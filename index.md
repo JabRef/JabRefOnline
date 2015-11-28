@@ -5,8 +5,10 @@ layout: default
 
 This site is under construction.
 
-See http://jabref.sf.net for the old homepage.
+Other sites to visit:
 
-See https://github.com/JabRef/jabref for development information.
-
-Support is mainly available through the mailing list: https://lists.sourceforge.net/lists/listinfo/jabref-users or via [tex.stackexchange.com](http://tex.stackexchange.com/tags/jabref/).
+ * The [JabRef developers and users conference JabCon](http://jabref.github.io/JabCon/)
+ * [Latest builds](http://builds.jabref.org/master/)
+ * [Development information](https://github.com/JabRef/jabref)
+ * [Old homepage](http://jabref.sf.net)
+ * Support: [mailing list](https://lists.sourceforge.net/lists/listinfo/jabref-users) or via [tex.stackexchange.com](http://tex.stackexchange.com/tags/jabref/).
