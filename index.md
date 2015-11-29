@@ -3,11 +3,13 @@ title: JabRef
 layout: default
 ---
 
+# JabRef
+
 This site is under construction.
 
 Other sites to visit:
 
- * The [JabRef developers and users conference JabCon](http://jabref.github.io/JabCon/)
+ * [JabRef developers and users conference JabCon](http://jabcon.jabref.org/)
  * [Latest builds](http://builds.jabref.org/master/)
  * [Development information](https://github.com/JabRef/jabref)
  * [Old homepage](http://jabref.sf.net)
