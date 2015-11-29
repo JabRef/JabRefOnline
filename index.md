@@ -6,6 +6,7 @@ layout: default
 # JabRef
 
 This site is under construction.
+See https://github.com/JabRef/jabref/issues/111 for migration discussion and status.
 
 Other sites to visit:
 
@@ -17,7 +18,9 @@ Other sites to visit:
 
 ## Backing
 
-JabRef development is powered by [Baola](http://baobab.org/BAOLA-sparkling-drink) and [neuronade](http://neuronade.com/en/), formally known as [nijoz](http://www.spiegel.de/unispiegel/wunderbar/nijoz-neuronade-gehirndoping-aus-der-brausetuete-a-964584.html).
+We use [install4j], the multi-platform installer builder.
+
+JabRef development is powered by [Baola] and [Neuronade], formally known as [nijoz].
 Furthermore, [Donations](https://github.com/JabRef/jabref/wiki/Donations) keep us going.
 
 <a href="http://baobab.org/BAOLA-sparkling-drink">
@@ -27,3 +30,8 @@ Furthermore, [Donations](https://github.com/JabRef/jabref/wiki/Donations) keep u
 <a href="http://neuronade.com/en/">
 <img src="http://neuronade.com/wp-content/uploads/2015/09/Neuronade-Logo-2015-e1442053558296.jpg" width="25%" alt="Image of Neuronade" style="display: block; margin-left: auto; margin-right: auto">
 </a>
+
+  [Baola]: http://baobab.org/BAOLA-sparkling-drink
+  [install4j]: https://www.ej-technologies.com/products/install4j/overview.html
+  [Neuronade]: http://neuronade.com/en/
+  [nijoz]: http://www.spiegel.de/unispiegel/wunderbar/nijoz-neuronade-gehirndoping-aus-der-brausetuete-a-964584.html
