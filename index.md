@@ -12,6 +12,7 @@ Other sites to visit:
 
  * [JabRef developers and users conference JabCon](http://jabcon.jabref.org/)
  * [Latest builds](http://builds.jabref.org/master/)
+ * [Current Changelog](https://github.com/JabRef/jabref/blob/master/CHANGELOG.md)
  * [Development information](https://github.com/JabRef/jabref)
  * [Old homepage](http://jabref.sf.net)
  * Support: [mailing list](https://lists.sourceforge.net/lists/listinfo/jabref-users) or via [tex.stackexchange.com](http://tex.stackexchange.com/tags/jabref/).
