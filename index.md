@@ -10,8 +10,9 @@ See https://github.com/JabRef/jabref/issues/111 for migration discussion and sta
 
 Other sites to visit:
 
- * [JabRef developers and users conference JabCon](http://jabcon.jabref.org/)
+ * [Downloads page](https://github.com/JabRef/jabref/releases)
  * [Latest builds](http://builds.jabref.org/master/)
+ * :blue_book: [JabRef developers and users conference JabCon](http://jabcon.jabref.org/)
  * [Current Changelog](https://github.com/JabRef/jabref/blob/master/CHANGELOG.md)
  * [Development information](https://github.com/JabRef/jabref)
  * [Old homepage](http://jabref.sf.net)
