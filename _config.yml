@@ -1,5 +1,37 @@
-# Hint by http://milanaryal.com/2015/writing-on-github-pages-and-jekyll-using-markdown/ and http://ajoz.github.io/2014/06/29/i-want-my-github-flavored-markdown/
+port: 4000
+host: 0.0.0.0
+safe: false
 
-markdown: redcarpet
-redcarpet:
-  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
+
+### site serving configuration ###
+exclude: [CNAME, README.md, .gitignore]
+permalink: / ## disables post output
+timezone: null
+lsi: false
+markdown: kramdown
+highlighter: pygments
+# Hint by http://milanaryal.com/2015/writing-on-github-pages-and-jekyll-using-markdown/ and http://ajoz.github.io/2014/06/29/i-want-my-github-flavored-markdown/
+#markdown: redcarpet
+#redcarpet:
+#  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
+
+
+### content configuration ###
+title:       "SinglePaged - Title: Edit me in _config.yml!"
+keywords:    "SinglePaged, jekyll, template, github, blog, single page"
+description: "A single-page template for Jekyll based blogs (like what you'd use on github pages!)"
+source_link: "https://github.com/t413/SinglePaged"
+favicon:     #put a path like: "img/favicon.ico"
+touch_icon:  #put a path like: "img/apple-touch-icon.png"
+google_analytics_key: ## put YOUR key here to enable tracking! (blank to disable)
+
+
+### template colors, used site-wide via css ###
+colors:
+  black:     '#111111'
+  white:     '#f8f8f8'
+  blue:      '#49a7e9'
+  green:     '#9bcf2f'
+  purple:    '#c869bf'
+  orange:    '#fab125'
+  turquoise: '#0fbfcf'
