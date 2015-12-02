@@ -17,6 +17,12 @@
 <body>
   <div id="main">
 
+    <div style="position: fixed; right: 2px; top: 0; z-index: 9999;">
+      <a href="https://github.com/JabRef/jabref/">
+        <img src="https://img.shields.io/github/stars/JabRef/jabref.svg?style=social&label=Star" alt="stars on GitHub">
+      </a>
+    </div>
+
     <nav><ul>
       {% for node in site.posts reversed %}
         {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
