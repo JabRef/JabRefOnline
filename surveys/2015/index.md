@@ -1,3 +1,8 @@
+---
+title: JabRef Survey 2015
+style: left
+---
+
 # Overview of the 2015 JabRef survey
 
 ## Introduction
