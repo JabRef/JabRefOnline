@@ -11,6 +11,7 @@ To foster its developments, the JabRef core team has carried out an online surve
 We were interested in getting the opinion of community members.
 
 The survey consisted of 3 sets of questions:
+
 - What do you think about the current features?
 - Which new features should be included?
 - Who are JabRef users?
@@ -18,6 +19,7 @@ The survey consisted of 3 sets of questions:
 Total, we got 428 responses, which included 31 incomplete responses.
 
 The analysis of the results is structured in the following order:
+
 - Who are the JabRef users.
 - What contribution to expect from users.
 - How do they currently use JabRef.
