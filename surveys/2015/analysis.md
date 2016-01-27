@@ -1,6 +1,6 @@
 ---
 title: JabRef Survey 2015 Analysis
-style: left
+layout: survey
 ---
 
 # Result analysis of JabRef survey
@@ -631,5 +631,3 @@ Responders could give final remarks. A quarter did. The vast majority were thank
 - financial contributions can come from companies (employers) and not from individuals.
 - work with online LaTeX editing tools (such as overleaf).
 - keep JabRef simple.
-
-

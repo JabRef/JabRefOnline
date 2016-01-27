@@ -1,6 +1,6 @@
 ---
 title: JabRef Survey 2015
-style: left
+layout: survey
 ---
 
 # Overview of the 2015 JabRef survey

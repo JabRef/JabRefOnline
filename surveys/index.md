@@ -1,6 +1,6 @@
 ---
 title: JabRef Surveys
-style: left
+layout: survey
 ---
 
-Please see <http://www.jabref.org/surveys/2015/>
+Please head forward to <http://www.jabref.org/surveys/2015/>.
