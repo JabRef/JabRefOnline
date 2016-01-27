@@ -77,6 +77,7 @@ Among the 100 responders who detailed their interest into attending JabCon,  85%
 ![IConsiderAttendingJabCon](graphs/IConsiderAttendingJabCon.png)
 
 Among the 360 responders:
+
 - 8% will possibly or definitely attend (i.e. 27 responders).
 - 16% would attend an online JabCon webinar instead (i.e. 59 responders).
 
@@ -104,18 +105,19 @@ Only 20% of responders would not make a finantial contribution to foster JabRef 
 
 ## How JabRef is currently used
 
-###JabRef is their primary bibliographic software
+### JabRef is their primary bibliographic software
 
 ![Main primary software is](graphs/JabRefIsMyMainBibliographicSoftware.png)
 
 - For 80% of the responders, JabRef is the main bibliographic software.
 - For the other 20%, either JabRef is their secondary bibliographic software, or they do not use JabRef.
 
-###If not using JabRef, Zotero, a plain text editor and Mendeley are the most popular
+### If not using JabRef, Zotero, a plain text editor and Mendeley are the most popular
 
 ![Main primary software is](graphs/MyMainBibliographicSoftwareIsNotJabRefItis.png)
 
 Among the 20% not using JabRef as their primary bibliographic software, numerous alternatives are cited, and the reasons are:
+
 - It works better with my OS (Bibdesk and Bookends for Mac; Citavi for Windows; Erathosthenes for Android)
 - Of a better GUI (Erathosthenes, Librarian)
 - My colleagues use this other software (Zotero, Citavi, Endnote)
@@ -627,6 +629,7 @@ JabRef, although great, has plenty of room for improvement! Importation of data,
 
 ### Final remarks given by responders
 Responders could give final remarks. A quarter did. The vast majority were thanks and congratulations. Some comments addressed new points:
+
 - how to help in the development of JabRef, even if you are not a developer.
 - financial contributions can come from companies (employers) and not from individuals.
 - work with online LaTeX editing tools (such as overleaf).
