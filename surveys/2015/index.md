@@ -33,7 +33,7 @@ A detailed analysis is provided at [Analysis](analysis).
 ## New features?
 The most desirable features are at the top of the graph, the least desirable at the bottom.
 
-![FeatureAllCompound](/graphs/FeatureAllCompound.png)
+![FeatureAllCompound](graphs/FeatureAllCompound.png)
 
 ## Who are the JabRef users?
 - Most are German and English speakers.
