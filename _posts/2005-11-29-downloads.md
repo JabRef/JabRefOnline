@@ -6,15 +6,16 @@ style: center
 fa-icon: cloud-download
 ---
 
-[Releases](https://github.com/JabRef/jabref/releases) |
-  <a href="https://github.com/JabRef/jabref/releases">
-    <img src="https://img.shields.io/github/release/JabRef/jabref.svg" alt="latest release">
-  </a>
 
-[Latest Development Snapshots](http://builds.jabref.org/master/) |
-  <a href="https://github.com/JabRef/jabref/blob/master/CHANGELOG.md#unreleased">
-    <img src="https://img.shields.io/github/commits-since/JabRef/jabref/v3.2.svg" alt="commits since last release">
-  </a>
+<div style="position: relative; top: -12px; display: table; margin: 0px auto; font-size:20px;">
+  <div style="width: 300px; float:left;" class="center">
+    <a href="https://github.com/JabRef/jabref/releases/latest"><i class="fa fa-cloud-download fa-5x"></i><br />download latest release</a>
+  </div>
+
+  <div style="width: 300px; overflow: hidden;">
+    <a href="http://builds.jabref.org/master/"><i class="fa fa-flask fa-5x"></i><br />download development snapshot</a>
+  </div>
+</div>
 
 We use [install4j], the multi-platform installer builder.
 
