@@ -1,0 +1,59 @@
+---
+title: JabRef FAQ
+---
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+	<meta name="keywords" content="JabRef FAQ, FAQ">
+	<meta name="description" content="The FAQ of JabRef">
+  <link rel="stylesheet" href="../combo.css">
+  <link rel="stylesheet" href="../faq.css">
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  {% if site.favicon %}<link rel="shortcut icon" href="{{ site.favicon }}" type="image/x-icon">{% endif %}
+	{% if site.touch_icon %}<link rel="apple-touch-icon" href="{{ site.touch_icon }}">{% endif %}
+</head>
+<body>
+
+  <div style="position: fixed; left: 10px; top: 10px; z-index: 9999">
+      <a href="../"><i class="fa fa-home fa-2x" style="color:white"></i></a>
+  </div>
+
+  <div id="main">
+
+    <nav><ul>
+      {% for node in site.faq %}
+        {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
+        <li class="p-{{id}}"><a href="#{{id}}">{{node.title}}</a></li>
+      {% endfor %}
+    </ul></nav>
+
+
+    {% for page in site.faq %}
+      {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
+      <div id="{{id}}" class="section p-{{id}}">
+        <div class="container {{ page.style }}">
+          <p class="editparagraph">
+            <a class="editlink" href="{{site.github.repository_url}}/blob/gh-pages/{{page.path}}"><i class="fa fa-pencil fa-1x"></i> Edit</a>
+          </p>
+          {{ page.content }}
+        </div>
+      </div>
+    {% endfor %}
+
+    <div id="footer" class="section text-white">
+      <div class="container">
+        {% capture foottext %} {% include footer.md %} {% endcapture %}
+        {{ foottext | markdownify }}
+      </div>
+    </div>
+  </div>
+
+{% include analytics.html %}
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="../site.js"></script>
+</html>
