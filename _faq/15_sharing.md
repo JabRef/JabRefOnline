@@ -1,7 +1,7 @@
 ---
 title: Sharing
 id: sharing
-bg: #2A7722
+bg: '#2A7722'
 color: lightgray
 style: left
 ---
