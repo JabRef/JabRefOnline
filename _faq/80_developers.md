@@ -1,7 +1,7 @@
 ---
 title: Developers
 id: developers
-bg: green
+bg: #2A7722
 color: lightgray
 style: left
 ---
