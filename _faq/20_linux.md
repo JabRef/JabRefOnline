@@ -1,7 +1,7 @@
 ---
 title: Linux
 id: linux
-bg: turquoise
+bg: #1529A7
 color: lightgray
 style: left
 ---
