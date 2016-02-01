@@ -140,19 +140,19 @@ Just ignore them.
 A: Go to **Options -&gt; Manage external file types**.
 Here you can add arbitrary types.
 
-## [How can it be opened?] Q: Is there a portable version of JabRef?
+## Q: Is there a portable version of JabRef?
 
 A: Store the file jabref.jar on the drive.
-It can be opened directly on any computer offering a Java installation.
-In **Options-&gt;Preferences-&gt;General**, be sure to activate “Load and Save preferences from/to jabref.xml on start-up (memory stick mode)”.
+It can be opened directly on any computer offering a Java installation by double clicking the `jar` file.
+In **Options-&gt;Preferences-&gt;General**, be sure to activate "Load and Save preferences from/to jabref.xml on start-up (memory stick mode)".
 
 ## Q: When an organization is provided as author, my BibTeX style doesn't recognize it.
 For instance, “European Commission” is converted to “Commission, E.”.
 
 A: Use braces to tell BibTeX to keep your author field as is: `{European Commission}`.
+In Biblatex, you can use `label = {EC}` to have `EC05` as label for a publication of the European Commission in the year 2005.
 
 ## Q: Is there a FAQ on BibTeX?
 
 A: Yes, please look at “Bibliographies and citations” at the [UK List of TeX Frequently Asked Questions on the Web](http://www.tex.ac.uk/).
 For German readers, there is the [dante e.V. FAQ](http://projekte.dante.de/DanteFAQ/LiteraturVerzeichnis).
-
