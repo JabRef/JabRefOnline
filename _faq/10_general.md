@@ -151,6 +151,6 @@ A: Use braces to tell BibTeX to keep your author field as is: `{European Commiss
 
 ## Q: Is there a FAQ on BibTeX?
 
-A: Yes, please look at “Bibliographies and citations” at the [UK List of TeX Frequently Asked Questions on the Web](http://www.tex.ac.uk/cgi-bin/texfaq2html).
+A: Yes, please look at “Bibliographies and citations” at the [UK List of TeX Frequently Asked Questions on the Web](http://www.tex.ac.uk/).
 For German readers, there is the [dante e.V. FAQ](http://projekte.dante.de/DanteFAQ/LiteraturVerzeichnis).
 
