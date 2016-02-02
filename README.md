@@ -7,3 +7,6 @@ Execute `gem install bundler`, `bundle install`, and `bundle exec jekyll serve` 
 Source: https://help.github.com/articles/using-jekyll-with-pages/#installing-jekyll
 At windows, this works with [RubyInstaller](http://rubyinstaller.org/downloads) and the [Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit).
 [JRuby](http://jruby.org/) doesn't work as the [C extensions were dropped](http://stackoverflow.com/a/32135381/873282).
+
+You can update your jekyll instance using `bundle update`.
+This might be necessary because of the update to [Jekyll 3.0 by GitHub](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0).
