@@ -100,9 +100,9 @@ A: Yes. Go to **Options -&gt; Preferences -&gt; Advanced -&gt; “Remote operati
 Put a checkmark to “Listen for remote operation on port:”. 
 This option allows new instances of JabRef to detect the instance already running, and pass files to that instead of opening a new window.
 
-## [Which version?] Q: Is it possible to append entries from a BibTeX file, e.g. from my web browser, to the currently opened database?
+## Q: Is it possible to append entries from a BibTeX file, e.g. from my web browser, to the currently opened database?
 
-A: Yes, in the upcoming version, you can use the parameter `--importToOpen bibfile`.
+A: Yes, you can use the parameter `--importToOpen bibfile`.
 
 ## Q: I want to link external files with paths relative to my .bib file, so I can easily move my database along with its files to another directory. Is this possible?
 
