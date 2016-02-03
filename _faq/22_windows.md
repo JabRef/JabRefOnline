@@ -16,7 +16,7 @@ Long explanation: see [Using JabRef references in Word document](http://www.adem
 
 Another option is to use [BibteX4Word](http://www.ee.ic.ac.uk/hp/staff/dmb/perl/index.html).
 
-The last option is to use [Docear4Word](https://github.com/Docear/Docear4Word), which is planned to be ported to JabRef.
+The last option is to use [Docear4Word](https://github.com/Docear/Docear4Word), which is planned to be ported to JabRef (see [JabRef4Word](https://github.com/JabRef/JabRef4Word)).
 
 ## Q: How can I start or focus JabRef with hotkey Windows+J?
 
