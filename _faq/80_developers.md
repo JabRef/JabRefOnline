@@ -25,5 +25,6 @@ A: We really prefer the pull request approach of GitHub.
 In case you want to contribute something, but git seems to be too hard for you, please get in touch with the developers to work out other ways of contributing.
 
 ## Q: Can I make a donation? How?
-Donations keeps us going! You can use Paypal, Flattr or bank transfers. Your institution/company can contribute too, through bank transfer for example. [All details are given here.](https://github.com/JabRef/jabref/wiki/Donations)
+
+A: Donations keeps us going! You can use Paypal, Flattr or bank transfers. Your institution/company can contribute too, through bank transfer for example. [All details are given here.](https://github.com/JabRef/jabref/wiki/Donations)
 
