@@ -19,7 +19,12 @@ See our [CONTRIBUTING.md](https://github.com/JabRef/jabref/blob/master/CONTRIBUT
 
 A: We encourage you to read [Translating JabRef](https://github.com/JabRef/jabref/wiki/Translating-JabRef).
 
-## Q: I want send a patch. Where can I do that?
+## Q: I want to send a patch. Where can I do that?
 
 A: We really prefer the pull request approach of GitHub.
 In case you want to contribute something, but git seems to be too hard for you, please get in touch with the developers to work out other ways of contributing.
+
+## Q: Can I make a donation? How?
+
+A: Donations keeps us going! You can use Paypal, Flattr or bank transfers. Your institution/company can contribute too, through bank transfer for example. [All details are given here.](https://github.com/JabRef/jabref/wiki/Donations)
+
