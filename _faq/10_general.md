@@ -156,3 +156,10 @@ In Biblatex, you can use `label = {EC}` to have `EC05` as label for a publicatio
 
 A: Yes, please look at “Bibliographies and citations” at the [UK List of TeX Frequently Asked Questions on the Web](http://www.tex.ac.uk/).
 For German readers, there is the [dante e.V. FAQ](http://projekte.dante.de/DanteFAQ/LiteraturVerzeichnis).
+
+## Q: Where is the RenameFile plugin? How to rename file automatically after importing entries?
+
+A: JabRef does not support plugin anymore (version > 2.11). However the plugin features are progressively integrated.
+Renaming of files is now part of the "Cleanup Entries" feature (brush button in the toolbar or CTRL+SHIFT+F7).
+Then, you can renamed attached files based on the Bibtex key.  You can change the format (pattern) under 
+**Options -&gt; Preferences -&gt; Import**, by altering the pattern under "Default PDF file link action".
