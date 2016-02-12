@@ -163,3 +163,15 @@ A: JabRef does not support plugin anymore (version > 2.11). However the plugin f
 Renaming of files is now part of the "Cleanup Entries" feature (brush button in the toolbar or CTRL+SHIFT+F7).
 Then, you can renamed attached files based on the Bibtex key.  You can change the format (pattern) under 
 **Options -&gt; Preferences -&gt; Import**, by altering the pattern under "Default PDF file link action".
+
+## Q: I have a JabRef database and I would like to export a subset to BibTeX (or BibLaTeX) format. How to do this?
+
+A: Your JabRef database is already a file in BibTeX (or BibLaTeX) format. Simply select the entries to be exported, and then 
+choose **File-&gt;Save Selected as...**. More details on [stackexchange.com](https://tex.stackexchange.com/questions/82554/jabref-can-it-export-a-subset-of-the-bibliography-in-bibtex-format).
+
+## Q: I have a JabRef database and I would like to export the subset corresponding to my LaTeX file. How to do this?
+
+A: Upon compilation, LaTeX generates a file with the extension ".aux". This files contains the keys of the cited references (among other things). Using this AUX file, JabRef can extract the relevant entries. Choose the menu **Tools-&gt;New subdatabase based on AUX file**. Then select the reference database (among the opened ones), and specify the AUX file.
+
+
+
