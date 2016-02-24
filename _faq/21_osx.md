@@ -19,3 +19,9 @@ When you have opened it once, you can change the security settings back and you'
 A: We were not able to generate a working version of JabRef 2.11 for Mac OS X.
 Please use the jar of version 2.11, or look at the newer 3.X versions (which fully supports Mac OS X again).
 
+## Q: Is it possible to upgrade directly from JabRef 2.x to JabRef 3.x?
+
+A: Due to the change of the installer for 3.x it is required to perform a clean install of any JabRef 3.x version.
+You are required to remove any previously installed JabRef 2.x application from the "Applications" folder.
+Then you can install the latest JabRef 3.x version with the installer.
+As soon you are running on any JabRef 3.x version, you can use the installer to upgrade JabRef.
