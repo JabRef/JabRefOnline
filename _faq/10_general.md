@@ -79,7 +79,7 @@ A Web search box appears on the left side of JabRef.
 The name of a web search is selected (e.g. “ACM Portal”).
 Click on it and change it to “ISBN to BibTeX”.
 If a ISBN is not found, head to the [online service](http://manas.tungare.name/software/isbn-to-bibtex/) by Manas Tungare.
-[We are working on making the error message more clear](https://github.com/JabRef/jabref/pull/791).
+[We are working on making the error message more clear](https://github.com/JabRef/jabref/pull/761).
 
 ## Q: I miss a field translator, lastfollowedon, ... How can I add such fields?
 
