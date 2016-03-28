@@ -1,56 +1,47 @@
 ---
+title: JabRef Blog
 ---
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ site.title }}</title>
-	<meta name="keywords" content="{{ site.keywords }}">
-	<meta name="description" content="{{ site.description }}">
-  <link rel="stylesheet" href="combo.css">
+  <title>{{ page.title }}</title>
+	<meta name="keywords" content="JabRef Developers Blog, JabRef Blog, Developers Blog">
+	<meta name="description" content="The Developers Blog of JabRef">
+  <link rel="stylesheet" href="../combo.css">
+  <link rel="stylesheet" href="../blog.css">
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   {% if site.favicon %}<link rel="shortcut icon" href="{{ site.favicon }}" type="image/x-icon">{% endif %}
 	{% if site.touch_icon %}<link rel="apple-touch-icon" href="{{ site.touch_icon }}">{% endif %}
 </head>
 <body>
+
+  <div style="position: fixed; left: 10px; top: 10px; z-index: 9999">
+      <a href="../"><i class="fa fa-home fa-2x" style="color:white"></i></a>
+  </div>
+
   <div id="main">
-
+      
     <nav><ul>
-      {% for node in site.posts reversed %}
-        {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
-        <li class="p-{{id}}"><a href="#{{id}}">{{node.title}}</a></li>
-      {% endfor %}
+        <li class="p-{{ site.blog.last.id }}"><a href="#{{ site.blog.last.id }}">Top</a></li>
+        <li class="p-welcome"><a href="#welcome">JabRef Blog</a></li>
+        <li class="p-{{ site.blog.first.id }}"><a href="#{{ site.blog.first.id }}">Bottom</a></li>
     </ul></nav>
+    
 
-
-    {% for page in site.posts reversed %}
+    {% for page in site.blog reversed%}
       {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
       <div id="{{id}}" class="section p-{{id}}">
-        {% if page.icon %}
-        <div class="subtlecircle sectiondivider imaged">
-          <img src="{{page.icon}}" alt="section icon" />
-          <h5 class="icon-title">{{ page.title }}</h5>
-        </div>
-        {% elsif page.fa-icon %}
-        <div class="subtlecircle sectiondivider faicon">
-          <span class="fa-stack">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-{{ page.fa-icon }} fa-stack-1x"></i>
-          </span>
-          <h5 class="icon-title">{{ page.title }}</h5>
-        </div>
-        {% endif %}
         <div class="container {{ page.style }}">
+          <p class="editparagraph">
+            <a class="editlink" href="{{site.github.repository_url}}/blob/gh-pages/{{page.relative_path}}"><i class="fa fa-pencil fa-1x"></i> View on GitHub</a>
+          </p>
           {{ page.content }}
-          {% if id == "news" %}
-            {{ site.blog.last.content }}
-          {% endif %}
         </div>
       </div>
     {% endfor %}
-
 
     <div id="footer" class="section text-white">
       <div class="container">
@@ -63,5 +54,5 @@
 {% include analytics.html %}
 </body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="site.js"></script>
+<script src="../site.js"></script>
 </html>
