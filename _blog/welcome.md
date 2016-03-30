@@ -16,4 +16,4 @@ Write your blog post in a markdown file.
 Prefix the file name with the date of your blog post and place it in the `_blog` folder.
 Add your changes to your git index, commit, and push your changes.
 Finally open a pull request and wait for feedback.
-Once your changes are merged your blog post will be on top of this site and featured in the news section of the [JabRef](../#news) website.  
+Once your changes are merged your blog post will be on top of this site and featured in the news section of the [JabRef](../#news) website.
