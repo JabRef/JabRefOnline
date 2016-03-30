@@ -25,7 +25,7 @@ $.extend($.easing,
         }, options );
         navItems = this;
 
-        //attatch click listeners
+        //attach click listeners
     	navItems.on('click', function(event){
     		event.preventDefault();
             var navID = $(this).attr("href").substring(1);
@@ -39,7 +39,7 @@ $.extend($.easing,
             );
     	});
 
-        //populate lookup of clicable elements and destination sections
+        //populate lookup of clickable elements and destination sections
         populateDestinations(); //should also be run on browser resize, btw
 
         // setup scroll listener
