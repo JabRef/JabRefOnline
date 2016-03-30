@@ -1,0 +1,43 @@
+---
+---
+/* ----- per blog colors! ----- */
+{% for node in site.blog %}
+  {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
+  {% capture bg %}{% if site.colors[node.bg] %}{{ site.colors[node.bg] }}{% else %}{{ node.bg }}{% endif %}{% endcapture %}
+  {% capture fg %}{% if site.colors[node.color] %}{{ site.colors[node.color] }}{% else %}{{ node.color }}{% endif %}{% endcapture %}
+  nav .p-{{id}} { border-color: {{ bg }}; }
+  #{{id}} { background-color: {{ bg }} !important; color: {{ fg }}; }
+  #{{id}} a { color: {{ fg }}; }
+  #{{id}} .sectiondivider { color: {{ bg }}; }
+{% endfor %}
+
+/* fix CSS of combo.css */
+
+html body div#main nav {
+  background-color: #4d4674;
+}
+
+.container h2 {
+  font-size: 21px;
+  font-weight: 500;
+  text-align: left;
+  line-height: normal;
+  padding-left: 5%;
+}
+
+.section {
+  padding: 20px;
+}
+
+.editparagraph {
+  padding-top: 5px;position:relative; top:47px; left:740px;
+}
+
+.editlink {
+  text-decoration: none;
+  color: #686868;
+}
+
+code {
+  white-space: pre;
+}

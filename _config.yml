@@ -5,7 +5,7 @@ safe: false
 
 ### site serving configuration ###
 exclude: [CNAME, README.md, .gitignore, vendor]
-include: ['surveys/', 'surveys/2015/', 'faq/']
+include: ['surveys/', 'surveys/2015/', 'faq/', 'blog/']
 permalink: /:title ## disables post output
 timezone: null
 lsi: false
@@ -19,9 +19,10 @@ highlighter: rouge
 #redcarpet:
 #  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
 
-### required for faq/
+### required for faq/ and blog/
 collections:
 - faq
+- blog
 
 ### content configuration ###
 title:       "JabRef"
