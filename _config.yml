@@ -19,10 +19,11 @@ highlighter: rouge
 #redcarpet:
 #  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
 
-### required for faq/ and blog/
+### required for main site and faq/
+## blog posts are stored in _posts (as usual), but served at blog/
 collections:
 - faq
-- blog
+- sections
 
 ### content configuration ###
 title:       "JabRef"
