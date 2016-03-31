@@ -35,9 +35,6 @@ title: JabRef Blog
       {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
       <div id="{{id}}" class="section p-{{id}}">
         <div class="container {{ page.style }}">
-          <p class="editparagraph">
-            <a class="editlink" href="{{site.github.repository_url}}/blob/gh-pages/{{page.relative_path}}"><i class="fa fa-pencil fa-1x"></i> View on GitHub</a>
-          </p>
           {{ page.content }}
         </div>
       </div>
