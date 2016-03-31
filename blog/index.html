@@ -31,11 +31,12 @@ title: JabRef Blog
     </ul></nav>
     
 
-    {% for page in site.posts reversed%}
+    {% for page in site.posts %}
       {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
       <div id="{{id}}" class="section p-{{id}}">
         <div class="container {{ page.style }}">
-          {{ page.content }}
+            <h1>{{ page.date | date: '%B %d, %Y' }} &ndash;  {{ page.title }}</h1>
+            {{ page.content }}
         </div>
       </div>
     {% endfor %}
