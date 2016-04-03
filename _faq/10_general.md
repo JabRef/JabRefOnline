@@ -46,7 +46,7 @@ A: Yes. Go to Options-&gt;Preferences-&gt;General-&gt;Default Encoding.
 Set it to UTF8.
 At "Appearance" set table font as simsun (or any other Chinese font).
 At "General", you can change the UI language to Chinese. 
-More information was available at <http://yenlung.math.nccu.edu.tw/~yenlung/notes/latex_in_Windows.pdf>, but the link is currently broken.
+More information are available at <http://yenlung.km.nccu.edu.tw/xms/read_attach.php?id=61> (alternative: <https://web.archive.org/web/20111027034912/http://yenlung.math.nccu.edu.tw/~yenlung/notes/latex_in_Windows.pdf>).
 
 ## Q: When I have an instance of Jabref running and double click another BibTeX file it is opened in a new JabRef instance. Is it possible to open it in a new tab in the first instance?
 
