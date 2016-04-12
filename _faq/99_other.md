@@ -15,5 +15,5 @@ A: After consulting [JabRef's help](http://help.jabref.org/) and checking whethe
 
 ## Q: There is a mistake in this FAQ, a dead link or I have written a better/new explanation for a question!
 
-A: Either click on `Edit` or fork the [www.jabref.org](https://github.com/JabRef/www.jabref.org) repository, do your changes and create a pull request.
+A: Either click on `View on GitHub` or fork the [www.jabref.org](https://github.com/JabRef/www.jabref.org) repository, do your changes and create a pull request.
 Remember not to use your master branch, but name your branch differently.
