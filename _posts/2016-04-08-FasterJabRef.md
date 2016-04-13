@@ -1,5 +1,10 @@
-
-# A faster JabRef is coming!
+---
+title: A faster JabRef is coming!
+id: faster-jabref
+bg: jabref-font
+color: white
+author: "[mlep](https://github.com/mlep)"
+---
 
 Some users reported JabRef was slow on large databases (thank you for the feedback!).
 This was especially the case for three operations:
@@ -22,4 +27,3 @@ You can [give it a try](http://builds.jabref.org/master/)
 *Stay tuned: [work is under way to speed up the opening of large databases](https://github.com/JabRef/jabref/issues/1094).*
 
 _**You like it? Foster JabRef development with [Code](https://github.com/JabRef/jabref/issues) or [Money](https://github.com/JabRef/jabref/wiki/Donations).**_
-
