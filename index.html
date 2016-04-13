@@ -19,7 +19,7 @@
 
     <nav><ul>
       {% for node in site.sections %}
-        {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
+        {% capture id %}{{ node.id | slice: 13, 255 | downcase }}{% endcapture %}
         <li class="p-{{id}}"><a href="#{{id}}">{{node.title}}</a></li>
       {% endfor %}
       <li class="p-blog"><a class="absolute" href="blog/">Blog</a></li>
@@ -27,7 +27,7 @@
 
 
     {% for page in site.sections %}
-      {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
+      {% capture id %}{{ page.id | slice: 13, 255 | downcase }}{% endcapture %}
       <div id="{{id}}" class="section p-{{id}}">
         {% if page.icon %}
         <div class="subtlecircle sectiondivider imaged">
