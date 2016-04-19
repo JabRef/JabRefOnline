@@ -43,6 +43,6 @@ Fonts, displayed fields, etc.
 You can add your own fields to any BibTeX entry type.
 
 ### Translations
-JabRef menus and dialog boxes are translated into Brazilian Portuguese, Chinese (simplified), Danish, Dutch, English, French, German, Indonesian, Italian, Japanese, Norwegian, Spanish, Turkish, Vietnamese.
+JabRef menus and dialog boxes are translated into Brazilian Portuguese, Chinese (simplified), Danish, Dutch, English, French, German, Indonesian, Italian, Japanese, Norwegian, Persian, Russian, Spanish, Swedish, Turkish, Vietnamese.
 
 See [our translation page on github](https://github.com/JabRef/jabref/wiki/Translating-JabRef) for more information and the status of each translation.
