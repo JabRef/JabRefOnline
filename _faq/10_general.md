@@ -115,7 +115,7 @@ Files will automatically be linked with relative paths if the files are placed i
 ## Q: I want to export my bibliography entries into a simple text file so that I can import them into a spreadsheet easily. Is this possible?
 
 A: Yes. Use **File -&gt; Export**.
-Under “Filter:”, choose “OpenOffice\LibreOffice CSV (\*.csv)”.
+Under “Filter:”, choose “OpenOffice/LibreOffice CSV (\*.csv)”.
 
 ## Q: How can I add and remove keywords of multiple entries?
 
