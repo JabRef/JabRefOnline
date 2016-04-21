@@ -37,7 +37,7 @@ A: We are collecting all publications we hear about at <https://github.com/JabRe
 ## Q: JabRef does not start. What should I do?
 
 A: This may be because the preferences need to be reset.
-Execute `java -jar JabRef-3.3.jar --prdef all -n`.
+Execute `java -jar JabRef-X.Y.jar --prdef all -n` (with X.Y the version of JabRef).
 On Windows, if that does not help, execute `regedit` and delete the folder `HKEY\_CURRENT\_USER\SOFTWARE\JavaSoft\Prefs\net\sf\jabref`.
 
 ## Q: Does JabRef support Chinese characters?
