@@ -20,7 +20,7 @@ Felldorfer Str. 17
 Oliver Kopp
 
 #### Kontakt:
-E-Mail: jabrefmail%2Bwebfeedback@gmail.com
+E-Mail: jabrefmail+webfeedback@gmail.com
 
 ### Haftungsausschluss:
 
