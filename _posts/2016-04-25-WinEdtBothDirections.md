@@ -20,4 +20,4 @@ JabRef can be launched from within WinEdt.
 
 ![FromWinEdtToJabRef](img/WinEdt-JabRef.png)
 
-_**You like it? Foster JabRef development with [Code](https://github.com/JabRef/jabref) or [Money](https://github.com/JabRef/jabref/wiki/Donations).**_
+_**You like it? Foster JabRef development with [Code](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) or [Money](https://github.com/JabRef/jabref/wiki/Donations).**_
