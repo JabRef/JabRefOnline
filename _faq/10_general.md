@@ -10,8 +10,8 @@ style: left
 
 ## Q: My plugins stopped working. What should I do?
 
-A: JabRef v3.0 removed plugin support as the development team cannot keep up plugin support any more.
-Plugins, however, can be integrated in JabRef.
+A: JabRef v3.0 removed plugin support, because the development team cannot keep up plugin support any more.
+Nevertheless, plugins can be integrated in JabRef.
 See [issue #152](https://github.com/JabRef/jabref/issues/152) for the current status and discussion.
 Please contact the author of the respective plugin and ask him to port his plugin into JabRef's code.
 
@@ -93,11 +93,12 @@ In the “File” panel, you will find an option called “Do not wrap the follo
 This option contains a semicolon-separated list of field names.
 Any field you add to this list will always be stored without introduction of line breaks.
 
-## **[Unclear Q&A]** Q: Is it possible to open files, e.g. from my web browser, in the running instance of JabRef instead of opening a new instance?
+## Q: I have a JabRef open. If I open a bibtex file from my web browser, a new JabRef is started. I want the file to be opened in the currently opened JabRef. Is this possible?
 
 A: Yes. Go to **Options -&gt; Preferences -&gt; Advanced -&gt; “Remote operation”**.
 Put a checkmark to “Listen for remote operation on port:”. 
 This option allows new instances of JabRef to detect the instance already running, and pass files to that instead of opening a new window.
+Note: This is the default [since JabRef 3.0](https://github.com/JabRef/jabref/blob/master/CHANGELOG.md#30---2015-11-29).
 
 ## Q: Is it possible to append entries from a BibTeX file, e.g. from my web browser, to the currently opened database?
 
@@ -168,6 +169,3 @@ choose **File-&gt;Save Selected as...**. More details on [stackexchange.com](htt
 ## Q: I have a JabRef database and I would like to export the subset corresponding to my LaTeX file. How to do this?
 
 A: Upon compilation, LaTeX generates a file with the extension ".aux". This files contains the keys of the cited references (among other things). Using this AUX file, JabRef can extract the relevant entries. Choose the menu **Tools-&gt;New subdatabase based on AUX file**. Then select the reference database (among the opened ones), and specify the AUX file.
-
-
-
