@@ -1,6 +1,6 @@
 ---
-title: JabRef & WinEdt: two-way communications
-id: JabRefWinedt
+title: "JabRef & WinEdt: two-way communications"
+id: JabRefWinEdt
 bg: jabref-font
 color: white
 author: "[JabRef Developers](https://github.com/orgs/JabRef/teams/developers)"
