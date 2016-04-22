@@ -37,7 +37,7 @@ A: We are collecting all publications we hear about at <https://github.com/JabRe
 ## Q: JabRef does not start. What should I do?
 
 A: This may be because the preferences need to be reset.
-Execute `java -jar JabRef-3.2.jar --prdef all -n`.
+Execute `java -jar JabRef-X.Y.jar --prdef all -n` (with X.Y the version of JabRef).
 On Windows, if that does not help, execute `regedit` and delete the folder `HKEY\_CURRENT\_USER\SOFTWARE\JavaSoft\Prefs\net\sf\jabref`.
 
 ## Q: Does JabRef support Chinese characters?
@@ -79,7 +79,6 @@ A Web search box appears on the left side of JabRef.
 The name of a web search is selected (e.g. “ACM Portal”).
 Click on it and change it to “ISBN to BibTeX”.
 If a ISBN is not found, head to the [online service](http://manas.tungare.name/software/isbn-to-bibtex/) by Manas Tungare.
-[We are working on making the error message more clear](https://github.com/JabRef/jabref/pull/761).
 
 ## Q: I miss a field translator, lastfollowedon, ... How can I add such fields?
 
@@ -94,7 +93,7 @@ In the “File” panel, you will find an option called “Do not wrap the follo
 This option contains a semicolon-separated list of field names.
 Any field you add to this list will always be stored without introduction of line breaks.
 
-## Q: Is it possible to open files, e.g. from my web browser, in the running instance of JabRef instead of opening a new instance?
+## **[Unclear Q&A]** Q: Is it possible to open files, e.g. from my web browser, in the running instance of JabRef instead of opening a new instance?
 
 A: Yes. Go to **Options -&gt; Preferences -&gt; Advanced -&gt; “Remote operation”**.
 Put a checkmark to “Listen for remote operation on port:”. 
@@ -116,7 +115,7 @@ Files will automatically be linked with relative paths if the files are placed i
 ## Q: I want to export my bibliography entries into a simple text file so that I can import them into a spreadsheet easily. Is this possible?
 
 A: Yes. Use **File -&gt; Export**.
-Under “Filter:”, choose “OpenOffice CSV (\*.csv)”.
+Under “Filter:”, choose “OpenOffice/LibreOffice CSV (\*.csv)”.
 
 ## Q: How can I add and remove keywords of multiple entries?
 
@@ -126,14 +125,12 @@ Choose “Manage keywords”.
 Then you can manage keywords appearing in all selected entries or in any selected entry.
 New keywords are added to all selected entries.
 
-## Q: I want to have bib file specific PDF directory.
+## Q: I want to have a bib-file-specific PDF directory.
 
 A: Right click on the tab of the .bib file.
 Choose “Database properties”.
 Then at the field “General file directory” choose the directory specific for the database.
-If you want to set a directory for you only and other users should use the default directory, use the field “User-specific file directory”.
-The fields “PDF directory” and “PS directory” are legacy fields.
-Just ignore them.
+If you want to set a directory for you only (so that other users should use the default directory), use the field “User-specific file directory”.
 
 ## Q: When linking a file, I cannot set the correct type. How can I add new types?
 
@@ -146,11 +143,10 @@ A: Store the file jabref.jar on the drive.
 It can be opened directly on any computer offering a Java installation by double clicking the `jar` file.
 In **Options-&gt;Preferences-&gt;General**, be sure to activate "Load and Save preferences from/to jabref.xml on start-up (memory stick mode)".
 
-## Q: When an organization is provided as author, my BibTeX style doesn't recognize it.
-For instance, “European Commission” is converted to “Commission, E.”.
+## Q: When an organization is provided as author, my BibTeX style doesn't recognize it. For instance, “European Commission” is converted to “Commission, E.”.
 
 A: Use braces to tell BibTeX to keep your author field as is: `{European Commission}`.
-In Biblatex, you can use `label = {EC}` to have `EC05` as label for a publication of the European Commission in the year 2005.
+In BibLaTeX, you can use `label = {EC}` to have `EC05` as label for a publication of the European Commission in the year 2005.
 
 ## Q: Is there a FAQ on BibTeX?
 
@@ -161,7 +157,7 @@ For German readers, there is the [dante e.V. FAQ](http://projekte.dante.de/Dante
 
 A: JabRef does not support plugin anymore (version > 2.11). However the plugin features are progressively integrated.
 Renaming of files is now part of the "Cleanup Entries" feature (brush button in the toolbar or CTRL+SHIFT+F7).
-Then, you can renamed attached files based on the Bibtex key.  You can change the format (pattern) under 
+Then, you can rename attached files based on the BibTeX key.  You can change the format (pattern) under 
 **Options -&gt; Preferences -&gt; Import**, by altering the pattern under "Default PDF file link action".
 
 ## Q: I have a JabRef database and I would like to export a subset to BibTeX (or BibLaTeX) format. How to do this?
