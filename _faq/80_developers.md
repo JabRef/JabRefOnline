@@ -22,7 +22,7 @@ A: We encourage you to read [Translating JabRef](https://github.com/JabRef/jabre
 ## Q: I want to send a patch. Where can I do that?
 
 A: We really prefer the pull request approach of GitHub.
-In case you want to contribute something, but git seems to be too hard for you, please get in touch with the developers to work out other ways of contributing.
+In case you want to contribute something, but git seems to be too hard for you, please get in touch with the developers to work out other ways of contributing (jabrefmail+webfeedback@gmail.com).
 
 ## Q: Can I make a donation? How?
 
