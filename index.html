@@ -20,6 +20,24 @@
 	{% if site.touch_icon %}<link rel="apple-touch-icon" href="{{ site.touch_icon }}">{% endif %}
 </head>
 <body>
+<div class="modal fade" tabindex="-1" role="dialog" id="impressmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Impressum</h4>
+      </div>
+      <div class="modal-body">
+        {% capture impress %} {% include impress.md %} {% endcapture %}
+        {{ impress | markdownify }}
+      </div>
+      <div class="modal-footer">
+        <button id="impressclose" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <div id="main">
 
     <nav><ul>
@@ -28,6 +46,7 @@
         <li class="p-{{id}}"><a href="#{{id}}">{{node.title}}</a></li>
       {% endfor %}
       <li class="p-blog"><a class="absolute" href="blog/">Blog</a></li>
+      <li class="p-blog"><a style="cursor:pointer" data-toggle="modal" data-target="#impressmodal">Impress</a></li>
     </ul></nav>
 
 
@@ -70,4 +89,9 @@
 </body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="site.js"></script>
+<script>
+$('#impressmodal').on('shown.bs.modal', function () {
+  $('#impressclose').focus()
+})
+</script>
 </html>

@@ -1,13 +1,3 @@
----
-title: Impressum
-bg: black
-color: lightgray
-style: impressum
-fa-icon: info
----
-
-## Impressum
-
 Dieses Impressum wird angegeben, da „die Impressumspflicht des TMG schon dann gegeben [ist], wenn es zumindest theoretisch möglich wäre, mit einer Webseite gleichen Zwecks durch Einsatz von Werbebannern oder ähnlichen Mitteln mindestens kostendeckende Einnahmen zu erzielen.“ ([Wikipedia](https://de.wikipedia.org/w/index.php?title=Impressumspflicht&oldid=151091516))
 
 Angaben gemäß § 5 TMG
