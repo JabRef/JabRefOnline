@@ -1,8 +1,5 @@
-
-
-Design by Tim O'Brien [t413.com](http://t413.com/)
-&mdash;
-[SinglePaged theme](https://github.com/t413/SinglePaged)
+Based on [Tim O'Brien's](http://t413.com/) [SinglePaged theme](https://github.com/t413/SinglePaged)
 &mdash;
 this site is [open source]({{ site.source_link }})
-
+&mdash;
+<a style="cursor:pointer" data-toggle="modal" data-target="#impressmodal">Impressum</a>
