@@ -8,8 +8,8 @@ style: left
 # JabRef
 <div class="container">
 	<div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			    <!-- Carousel indicators -->
 			    <ol class="carousel-indicators">
@@ -21,28 +21,28 @@ style: left
 			    <!-- Wrapper for carousel items -->
 			    <div class="carousel-inner">
 			        <div class="item active">
-			            <img src="img/jabref3.4-maintable.png" height="600" width="800" alt="Main table" class="center-block">
+			            <img src="img/jabref3.4-maintable.png" alt="Main table" class="center-block">
 			            <div class="carousel-caption well well-sm">
 					        <h3>Main table</h3>
 					        <p>All your references listed in a nice looking, sortable table.</p>
 					    </div>
 			        </div>
 			        <div class="item">
-			            <img src="img/jabref3.4-entry-editor.png" height="600" width="800"  alt="Entry Editor" class="center-block">
+			            <img src="img/jabref3.4-entry-editor.png" alt="Entry Editor" class="center-block">
 			            <div class="carousel-caption well well-sm">
 					        <h3>Entry editor</h3>
 					        <p>Edit your entries using the entry editor.</p>
 					    </div>
 			        </div>
 			        <div class="item">
-			            <img src="img/jabref3.4-search.png" height="600" width="800"  alt="JabRef Search Feature" class="center-block">
+			            <img src="img/jabref3.4-search.png" alt="JabRef Search Feature" class="center-block">
 			            <div class="carousel-caption well well-sm">
 						    <h3>Search for entries</h3>
 						    <p>Advanced and fast search features: Use simple terms, combinations or even regular expressions to search your database.</p>
 					    </div>
 			        </div>
 			        <div class="item">
-			            <img src="img/jabref3.4-DOI-handling.png" height="600" width="800"  alt="Jabref Search Feature" class="center-block">
+			            <img src="img/jabref3.4-DOI-handling.png" alt="Jabref Search Feature" class="center-block">
 			            <div class="carousel-caption well well-sm">
 						    <h3>DOI support</h3>
 						    <p>Automatic lookup of Digital Object Identifiers (DOIs), automatic entry completion based on DOI, automatic fulltext download based on DOI</p>
@@ -58,7 +58,7 @@ style: left
 			    </a>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </div>
 JabRef is an open source bibliography reference manager.
