@@ -8,10 +8,12 @@ fa-icon: archive
 
 ### Search the Web
 Entries can be searched in external databases and BibTeX entries can be fetched from there.
-Example sources: arXiv, CiteseerX, Google Scholar, Medline, GVK, IEEEXplore, and Springer
+Example sources: arXiv, CiteseerX, Google Scholar, Medline, GVK, IEEEXplore, and Springer.
 
 ### Import of various formats
 RIS, Medline/Pubmed (xml), Refer/Endnote, INSPEC, BibTeXML, CSA, ISI Web of Science, SilverPlatter, Scifinder, OVID, Biblioscape, Sixpack, JStor, and RIS.
+
+Moreover, the [FireFox add-on JabFox](https://addons.mozilla.org/en-US/firefox/addon/jabfox?src=external-jabrefSite) makes importing new bibliographic information directly from the browser very easy. 
 
 ### Automatic download of full texts
 JabRef can be instructed to search for the full text of a reference, download it, and directly link it to the BibTeX entry.
