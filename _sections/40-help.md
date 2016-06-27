@@ -16,15 +16,17 @@ Frequently asked questions are available at <http://www.jabref.org/faq>.
 
 ## General Support
 
-[mailing list](https://lists.sourceforge.net/lists/listinfo/jabref-users)
+Use our discourse forum at <http://discourse.jabref.org> to get help or to provide feedback.
 
-[tex.stackexchange.com](http://tex.stackexchange.com/tags/jabref/)
+You can also [propose new features there](http://discourse.jabref.org/c/features).
 
-[Feature and bug tracker](https://github.com/JabRef/jabref/issues)
+[Bug and error reports](https://github.com/JabRef/jabref/issues) are managed at GitHub.
 
 ## Development Information
 
-Please go to our github project page at <https://github.com/JabRef/jabref>.
+The development of JabRef is managed at GitHub. 
+
+You can find the source code and a contribution guide at our github project page at <https://github.com/JabRef/jabref>.
 
 ## Changelog
 
