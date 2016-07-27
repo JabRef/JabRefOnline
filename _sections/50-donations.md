@@ -10,7 +10,6 @@ fa-icon: gift
 <a href="https://github.com/JabRef/jabref/wiki/Donations" style="text-decoration: none;"><span class="fa fa-gift"></span> Donations keep us going.</a>
 </div>
 [![PayPal Donation](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.com/cgi-bin/webscr?item_name=JabRef+Bibliography+Manager&cmd=_donations&lc=US&currency_code=EUR&business=jabrefmail%40gmail.com)
-[![Flattr this git repo](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=koppor&url=https%3A%2F%2Fgithub.com%2FJabRef%2Fjabref&title=JabRef&language=Java&tags=github&category=software)
 
 Please [visit our wiki](https://github.com/JabRef/jabref/wiki/Donations) for more information such as donating via bank transfer.
 
