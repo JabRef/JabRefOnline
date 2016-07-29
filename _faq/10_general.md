@@ -54,13 +54,6 @@ A: Yes. Go to **Options -&gt; Preferences -&gt; Advanced -&gt; “Remote operati
 Put a checkmark to “Listen for remote operation on port:”.
 This option allows new instances of JabRef to detect the instance already running, and pass files to that instead of opening a new window.
 
-## Q: BibTeX converts uppercase characters to lowercase in my title field. I know this can be prevented by wrapping uppercase letters in braces, e.g. `{T}he life cycle of {A}tlantic salmon`, but this is too much work. Can JabRef help?
-
-A: JabRef has a setting that will automatically wrap all capital letters for certain fields in `{ }` - this will make sure they are preserved in the LaTeX output.
-Under **Options -&gt; Preferences -&gt; File -&gt; "Store the following fields with braces around capital letters"**, make sure the title field is included.
-To do this for several fields, write e.g. `title;abstract`.
-This setting automatically adds braces when saving the bib file, but you won't see the braces within JabRef.
-
 ## Q: I have a DOI. Is it possible to create an entry directly out of the DOI?
 
 A: Yes. Go to Search and click on “Web Search” to enable the Web search.
