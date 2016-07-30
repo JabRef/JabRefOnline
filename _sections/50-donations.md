@@ -9,7 +9,7 @@ fa-icon: gift
 <div style="font-size:30px; margin-bottom:20px;">
 <a href="https://github.com/JabRef/jabref/wiki/Donations" style="text-decoration: none;"><span class="fa fa-gift"></span> Donations keep us going.</a>
 </div>
-[![PayPal Donation](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.com/cgi-bin/webscr?item_name=JabRef+Bibliography+Manager&cmd=_donations&lc=US&currency_code=EUR&business=jabrefmail%40gmail.com)
+[![PayPal Donation](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.com/cgi-bin/webscr?item_name=JabRef+Bibliography+Manager&cmd=_donations&lc=US&currency_code=EUR&business=donations%40jabref.org)
 
 Please [visit our wiki](https://github.com/JabRef/jabref/wiki/Donations) for more information such as donating via bank transfer.
 
