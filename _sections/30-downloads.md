@@ -9,7 +9,7 @@ fa-icon: cloud-download
 
 <div style="position: relative; top: -12px; display: table; margin: 0px auto; font-size:20px; width: 600px;">
   <div style="width: 300px; float:left;" class="center">
-    <a href="http://www.fosshub.com/JabRef.html"><i class="fa fa-cloud-download fa-5x"></i><br />download latest release</a>
+    <a href="https://github.com/JabRef/jabref/releases/tag/v3.5"><i class="fa fa-cloud-download fa-5x"></i><br />download latest release</a>
   </div>
 
   <div style="width: 300px; overflow: hidden;">
