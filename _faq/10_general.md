@@ -162,3 +162,8 @@ choose **File-&gt;Save Selected as...**. More details on [stackexchange.com](htt
 ## Q: I have a JabRef database and I would like to export the subset corresponding to my LaTeX file. How to do this?
 
 A: Upon compilation, LaTeX generates a file with the extension ".aux". This files contains the keys of the cited references (among other things). Using this AUX file, JabRef can extract the relevant entries. Choose the menu **Tools-&gt;New subdatabase based on AUX file**. Then select the reference database (among the opened ones), and specify the AUX file.
+
+
+## Q: When I modify my database, I would like that JabRef performs entry cleaning automatically. How to do this?
+
+A: In **File-&gt;Database properties**, you will find a section named "Save actions". After enabling this feature, you can choose which actions should be performed for each field upon saving. That should help you keep your database tidy.
