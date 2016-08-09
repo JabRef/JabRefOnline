@@ -167,3 +167,12 @@ A: Upon compilation, LaTeX generates a file with the extension ".aux". This file
 ## Q: When I modify my database, I would like that JabRef performs entry cleaning automatically. How to do this?
 
 A: In **File-&gt;Database properties**, you will find a section named "Save actions". After enabling this feature, you can choose which actions should be performed for each field upon saving. That should help you keep your database tidy.
+
+## Q: Search on Google scholar does not work anymore. What is going on?
+
+A: Google scholar is blocking "automated" crawls which generate too much traffic in a short time. JabRef already uses a two-step approach (with the prefetched list before crawling the actual BibTeX data) to circumvent this.
+However, after too much crawls JabRef --- or more correct: your IP address --- is being blocked. 
+To unblock your IP, do a Google scholar search in your browser. You will be asked to show that you are not a robot.
+
+Thus, the Google Scholar fetcher is not the best way to obtain lots of entries at the same time. If you are Mozilla Firefox, the JabRef Plugin "JabFox" might be an alternative to download the BibTeX data directly from the browser. You can find the PlugIn here: https://addons.mozilla.org/en-US/firefox/addon/jabfox/?src=external-jabrefSite
+
