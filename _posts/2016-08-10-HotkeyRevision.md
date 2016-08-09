@@ -1,7 +1,7 @@
 ﻿---
 title: Revised Hotkey System
 id: HotkeyRevisionAugust2016
-author: "[JabRef Developers](https://github.com/orgs/JabRef/teams/developers)"
+author: "[JabRef StuPro](https://github.com/orgs/JabRef/teams/stupro)"
 ---
 
 In the next release of JabRef we will introduce a revisid hotkey system. The 2 goals of this revision is to improve maneuverability through the keyboard and streamlining hotkeys. Some related hotkeys like for the side panes were scattered across the keyboard, so we grouped them together. You might be wondering what has changed, so have a look at them:
