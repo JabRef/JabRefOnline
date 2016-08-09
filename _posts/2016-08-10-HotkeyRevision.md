@@ -39,5 +39,7 @@ ctrl + shift R | - | Technical report
 - We removed the hotkey for "Edit preamble" due to being a seldomly used action that doens't require a hotkey.
 - We resized the “change key bindings” dialog due to being too small for some descriptions.
 
+If you would like to to try the new system, you can try it out at http://builds.jabref.org/master/.
+
 For questions about the functioning or suggestions for improvements please use the discussion forum. In case you have trouble, report bugs on GitHub.
 _**You like it? Foster JabRef development with [Code](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) or [Money](https://github.com/JabRef/jabref/wiki/Donations).**_
