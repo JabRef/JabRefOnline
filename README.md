@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/JabRef/www.jabref.org.svg?branch=master)](https://travis-ci.org/JabRef/www.jabref.org)
-
 This repository contains the source of the [JabRef homepage](https://www.jabref.org/).
 Feel free to improve the page using the [issue tracker](https://github.com/JabRef/www.jabref.org/issues) or pull requests.
 
