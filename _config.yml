@@ -1,26 +1,26 @@
 ---
 
 port: 4000
-host: 0.0.0.0
+host: localhost
 safe: false
 
 
 ### site serving configuration ###
-exclude: [CNAME, README.md, .gitignore]
-permalink: / ## disables post output
+exclude: [CNAME, README.md, .gitignore, Gemfile, Gemfile.lock, cibuild.sh]
+permalink: :title ## disables post output
 timezone: null
 lsi: false
 markdown: kramdown
 
 
 ### content configuration ###
-title:       "SinglePaged - Title: Edit me in _config.yml!"
-keywords:    "SinglePaged, jekyll, template, github, blog, single page"
-description: "A single-page template for Jekyll based blogs (like what you'd use on github pages!)"
-source_link: "https://github.com/t413/SinglePaged"
+title:       "JabRef | Blog"
+keywords:    "JabRef, blog"
+description: "The blog of the literature management software JabRef"
+source_link: "https://github.com/JabRef/blog.jabref.org/"
 favicon:     #put a path like: "img/favicon.ico"
 touch_icon:  #put a path like: "img/apple-touch-icon.png"
-google_analytics_key: ## put YOUR key here to enable tracking! (blank to disable)
+google_analytics_key: UA-74055103-1
 
 
 ### template colors, used site-wide via css ###
@@ -32,6 +32,8 @@ colors:
   purple:    '#c869bf'
   orange:    '#fab125'
   turquoise: '#0fbfcf'
+  jabref-font:     '#4d4674'
+  light-turquoise: '#d0f7fb'
 
 kramdown:
   auto_ids:  false

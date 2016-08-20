@@ -21,5 +21,3 @@ JabRef can be launched from within WinEdt.
 
 ![image: From WinEdt to JabRef]({{ site.url }}/img/WinEdt-JabRef.png)    
 From WinEdt to JabRef.
-
-_**You like it? Foster JabRef development with [Code](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) or [Money](https://github.com/JabRef/jabref/wiki/Donations).**_

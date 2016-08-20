@@ -25,5 +25,3 @@ You can [give it a try](http://builds.jabref.org/master/)
 [Your comments are welcomed](https://github.com/JabRef/jabref/pull/1100)!
 
 *Stay tuned: [work is under way to speed up the opening of large databases](https://github.com/JabRef/jabref/issues/1094).*
-
-_**You like it? Foster JabRef development with [Code](https://github.com/JabRef/jabref/issues) or [Money](https://github.com/JabRef/jabref/wiki/Donations).**_

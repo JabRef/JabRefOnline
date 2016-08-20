@@ -31,5 +31,3 @@ Thus, we decided to officially discontinue the support on the mailing list. We'l
 For those of you who like to stick with a mailing-list like behavior we provide you [a guide on how to use the discourse forum just like a mailing list](http://discourse.jabref.org/t/quick-start-guide-for-former-mailing-list-users/31).
 
 *Thanks again to [discourse.org](http://www.discourse.org) for the great software and especially for providing us free hosting!*
-
-_**You like it? Foster JabRef development with [Code](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) or [Money](https://github.com/JabRef/jabref/wiki/Donations).**_
