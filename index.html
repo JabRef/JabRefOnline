@@ -34,7 +34,7 @@
 	</nav>
 
     {% for page in site.posts %}
-      {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
+      {% capture id %}id-{{ page.id | remove:'/' | downcase }}{% endcapture %}
       <div id="{{id}}" class="section p-{{id}}">
         <div class="container {{ page.style  | default: "left" }}">
             <h1>{{ page.date | date: '%B %d, %Y' }} &ndash;  {{ page.title }}</h1>
