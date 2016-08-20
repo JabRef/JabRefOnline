@@ -8,6 +8,7 @@
   <title>{{ site.title }}</title>
 	<meta name="keywords" content="{{ site.keywords }}">
 	<meta name="description" content="{{ site.description }}">
+  {% feed_meta %}
   <link rel="stylesheet" href="combo.css">
   <link rel="stylesheet" href="blog.css">
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
@@ -19,6 +20,7 @@
 
   <div style="position: fixed; left: 10px; top: 10px; z-index: 9999">
       <a href="https://www.jabref.org/"><i class="fa fa-home fa-2x" style="color:white"></i></a>
+	  <a href="feed.xml"><i class="fa fa-rss fa-2x" style="color:white"></i></a>
   </div>
 
   <div id="main">

@@ -4,10 +4,12 @@ port: 4000
 host: localhost
 safe: false
 
+gems:
+  - jekyll-feed
 
 ### site serving configuration ###
 exclude: [CNAME, README.md, .gitignore, Gemfile, Gemfile.lock, cibuild.sh]
-permalink: :title ## disables post output
+permalink: \#:title
 timezone: null
 lsi: false
 markdown: kramdown
