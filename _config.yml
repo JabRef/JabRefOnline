@@ -7,6 +7,14 @@ safe: false
 gems:
   - jekyll-feed
 
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts"
+    values:
+      layout: "default"
+
 ### site serving configuration ###
 exclude: [CNAME, README.md, .gitignore, Gemfile, Gemfile.lock, cibuild.sh]
 permalink: pretty
