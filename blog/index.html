@@ -1,57 +1,16 @@
 ---
-title: JabRef Blog
 ---
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title }}</title>
-	<meta name="keywords" content="JabRef Developers Blog, JabRef Blog, Developers Blog">
-	<meta name="description" content="The Developers Blog of JabRef">
-  <link rel="stylesheet" href="../combo.css">
-  <link rel="stylesheet" href="../blog.css">
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-  {% if site.favicon %}<link rel="shortcut icon" href="{{ site.favicon }}" type="image/x-icon">{% endif %}
-	{% if site.touch_icon %}<link rel="apple-touch-icon" href="{{ site.touch_icon }}">{% endif %}
+<link rel="canonical" href="https://blog.jabref.org"/>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="refresh" content="0;url={{ page.redirect_to }}" />
 </head>
 <body>
-
-  <div style="position: fixed; left: 10px; top: 10px; z-index: 9999">
-      <a href="../"><i class="fa fa-home fa-2x" style="color:white"></i></a>
-  </div>
-
-  <div id="main">
-      
-    <nav><ul>
-        <li class="p-{{ site.posts.first.id }}"><a href="#{{ site.posts.first.id }}">Top</a></li>
-        <li class="p-welcome"><a href="#welcome">JabRef Blog</a></li>
-        <li class="p-{{ site.posts.last.id }}"><a href="#{{ site.posts.last.id }}">Bottom</a></li>
-    </ul></nav>
-    
-
-    {% for page in site.posts %}
-      {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
-      <div id="{{id}}" class="section p-{{id}}">
-        <div class="container {{ page.style  | default: "left" }}">
-            <h1>{{ page.date | date: '%B %d, %Y' }} &ndash;  {{ page.title }}</h1>
-            <div class="postauthor">{{page.author | markdownify}}</div>
-            {{ page.content }}
-        </div>
-      </div>
-    {% endfor %}
-
-    <div id="footer" class="section text-white">
-      <div class="container">
-        {% capture foottext %} {% include footer.md %} {% endcapture %}
-        {{ foottext | markdownify }}
-      </div>
-    </div>
-  </div>
-
-{% include analytics.html %}
+    <h1>Redirecting...</h1>
+	  <p>The location of JabRef's blog has been updated.</p>
+      <a href="https://blog.jabref.org">Click here if you are not redirected.<a>
+      <script>location='https://blog.jabref.org'</script>
 </body>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="../site.js"></script>
 </html>
