@@ -31,6 +31,6 @@ Keys - new | Keys - old | Function
 - We removed the hotkey for "Print entry preview" due to some conflicts with others and the fact that this function wasn't really used that often by users. The function itself is not gone: It existed in the right click menu of the preview panel and now is also available at the right click menu.
 - We resized the "change key bindings" dialog due to being too small for some descriptions.
 
-If you would like to try the new system, you can try it out at https://builds.jabref.org/master/.
+If you would like to try the new system, you can try it out at [https://builds.jabref.org/master/](https://builds.jabref.org/master/).
 
 For questions about the functioning or suggestions for improvements, please use the [discussion forum](http://discourse.jabref.org/). In case you have trouble, report bugs on [GitHub]( https://github.com/JabRef/jabref/issues).
