@@ -1,5 +1,5 @@
 ---
-title: Customize entry types in JabRef: Video tutorial
+title: "Customize entry types in JabRef: Video tutorial"
 id: CustomEntryTypesVideoTut
 author: "[JabRef Developers](https://github.com/orgs/JabRef/teams/developers)"
 ---
