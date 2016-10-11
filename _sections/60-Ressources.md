@@ -145,7 +145,6 @@ If you now go to **File -&gt; Export**, Jabref will open a window where you can 
 ### CSV export filter with Mendeley tags
 [Cynthia D'Angelo's CSV export filter with Mendeley tags](https://cynthiadangelo.com/2012/10/22/exporting-mendeley-tags/) provide an export filter that allows for exporting Mendely tags. It exports the refencence in CVS format (i.e. spreadsheet- compatible).
 
-
 ## JabRef journal abbreviation lists
 
 JabRef can help you refactor your reference list by automatically abbreviating or unabbreviating journal names, as explained in [the dedicated help file](http://help.jabref.org/en/JournalAbbreviations).
@@ -160,9 +159,10 @@ While JabRef comes with a build-in list of journals, additional lists are availa
 * [Geology and Physics](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_geology_physics.txt) by an [anonymous user](https://sourceforge.net/p/jabref/patches/164/).
 *   [IEEE](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_ieee.txt) by Thomas Arildsen and “eyliu”.
 * [Index Medicus](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_medicus.txt) by Guy Tsafnat. _Note: provides Medline (dotless) abbr. only._
+* [ISI Web of Science](https://figshare.com/articles/Journal_abbreviations_from_Web_of_Science/3207787) by Alistair Auffret.
 * [Life Science](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_lifescience.txt) by Zé Roberto Ribeiro.
 * [Mechanical and biomechanical](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_mechanical.txt) by an [anonymous user](https://sourceforge.net/p/jabref/patches/151/).
-*   [Meteorology](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_meteorology.txt) by Thijs Heus.
+* [Meteorology](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_meteorology.txt) by Thijs Heus.
 * [Sociology](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_sociology.txt) by Ronggui Huang.
 
 
