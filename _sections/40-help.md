@@ -12,7 +12,7 @@ Documentation is available at <http://help.jabref.org>.
 
 ## FAQ
 
-Frequently asked questions are available at <http://www.jabref.org/faq>.
+Frequently asked questions are available at <http://help.jabref.org/>.
 
 ## General Support
 
