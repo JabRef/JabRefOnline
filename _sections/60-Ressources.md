@@ -1,9 +1,9 @@
 ---
 title: Resources
-bg: !!!
-color: !!!
-style: !!!
-fa-icon: !!!
+bg: lightgray
+color: black
+style: center
+fa-icon: fa-wrench
 ---
 
 ## JabRef-compatible text editors
