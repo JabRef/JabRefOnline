@@ -76,16 +76,6 @@ Bibtex4Word is an add-in for Microsoft Word that allows the citation of referenc
 
 [Bibtex4Word](http://www.ee.ic.ac.uk/hp/staff/dmb/perl/index.html)
 
-### Feinerleiser
-
-**!!!Status?**
-
-_by Niklas Alt_
-
-Feinerleiser is a tool for improving the JabRef-LibreOffice integration when writing for the Humanities. This tool can be run to finalize a document, providing citation features that are not supported by JabRef itself.
-
-[Feinerleiser](http://www.sourceforge.net/projects/feinerleiser/)
-
 ### BibSync
 
 _by Daniel Mendler_
