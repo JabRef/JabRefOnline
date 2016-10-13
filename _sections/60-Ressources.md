@@ -3,7 +3,7 @@ title: Resources
 bg: lightgray
 color: black
 style: left
-fa-icon: fa-wrench
+fa-icon: wrench
 ---
 
 ## JabRef-compatible text editors
