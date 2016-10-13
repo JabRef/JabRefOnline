@@ -143,7 +143,7 @@ If you now go to **File -&gt; Export**, Jabref will open a window where you can 
 [Russell Almond's APA export filter](http://ralmond.net/APAish/) provides an export filter that is close to the American Pychological Association (APA) guidelines. It exports the references in Rich Text Format (rtf).
 
 ### CSV export filter with Mendeley tags
-[Cynthia D'Angelo's CSV export filter with Mendeley tags](https://cynthiadangelo.com/2012/10/22/exporting-mendeley-tags/) provide an export filter that allows for exporting Mendely tags. It exports the refencence in CVS format (i.e. spreadsheet- compatible).
+[Cynthia D'Angelo's CSV export filter with Mendeley tags](https://cynthiadangelo.com/2012/10/22/exporting-mendeley-tags/) provide an export filter that allows for exporting Mendely tags. It exports the refencence in csv format (i.e. spreadsheet- compatible).
 
 ## JabRef journal abbreviation lists
 
