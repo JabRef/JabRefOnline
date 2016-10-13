@@ -2,7 +2,7 @@
 title: Resources
 bg: lightgray
 color: black
-style: center
+style: left
 fa-icon: fa-wrench
 ---
 
