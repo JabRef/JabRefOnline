@@ -8,6 +8,10 @@ fa-icon: users
 
 You can foster JabRef's development with:
 
+### Feature requests
+
+Some missing features? [Come discuss about it!](http://discourse.jabref.org/)
+
 ### Code
 
 Check the [high-priority open issues](https://github.com/JabRef/jabref/labels/asking-for-a-pull-request), and see our [CONTRIBUTING.md](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) for detailed information and further links.
