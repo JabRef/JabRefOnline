@@ -26,4 +26,4 @@ Although JabRef is currently available in 17 languages, some languages lack cont
 Hence, you may help in [translating JabRef interface](https://help.jabref.org/en/TranslatingGUI).
 
 ### Money
-If you have no time or skills to contribute to any of the above, please, [make a donation](http://www.jabref.org/#donations).
+If you have no time or skills to contribute to any of the above, please consider [making a donation](http://www.jabref.org/#donations).
