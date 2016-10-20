@@ -27,4 +27,4 @@ Hence, you may help in [translating JabRef interface](https://help.jabref.org/en
 
 ### Money
 
-If you have no time or skills to contribute to any of the above, please consider [making a donation](https://dontations.jabref.org).
+If you have no time or skills to contribute to any of the above, please consider [making a donation](https://donations.jabref.org).
