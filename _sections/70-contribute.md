@@ -14,7 +14,7 @@ Some missing features? [Come discuss about it!](http://discourse.jabref.org/)
 
 ### Code
 
-Check the [high-priority open issues](https://github.com/JabRef/jabref/labels/asking-for-a-pull-request), and see our [CONTRIBUTING.md](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) for detailed information and further links.
+Check the [issues intended for external contributions](https://github.com/JabRef/jabref/labels/asking-for-a-pull-request) and see our [CONTRIBUTING.md](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) for detailed information and further links.
 
 ### Documentation
 
@@ -26,4 +26,5 @@ Although JabRef is currently available in 17 languages, some languages lack cont
 Hence, you may help in [translating JabRef interface](https://help.jabref.org/en/TranslatingGUI).
 
 ### Money
-If you have no time or skills to contribute to any of the above, please consider [making a donation](http://www.jabref.org/#donations).
+
+If you have no time or skills to contribute to any of the above, please consider [making a donation](https://dontations.jabref.org).
