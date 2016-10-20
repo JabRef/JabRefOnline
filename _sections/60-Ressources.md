@@ -67,6 +67,18 @@ Available for iPad, iPhone and iPod Touch.
 
 [Download PocketBib](http://www.grahamdennis.me/pocketbib/)
 
+
+### Eratosthenes Reference Manager
+
+_by Matthew Matlock_
+
+Eratosthenes Reference Manager is a BibTeX-based bibliography manager for Android. It [integrates with JabRef](https://bitbucket.org/mkmatlock/eratosthenes/wiki/Home#!using-eratosthenes-with-jabref), supporting top-level groups and attached files/external links.
+
+Available for Android 4.0 and up.
+
+[Download Eratosthenes Reference Manager](https://play.google.com/store/apps/details?id=com.mm.eratos)
+
+
 ### Bibtex4word
 
 _by Mike Brookes_
