@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="combo.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js"></script>
   {% if site.favicon %}<link rel="shortcut icon" href="{{ site.favicon }}" type="image/x-icon">{% endif %}
 	{% if site.touch_icon %}<link rel="apple-touch-icon" href="{{ site.touch_icon }}">{% endif %}
 </head>
@@ -87,6 +88,13 @@
       </div>
     </div>
   </div>
+  <script>
+	  anchors.options = {
+         placement: 'left'
+	  }
+	  anchors.add('h5');
+  </script>
+
 
 {% include analytics.html %}
 </body>
