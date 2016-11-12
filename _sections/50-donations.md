@@ -24,7 +24,7 @@ Enter `jabref-21` as code.
 This seems to work in Germany only.
 
 <a href="http://baobab.org/BAOLA-sparkling-drink" style="text-decoration: none;">
-<img src="https://baobab.org/bilder/produkte/normal/BAOLA-Erfrischungsgetraenk.jpg" width="25%" alt="Image of Baola" style="display: block; margin-left: auto; margin-right: auto">
+<img src="img/BAOLA-Erfrischungsgetraenk-min.jpg" width="25%" alt="Image of Baola" style="display: block; margin-left: auto; margin-right: auto">
 </a>
 
 <a href="https://www.adcell.de/promotion/click/promoId/113867/slotId/70596" target="_blank"  style="text-decoration: none;">
