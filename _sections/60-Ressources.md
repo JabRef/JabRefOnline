@@ -157,13 +157,15 @@ While JabRef comes with a build-in list of journals, additional lists are availa
 
 * [General](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_general.txt)
 * [American Mathematical Society](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_ams.txt) by Tzu-Hao Wei.
-* [Astronomy](https://github.com/timstaley/jabref-astro-abbreviations/blob/master/MNRAS_abbreviations.txt) by Tim Staley. _Note: Please contribute using [github](https://github.com/timstaley/jabref-astro-abbreviations)._
+* [Année philologique](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_annee-philologique.txt) by Domenico Cufalo.
+* [Astronomy](https://raw.githubusercontent.com/timstaley/jabref-astro-abbreviations/master/MNRAS_abbreviations.txt) by Tim Staley. _Note: Please contribute using [github](https://github.com/timstaley/jabref-astro-abbreviations)._
 * [Economics](https://raw.github.com/jrnold/jabref-econ-journal-abbrevs/master/aea-abbrevs.txt) by Jeff Arnold (as as posted on the AEA website).
 * [Entrez](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_entrez.txt) by Emmanuel Charpentier. _Note: provides Medline (dotless) abbr. only._
 * [Geology and Physics](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_geology_physics.txt) by an [anonymous user](https://sourceforge.net/p/jabref/patches/164/).
 * [IEEE](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_ieee.txt) by Thomas Arildsen and “eyliu”.
 * [Index Medicus](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_medicus.txt) by Guy Tsafnat. _Note: provides Medline (dotless) abbr. only._
-* [ISI Web of Science](https://figshare.com/articles/Journal_abbreviations_from_Web_of_Science/3207787) by Alistair Auffret.
+* [ISI Web of Science (with dots)](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_webofscience-dots.txt) by Alistair Auffret.
+* [ISI Web of Science (dotless)](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_webofscience.txt) by Alistair Auffret.
 * [Life Science](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_lifescience.txt) by Zé Roberto Ribeiro.
 * [Mechanical and biomechanical](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_mechanical.txt) by an [anonymous user](https://sourceforge.net/p/jabref/patches/151/).
 * [Meteorology](https://raw.githubusercontent.com/JabRef/reference-abbreviations/master/journals/journal_abbreviations_meteorology.txt) by Thijs Heus.
