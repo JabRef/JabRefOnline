@@ -97,57 +97,11 @@ BibSync is a tool to synchronize your paper database with a BibTeX file which mi
 
 ## Export filters
 
-JabRef allows you to create custom export filters. This functionality and the installation procedure are described in the help file on [Custom export filters](http://help.jabref.org/en/CustomExports). Some users have created export filters that can be useful to many others. This page we provide links or direct downloads for some of these export filters.
+JabRef allows you to create custom export filters.
+This functionality and the installation procedure are described in the help file on [Custom export filters](https://help.jabref.org/en/CustomExports).
+Some users have created export filters that can be useful to many others.
+They are collected at <https://layouts.jabref.org>.
 
-*If you have created an export filter that you want to share with other users, [please notify us](http://discourse.jabref.org). We can provide a download from this page, or a link to your own page.*
-
-### Mark Schenk's HTML export filters
-
-Mark Schenk's HTML export filters provide HTML listings of your reference list. The exported HTML comes complete with scripts for quick filtering of the list.
-
-_Note: some of Mark Schenk's filters are distributed with JabRef as standard export filters._
-
-[Download Mark Schenk's HTML export filters](http://www.markschenk.com/tools/jabref/)
-
-### Daniel Haertle's HTML export filter
-
-Daniel Haertle's HTML export filter provides an HTML listing of your reference list. The output looks [like this](http://haertle.ch/publications/).
-
-[Download Daniel Haertle's HTML export filter](http://haertle.ch/programs/jabref/)
-
-### Truong X. Nghiem's HTML export filter
-Truong X. Nghiem's HTML export filter provides an HTML listing of your reference list that does not contain a header nor a body. Its purpose is to be included in other HTML files or in text-to-html source files (e.g. Jemdoc). The output looks [like this](http://txn.name/publications.html).
-
-[Download Truong X. Nghiem's HTML export filter](http://txn.name/publist.html)
-
-### Marten Kooiker's RTF export filters
-
-Marten Kooiker has put together a number of export filters outputting RTF references formatted for specific journals.
-
-[Download Marten Kooiker's RTF export filters (v1.0a)](https://github.com/JabRef/htdocs/raw/master/exportfilters/Marten_Kooiker_export_filters_v1.0a.zip)
-
-### Edward Elgar export filters
-
-Christian Bartolomaeus has made an export filter matching the author guidelines of Edward Elgar. The export filter requires definition of two name formatters - please read the included README file.
-
-[Download Edward Elgar export filters](https://github.com/JabRef/htdocs/raw/master/exportfilters/Edward_Elgar_export_filters_v1.0.zip)
-
-### International Journal of Greenhouse Gas (IJoGGC) export filter
-
-This filter is a modified version of Edwared Elgar's export filters. It formats the exported .rtf file into the format required by lots of Elsevier Journals. You just have to follow the next few steps:
-
-[Download the International Journal of Greenhouse Gas (IJoGGC) export filter](https://github.com/JabRef/htdocs/raw/master/exportfilters/Exportfilter_IJoGGC_v1.0.zip)
-
-### APA export filter
-
-Russell Almond's APA export filter provides an export filter that is close to the American Pychological Association (APA) guidelines. It exports the references in Rich Text Format (rtf).
-
-[Download Russell Almond's APA export filter](http://ralmond.net/APAish/)
-
-### CSV export filter with Mendeley tags
-Cynthia D'Angelo's CSV export filter with Mendeley tags provides an export filter that allows for exporting Mendely tags. It exports the refencence in csv format (i.e. spreadsheet- compatible).
-
-[Dowload Cynthia D'Angelo's CSV export filter with Mendeley tags](https://cynthiadangelo.com/2012/10/22/exporting-mendeley-tags/)
 
 ## JabRef journal abbreviation lists
 
