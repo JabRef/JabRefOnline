@@ -8,11 +8,12 @@ fa-icon: question-circle
 
 ## Documentation
 
-Documentation is available at <http://help.jabref.org>.
+Documentation is available at <https://help.jabref.org>.
+There was a huge effort to generate a German user manual. You find it at <https://manuals.jabref.org>.
 
 ## FAQ
 
-Frequently asked questions are available at <http://help.jabref.org/>.
+Frequently asked questions are available at <https://help.jabref.org/en/#faq>.
 
 ## General Support
 
