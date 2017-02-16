@@ -29,15 +29,6 @@ See [OpenOffice/LibreOffice integration](https://help.jabref.org/en/OpenOfficeIn
 ## External tools
 
 
-### Bibtex4word
-
-_by Mike Brookes_
-
-Bibtex4Word is an add-in for Microsoft Word that allows the citation of references and the insertion of a bibliography into your document using your choice of formatting style. It is lightweight, transparent and does not mess up your documents.
-
-Homepage: <http://www.ee.ic.ac.uk/hp/staff/dmb/perl/index.html>
-
-
 ### BibSync
 
 _by Daniel Mendler_
@@ -45,6 +36,15 @@ _by Daniel Mendler_
 BibSync is a tool to synchronize your paper database with a BibTeX file which might be most useful for Physicists and Mathematicians since it supports synchronization with DOI and arXiv.
 
 Homepage: <https://github.com/minad/bibsync>
+
+
+### Bibtex4word
+
+_by Mike Brookes_
+
+Bibtex4Word is an add-in for Microsoft Word that allows the citation of references and the insertion of a bibliography into your document using your choice of formatting style. It is lightweight, transparent and does not mess up your documents.
+
+Homepage: <http://www.ee.ic.ac.uk/hp/staff/dmb/perl/index.html>
 
 
 ### Endnote filter set
