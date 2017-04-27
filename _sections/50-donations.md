@@ -16,7 +16,7 @@ fa-icon: gift
 Please [visit our wiki](https://github.com/JabRef/jabref/wiki/Donations) for more information such as donating via bank transfer.
 
 JabRef development is powered by [Baola], [Neuronade] and [YourKit Java Profiler](https://www.yourkit.com/java/profiler/) 
-<img src="img/yklogo.png" alt="Image of YourKit" height="15"/>.
+<img src="img/yklogo.png" alt="Image of YourKit" style="height: 15px"/>.
 
 If you need books, please order them at your local bookstore.<br/>
 In case you stick with [Amazon](http://www.amazon.de/b?_encoding=UTF8&camp=1638&creative=6742&linkCode=ur2&node=13690631&site-redirect=de&tag=jabref-21), please use [this link](http://www.amazon.de/b?_encoding=UTF8&camp=1638&creative=6742&linkCode=ur2&node=13690631&site-redirect=de&tag=jabref-21).
