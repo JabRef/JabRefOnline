@@ -105,8 +105,8 @@ _by Tobias Diez_
 
 JabFox is a Firefox add-on for users of the bibliographic reference manager JabRef. It automatically identifies and extracts bibliographic information on websites and sends them to JabRef in one click. A wide range of publisher sites, library catalogs and databases are supported.
 
-- Homepage: https://addons.mozilla.org/en-US/firefox/addon/jabfox/
-- Source: https://github.com/JabRef/JabFox/
+- Homepage: <https://addons.mozilla.org/en-US/firefox/addon/jabfox/>
+- Source: <https://github.com/JabRef/JabFox/>
 
 
 ### PocketBib
