@@ -11,7 +11,6 @@ fa-icon: wrench
 JabRef can push entries, i.e. insert `\cite{key}` commands, to the following text editors:
 
 - [Emacs](https://www.gnu.org/software/emacs/)
-- [LaTeX Editor](http://www.latexeditor.org/)
 - [LyX/Kile](http://www.lyx.org/)
 - [TeXstudio](http://www.texstudio.org/)
 - [Texmaker](http://www.xm1math.net/texmaker/)
