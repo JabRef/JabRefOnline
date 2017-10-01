@@ -17,32 +17,48 @@ style: left
 			        <li data-target="#myCarousel" data-slide-to="1"></li>
 			        <li data-target="#myCarousel" data-slide-to="2"></li>
 			        <li data-target="#myCarousel" data-slide-to="3"></li>
+			        <li data-target="#myCarousel" data-slide-to="4"></li>
+			        <li data-target="#myCarousel" data-slide-to="5"></li>
 			    </ol>   
 			    <!-- Wrapper for carousel items -->
 			    <div class="carousel-inner">
 			        <div class="item active">
-			            <img src="img/jabref3.4-maintable.png" alt="Main table" class="center-block">
+			            <img src="img/JabRef-4-0-MainTable.png" alt="Main table" class="center-block">
 			            <div class="carousel-caption well well-sm">
 					        <h3>Main table</h3>
 					        <p>All your references listed in a nice looking, sortable table.</p>
 					    </div>
 			        </div>
 			        <div class="item">
-			            <img src="img/jabref3.4-entry-editor.png" alt="Entry Editor" class="center-block">
+			            <img src="img/JabRef-4-0-EntryEditor.png" alt="Entry Editor" class="center-block">
 			            <div class="carousel-caption well well-sm">
 					        <h3>Entry editor</h3>
 					        <p>Edit your entries using the entry editor.</p>
 					    </div>
 			        </div>
 			        <div class="item">
-			            <img src="img/jabref3.4-search.png" alt="JabRef Search Feature" class="center-block">
+			            <img src="img/JabRef-4-0-Groups.png" alt="JabRef Groups Feature" class="center-block">
+			            <div class="carousel-caption well well-sm">
+						    <h3>Groups View</h3>
+						    <p>Group your references with manual or automated (e.g., by author or keyword) assignment.</p>
+					    </div>
+			        </div>
+			        <div class="item">
+			            <img src="img/JabRef-4-0-FileAnnotations.png" alt="JabRef Annotations Viewer" class="center-block">
+			            <div class="carousel-caption well well-sm">
+						    <h3>Annotations View</h3>
+						    <p>Read your PDF annotations within JabRef.</p>
+					    </div>
+			        </div>
+			        <div class="item">
+			            <img src="img/JabRef-4-0-Search.png" alt="JabRef Search Feature" class="center-block">
 			            <div class="carousel-caption well well-sm">
 						    <h3>Search for entries</h3>
 						    <p>Advanced and fast search features: Use simple terms, combinations or even regular expressions to search your database.</p>
 					    </div>
 			        </div>
 			        <div class="item">
-			            <img src="img/jabref3.4-DOI-handling.png" alt="Jabref Search Feature" class="center-block">
+			            <img src="img/JabRef-4-0-DOI-handling.png" alt="JabRef Search Feature" class="center-block">
 			            <div class="carousel-caption well well-sm">
 						    <h3>DOI support</h3>
 						    <p>Automatic lookup of Digital Object Identifiers (DOIs), automatic entry completion based on DOI, automatic fulltext download based on DOI</p>
