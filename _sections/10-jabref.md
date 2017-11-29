@@ -79,7 +79,7 @@ style: left
 </div>
 JabRef is an open source bibliography reference manager.
 The native file format used by JabRef is BibTeX, the standard LaTeX bibliography format.
-JabRef runs on the [Java VM](http://www.java.com/) (version 1.8 or newer), and works equally well on Windows, Linux, and Mac OS X.
+JabRef is a desktop application and runs on the [Java VM](http://www.java.com/) ([version 8](https://github.com/JabRef/jabref/issues/2594)), and works equally well on Windows, Linux, and Mac OS X.
 
 BibTeX is an application and a bibliography file format written by Oren Patashnik and Leslie Lamport for the LaTeX document preparation system.
 General information can be found on the [CTAN BibTeX package information page](https://www.ctan.org/pkg/bibtex).
