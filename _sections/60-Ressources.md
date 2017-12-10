@@ -108,17 +108,6 @@ JabFox is a Firefox add-on for users of the bibliographic reference manager JabR
 - Source: <https://github.com/JabRef/JabFox/>
 
 
-### PocketBib
-
-_by Graham Dennis_
-
-PocketBib is a BibTeX library reader for academics on the go. With PocketBib you can search, browse and read the papers in your BibTeX library, and sync them with BibDesk or JabRef on your computer.
-
-Available for iPad, iPhone and iPod Touch.
-
-Homepage: <http://www.grahamdennis.me/pocketbib/>
-
-
 ### WinEdt's JabRef launcher
 
 _by Karl Koeller_
