@@ -27,7 +27,7 @@ You can group entries explicitly, by keywords or any other fields.
 ### Integrates to your environment
 Launch external applications: PDF viewers, web browser
 
-Insert citations into TeXstudio, LyX, Kile, LatexEditor, Emacs, Vim, and WinEdt
+Insert citations into TeXstudio, LyX, Kile, Emacs, TeXmaker, Vim, and WinEdt
 
 ### Automatic Key generation
 BibTeX keys can be automatically generated in a customizable way from document data, e.g. using author names, title and year.
