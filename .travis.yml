@@ -1,7 +1,9 @@
 # we test at Ubuntu Trusty (Ubuntu 14.04 LTS)
 # see https://docs.travis-ci.com/user/trusty-ci-environment/
-sudo: required
 dist: trusty
+
+git:
+depth: 1
 
 language: ruby
 rvm:
