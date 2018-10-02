@@ -11,5 +11,5 @@ One of the biggest new features is the redesign of the Main Entry Table with Jav
 
 TODO: Screenshots
 
-Want to help with the improvement and even get a free T-shirt? JabRef is participating in 2019's **Hacktoberfest**! Start contributing now as part of [Hacktoberfest])(https://hacktoberfest.digitalocean.com/) from DigitalOcean.
+Want to help with the improvement and even get a free T-shirt? JabRef is participating in 2019's **Hacktoberfest**! Start contributing now as part of [Hacktoberfest](https://hacktoberfest.digitalocean.com/) from DigitalOcean.
 Check the [open issues](https://github.com/JabRef/jabref/issues), pick one and create a Pull Request. We will review your code and once it is approved it will be merged into the development version.
