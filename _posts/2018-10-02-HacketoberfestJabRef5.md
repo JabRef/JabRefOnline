@@ -17,7 +17,7 @@ One of the biggest new features is the redesign of the Main Entry Table with Jav
 The new table displays unicode more properly then in earlier JabRef versions, In addition, the column sort order is saved and restored when opening JabRef again.
 JabRef now also supports the connection to shared SQL databases over SSL using provided certificates.
 
-[![MainTable: The new Maintable ](../img/MainTableUnicode.PNG)
-[![GeneralFields: The converted General Fields dialog](../img/GeneralFields.PNG)
-[![SharedDatabaseDialog: The new shared database loging dialog](../img/SharedDbDialog.PNG)
+![MainTable: The new Maintable](../img/MainTableUnicode.PNG)
+![GeneralFields: The converted General Fields dialog](../img/GeneralFields.PNG)
+![SharedDatabaseDialog: The new shared database loging dialog](../img/SharedDbDialog.PNG)
 
