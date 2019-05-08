@@ -16,6 +16,6 @@ We nonetheless would like to thank all other students as well who applied for GS
 This year is the first time JabRef is participating in GSoC and we were overwhelmed by the interest in JabRef.
 It was a tough choice having to reject so many developers who are motivated to contribute to scientific free and open source software!
 
-Of course, all other interested persons are invited as well to contribute! The list of potential projects can be found here: http://www.jabref.org/GSoC2019.html
+Of course, all other interested persons are invited as well to contribute! The list of potential projects can be found here: [http://www.jabref.org/GSoC2019.html](http://www.jabref.org/GSoC2019.html)
 
 Stay tuned for further updates!
