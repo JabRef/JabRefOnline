@@ -7,11 +7,11 @@ color: white
 ---
 
 Hello!
-Since our last publication, we have worked hard to carry out this second major update.
-The tool that allows you to search for citations in LaTeX files is ready, fully functional and integrated into the project, in its latest version.
+Since our last post, we have worked hard to carry out this second major update.
+The tool that allows you to search for citations in LaTeX files is ready, fully functional and integrated into the development version, in its latest version.
 
-All code has been reviewed and modified to improve its performance and prevent possible errors.
-Regarding the user interface, we have added a tab to the entry editor, improved the aesthetics and renamed the tool: **Search for Citations in LaTeX files**.
+The code has been reviewed and modified to improve its performance and prevent possible errors.
+Regarding the user interface, we have added a tab to the entry editor, improved the aesthetics and renamed the tool to **Search for Citations in LaTeX files**.
 
 Now we need your feedback!
 We will take it into account to keep improving this feature.
@@ -24,7 +24,7 @@ We will take it into account to keep improving this feature.
 We added a new tab to the entry editor to search for citations to the active entry in the LaTeX file directory (it can be configured in the _Library properties_ dialog).
 The new tab can be disabled in the preferences.
 
-That is how it works:
+This is how it works:
 
 !['LaTeX Citations' tab](https://user-images.githubusercontent.com/12954316/62509787-d68a0a80-b80c-11e9-84f5-f894f965dc9e.gif)
 
