@@ -10,7 +10,7 @@ This year's JabCon was special as our Google Sumemr of Code student David also w
 We were finally able to release an alpha version of the upcoming JabRef 5.0 release after more than one year of hard work! ❤️ 🎆
 The major change is the new user interface, and our primary focus was on reducing the number of bugs to make JabRef 5.0 more stable.
 
-During JabCon could successfully reduce the number of [open issues](https://github.com/JabRef/jabref/issues?q=is%3Aopen+is%3Aissue).
+During the JabCon we could successfully reduce the number of [open issues](https://github.com/JabRef/jabref/issues?q=is%3Aopen+is%3Aissue).
 Managing, categorizing and sorting issues is a very time consuming task that takes away valuable programming time, so consolidating the list of existing issues is very important once in a while. 
 Now, we are ready to focus on important issues and to move on with JabRef more quickly.
 
