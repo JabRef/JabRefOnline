@@ -16,9 +16,9 @@ Now, we are ready to focus on important issues and to move on with JabRef more q
 We also would like to thank to all of our various contributors, translators and donors! This helps us a lot!
 
 Some highlights of the things we fixed and implemented in the new release:
-- We finished the complete rewrite of the old user interface to the new GUI technology JavaFX This allows for a smoother JabRef user interface experience and enables support for high-dpi monitors. 
+- We completed the rewrite of the old user interface to the new GUI technology JavaFX. This allows for a smoother JabRef user interface experience and enables support for high-dpi monitors. 
 - We restructured the menu items to be more consistent.
-- We finished the migration to Java 11 as Java 8 is no longer supported. All further versions now require a Java 11 installation. For Windows, the Java 11 version is now included in the installer.
+- We finished the migration to Java 11. All further versions now require a Java 11 installation. For Windows, the Java 11 version is now included in the installer.
 - We added a 'LaTeX citations' tab to the entry editor, to search for citations to the active entry in the LaTeX file directory. It can be disabled in the preferences dialog.
 - We improved the process of renaming and moving files in the entry editor. A new feature is the possibility to copy a single file or mutliple files of selected entries to a new folder
 - We added the ability to use negation in export filter layouts.
