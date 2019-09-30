@@ -18,8 +18,6 @@ Please [visit our wiki](https://github.com/JabRef/jabref/wiki/Donations) for mor
 JabRef development is powered by [Baola] and [YourKit Java Profiler](https://www.yourkit.com/java/profiler/) 
 <img src="img/yklogo.png" alt="Image of YourKit" style="height: 15px"/>.
 
-**Update: In Germany, you can use the code "BaolaMKP" to buy the "[Aktions-Mix](http://baobab.org/BAOLA-Erfrischungsgetraenk)" for less and to get free shipping. You save more than 10€.**
-
 If you need books, please order them at your local bookstore.<br/>
 In case you stick with [Amazon](http://www.amazon.de/b?_encoding=UTF8&camp=1638&creative=6742&linkCode=ur2&node=13690631&site-redirect=de&tag=jabref-21), please use [this link](http://www.amazon.de/b?_encoding=UTF8&camp=1638&creative=6742&linkCode=ur2&node=13690631&site-redirect=de&tag=jabref-21).
 You can use [Amazing Affiliate Link](https://chrome.google.com/webstore/detail/amazing-affiliate-link/ikoompcclgdajbbijbhpgfpigolnbgpk) to ensure that the affiliate link always works.
