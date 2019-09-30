@@ -8,10 +8,17 @@ For running htmlproof, execute these two commands:
     bundle exec jekyll build
     bundle exec htmlproof ./_site
 
-On Windows, you have to do following steps to let htmlproof work.
+On Windows, the [Docker image](https://github.com/envygeeks/jekyll-docker/blob/master/README.md) is recommended:
 
-  - Download libcurl https://curl.haxx.se/download.html. Current version: http://curl.haxx.se/gknw.net/7.40.0/dist-w32/renamed-curl-7.40.0-devel-mingw32.zip
-  - Extract subfolder `curl-7.40.0-devel-mingw32` into `c:\temp`
-  - Exec `SET PATH=%PATH%;c:\temp\curl-7.40.0-devel-mingw32\bin`
+([Jekyll's Docker image](https://github.com/envygeeks/jekyll-docker/blob/master/README.md) does not work)
+
+```
+docker run --rm --volume="c:\CHECKOUTDIR:/srv/jekyll" -it ruby:2.3.4 bash
+cd /srv/jekyll
+bundle install
+jekyll build
+```
 
 Hints for running Jekyll in general is provided at <https://github.com/JabRef/help.jabref.org/blob/gh-pages/README.md>.
+
+We use Jekyll 3.8.6, as the GitHub action currently does not support Jekyll 4.x (due to pinning ruby to 2.3.4).

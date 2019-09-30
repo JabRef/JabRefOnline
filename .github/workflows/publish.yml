@@ -1,0 +1,17 @@
+on:
+  push:
+    branches:    
+      - master
+
+jobs:
+  publish:
+    name: Publish on gh-pages
+  steps:
+    - name: Checkout source
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Build and Deploy Jekyll
+      uses: BryanSchuetz/jekyll-deploy-gh-pages@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
