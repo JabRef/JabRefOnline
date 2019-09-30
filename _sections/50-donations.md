@@ -1,7 +1,7 @@
 ---
 title: Donations
-bg: green
-color: lightgray
+bg: "#bbfd31"
+color: "#2b2b2b"
 style: center
 fa-icon: gift
 ---
@@ -28,5 +28,4 @@ This seems to work in Germany only.
 <img src="img/BAOLA-Erfrischungsgetraenk-min.jpg" width="25%" alt="Image of Baola" style="display: block; margin-left: auto; margin-right: auto">
 </a>
 
-  [Baola]: http://baobab.org/BAOLA-sparkling-drink
-  
+[Baola]: http://baobab.org/BAOLA-sparkling-drink
