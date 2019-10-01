@@ -16,3 +16,9 @@ jobs:
         uses: BryanSchuetz/jekyll-deploy-gh-pages@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: koppor/github-push-action@add-support-for-sub-directory
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
+          directory: build
