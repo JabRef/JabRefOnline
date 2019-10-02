@@ -12,6 +12,10 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      - name: Create .nojekyll
+        run: |
+          mkdir build
+          touch build/.nojekyll
       - name: Build and Deploy Jekyll
         uses: BryanSchuetz/jekyll-deploy-gh-pages@master
         env:
