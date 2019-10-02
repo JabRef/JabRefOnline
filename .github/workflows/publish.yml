@@ -13,9 +13,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: Build and Deploy Jekyll
-        uses: koppor/jekyll-deploy-gh-pages@patch-1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: BryanSchuetz/jekyll-deploy-gh-pages@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 #      - name: Create .nojekyll
 #        run: touch build/.nojekyll
       - uses: ad-m/github-push-action@master
