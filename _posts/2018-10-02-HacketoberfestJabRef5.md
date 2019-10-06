@@ -5,11 +5,11 @@ author: "[JabRef Developers](https://github.com/JabRef/jabref/blob/master/DEVELO
 bg: jabref-font
 color: white
 ---
-📅 October is here and that means that it's time for 2019's edition of **Hacktoberfest**!
+📅 October is here and that means that it's time for 2018's edition of **Hacktoberfest**!
 Want to help with the improvement of JabRef and even get a free T-shirt? Start contributing now as part of [Hacktoberfest](https://hacktoberfest.digitalocean.com/) from DigitalOcean.
 Check the [open issues](https://github.com/JabRef/jabref/issues), pick one and create a Pull Request. We will review your code and once it is approved it will be merged into the development version.
 
-[![Hacktoberfest: Hacktoberfest 2019](../img/Hacktoberfest_2018_banner1_1293x157.png)](https://hacktoberfest.digitalocean.com/)
+[![Hacktoberfest: Hacktoberfest 2018](../img/Hacktoberfest_2018_banner1_1293x157.png)](https://hacktoberfest.digitalocean.com/)
 
 ### JabRef 5.0 development
 Since the release of Version 4.3.1 we have been continuously working on fixing and converting the old GUI technology to the new one, JavaFX. 
