@@ -5,7 +5,7 @@ color: white
 style: left
 ---
 
-# JabRef [![release](http://github-release-version.herokuapp.com/github/JabRef/jabref/release.svg?style=flat)](https://downloads.jabref.org)
+# JabRef [![release](https://img.shields.io/github/v/release/JabRef/jabref.svg)](https://downloads.jabref.org)
 <div class="container">
 	<div class="row">
         <div class="col-md-1"></div>
