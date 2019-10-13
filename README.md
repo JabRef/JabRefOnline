@@ -1,7 +1,13 @@
-This repository contains the source of the [JabRef blog](https://blog.jabref.org/).
-Feel free to send blog entries via [requests](https://github.com/JabRef/blog.jabref.org/pulls).
+# JabRef's blog.
+
+> This repository contains the source of the [JabRef blog](https://blog.jabref.org/).
+
+Feel free to send blog entries.
+Find details in our [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 The layout is based on [github.com/t413/SinglePaged](https://github.com/t413/SinglePaged).
+We use [jekyll](https://jekyllrb.com/) as static site generator.
+See [GitHub pages](https://pages.github.com/) for more details on the mechanics behnd.
 
 
 ## Testing the blog entry
@@ -15,6 +21,7 @@ For running htmlproof, execute these two commands:
 
 
 ## Installation
+
 Source: https://help.github.com/articles/using-jekyll-with-pages/#installing-jekyll
 
 1. Install Ruby by using the [RubyInstaller](http://rubyinstaller.org/downloads) or [choco install ruby](https://chocolatey.org/packages/ruby)
@@ -24,6 +31,7 @@ Source: https://help.github.com/articles/using-jekyll-with-pages/#installing-jek
 
 Note that [JRuby](http://jruby.org/) doesn't work as the [C extensions were dropped](http://stackoverflow.com/a/32135381/873282).
 
+
 ### htmlproof
 
 On Windows, you have to do following steps to let [htmlproof] work.
@@ -31,6 +39,7 @@ On Windows, you have to do following steps to let [htmlproof] work.
   - Download libcurl https://curl.haxx.se/download.html. Current version: http://curl.haxx.se/gknw.net/7.40.0/dist-w32/renamed-curl-7.40.0-devel-mingw32.zip
   - Extract subfolder `curl-7.40.0-devel-mingw32` into `c:\temp`
   - Exec `SET PATH=%PATH%;c:\temp\curl-7.40.0-devel-mingw32\bin`
+
 
 ## Updating jekyll
 
