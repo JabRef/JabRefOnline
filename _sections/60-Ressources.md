@@ -53,6 +53,16 @@ This improves author recognitzion and adds support for more fileds to EndNote.
 Homepage: <https://github.com/JabRef/EndNode-JabRef-filters>
 
 
+### Library
+
+_by Christian Gogolin_
+
+Library is an [Open Source](https://github.com/cgogolin/library) Android application to view BibTeX files in order to open (and annotate) linked PDFs.
+It also supports opening DOIs as well as sharing entries. Furthermore it is possible to filter entries and sort them by date, journal, author and title. There are no editing capabilites though.
+
+Library is available from [F-Droid](https://f-droid.org/app/com.cgogolin.library) and [Google Play](https://play.google.com/store/apps/details?id=com.cgogolin.library).
+
+
 ### Eratosthenes Reference Manager
 
 _by Matthew Matlock_
@@ -61,7 +71,7 @@ Eratosthenes Reference Manager is a BibTeX-based bibliography manager for Androi
 
 Available for Android 4.0 and up.
 
-App store: <https://play.google.com/store/apps/details?id=com.mm.eratos>
+Unfortunately, this application is not available anymore from Google Play and must be [build on your own from source](https://bitbucket.org/mkmatlock/eratosthenes/src/default/).
 
 
 ### Export-Filter Editor
