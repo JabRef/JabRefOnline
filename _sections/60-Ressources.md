@@ -8,7 +8,7 @@ fa-icon: wrench
 
 ## JabRef-compatible text editors
 
-JabRef can push entries, i.e. insert `\cite{key}` commands, to the following text editors:
+JabRef can push entries, i.e., insert `\cite{key}` commands, to the following text editors:
 
 - [Emacs](https://www.gnu.org/software/emacs/)
 - [LyX/Kile](http://www.lyx.org/)
