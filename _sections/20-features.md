@@ -8,12 +8,12 @@ fa-icon: archive
 
 ### Search the Web
 Entries can be searched in external databases and BibTeX entries can be fetched from there.
-Example sources: arXiv, CiteseerX, Google Scholar, Medline, GVK, IEEEXplore, and Springer.
+Example sources: arXiv, CiteSeerX, Google Scholar, Medline, GVK, IEEEXplore, and Springer.
 
 ### Import of various formats
-RIS, Medline/Pubmed (xml), Refer/Endnote, INSPEC, BibTeXML, CSA, ISI Web of Science, SilverPlatter, Scifinder, OVID, Biblioscape, Sixpack, JStor, and RIS.
+RIS, MEDLINE/PubMed (XML), Refer/EndNote, INSPEC, BibTeXML, CSA, ISI Web of Science, SilverPlatter, SciFinder, OVID, Biblioscape, Sixpack, JSTOR, and RIS.
 
-Moreover, the [FireFox add-on JabFox](https://addons.mozilla.org/en-US/firefox/addon/jabfox?src=external-jabrefSite) makes importing new bibliographic information directly from the browser very easy. 
+Moreover, the [Firefox add-on JabFox](https://addons.mozilla.org/en-US/firefox/addon/jabfox?src=external-jabrefSite) makes importing new bibliographic information directly from the browser very easy. 
 
 ### Automatic download of full texts
 JabRef can be instructed to search for the full text of a reference, download it, and directly link it to the BibTeX entry.
@@ -36,7 +36,7 @@ BibTeX keys can be automatically generated in a customizable way from document d
 Improve the workflow of sharing PDFs and bibliography information
 
 ### Built-in and custom export formats
-HTML, Docbook, BibTeXML, MODS, RTF, Refer/Endnote, and OpenOffice.org as well as LibreOffice
+HTML, DocBook, BibTeXML, MODS, RTF, Refer/EndNote, and OpenOffice.org as well as LibreOffice
 
 ### Customization of the JabRef interface
 Fonts, displayed fields, etc.
@@ -47,4 +47,4 @@ You can add your own fields to any BibTeX entry type.
 ### Translations
 JabRef menus and dialog boxes are translated into Brazilian Portuguese, Chinese (simplified), Danish, Dutch, English, French, German, Indonesian, Italian, Japanese, Norwegian, Persian, Russian, Spanish, Swedish, Turkish, Vietnamese.
 
-See [our translation page on github](https://github.com/JabRef/jabref/wiki/Translating-JabRef) for more information and the status of each translation.
+See [our translation page on GitHub](https://github.com/JabRef/jabref/wiki/Translating-JabRef) for more information and the status of each translation.
