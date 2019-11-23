@@ -6,4 +6,4 @@ style: center
 fa-icon: users
 ---
 
-Please head over to our [contributing FAQ](http://help.jabref.org/en/FAQcontributing).
+Please head over to our [contributing FAQ](https://docs.jabref.org/faq/faqcontributing).
