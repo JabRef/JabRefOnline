@@ -13,7 +13,7 @@ Example sources: arXiv, CiteSeerX, Google Scholar, Medline, GVK, IEEEXplore, and
 ### Import of various formats
 RIS, MEDLINE/PubMed (XML), Refer/EndNote, INSPEC, BibTeXML, CSA, ISI Web of Science, SilverPlatter, SciFinder, OVID, Biblioscape, Sixpack, JSTOR, and RIS.
 
-Moreover, the [Firefox add-on JabFox](https://addons.mozilla.org/en-US/firefox/addon/jabfox?src=external-jabrefSite) makes importing new bibliographic information directly from the browser very easy. 
+Moreover, the [official browser extension](https://github.com/JabRef/JabRef-Browser-Extension) for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/jabref/?src=external-github),  [Chrome](https://chrome.google.com/webstore/detail/jabref-browser-extension/bifehkofibaamoeaopjglfkddgkijdlh), [Edge](https://microsoftedge.microsoft.com/addons/detail/pgkajmkfgbehiomipedjhoddkejohfna) and [Vivaldi](https://chrome.google.com/webstore/detail/jabref-browser-extension/bifehkofibaamoeaopjglfkddgkijdlh) makes importing new bibliographic information directly from the browser very easy. 
 
 ### Automatic download of full texts
 JabRef can be instructed to search for the full text of a reference, download it, and directly link it to the BibTeX entry.
