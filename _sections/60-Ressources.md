@@ -22,11 +22,61 @@ Additionally, JabRef can natively insert citations and format a bibliography in:
 - [OpenOffice Writer](https://www.openoffice.org/)
 - [LibreOffice Writer](https://www.libreoffice.org/)
 
-See [OpenOffice/LibreOffice integration](https://help.jabref.org/en/OpenOfficeIntegration) for details.
+See [OpenOffice/LibreOffice integration](https://docs.jabref.org/import-export/other-integrations/openofficeintegration) for details.
+
+## JabRef Browser Extension
+
+_by Tobias Diez_
+
+JabRef Browser Extension is a Web-browser add-on for users of the bibliographic reference manager JabRef. It automatically identifies and extracts bibliographic information on websites and sends them to JabRef in one click. A wide range of publisher sites, library catalogs and databases are supported.
+
+- [For Firefox](https://addons.mozilla.org/en-US/firefox/addon/jabref/?src=external-github)
+- [For Chrome](https://chrome.google.com/webstore/detail/jabref-browser-extension/bifehkofibaamoeaopjglfkddgkijdlh)
+- [For Edge](https://microsoftedge.microsoft.com/addons/detail/pgkajmkfgbehiomipedjhoddkejohfna)
+- [For Vivaldi](https://chrome.google.com/webstore/detail/jabref-browser-extension/bifehkofibaamoeaopjglfkddgkijdlh)
+
+- Source: <https://github.com/JabRef/JabRef-Browser-Extension>
 
 
-## External tools
+## JabRef journal abbreviation lists
 
+JabRef can help you refactor your reference list by automatically abbreviating or unabbreviating journal names, as explained in [the dedicated help](https://docs.jabref.org/fields/journalabbreviations).
+
+Although JabRef comes with a build-in list of journals, additional lists are available at <https://abbrv.jabref.org>.
+
+
+## Export filters
+
+JabRef allows you to create custom export filters.
+This functionality and the installation procedure are described in the help file on [Custom export filters](https://docs.jabref.org/import-export/export/customexports).
+Some users have created export filters that can be useful to many others.
+
+They are collected at <https://layouts.jabref.org>.
+
+
+### Endnote export filter set
+
+This improves author recognitzion and adds support for more fileds to EndNote.
+
+Homepage: <https://github.com/JabRef/EndNode-JabRef-filters>
+
+
+### Export-Filter Editor
+
+_by Felix Wilke_
+
+Using this tool you can easily create a custom export filter for JabRef to build you own bibliography style.
+Styles files are available at <https://layouts.jabref.org> and for LibreOffice at <https://jstyles.jabref.org>.
+The tool itself supports:
+*   HTML Export Filter
+*   RTF Export Filter
+*   OpenOffice/ LibreOffice Style File
+*   Saving the filter for later refinements
+
+[Download the Export-Filter Editor](https://sourceforge.net/projects/efe/?source=dlp)
+
+
+## Additional tools
 
 ### BibSync
 
@@ -44,13 +94,6 @@ _by Mike Brookes_
 Bibtex4Word is an add-in for Microsoft Word that allows the citation of references and the insertion of a bibliography into your document using your choice of formatting style. It is lightweight, transparent and does not mess up your documents.
 
 Homepage: <http://www.ee.ic.ac.uk/hp/staff/dmb/perl/index.html>
-
-
-### Endnote filter set
-
-This improves author recognitzion and adds support for more fileds to EndNote.
-
-Homepage: <https://github.com/JabRef/EndNode-JabRef-filters>
 
 
 ### Library
@@ -74,22 +117,6 @@ Available for Android 4.0 and up.
 Unfortunately, this application is not available anymore from Google Play and must be [build on your own from source](https://bitbucket.org/mkmatlock/eratosthenes/src/default/).
 
 
-### Export-Filter Editor
-
-_by Felix Wilke_
-
-Using this tool you can easily create a custom export filter for JabRef to build you own bibliography style.
-Styles files are available at <https://layouts.jabref.org> and for LibeOffice at <https://jstyles.jabref.org>.
-The tool itself supports:
-
-*   HTML Export Filter
-*   RTF Export Filter
-*   OpenOffice/ LibreOffice Style File
-*   Saving the filter for later refinements
-
-[Download the Export-Filter Editor](https://sourceforge.net/projects/efe/?source=dlp)
-
-
 ### Feinerleiser
 
 _by Niklas Alt_
@@ -108,16 +135,6 @@ For instance, you can use the keywords JabRef, Windows, Linux, macos, latex to g
 - .gitignore for JabRef and friends: <https://www.gitignore.io/api/jabref%2Clatex%2Cwindows%2Clinux%2Cmacos>
 
 
-### JabFox
-
-_by Tobias Diez_
-
-JabFox is a Firefox add-on for users of the bibliographic reference manager JabRef. It automatically identifies and extracts bibliographic information on websites and sends them to JabRef in one click. A wide range of publisher sites, library catalogs and databases are supported.
-
-- Homepage: <https://addons.mozilla.org/en-US/firefox/addon/jabfox/>
-- Source: <https://github.com/JabRef/JabFox/>
-
-
 ### WinEdt's JabRef launcher
 
 _by Karl Koeller_
@@ -125,27 +142,3 @@ _by Karl Koeller_
 This WinEdt's package allows to launch the JabRef program from within WinEdt.
 
 [Download the WinEdt's JabRef launcher](http://www.winedt.org/config/menus/JabRef.html)
-
-
-## Export filters
-
-JabRef allows you to create custom export filters.
-This functionality and the installation procedure are described in the help file on [Custom export filters](https://help.jabref.org/en/CustomExports).
-Some users have created export filters that can be useful to many others.
-They are collected at <https://layouts.jabref.org>.
-
-
-## JabRef journal abbreviation lists
-
-JabRef can help you refactor your reference list by automatically abbreviating or unabbreviating journal names, as explained in [the dedicated help](https://help.jabref.org/en/JournalAbbreviations).
-
-Although JabRef comes with a build-in list of journals, additional lists are available at <https://abbrv.jabref.org>.
-
-
-## Plugins and additional entry fetchers
-
-Until version 2.11 JabRef offered a plugin framework.
-Support for that has been removed.
-See [issue #152](https://github.com/JabRef/jabref/issues/152) for the current status of integration of the plugins into JabRef.
-
-The current way to add a new entry fetcher or additional functionality is to directly [contribute](https://github.com/JabRef/jabref/blob/master/CONTRIBUTING.md) the code to JabRef.
