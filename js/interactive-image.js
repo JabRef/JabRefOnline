@@ -1407,8 +1407,8 @@ var ItemHelper = function () {
          * @returns {*[]}
          */
         value: function calculateInitialContainerPosition(hotspotLeft, hotspotTop, width) {
-            return [hotspotLeft + 25 - width / 2, // 25 is the width of the hotspot (50px) divided by 2
-            hotspotTop + 40 // 40 is the offset to position the container below the hotspot
+            return ["calc(" + hotspotLeft + "% + " + (25 - width / 2) + "px)", // 25 is the width of the hotspot (50px) divided by 2
+            "calc(" + hotspotTop + "% + " + 40 + "px)" // 40 is the offset to position the container below the hotspot
             ];
         }
 
@@ -1764,8 +1764,8 @@ var BaseItem = function () {
         value: function createHotspotElement() {
             var element = _domHelper2.default.createElement('div', { 'class': 'hotspot icon-radio-checked' });
             element.setAttribute('data-for', this.identifier);
-            element.style.left = this.position.left + 'px';
-            element.style.top = this.position.top + 'px';
+            element.style.left = this.position.left + '%';
+            element.style.top = this.position.top + '%';
 
             return element;
         }

@@ -43,8 +43,8 @@ var items = [
       title: "Search",
       description: "Find your paper using advanced search and filter features.",
       position: {
-          left: 200,
-          top: 45
+          left: 20,
+          top: 7
       }
     },
     {
@@ -52,8 +52,8 @@ var items = [
         title: "Groups",
         description: "Group your research into hierarchical collections based on keywords, search terms or manual assignments.",
         position: {
-            left: 80,
-            top: 250
+            left: 10,
+            top: 30
         }
       },
       {
@@ -61,8 +61,8 @@ var items = [
         title: "Web Search",
         description: "Import new documents from many online scientific catalogue.",
         position: {
-            left: 100,
-            top: 600
+            left: 6,
+            top: 93
         }
       },
       {
@@ -70,8 +70,8 @@ var items = [
         title: "Library",
         description: "Keep the overview of what you read and cite.",
         position: {
-            left: 720,
-            top: 285
+            left: 70,
+            top: 31
         }
       },
       {
@@ -79,8 +79,8 @@ var items = [
         title: "Editor",
         description: "Edit and complete bibliographic data using curated online catalogues.",
         position: {
-            left: 500,
-            top: 550
+            left: 50,
+            top: 85
         }
       },
       
