@@ -108,15 +108,28 @@ header.masthead h3 {
   }
 }
 
-.content-section-a, .content-section-b {
-    padding: 1rem 0;
+.content-section-a,
+.content-section-b {
+  padding: 1rem 0;
 }
 
 @media (min-width: 768px) {
-    .content-section-a, .content-section-b {
-        padding: 3rem 0;
-    }
+  .content-section-a,
+  .content-section-b {
+    padding: 3rem 0;
   }
+}
+
+#download {
+    background-color: #eef2f8;
+}
+
+@media (min-width: 768px) {
+  #download {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+  }
+}
 
 .features-icons {
   padding-top: 7rem;
