@@ -19,53 +19,77 @@ h6 {
 }
 
 .navbar {
-    padding: 0;
-    background-color: #fffefc;
+  padding: 0;
+  background-color: #fffefc;
 }
 
 .navbar .container {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 0px;
 }
 
 .navbar .navbar-brand {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-    padding: .75rem 1rem;
+  padding: 0.75rem 1rem;
 }
 
 header.masthead {
   position: relative;
-  background-color: #343a40;
-  background: url("../img/bg-masthead.jpg") no-repeat center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
-}
-
-header.masthead .overlay {
-  position: absolute;
-  background-color: #212529;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0.3;
 }
 
 header.masthead h1 {
   font-size: 2rem;
 }
 
+header.masthead h3 {
+  color: rgba(0, 0, 0, 0.65);
+}
+
 @media (min-width: 768px) {
   header.masthead {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
   }
   header.masthead h1 {
     font-size: 3rem;
   }
+}
+
+.screenshot {
+  position: relative;
+}
+
+.screenshot img {
+  width: 100%;
+}
+
+.screenshot #image-overlay-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.screenshot .interactive-image .hotspot {
+  color: black;
+}
+
+.screenshot .interactive-image .item {
+  background-color: #232f34;
+  color: #fffefc;
+}
+
+.screenshot .interactive-image .item::after {
+  border-bottom-color: #232f34;
+}
+
+.screenshot .interactive-image .text-item .title {
+  color: #fffefc;
 }
 
 .showcase .showcase-text {

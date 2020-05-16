@@ -1,6 +1,6 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-    <div class="container">
+  <div class="container">
     <a class="navbar-brand" href="#home">{{ site.title }}</a>
 
     <!-- Links get grouped for better mobile display -->
@@ -26,44 +26,35 @@
           <a class="nav-link" href="#">Download</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Support</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Get Involved</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://blog.jabref.org/">News</a>
-          </li>
+          <a class="nav-link" href="#">Support</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Get Involved</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://blog.jabref.org/">News</a>
+        </li>
       </ul>
     </div>
-</div>
+  </div>
 </nav>
 
-<section id="home">
-  <!-- Header -->
-  <div class="intro-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="intro-message">
-            <h1>{{ page.title }}</h1>
-            <h3>{{ page.subTitle }}</h3>
-            <hr class="intro-divider" />
-            <ul class="list-inline intro-social-buttons">
-              {% for social in site.social %}
-              <li>
-                <a href="{{ social.url }}" class="btn btn-default btn-lg"
-                  ><i class="fa fa-{{ social.title }} fa-fw"></i>
-                  <span class="network-name">{{ social.title }}</span></a
-                >
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
+<!-- Masthead -->
+<header class="masthead text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <h1>{{ page.title }}</h1>
+      </div>
+      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <h3 class="mb-5">{{ page.subTitle }}</h3>
       </div>
     </div>
-    <!-- /.container -->
-  </div>
-  <!-- /.intro-header -->
-</section>
+</div>
+<div class="container">
+    <div class="screenshot mt-5" data-img="main">
+      <img id="screeny" src="../img/jabref-5-0-groups.png" alt="" />
+      <div class="interactive-image" id="image-overlay-container"></div>
+    </div>
+</div>
+</header>
