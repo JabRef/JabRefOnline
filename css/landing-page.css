@@ -39,7 +39,7 @@ header.masthead {
   position: relative;
   background-size: cover;
   padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-bottom: 4rem;
 }
 
 header.masthead h1 {
@@ -53,7 +53,7 @@ header.masthead h3 {
 @media (min-width: 768px) {
   header.masthead {
     padding-top: 10rem;
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
   }
   header.masthead h1 {
     font-size: 3rem;
@@ -107,6 +107,16 @@ header.masthead h3 {
     padding: 7rem;
   }
 }
+
+.content-section-a, .content-section-b {
+    padding: 1rem 0;
+}
+
+@media (min-width: 768px) {
+    .content-section-a, .content-section-b {
+        padding: 3rem 0;
+    }
+  }
 
 .features-icons {
   padding-top: 7rem;
