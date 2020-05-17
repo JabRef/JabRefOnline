@@ -8,4 +8,5 @@ gem 'html-proofer', '~> 3.10.0'
 group :jekyll_plugins do
     gem 'jekyll-sitemap'
     gem 'jekyll-redirect-from'
+    gem 'jekyll-analytics'
 end

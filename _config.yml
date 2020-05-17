@@ -31,7 +31,10 @@ sass:
 
 ### required for main site
 collections:
-- features
+  - features
+
+plugins:
+  - jekyll-analytics
 
 ### content configuration ###
 url:         "http://www.jabref.org"
@@ -41,7 +44,10 @@ description: "Graphical Java application for managing bibtex (.bib) databases"
 source_link: "https://github.com/JabRef/www.jabref.org/"
 favicon:     img/favicon.ico
 touch_icon:  #put a path like: "img/apple-touch-icon.png"
-google_analytics_key: UA-74055103-1 ## put YOUR key here to enable tracking! (blank to disable)
+
+jekyll_analytics:
+  GoogleAnalytics:
+    id: UA-74055103-1
 
 social:
   - title: twitter
