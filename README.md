@@ -4,24 +4,9 @@
 
 Feel free to improve the page using the [issue tracker](https://github.com/JabRef/www.jabref.org/issues) or pull requests.
 
-The layout is based on [github.com/t413/SinglePaged](https://github.com/t413/SinglePaged).
-
-For running htmlproof, execute these two commands:
-
-    bundle exec jekyll build
-    bundle exec htmlproof ./build
-
-On Windows, the [Docker image](https://github.com/envygeeks/jekyll-docker/blob/master/README.md) is recommended:
-
-([Jekyll's Docker image](https://github.com/envygeeks/jekyll-docker/blob/master/README.md) does not work)
-
+For local development, follow the [Jekyll installation instructions](https://jekyllrb.com/docs/installation/), run
 ```
-docker run --rm --volume="c:\CHECKOUTDIR:/srv/jekyll" -it ruby:2.3.4 bash
-cd /srv/jekyll
 bundle install
-jekyll build
+jekyll serve --livereload
 ```
-
-Hints for running Jekyll in general is provided at <https://github.com/JabRef/help.jabref.org/blob/gh-pages/README.md>.
-
-We use Jekyll 3.8.6, as the GitHub action currently does not support Jekyll 4.x (due to pinning ruby to 2.3.4).
+and go to <http://localhost:4000/> in your browser.
