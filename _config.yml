@@ -25,6 +25,10 @@ kramdown:
 #redcarpet:
 #  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
 
+# Set proper base directory for Sass files
+sass:
+  sass_dir: css
+
 ### required for main site and faq/
 ## blog posts are stored in _posts (as usual), but served at blog/
 collections:
