@@ -10,6 +10,10 @@
 $primary: #4f5f8f;
 @import 'bootstrap/bootstrap';
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -41,11 +45,17 @@ h6 {
   padding: 0.75rem 1rem;
 }
 
+// Space before every section to account for the navbar
+section:before {
+  height: 70px;
+  content: "";
+  display:block;
+}
+
 header.masthead {
   position: relative;
   background-size: cover;
   padding-top: 8rem;
-  padding-bottom: 2rem;
 }
 
 header.masthead h1 {
@@ -131,15 +141,15 @@ header.masthead h3 {
 
 @media (min-width: 768px) {
   #download {
-    padding-top: 4rem;
+    padding-top: 1rem;
     padding-bottom: 5rem;
   }
 }
 
 @media (min-width: 768px) {
     #getinvolved {
-      padding-top: 3rem;
-      padding-bottom: 5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   }
 
