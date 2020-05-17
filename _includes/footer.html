@@ -10,28 +10,33 @@
             <h6>Install</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-dark" href="https://www.fosshub.com/JabRef.html"
-              >Desktop apps</a
+            <a
+              class="nav-link text-dark"
+              href="https://www.fosshub.com/JabRef.html"
             >
+              Desktop apps
+            </a>
           </li>
           <li class="nav-item">
             <a
               class="nav-link"
               href="https://docs.jabref.org/import-export/import/jabref-browser-extension"
-              >Browser extensions</a
             >
+              Browser extensions
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://builds.jabref.org/master/"
-              >Development build</a
-            >
+            <a class="nav-link" href="https://builds.jabref.org/master/">
+              Development build
+            </a>
           </li>
           <li class="nav-item">
             <a
               class="nav-link"
               href="https://github.com/JabRef/jabref/blob/master/CHANGELOG.md"
-              >Change Log</a
             >
+              Change Log
+            </a>
           </li>
         </ul>
       </div>
@@ -41,14 +46,19 @@
             <strong>Links</strong>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://docs.jabref.org/resources"
-              >Resources</a
-            >
+            <a class="nav-link" href="https://docs.jabref.org/resources">
+              Resources
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://java.by-comparison.com/"
-              >Java by Comparison</a
-            >
+            <a class="nav-link" href="http://java.by-comparison.com/">
+              Java by Comparison
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#impressmodal" data-toggle="modal" data-target="#impressmodal">
+              Impressum
+            </a>
           </li>
         </ul>
       </div>
@@ -58,19 +68,26 @@
             <strong>Contribute</strong>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/JabRef/jabref/wiki/Donations">Donation</a>
+            <a
+              class="nav-link"
+              href="https://github.com/JabRef/jabref/wiki/Donations"
+            >
+              Donation
+            </a>
           </li>
           <li class="nav-item">
             <a
               class="nav-link"
               href="https://docs.jabref.org/faq/how-tos/how-to-translate-the-ui"
-              >Translation</a
             >
+              Translation
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/JabRef/jabref">GitHub</a>
+            <a class="nav-link" href="https://github.com/JabRef/jabref">
+              GitHub
+            </a>
           </li>
-          
         </ul>
       </div>
 
@@ -80,24 +97,62 @@
             <strong>Help & Contact</strong>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://help.jabref.org/"
-              >Documentation</a
-            >
+            <a class="nav-link" href="https://help.jabref.org/">
+              Documentation
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://discourse.jabref.org/">Forum</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://twitter.com/JabRef_org"
-              >Twitter</a
-            >
+            <a class="nav-link" href="https://twitter.com/JabRef_org">
+              Twitter
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/JabRef/jabref/issues"
-              >Report an issue</a
-            >
+            <a class="nav-link" href="https://github.com/JabRef/jabref/issues">
+              Report an issue
+            </a>
           </li>
         </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    id="impressmodal"
+    aria-hidden="true"
+    aria-labelledby="impressumLabel"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="impressumLabel">Impressum</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% capture impress %} {% include impress.md %} {% endcapture %} {{
+          impress | markdownify }}
+        </div>
+        <div class="modal-footer">
+          <button
+            id="impressclose"
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </div>
