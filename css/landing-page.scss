@@ -8,14 +8,12 @@
  */
 
 $primary: #4f5f8f;
+$font-family-base: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 @import 'bootstrap/bootstrap';
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1,
@@ -26,6 +24,11 @@ h5,
 h6 {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
+}
+
+// Hide os-specific blocks by default
+.for-win-only, .for-mac-only, .for-linux-only {
+  display: none;
 }
 
 .navbar {
