@@ -41,7 +41,7 @@ var items = [
     description: 'Find your paper using advanced search and filter features.',
     position: {
       left: 20,
-      top: 7,
+      top: 9,
     },
   },
   {
@@ -60,7 +60,7 @@ var items = [
     description: 'Import new documents from many online scientific catalogue.',
     position: {
       left: 6,
-      top: 93,
+      top: 90,
     },
   },
   {
@@ -68,8 +68,8 @@ var items = [
     title: 'Library',
     description: 'Keep the overview of what you read and cite.',
     position: {
-      left: 70,
-      top: 31,
+      left: 75,
+      top: 32.2,
     },
   },
   {
@@ -79,7 +79,7 @@ var items = [
       'Edit and complete bibliographic data using curated online catalogues.',
     position: {
       left: 50,
-      top: 85,
+      top: 83.5,
     },
   },
 ]

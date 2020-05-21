@@ -1,6 +1,6 @@
 ---
 
-img: jabref-5-0-doilookup.png
+img: jabref-groups.png
 title: Organize
 
 ---
