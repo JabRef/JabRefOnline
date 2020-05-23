@@ -8,6 +8,33 @@
   <title>
     {% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}
   </title>
+  
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "JabRef",
+      "operatingSystem": "Windows, OS X, Linux",
+      "applicationCategory": "https://schema.org/EducationalApplication",
+      "applicationSubCategory": "Reference manager",
+      "downloadUrl": "https://downloads.jabref.org/",
+      "featureList": "https://www.jabref.org//#features",
+      "screenshot": "https://www.jabref.org/img/jabref-mainscreen.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.jabref.org/",
+      "logo": "https://www.jabref.org/img/JabRef-icon-256.png",
+      "name": "JabRef"
+    }
+  </script>
 
   <!-- Include Interactive Image jQuery plugin Styles -->
   <link href="css/interactive-image.min.css" rel="stylesheet" />
