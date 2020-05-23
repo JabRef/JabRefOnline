@@ -11,6 +11,6 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
       - name: Build and Deploy Jekyll
-        uses: helaili/jekyll-action@2.0.1
+        uses: helaili/jekyll-action@2.0.3
         env:
           JEKYLL_PAT: ${{ secrets.GITHUB_TOKEN }}
