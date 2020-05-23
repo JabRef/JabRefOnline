@@ -1,0 +1,43 @@
+<section id="features">
+{% for feature in site.features %}
+  {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
+    {% if thecycle == 'odd' %}
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-6 pr-3 pr-md-5 order-first">
+                    <hr class="section-heading-spacer">
+                    <h2 class="section-heading">{{ feature.title }}</h2>
+                    <div class="lead">{{ feature.content }}</div>
+                </div>
+                <div class="col-lg-5 col-sm-6 pl-3 pl-md-5 pt-3 order-last vertical-center">
+                    <img class="img-fluid" src="img/{{ feature.img }}" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% else %}
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-sm-6 pl-3 pl-md-5 order-lg-last">
+                    <hr class="section-heading-spacer">
+                    <h2 class="section-heading">{{ feature.title }}</h2>
+                    <div class="lead">{{ feature.content }}</div>
+                </div>
+                <div class="col-lg-5 col-sm-6 pr-3 pr-md-5 pt-3 order-lg-first vertical-center">
+                    <img class="img-fluid" src="img/{{ feature.img }}" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
+</section>

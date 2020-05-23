@@ -25,30 +25,25 @@ kramdown:
 #redcarpet:
 #  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
 
-### required for main site and faq/
-## blog posts are stored in _posts (as usual), but served at blog/
+# Set proper base directory for Sass files
+sass:
+  sass_dir: css
+
+### required for main site
 collections:
-- faq
-- sections
+  - features
+
+plugins:
+  - jekyll-analytics
 
 ### content configuration ###
+url:         "http://www.jabref.org"
 title:       "JabRef"
 keywords:    "JabRef, bibtex, biblatex, bibliography, editor"
 description: "Graphical Java application for managing bibtex (.bib) databases"
 source_link: "https://github.com/JabRef/www.jabref.org/"
-favicon:     favicon.ico #put a path like: "img/favicon.ico"
-touch_icon:  #put a path like: "img/apple-touch-icon.png"
-google_analytics_key: UA-74055103-1 ## put YOUR key here to enable tracking! (blank to disable)
+favicon:     "img/favicon.ico"
 
-### template colors, used site-wide via css ###
-colors:
-  black:     '#111111'
-  white:     '#ffffff'
-  lightgray: '#e0e0e0'
-  blue:      '#49a7e9'
-  green:     '#9bcf2f'
-  purple:    '#c869bf'
-  orange:    '#fab125'
-  turquoise: '#0fbfcf'
-  jabref-font:     '#4d4674'
-  light-turquoise: '#d0f7fb'
+jekyll_analytics:
+  GoogleAnalytics:
+    id: UA-74055103-1
