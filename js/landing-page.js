@@ -9,7 +9,7 @@ if (window.navigator.userAgent.indexOf('Win') != -1) {
   // Windows
   $('.download-btn').attr(
     'href',
-    'https://www.fosshub.com/JabRef.html?dwl=JabRef-5.0.msi'
+    'https://downloads.jabref.org/win'
   )
   $('.for-win-only').css('display', 'inline')
 }
@@ -17,7 +17,7 @@ if (window.navigator.userAgent.indexOf('Mac') != -1) {
   // Mac/iOS
   $('.download-btn').attr(
     'href',
-    'https://www.fosshub.com/JabRef.html?dwl=JabRef-5.0.pkg'
+    'https://downloads.jabref.org/mac'
   )
   $('.for-mac-only').css('display', 'inline')
 }
@@ -25,7 +25,7 @@ if (window.navigator.userAgent.indexOf('X11') != -1) {
   // Unix
   $('.download-btn').attr(
     'href',
-    'https://www.fosshub.com/JabRef.html?dwl=jabref_5.0-1_amd64.deb'
+    'https://downloads.jabref.org/linux'
   )
   $('.for-linux-only').css('display', 'inline')
 }
