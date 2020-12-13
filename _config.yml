@@ -4,8 +4,8 @@ safe: false
 destination: build
 
 ### site serving configuration ###
-exclude: [Gemfile, Gemfile.lock, LICENSE.md, README.md, .gitignore, vendor]
-include: ['surveys/', 'surveys/2015/', 'faq/', 'blog/', 'GSoC2019.md']
+exclude: [Gemfile, Gemfile.lock, LICENSE.md, README.md, package-lock.json, vendor, .gitignore, .mailmap, .prettierrc]
+include: ['surveys/', 'surveys/2015/', 'faq/', 'blog/', 'GSoC2019.md', 'node_modules']
 permalink: /:title ## disables post output
 timezone: null
 lsi: false

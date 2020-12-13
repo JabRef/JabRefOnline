@@ -10,6 +10,11 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+      - uses: bahmutov/npm-install@v1
       - name: Build and Deploy Jekyll
         uses: helaili/jekyll-action@2.0.4
         env:
