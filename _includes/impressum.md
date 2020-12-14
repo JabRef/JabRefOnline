@@ -1,5 +1,3 @@
-# Impressum
-
 Angaben gemäß § 5 TMG
 
 JabRef e.V.\
@@ -20,12 +18,12 @@ Vertreten durch den Vorstand (gewählt am 01.09.2020):
 - Erster stellvertredender Vorsitzender: Carl Christian Snethlage
 - Zweiter stellvertredender Vorsitzender: Christoph Schwentker
 
-## Bankverbindung
+#### Bankverbindung
 
 - Vereinigte Volksbanken eG
 - IBAN DE35 6039 0000 0579 6860 19
 
-## Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+#### Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
 
 Dr. Oliver Kopp\
 Josef-Lanner-Str. 9\
@@ -45,6 +43,4 @@ Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unt
 
 Siehe [Datenschutzerklärung](datenschutz.html).
 
-### Sonstiges
-
-Dieses Impressum basiert auf <https://www.datenschutzbeauftragter-info.de/> und <http://www.impressum-generator.de/> von der [Kanzlei Hasselbach, Frankfurt](http://www.kanzlei-hasselbach.de/rechtsanwalt-frankfurt/).
+**Sonstiges:** Dieses Impressum basiert auf <https://www.datenschutzbeauftragter-info.de/> und <http://www.impressum-generator.de/> von der [Kanzlei Hasselbach, Frankfurt](http://www.kanzlei-hasselbach.de/rechtsanwalt-frankfurt/).
