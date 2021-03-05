@@ -46,7 +46,9 @@ export default {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    // Typescript support for nuxt: https://typescript.nuxtjs.org/
+    '@nuxt/typescript-build'
   ],
 
   /*
