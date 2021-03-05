@@ -1,4 +1,4 @@
-const { Router } = require('express')
+import { Router } from 'express'
 
 const router = Router()
 
@@ -7,4 +7,4 @@ router.use('/test', (req, res) => {
   res.end('Test API!')
 })
 
-module.exports = router
+export default router

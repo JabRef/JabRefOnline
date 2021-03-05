@@ -1,11 +1,11 @@
-const express = require('express')
+import express from 'express'
+
+// Require API routes
+import users from './routes/users'
+import test from './routes/test'
 
 // Create express instance
 const app = express()
-
-// Require API routes
-const users = require('./routes/users')
-const test = require('./routes/test')
 
 // Import API Routes
 app.use(users)

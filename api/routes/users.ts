@@ -1,10 +1,10 @@
-const { Router } = require('express')
+import { Router } from 'express'
 
 const router = Router()
 
 // Mock Users
 const users = [
-  { name: 'Alexandre' },
+  { name: 'Alexandr' },
   { name: 'Pooya' },
   { name: 'Sébastien' }
 ]
@@ -24,4 +24,4 @@ router.get('/users/:id', function (req, res, next) {
   }
 })
 
-module.exports = router
+export default router
