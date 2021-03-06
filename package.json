@@ -6,12 +6,23 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "prisma:migrate:dev": "prisma migrate dev --preview-feature",
+    "prisma:migrate:dev:create": "prisma migrate dev --create-only --preview-feature",
+    "prisma:migrate:reset": "prisma migrate reset --preview-feature",
+    "prisma:migrate:deploy": "prisma migrate deploy --preview-feature",
+    "prisma:migrate:status": "prisma migrate status --preview-feature",
+    "prisma:migrate:resolve": "prisma migrate resolve --preview-feature",
+    "prisma:seed": "prisma db seed --preview-feature",
+    "prisma:studio": "prisma studio",
+    "prisma:generate": "prisma generate",
+    "prisma:generate:watch": "prisma generate --watch",
     "lint": "yarn lint:js",
-    "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore ."
+    "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "postinstall": "yarn prisma:generate"
   },
   "dependencies": {
     "@nuxt/http": "latest",
+    "@prisma/client": "2.18.0",
     "express": "latest",
     "nuxt": "latest"
   },
@@ -21,7 +32,9 @@
     "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/eslint-config-typescript": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@types/express": "^4.17.11",
     "eslint": "^7.20.0",
-    "eslint-plugin-nuxt": "^2.0.0"
+    "eslint-plugin-nuxt": "^2.0.0",
+    "prisma": "2.18.0"
   }
 }

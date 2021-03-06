@@ -1,27 +1,35 @@
 import { Router } from 'express'
+import { PrismaClient } from '@prisma/client'
 
 const router = Router()
 
-// Mock Users
-const users = [
-  { name: 'Alexandr' },
-  { name: 'Pooya' },
-  { name: 'Sébastien' }
-]
+const prisma = new PrismaClient()
 
 /* GET users listing. */
-router.get('/users', function (req, res, next) {
+router.get('/users', async function (req, res, next) {
+  const users = await prisma.user.findMany()
   res.json(users)
 })
 
 /* GET user by ID. */
-router.get('/users/:id', function (req, res, next) {
+router.get('/users/:id', async function (req, res, next) {
   const id = parseInt(req.params.id)
-  if (id >= 0 && id < users.length) {
-    res.json(users[id])
-  } else {
-    res.sendStatus(404)
-  }
+  const user = await prisma.user.findUnique({
+    where: {
+      id
+    }
+  })
+  res.json(user)
+})
+
+router.post('/user', async (req, res) => {
+  const result = await prisma.user.create({
+    data: {
+      email: req.body.email,
+      name: req.body.name
+    }
+  })
+  res.json(result)
 })
 
 export default router

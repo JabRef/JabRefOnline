@@ -2,8 +2,10 @@
 
 ## Getting started
 - Install [Node.js](https://nodejs.org/)
+- Install [PostgreSQL](https://www.postgresql.org/)
 - Checkout
-- Run `yarn install`
+- Create a `.env` file in the root containing the connection URL for the database, e.g. `DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
+- Run `yarn install`.
 
 ## Commands
 
@@ -12,6 +14,7 @@
 | yarn dev | Start ExpressJS server in development with Nuxt.js in dev mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). |
 | yarn build | Build the nuxt.js web application for production. |
 | yarn start | Start ExpressJS server in production. |
+| yarn prisma:studio | Explore data in the database using a visual editor. |
 
 
 ## Directories
@@ -26,3 +29,12 @@
 - `static` is directly mapped to the server root and contains files that have to keep their names (e.g. robots.txt) or likely won't change (e.g. the favicon).
 - `store` contains Vuex Store files. [Nuxt documentation](https://nuxtjs.org/guide/vuex-store).
 
+## Recommended VS Code extensions
+- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma): Adds syntax highlighting, formatting, jump-to-definition and linting for Prisma Schema files. 
+
+## Technologies used
+- [Prisma](https://www.prisma.io/): [Documentation](https://www.prisma.io/docs/)
+
+## References
+- Prisma used in different contexts: https://github.com/prisma/prisma-examples
+- Example application using Prisma and Apollo: https://github.com/poulainv/tottem
