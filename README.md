@@ -34,6 +34,7 @@
 
 ## Technologies used
 - [Prisma](https://www.prisma.io/): [Documentation](https://www.prisma.io/docs/)
+- [GraphQL code generator](https://graphql-code-generator.com/): [Documentation](https://graphql-code-generator.com/docs/getting-started/index)
 
 ### GraphQL.js with GraphQL Code Generator
 Considered options:

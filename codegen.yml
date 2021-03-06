@@ -4,6 +4,9 @@ generates:
   api/graphql.d.ts:
     config:
       useIndexSignature: true
+      mapperTypeSuffix: Model
+      mappers:
+        User: '@prisma/client/index.d#User'
     plugins:
       - typescript
       - typescript-resolvers

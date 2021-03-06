@@ -13,10 +13,9 @@ router.get('/users', async function (req, res, next) {
 
 /* GET user by ID. */
 router.get('/users/:id', async function (req, res, next) {
-  const id = parseInt(req.params.id)
   const user = await prisma.user.findUnique({
     where: {
-      id
+      id: req.params.id
     }
   })
   res.json(user)
