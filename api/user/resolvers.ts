@@ -1,13 +1,13 @@
 import { UserResolvers, QueryResolvers } from '../graphql'
-import prisma from '../prismaClient'
+import { Context } from '../context'
 
 export const userResolver: UserResolvers = {
   id: ({ id }) => id,
   name: ({ name }) => name
 }
 
-export const queryUserByID: QueryResolvers['user'] = async (_root, args, _context) => {
-  const user = await prisma.user.findUnique({
+export const queryUserByID: QueryResolvers<Context>['user'] = async (_root, args, context) => {
+  const user = await context.prisma.user.findUnique({
     where: {
       id: args.id
     }

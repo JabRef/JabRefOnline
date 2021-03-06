@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
-import { PrismaClient } from '@prisma/client'
+import { createContext } from './context'
 
 // Require API routes
 import users from './routes/users'
@@ -21,10 +21,7 @@ const typeDefs = loadSchemaSync('./**/*.graphql', { loaders: [new GraphQLFileLoa
 
 const server = new ApolloServer({
   schema: addResolversToSchema(typeDefs, resolvers),
-  context: () => {
-    const prisma = new PrismaClient()
-    return { prisma }
-  }
+  context: createContext
 })
 server.applyMiddleware({ app, path: '/' })
 
