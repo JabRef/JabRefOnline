@@ -22,13 +22,13 @@ router.get('/users/:id', async function (req, res, next) {
 })
 
 router.post('/user', async (req, res) => {
-  const result = await prisma.user.create({
-    data: {
-      email: req.body.email,
-      name: req.body.name
-    }
-  })
-  res.json(result)
+  // const result = await prisma.user.create({
+  //   data: {
+  //     email: req.body.email,
+  //     name: req.body.name
+  //   }
+  // })
+  // res.json(result)
 })
 
 export default router

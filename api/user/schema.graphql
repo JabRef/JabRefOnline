@@ -3,6 +3,14 @@ extend type Query {
   Get user by ID.
   """
   user(id: ID!): User
+
+  currentUser: User
+}
+
+extend type Mutation {
+  logout: Boolean
+  login(email: String!, password: String!): User
+  signup(name: String!, email: String!, password: String!): User
 }
 
 type User {

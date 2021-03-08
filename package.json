@@ -6,6 +6,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
+    "generate": "yarn prisma:generate && yarn graphql:generate",
     "prisma:migrate:dev": "prisma migrate dev --preview-feature",
     "prisma:migrate:dev:create": "prisma migrate dev --create-only --preview-feature",
     "prisma:migrate:reset": "prisma migrate reset --preview-feature",
@@ -19,15 +20,21 @@
     "graphql:generate": "graphql-codegen --config codegen.yml",
     "lint": "yarn lint:js",
     "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "postinstall": "yarn prisma:generate graphql:generate"
+    "postinstall": "yarn generate"
   },
   "dependencies": {
-    "@nuxt/http": "latest",
-    "@prisma/client": "2.18.0",
+    "@nuxt/http": "^0.6.4",
+    "@prisma/client": "^2.18.0",
     "apollo-server-express": "^2.21.0",
-    "express": "latest",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "graphql": "^15.5.0",
-    "nuxt": "latest"
+    "graphql-passport": "^0.6.3",
+    "nuxt": "^2.15.2",
+    "passport": "^0.4.1",
+    "typescript": "^4.2.3",
+    "webpack": "^5.24.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.1",
@@ -38,7 +45,10 @@
     "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/eslint-config-typescript": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.11",
+    "@types/express-session": "^1.17.3",
+    "@types/passport": "^1.0.6",
     "eslint": "^7.20.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "prisma": "2.18.0"
