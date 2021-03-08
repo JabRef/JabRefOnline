@@ -3,7 +3,6 @@ import { ApolloServer } from 'apollo-server-express'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
-import session from 'express-session'
 import { createContext } from './context'
 import AuthService from './passport/auth.service'
 
@@ -19,16 +18,6 @@ const app = express()
 // Import API Routes
 app.use(users)
 app.use(test)
-
-app.use(session({
-  secret: 'TODO: CHANGE THIS TO ENVIRONMENT VARIABLE',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    // Serve secure cookies
-    secure: app.get('env') === 'production'
-  }
-}))
 
 const passportInitializer = new PassportInitializer(new AuthService())
 passportInitializer.initialize()
