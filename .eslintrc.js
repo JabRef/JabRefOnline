@@ -10,6 +10,9 @@ module.exports = {
   ],
   plugins: [
   ],
-  // add your custom rules here
-  rules: {}
+  rules: {
+    // Workaround for bug https://github.com/nuxt/eslint-config/issues/147
+    'no-useless-constructor': 'off',
+    '@typescript-eslint/no-useless-constructor': 'error'
+  }
 }
