@@ -10,11 +10,8 @@ export interface AuthenticateReturn {
   message?: string
 }
 
-export default class AuthService {
-  private prisma: PrismaClient
-  constructor () {
-    this.prisma = new PrismaClient()
-  }
+export class AuthService {
+  constructor (private prisma: PrismaClient) { }
 
   async validateUser (email: string, password: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
@@ -39,6 +36,31 @@ export default class AuthService {
     return await this.prisma.user.findUnique({
       where: {
         id
+      }
+    })
+  }
+
+  async createAccount(name: string, email: string, password: string): Promise<User> {
+    const existingUser = await this.prisma.user.findFirst({
+      where: {
+        email
+      }
+    })
+    const userWithEmailAlreadyExists = existingUser !== null
+    if (userWithEmailAlreadyExists) {
+      throw new Error(`User with email ${email} already exists`)
+    }
+
+    // Hash password before saving in database
+    // We use salted hashing to prevent rainbow table attacks
+    const salt = await bcrypt.genSalt()
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    return await this.prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword
       }
     })
   }

@@ -1,16 +1,13 @@
 import { Resolvers } from './graphql'
-import { queryUserByID, userResolver, getCurrentUser, logoutCurrentUser, login, signup } from './user/resolvers'
+import { userResolver, queryResolvers, mutationResolvers } from './user/resolvers'
 
 const resolvers: Resolvers = {
   Query: {
-    user: queryUserByID,
-    currentUser: getCurrentUser
+    ...queryResolvers
   },
 
   Mutation: {
-    logout: logoutCurrentUser,
-    login,
-    signup
+    ...mutationResolvers,
   },
 
   User: userResolver

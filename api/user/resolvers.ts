@@ -1,63 +1,43 @@
+import { PrismaClient } from '@prisma/client'
 import { UserResolvers, QueryResolvers, MutationResolvers } from '../graphql'
-import { Context } from '../context'
-import { User } from '@prisma/client'
-import * as bcrypt from 'bcryptjs'
+import { AuthService } from '../passport/auth.service'
+
+const authService = new AuthService(new PrismaClient())
 
 export const userResolver: UserResolvers = {
   id: ({ id }) => id,
   name: ({ name }) => name
 }
 
-export const queryUserByID: QueryResolvers<Context>['user'] = async (_root, args, context) => {
-  const user = await context.prisma.user.findUnique({
-    where: {
-      id: args.id
-    }
-  })
-  return user
-  // TODO: Reuse AuthService#getUserById
-}
+export const queryResolvers: QueryResolvers = {
+  async user (_root, { id }, _context) {
+    return await authService.getUserById(id)
+  },
 
-export const getCurrentUser: QueryResolvers<Context>['currentUser'] = (_root, _args, context) => {
-  return context.getUser() || null
-}
-
-export const logoutCurrentUser: MutationResolvers<Context>['logout'] = (_root, _args, context) => {
-  return context.logout()
-}
-
-export const login: MutationResolvers<Context>['login'] = async (_root, { email, password }, context) => {
-  const { user } = await context.authenticate('graphql-local', { email, password })
-  if (user) {
-    await context.login(user)
-    return user
-  } else {
-    return null
+  currentUser (_root, _args, context) {
+    return context.getUser() || null
   }
 }
 
-export const signup: MutationResolvers<Context>['signup'] = async (_root, { name, email, password }, context) => {
-  // TODO: Move most of this to AuthService
-  const existingUser = await context.prisma.user.findFirst({
-    where: {
-      email
+export const  mutationResolvers: MutationResolvers = {
+  logout (_root, _args, context) {
+    context.logout()
+    return true
+  },
+
+  async login (_root, { email, password }, context) {
+    const { user } = await context.authenticate('graphql-local', { email, password })
+    if (user) {
+      await context.login(user)
+      return user
+    } else {
+      return null
     }
-  })
-  const userWithEmailAlreadyExists = existingUser !== null
-  if (userWithEmailAlreadyExists) {
-    throw new Error(`User with email ${email} already exists`)
+  },
+
+  async signup (_root, { name, email, password }, context) {
+    const newUser = await authService.createAccount(name, email, password)
+    context.login(newUser)
+    return newUser
   }
-
-  // Hash password before saving in database
-  // We use salted hashing to prevent rainbow table attacks
-  const salt = await bcrypt.genSalt()
-  const hashedPassword = await bcrypt.hash(password, salt)
-
-  return await context.prisma.user.create({
-    data: {
-      name,
-      email,
-      password: hashedPassword
-    }
-  })
 }

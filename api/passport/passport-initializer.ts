@@ -1,11 +1,11 @@
 import { Express } from 'express-serve-static-core'
 import session from 'express-session'
 import passport from 'passport'
-import AuthService from './auth.service'
+import { AuthService } from './auth.service'
 import LocalStrategy from './local.strategy'
 
 export default class PassportInitializer {
-  constructor (private readonly accountService: AuthService) {}
+  constructor (private accountService: AuthService) {}
 
   initialize (): void {
     passport.use(new LocalStrategy(this.accountService))
