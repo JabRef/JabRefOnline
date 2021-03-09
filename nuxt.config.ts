@@ -44,6 +44,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    'nuxt-vite',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Typescript support for nuxt: https://typescript.nuxtjs.org/
