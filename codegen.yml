@@ -5,6 +5,7 @@ generates:
     config:
       useIndexSignature: true
       mapperTypeSuffix: Model
+      contextType: ./context#Context
       mappers:
         User: '@prisma/client/index.d#User'
     plugins:
