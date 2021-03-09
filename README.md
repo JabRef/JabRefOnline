@@ -31,6 +31,7 @@
 
 ## Recommended VS Code extensions
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma): Adds syntax highlighting, formatting, jump-to-definition and linting for Prisma Schema files. 
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style
 
 ## Technologies used
 - [Prisma](https://www.prisma.io/): [Documentation](https://www.prisma.io/docs/)

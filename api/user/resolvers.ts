@@ -10,22 +10,22 @@ export const userResolver: UserResolvers = {
 }
 
 export const queryResolvers: QueryResolvers = {
-  async user (_root, { id }, _context) {
+  async user(_root, { id }, _context) {
     return await authService.getUserById(id)
   },
 
-  currentUser (_root, _args, context) {
+  currentUser(_root, _args, context) {
     return context.getUser() || null
   }
 }
 
-export const  mutationResolvers: MutationResolvers = {
-  logout (_root, _args, context) {
+export const mutationResolvers: MutationResolvers = {
+  logout(_root, _args, context) {
     context.logout()
     return true
   },
 
-  async login (_root, { email, password }, context) {
+  async login(_root, { email, password }, context) {
     const { user } = await context.authenticate('graphql-local', { email, password })
     if (user) {
       await context.login(user)
@@ -35,7 +35,7 @@ export const  mutationResolvers: MutationResolvers = {
     }
   },
 
-  async signup (_root, { name, email, password }, context) {
+  async signup(_root, { name, email, password }, context) {
     const newUser = await authService.createAccount(name, email, password)
     context.login(newUser)
     return newUser
