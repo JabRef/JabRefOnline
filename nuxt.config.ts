@@ -45,19 +45,16 @@ export default {
   */
   buildModules: [
     'nuxt-vite',
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
-    // Typescript support for nuxt: https://typescript.nuxtjs.org/
-    '@nuxt/typescript-build'
+    // https://go.nuxtjs.dev/typescript
+    '@nuxt/typescript-build',
+    // https://go.nuxtjs.dev/tailwindcss
+    '@nuxtjs/tailwindcss',
   ],
 
   /*
   ** Nuxt.js modules
   */
-  modules: [
-    // Doc: https://http.nuxtjs.org
-    '@nuxt/http'
-  ],
+  modules: [],
 
   /*
   ** Server Middleware
