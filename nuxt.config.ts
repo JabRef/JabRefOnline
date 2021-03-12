@@ -30,6 +30,8 @@ export default {
   ** Global CSS
   */
   css: [
+    // FontAwesome support
+    '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
   /*
@@ -37,6 +39,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    // FontAwesome support
+    '~/plugins/fontawesome.ts'
   ],
 
   /*

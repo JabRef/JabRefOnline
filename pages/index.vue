@@ -41,6 +41,7 @@
         </a>
       </div>
       {{user}}
+      <font-awesome-icon icon="laugh-beam" />
     </div>
   </div>
 </template>
