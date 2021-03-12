@@ -1,3 +1,5 @@
+import forms from "@tailwindcss/forms";
+
 export default {
   /*
   ** Nuxt target
@@ -89,5 +91,13 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+
+  tailwindcss: {
+    config: {
+      plugins: [
+        forms
+      ]
+    }
   }
 }
