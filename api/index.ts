@@ -25,7 +25,7 @@ const passportInitializer = new PassportInitializer(new AuthService(new PrismaCl
 passportInitializer.initialize()
 passportInitializer.install(app)
 
-const typeDefs = loadSchemaSync('./**/*.graphql', { loaders: [new GraphQLFileLoader()] })
+const typeDefs = loadSchemaSync('./api/**/*.graphql', { loaders: [new GraphQLFileLoader()] })
 const server = new ApolloServer({
   schema: addResolversToSchema(typeDefs, resolvers),
   context: buildContext

@@ -6,6 +6,11 @@ export default {
   target: 'server',
 
   /*
+  ** Disable server-side rendering
+  */
+  ssr: false,
+
+  /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
   */
@@ -44,7 +49,8 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    'nuxt-vite',
+    // TODO: Play again with vite once it is more stable
+    //'nuxt-vite',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
@@ -54,7 +60,10 @@ export default {
   /*
   ** Nuxt.js modules
   */
-  modules: [],
+  modules: [
+    // Graphql support on the client side
+    '~/plugins/apollo.module.ts'
+  ],
 
   /*
   ** Server Middleware
