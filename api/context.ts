@@ -7,13 +7,19 @@ export interface Context {
   isAuthenticated: () => boolean
   isUnauthenticated: () => boolean
   getUser: () => User
-  authenticate: (strategyName: string, options?: Record<string, unknown>) => Promise<AuthenticateReturn>
+  authenticate: (
+    strategyName: string,
+    options?: Record<string, unknown>
+  ) => Promise<AuthenticateReturn>
   login: (user: User, options?: Record<string, unknown>) => Promise<void>
   logout: () => void
 }
 
-export function buildContext (req: express.Request, res: express.Response): Context {
+export function buildContext(
+  req: express.Request,
+  res: express.Response
+): Context {
   return {
-    ...passportBuildContext<User>({ req, res })
+    ...passportBuildContext<User>({ req, res }),
   }
 }

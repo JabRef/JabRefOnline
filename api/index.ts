@@ -21,14 +21,18 @@ const app = express()
 app.use(users)
 app.use(test)
 
-const passportInitializer = new PassportInitializer(new AuthService(new PrismaClient()))
+const passportInitializer = new PassportInitializer(
+  new AuthService(new PrismaClient())
+)
 passportInitializer.initialize()
 passportInitializer.install(app)
 
-const typeDefs = loadSchemaSync('./api/**/*.graphql', { loaders: [new GraphQLFileLoader()] })
+const typeDefs = loadSchemaSync('./api/**/*.graphql', {
+  loaders: [new GraphQLFileLoader()],
+})
 const server = new ApolloServer({
   schema: addResolversToSchema(typeDefs, resolvers),
-  context: buildContext
+  context: buildContext,
 })
 server.applyMiddleware({ app, path: '/' })
 

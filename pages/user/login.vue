@@ -35,10 +35,10 @@
                 </label>
                 <div class="mt-1">
                   <input
-                    type="text"
-                    name="email"
                     id="email"
                     ref="email"
+                    name="email"
+                    type="text"
                     class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border border-gray-300 placeholder-gray-400"
                   />
                 </div>
@@ -53,16 +53,16 @@
                 </label>
                 <div class="mt-1 relative">
                   <input
+                    id="password"
+                    name="password"
                     :type="showHiddenPassword ? 'password' : 'text'"
                     x-model="password"
-                    name="password"
-                    id="password"
                     class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border border-gray-300 placeholder-gray-400"
                   />
                   <div
                     class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
                   >
-                    <font-awesome-icon
+                    <FontAwesomeIcon
                       class="text-gray-500"
                       :icon="showHiddenPassword ? 'eye' : 'eye-slash'"
                       @click="showHiddenPassword = !showHiddenPassword"
@@ -119,8 +119,8 @@
               </div>
               <div class="pt-2 flex justify-center">
                 <img
-                  class="w-28"
                   id="orcidLogoFooter"
+                  class="w-28"
                   src="https://info.orcid.org/wp-content/uploads/2020/01/orcid-logo.png"
                   alt="ORCID"
                 />

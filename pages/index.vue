@@ -2,24 +2,17 @@
   <div class="container">
     <div>
       <div v-if="authStatus">
-        <div>{{user.name}}</div>
+        <div>{{ user.name }}</div>
         <button class="auth-button" @click="logOut">Log Out</button>
       </div>
 
       <Logo />
-      <h1 class="title">
-        nuxt-express
-      </h1>
+      <h1 class="title">nuxt-express</h1>
       <div>
         {{ test }}
         {{ result }}
         <div class="links">
-          <a
-            href="/users"
-            class="button--green"
-          >
-            Users List
-          </a>
+          <a href="/users" class="button--green">Users List</a>
         </div>
       </div>
       <div class="links">
@@ -40,8 +33,8 @@
           GitHub
         </a>
       </div>
-      {{user}}
-      <font-awesome-icon icon="laugh-beam" />
+      {{ user }}
+      <FontAwesomeIcon icon="laugh-beam" />
     </div>
   </div>
 </template>
@@ -51,27 +44,29 @@ import Vue from 'vue'
 import gql from 'graphql-tag'
 
 export default Vue.extend({
-   apollo: {
-     user: {
-       query: gql`query getUserById($id: ID!) {
+  apollo: {
+    user: {
+      query: gql`
+        query getUserById($id: ID!) {
           user(id: $id) {
             name
           }
-        }`,
-        variables: {
-          id: "cklzr73840000l8v7b4gthdts"
-        },
-        update: response => response.user.name
-     }
-   },
+        }
+      `,
+      variables: {
+        id: 'cklzr73840000l8v7b4gthdts',
+      },
+      update: (response) => response.user.name,
+    },
+  },
   data: function () {
-    const result = "test3"
+    const result = 'test3'
     return {
       authStatus: false,
       result: result,
-      test: 'Walter2'
+      test: 'Walter2',
     }
-  }
+  },
 })
 </script>
 

@@ -6,17 +6,17 @@ const router = Router()
 const prisma = new PrismaClient()
 
 /* GET users listing. */
-router.get('/users', async function (req, res, next) {
+router.get('/users', async function (_req, res, _next) {
   const users = await prisma.user.findMany()
   res.json(users)
 })
 
 /* GET user by ID. */
-router.get('/users/:id', async function (req, res, next) {
+router.get('/users/:id', async function (req, res, _next) {
   const user = await prisma.user.findUnique({
     where: {
-      id: req.params.id
-    }
+      id: req.params.id,
+    },
   })
   res.json(user)
 })

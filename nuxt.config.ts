@@ -1,4 +1,4 @@
-import forms from "@tailwindcss/forms";
+import forms from '@tailwindcss/forms'
 
 export default {
   /*

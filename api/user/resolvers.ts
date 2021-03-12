@@ -6,7 +6,7 @@ const authService = new AuthService(new PrismaClient())
 
 export const userResolver: UserResolvers = {
   id: ({ id }) => id,
-  name: ({ name }) => name
+  name: ({ name }) => name,
 }
 
 export const queryResolvers: QueryResolvers = {
@@ -16,7 +16,7 @@ export const queryResolvers: QueryResolvers = {
 
   currentUser(_root, _args, context) {
     return context.getUser() || null
-  }
+  },
 }
 
 export const mutationResolvers: MutationResolvers = {
@@ -26,7 +26,10 @@ export const mutationResolvers: MutationResolvers = {
   },
 
   async login(_root, { email, password }, context) {
-    const { user } = await context.authenticate('graphql-local', { email, password })
+    const { user } = await context.authenticate('graphql-local', {
+      email,
+      password,
+    })
     if (user) {
       await context.login(user)
       return user
@@ -39,5 +42,5 @@ export const mutationResolvers: MutationResolvers = {
     const newUser = await authService.createAccount(name, email, password)
     context.login(newUser)
     return newUser
-  }
+  },
 }
