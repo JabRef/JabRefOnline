@@ -61,6 +61,9 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    // Allows more control where component's templates are rendered
+    // https://portal-vue.linusb.org/
+    'portal-vue/nuxt',
   ],
 
   /*
