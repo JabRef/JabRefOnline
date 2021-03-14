@@ -14,40 +14,15 @@
     </Portal>
     <form action="#" method="POST">
       <div class="space-y-5">
-        <div>
-          <label for="email" class="block text-sm font-semibold text-gray-700">
-            Email address
-          </label>
-          <div class="mt-1">
-            <input
-              id="email"
-              ref="email"
-              name="email"
-              type="text"
-              class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border border-gray-300 placeholder-gray-400"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label
-            for="password"
-            class="block text-sm font-semibold text-gray-700"
-          >
-            Password
-          </label>
-          <div class="mt-1 relative">
-            <PasswordInput />
-          </div>
-        </div>
+        <t-input-group label="Email address" variant="important">
+          <t-input ref="email" />
+        </t-input-group>
+        <t-input-group label="Password" variant="important">
+          <PasswordInput />
+        </t-input-group>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <input
-              id="remember_me"
-              name="remember_me"
-              type="checkbox"
-              class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-            />
+            <t-checkbox id="remember_me" />
             <label for="remember_me" class="ml-2 block text-sm text-gray-900">
               Keep me logged in
             </label>
@@ -64,12 +39,7 @@
         </div>
 
         <div class="py-2">
-          <button
-            type="submit"
-            class="mt-1 group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Sign in
-          </button>
+          <t-button class="w-full" type="submit">Sign in</t-button>
         </div>
 
         <div>

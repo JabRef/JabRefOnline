@@ -42,7 +42,9 @@ export default {
   */
   plugins: [
     // FontAwesome support
-    '~/plugins/fontawesome.ts'
+    '~/plugins/fontawesome.ts',
+    // Tailwind CSS support
+    '~/plugins/tailwind.ts',
   ],
 
   /*

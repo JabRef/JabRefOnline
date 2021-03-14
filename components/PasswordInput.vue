@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <input
+  <div class="relative">
+    <t-input
       ref="input"
+      v-model="value"
       :class="[classes]"
       :type="showHiddenPassword ? 'password' : 'text'"
       x-model="password"
-      class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border border-gray-300 placeholder-gray-400"
-      @input="handleInput"
     />
     <div
       class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
@@ -38,11 +37,6 @@ export default Vue.extend({
     return {
       showHiddenPassword: false,
     }
-  },
-  methods: {
-    handleInput(event: HTMLInputEvent): void {
-      this.$emit('input', event.target.value)
-    },
   },
 })
 </script>
