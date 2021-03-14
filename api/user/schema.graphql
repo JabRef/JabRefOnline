@@ -10,10 +10,10 @@ extend type Query {
 extend type Mutation {
   logout: Boolean
   login(email: String!, password: String!): User
-  signup(name: String!, email: String!, password: String!): User
+  signup(email: String!, password: String!): User
 }
 
 type User {
     id: ID!
-    name: String!
+    email: String!
 }

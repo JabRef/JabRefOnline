@@ -2,7 +2,7 @@
   <div class="relative">
     <t-input
       ref="input"
-      v-model="value"
+      v-model="valuelocal"
       :class="[classes]"
       :type="showHiddenPassword ? 'password' : 'text'"
       x-model="password"
@@ -35,8 +35,18 @@ export default Vue.extend({
   },
   data() {
     return {
-      showHiddenPassword: false,
+      showHiddenPassword: true,
     }
+  },
+  computed: {
+    valuelocal: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit('input', value)
+      },
+    },
   },
 })
 </script>

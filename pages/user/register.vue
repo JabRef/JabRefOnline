@@ -3,12 +3,12 @@
     <Portal to="header">
       <Logo class="mx-auto h-20 w-auto" />
       <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
-        Sign in
+        Create account
       </h2>
       <p class="mt-8 text-center text-sm text-gray-600">
-        Don't have an account?
+        Already have an account?
         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-          Sign up
+          Sign in
         </a>
       </p>
       <t-alert
@@ -21,38 +21,23 @@
         {{ error }}
       </t-alert>
     </Portal>
-    <form @submit.prevent="loginUser">
+    <form @submit.prevent="registerUser">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">
           <t-input ref="email" v-model="authDetails.email" />
         </t-input-group>
-        <t-input-group label="Password" variant="important">
+        <t-input-group
+          label="Password"
+          variant="important"
+          feedback="Use 8 or more characters with a mix of letters, numbers and symbols"
+        >
           <PasswordInput v-model="authDetails.password" />
         </t-input-group>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <t-checkbox id="remember_me" />
-            <label for="remember_me" class="ml-2 block text-sm text-gray-900">
-              Keep me logged in
-            </label>
-          </div>
-
-          <div class="text-sm">
-            <a
-              href="#"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Forgot your password?
-            </a>
-          </div>
-        </div>
-
         <div class="py-2">
-          <t-button class="w-full" type="submit">Sign in</t-button>
+          <t-button class="w-full" type="submit">Create your account</t-button>
         </div>
-
         <div>
-          <HorizontalRule content="or sign in with" />
+          <HorizontalRule content="or sign up with" />
         </div>
         <div class="pt-2 flex justify-center">
           <img
@@ -67,8 +52,10 @@
   </div>
 </template>
 <script lang="ts">
+import gql from 'graphql-tag'
+
 export default {
-  name: 'Login',
+  name: 'Register',
   layout: 'bare',
   data() {
     return {
@@ -83,12 +70,12 @@ export default {
     this.$refs.email.focus()
   },
   methods: {
-    loginUser(): void {
+    registerUser(): void {
       this.$apollo
         .mutate({
           mutation: gql`
             mutation($email: String!, $password: String!) {
-              login(email: $email, password: $password) {
+              signup(email: $email, password: $password) {
                 id
               }
             }
@@ -98,7 +85,7 @@ export default {
           },
         })
         .then((response) => {
-          localStorage.setItem('app-token', response.data.login)
+          localStorage.setItem('app-token', response.data.signup)
           this.$router.push('/dashboard')
         })
         .catch((error) => {

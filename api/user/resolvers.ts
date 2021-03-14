@@ -6,7 +6,7 @@ const authService = new AuthService(new PrismaClient())
 
 export const userResolver: UserResolvers = {
   id: ({ id }) => id,
-  name: ({ name }) => name,
+  email: ({ email }) => email,
 }
 
 export const queryResolvers: QueryResolvers = {
@@ -38,8 +38,8 @@ export const mutationResolvers: MutationResolvers = {
     }
   },
 
-  async signup(_root, { name, email, password }, context) {
-    const newUser = await authService.createAccount(name, email, password)
+  async signup(_root, { email, password }, context) {
+    const newUser = await authService.createAccount(email, password)
     context.login(newUser)
     return newUser
   },
