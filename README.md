@@ -19,7 +19,7 @@
 
 ## Directories
 
-`api`
+- `api` contains the backend.
 - `assets` contains uncompiled assets such as styles, images, or fonts. The content of this folder will be processed by webpack, e.g. CSS has pre-processor applied.
 - `components` is where we put all our Vue.js components which are then imported into the pages.
 - `layouts` contains the layouts that determine the look and feel. [Nuxt documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
@@ -34,8 +34,13 @@
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style
 
 ## Technologies used
+- [Vue.js](https://vuejs.org/): UI framework [Documentation](https://vuejs.org/v2/guide/)
+- [NuxtJS](https://nuxtjs.org/): Vue framework [Documentation](https://nuxtjs.org/docs/2.x/get-started/installation)
 - [Prisma](https://www.prisma.io/): [Documentation](https://www.prisma.io/docs/)
-- [GraphQL code generator](https://graphql-code-generator.com/): [Documentation](https://graphql-code-generator.com/docs/getting-started/index)
+- Graphql:
+   - [GraphQL code generator](https://graphql-code-generator.com/): [Documentation](https://graphql-code-generator.com/docs/getting-started/index)
+   - [Vue Apollo](https://apollo.vuejs.org/): Graphql integration for Vue [Documentation](https://v4.apollo.vuejs.org/guide-option/)
+- [Tailwind CSS](https://tailwindcss.com/): CSS framework [Documentation](https://tailwindcss.com/docs)
 
 ### GraphQL.js with GraphQL Code Generator
 Considered options:
