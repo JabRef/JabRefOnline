@@ -67,9 +67,14 @@
   </div>
 </template>
 <script lang="ts">
+import gql from 'graphql-tag'
 export default {
   name: 'Login',
   layout: 'bare',
+
+  // TODO: Automatically go to home if already loggin in
+  //middleware: 'guest',
+
   data() {
     return {
       error: '',
@@ -97,8 +102,7 @@ export default {
             ...this.authDetails,
           },
         })
-        .then((response) => {
-          localStorage.setItem('app-token', response.data.login)
+        .then(() => {
           this.$router.push('/dashboard')
         })
         .catch((error) => {

@@ -49,14 +49,14 @@ export default Vue.extend({
       query: gql`
         query getUserById($id: ID!) {
           user(id: $id) {
-            name
+            email
           }
         }
       `,
       variables: {
         id: 'cklzr73840000l8v7b4gthdts',
       },
-      update: (response) => response.user.name,
+      update: (response) => response.user.email,
     },
   },
   data: function () {

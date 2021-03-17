@@ -31,6 +31,7 @@ export const mutationResolvers: MutationResolvers = {
       password,
     })
     if (user) {
+      // Make login persistent by putting it in the express session store
       await context.login(user)
       return user
     } else {

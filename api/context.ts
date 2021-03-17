@@ -1,6 +1,6 @@
 import { User } from '@prisma/client'
-import express from 'express'
 import { buildContext as passportBuildContext } from 'graphql-passport'
+import { ContextParams } from 'graphql-passport/lib/buildContext'
 import { AuthenticateReturn } from './passport/auth.service'
 
 export interface Context {
@@ -15,10 +15,7 @@ export interface Context {
   logout: () => void
 }
 
-export function buildContext(
-  req: express.Request,
-  res: express.Response
-): Context {
+export function buildContext({ req, res }: ContextParams): Context {
   return {
     ...passportBuildContext<User>({ req, res }),
   }

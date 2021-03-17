@@ -37,14 +37,16 @@ export default {
   ],
 
   /*
-  ** Plugins to load before mounting the App
-  ** https://nuxtjs.org/guide/plugins
-  */
+   * Front-end plugins to load before mounting the App
+   * https://nuxtjs.org/guide/plugins
+   */
   plugins: [
     // FontAwesome support
     '~/plugins/fontawesome.ts',
     // Tailwind CSS support
     '~/plugins/tailwind.ts',
+    // Graphql support
+    '~/plugins/apollo.ts',
   ],
 
   /*
@@ -69,12 +71,10 @@ export default {
   ],
 
   /*
-  ** Nuxt.js modules
-  */
-  modules: [
-    // Graphql support on the client side
-    '~/plugins/apollo.module.ts'
-  ],
+   * Front-end Nuxt.js modules
+   * See https://nuxtjs.org/docs/2.x/directory-structure/modules
+   */
+  modules: [],
 
   /*
   ** Server Middleware
