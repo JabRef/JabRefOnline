@@ -9,7 +9,7 @@ import Vue from 'vue'
 import gql from 'graphql-tag'
 
 export default Vue.extend({
-  //middleware: ['auth'],
+  middleware: ['authenticated'],
   apollo: {
     user: {
       query: gql`

@@ -101,6 +101,18 @@ export default {
           variables: {
             ...this.authDetails,
           },
+          update(cache, { data: { login } }) {
+            cache.writeQuery({
+              query: gql`
+                query currentUser {
+                  currentUser {
+                    id
+                  }
+                }
+              `,
+              data: { id: login.id },
+            })
+          },
         })
         .then(() => {
           this.$router.push('/dashboard')
