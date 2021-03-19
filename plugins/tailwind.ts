@@ -114,6 +114,14 @@ const settings = {
       },
     },
   },
+  't-nuxtlink': {
+    // TButton has builtin support for NuxtLink, so we just reuse it
+    component: TButton,
+    props: {
+      tagName: 'a',
+      classes: 'text-blue-500 hover:text-blue-600',
+    },
+  },
 }
 
 Vue.use(VueTailwind, settings)

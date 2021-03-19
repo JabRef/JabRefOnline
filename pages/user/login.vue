@@ -7,9 +7,7 @@
       </h2>
       <p class="mt-8 text-center text-sm text-gray-600">
         Don't have an account?
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-          Sign up
-        </a>
+        <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
       </p>
       <t-alert
         v-if="error !== ''"
