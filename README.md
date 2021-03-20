@@ -33,6 +33,7 @@
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma): Adds syntax highlighting, formatting, jump-to-definition and linting for Prisma Schema files. 
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style.
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): Override user/workspace VS Code settings with the provided settings in `.editorconfig`.
+- [Tailwind CSS](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): IntelliSense enhancement to support Tailwind
 - Vue.js devtools: Browser integration for debugging and investigation [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
 ## Technologies used
