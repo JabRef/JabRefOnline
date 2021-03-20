@@ -29,12 +29,13 @@
 - `static` is directly mapped to the server root and contains files that have to keep their names (e.g. robots.txt) or likely won't change (e.g. the favicon). Files in this folder are not processed by webpack.
 - `store` contains Vuex Store files. [Nuxt documentation](https://nuxtjs.org/guide/vuex-store).
 
-## Recommended VS Code extensions
+## Recommended VS Code and Browser extensions
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma): Adds syntax highlighting, formatting, jump-to-definition and linting for Prisma Schema files. 
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style.
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): Override user/workspace VS Code settings with the provided settings in `.editorconfig`.
 - [Tailwind CSS](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): IntelliSense enhancement to support Tailwind
 - Vue.js devtools: Browser integration for debugging and investigation [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+- Apollo Client Devtools: Debug and analyze GraphQL on the client side [Firefox](https://addons.mozilla.org/en-US/firefox/addon/apollo-developer-tools/) 
 
 ## Technologies used
 - [Vue.js](https://vuejs.org/): UI framework [Documentation](https://vuejs.org/v2/guide/)
