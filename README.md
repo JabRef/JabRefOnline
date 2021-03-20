@@ -58,3 +58,8 @@ Reference:
 ## References
 - Prisma used in different contexts: https://github.com/prisma/prisma-examples
 - Example application using Prisma and Apollo: https://github.com/poulainv/tottem
+- Example application using Nuxt: https://github.com/gyarasu/nuxt-full-stack-template
+- Example application for authentication using GraphQL Shield and Prisma: https://github.com/prisma/prisma-examples/tree/latest/typescript/graphql-auth
+- Example server using Prisma and GraphQL: https://github.com/prisma-labs/graphql-prisma-typescript
+- Example application for vue-apollo: https://github.com/Akryum/vue-apollo-todos
+- Best practices: [Node](https://github.com/goldbergyoni/nodebestpractices)
