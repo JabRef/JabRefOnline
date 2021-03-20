@@ -100,9 +100,7 @@ export default {
 
   tailwindcss: {
     config: {
-      plugins: [
-        forms
-      ]
-    }
-  }
+      plugins: [forms],
+    },
+  },
 }
