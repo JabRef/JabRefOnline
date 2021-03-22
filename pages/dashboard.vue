@@ -1,6 +1,14 @@
 <template>
   <div>
-    {{ user }}
+    <div class="space-y-4 p-4">
+      <EntryView />
+      <EntryView />
+      <EntryView />
+      <EntryView />
+    </div>
+    <div>
+      {{ user }}
+    </div>
   </div>
 </template>
 
