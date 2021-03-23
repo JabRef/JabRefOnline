@@ -1,9 +1,11 @@
 import { Express } from 'express-serve-static-core'
 import session from 'express-session'
 import passport from 'passport'
+import { injectable } from 'tsyringe'
 import { AuthService } from './auth.service'
 import LocalStrategy from './local.strategy'
 
+@injectable()
 export default class PassportInitializer {
   constructor(private accountService: AuthService) {}
 

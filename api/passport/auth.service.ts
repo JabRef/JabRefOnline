@@ -1,5 +1,6 @@
 import { PrismaClient, User } from '@prisma/client'
 import * as bcrypt from 'bcryptjs'
+import { injectable } from 'tsyringe'
 
 export interface AuthenticationMessage {
   message?: string
@@ -10,8 +11,9 @@ export interface AuthenticateReturn {
   message?: string
 }
 
+@injectable()
 export class AuthService {
-  constructor(private prisma: PrismaClient) { }
+  constructor(private prisma: PrismaClient) {}
 
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
