@@ -16,6 +16,14 @@
 | yarn start | Start ExpressJS server in production. |
 | yarn prisma:studio | Explore data in the database using a visual editor. |
 
+### Workflow for editing the database schema
+
+1. Prototype your new feature by making the necessary changes to `schema.prisma`.
+2. Run `yarn prisma:push` to push the changes to the local database.
+3. Iterate until feature is ready.
+4. Run `yarn prisma:migrate:dev` to generate new migration based on the schema changes.
+
+See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecycle/prototyping-schema-db-push) for more details.
 
 ## Directories
 
