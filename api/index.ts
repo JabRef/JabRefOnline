@@ -7,18 +7,11 @@ import './tsyringe.config'
 import { container } from 'tsyringe'
 import { buildContext } from './context'
 
-// Require API routes
-import users from './routes/users'
-import test from './routes/test'
 import resolvers from './resolvers'
 import PassportInitializer from './passport/passport-initializer'
 
 // Create express instance
 const app = express()
-
-// Import API Routes
-app.use(users)
-app.use(test)
 
 const passportInitializer = container.resolve(PassportInitializer)
 passportInitializer.initialize()
