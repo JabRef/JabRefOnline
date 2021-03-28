@@ -1,0 +1,55 @@
+scalar DateTime
+
+type FieldValueTuple {
+  field: String!
+  value: String!
+}
+
+input FieldValueTupleInput {
+  field: String!
+  value: String!
+}
+
+# Articles, books etc added by users
+# These *Raw*-types should only be used to sync with JabRef
+input UserDocumentRawInput {
+    type: String!
+    citationKey: String
+
+    lastModified: DateTime
+    added: DateTime
+
+    fields: [FieldValueTupleInput!]
+}
+
+input UserDocumentRawUpdateInput {
+    id: ID!,
+    type: String
+    citationKey: String
+
+    lastModified: DateTime
+    added: DateTime
+
+    fields: [FieldValueTupleInput!]
+}
+
+type UserDocumentRaw {
+    id: ID!
+
+    type: String!
+    citationKey: String
+
+    lastModified: DateTime
+    added: DateTime
+
+    fields: [FieldValueTuple!]!
+}
+
+extend type Query {
+  getUserDocumentRaw(id: ID!): UserDocumentRaw
+}
+
+extend type Mutation {
+  addUserDocumentRaw(document: UserDocumentRawInput!): UserDocumentRaw
+  updateUserDocumentRaw(document: UserDocumentRawUpdateInput!): UserDocumentRaw
+}

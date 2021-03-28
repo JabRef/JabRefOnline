@@ -16,4 +16,51 @@ model User {
   name String?
   password String
   createdAt DateTime @default(now())
+  documents UserDocument[]
+}
+
+// Articles, books etc added by users
+// We do not know what users put in their fields, thus we assume everything is a string
+model UserDocument {
+  id String @id @default(cuid())
+  users User[]
+
+  type String
+  citationKey String?
+
+  lastModified DateTime?
+  added DateTime?
+
+  // Common fields
+  author String?
+  editor String?
+  title String?
+  journal String?
+  journaltitle String?
+  booktitle String?
+  date String?
+  year String?
+  month String?
+  number String?
+  volume String?
+  edition String?
+  series String?
+  pages String?
+  pagetotal String?
+  issue String?
+  note String?
+  url String?
+  urldate String?
+  publisher String?
+
+  // Identifier
+  doi String?
+  eprint String?
+  eprintclass String?
+  eprinttype String?
+  issn String?
+  isbn String?
+
+  // Other fields stored as json
+  other Json?
 }

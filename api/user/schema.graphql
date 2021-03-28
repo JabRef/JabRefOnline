@@ -16,4 +16,6 @@ extend type Mutation {
 type User {
     id: ID!
     email: String!
+
+    documents: [UserDocumentRaw!]!
 }
