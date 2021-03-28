@@ -39,10 +39,11 @@ See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecyc
 
 ## Recommended VS Code and Browser extensions
 - [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur): Add syntax highlighting and other tooling for Vue. 
-- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma): Adds syntax highlighting, formatting, jump-to-definition and linting for Prisma Schema files. 
+- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma): Add syntax highlighting, formatting, jump-to-definition and linting for Prisma Schema files. 
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style.
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): Override user/workspace VS Code settings with the provided settings in `.editorconfig`.
-- [Tailwind CSS](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): IntelliSense enhancement to support Tailwind
+- [Tailwind CSS](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): IntelliSense enhancement to support Tailwind.
+- [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): Add integration of Jest, e.g. easy debugging of tests.
 - Vue.js devtools: Browser integration for debugging and investigation [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 - Apollo Client Devtools: Debug and analyze GraphQL on the client side [Firefox](https://addons.mozilla.org/en-US/firefox/addon/apollo-developer-tools/) 
 
