@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 
 export default Vue.extend({
   apollo: {
@@ -59,11 +59,11 @@ export default Vue.extend({
       update: (response) => response.user.email,
     },
   },
-  data: function () {
+  data() {
     const result = 'test3'
     return {
       authStatus: false,
-      result: result,
+      result,
       test: 'Walter2',
     }
   },

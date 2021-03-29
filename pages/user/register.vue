@@ -50,7 +50,7 @@
   </div>
 </template>
 <script lang="ts">
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 
 export default {
   name: 'Register',
@@ -65,6 +65,7 @@ export default {
     }
   },
   mounted(): void {
+    // @ts-ignore: Currently no more type information avaliable
     this.$refs.email.focus()
   },
   methods: {

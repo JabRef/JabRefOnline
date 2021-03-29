@@ -65,13 +65,13 @@
   </div>
 </template>
 <script lang="ts">
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 export default {
   name: 'Login',
   layout: 'bare',
 
   // TODO: Automatically go to home if already loggin in
-  //middleware: 'guest',
+  // middleware: 'guest',
 
   data() {
     return {
@@ -83,6 +83,7 @@ export default {
     }
   },
   mounted(): void {
+    // @ts-ignore: Currently no more type information avaliable
     this.$refs.email.focus()
   },
   methods: {

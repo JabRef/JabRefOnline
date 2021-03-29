@@ -64,7 +64,7 @@ export default {
    */
   buildModules: [
     // TODO: Play again with vite once it is more stable
-    //'nuxt-vite',
+    // 'nuxt-vite',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss

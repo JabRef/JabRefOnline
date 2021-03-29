@@ -48,13 +48,15 @@ export default class PassportInitializer {
     app.use(passport.session())
   }
 
-  private serializeUser(user: any, done: (err: any, id?: string) => void) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private serializeUser(user: any, done: (err: unknown, id?: string) => void) {
     done(null, user.id)
   }
 
   private async deserializeUser(
     id: string,
-    done: (err: any, user?: any) => void
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    done: (err: unknown, user?: any) => void
   ) {
     const user = await this.accountService.getUserById(id)
     if (user === undefined) {
