@@ -52,6 +52,12 @@ model UserDocument {
   url String?
   urldate String?
   publisher String?
+  abstract String?
+  keywords String?
+
+  // JabRef-specific
+  groups String? // TODO: Make this a relation
+  priority String?
 
   // Identifier
   doi String?
