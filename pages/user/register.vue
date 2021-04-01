@@ -10,7 +10,7 @@
         <t-nuxtlink to="/user/login">Sign in</t-nuxtlink>
       </p>
       <t-alert
-        v-if="error !== ''"
+        v-if="error"
         variant="error"
         class="mt-8"
         :dismissible="false"
@@ -19,17 +19,17 @@
         {{ error }}
       </t-alert>
     </Portal>
-    <form @submit.prevent="registerUser">
+    <form @submit.prevent="signup">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">
-          <t-input ref="email" v-model="authDetails.email" />
+          <t-input v-model="email" v-focus />
         </t-input-group>
         <t-input-group
           label="Password"
           variant="important"
           feedback="Use 8 or more characters with a mix of letters, numbers and symbols"
         >
-          <PasswordInput v-model="authDetails.password" />
+          <PasswordInput v-model="password" />
         </t-input-group>
         <div class="py-2">
           <t-button class="w-full" type="submit">Create your account</t-button>
@@ -51,46 +51,45 @@
 </template>
 <script lang="ts">
 import { gql } from 'graphql-tag'
+import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import { useSignupMutation } from '~/apollo/graphql'
+import { currentUserVar } from '~/apollo/cache'
 
-export default {
+export default defineComponent({
   name: 'Register',
   layout: 'bare',
-  data() {
-    return {
-      error: '',
-      authDetails: {
-        email: '',
-        password: '',
+
+  setup() {
+    const email = ref('')
+    const password = ref('')
+
+    gql`
+      mutation signup($email: String!, $password: String!) {
+        signup(email: $email, password: $password) {
+          id
+        }
+      }
+    `
+    const { mutate: signup, onDone, error } = useSignupMutation(() => ({
+      variables: {
+        email: email.value,
+        password: password.value,
       },
+      update(_context, { data }) {
+        currentUserVar(data?.signup ?? null)
+      },
+    }))
+    const router = useRouter()
+    onDone(() => {
+      router.push('/dashboard')
+    })
+
+    return {
+      error,
+      email,
+      password,
+      signup,
     }
   },
-  mounted(): void {
-    // @ts-ignore: Currently no more type information avaliable
-    this.$refs.email.focus()
-  },
-  methods: {
-    registerUser(): void {
-      this.$apollo
-        .mutate({
-          mutation: gql`
-            mutation($email: String!, $password: String!) {
-              signup(email: $email, password: $password) {
-                id
-              }
-            }
-          `,
-          variables: {
-            ...this.authDetails,
-          },
-        })
-        .then((response) => {
-          localStorage.setItem('app-token', response.data.signup)
-          this.$router.push('/dashboard')
-        })
-        .catch((error) => {
-          this.error = error.message
-        })
-    },
-  },
-}
+})
 </script>

@@ -10,7 +10,7 @@
         <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
       </p>
       <t-alert
-        v-if="error !== ''"
+        v-if="error"
         variant="error"
         class="mt-8"
         :dismissible="false"
@@ -22,7 +22,7 @@
     <form @submit.prevent="loginUser">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">
-          <t-input ref="emailInput" v-model="email" />
+          <t-input v-model="email" v-focus />
         </t-input-group>
         <t-input-group label="Password" variant="important">
           <PasswordInput v-model="password" />
@@ -66,7 +66,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
-import { onMounted, ref } from '@vue/composition-api'
+import { ref } from '@vue/composition-api'
 import { gql } from 'graphql-tag'
 import { currentUserVar } from '../../apollo/cache'
 import { useLoginMutation } from '../../apollo/graphql'
@@ -79,14 +79,8 @@ export default defineComponent({
   // middleware: 'guest',
 
   setup() {
-    const emailInput = ref<HTMLInputElement | null>(null)
-    onMounted(() => {
-      emailInput.value?.focus()
-    })
-
     const email = ref('')
     const password = ref('')
-    const error = ref('')
 
     gql`
       mutation Login($email: String!, $password: String!) {
@@ -95,7 +89,7 @@ export default defineComponent({
         }
       }
     `
-    const { mutate: loginUser, onDone, onError } = useLoginMutation(() => ({
+    const { mutate: loginUser, onDone, error } = useLoginMutation(() => ({
       variables: {
         email: email.value,
         password: password.value,
@@ -108,11 +102,8 @@ export default defineComponent({
     onDone(() => {
       router.push('/dashboard')
     })
-    onError((err) => {
-      error.value = err.message
-    })
 
-    return { emailInput, email, password, error, loginUser }
+    return { email, password, error, loginUser }
   },
 })
 </script>

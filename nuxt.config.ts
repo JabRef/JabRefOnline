@@ -51,6 +51,8 @@ export default {
     '~/plugins/tailwind.ts',
     // Graphql support
     '~/plugins/apollo.ts',
+    // Custom Vue directives
+    '~/plugins/vue.directives.ts',
   ],
 
   /*
