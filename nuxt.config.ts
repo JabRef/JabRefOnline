@@ -72,6 +72,9 @@ export default {
     // Allows more control where component's templates are rendered
     // https://portal-vue.linusb.org/
     'portal-vue/nuxt',
+    // Enables Vue 3 composition API
+    // https://composition-api.nuxtjs.org/
+    '@nuxtjs/composition-api',
   ],
 
   /*

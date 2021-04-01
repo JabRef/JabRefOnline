@@ -22,10 +22,10 @@
     <form @submit.prevent="loginUser">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">
-          <t-input ref="email" v-model="authDetails.email" />
+          <t-input ref="emailInput" v-model="email" />
         </t-input-group>
         <t-input-group label="Password" variant="important">
-          <PasswordInput v-model="authDetails.password" />
+          <PasswordInput v-model="password" />
         </t-input-group>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
@@ -65,61 +65,54 @@
   </div>
 </template>
 <script lang="ts">
+import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+import { onMounted, ref } from '@vue/composition-api'
 import { gql } from 'graphql-tag'
-export default {
+import { currentUserVar } from '../../apollo/cache'
+import { useLoginMutation } from '../../apollo/graphql'
+
+export default defineComponent({
   name: 'Login',
   layout: 'bare',
 
   // TODO: Automatically go to home if already loggin in
   // middleware: 'guest',
 
-  data() {
-    return {
-      error: '',
-      authDetails: {
-        email: '',
-        password: '',
+  setup() {
+    const emailInput = ref<HTMLInputElement | null>(null)
+    onMounted(() => {
+      emailInput.value?.focus()
+    })
+
+    const email = ref('')
+    const password = ref('')
+    const error = ref('')
+
+    gql`
+      mutation Login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+          id
+        }
+      }
+    `
+    const { mutate: loginUser, onDone, onError } = useLoginMutation(() => ({
+      variables: {
+        email: email.value,
+        password: password.value,
       },
-    }
+      update(_context, { data }) {
+        currentUserVar(data?.login ?? null)
+      },
+    }))
+    const router = useRouter()
+    onDone(() => {
+      router.push('/dashboard')
+    })
+    onError((err) => {
+      error.value = err.message
+    })
+
+    return { emailInput, email, password, error, loginUser }
   },
-  mounted(): void {
-    // @ts-ignore: Currently no more type information avaliable
-    this.$refs.email.focus()
-  },
-  methods: {
-    loginUser(): void {
-      this.$apollo
-        .mutate({
-          mutation: gql`
-            mutation($email: String!, $password: String!) {
-              login(email: $email, password: $password) {
-                id
-              }
-            }
-          `,
-          variables: {
-            ...this.authDetails,
-          },
-          update(cache, { data: { login } }) {
-            cache.writeQuery({
-              query: gql`
-                query currentUser {
-                  currentUser {
-                    id
-                  }
-                }
-              `,
-              data: { id: login.id },
-            })
-          },
-        })
-        .then(() => {
-          this.$router.push('/dashboard')
-        })
-        .catch((error) => {
-          this.error = error.message
-        })
-    },
-  },
-}
+})
 </script>

@@ -4,6 +4,9 @@ extend type Query {
   """
   user(id: ID!): User
 
+  """
+  Get the current user.
+  """
   currentUser: User
 }
 
