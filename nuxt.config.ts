@@ -113,7 +113,7 @@ export default {
   // Workaround for https://github.com/nuxt/typescript/issues/494
   createRequire: (jsFileName: string) => {
     return jiti(jsFileName, {
-      debug: true,
+      debug: false,
       legacy: true,
       transform(opts: any): any {
         const _opts = {
