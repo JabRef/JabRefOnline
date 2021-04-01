@@ -4,15 +4,26 @@ import { ApolloClient, HttpLink } from '@apollo/client/core'
 import { Plugin } from '@nuxt/types'
 import fetch from 'cross-fetch'
 import { DefaultApolloClient } from '@vue/apollo-composable'
+import { onError } from '@apollo/client/link/error'
+import { logErrorMessages } from '@vue/apollo-util'
 import { provide, onGlobalSetup } from '@nuxtjs/composition-api'
 import { cache } from '../apollo/cache'
 
 Vue.use(VueApollo)
 
+const httpLink = new HttpLink({ uri: 'http://localhost:3000/api', fetch })
+
+// Print errors
+const errorLink = onError((error) => {
+  if (process.env.NODE_ENV !== 'production') {
+    logErrorMessages(error)
+  }
+})
+
 // Create the apollo client
 const apolloClient = new ApolloClient({
   cache,
-  link: new HttpLink({ uri: 'http://localhost:3000/api', fetch }),
+  link: errorLink.concat(httpLink),
   // Send cookies along with every request (needed for authentication)
   credentials: 'include',
 })
