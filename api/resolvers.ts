@@ -2,23 +2,20 @@
 import GraphQLDateTime from 'graphql-type-datetime'
 import { container } from 'tsyringe'
 import { Resolvers } from './graphql'
-import {
-  userResolver,
-  queryResolvers as userQueryResolvers,
-  mutationResolvers as userMutationResolvers,
-} from './user/resolvers'
+import { Resolvers as UserResolvers } from './user/resolvers'
 import { DocumentResolvers } from './documents/resolvers'
 
+const userResolvers = container.resolve(UserResolvers)
 const documentResolvers = container.resolve(DocumentResolvers)
 
 const resolvers: Resolvers = {
   Query: {
-    ...userQueryResolvers,
+    ...userResolvers.queryResolvers(),
     ...documentResolvers.queryResolvers(),
   },
 
   Mutation: {
-    ...userMutationResolvers,
+    ...userResolvers.mutationResolvers(),
     ...documentResolvers.mutationResolvers(),
   },
 
@@ -26,7 +23,7 @@ const resolvers: Resolvers = {
   DateTime: GraphQLDateTime,
 
   // Our types
-  User: userResolver,
+  User: userResolvers.userResolver(),
 }
 
 export default resolvers
