@@ -1,7 +1,7 @@
 import { User } from '@prisma/client'
 import { buildContext as passportBuildContext } from 'graphql-passport'
 import { ContextParams } from 'graphql-passport/lib/buildContext'
-import { AuthenticateReturn } from './passport/auth.service'
+import { AuthenticateReturn } from './user/auth.service'
 
 export interface Context {
   isAuthenticated: () => boolean

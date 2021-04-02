@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { UserResolvers, QueryResolvers, MutationResolvers } from '../graphql'
-import { AuthService } from '../passport/auth.service'
+import { AuthService } from './auth.service'
 
 const authService = new AuthService(new PrismaClient())
 

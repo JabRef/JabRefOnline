@@ -8,7 +8,7 @@ import { container } from 'tsyringe'
 import { buildContext } from './context'
 
 import resolvers from './resolvers'
-import PassportInitializer from './passport/passport-initializer'
+import PassportInitializer from './user/passport-initializer'
 
 // Create express instance
 const app = express()
