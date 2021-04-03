@@ -1,8 +1,9 @@
+import { transformSync } from '@babel/core'
+import { NuxtConfig } from '@nuxt/types'
 import forms from '@tailwindcss/forms'
 import jiti from 'jiti'
-import { transformSync } from '@babel/core'
 
-export default {
+const config: NuxtConfig = {
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -88,9 +89,7 @@ export default {
   /*
    ** Server Middleware
    */
-  serverMiddleware: {
-    '/api': '~/api',
-  },
+  serverMiddleware: [{ path: '/api', handler: '~/api' }],
 
   /*
    ** For deployment you might want to edit host and port
@@ -104,7 +103,15 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    extend: (config, { isClient }): void => {
+      // Extend only webpack config for client-bundle
+      if (isClient) {
+        config.devtool = 'source-map'
+      }
+    },
+  },
 
   tailwindcss: {
     config: {
@@ -181,3 +188,4 @@ export default {
     })
   },
 }
+export default config
