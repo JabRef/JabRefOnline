@@ -7,7 +7,7 @@ const codegen = {
   overwrite: true,
   schema: 'api/**/*.graphql',
   generates: {
-    'api/graphql.d.ts': {
+    'api/graphql.ts': {
       config: {
         useIndexSignature: true,
         mapperTypeSuffix: 'Model',
