@@ -2,7 +2,7 @@
   <div class="relative">
     <t-input
       ref="input"
-      v-model="valuelocal"
+      v-model="password"
       :class="[classes]"
       :type="showHiddenPassword ? 'password' : 'text'"
       x-model="password"
@@ -20,9 +20,9 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue'
+import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
 
-export default Vue.extend({
+export default defineComponent({
   props: {
     value: {
       type: String,
@@ -33,20 +33,18 @@ export default Vue.extend({
       default: '',
     },
   },
-  data() {
+  setup(props, { emit }) {
+    const showHiddenPassword = ref(true)
+
+    const password = computed({
+      get: () => props.value,
+      set: (value): void => emit('input', value),
+    })
+
     return {
-      showHiddenPassword: true,
+      password,
+      showHiddenPassword,
     }
-  },
-  computed: {
-    valuelocal: {
-      get() {
-        return this.value
-      },
-      set(value) {
-        this.$emit('input', value)
-      },
-    },
   },
 })
 </script>
