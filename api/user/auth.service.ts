@@ -42,6 +42,14 @@ export class AuthService {
     })
   }
 
+  async getUserByEmail(email: string): Promise<User | null> {
+    return await this.prisma.user.findFirst({
+      where: {
+        email,
+      },
+    })
+  }
+
   async createAccount(email: string, password: string): Promise<User> {
     const existingUser = await this.prisma.user.findFirst({
       where: {

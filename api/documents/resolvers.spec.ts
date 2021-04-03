@@ -1,12 +1,13 @@
 import { container } from 'tsyringe'
 import { mock, mockReset } from 'jest-mock-extended'
 import { UserDocument } from '@prisma/client'
+import { DocumentType } from '../graphql'
 import { UserDocumentService } from './user.document.service'
-import { DocumentResolvers } from './resolvers'
+import { parse, Resolvers } from './resolvers'
 
 const userDocumentService = mock<UserDocumentService>()
 container.registerInstance(UserDocumentService, userDocumentService)
-const resolvers = container.resolve(DocumentResolvers)
+const resolvers = container.resolve(Resolvers)
 
 beforeEach(() => {
   mockReset(userDocumentService)
@@ -117,5 +118,15 @@ describe('addUserDocumentRaw', () => {
       author: 'JabRef devs',
       other: [],
     })
+  })
+})
+
+describe('parse', () => {
+  it('converts lowercase type correctly', () => {
+    expect(parse('article')).toEqual(DocumentType.Article)
+  })
+
+  it('converts uppercase type correctly', () => {
+    expect(parse('Article')).toEqual(DocumentType.Article)
   })
 })

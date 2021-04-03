@@ -7,7 +7,7 @@ extend type Query {
   """
   Get the current user.
   """
-  currentUser: User
+  me: User
 }
 
 extend type Mutation {
@@ -20,5 +20,6 @@ type User {
     id: ID!
     email: String!
 
-    documents: [UserDocumentRaw!]!
+    documentsRaw: [DocumentRaw!]!
+    documents: [Document!]!
 }

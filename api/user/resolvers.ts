@@ -1,21 +1,27 @@
-import { PrismaClient, User } from '@prisma/client'
+import { User } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import { Context } from '../context'
 import { UserResolvers, QueryResolvers, MutationResolvers } from '../graphql'
+import { Resolvers as DocumentResolvers } from '../documents/resolvers'
 import { AuthService } from './auth.service'
-
-const authService = new AuthService(new PrismaClient())
 
 @injectable()
 export class Resolvers {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private documentResolver: DocumentResolvers
+  ) {}
 
   async getUserById(id: string): Promise<User | null> {
-    return await authService.getUserById(id)
+    return await this.authService.getUserById(id)
   }
 
-  me(context: Context): User {
-    return context.getUser() || null
+  async me(context: Context): Promise<User | null> {
+    if (process.env.NODE_ENV === 'development') {
+      return await this.authService.getUserByEmail('test@testum.de2')
+    } else {
+      return context.getUser() || null
+    }
   }
 
   async signup(
@@ -23,7 +29,7 @@ export class Resolvers {
     password: string,
     context: Context
   ): Promise<User> {
-    const newUser = await authService.createAccount(email, password)
+    const newUser = await this.authService.createAccount(email, password)
     context.login(newUser)
     return newUser
   }
@@ -80,8 +86,7 @@ export class Resolvers {
 
   userResolver(): UserResolvers {
     return {
-      id: ({ id }) => id,
-      email: ({ email }) => email,
+      documents: (user) => this.documentResolver.getDocumentsOf(user),
     }
   }
 }

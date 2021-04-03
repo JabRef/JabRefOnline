@@ -1,35 +1,56 @@
 <template>
   <div>
-    <div class="space-y-4 p-4">
-      <EntryView />
-      <EntryView />
-      <EntryView />
-      <EntryView />
-    </div>
-    <div>
-      {{ user }}
+    <div v-if="documents" class="space-y-4 p-4">
+      <DocumentView
+        v-for="document of documents"
+        :key="document.id"
+        :document="document"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { gql } from 'graphql-tag'
+import { useResult } from '@vue/apollo-composable'
+import { useGetDocumentsQuery } from '~/apollo/graphql'
 
-export default Vue.extend({
+export default defineComponent({
   middleware: ['authenticated'],
-  apollo: {
-    user: {
-      query: gql`
-        query getCurrentUser {
-          currentUser {
+
+  setup() {
+    gql`
+      query getDocuments {
+        me {
+          documents {
             id
-            email
+            type
+            title
+            ... on Article {
+              abstract
+              author {
+                ... on Person {
+                  name
+                }
+                ... on Organization {
+                  name
+                }
+              }
+              journal {
+                name
+              }
+            }
           }
         }
-      `,
-      update: (response) => response.currentUser,
-    },
+      }
+    `
+
+    const { result } = useGetDocumentsQuery()
+    const documents = useResult(result, null, (data) => data.me?.documents)
+    return {
+      documents,
+    }
   },
 })
 </script>

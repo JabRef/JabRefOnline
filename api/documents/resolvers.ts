@@ -1,12 +1,15 @@
-import { Prisma, UserDocument } from '@prisma/client'
+import { Prisma, User, UserDocument } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import {
   FieldValueTuple,
   QueryResolvers,
   MutationResolvers,
-  UserDocumentRaw,
-  UserDocumentRawInput,
-  UserDocumentRawUpdateInput,
+  DocumentRaw,
+  DocumentRawInput,
+  DocumentRawUpdateInput,
+  DocumentResolvers,
+  Document,
+  DocumentType,
 } from '../graphql'
 import { UserDocumentService } from './user.document.service'
 
@@ -58,7 +61,7 @@ function toPair(field: string, value: string | null): FieldValueTuple | null {
   }
 }
 
-function convertToRaw(document: UserDocument): UserDocumentRaw {
+function convertToRaw(document: UserDocument): DocumentRaw {
   const documentFields = Object.entries(document)
     .filter(([key, _]) => specialFields.includes(key))
     .map(([key, value]) => toPair(key, value as string))
@@ -89,7 +92,7 @@ function convertToRaw(document: UserDocument): UserDocumentRaw {
 }
 
 function convertFromRaw(
-  document: UserDocumentRawInput | UserDocumentRawUpdateInput
+  document: DocumentRawInput | DocumentRawUpdateInput
 ): Prisma.UserDocumentCreateInput {
   const special = document.fields
     ?.filter((item) => specialFields.includes(item.field))
@@ -123,11 +126,51 @@ function convertFromRaw(
   return convertedDocument
 }
 
+export function parse(type: string): DocumentType | null {
+  const found = Object.entries(DocumentType).find(([key, _value]) =>
+      key.localeCompare(type, undefined, { sensitivity: 'accent' }) === 0
+  )
+  if (found) {
+    return found[1]
+  } else {
+    return null
+  }
+}
+
 @injectable()
-export class DocumentResolvers {
+export class Resolvers {
   constructor(private userDocumentService: UserDocumentService) {}
 
-  async getUserDocumentRaw(id: string): Promise<UserDocumentRaw | null> {
+  async getDocumentsOf(user: User): Promise<Document[]> {
+    const documents = await this.userDocumentService.getDocumentsOf(user)
+    return documents.map((document) => {
+      let author
+      if (document.author) {
+        author = {
+          name: document.author,
+          __typename: 'Person',
+        }
+      }
+      const journalName = document.journal ?? document.journaltitle
+      let journal
+      if (journalName) {
+        journal = {
+          name: journalName,
+        }
+      }
+
+      return {
+        id: document.id,
+        title: document.title,
+        type: parse(document.type),
+        abstract: document.abstract,
+        author,
+        journal,
+      }
+    })
+  }
+
+  async getUserDocumentRaw(id: string): Promise<DocumentRaw | null> {
     const document = await this.userDocumentService.getDocumentById(id)
     if (document) {
       return convertToRaw(document)
@@ -137,8 +180,8 @@ export class DocumentResolvers {
   }
 
   async addUserDocumentRaw(
-    document: UserDocumentRawInput
-  ): Promise<UserDocumentRaw | null> {
+    document: DocumentRawInput
+  ): Promise<DocumentRaw | null> {
     const addedDocument = await this.userDocumentService.addDocument(
       convertFromRaw(document)
     )
@@ -160,6 +203,19 @@ export class DocumentResolvers {
     return {
       addUserDocumentRaw: (_parent, { document }, _context) =>
         this.addUserDocumentRaw(document),
+    }
+  }
+
+  documentResolver(): DocumentResolvers {
+    return {
+      __resolveType(document, _context) {
+        switch (document.type) {
+          case DocumentType.Article:
+            return 'Article'
+          default:
+            return 'Unknown'
+        }
+      },
     }
   }
 }

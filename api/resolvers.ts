@@ -3,7 +3,7 @@ import GraphQLDateTime from 'graphql-type-datetime'
 import { container } from 'tsyringe'
 import { Resolvers } from './graphql'
 import { Resolvers as UserResolvers } from './user/resolvers'
-import { DocumentResolvers } from './documents/resolvers'
+import { Resolvers as DocumentResolvers } from './documents/resolvers'
 
 const userResolvers = container.resolve(UserResolvers)
 const documentResolvers = container.resolve(DocumentResolvers)
@@ -24,6 +24,7 @@ const resolvers: Resolvers = {
 
   // Our types
   User: userResolvers.userResolver(),
+  Document: documentResolvers.documentResolver(),
 }
 
 export default resolvers

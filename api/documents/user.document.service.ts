@@ -1,4 +1,4 @@
-import { PrismaClient, UserDocument, Prisma } from '@prisma/client'
+import { PrismaClient, UserDocument, Prisma, User } from '@prisma/client'
 import { injectable } from 'tsyringe'
 
 @injectable()
@@ -9,6 +9,19 @@ export class UserDocumentService {
     return await this.prisma.userDocument.findUnique({
       where: {
         id,
+      },
+    })
+  }
+
+  async getDocumentsOf(user: User | string): Promise<UserDocument[]> {
+    const userId = typeof user === 'string' ? user : user.id
+    return await this.prisma.userDocument.findMany({
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
       },
     })
   }

@@ -10,9 +10,9 @@ input FieldValueTupleInput {
   value: String!
 }
 
-# Articles, books etc added by users
+# Articles, books etc
 # These *Raw*-types should only be used to sync with JabRef
-input UserDocumentRawInput {
+input DocumentRawInput {
     type: String!
     citationKey: String
 
@@ -22,7 +22,7 @@ input UserDocumentRawInput {
     fields: [FieldValueTupleInput!]
 }
 
-input UserDocumentRawUpdateInput {
+input DocumentRawUpdateInput {
     id: ID!,
     type: String
     citationKey: String
@@ -33,7 +33,7 @@ input UserDocumentRawUpdateInput {
     fields: [FieldValueTupleInput!]
 }
 
-type UserDocumentRaw {
+type DocumentRaw {
     id: ID!
 
     type: String!
@@ -45,11 +45,63 @@ type UserDocumentRaw {
     fields: [FieldValueTuple!]!
 }
 
+type Person {
+  id: ID!
+  name: String!
+}
+
+type Organization {
+  id: ID!
+  name: String!
+}
+
+union Entity = Person | Organization
+
+type Journal {
+  id: ID!
+  name: String!
+}
+
+enum DocumentType {
+  ARTICLE
+}
+
+interface Document {
+  id: ID!
+  type: DocumentType
+  title: String
+}
+
+type Article implements Document {
+  id: ID!
+  type: DocumentType
+  title: String
+
+  # The page on which the work starts; for example "135" or "xiii".
+  pageStart: String
+  # The page on which the work ends; for example "138" or "xvi".
+  pageEnd: String
+  # A short description that summarizes the work.
+  abstract: String
+  # The author of this work.
+  author: Entity
+  # Keywords or tags used to describe the content.
+  keywords: [String]
+  journal: Journal
+}
+
+type Unknown implements Document {
+  id: ID!
+  type: DocumentType
+  title: String
+}
+
+
 extend type Query {
-  getUserDocumentRaw(id: ID!): UserDocumentRaw
+  getUserDocumentRaw(id: ID!): DocumentRaw
 }
 
 extend type Mutation {
-  addUserDocumentRaw(document: UserDocumentRawInput!): UserDocumentRaw
-  updateUserDocumentRaw(document: UserDocumentRawUpdateInput!): UserDocumentRaw
+  addUserDocumentRaw(document: DocumentRawInput!): DocumentRaw
+  updateUserDocumentRaw(document: DocumentRawUpdateInput!): DocumentRaw
 }
