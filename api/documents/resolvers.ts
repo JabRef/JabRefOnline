@@ -127,7 +127,8 @@ function convertFromRaw(
 }
 
 export function parse(type: string): DocumentType | null {
-  const found = Object.entries(DocumentType).find(([key, _value]) =>
+  const found = Object.entries(DocumentType).find(
+    ([key, _value]) =>
       key.localeCompare(type, undefined, { sensitivity: 'accent' }) === 0
   )
   if (found) {

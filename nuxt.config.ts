@@ -124,6 +124,7 @@ const config: NuxtConfig = {
     return jiti(jsFileName, {
       debug: false,
       legacy: true,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       transform(opts: any): any {
         const _opts = {
           babelrc: false,
@@ -147,15 +148,20 @@ const config: NuxtConfig = {
         }
 
         if (opts.ts) {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          _opts.plugins!.push(require('@babel/plugin-transform-typescript'))
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          _opts.plugins!.push(
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            require('@babel/plugin-transform-typescript')
+          )
         }
 
         if (opts.legacy) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           _opts.plugins!.push(
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             require('@babel/plugin-proposal-nullish-coalescing-operator')
           )
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           _opts.plugins!.push(
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             require('@babel/plugin-proposal-optional-chaining')
