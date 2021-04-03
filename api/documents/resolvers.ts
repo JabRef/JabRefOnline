@@ -2,14 +2,12 @@ import { Prisma, User, UserDocument } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import {
   FieldValueTuple,
-  QueryResolvers,
-  MutationResolvers,
   DocumentRaw,
   DocumentRawInput,
   DocumentRawUpdateInput,
-  DocumentResolvers,
   Document,
   DocumentType,
+  Resolvers as AllResolvers,
 } from '../graphql'
 import { UserDocumentService } from './user.document.service'
 
@@ -193,29 +191,27 @@ export class Resolvers {
     }
   }
 
-  queryResolvers(): QueryResolvers {
+  resolvers(): AllResolvers {
     return {
-      getUserDocumentRaw: (_parent, { id }, _context) =>
-        this.getUserDocumentRaw(id),
-    }
-  }
+      Query: {
+        getUserDocumentRaw: (_parent, { id }, _context) =>
+          this.getUserDocumentRaw(id),
+      },
 
-  mutationResolvers(): MutationResolvers {
-    return {
-      addUserDocumentRaw: (_parent, { document }, _context) =>
-        this.addUserDocumentRaw(document),
-    }
-  }
+      Mutation: {
+        addUserDocumentRaw: (_parent, { document }, _context) =>
+          this.addUserDocumentRaw(document),
+      },
 
-  documentResolver(): DocumentResolvers {
-    return {
-      __resolveType(document, _context) {
-        switch (document.type) {
-          case DocumentType.Article:
-            return 'Article'
-          default:
-            return 'Unknown'
-        }
+      Document: {
+        __resolveType(document, _context) {
+          switch (document.type) {
+            case DocumentType.Article:
+              return 'Article'
+            default:
+              return 'Unknown'
+          }
+        },
       },
     }
   }

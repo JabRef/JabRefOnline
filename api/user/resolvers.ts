@@ -1,7 +1,7 @@
 import { User } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import { Context } from '../context'
-import { UserResolvers, QueryResolvers, MutationResolvers } from '../graphql'
+import { Resolvers as AllResolvers } from '../graphql'
 import { Resolvers as DocumentResolvers } from '../documents/resolvers'
 import { AuthService } from './auth.service'
 
@@ -57,36 +57,34 @@ export class Resolvers {
     return true
   }
 
-  queryResolvers(): QueryResolvers {
+  resolvers(): AllResolvers {
     return {
-      user: (_root, { id }, _context) => {
-        return this.getUserById(id)
-      },
-      me: (_root, _args, context) => {
-        return this.me(context)
-      },
-    }
-  }
-
-  mutationResolvers(): MutationResolvers {
-    return {
-      logout: (_root, _args, context) => {
-        return this.logout(context)
+      Query: {
+        user: (_root, { id }, _context) => {
+          return this.getUserById(id)
+        },
+        me: (_root, _args, context) => {
+          return this.me(context)
+        },
       },
 
-      login: (_root, { email, password }, context) => {
-        return this.login(context, email, password)
+      Mutation: {
+        logout: (_root, _args, context) => {
+          return this.logout(context)
+        },
+
+        login: (_root, { email, password }, context) => {
+          return this.login(context, email, password)
+        },
+
+        signup: (_root, { email, password }, context) => {
+          return this.signup(email, password, context)
+        },
       },
 
-      signup: (_root, { email, password }, context) => {
-        return this.signup(email, password, context)
+      User: {
+        documents: (user) => this.documentResolver.getDocumentsOf(user),
       },
-    }
-  }
-
-  userResolver(): UserResolvers {
-    return {
-      documents: (user) => this.documentResolver.getDocumentsOf(user),
     }
   }
 }
