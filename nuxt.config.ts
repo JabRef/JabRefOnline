@@ -92,6 +92,11 @@ const config: NuxtConfig = {
   serverMiddleware: [{ path: '/api', handler: '~/api' }],
 
   /*
+   ** Restarts the server when dependencies change.
+   */
+  watch: ['api/**/*.graphql'],
+
+  /*
    ** For deployment you might want to edit host and port
    */
   // server: {
@@ -105,9 +110,10 @@ const config: NuxtConfig = {
    */
   build: {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    extend: (config, { isClient }): void => {
-      // Extend only webpack config for client-bundle
+    extend: (config, { isClient, isServer }): void => {
+      // Extensions for client bundling
       if (isClient) {
+        // Create source maps to enable debugging from VS Code
         config.devtool = 'source-map'
       }
     },
