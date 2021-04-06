@@ -17,6 +17,7 @@ model User {
   password String
   createdAt DateTime @default(now())
   documents UserDocument[]
+  groups Group[]
 }
 
 // Articles, books etc added by users
@@ -56,7 +57,7 @@ model UserDocument {
   keywords String?
 
   // JabRef-specific
-  groups String? // TODO: Make this a relation
+  explicitGroups Group[]
   priority String?
 
   // Identifier
@@ -69,4 +70,20 @@ model UserDocument {
 
   // Other fields stored as json
   other Json?
+}
+
+model Group {
+  id String @id @default(cuid())
+  users User[]
+  name String
+
+  parentId String?
+  parent Group? @relation("GroupTree", fields: [parentId], references: [id])
+  children Group[] @relation("GroupTree")
+
+  color String?
+  description String?
+  icon String?
+
+  explicitDocuments UserDocument[]
 }

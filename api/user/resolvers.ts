@@ -3,14 +3,16 @@ import { injectable } from 'tsyringe'
 import { Context } from '../context'
 import { Resolvers as AllResolvers } from '../graphql'
 import { Resolvers as DocumentResolvers } from '../documents/resolvers'
+import { Resolvers as GroupResolvers } from '../groups/resolvers'
 import { AuthService } from './auth.service'
 
 @injectable()
 export class Resolvers {
   constructor(
     private authService: AuthService,
-    private documentResolver: DocumentResolvers
-  ) {}
+    private documentResolver: DocumentResolvers,
+    private groupsResolver: GroupResolvers
+  ) { }
 
   async getUserById(id: string): Promise<User | null> {
     return await this.authService.getUserById(id)
@@ -84,6 +86,7 @@ export class Resolvers {
 
       User: {
         documents: (user) => this.documentResolver.getDocumentsOf(user),
+        groups: (user) => this.groupsResolver.getGroupsOf(user),
       },
     }
   }
