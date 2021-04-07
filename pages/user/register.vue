@@ -50,7 +50,7 @@
   </div>
 </template>
 <script lang="ts">
-import { gql } from 'graphql-tag'
+import gql from 'graphql-tag'
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { useSignupMutation } from '~/apollo/graphql'
 import { currentUserVar } from '~/apollo/cache'

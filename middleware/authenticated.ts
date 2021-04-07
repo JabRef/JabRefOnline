@@ -1,5 +1,5 @@
 import { Context, Middleware } from '@nuxt/types'
-import { gql } from 'graphql-tag'
+import gql from 'graphql-tag'
 
 /**
  * Middleware that checks the user is logged in, and redirects her to the login page if not.

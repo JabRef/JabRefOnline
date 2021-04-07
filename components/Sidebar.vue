@@ -80,7 +80,7 @@
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 // @ts-ignore: No type infos available
 import { VueTreeList, Tree } from 'vue-tree-list'
-import { gql } from 'graphql-tag'
+import gql from 'graphql-tag'
 import { useResult } from '@vue/apollo-composable'
 import { useGetGroupsQuery } from '~/apollo/graphql'
 
