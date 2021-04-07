@@ -11,7 +11,12 @@ import { cache } from '../apollo/cache'
 
 Vue.use(VueApollo)
 
-const httpLink = new HttpLink({ uri: 'http://localhost:3000/api', fetch })
+let httpLink;
+if (process.env.NODE_ENV === 'production') {
+  httpLink = new HttpLink({ uri: '/api', fetch })
+} else {
+  httpLink = new HttpLink({ uri: 'http://localhost:3000/api', fetch })
+}
 
 // Print errors
 const errorLink = onError((error) => {
