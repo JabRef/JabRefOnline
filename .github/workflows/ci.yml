@@ -58,7 +58,9 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "jabref-online"
           heroku_email: "TobiasDiez@gmx.de"
-          procfile: "web: yarn start"
+          procfile: |
+            web: yarn start
+            release: yarn prisma:migrate:deploy
         env:
           HD_HOST: "0.0.0.0"
           HD_NODE_ENV: "production"
