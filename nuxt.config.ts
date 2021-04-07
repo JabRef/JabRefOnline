@@ -1,6 +1,5 @@
 import { transformSync } from '@babel/core'
 import { NuxtConfig } from '@nuxt/types'
-import forms from '@tailwindcss/forms'
 import jiti from 'jiti'
 
 const config: NuxtConfig = {
@@ -116,12 +115,6 @@ const config: NuxtConfig = {
         // Create source maps to enable debugging from VS Code
         config.devtool = 'source-map'
       }
-    },
-  },
-
-  tailwindcss: {
-    config: {
-      plugins: [forms],
     },
   },
 
