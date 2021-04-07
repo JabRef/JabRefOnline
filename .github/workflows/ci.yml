@@ -49,3 +49,16 @@ jobs:
 
       - name: Run tests 🧪
         run: yarn test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "jabref-online"
+          heroku_email: "TobiasDiez@gmx.de"
+          procfile: "web: yarn start"
+        env:
+          HD_HOST: "0.0.0.0"
+          HD_NODE_ENV: "production"
