@@ -60,7 +60,7 @@ jobs:
           heroku_email: "TobiasDiez@gmx.de"
           procfile: |
             web: yarn start
-            release: yarn prisma:migrate:deploy
+            release: yarn prisma:migrate:deploy && yarn prisma:seed
         env:
           HD_HOST: "0.0.0.0"
           HD_NODE_ENV: "production"
