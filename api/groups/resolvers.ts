@@ -5,7 +5,7 @@ import { GroupService } from './service'
 
 @injectable()
 export class Resolvers {
-  constructor(private groupService: GroupService) { }
+  constructor(private groupService: GroupService) {}
 
   async getGroupsOf(user: User): Promise<Group[]> {
     const groups = await this.groupService.getGroupsOf(user)

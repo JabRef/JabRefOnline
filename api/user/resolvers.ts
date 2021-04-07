@@ -12,7 +12,7 @@ export class Resolvers {
     private authService: AuthService,
     private documentResolver: DocumentResolvers,
     private groupsResolver: GroupResolvers
-  ) { }
+  ) {}
 
   async getUserById(id: string): Promise<User | null> {
     return await this.authService.getUserById(id)

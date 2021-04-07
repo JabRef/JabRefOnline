@@ -3,7 +3,7 @@ import { injectable } from 'tsyringe'
 
 @injectable()
 export class GroupService {
-  constructor(private prisma: PrismaClient) { }
+  constructor(private prisma: PrismaClient) {}
 
   async getGroupById(id: string): Promise<Group | null> {
     return await this.prisma.group.findUnique({
