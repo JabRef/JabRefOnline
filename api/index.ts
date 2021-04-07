@@ -23,6 +23,9 @@ const typeDefs = loadSchemaSync('./api/**/*.graphql', {
 const server = new ApolloServer({
   schema: addResolversToSchema(typeDefs, resolvers),
   context: buildContext,
+  // Enable playground also in production (at least for now)
+  introspection: true,
+  playground: true,
 })
 server.applyMiddleware({ app, path: '/' })
 
