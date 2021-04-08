@@ -58,17 +58,6 @@ See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecyc
 - [Tailwind CSS](https://tailwindcss.com/): CSS framework [Documentation](https://tailwindcss.com/docs), including [Vue Tailwind](https://www.vue-tailwind.com/docs/installation) to extract reusable components 
 - [Font Awesome](https://fontawesome.com/icons?d=gallery&p=2): Font-based icons
 
-### GraphQL.js with GraphQL Code Generator
-Considered options:
-- GraphQL.js with and without GraphQL Code Generator
-- TypeGraphQL
-- GraphQL Nexus
-   - `-` [Future of Nexus Prisma Plugin unclear](https://github.com/graphql-nexus/nexus-plugin-prisma/issues/1039)
-
-Reference:
-- [Comparison of GraphQL.js vs. TypeGraphQL vs. GraphQL Nexus](https://medium.com/swlh/graphql-js-vs-typegraphql-vs-graphql-nexus-2a8036deb851): Recommends GraphQL.js with GraphQL Code Generator
-- [How Prisma and GraphQL fit together](https://www.prisma.io/graphql)
-
 ## References
 - Prisma used in different contexts: https://github.com/prisma/prisma-examples
 - Example application using Prisma and Apollo: https://github.com/poulainv/tottem
