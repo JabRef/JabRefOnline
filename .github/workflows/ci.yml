@@ -11,7 +11,7 @@ on:
       - master
 
 jobs:
-  ci:
+  test:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -51,6 +51,7 @@ jobs:
         run: yarn test
   deploy:
     runs-on: ubuntu-latest
+    need: test
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
