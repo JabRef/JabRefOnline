@@ -11,7 +11,7 @@ import { cache } from '../apollo/cache'
 
 Vue.use(VueApollo)
 
-let httpLink;
+let httpLink
 if (process.env.NODE_ENV === 'production') {
   httpLink = new HttpLink({ uri: '/api', fetch })
 } else {

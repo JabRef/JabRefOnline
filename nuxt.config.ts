@@ -109,7 +109,7 @@ const config: NuxtConfig = {
    */
   build: {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    extend: (config, { isClient, isServer }): void => {
+    extend: (config, { isClient }): void => {
       // Extensions for client bundling
       if (isClient) {
         // Create source maps to enable debugging from VS Code
