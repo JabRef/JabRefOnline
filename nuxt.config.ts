@@ -76,7 +76,7 @@ const config: NuxtConfig = {
     'portal-vue/nuxt',
     // Enables Vue 3 composition API
     // https://composition-api.nuxtjs.org/
-    '@nuxtjs/composition-api',
+    '@nuxtjs/composition-api/module',
   ],
 
   /*
