@@ -1,18 +1,304 @@
 extend type Query {
   """
-  Get group by id.
+  Get the group by id.
   """
   group(id: ID!): Group
 }
 
-type Group {
+extend type Mutation {
+  createGroup(group: GroupInput!): Group
+  updateGroup(group: GroupUpdate!): Group
+}
+
+interface Group {
   id: ID!
   name: String!
+  displayName: String!
   children: [Group!]!
+  parent: Group
 
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+}
+
+# GraphQL sadly does not yet support extension of interfaces, so we need to copy & paste most of the fields for each group...
+type AutomaticKeywordGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  field: String!
+  keywordDelimiter: String!
+  keywordHierarchicalDelimiter: String!
+}
+input AutomaticKeywordGroupDetails {
+  field: String!
+  keywordDelimiter: String!
+  keywordHierarchicalDelimiter: String!
+}
+
+type AutomaticPersonsGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  field: String!
+
+}
+input AutomaticPersonsGroupDetails {
+  field: String!
+}
+
+type ExplicitGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  keywordSeparator: String!
+
+}
+input ExplicitGroupDetails {
+  keywordSeparator: String!
+}
+
+type LastNameGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  field: String!
+  name: String!
+
+}
+input LastNameGroupDetails {
+  field: String!
+  name: String!
+}
+
+type WordKeywordGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  field: String!
+  searchExpression: String!
+  caseSensitive: Boolean!
+  keywordSeparator: String!
+  onlySplitWordsAtSeparator: Boolean!
+}
+input WordKeywordGroupDetails {
+  field: String!
+  searchExpression: String!
+  caseSensitive: Boolean!
+  keywordSeparator: String!
+  onlySplitWordsAtSeparator: Boolean!
+}
+
+type RegexKeywordGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  field: String!
+  searchExpression: String!
+  caseSensitive: Boolean!
+}
+input RegexKeywordGroupDetails {
+  field: String!
+  searchExpression: String!
+  caseSensitive: Boolean!
+}
+
+type SearchGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  searchExpression: String!
+  caseSensitive: Boolean!
+  isRegEx: Boolean!
+}
+input SearchGroupDetails {
+  searchExpression: String!
+  caseSensitive: Boolean!
+  isRegEx: Boolean!
+}
+
+type TexGroupDevicePathPair implements Group {
+  deviceName: String!
+  filePath: String!
+}
+input TexGroupDevicePathPairInput {
+  deviceName: String!
+  filePath: String!
+}
+type TexGroup implements Group {
+  id: ID!
+  name: String!
+  displayName: String!
+  children: [Group!]!
+  parent: Group
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+  isExpanded: Boolean
+
+  documents: [Document!]!
+
+  # Specific fields
+  paths: [TexGroupDevicePathPair!]!
+}
+input TexGroupDetails {
+  paths: [TexGroupDevicePathPairInput!]!
+}
+
+enum GroupHierarchyType {
+  """
+  The group's content is independent of its hierarchical position.
+  """
+  INDEPENDENT
+
+  """
+  The group's content is the intersection of its own content with its supergroups' content.
+  """
+  INTERSECTION
+
+  """
+  The group's content is the union of its own content with its subgroups' content.
+  """
+  UNION
+}
+
+input GroupInput {
+  name: String!
+  displayName: String
+  children: [GroupInput!]!
+  parentId: ID
+
+  hierarchyType: GroupHierarchyType
   color: String
   description: String
   icon: String
 
-  documents: [Document!]!
+  # GraphQL does not support input interface/union types
+  # https://github.com/graphql/graphql-spec/blob/main/rfcs/InputUnion.md
+  # Thus we use "tagged inputs" as a workaround, which is pretty close to the current favorite for the official language extension
+  # The user of the API should specify exactly one of the following fields.
+  automaticKeywordGroup: AutomaticKeywordGroupDetails
+  automaticPersonsGroup: AutomaticPersonsGroupDetails
+  explicitGroup: ExplicitGroupDetails
+  lastNameGroup: LastNameGroupDetails
+  wordKeywordGroup: WordKeywordGroupDetails
+  regexKeywordGroup: RegexKeywordGroupDetails
+  searchGroup: SearchGroupDetails
+  texGroup:TexGroupDetails
+}
+input GroupUpdate {
+  id: ID!
+  name: String
+  displayName: String
+  children: [GroupInput!]
+  parentId: ID
+
+  hierarchyType: GroupHierarchyType
+  color: String
+  description: String
+  icon: String
+
+  # GraphQL does not support input interface/union types
+  # https://github.com/graphql/graphql-spec/blob/main/rfcs/InputUnion.md
+  # Thus we use "tagged inputs" as a workaround, which is pretty close to the current favorite for the official language extension
+  # The user of the API should specify exactly one of the following fields.
+  automaticKeywordGroup: AutomaticKeywordGroupDetails
+  automaticPersonsGroup: AutomaticPersonsGroupDetails
+  explicitGroup: ExplicitGroupDetails
+  lastNameGroup: LastNameGroupDetails
+  wordKeywordGroup: WordKeywordGroupDetails
+  regexKeywordGroup: RegexKeywordGroupDetails
+  searchGroup: SearchGroupDetails
+  texGroup:TexGroupDetails
 }
