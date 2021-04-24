@@ -206,7 +206,7 @@ input SearchGroupDetails {
   isRegEx: Boolean!
 }
 
-type TexGroupDevicePathPair implements Group {
+type TexGroupDevicePathPair {
   deviceName: String!
   filePath: String!
 }
@@ -275,7 +275,7 @@ input GroupInput {
   wordKeywordGroup: WordKeywordGroupDetails
   regexKeywordGroup: RegexKeywordGroupDetails
   searchGroup: SearchGroupDetails
-  texGroup:TexGroupDetails
+  texGroup: TexGroupDetails
 }
 input GroupUpdate {
   id: ID!
@@ -300,5 +300,5 @@ input GroupUpdate {
   wordKeywordGroup: WordKeywordGroupDetails
   regexKeywordGroup: RegexKeywordGroupDetails
   searchGroup: SearchGroupDetails
-  texGroup:TexGroupDetails
+  texGroup: TexGroupDetails
 }
