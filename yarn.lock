@@ -3058,7 +3058,7 @@
     "@vue/compiler-core" "3.0.11"
     "@vue/shared" "3.0.11"
 
-"@vue/compiler-sfc@^3.0.11":
+"@vue/compiler-sfc@^3.0.0", "@vue/compiler-sfc@^3.0.11":
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-3.0.11.tgz#cd8ca2154b88967b521f5ad3b10f5f8b6b665679"
   integrity sha512-7fNiZuCecRleiyVGUWNa6pn8fB2fnuJU+3AGjbjl7r1P5wBivfl02H4pG+2aJP5gh2u+0wXov1W38tfWOphsXw==
@@ -3088,7 +3088,7 @@
     "@vue/compiler-dom" "3.0.11"
     "@vue/shared" "3.0.11"
 
-"@vue/component-compiler-utils@^3.1.0", "@vue/component-compiler-utils@^3.1.2", "@vue/component-compiler-utils@^3.2.0":
+"@vue/component-compiler-utils@^3.1.0", "@vue/component-compiler-utils@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@vue/component-compiler-utils/-/component-compiler-utils-3.2.0.tgz#8f85182ceed28e9b3c75313de669f83166d11e5d"
   integrity sha512-lejBLa7xAMsfiZfNp7Kv51zOzifnb29FwdnMLa96z26kXErPFioSf9BMcePVIQ6/Gc6/mC0UrPpxAWIHyae0vw==
@@ -6710,16 +6710,15 @@ eslint-plugin-nuxt@^2.0.0:
     semver "^7.3.2"
     vue-eslint-parser "^7.1.1"
 
-eslint-plugin-prettier-vue@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier-vue/-/eslint-plugin-prettier-vue-2.1.1.tgz#7a60568677ae0e6194988eda5c2b94afd5ffd11b"
-  integrity sha512-B9nYJCwf6508tc36fBU6a7QRwmp688Z8q6BPDvHLftR5KccqVNRkCUwPYjHXouw1m6NzdcRZraJ0A0jXwtNCTQ==
+eslint-plugin-prettier-vue@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier-vue/-/eslint-plugin-prettier-vue-3.0.0.tgz#ff2d69fabe645a3e18086ede4bdbff67906410bd"
+  integrity sha512-fRjvHSu7aLjS+rJp/Asrualum/6uThr1Swf5ExlieAT8EeY3Z1kegmNinN2t2UTEi3lOtRvhV6b6iRVWjVtpqA==
   dependencies:
-    "@vue/component-compiler-utils" "^3.1.2"
+    "@vue/compiler-sfc" "^3.0.0"
     chalk "^4.0.0"
-    prettier "^1.18.2 || ^2.0.0"
+    prettier "^2.0.0"
     prettier-linter-helpers "^1.0.0"
-    vue-template-compiler "^2.0.0"
 
 eslint-plugin-prettier@^3.4.0:
   version "3.4.0"
@@ -12225,7 +12224,7 @@ prettier@^1.18.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
 
-"prettier@^1.18.2 || ^2.0.0", prettier@^2.0.5, prettier@^2.2.1:
+prettier@^2.0.0, prettier@^2.0.5, prettier@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
   integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
@@ -15021,7 +15020,7 @@ vue-tailwind@^2.2.1:
     tailwindcss "npm:@tailwindcss/postcss7-compat"
     vue "^2.6"
 
-vue-template-compiler@^2.0.0, vue-template-compiler@^2.6.11, vue-template-compiler@^2.6.12:
+vue-template-compiler@^2.6.11, vue-template-compiler@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.12.tgz#947ed7196744c8a5285ebe1233fe960437fcc57e"
   integrity sha512-OzzZ52zS41YUbkCBfdXShQTe69j1gQDZ9HIX8miuC9C3rBCk9wIRjLiZZLrmX9V+Ftq/YEyv1JaVr5Y/hNtByg==
