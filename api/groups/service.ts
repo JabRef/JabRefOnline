@@ -26,7 +26,42 @@ export class GroupService {
     })
   }
 
+  async getSubgroupsOf(group: Group | string): Promise<Group[]> {
+    const groupId = typeof group === 'string' ? group : group.id
+    return await this.prisma.group.findMany({
+      where: {
+        parent: {
+          id: groupId,
+        },
+      },
+    })
+  }
+
+  async getParentOf(group: Group | string): Promise<Group | null> {
+    const groupId = typeof group === 'string' ? group : group.id
+    return await this.prisma.group.findFirst({
+      where: {
+        children: {
+          some: {
+            id: groupId,
+          },
+        },
+      },
+    })
+  }
+
   async addGroup(group: Prisma.GroupCreateInput): Promise<Group | null> {
     return await this.prisma.group.create({ data: group })
+  }
+
+  async updateGroup(
+    group: Omit<Prisma.GroupUpdateInput, 'id'> & { id: string }
+  ): Promise<Group | null> {
+    return await this.prisma.group.update({
+      data: group,
+      where: {
+        id: group.id,
+      },
+    })
   }
 }

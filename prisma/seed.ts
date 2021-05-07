@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, GroupType, GroupHierarchyType } from '@prisma/client'
 const prisma = new PrismaClient()
 async function main() {
   await prisma.user.deleteMany({})
@@ -19,14 +18,17 @@ async function main() {
         create: [
           {
             type: 'Article',
-            title: 'Clebsch-Lagrange variational principle and geometric constraint analysis of relativistic field theories',
+            title:
+              'Clebsch-Lagrange variational principle and geometric constraint analysis of relativistic field theories',
             author: 'Tobias Diez and Gerd Rudolph',
-            abstract: 'Inspired by the Clebsch optimal control problem, we introduce a new variational principle that is suitable for capturing the geometry of relativistic field theories with constraints related to a gauge symmetry. Its special feature is that the Lagrange multipliers couple to the configuration variables via the symmetry group action. The resulting constraints are formulated as a condition on the momentum map of the gauge group action on the phase space of the system. We discuss the Hamiltonian picture and the reduction in the gauge symmetry by stages in this geometric setting. We show that the Yang–Mills–Higgs action and the Einstein–Hilbert action fit into this new framework after a (1 + 3)-splitting. Moreover, we recover the Gaus constraint of Yang–Mills–Higgs theory and the diffeomorphism constraint of general relativity as momentum map constraints.Inspired by the Clebsch optimal control problem, we introduce a new variational principle that is suitable for capturing the geometry of relativistic field theories with constraints related to a gauge symmetry. Its special feature is that the Lagrange multipliers couple to the configuration variables via the symmetry group action. The resulting constraints are formulated as a condition on the momentum map of the gauge group action on the phase space of the system. We discuss the Hamiltonian picture and the reduction in the gauge symmetry by stages in this geometric setting. We show that the Yang–Mills–Higgs action and the Einstein–Hilbert action fit into this new framework after a (1 + 3)-splitting. Moreover, we recover the Gaus constraint of Yang–Mills–Higgs theory and the diffeomorphism constraint of general relativity as momentum map constraints.',
+            abstract:
+              'Inspired by the Clebsch optimal control problem, we introduce a new variational principle that is suitable for capturing the geometry of relativistic field theories with constraints related to a gauge symmetry. Its special feature is that the Lagrange multipliers couple to the configuration variables via the symmetry group action. The resulting constraints are formulated as a condition on the momentum map of the gauge group action on the phase space of the system. We discuss the Hamiltonian picture and the reduction in the gauge symmetry by stages in this geometric setting. We show that the Yang–Mills–Higgs action and the Einstein–Hilbert action fit into this new framework after a (1 + 3)-splitting. Moreover, we recover the Gaus constraint of Yang–Mills–Higgs theory and the diffeomorphism constraint of general relativity as momentum map constraints.Inspired by the Clebsch optimal control problem, we introduce a new variational principle that is suitable for capturing the geometry of relativistic field theories with constraints related to a gauge symmetry. Its special feature is that the Lagrange multipliers couple to the configuration variables via the symmetry group action. The resulting constraints are formulated as a condition on the momentum map of the gauge group action on the phase space of the system. We discuss the Hamiltonian picture and the reduction in the gauge symmetry by stages in this geometric setting. We show that the Yang–Mills–Higgs action and the Einstein–Hilbert action fit into this new framework after a (1 + 3)-splitting. Moreover, we recover the Gaus constraint of Yang–Mills–Higgs theory and the diffeomorphism constraint of general relativity as momentum map constraints.',
             keywords: 'Diffeomorphism constraint, gauge symmetry',
           },
           {
             type: 'PhdThesis',
-            title: 'The postcranial anatomy of \textit{Procolophon} (Parareptilia: Procolophonidae) and its implications for the origin of turtles',
+            title:
+              'The postcranial anatomy of \textit{Procolophon} (Parareptilia: Procolophonidae) and its implications for the origin of turtles',
             author: 'Michael deBraga',
             citationKey: 'deBraga2001',
             year: '2001',
@@ -39,7 +41,8 @@ async function main() {
           },
           {
             type: 'Article',
-            title: 'The trouble with login: on usability and computer security in ubiquitous computing',
+            title:
+              'The trouble with login: on usability and computer security in ubiquitous computing',
             doi: 'http://dx.doi.org/10.1007/s00779-005-0347-6',
             issn: '1617-4909',
             number: '6',
@@ -56,7 +59,8 @@ async function main() {
           },
           {
             type: 'Article',
-            author: 'Jeff Yan and Alan Blackwell and Ross Anderson and Alasdair Grant',
+            author:
+              'Jeff Yan and Alan Blackwell and Ross Anderson and Alasdair Grant',
             journal: 'IEEE Security and Privacy',
             year: '2004',
             volume: '2',
@@ -72,28 +76,48 @@ async function main() {
           {
             id: 'ckn4h9pl5000101le5bco3b8r',
             name: 'History of Chocolate',
+            displayName: 'History of Chocolate',
             icon: 'history',
+            hierarchyType: GroupHierarchyType.INDEPENDENT,
+            isExpanded: true,
+            type: GroupType.ExplicitGroup,
           },
           {
             id: 'ckn4i99oe000101mc4igzgvix',
             name: 'Chocolate Ingredients',
+            displayName: 'Chocolate Ingredients',
             icon: 'concierge-bell',
+            hierarchyType: GroupHierarchyType.INDEPENDENT,
+            isExpanded: true,
+            type: GroupType.ExplicitGroup,
             children: {
               create: [
                 {
                   id: 'ckn4i9dr1000301mc9oekh3nu',
                   name: 'Beans',
-                  icon: 'leaf'
+                  displayName: 'Beans',
+                  icon: 'leaf',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
                 {
                   id: 'ckn4i9hg6000501mc21l9dmzb',
                   name: 'Sugar',
+                  displayName: 'Sugar',
                   icon: 'candy-cane',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
                 {
                   id: 'ckn4i9qek000701mc82eqagmz',
                   name: 'Milk',
+                  displayName: 'Milk',
                   icon: 'glass-whiskey',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
               ],
             },
@@ -101,23 +125,39 @@ async function main() {
           {
             id: 'ckn4i9u9m000901mcc4mjgdkq',
             name: 'Chocolate Making',
+            displayName: 'Chocolate Making',
             icon: 'project-diagram',
+            hierarchyType: GroupHierarchyType.INDEPENDENT,
+            isExpanded: true,
+            type: GroupType.ExplicitGroup,
             children: {
               create: [
                 {
                   id: 'ckn4i9zhq000b01mcgqjxdvcv',
                   name: 'Roasting',
+                  displayName: 'Roasting',
                   icon: 'fire',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
                 {
                   id: 'ckn4ia3i2000d01mcdizx83np',
                   name: 'Grinding',
+                  displayName: 'Grinding',
                   icon: 'mortar-pestle',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
                 {
                   id: 'ckn4ia876000f01mc0w5kgecg',
                   name: 'Conching',
+                  displayName: 'Conching',
                   icon: 'blender',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
               ],
             },
@@ -125,18 +165,30 @@ async function main() {
           {
             id: 'ckn4iaf1t000h01mcaob9ewey',
             name: 'Consumption',
+            displayName: 'Consumption',
             icon: 'laugh-beam',
+            hierarchyType: GroupHierarchyType.INDEPENDENT,
+            isExpanded: true,
+            type: GroupType.ExplicitGroup,
             children: {
               create: [
                 {
                   id: 'ckn4iajdx000j01mc8x219zb6',
                   name: 'Drink',
+                  displayName: 'Drink',
                   icon: 'mug-hot',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
                 {
                   id: 'ckn4ian59000l01mc78zp3ryh',
                   name: 'Eat',
+                  displayName: 'Eat',
                   icon: 'cookie-bite',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
               ],
             },
@@ -144,18 +196,30 @@ async function main() {
           {
             id: 'ckn4iar8j000n01mc7feq709f',
             name: 'Health',
+            displayName: 'Health',
             icon: 'heartbeat',
+            hierarchyType: GroupHierarchyType.INDEPENDENT,
+            isExpanded: true,
+            type: GroupType.ExplicitGroup,
             children: {
               create: [
                 {
                   id: 'ckn4iav33000p01mc3htz2ijx',
                   name: 'Nutrition',
+                  displayName: 'Nutrition',
                   icon: 'capsules',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
                 {
                   id: 'ckn4iazmc000r01mc1a0d6l0s',
                   name: 'Positive Heath Effects',
+                  displayName: 'Positive Heath Effects',
                   icon: 'notes-medical',
+                  hierarchyType: GroupHierarchyType.INDEPENDENT,
+                  isExpanded: true,
+                  type: GroupType.ExplicitGroup,
                 },
               ],
             },

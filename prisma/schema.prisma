@@ -72,18 +72,53 @@ model UserDocument {
   other Json?
 }
 
+enum GroupHierarchyType {
+  /// The group's content is independent of its hierarchical position.
+  INDEPENDENT
+
+  /// The group's content is the intersection of its own content with its supergroups' content.
+  INTERSECTION
+
+  /// The group's content is the union of its own content with its subgroups' content.
+  UNION
+}
+
+enum GroupType {
+  AutomaticKeywordGroup
+  AutomaticPersonsGroup
+  ExplicitGroup
+  LastNameGroup
+  WordKeywordGroup
+  RegexKeywordGroup
+  SearchGroup
+  TexGroup
+}
+
 model Group {
   id String @id @default(cuid())
   users User[]
   name String
-
+  displayName String
   parentId String?
   parent Group? @relation("GroupTree", fields: [parentId], references: [id])
   children Group[] @relation("GroupTree")
 
+  hierarchyType GroupHierarchyType
   color String?
   description String?
   icon String?
+  isExpanded Boolean
 
+  // Prisma currently does not support union types / inheritance (https://github.com/prisma/prisma/issues/2505)
+  // Thus, we assemble all possible fields from all types of groups here
+  type GroupType
   explicitDocuments UserDocument[]
+  field String?
+  keywordDelimiter String?
+  keywordHierarchicalDelimiter String?
+  authorLastName String?
+  searchExpression String?
+  caseSensitive Boolean?
+  onlySplitWordsAtDelimiter Boolean?
+  isRegEx Boolean?
 }

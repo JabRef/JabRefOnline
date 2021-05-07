@@ -14,6 +14,7 @@ const codegen = {
         contextType: './context#Context',
         mappers: {
           User: '@prisma/client/index.d#User',
+          Group: './groups/resolvers#GroupMaybeResolved',
         },
         scalars: {
           DateTime: 'Date',

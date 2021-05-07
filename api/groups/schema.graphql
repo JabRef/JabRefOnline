@@ -92,11 +92,11 @@ type ExplicitGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  keywordSeparator: String!
-
+  keywordDelimiter: String!
 }
 input ExplicitGroupDetails {
-  keywordSeparator: String!
+  keywordDelimiter: String!
+  documentIds: [ID!]!
 }
 
 type LastNameGroup implements Group {
@@ -116,12 +116,11 @@ type LastNameGroup implements Group {
 
   # Specific fields
   field: String!
-  name: String!
-
+  authorLastName: String!
 }
 input LastNameGroupDetails {
   field: String!
-  name: String!
+  authorLastName: String!
 }
 
 type WordKeywordGroup implements Group {
@@ -143,15 +142,15 @@ type WordKeywordGroup implements Group {
   field: String!
   searchExpression: String!
   caseSensitive: Boolean!
-  keywordSeparator: String!
-  onlySplitWordsAtSeparator: Boolean!
+  keywordDelimiter: String!
+  onlySplitWordsAtDelimiter: Boolean!
 }
 input WordKeywordGroupDetails {
   field: String!
   searchExpression: String!
   caseSensitive: Boolean!
-  keywordSeparator: String!
-  onlySplitWordsAtSeparator: Boolean!
+  keywordDelimiter: String!
+  onlySplitWordsAtDelimiter: Boolean!
 }
 
 type RegexKeywordGroup implements Group {
@@ -263,6 +262,7 @@ input GroupInput {
   color: String
   description: String
   icon: String
+  isExpanded: Boolean
 
   # GraphQL does not support input interface/union types
   # https://github.com/graphql/graphql-spec/blob/main/rfcs/InputUnion.md
@@ -281,7 +281,7 @@ input GroupUpdate {
   id: ID!
   name: String
   displayName: String
-  children: [GroupInput!]
+  children: [GroupUpdate!]!
   parentId: ID
 
   hierarchyType: GroupHierarchyType
