@@ -48,11 +48,7 @@ jobs:
         run: yarn lint
 
       - name: Validate GraphQL operations
-        uses: mandiwise/graphql-operation-validation-action@v1
-        with:
-          schema_location: ${{ github.workspace }}/api/**/*.graphql
-          base_dir: ${{ github.workspace }}
-          excluded_paths: ${{ github.workspace }}/api/documents/schema.graphql
+        run: yarn validate
 
       - name: Run tests 🧪
         run: yarn test

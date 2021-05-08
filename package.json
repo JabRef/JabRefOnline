@@ -21,10 +21,12 @@
     "prisma:generate:watch": "prisma generate --watch",
     "graphql:generate": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json graphql-codegen",
     "graphql:generate:watch": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json graphql-codegen --watch",
+    "graphql:validate": "graphql-inspector validate --apollo '{pages,components}/**/*.vue' 'api/**/*.graphql'",
     "lint": "yarn lint:js",
     "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "postinstall": "yarn generate",
     "test": "jest",
+    "validate": "yarn graphql:validate",
     "ts-node": "ts-node --compiler-options \"{\"\"module\"\":\"\"CommonJS\"\"}\""
   },
   "dependencies": {
@@ -72,6 +74,7 @@
     "@graphql-codegen/typescript-operations": "^1.17.16",
     "@graphql-codegen/typescript-resolvers": "^1.19.1",
     "@graphql-codegen/typescript-vue-apollo": "^2.3.4",
+    "@graphql-inspector/cli": "^2.5.0",
     "@nuxt/types": "^2.15.4",
     "@nuxt/typescript-build": "^2.0.6",
     "@nuxtjs/eslint-config": "^6.0.0",
