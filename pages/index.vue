@@ -50,7 +50,8 @@ gql`
       id
     }
   }
-
+`
+gql`
   query TestGroup {
     group(id: "test") {
       id
