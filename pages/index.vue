@@ -43,6 +43,15 @@
 import Vue from 'vue'
 import gql from 'graphql-tag'
 
+// Dummy command to have operation for all graphql schema files
+gql`
+  query TestCommand {
+    getUserDocumentRaw(id: 'test') {
+      id
+    }
+  }
+`
+
 export default Vue.extend({
   apollo: {
     user: {
