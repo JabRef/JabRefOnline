@@ -46,7 +46,7 @@ import gql from 'graphql-tag'
 // Dummy command to have operation for all graphql schema files
 gql`
   query TestCommand {
-    getUserDocumentRaw(id: 'test') {
+    getUserDocumentRaw(id: "test") {
       id
     }
   }
