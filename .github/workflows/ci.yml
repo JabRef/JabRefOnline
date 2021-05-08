@@ -47,6 +47,12 @@ jobs:
       - name: Run linter 👀
         run: yarn lint
 
+      - name: Validate GraphQL operations
+        uses: mandiwise/graphql-operation-validation-action@v1
+        with:
+          schema_location: ${{ github.workspace }}/api/**/*.graphql
+          base_dir: ${{ github.workspace }}
+
       - name: Run tests 🧪
         run: yarn test
   deploy:
