@@ -51,13 +51,6 @@ gql`
     }
   }
 `
-gql`
-  query TestGroup {
-    group(id: "test") {
-      id
-    }
-  }
-`
 
 export default Vue.extend({
   apollo: {
