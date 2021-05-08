@@ -1,9 +1,7 @@
-// TODO: Convert this file to typescript as soon as https://github.com/dotansimha/graphql-code-generator/issues/5762 is fixed
-// import type { IGraphQLConfig } from 'graphql-config'
-// import { Types } from '@graphql-codegen/plugin-helpers'
+import type { IGraphQLConfig } from 'graphql-config'
+import { Types } from '@graphql-codegen/plugin-helpers'
 
-// const codegen: Types.Config = {
-const codegen = {
+const codegen: Types.Config = {
   overwrite: true,
   schema: 'api/**/*.graphql',
   generates: {
@@ -29,13 +27,11 @@ const codegen = {
   },
 }
 
-// const config: IGraphQLConfig = {
-const config = {
+const config: IGraphQLConfig = {
   schema: ['api/**/*.graphql'],
   extensions: {
     codegen,
   },
 }
 
-// export default config
-module.exports = config
+export default config
