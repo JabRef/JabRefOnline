@@ -92,11 +92,16 @@ describe('addUserDocumentRaw', () => {
       citationKey: null,
       lastModified: null,
       type: 'something',
-      other: [
-        {
-          some: 'random field',
+      other: {
+        createMany: {
+          data: [
+            {
+              field: 'some',
+              value: 'random field',
+            },
+          ],
         },
-      ],
+      },
     })
   })
 
@@ -116,7 +121,6 @@ describe('addUserDocumentRaw', () => {
       lastModified: null,
       type: 'something',
       author: 'JabRef devs',
-      other: [],
     })
   })
 })

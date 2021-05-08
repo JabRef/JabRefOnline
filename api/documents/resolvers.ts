@@ -1,4 +1,4 @@
-import { Prisma, User, UserDocument } from '@prisma/client'
+import { Prisma, User } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import {
   FieldValueTuple,
@@ -9,7 +9,7 @@ import {
   DocumentType,
   Resolvers as AllResolvers,
 } from '../graphql'
-import { UserDocumentService } from './user.document.service'
+import { UserDocumentService, UserDocument } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
 const specialFields: string[] = [
@@ -100,15 +100,25 @@ function convertFromRaw(
   const other = document.fields
     ?.filter((item) => !specialFields.includes(item.field))
     .map((item) => {
-      return { [item.field]: item.value }
+      return {
+        field: item.field,
+        value: item.value,
+      }
     })
 
-  let convertedDocument = {
+  let convertedDocument: Prisma.UserDocumentCreateInput = {
     type: document.type ?? 'unknown',
     citationKey: document.citationKey ?? null,
     lastModified: document.lastModified ?? null,
     added: document.added ?? null,
-    other,
+    ...(other &&
+      other.length > 0 && {
+        other: {
+          createMany: {
+            data: other,
+          },
+        },
+      }),
   }
 
   if (special) {
@@ -170,7 +180,7 @@ export class Resolvers {
   }
 
   async getUserDocumentRaw(id: string): Promise<DocumentRaw | null> {
-    const document = await this.userDocumentService.getDocumentById(id)
+    const document = await this.userDocumentService.getDocumentById(id, true)
     if (document) {
       return convertToRaw(document)
     } else {

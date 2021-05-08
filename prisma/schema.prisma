@@ -68,8 +68,17 @@ model UserDocument {
   issn String?
   isbn String?
 
-  // Other fields stored as json
-  other Json?
+  // Other fields that are not often used
+  other UserDocumentOtherField[]
+}
+
+model UserDocumentOtherField {
+  document UserDocument @relation(fields: [documentId], references: [id])
+  documentId String
+  field String
+  value String
+
+  @@id([documentId, field])
 }
 
 enum GroupHierarchyType {
