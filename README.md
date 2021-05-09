@@ -25,6 +25,11 @@
 
 See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecycle/prototyping-schema-db-push) for more details.
 
+## Backend: Overall Structure
+- `Resolver` aggregates the data, and transforms in a representation suitable for the domain layer.
+- `Service` performs input validation, authorization, sorting, and implements the business logic.
+- Data layer is handled by Prisma.  
+
 ## Directories
 
 - `api` contains the backend.
