@@ -89,7 +89,11 @@ export default defineComponent({
         }
       }
     `
-    const { mutate: loginUser, onDone, error } = useLoginMutation(() => ({
+    const {
+      mutate: loginUser,
+      onDone,
+      error,
+    } = useLoginMutation(() => ({
       variables: {
         email: email.value,
         password: password.value,

@@ -70,7 +70,11 @@ export default defineComponent({
         }
       }
     `
-    const { mutate: signup, onDone, error } = useSignupMutation(() => ({
+    const {
+      mutate: signup,
+      onDone,
+      error,
+    } = useSignupMutation(() => ({
       variables: {
         email: email.value,
         password: password.value,
