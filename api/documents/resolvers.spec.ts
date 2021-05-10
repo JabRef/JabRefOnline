@@ -53,7 +53,7 @@ describe('getUserDocumentRaw', () => {
   it('puts other field in fields', async () => {
     userDocumentService.getDocumentById
       .calledWith('uniqueId')
-      .mockResolvedValueOnce(({
+      .mockResolvedValueOnce({
         id: 'uniqueId',
         type: 'something',
         other: [
@@ -61,7 +61,7 @@ describe('getUserDocumentRaw', () => {
             some: 'random field',
           },
         ],
-      } as unknown) as UserDocument)
+      } as unknown as UserDocument)
     const document = await resolvers.getUserDocumentRaw('uniqueId')
     expect(document).toEqual({
       id: 'uniqueId',
