@@ -1,7 +1,16 @@
 <template>
   <nav class="sticky top-0 z-30 flex-none md:shadow-md">
     <div
-      class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-gray-300 h-20"
+      class="
+        w-full
+        flex flex-row flex-wrap
+        items-center
+        justify-between
+        bg-white
+        px-6
+        border-b border-gray-300
+        h-20
+      "
     >
       <div class="flex">
         <!-- Hamburger icon for small screens -->
@@ -17,7 +26,16 @@
             type="search"
             name="serch"
             placeholder="Search..."
-            class="w-full xl:w-96 px-5 border-none shadow-none pl-10 font-semibold text-lg"
+            class="
+              w-full
+              xl:w-96
+              px-5
+              border-none
+              shadow-none
+              pl-10
+              font-semibold
+              text-lg
+            "
           />
           <button type="submit" class="absolute left-0 top-0 bottom-0 ml-2">
             <FontAwesomeIcon icon="search" class="text-gray-400" />
@@ -78,21 +96,64 @@
 
             <div slot-scope="{ blurHandler }" class="w-36">
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                class="
+                  block
+                  w-full
+                  px-4
+                  py-2
+                  text-sm
+                  leading-5
+                  text-gray-700
+                  transition
+                  duration-150
+                  ease-in-out
+                  hover:bg-gray-100
+                  focus:outline-none
+                  focus:bg-gray-100
+                "
                 role="menuitem"
                 @blur="blurHandler"
               >
                 Your Profile
               </button>
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                class="
+                  block
+                  w-full
+                  px-4
+                  py-2
+                  text-sm
+                  leading-5
+                  text-gray-700
+                  transition
+                  duration-150
+                  ease-in-out
+                  hover:bg-gray-100
+                  focus:outline-none
+                  focus:bg-gray-100
+                "
                 role="menuitem"
                 @blur="blurHandler"
               >
                 Settings
               </button>
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-red-500 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                class="
+                  block
+                  w-full
+                  px-4
+                  py-2
+                  text-sm
+                  leading-5
+                  text-red-500
+                  transition
+                  duration-150
+                  ease-in-out
+                  border-t
+                  hover:bg-gray-100
+                  focus:outline-none
+                  focus:bg-gray-100
+                "
               >
                 Logout
               </button>
