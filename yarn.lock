@@ -7932,6 +7932,15 @@ fs-capacitor@^6.1.0:
   resolved "https://registry.yarnpkg.com/fs-capacitor/-/fs-capacitor-6.2.0.tgz#fa79ac6576629163cb84561995602d8999afb7f5"
   integrity sha512-nKcE1UduoSKX27NSZlg879LdQc94OtbOsEmKMN2MBNudXREvijRKx2GEBsTMTfws+BrbkJoEuynbGSVRSpauvw==
 
+fs-extra@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
+  integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs-extra@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
@@ -11164,25 +11173,25 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt-vite@^0.0.37:
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/nuxt-vite/-/nuxt-vite-0.0.37.tgz#9c3ee08d1ad983478b80cf00a800bb7d15790278"
-  integrity sha512-6XoD2pfnKV2TjkvcfkAChfxGfwmrd89QwaxFuqJD1vji7CbpeHO0E2exbkcCGySEzL/xjFk2tOltzGbQ7oK29Q==
+nuxt-vite@^0.0.38:
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/nuxt-vite/-/nuxt-vite-0.0.38.tgz#40f4b7a5a4a3a6a67334bf51052b42b96a9c2122"
+  integrity sha512-C8l3JSS3jyHa2p+3in1rE4mrcyXWnA2xxuskRK2oqRMsHzjvwKyf01YKsDBoZBEhoBBKbXn5C8H27yIdiSyN6Q==
   dependencies:
     "@nuxt/http" "^0.6.4"
     chokidar "^3.5.1"
     consola "^2.15.3"
     debounce "^1.2.1"
-    fs-extra "^9.1.0"
-    postcss-import "^14.0.1"
+    fs-extra "^10.0.0"
+    postcss-import "^14.0.2"
     postcss-import-resolver "^2.0.0"
     postcss-preset-env "^6.7.0"
     postcss-url "^10.1.3"
     semver "^7.3.5"
-    ufo "^0.6.11"
+    ufo "^0.7.4"
     upath "^2.0.1"
-    vite "^2.2.1"
-    vite-plugin-vue2 "^1.4.4"
+    vite "~2.2.1"
+    vite-plugin-vue2 "^1.5.1"
 
 nuxt@^2.15.5:
   version "2.15.5"
@@ -12083,10 +12092,10 @@ postcss-import@^13.0.0:
     read-cache "^1.0.0"
     resolve "^1.1.7"
 
-postcss-import@^14.0.1:
-  version "14.0.1"
-  resolved "https://registry.yarnpkg.com/postcss-import/-/postcss-import-14.0.1.tgz#6a3f8f2ce74a95fc7c72ecfe3eddfa0e9124e677"
-  integrity sha512-Xn2+z++vWObbEPhiiKO1a78JiyhqipyrXHBb3AHpv0ks7Cdg+GxQQJ24ODNMTanldf7197gSP3axppO9yaG0lA==
+postcss-import@^14.0.2:
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/postcss-import/-/postcss-import-14.0.2.tgz#60eff77e6be92e7b67fe469ec797d9424cae1aa1"
+  integrity sha512-BJ2pVK4KhUyMcqjuKs9RijV5tatNzNa73e/32aBVE/ejYPe37iH+6vAu9WvqUkB5OAYgLHzbSvzHnorybJCm9g==
   dependencies:
     postcss-value-parser "^4.0.0"
     read-cache "^1.0.0"
@@ -15026,15 +15035,10 @@ ua-parser-js@^0.7.28:
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
   integrity sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==
 
-ufo@^0.6.11:
-  version "0.6.11"
-  resolved "https://registry.yarnpkg.com/ufo/-/ufo-0.6.11.tgz#69311ed4abc8ab671c83754b79ce0d396fea1075"
-  integrity sha512-Yu7TJThwlr23peOkX/+hm6LfkyBs+eDWV880468PTrjKBKjjsNWFFwIuOqDfmXngRo9TZ4+twFYueRH0OLl0Gw==
-
-ufo@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/ufo/-/ufo-0.7.2.tgz#a0e3c9f1b1d9b55f60e068d17afd6ffbdc4fbd62"
-  integrity sha512-cfxpkL4g79LrCXa1RyvhM/obxunKRjHApD4Ml4UG0CZcKvfodfKH0YTmnm6ofKKUnLzBMdfXSZzlgyQmj6b3sw==
+ufo@^0.7.2, ufo@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/ufo/-/ufo-0.7.4.tgz#06e971738bea098b95056755ba006a6b73a63f97"
+  integrity sha512-qFCjO4/IAaejZ6QKVBdM7FZkjhd8zQmBmE6i2bcSwBRrctPVtKXFojJa2flaqNUd7YWQoCFwd44MpOt1g94ekQ==
 
 uglify-js@^3.5.1:
   version "3.13.3"
@@ -15357,10 +15361,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-vue2@^1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/vite-plugin-vue2/-/vite-plugin-vue2-1.4.4.tgz#a5d371d295e6bada3d75a11c8b4b99a54b66733f"
-  integrity sha512-ItxvY9DsAeq8HRbcGe9npbsuUVFN2VNltMiqLDT9jBGFnzMAouiq5KfYVTkiAGVEEJ7s/iCZcO6bwsl3SK1OzA==
+vite-plugin-vue2@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-vue2/-/vite-plugin-vue2-1.5.1.tgz#3b1bd0b1ccccfe2a4be272b3b35cd46527a6d9ff"
+  integrity sha512-z7TUaSL3f2XvQWU1YmpxBDyPWwIRwH/6O4RTqsZKTzPfRWpCT2r9Ap84C4+YS1MmbPlrYjgWplCIdJd7I0Vr+A==
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/parser" "^7.13.10"
@@ -15382,10 +15386,10 @@ vite-plugin-vue2@^1.4.4:
     vue-template-compiler "^2.6.11"
     vue-template-es2015-compiler "^1.9.1"
 
-vite@^2.2.1:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.2.3.tgz#1acbdfa56ac00e00e7ccb6988f63f130c2f99dbb"
-  integrity sha512-PtjyBL4GtACM+uT5q5hi2+AlMBbb6YI2b2bam6QI8ZdZt4FezseF0yZHQx0G+b3po9jIJ/GS5N9gc5Yq9Rue7g==
+vite@~2.2.1:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.2.4.tgz#8f9cc85aacab04c850085894b086c8717f12ed16"
+  integrity sha512-vnIwSNci+phFMp6krhy+FbYzKL0R67Sdt9mVZ96S27AewrApSJjTqncJcalk8sf60BgcbW4+1C6DFIWkxquO9g==
   dependencies:
     esbuild "^0.9.3"
     postcss "^8.2.1"
