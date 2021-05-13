@@ -1,13 +1,9 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import { loadSchemaSync } from '@graphql-tools/load'
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
-import { addResolversToSchema } from '@graphql-tools/schema'
 import './tsyringe.config'
 import { container } from 'tsyringe'
 import { buildContext } from './context'
-
-import resolvers from './resolvers'
+import { loadSchema } from './schema'
 import PassportInitializer from './user/passport-initializer'
 
 // Create express instance
@@ -17,11 +13,8 @@ const passportInitializer = container.resolve(PassportInitializer)
 passportInitializer.initialize()
 passportInitializer.install(app)
 
-const typeDefs = loadSchemaSync('./api/**/*.graphql', {
-  loaders: [new GraphQLFileLoader()],
-})
-const server = new ApolloServer({
-  schema: addResolversToSchema(typeDefs, resolvers),
+export const server = new ApolloServer({
+  schema: loadSchema(),
   context: buildContext,
   // Enable playground also in production (at least for now)
   introspection: true,

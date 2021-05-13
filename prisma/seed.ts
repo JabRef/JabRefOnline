@@ -304,11 +304,16 @@ export async function main(): Promise<void> {
     })
   }
 }
-main()
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+
+// The following if check prevents that main is called upon import in test files
+// Taken from https://github.com/prisma/prisma/issues/5161#issuecomment-776897706
+if (require.main === module) {
+  main()
+    .catch((e) => {
+      console.error(e)
+      process.exit(1)
+    })
+    .finally(async () => {
+      await prisma.$disconnect()
+    })
+}
