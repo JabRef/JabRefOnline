@@ -1,0 +1,43 @@
+import { gql } from 'apollo-server-express'
+import { createAuthenticatedClient } from '../../test/apollo.server'
+import { resetToSeed } from '~/prisma/truncate'
+
+const authenticatedClient = createAuthenticatedClient()
+
+describe('User', () => {
+  beforeEach(async () => {
+    await resetToSeed()
+  })
+
+  describe('getCurrentUser', () => {
+    const query = gql`
+      query getCurrentUser {
+        me {
+          id
+          email
+        }
+      }
+    `
+
+    it('retrieves the currently authenticated user', async () => {
+      const result = await authenticatedClient.query({ query })
+      expect(result).toMatchInlineSnapshot(`
+        Object {
+          "data": Object {
+            "me": Object {
+              "email": "test@testum.de2",
+              "id": "ckn4oul7100004cv7y3t94n8j",
+            },
+          },
+          "errors": undefined,
+          "extensions": undefined,
+          "http": Object {
+            "headers": Headers {
+              Symbol(map): Object {},
+            },
+          },
+        }
+      `)
+    })
+  })
+})
