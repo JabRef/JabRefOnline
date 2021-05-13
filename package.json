@@ -15,7 +15,7 @@
     "prisma:migrate:status": "prisma migrate status",
     "prisma:migrate:resolve": "prisma migrate resolve",
     "prisma:push": "prisma db push",
-    "prisma:seed": "prisma db seed --preview-feature",
+    "prisma:seed": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json prisma db seed --preview-feature",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
     "prisma:generate:watch": "prisma generate --watch",
@@ -26,8 +26,7 @@
     "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "postinstall": "yarn generate",
     "test": "jest",
-    "validate": "yarn graphql:validate",
-    "ts-node": "ts-node --compiler-options \"{\"\"module\"\":\"\"CommonJS\"\"}\""
+    "validate": "yarn graphql:validate"
   },
   "dependencies": {
     "@apollo/client": "^3.3.17",
