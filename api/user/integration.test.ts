@@ -1,12 +1,16 @@
 import { gql } from 'apollo-server-express'
 import { createAuthenticatedClient } from '../../test/apollo.server'
-import { resetToSeed } from '~/prisma/truncate'
+import * as prisma from '~/prisma/util'
 
 const authenticatedClient = createAuthenticatedClient()
 
 describe('User', () => {
   beforeEach(async () => {
-    await resetToSeed()
+    await prisma.resetToSeed()
+  })
+
+  afterAll(async () => {
+    await prisma.disconnect()
   })
 
   describe('getCurrentUser', () => {
