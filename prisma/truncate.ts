@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { main as seed } from './seed'
+import { seed } from './seed'
 
 /**
  * Drop all data from the (Postgres) database.

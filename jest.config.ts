@@ -17,6 +17,7 @@ const config: Config.InitialOptions = {
     '<rootDir>/pages/**/*.vue',
   ],
   setupFilesAfterEnv: ['<rootDir>/test/jest.setup.ts'],
+  testEnvironment: 'node',
 }
 
 export default config
