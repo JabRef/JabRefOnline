@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { PrismaClient, GroupType, GroupHierarchyType } from '@prisma/client'
-const prisma = new PrismaClient()
-export async function main(): Promise<void> {
+
+async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.user.deleteMany({})
   // Manually delete other fields first (at the moment, its not possible to do this automatically https://github.com/prisma/prisma/issues/2810)
   await prisma.userDocumentOtherField.deleteMany({})
@@ -305,15 +305,21 @@ export async function main(): Promise<void> {
   }
 }
 
+export async function seed(): Promise<void> {
+  const prisma = new PrismaClient()
+
+  try {
+    await seedInternal(prisma)
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
 // The following if check prevents that main is called upon import in test files
 // Taken from https://github.com/prisma/prisma/issues/5161#issuecomment-776897706
 if (require.main === module) {
-  main()
-    .catch((e) => {
-      console.error(e)
-      process.exit(1)
-    })
-    .finally(async () => {
-      await prisma.$disconnect()
-    })
+  seed().catch((e) => {
+    console.error(e)
+    process.exit(1)
+  })
 }
