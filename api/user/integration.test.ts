@@ -33,13 +33,6 @@ describe('User', () => {
               "id": "ckn4oul7100004cv7y3t94n8j",
             },
           },
-          "errors": undefined,
-          "extensions": undefined,
-          "http": Object {
-            "headers": Headers {
-              Symbol(map): Object {},
-            },
-          },
         }
       `)
     })
