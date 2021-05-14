@@ -15,6 +15,7 @@ const config: Config.InitialOptions = {
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
     '<rootDir>/pages/**/*.vue',
+    '<rootDir>/api/**/*.ts',
   ],
   setupFilesAfterEnv: ['<rootDir>/test/jest.setup.ts'],
   testEnvironment: 'node',
