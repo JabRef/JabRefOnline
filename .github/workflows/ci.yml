@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - main
-      - master
+
   pull_request:
     branches:
       - main
-      - master
 
 jobs:
   test:
@@ -38,19 +37,19 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
 
     steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Setup node env 🏗
+      - name: Setup node
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Get yarn cache directory path 🛠
+      - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node_modules 📦
+      - name: Cache node_modules
         uses: actions/cache@v2.1.5
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -59,26 +58,37 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install dependencies 👨🏻‍💻
+      - name: Install dependencies
         run: yarn
 
       - name: Init database
         run: yarn prisma:push
 
-      - name: Run linter 👀
+      - name: Run linter
         run: yarn lint
 
       - name: Validate GraphQL operations
         run: yarn validate
 
-      - name: Run tests 🧪
-        run: yarn test
+      - name: Run tests
+        run: yarn test --ci --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
   deploy:
     runs-on: ubuntu-latest
+
     needs: test
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "jabref-online"
