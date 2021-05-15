@@ -6,12 +6,14 @@ import { GraphQLResponse } from 'apollo-server-types'
 expect.addSnapshotSerializer({
   test: (value) => {
     value = value as GraphQLResponse
-    return value && value.data !== undefined && value.http
+    return value && (value.data || value.errors) && value.http
   },
   print: (value: unknown, serialize) => {
     const { data, errors } = value as GraphQLResponse
     return serialize({
-      data,
+      ...(data !== undefined && {
+        data,
+      }),
       ...(errors !== undefined && {
         errors,
       }),
