@@ -37,7 +37,7 @@ export default class PassportInitializer {
         // Don't force session to be saved back to the session store unless it was modified
         resave: false,
         saveUninitialized: false,
-        name: 'session',
+        name: 'jab-qid',
         cookie: {
           // Serve secure cookies (requires HTTPS, so only in production)
           secure: app.get('env') === 'production',

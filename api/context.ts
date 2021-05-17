@@ -13,7 +13,6 @@ export interface MyContext extends PassportContext<User, ExpressRequest> {
 }
 
 export interface Context {
-  redis: Redis
   isAuthenticated: () => boolean
   isUnauthenticated: () => boolean
   getUser: () => User
@@ -23,14 +22,11 @@ export interface Context {
   ) => Promise<AuthenticateResponse>
   login: (user: User, options?: Record<string, unknown>) => Promise<void>
   logout: () => void
+  redis: Redis
 }
 
-export function buildContext(
-  { req, res }: ContextParams,
-  redis: Redis
-): Context {
+export function buildContext({ req, res, redis }: ContextParams): Context {
   return {
-    ...passportBuildContext<User>({ req, res }),
-    redis,
+    ...passportBuildContext<User>({ req, res, redis }),
   }
 }

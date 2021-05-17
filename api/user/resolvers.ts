@@ -1,7 +1,7 @@
 import { User } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import { v4 } from 'uuid'
-import { Context, MyContext } from '../context'
+import { Context } from '../context'
 import { Resolvers as AllResolvers } from '../graphql'
 import { Resolvers as DocumentResolvers } from '../documents/resolvers'
 import { Resolvers as GroupResolvers } from '../groups/resolvers'
@@ -75,7 +75,7 @@ export class Resolvers {
     return true
   }
 
-  async forgetPassword(email: string, { redis }: MyContext): Promise<boolean> {
+  async forgetPassword(email: string, { redis }: Context): Promise<boolean> {
     const userId = this.authService.getUserId(email)
 
     if (!userId) {
@@ -88,7 +88,7 @@ export class Resolvers {
       redis.set('forget-password' + token, id, 'ex', 1000 * 60 * 60 * 24)
       await sendEmail(
         email,
-        `<a herf = "http://localhost:3000/user/change-password/${token}/"Reset Password</a>`
+        `<a href="http://localhost:3000/user/change-password/${token}">reset password</a>`
       )
     }
     return true
@@ -97,14 +97,14 @@ export class Resolvers {
   async changePassword(
     token: string,
     newPassword: string,
-    { redis }: MyContext
+    { redis, login }: Context
   ): Promise<AuthenticateResponse> {
-    if (newPassword.length <= 2) {
+    if (newPassword.length <= 6) {
       return {
         errors: [
           {
             field: 'password',
-            message: 'length must be greater than 2',
+            message: 'length must be greater than 6',
           },
         ],
       }
@@ -131,7 +131,7 @@ export class Resolvers {
     await redis.del(key)
     if (user) {
       // Make login persistent by putting it in the express session store
-      // context.login(user)
+      login(user)
     }
     return { user }
   }
@@ -159,8 +159,11 @@ export class Resolvers {
         signup: (_root, { email, password }, context) => {
           return this.signup(email, password, context)
         },
-        forgetPassword: (_root, { email }, context) => {
+        forgetPassword: (_root, { email }, context: Context) => {
           return this.forgetPassword(email, context)
+        },
+        changePassword: (_root, { newPassword, token }, context: Context) => {
+          return this.changePassword(token, newPassword, context)
         },
       },
 
