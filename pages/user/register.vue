@@ -21,7 +21,7 @@
     </Portal>
     <form @submit.prevent="signup">
       <div class="space-y-5">
-        <t-input-group label="Email address" variant="important">
+        <t-input-group label="Email address" :props="setErrors">
           <t-input v-model="email" v-focus />
         </t-input-group>
         <t-input-group
@@ -58,7 +58,6 @@ import { currentUserVar } from '~/apollo/cache'
 export default defineComponent({
   name: 'Register',
   layout: 'bare',
-
   setup() {
     const email = ref('')
     const password = ref('')
@@ -66,7 +65,13 @@ export default defineComponent({
     gql`
       mutation signup($email: String!, $password: String!) {
         signup(email: $email, password: $password) {
-          id
+          user {
+            id
+          }
+          errors {
+            field
+            message
+          }
         }
       }
     `
@@ -80,7 +85,7 @@ export default defineComponent({
         password: password.value,
       },
       update(_context, { data }) {
-        currentUserVar(data?.signup ?? null)
+        currentUserVar(data?.signup?.user ?? null)
       },
     }))
     const router = useRouter()
@@ -94,6 +99,14 @@ export default defineComponent({
       password,
       signup,
     }
+  },
+  computed: {
+    setErrors() {
+      console.log(this.error)
+      return {
+        varient: this.error ? 'danger' : 'important',
+      }
+    },
   },
 })
 </script>

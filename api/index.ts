@@ -2,7 +2,7 @@ import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import './tsyringe.config'
 import { container } from 'tsyringe'
-import { buildContext } from './context'
+// import { buildContext } from './context'
 import { loadSchema } from './schema'
 import PassportInitializer from './user/passport-initializer'
 
@@ -10,12 +10,12 @@ import PassportInitializer from './user/passport-initializer'
 const app = express()
 
 const passportInitializer = container.resolve(PassportInitializer)
-passportInitializer.initialize()
+const redis = passportInitializer.initialize()
 passportInitializer.install(app)
 
 export const server = new ApolloServer({
   schema: loadSchema(),
-  context: buildContext,
+  context: ({ req, res }) => ({ req, res, redis }),
   // Enable playground also in production (at least for now)
   introspection: true,
   playground: true,

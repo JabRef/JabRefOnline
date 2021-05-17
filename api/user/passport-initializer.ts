@@ -2,6 +2,8 @@ import { Express } from 'express-serve-static-core'
 import session from 'express-session'
 import passport from 'passport'
 import { injectable } from 'tsyringe'
+import connectRedis from 'connect-redis'
+import Redis from 'ioredis'
 import { AuthService } from './auth.service'
 import LocalStrategy from './local.strategy'
 
@@ -19,11 +21,17 @@ export default class PassportInitializer {
     )
   }
 
-  install(app: Express): void {
+  install(app: Express): Redis.Redis {
+    const RedisStore = connectRedis(session)
+    const redis = new Redis()
     // Add middleware that sends and receives the session ID using cookies
     // See https://github.com/expressjs/session#readme
     app.use(
       session({
+        store: new RedisStore({
+          client: redis,
+          disableTouch: true,
+        }),
         // The secret used to sign the session cookie
         secret: 'TODO: CHANGE THIS TO ENVIRONMENT VARIABLE',
         // Don't force session to be saved back to the session store unless it was modified
@@ -36,7 +44,7 @@ export default class PassportInitializer {
           // Blocks the access cooky from javascript, preventing XSS attacks
           httpOnly: true,
           // Blocks sending a cookie in a cross-origin request, protects somewhat against CORS attacks
-          sameSite: true,
+          sameSite: 'lax',
           // Expires after half a year
           maxAge: 0.5 * 31556952 * 1000,
         },
@@ -46,6 +54,7 @@ export default class PassportInitializer {
     app.use(passport.initialize())
     // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
     app.use(passport.session())
+    return redis
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

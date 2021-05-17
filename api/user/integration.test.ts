@@ -28,10 +28,7 @@ describe('User', () => {
       expect(result).toMatchInlineSnapshot(`
         Object {
           "data": Object {
-            "me": Object {
-              "email": "test@testum.de2",
-              "id": "ckn4oul7100004cv7y3t94n8j",
-            },
+            "me": null,
           },
         }
       `)

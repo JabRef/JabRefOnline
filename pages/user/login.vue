@@ -67,7 +67,7 @@
 <script lang="ts">
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
-import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 import { currentUserVar } from '../../apollo/cache'
 import { useLoginMutation } from '../../apollo/graphql'
 
@@ -85,7 +85,13 @@ export default defineComponent({
     gql`
       mutation Login($email: String!, $password: String!) {
         login(email: $email, password: $password) {
-          id
+          user {
+            id
+          }
+          errors {
+            field
+            message
+          }
         }
       }
     `
@@ -99,7 +105,7 @@ export default defineComponent({
         password: password.value,
       },
       update(_context, { data }) {
-        currentUserVar(data?.login ?? null)
+        currentUserVar(data?.login?.user ?? null)
       },
     }))
     const router = useRouter()

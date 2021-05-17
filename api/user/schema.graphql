@@ -12,8 +12,20 @@ extend type Query {
 
 extend type Mutation {
   logout: Boolean
-  login(email: String!, password: String!): User
-  signup(email: String!, password: String!): User
+  login(email: String!, password: String!): AuthenticateResponse
+  signup(email: String!, password: String!): AuthenticateResponse
+  forgetPassword(email: String!): Boolean
+  changePassword(token: String!, newPassword: String!): AuthenticateResponse
+}
+
+type FieldError {
+  field: String!
+  message: String!
+}
+
+type AuthenticateResponse {
+  user: User
+  errors: [FieldError]
 }
 
 type User {

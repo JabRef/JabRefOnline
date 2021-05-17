@@ -11,27 +11,62 @@ export interface AuthenticateReturn {
   message?: string
 }
 
+export interface FieldError {
+  field: string
+  message: string
+}
+
+export interface AuthenticateResponse {
+  user?: User
+  errors?: [FieldError]
+}
+
 @injectable()
 export class AuthService {
   constructor(private prisma: PrismaClient) {}
-
-  async validateUser(email: string, password: string): Promise<User | null> {
+  async validateUser(
+    email: string,
+    password: string
+  ): Promise<AuthenticateResponse> {
     const user = await this.prisma.user.findUnique({
       where: {
         email,
       },
     })
-
     if (!user) {
-      return null
-    } else {
-      const correctPassword = await bcrypt.compare(password, user.password)
-      if (correctPassword) {
-        return user
-      } else {
-        return null
+      return {
+        errors: [
+          {
+            field: 'email',
+            message: `User with email '${email}' doesn't exists.`,
+          },
+        ],
       }
     }
+    const correctPassword = await bcrypt.compare(password, user.password)
+    if (!correctPassword) {
+      return {
+        errors: [
+          {
+            field: 'password',
+            message: 'Wrong password',
+          },
+        ],
+      }
+    }
+    return { user }
+  }
+
+  async getUserId(email: string): Promise<string | null> {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        email,
+      },
+    })
+    if (user) {
+      return user.id
+    }
+    return null
   }
 
   async getUserById(id: string): Promise<User | null> {
@@ -50,7 +85,10 @@ export class AuthService {
     })
   }
 
-  async createAccount(email: string, password: string): Promise<User> {
+  async createAccount(
+    email: string,
+    password: string
+  ): Promise<AuthenticateResponse> {
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email,
@@ -58,19 +96,56 @@ export class AuthService {
     })
     const userWithEmailAlreadyExists = existingUser !== null
     if (userWithEmailAlreadyExists) {
-      throw new Error(`User with email '${email}' already exists.`)
+      return {
+        errors: [
+          {
+            field: 'email',
+            message: `User with email '${email}' already exists.`,
+          },
+        ],
+      }
     }
-
     // Hash password before saving in database
     // We use salted hashing to prevent rainbow table attacks
     const salt = await bcrypt.genSalt()
     const hashedPassword = await bcrypt.hash(password, salt)
 
-    return await this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: {
         email,
         password: hashedPassword,
       },
     })
+    return { user }
+  }
+
+  async updatePassword(
+    id: string,
+    password: string
+  ): Promise<AuthenticateResponse> {
+    const getUser = await this.getUserById(id)
+    if (!getUser) {
+      return {
+        errors: [
+          {
+            field: 'token',
+            message: 'user no longer exist',
+          },
+        ],
+      }
+    }
+    // Hash password before saving in database
+    // We use salted hashing to prevent rainbow table attacks
+    const salt = await bcrypt.genSalt()
+    const hashedPassword = await bcrypt.hash(password, salt)
+    const user = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    })
+    return { user }
   }
 }

@@ -1,7 +1,7 @@
 import { GraphQLLocalStrategy } from 'graphql-passport'
 import { Request as ExpressRequest } from 'express'
 import { User } from '@prisma/client'
-import { AuthService, AuthenticationMessage } from './auth.service'
+import { AuthService } from './auth.service'
 
 export default class LocalStrategy extends GraphQLLocalStrategy<
   User,
@@ -13,19 +13,18 @@ export default class LocalStrategy extends GraphQLLocalStrategy<
         email: unknown,
         password: unknown,
         done: (
-          error: Error | null,
-          user?: User | null,
-          message?: AuthenticationMessage
+          error?: [{ field: string; message: string }] | null,
+          user?: User | null
         ) => void
       ) => {
         try {
-          const user = await this.authService.validateUser(
+          const { user, errors } = await this.authService.validateUser(
             email as string,
             password as string
           )
           if (!user) {
             // Wrong email-password combination
-            done(null, null, { message: 'Wrong email or password.' })
+            done(errors)
           } else {
             // Authentication succeeded
             done(null, user)
