@@ -1,4 +1,4 @@
-name: ci
+name: Test
 
 on:
   push:
@@ -11,6 +11,8 @@ on:
 
 jobs:
   test:
+    name: Test
+
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -77,25 +79,3 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-  deploy:
-    runs-on: ubuntu-latest
-
-    needs: test
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "jabref-online"
-          heroku_email: "TobiasDiez@gmx.de"
-          procfile: |
-            web: yarn start
-            release: yarn prisma:migrate:deploy
-        env:
-          HD_HOST: "0.0.0.0"
-          HD_NODE_ENV: "production"
