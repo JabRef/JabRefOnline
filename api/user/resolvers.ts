@@ -85,6 +85,7 @@ export class Resolvers {
       },
 
       User: {
+        documentsRaw: (user) => this.documentResolver.getDocumentsOf(user),
         documents: (user) => this.documentResolver.getDocumentsOf(user),
         groups: (user) => this.groupsResolver.getGroupsOf(user),
       },

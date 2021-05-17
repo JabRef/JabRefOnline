@@ -2,10 +2,8 @@ import { Prisma, User } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import {
   FieldValueTuple,
-  DocumentRaw,
   DocumentRawInput,
   DocumentRawUpdateInput,
-  Document,
   DocumentType,
   Resolvers as AllResolvers,
 } from '../graphql'
@@ -56,36 +54,6 @@ function toPair(field: string, value: string | null): FieldValueTuple | null {
     }
   } else {
     return null
-  }
-}
-
-function convertToRaw(document: UserDocument): DocumentRaw {
-  const documentFields = Object.entries(document)
-    .filter(([key, _]) => specialFields.includes(key))
-    .map(([key, value]) => toPair(key, value as string))
-    .filter(notEmpty)
-
-  let otherFields: FieldValueTuple[] = []
-  if (document.other) {
-    // document.other is an array of objects of the form { field: value }
-    otherFields = (document.other as Prisma.JsonArray)
-      .map((item) => {
-        if (item) {
-          const [key, value] = Object.entries(item)[0]
-          return toPair(key as string, value as string)
-        }
-        return null
-      })
-      .filter(notEmpty)
-  }
-
-  return {
-    id: document.id,
-    type: document.type,
-    citationKey: document.citationKey,
-    lastModified: document.lastModified,
-    added: document.added,
-    fields: [...documentFields, ...otherFields],
   }
 }
 
@@ -150,76 +118,93 @@ export function parse(type: string): DocumentType | null {
 export class Resolvers {
   constructor(private userDocumentService: UserDocumentService) {}
 
-  async getDocumentsOf(user: User): Promise<Document[]> {
-    const documents = await this.userDocumentService.getDocumentsOf(user)
-    return documents.map((document) => {
-      let author
-      if (document.author) {
-        author = {
-          name: document.author,
-          __typename: 'Person',
-        }
-      }
-      const journalName = document.journal ?? document.journaltitle
-      let journal
-      if (journalName) {
-        journal = {
-          name: journalName,
-        }
-      }
-
-      return {
-        id: document.id,
-        title: document.title,
-        type: parse(document.type),
-        abstract: document.abstract,
-        author,
-        journal,
-      }
-    })
+  async getDocumentsOf(user: User): Promise<UserDocument[]> {
+    return await this.userDocumentService.getDocumentsOf(user)
   }
 
-  async getUserDocumentRaw(id: string): Promise<DocumentRaw | null> {
-    const document = await this.userDocumentService.getDocumentById(id, true)
-    if (document) {
-      return convertToRaw(document)
-    } else {
-      return null
-    }
+  async getUserDocument(id: string): Promise<UserDocument | null> {
+    return await this.userDocumentService.getDocumentById(id, true)
   }
 
-  async addUserDocumentRaw(
+  async addUserDocument(
     document: DocumentRawInput
-  ): Promise<DocumentRaw | null> {
-    const addedDocument = await this.userDocumentService.addDocument(
-      convertFromRaw(document)
-    )
-    if (addedDocument) {
-      return convertToRaw(addedDocument)
-    } else {
-      return null
+  ): Promise<UserDocument | null> {
+    return await this.userDocumentService.addDocument(convertFromRaw(document))
+  }
+
+  getAllFields(document: UserDocument): FieldValueTuple[] {
+    const documentFields = Object.entries(document)
+      .filter(([key, _]) => specialFields.includes(key))
+      .map(([key, value]) => toPair(key, value as string))
+      .filter(notEmpty)
+
+    let otherFields: FieldValueTuple[] = []
+    if (document.other) {
+      // document.other is an array of objects of the form { field: value }
+      otherFields = (document.other as Prisma.JsonArray)
+        .map((item) => {
+          if (item) {
+            const [key, value] = Object.entries(item)[0]
+            return toPair(key as string, value as string)
+          }
+          return null
+        })
+        .filter(notEmpty)
     }
+    return [...documentFields, ...otherFields]
   }
 
   resolvers(): AllResolvers {
     return {
       Query: {
         getUserDocumentRaw: (_parent, { id }, _context) =>
-          this.getUserDocumentRaw(id),
+          this.getUserDocument(id),
       },
 
       Mutation: {
         addUserDocumentRaw: (_parent, { document }, _context) =>
-          this.addUserDocumentRaw(document),
+          this.addUserDocument(document),
       },
 
       Document: {
         __resolveType(document, _context) {
-          switch (document.type) {
+          switch (parse(document.type)) {
             case DocumentType.Article:
               return 'Article'
             default:
               return 'Unknown'
+          }
+        },
+      },
+
+      DocumentRaw: {
+        fields: (document, _args, _context) => {
+          return this.getAllFields(document)
+        },
+      },
+
+      Article: {
+        author: (document, _args, _context) => {
+          if (document.author) {
+            return {
+              id: 'TODO',
+              name: document.author,
+              __typename: 'Person',
+            }
+          } else {
+            return null
+          }
+        },
+
+        journal: (document, _args, _context) => {
+          const journalName = document.journal ?? document.journaltitle
+          if (journalName) {
+            return {
+              id: 'TODO',
+              name: journalName,
+            }
+          } else {
+            return null
           }
         },
       },

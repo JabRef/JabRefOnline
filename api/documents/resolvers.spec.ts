@@ -13,7 +13,7 @@ beforeEach(() => {
   mockReset(userDocumentService)
 })
 
-describe('getUserDocumentRaw', () => {
+describe('getUserDocument', () => {
   it('gets the correct document', async () => {
     userDocumentService.getDocumentById
       .calledWith('uniqueId')
@@ -21,14 +21,14 @@ describe('getUserDocumentRaw', () => {
         id: 'uniqueId',
         type: 'something',
       } as UserDocument)
-    const document = await resolvers.getUserDocumentRaw('uniqueId')
+    const document = await resolvers.getUserDocument('uniqueId')
     expect(document).toEqual({
       id: 'uniqueId',
       type: 'something',
-      fields: [],
     })
   })
 
+  /* TODO: Test this as integration tests
   it('puts special field in fields', async () => {
     userDocumentService.getDocumentById
       .calledWith('uniqueId')
@@ -37,7 +37,7 @@ describe('getUserDocumentRaw', () => {
         type: 'something',
         author: 'JabRef devs',
       } as UserDocument)
-    const document = await resolvers.getUserDocumentRaw('uniqueId')
+    const document = await resolvers.getUserDocument('uniqueId')
     expect(document).toEqual({
       id: 'uniqueId',
       type: 'something',
@@ -62,7 +62,7 @@ describe('getUserDocumentRaw', () => {
           },
         ],
       } as unknown as UserDocument)
-    const document = await resolvers.getUserDocumentRaw('uniqueId')
+    const document = await resolvers.getUserDocument('uniqueId')
     expect(document).toEqual({
       id: 'uniqueId',
       type: 'something',
@@ -74,11 +74,12 @@ describe('getUserDocumentRaw', () => {
       ],
     })
   })
+  */
 })
 
-describe('addUserDocumentRaw', () => {
+describe('addUserDocument', () => {
   it('converts other fields correctly', async () => {
-    await resolvers.addUserDocumentRaw({
+    await resolvers.addUserDocument({
       type: 'something',
       fields: [
         {
@@ -106,7 +107,7 @@ describe('addUserDocumentRaw', () => {
   })
 
   it('converts special fields correctly', async () => {
-    await resolvers.addUserDocumentRaw({
+    await resolvers.addUserDocument({
       type: 'something',
       fields: [
         {
