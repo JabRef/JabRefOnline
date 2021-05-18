@@ -14,7 +14,7 @@ extend type Mutation {
   logout: Boolean
   login(email: String!, password: String!): AuthenticateResponse
   signup(email: String!, password: String!): AuthenticateResponse
-  forgetPassword(email: String!): Boolean
+  forgotPassword(email: String!): Boolean
   changePassword(token: String!, newPassword: String!): AuthenticateResponse
 }
 

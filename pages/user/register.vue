@@ -21,7 +21,7 @@
     </Portal>
     <form @submit.prevent="signup">
       <div class="space-y-5">
-        <t-input-group label="Email address" :props="setErrors">
+        <t-input-group label="Email address" varient="important">
           <t-input v-model="email" v-focus />
         </t-input-group>
         <t-input-group
@@ -99,14 +99,6 @@ export default defineComponent({
       password,
       signup,
     }
-  },
-  computed: {
-    setErrors() {
-      console.log(this.error)
-      return {
-        varient: this.error ? 'danger' : 'important',
-      }
-    },
   },
 })
 </script>

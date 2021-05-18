@@ -75,7 +75,7 @@ export class Resolvers {
     return true
   }
 
-  async forgetPassword(email: string, { redis }: Context): Promise<boolean> {
+  async forgotPassword(email: string, { redis }: Context): Promise<boolean> {
     const userId = await this.authService.getUserId(email)
     if (!userId) {
       return true
@@ -83,7 +83,8 @@ export class Resolvers {
 
     if (userId) {
       const token = v4()
-      redis.set('forget-password' + token, userId, 'ex', 1000 * 60 * 60 * 24) // valid for one day
+      redis.set('forgot-password' + token, userId, 'ex', 1000 * 60 * 60 * 24) // VALID FOR ONE DAY
+      // TODO: ADD BETTER TEMPLATE FOR THE EMAIL
       await sendEmail(
         email,
         `<a href="http://localhost:3000/change-password/${token}">Reset password</a>`
@@ -107,7 +108,7 @@ export class Resolvers {
         ],
       }
     }
-    const key = 'forget-password' + token
+    const key = 'forgot-password' + token
     const userId = await redis.get(key)
     if (!userId) {
       return {
@@ -157,8 +158,8 @@ export class Resolvers {
         signup: (_root, { email, password }, context) => {
           return this.signup(email, password, context)
         },
-        forgetPassword: (_root, { email }, context: Context) => {
-          return this.forgetPassword(email, context)
+        forgotPassword: (_root, { email }, context: Context) => {
+          return this.forgotPassword(email, context)
         },
         changePassword: (_root, { newPassword, token }, context: Context) => {
           return this.changePassword(token, newPassword, context)
