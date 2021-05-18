@@ -76,19 +76,17 @@ export class Resolvers {
   }
 
   async forgetPassword(email: string, { redis }: Context): Promise<boolean> {
-    const userId = this.authService.getUserId(email)
-
+    const userId = await this.authService.getUserId(email)
     if (!userId) {
       return true
     }
 
     if (userId) {
-      const token = v4
-      const id = userId as unknown as string
-      redis.set('forget-password' + token, id, 'ex', 1000 * 60 * 60 * 24)
+      const token = v4()
+      redis.set('forget-password' + token, userId, 'ex', 1000 * 60 * 60 * 24) // valid for one day
       await sendEmail(
         email,
-        `<a href="http://localhost:3000/user/change-password/${token}">reset password</a>`
+        `<a href="http://localhost:3000/change-password/${token}">Reset password</a>`
       )
     }
     return true
