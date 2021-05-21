@@ -46,7 +46,7 @@ export default class PassportInitializer {
           // Blocks the access cooky from javascript, preventing XSS attacks
           httpOnly: true,
           // Blocks sending a cookie in a cross-origin request, protects somewhat against CORS attacks
-          sameSite: 'lax',
+          sameSite: true,
           // Expires after half a year
           maxAge: 0.5 * 31556952 * 1000,
         },
