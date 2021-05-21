@@ -1,7 +1,7 @@
 import connectRedis from 'connect-redis'
 import { Express } from 'express-serve-static-core'
 import session from 'express-session'
-import { Redis } from 'ioredis'
+import { RedisClient } from 'redis'
 import passport from 'passport'
 import { injectable } from 'tsyringe'
 import { AuthService } from './auth.service'
@@ -9,7 +9,10 @@ import LocalStrategy from './local.strategy'
 
 @injectable()
 export default class PassportInitializer {
-  constructor(private accountService: AuthService, private redis: Redis) {}
+  constructor(
+    private accountService: AuthService,
+    private redisClient: RedisClient
+  ) {}
 
   initialize(): void {
     passport.use(new LocalStrategy(this.accountService))
@@ -28,7 +31,7 @@ export default class PassportInitializer {
     app.use(
       session({
         store: new RedisStore({
-          client: this.redis,
+          client: this.redisClient,
           disableTouch: true,
         }),
         // The secret used to sign the session cookie
