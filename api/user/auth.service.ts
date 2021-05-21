@@ -34,6 +34,18 @@ export class AuthService {
     }
   }
 
+  async getUserId(email: string): Promise<string | null> {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        email,
+      },
+    })
+    if (user) {
+      return user.id
+    }
+    return null
+  }
+
   async getUserById(id: string): Promise<User | null> {
     return await this.prisma.user.findUnique({
       where: {
@@ -72,5 +84,25 @@ export class AuthService {
         password: hashedPassword,
       },
     })
+  }
+
+  async updatePassword(id: string, password: string): Promise<User | null> {
+    const getUser = await this.getUserById(id)
+    if (!getUser) {
+      return null
+    }
+    // Hash password before saving in database
+    // We use salted hashing to prevent rainbow table attacks
+    const salt = await bcrypt.genSalt()
+    const hashedPassword = await bcrypt.hash(password, salt)
+    const user = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    })
+    return user
   }
 }
