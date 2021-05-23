@@ -61,18 +61,6 @@ export class AuthService {
     return await bcrypt.hash(password, salt)
   }
 
-  async getUserId(email: string): Promise<string | null> {
-    const user = await this.prisma.user.findFirst({
-      where: {
-        email,
-      },
-    })
-    if (user) {
-      return user.id
-    }
-    return null
-  }
-
   async getUserById(id: string): Promise<User | null> {
     return await this.prisma.user.findUnique({
       where: {
@@ -119,6 +107,7 @@ export class AuthService {
     const key = 'forgot-password' + token
     const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
     const email = await getAsync(key)
+    this.redisClient.del(key)
     if (!email) {
       return null
     }
