@@ -1,6 +1,10 @@
+import { promisify } from 'util'
 import { PrismaClient, User } from '@prisma/client'
 import * as bcrypt from 'bcryptjs'
 import { injectable } from 'tsyringe'
+import { v4 } from 'uuid'
+import { RedisClient } from 'redis'
+import { sendEmail } from '../utils/sendEmail'
 
 export interface AuthenticationMessage {
   message?: string
@@ -13,7 +17,7 @@ export interface AuthenticateReturn {
 
 @injectable()
 export class AuthService {
-  constructor(private prisma: PrismaClient) {}
+  constructor(private prisma: PrismaClient, private redisClient: RedisClient) {}
 
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
@@ -32,6 +36,29 @@ export class AuthService {
         return null
       }
     }
+  }
+
+  async createAndSendToken(email: string): Promise<boolean> {
+    const token = v4()
+    this.redisClient.set(
+      'forgot-password' + token,
+      email,
+      'ex',
+      1000 * 60 * 60 * 24
+    ) // VALID FOR ONE DAY
+    // TODO: ADD BETTER TEMPLATE FOR THE EMAIL
+    await sendEmail(
+      email,
+      `<a href="http://localhost:3000/change-password/${token}">Reset password</a>`
+    )
+    return true
+  }
+
+  async hashPassword(password: string): Promise<string> {
+    // Hash password before saving in database
+    // We use salted hashing to prevent rainbow table attacks
+    const salt = await bcrypt.genSalt()
+    return await bcrypt.hash(password, salt)
   }
 
   async getUserId(email: string): Promise<string | null> {
@@ -72,11 +99,7 @@ export class AuthService {
     if (userWithEmailAlreadyExists) {
       throw new Error(`User with email '${email}' already exists.`)
     }
-
-    // Hash password before saving in database
-    // We use salted hashing to prevent rainbow table attacks
-    const salt = await bcrypt.genSalt()
-    const hashedPassword = await bcrypt.hash(password, salt)
+    const hashedPassword = await this.hashPassword(password)
 
     return await this.prisma.user.create({
       data: {
@@ -86,23 +109,31 @@ export class AuthService {
     })
   }
 
-  async updatePassword(id: string, password: string): Promise<User | null> {
-    const getUser = await this.getUserById(id)
+  async updatePassword(
+    token: string,
+    newPassword: string
+  ): Promise<User | null> {
+    if (newPassword.length <= 6) {
+      return null
+    }
+    const key = 'forgot-password' + token
+    const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
+    const email = await getAsync(key)
+    if (!email) {
+      return null
+    }
+    const getUser = await this.getUserByEmail(email)
     if (!getUser) {
       return null
     }
-    // Hash password before saving in database
-    // We use salted hashing to prevent rainbow table attacks
-    const salt = await bcrypt.genSalt()
-    const hashedPassword = await bcrypt.hash(password, salt)
-    const user = await this.prisma.user.update({
+    const hashedPassword = await this.hashPassword(newPassword)
+    return await this.prisma.user.update({
       where: {
-        id,
+        email,
       },
       data: {
         password: hashedPassword,
       },
     })
-    return user
   }
 }

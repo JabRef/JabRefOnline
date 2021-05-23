@@ -1,13 +1,9 @@
-import { promisify } from 'util'
 import { User } from '@prisma/client'
 import { injectable } from 'tsyringe'
-import { RedisClient } from 'redis'
-import { v4 } from 'uuid'
 import { Context } from '../context'
 import { Resolvers as AllResolvers } from '../graphql'
 import { Resolvers as DocumentResolvers } from '../documents/resolvers'
 import { Resolvers as GroupResolvers } from '../groups/resolvers'
-import { sendEmail } from '../utils/sendEmail'
 import { AuthService } from './auth.service'
 
 @injectable()
@@ -15,8 +11,7 @@ export class Resolvers {
   constructor(
     private authService: AuthService,
     private documentResolver: DocumentResolvers,
-    private groupsResolver: GroupResolvers,
-    private redisClient: RedisClient
+    private groupsResolver: GroupResolvers
   ) {}
 
   async getUserById(id: string): Promise<User | null> {
@@ -65,26 +60,11 @@ export class Resolvers {
   }
 
   async forgotPassword(email: string): Promise<boolean> {
-    const userId = await this.authService.getUserId(email)
-    if (!userId) {
+    const user = await this.authService.getUserByEmail(email)
+    if (!user) {
       return true
     }
-
-    if (userId) {
-      const token = v4()
-      this.redisClient.set(
-        'forgot-password' + token,
-        userId,
-        'ex',
-        1000 * 60 * 60 * 24
-      ) // VALID FOR ONE DAY
-      // TODO: ADD BETTER TEMPLATE FOR THE EMAIL
-      await sendEmail(
-        email,
-        `<a href="http://localhost:3000/change-password/${token}">Reset password</a>`
-      )
-    }
-    return true
+    return await this.authService.createAndSendToken(email)
   }
 
   async changePassword(
@@ -92,21 +72,12 @@ export class Resolvers {
     newPassword: string,
     context: Context
   ): Promise<User | null> {
-    if (newPassword.length <= 6) {
+    const user = await this.authService.updatePassword(token, newPassword)
+    if (!user) {
       return null
     }
-    const key = 'forgot-password' + token
-    const getAsync = promisify(this.redisClient.GET).bind(this.redisClient)
-    const userId = await getAsync(key)
-    if (!userId) {
-      return null
-    }
-    const user = await this.authService.updatePassword(userId, newPassword)
-    this.redisClient.del(key)
-    if (user) {
-      // Make login persistent by putting it in the express session store
-      context.login(user)
-    }
+    // Make login persistent by putting it in the express session store
+    context.login(user)
     return user
   }
 
