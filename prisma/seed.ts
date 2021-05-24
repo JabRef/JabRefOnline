@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { PrismaClient, GroupType, GroupHierarchyType } from '@prisma/client'
 
 async function seedInternal(prisma: PrismaClient): Promise<void> {
@@ -313,13 +312,4 @@ export async function seed(): Promise<void> {
   } finally {
     await prisma.$disconnect()
   }
-}
-
-// The following if check prevents that main is called upon import in test files
-// Taken from https://github.com/prisma/prisma/issues/5161#issuecomment-776897706
-if (require.main === module) {
-  seed().catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
 }
