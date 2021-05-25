@@ -50,7 +50,6 @@ export default defineComponent({
         email: email.value,
       },
     }))
-    // eslint-disable-next-line no-console
     return { email, error, called, forgotPassword }
   },
 })

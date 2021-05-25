@@ -101,7 +101,7 @@ export default defineComponent({
     }))
     const router = useRouter()
     onDone(() => {
-      router.push('./dashboard')
+      router.push('/dashboard')
     })
 
     return { email, password, error, loginUser }
