@@ -2,7 +2,7 @@
   <div class="space-y-1">
     <div class="flex flex-row justify-between space-x-10">
       <a
-        class="font-semibold text-lg text-blue-800"
+        class="font-semibold text-lg text-primary-800"
         href="paper/3104609148/reference"
       >
         <FontAwesomeIcon
