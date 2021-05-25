@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function sendEmail(to: string, html: string) {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
@@ -21,7 +22,7 @@ export async function sendEmail(to: string, html: string) {
   const info = await transporter.sendMail({
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
     to, // list of receivers
-    subject: 'Change Password', // Subject line
+    subject: 'Reset your password', // Subject line
     html, // plain text body
   })
   // eslint-disable-next-line no-console

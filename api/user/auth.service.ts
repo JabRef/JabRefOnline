@@ -5,6 +5,7 @@ import { injectable } from 'tsyringe'
 import { v4 } from 'uuid'
 import { RedisClient } from 'redis'
 import { sendEmail } from '../utils/sendEmail'
+import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 
 export interface AuthenticationMessage {
   message?: string
@@ -46,11 +47,7 @@ export class AuthService {
       'ex',
       1000 * 60 * 60 * 24
     ) // VALID FOR ONE DAY
-    // TODO: ADD BETTER TEMPLATE FOR THE EMAIL
-    await sendEmail(
-      email,
-      `<a href="http://localhost:3000/change-password/${token}">Reset password</a>`
-    )
+    await sendEmail(email, resetPasswordTemplate(token))
     return true
   }
 
