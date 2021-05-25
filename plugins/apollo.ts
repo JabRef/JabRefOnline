@@ -6,7 +6,7 @@ import fetch from 'cross-fetch'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { onError } from '@apollo/client/link/error'
 import { logErrorMessages } from '@vue/apollo-util'
-import { provide, onGlobalSetup } from '@nuxtjs/composition-api'
+import { provide, onGlobalSetup, globalPlugin } from '@nuxtjs/composition-api'
 import { cache } from '../apollo/cache'
 
 Vue.use(VueApollo)
@@ -37,8 +37,11 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
 })
 
-const apolloPlugin: Plugin = function ({ app }, _inject) {
-  app.apolloProvider = apolloProvider
+const apolloPlugin: Plugin = function (context, inject) {
+  context.app.apolloProvider = apolloProvider
+
+  // Workaround for https://github.com/nuxt-community/composition-api/issues/488
+  globalPlugin(context, inject)
 
   onGlobalSetup(() => {
     provide(DefaultApolloClient, apolloProvider.defaultClient)
