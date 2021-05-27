@@ -5,6 +5,8 @@ on:
     workflows: ["Test"]
     branches: [main]
     types: [completed]
+  
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -12,7 +14,7 @@ jobs:
     
     runs-on: ubuntu-latest
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
 
     steps:
       - name: Checkout

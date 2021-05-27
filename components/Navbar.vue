@@ -45,14 +45,14 @@
 
       <!-- Main menu -->
       <div class="space-x-14">
-        <span class="text-blue-600 text-lg font-semibold">Library</span>
+        <span class="text-primary-600 text-lg font-semibold">Library</span>
         <span class="text-gray-400 text-lg font-semibold">Browse</span>
         <div class="inline">
           <span class="text-gray-400 text-lg font-semibold">
             Subscriptions
           </span>
           <div class="inline-block align-top pl-0.5 -mt-1">
-            <FontAwesomeIcon icon="circle" class="text-blue-600" size="xs" />
+            <FontAwesomeIcon icon="circle" class="text-primary-600" size="xs" />
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
       <div class="flex items-center pr-10 space-x-7">
         <FontAwesomeIcon
           icon="bell"
-          class="text-gray-400 hover:text-blue-500"
+          class="text-gray-400 hover:text-highlight-500"
           size="lg"
         />
         <div>
@@ -145,7 +145,7 @@
                   py-2
                   text-sm
                   leading-5
-                  text-red-500
+                  text-gray-700
                   transition
                   duration-150
                   ease-in-out
