@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function resetPasswordTemplate(token: string) {
+export function resetPasswordTemplate(token: string): string {
   return `
   <!doctype html>
   <html lang="en-US">

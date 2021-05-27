@@ -60,19 +60,20 @@ export class Resolvers {
   }
 
   async forgotPassword(email: string): Promise<boolean> {
-    const user = await this.authService.getUserByEmail(email)
-    if (!user) {
-      return true
-    }
-    return await this.authService.createAndSendToken(email)
+    return await this.authService.resetPassword(email)
   }
 
   async changePassword(
     token: string,
+    email: string,
     newPassword: string,
     context: Context
   ): Promise<User | null> {
-    const user = await this.authService.updatePassword(token, newPassword)
+    const user = await this.authService.updatePassword(
+      token,
+      email,
+      newPassword
+    )
     if (!user) {
       return null
     }
@@ -107,8 +108,8 @@ export class Resolvers {
         forgotPassword: (_root, { email }, _context) => {
           return this.forgotPassword(email)
         },
-        changePassword: (_root, { token, newPassword }, context) => {
-          return this.changePassword(token, newPassword, context)
+        changePassword: (_root, { token, email, newPassword }, context) => {
+          return this.changePassword(token, email, newPassword, context)
         },
       },
 
