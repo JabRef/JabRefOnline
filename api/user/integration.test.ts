@@ -24,7 +24,7 @@ describe('User', () => {
     `
 
     it('retrieves the currently authenticated user', async () => {
-      const result = await authenticatedClient.query({ query })
+      const result = await authenticatedClient.executeOperation({ query })
       expect(result).toMatchInlineSnapshot(`
         Object {
           "data": Object {
@@ -58,7 +58,7 @@ describe('User', () => {
     `
 
     it('resolves all fields of user', async () => {
-      const result = await authenticatedClient.query({
+      const result = await authenticatedClient.executeOperation({
         query,
         variables: { id: 'ckn4oul7100004cv7y3t94n8j' },
       })
