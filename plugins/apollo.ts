@@ -37,11 +37,8 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
 })
 
-const apolloPlugin: Plugin = function (context, inject) {
-  context.app.apolloProvider = apolloProvider
-
-  // Workaround for https://github.com/nuxt-community/composition-api/issues/488
-  globalPlugin(context, inject)
+const apolloPlugin: Plugin = function ({ app }, _inject) {
+  app.apolloProvider = apolloProvider
 
   onGlobalSetup(() => {
     provide(DefaultApolloClient, apolloProvider.defaultClient)
