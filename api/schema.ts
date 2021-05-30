@@ -13,5 +13,12 @@ export function loadSchema(): GraphQLSchema {
     loaders: [new GraphQLFileLoader()],
   })
 
-  return addResolversToSchema(typeDefs, resolvers)
+  return addResolversToSchema({
+    schema: typeDefs,
+    resolvers,
+    resolverValidationOptions: {
+      // Ignore additional methods in our resolver classes (e.g. private fields)
+      requireResolversToMatchSchema: 'ignore',
+    },
+  })
 }
