@@ -6,7 +6,7 @@ import fetch from 'cross-fetch'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { onError } from '@apollo/client/link/error'
 import { logErrorMessages } from '@vue/apollo-util'
-import { provide, onGlobalSetup, globalPlugin } from '@nuxtjs/composition-api'
+import { provide, onGlobalSetup } from '@nuxtjs/composition-api'
 import { cache } from '../apollo/cache'
 
 Vue.use(VueApollo)
