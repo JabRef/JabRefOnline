@@ -43,6 +43,9 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          # Maps port 6379 on service container to the host
+          - 6379:6379
 
 
 
@@ -78,6 +81,12 @@ jobs:
 
       - name: Init database
         run: yarn prisma:push
+
+      - name: Connect to Redis
+        run: node client.js
+        env:
+          REDIS_HOST: redis
+          REDIS_PORT: 6379
 
       - name: Run linter
         run: yarn lint
