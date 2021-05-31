@@ -8,10 +8,7 @@
     </Portal>
     <form @submit.prevent="changePassword">
       <div class="space-y-5">
-        <t-input-group label="Email address" variant="important">
-          <t-input v-model="email" v-focus />
-        </t-input-group>
-        <t-input-group label="New Password" varient="important">
+        <t-input-group label="New Password" variant="important">
           <PasswordInput v-model="password" />
         </t-input-group>
         <t-input-group label="Confirm Password" variant="important">
@@ -39,7 +36,6 @@ export default defineComponent({
   name: 'ChangePassword',
   layout: 'bare',
   setup() {
-    const email = ref('')
     const password = ref('')
     const repeatPassword = ref('')
     gql`
@@ -58,7 +54,8 @@ export default defineComponent({
       }
     `
     const route = useRoute()
-    const token = computed(() => route.value.params.token)
+    const token = computed(() => route.value.query.token)
+    const email = computed(() => route.value.query.email)
     const {
       mutate: changePassword,
       onDone,
@@ -74,7 +71,7 @@ export default defineComponent({
     onDone(() => {
       router.push('/dashboard')
     })
-    return { email, password, error, changePassword, repeatPassword }
+    return { password, error, changePassword, repeatPassword }
   },
 })
 </script>

@@ -66,19 +66,13 @@ export class Resolvers {
   async changePassword(
     token: string,
     email: string,
-    newPassword: string,
-    context: Context
+    newPassword: string
   ): Promise<User | null> {
     const user = await this.authService.updatePassword(
       token,
       email,
       newPassword
     )
-    if (!user) {
-      return null
-    }
-    // Make login persistent by putting it in the express session store
-    context.login(user)
     return user
   }
 
@@ -108,8 +102,8 @@ export class Resolvers {
         forgotPassword: (_root, { email }, _context) => {
           return this.forgotPassword(email)
         },
-        changePassword: (_root, { token, email, newPassword }, context) => {
-          return this.changePassword(token, email, newPassword, context)
+        changePassword: (_root, { token, email, newPassword }, _context) => {
+          return this.changePassword(token, email, newPassword)
         },
       },
 

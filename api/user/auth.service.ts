@@ -52,7 +52,7 @@ export class AuthService {
       'ex',
       1000 * 60 * 60 * 24
     ) // VALID FOR ONE DAY
-    await sendEmail(email, resetPasswordTemplate(token))
+    await sendEmail(email, resetPasswordTemplate(email, token))
     return true
   }
 
