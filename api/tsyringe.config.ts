@@ -12,7 +12,7 @@ container.register<RedisClient>(RedisClient, {
   useFactory: instanceCachingFactory<RedisClient>(() =>
     createClient({
       host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
+      port: parseInt(process.env.REDIS_PORT as string),
     })
   ),
 })
