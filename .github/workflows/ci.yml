@@ -51,7 +51,7 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
-      REDIS_HOST: redis
+      REDIS_HOST: localhost
       REDIS_PORT: 6379
 
     steps:
