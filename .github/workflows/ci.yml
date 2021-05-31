@@ -35,8 +35,21 @@ jobs:
         ports:
           - 5432:5432
 
+      redis:
+        image: redis
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+
+
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
 
     steps:
       - name: Checkout
@@ -66,6 +79,12 @@ jobs:
       - name: Init database
         run: yarn prisma:push
 
+      - name: Connect to Redis
+        run: node client.js
+        env:
+          REDIS_HOST: redis
+          REDIS_PORT: 6379
+
       - name: Run linter
         run: yarn lint
 
@@ -79,3 +98,4 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
