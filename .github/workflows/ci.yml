@@ -82,12 +82,6 @@ jobs:
       - name: Init database
         run: yarn prisma:push
 
-      - name: Connect to Redis
-        run: node client.js
-        env:
-          REDIS_HOST: redis
-          REDIS_PORT: 6379
-
       - name: Run linter
         run: yarn lint
 
