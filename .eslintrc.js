@@ -41,4 +41,18 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      plugins: ['@graphql-eslint'],
+      rules: {
+        '@graphql-eslint/known-directives': 'error',
+      },
+    },
+    {
+      files: ['*.tsx', '*.ts', '*.jsx', '*.js'],
+      processor: '@graphql-eslint/graphql',
+    },
+  ],
 }

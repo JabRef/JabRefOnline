@@ -31,7 +31,7 @@ const codegen: Types.Config = {
 }
 
 const config: IGraphQLConfig = {
-  schema: ['api/**/*.graphql'],
+  schema: 'api/**/*.graphql',
   extensions: {
     codegen,
   },
