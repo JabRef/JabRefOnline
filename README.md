@@ -52,6 +52,7 @@ See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecyc
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): Override user/workspace VS Code settings with the provided settings in `.editorconfig`.
 - [Tailwind CSS](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): IntelliSense enhancement to support Tailwind.
 - [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): Add integration of Jest, e.g. easy debugging of tests.
+- [GraphQL](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql): Add syntax highlighting and IntelliSense for GraphQL.
 - Debugger for [Firefox](https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug) or [Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome): Allow debugging web applications from within VS Code. 
 - Vue.js devtools: Browser integration for debugging and investigation for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 - Apollo Client Devtools: Debug and analyze GraphQL on the client side for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/apollo-developer-tools/) 
