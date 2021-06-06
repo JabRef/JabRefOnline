@@ -3,7 +3,6 @@ import '~/api/tsyringe.config'
 import { GraphQLResponse } from 'apollo-server-types'
 import { container } from 'tsyringe'
 import { AuthService } from '../api/user/auth.service'
-import { after } from 'lodash'
 
 // Minimize snapshot of GraphQL responses (no extensions and http field)
 expect.addSnapshotSerializer({
