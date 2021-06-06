@@ -20,6 +20,10 @@ export interface AuthenticateReturn {
 export class AuthService {
   constructor(private prisma: PrismaClient, private redisClient: RedisClient) {}
 
+  closeRedisInstance(): void {
+    this.redisClient.quit()
+  }
+
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
       where: {
