@@ -108,8 +108,7 @@
                   duration-150
                   ease-in-out
                   hover:bg-gray-100
-                  focus:outline-none
-                  focus:bg-gray-100
+                  focus:outline-none focus:bg-gray-100
                 "
                 role="menuitem"
                 @blur="blurHandler"
@@ -129,8 +128,7 @@
                   duration-150
                   ease-in-out
                   hover:bg-gray-100
-                  focus:outline-none
-                  focus:bg-gray-100
+                  focus:outline-none focus:bg-gray-100
                 "
                 role="menuitem"
                 @blur="blurHandler"
@@ -151,8 +149,7 @@
                   ease-in-out
                   border-t
                   hover:bg-gray-100
-                  focus:outline-none
-                  focus:bg-gray-100
+                  focus:outline-none focus:bg-gray-100
                 "
               >
                 Logout
