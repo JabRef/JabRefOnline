@@ -77,6 +77,8 @@ const config: NuxtConfig = {
     // Enables Vue 3 composition API
     // https://composition-api.nuxtjs.org/
     '@nuxtjs/composition-api/module',
+    // Use postcss v8
+    '@nuxt/postcss8',
   ],
 
   /*
