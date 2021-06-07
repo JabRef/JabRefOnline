@@ -6,7 +6,7 @@ import { AuthenticateReturn } from './user/auth.service'
 export interface Context {
   isAuthenticated: () => boolean
   isUnauthenticated: () => boolean
-  getUser: () => User
+  getUser: () => User | null
   authenticate: (
     strategyName: string,
     options?: Record<string, unknown>

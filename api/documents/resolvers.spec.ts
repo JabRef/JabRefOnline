@@ -3,125 +3,150 @@ import { mock, mockReset } from 'jest-mock-extended'
 import { UserDocument } from '@prisma/client'
 import { DocumentType } from '../graphql'
 import { UserDocumentService } from './user.document.service'
-import { parse, Resolvers } from './resolvers'
+import {
+  parse,
+  Query,
+  Mutation,
+  DocumentResolver,
+  DocumentRawResolver,
+} from './resolvers'
+import { createUnauthenticatedContext } from '~/test/context.helper'
 
 const userDocumentService = mock<UserDocumentService>()
 container.registerInstance(UserDocumentService, userDocumentService)
-const resolvers = container.resolve(Resolvers)
+const query = container.resolve(Query)
+const mutation = container.resolve(Mutation)
+
+const context = createUnauthenticatedContext()
 
 beforeEach(() => {
   mockReset(userDocumentService)
 })
 
-describe('getUserDocument', () => {
-  it('gets the correct document', async () => {
-    userDocumentService.getDocumentById
-      .calledWith('uniqueId')
-      .mockResolvedValueOnce({
+describe('Query', () => {
+  describe('userDocument', () => {
+    it('gets the correct document', async () => {
+      userDocumentService.getDocumentById
+        .calledWith('uniqueId')
+        .mockResolvedValueOnce({
+          id: 'uniqueId',
+          type: 'something',
+        } as UserDocument)
+      const document = await query.userDocument({}, { id: 'uniqueId' }, context)
+      expect(document).toEqual({
         id: 'uniqueId',
         type: 'something',
-      } as UserDocument)
-    const document = await resolvers.getUserDocument('uniqueId')
-    expect(document).toEqual({
-      id: 'uniqueId',
-      type: 'something',
+      })
     })
   })
+})
 
-  /* TODO: Test this as integration tests
-  it('puts special field in fields', async () => {
-    userDocumentService.getDocumentById
-      .calledWith('uniqueId')
-      .mockResolvedValueOnce({
-        id: 'uniqueId',
+describe('Mutation', () => {
+  describe('addUserDocument', () => {
+    it('converts other fields correctly', async () => {
+      await mutation.addUserDocumentRaw(
+        {},
+        {
+          document: {
+            type: 'something',
+            fields: [
+              {
+                field: 'some',
+                value: 'random field',
+              },
+            ],
+          },
+        },
+        context
+      )
+      expect(userDocumentService.addDocument).toHaveBeenCalledWith({
+        added: null,
+        citationKey: null,
+        lastModified: null,
+        type: 'something',
+        other: {
+          createMany: {
+            data: [
+              {
+                field: 'some',
+                value: 'random field',
+              },
+            ],
+          },
+        },
+      })
+    })
+
+    it('converts special fields correctly', async () => {
+      await mutation.addUserDocumentRaw(
+        {},
+        {
+          document: {
+            type: 'something',
+            fields: [
+              {
+                field: 'author',
+                value: 'JabRef devs',
+              },
+            ],
+          },
+        },
+        context
+      )
+      expect(userDocumentService.addDocument).toHaveBeenCalledWith({
+        added: null,
+        citationKey: null,
+        lastModified: null,
         type: 'something',
         author: 'JabRef devs',
-      } as UserDocument)
-    const document = await resolvers.getUserDocument('uniqueId')
-    expect(document).toEqual({
-      id: 'uniqueId',
-      type: 'something',
-      fields: [
+      })
+    })
+  })
+})
+
+describe('DocumentResolver', () => {
+  const documentResolver = new DocumentResolver()
+  describe('resolveType', () => {
+    it('returns Article for articles', () => {
+      const article = {
+        type: DocumentType.Article,
+      } as UserDocument
+      expect(documentResolver.__resolveType(article)).toEqual('Article')
+    })
+  })
+})
+
+describe('DocumentRawResolver', () => {
+  const documentResolver = new DocumentRawResolver()
+  describe('fields', () => {
+    it('contains special field', () => {
+      const document = {
+        id: 'uniqueId',
+        author: 'JabRef devs',
+      } as UserDocument
+      expect(documentResolver.fields(document)).toStrictEqual([
         {
           field: 'author',
           value: 'JabRef devs',
         },
-      ],
+      ])
     })
-  })
 
-  it('puts other field in fields', async () => {
-    userDocumentService.getDocumentById
-      .calledWith('uniqueId')
-      .mockResolvedValueOnce({
+    it('contains other field', () => {
+      const document = {
         id: 'uniqueId',
-        type: 'something',
         other: [
           {
             some: 'random field',
           },
         ],
-      } as unknown as UserDocument)
-    const document = await resolvers.getUserDocument('uniqueId')
-    expect(document).toEqual({
-      id: 'uniqueId',
-      type: 'something',
-      fields: [
+      } as unknown as UserDocument
+      expect(documentResolver.fields(document)).toStrictEqual([
         {
           field: 'some',
           value: 'random field',
         },
-      ],
-    })
-  })
-  */
-})
-
-describe('addUserDocument', () => {
-  it('converts other fields correctly', async () => {
-    await resolvers.addUserDocument({
-      type: 'something',
-      fields: [
-        {
-          field: 'some',
-          value: 'random field',
-        },
-      ],
-    })
-    expect(userDocumentService.addDocument).toHaveBeenCalledWith({
-      added: null,
-      citationKey: null,
-      lastModified: null,
-      type: 'something',
-      other: {
-        createMany: {
-          data: [
-            {
-              field: 'some',
-              value: 'random field',
-            },
-          ],
-        },
-      },
-    })
-  })
-
-  it('converts special fields correctly', async () => {
-    await resolvers.addUserDocument({
-      type: 'something',
-      fields: [
-        {
-          field: 'author',
-          value: 'JabRef devs',
-        },
-      ],
-    })
-    expect(userDocumentService.addDocument).toHaveBeenCalledWith({
-      added: null,
-      citationKey: null,
-      lastModified: null,
-      type: 'something',
-      author: 'JabRef devs',
+      ])
     })
   })
 })
