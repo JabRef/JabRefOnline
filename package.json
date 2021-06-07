@@ -120,6 +120,9 @@
   "resolutions": {
     "ts-invariant": "0.6.0"
   },
+  "resolutionsComment": {
+    "ts-invariant": "ts-invariant 0.4.0 is required by apollo-link, which is required by graphql-tools v4, which is required by apollo-server. In v3 of apollo-server, the dependency of graphql-tools is finally updated, and this workaround can be removed."
+  },
   "workspaces": {
     "nohoist": [
       "**/tailwindcss",
