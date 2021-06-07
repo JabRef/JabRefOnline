@@ -8,8 +8,7 @@
       border-r border-gray-300
       w-64
       fixed
-      md:top-0
-      md:left-0
+      md:top-0 md:left-0
       z-40
       h-screen
     "
