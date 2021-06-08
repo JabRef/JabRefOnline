@@ -1,7 +1,13 @@
-import { User, Group, GroupType, GroupHierarchyType } from '@prisma/client'
+import { Context } from '@apollo/client'
+import { Group, GroupType, GroupHierarchyType } from '@prisma/client'
 import { UserInputError } from 'apollo-server-errors'
-import { injectable } from 'tsyringe'
-import { Resolvers as AllResolvers, GroupInput, GroupUpdate } from '../graphql'
+import { container, injectable } from 'tsyringe'
+import {
+  Resolvers,
+  QueryGroupArgs,
+  MutationUpdateGroupArgs,
+  MutationCreateGroupArgs,
+} from '../graphql'
 import { GroupService } from './service'
 
 export type GroupResolved = Group & {
@@ -12,42 +18,27 @@ export type GroupResolved = Group & {
 export type GroupMaybeResolved = Group | GroupResolved
 
 @injectable()
-export class Resolvers {
+export class Query {
   constructor(private groupService: GroupService) {}
 
-  async getGroupById(id: string): Promise<Group | null> {
+  async group(
+    _root: Record<string, never>,
+    { id }: QueryGroupArgs,
+    _context: Context
+  ): Promise<Group | null> {
     return await this.groupService.getGroupById(id)
   }
+}
 
-  async getGroupsOf(user: User): Promise<GroupResolved[]> {
-    const groups = await this.groupService.getGroupsOf(user)
-    const groupsById = new Map<string, GroupResolved>()
-    groups.forEach((group) =>
-      groupsById.set(group.id, { ...group, parent: null, children: [] })
-    )
-    const roots: GroupResolved[] = []
+@injectable()
+export class Mutation {
+  constructor(private groupService: GroupService) {}
 
-    groupsById.forEach((group) => {
-      if (group.parentId === null) {
-        roots.push(group)
-      } else {
-        const parent = groupsById.get(group.parentId)
-        parent?.children.push(group)
-        group.parent = parent ?? null
-      }
-    })
-    return roots
-  }
-
-  async getSubgroupsOf(group: Group | string): Promise<Group[]> {
-    return await this.getSubgroupsOf(group)
-  }
-
-  async getParentOf(group: Group | string): Promise<Group | null> {
-    return await this.getParentOf(group)
-  }
-
-  async addGroup(user: User, group: GroupInput): Promise<Group | null> {
+  async createGroup(
+    _root: Record<string, never>,
+    { group }: MutationCreateGroupArgs,
+    context: Context
+  ): Promise<Group | null> {
     let type = null
     let field = null
     let keywordDelimiter = null
@@ -109,7 +100,7 @@ export class Resolvers {
     return await this.groupService.addGroup({
       users: {
         connect: {
-          id: user.id,
+          id: context.getUser().id,
         },
       },
       name: group.name,
@@ -145,42 +136,48 @@ export class Resolvers {
     })
   }
 
-  async updateGroup(group: GroupUpdate): Promise<Group | null> {
+  async updateGroup(
+    _root: Record<never, string>,
+    { group }: MutationUpdateGroupArgs,
+    _context: Context
+  ): Promise<Group | null> {
     return await this.groupService.updateGroup({
       id: group.id,
       name: group.name || undefined,
       // TODO: Remaining properties
     })
   }
+}
 
-  resolvers(): AllResolvers {
-    return {
-      Query: {
-        group: (_parent, { id }, _context) => this.getGroupById(id),
-      },
+@injectable()
+export class GroupResolver {
+  constructor(private groupService: GroupService) {}
 
-      Mutation: {
-        createGroup: (_parent, { group }, context) =>
-          this.addGroup(context.getUser(), group),
-        updateGroup: (_parent, { group }, _context) => this.updateGroup(group),
-      },
-      Group: {
-        __resolveType: (group) => group.type,
-        children: async (group) => {
-          if ('children' in group) {
-            return group.children
-          } else {
-            return await this.getSubgroupsOf(group)
-          }
-        },
-        parent: async (group) => {
-          if ('parent' in group) {
-            return group.parent
-          } else {
-            return await this.getParentOf(group)
-          }
-        },
-      },
+  __resolveType(group: GroupMaybeResolved): GroupType {
+    return group.type
+  }
+
+  async children(group: GroupMaybeResolved): Promise<GroupMaybeResolved[]> {
+    if ('children' in group) {
+      return group.children
+    } else {
+      return await this.groupService.getSubgroupsOf(group)
     }
+  }
+
+  async parent(group: GroupMaybeResolved): Promise<GroupMaybeResolved | null> {
+    if ('parent' in group) {
+      return group.parent
+    } else {
+      return await this.groupService.getParentOf(group)
+    }
+  }
+}
+
+export function resolvers(): Resolvers {
+  return {
+    Query: container.resolve(Query),
+    Mutation: container.resolve(Mutation),
+    Group: container.resolve(GroupResolver),
   }
 }

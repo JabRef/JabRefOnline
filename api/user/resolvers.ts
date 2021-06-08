@@ -7,11 +7,12 @@ import {
   QueryUserArgs,
   Resolvers,
 } from '../graphql'
-import { GroupResolved, Resolvers as GroupResolvers } from '../groups/resolvers'
+import { GroupResolved } from '../groups/resolvers'
 import {
   UserDocument,
   UserDocumentService,
 } from '../documents/user.document.service'
+import { GroupService } from '../groups/service'
 import { AuthService } from './auth.service'
 
 @injectable()
@@ -85,7 +86,7 @@ export class Mutation {
 export class UserResolver {
   constructor(
     private userDocumentService: UserDocumentService,
-    private groupsResolver: GroupResolvers
+    private groupService: GroupService
   ) {}
 
   async documentsRaw(user: User): Promise<UserDocument[]> {
@@ -96,8 +97,24 @@ export class UserResolver {
     return await this.userDocumentService.getDocumentsOf(user)
   }
 
-  groups(user: User): Promise<GroupResolved[]> {
-    return this.groupsResolver.getGroupsOf(user)
+  async groups(user: User): Promise<GroupResolved[]> {
+    const groups = await this.groupService.getGroupsOf(user)
+    const groupsById = new Map<string, GroupResolved>()
+    groups.forEach((group) =>
+      groupsById.set(group.id, { ...group, parent: null, children: [] })
+    )
+    const roots: GroupResolved[] = []
+
+    groupsById.forEach((group) => {
+      if (group.parentId === null) {
+        roots.push(group)
+      } else {
+        const parent = groupsById.get(group.parentId)
+        parent?.children.push(group)
+        group.parent = parent ?? null
+      }
+    })
+    return roots
   }
 }
 
