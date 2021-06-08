@@ -3,14 +3,14 @@ import session from 'express-session'
 import passport from 'passport'
 import { injectable } from 'tsyringe'
 import { AuthService } from './auth.service'
-import LocalStrategy from './local.strategy'
+import EmailStrategy from './auth.email.strategy'
 
 @injectable()
 export default class PassportInitializer {
   constructor(private accountService: AuthService) {}
 
   initialize(): void {
-    passport.use(new LocalStrategy(this.accountService))
+    passport.use(new EmailStrategy(this.accountService))
     passport.serializeUser<string>((user, done) =>
       this.serializeUser(user, done)
     )

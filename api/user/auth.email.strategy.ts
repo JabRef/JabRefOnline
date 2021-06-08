@@ -3,7 +3,7 @@ import { Request as ExpressRequest } from 'express'
 import { User } from '@prisma/client'
 import { AuthService, AuthenticationMessage } from './auth.service'
 
-export default class LocalStrategy extends GraphQLLocalStrategy<
+export default class EmailStrategy extends GraphQLLocalStrategy<
   User,
   ExpressRequest
 > {
