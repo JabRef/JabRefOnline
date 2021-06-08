@@ -12,7 +12,7 @@ const authenticated: Middleware = async function (context) {
     const response = await apolloClient.query({
       query: gql`
         query currentUser {
-          currentUser {
+          me {
             id
           }
         }
