@@ -79,6 +79,8 @@ const config: NuxtConfig = {
     '@nuxtjs/composition-api/module',
     // Use postcss v8
     '@nuxt/postcss8',
+    // Use Pinia for state management
+    'pinia/nuxt',
   ],
 
   /*
