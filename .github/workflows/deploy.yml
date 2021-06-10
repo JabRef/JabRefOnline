@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir artifact
           npx tsc nuxt.config.ts || true
-          cp -r .nuxt nuxt.config.js package.json artifact
+          cp -r .nuxt nuxt.config.js package.json /api /artifact/
 
       - name: 'Deploy to Azure WebApp'
         uses: azure/webapps-deploy@v2
