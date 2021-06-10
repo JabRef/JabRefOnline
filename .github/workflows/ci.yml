@@ -42,7 +42,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup node
+      - name: Setup Node.js
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node }}
@@ -61,7 +61,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Init database
         run: yarn prisma:push

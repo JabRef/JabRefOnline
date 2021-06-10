@@ -5,13 +5,13 @@ on:
     workflows: ["Test"]
     branches: [main]
     types: [completed]
-  
+
   workflow_dispatch:
 
 jobs:
   deploy:
     name: Deploy
-    
+
     runs-on: ubuntu-latest
 
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
@@ -20,15 +20,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "jabref-online"
-          heroku_email: "TobiasDiez@gmx.de"
-          procfile: |
-            web: yarn start
-            release: yarn prisma:migrate:deploy
-        env:
-          HD_HOST: "0.0.0.0"
-          HD_NODE_ENV: "production"
+          node-version: 14.x
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: 'Deploy to Azure WebApp'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: JabRef
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: ./dist
+
