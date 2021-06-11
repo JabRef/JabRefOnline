@@ -27,7 +27,7 @@ jobs:
           --health-retries 5
         ports:
           # Maps port 6379 on service container to port 6380 on host
-          - 6379:6380
+          - 6380:6379
 
     steps:
       - name: Checkout
