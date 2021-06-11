@@ -9,5 +9,12 @@ container.register<PrismaClient>(PrismaClient, {
 })
 
 container.register<RedisClient>(RedisClient, {
-  useFactory: instanceCachingFactory<RedisClient>(() => createClient()),
+  useFactory: instanceCachingFactory<RedisClient>(() =>
+    createClient({
+      port: 6380,
+      host: process.env.REDISCACHEHOSTNAME,
+      password: process.env.REDISCACHEKEY,
+      tls: { servername: process.env.REDISCACHEHOSTNAME },
+    })
+  ),
 })
