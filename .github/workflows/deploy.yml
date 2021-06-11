@@ -47,7 +47,7 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir artifact
-          cp -r .nuxt nuxt.config.ts package.json ./api ./static ./node_modules artifact
+          cp -r .nuxt nuxt.config.ts package.json config.ts ./api ./static ./node_modules artifact
 
       - name: Login to Azure
         uses: Azure/login@v1
