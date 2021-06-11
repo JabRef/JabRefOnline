@@ -2,13 +2,40 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "name": "vscode-jest-tests",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": [
+        "--runInBand",
+        "--watchAll=false"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+      },
+      "skipFiles": [
+        "${workspaceFolder}/node_modules/jest-runner/**/*.js",
+        "${workspaceFolder}/node_modules/jest-runtime/**/*.js",
+        "${workspaceFolder}/node_modules/tsyringe/**/*.js"
+      ]
+    },
+    {
       "type": "firefox",
       "request": "launch",
       "reAttach": true,
       "name": "Client: Firefox",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}",
-      "pathMappings": [{ "url": "webpack:///", "path": "${webRoot}/" }]
+      "pathMappings": [
+        {
+          "url": "webpack:///",
+          "path": "${webRoot}/"
+        }
+      ]
     },
     {
       "type": "chrome",
@@ -28,7 +55,9 @@
         "${workspaceFolder}/**",
         "!**/node_modules/**"
       ],
-      "args": ["dev"],
+      "args": [
+        "dev"
+      ],
       "osx": {
         "program": "${workspaceFolder}/node_modules/.bin/nuxt"
       },
@@ -43,7 +72,10 @@
   "compounds": [
     {
       "name": "Fullstack: nuxt",
-      "configurations": ["Server: nuxt", "Client: Firefox"]
+      "configurations": [
+        "Server: nuxt",
+        "Client: Firefox"
+      ]
     }
   ]
 }
