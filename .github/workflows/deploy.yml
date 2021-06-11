@@ -36,17 +36,17 @@ jobs:
           mkdir artifact
           cp -r .nuxt nuxt.config.ts package.json ./api ./static ./node_modules artifact
 
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
           app-name: JabRef
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: ./artifact
-
-      - name: Login to Azure
-        uses: Azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
 
       - name: Update database on Azure
         run: yarn prisma:migrate:deploy
