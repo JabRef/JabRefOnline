@@ -47,12 +47,8 @@ jobs:
           # Maps port 6379 on service container to port 6380 on host
           - 6380:6379
 
-
-
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
-      REDIS_HOST: localhost
-      REDIS_PORT: 6379
 
     steps:
       - name: Checkout
