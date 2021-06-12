@@ -39,23 +39,14 @@ export default defineComponent({
     const password = ref('')
     const repeatPassword = ref('')
     gql`
-      mutation ChangePassword(
-        $token: String!
-        $email: String!
-        $newPassword: String!
-      ) {
-        changePassword(
-          token: $token
-          email: $email
-          newPassword: $newPassword
-        ) {
+      mutation ChangePassword($token: String!, $newPassword: String!) {
+        changePassword(token: $token, newPassword: $newPassword) {
           id
         }
       }
     `
     const route = useRoute()
     const token = computed(() => route.value.query.token)
-    const email = computed(() => route.value.query.email)
     const {
       mutate: changePassword,
       onDone,
@@ -63,13 +54,12 @@ export default defineComponent({
     } = useChangePasswordMutation(() => ({
       variables: {
         token: token.value,
-        email: email.value,
         newPassword: password.value,
       },
     }))
     const router = useRouter()
     onDone(() => {
-      router.push('/dashboard')
+      router.push('../user/login')
     })
     return { password, error, changePassword, repeatPassword }
   },

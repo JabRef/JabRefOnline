@@ -45,14 +45,13 @@ export class AuthService {
       return true
     }
     const token = generateToken()
-    const hashedToken = await this.hashString(token)
     this.redisClient.set(
-      `forgot-password-${email}`,
-      hashedToken,
-      'ex',
+      `forgot-password-${token}`,
+      email,
+      'EX',
       1000 * 60 * 60 * 24
     ) // VALID FOR ONE DAY
-    await sendEmail(email, resetPasswordTemplate(email, token))
+    await sendEmail(email, resetPasswordTemplate(token))
     return true
   }
 
@@ -101,35 +100,26 @@ export class AuthService {
 
   async updatePassword(
     token: string,
-    email: string,
     newPassword: string
   ): Promise<User | null> {
     if (newPassword.length <= 6) {
       return null
     }
-    const getUser = await this.getUserByEmail(email)
-    if (!getUser) {
-      return null
-    }
-    const key = `forgot-password-${email}`
+    const key = `forgot-password-${token}`
     const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
-    const hashedToken = await getAsync(key)
-    if (!hashedToken) {
+    const email = await getAsync(key)
+    if (!email) {
       return null
     }
-    const tokenCheck = await bcrypt.compare(token, hashedToken)
-    if (tokenCheck) {
-      this.redisClient.del(key)
-      const hashedPassword = await this.hashString(newPassword)
-      return await this.prisma.user.update({
-        where: {
-          email,
-        },
-        data: {
-          password: hashedPassword,
-        },
-      })
-    }
-    return null
+    this.redisClient.del(key)
+    const hashedPassword = await this.hashString(newPassword)
+    return await this.prisma.user.update({
+      where: {
+        email,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    })
   }
 }
