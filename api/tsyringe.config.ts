@@ -13,7 +13,6 @@ container.register<RedisClient>(RedisClient, {
   useFactory: instanceCachingFactory<RedisClient>(() =>
     createClient({
       ...config.redis,
-      tls: { servername: config.redis.host },
     })
   ),
 })
