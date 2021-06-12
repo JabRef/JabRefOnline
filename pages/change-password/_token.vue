@@ -39,14 +39,19 @@ export default defineComponent({
     const password = ref('')
     const repeatPassword = ref('')
     gql`
-      mutation ChangePassword($token: String!, $newPassword: String!) {
-        changePassword(token: $token, newPassword: $newPassword) {
+      mutation ChangePassword(
+        $token: String!
+        $id: String!
+        $newPassword: String!
+      ) {
+        changePassword(token: $token, id: $id, newPassword: $newPassword) {
           id
         }
       }
     `
     const route = useRoute()
     const token = computed(() => route.value.query.token)
+    const id = computed(() => route.value.query.id)
     const {
       mutate: changePassword,
       onDone,
@@ -54,6 +59,7 @@ export default defineComponent({
     } = useChangePasswordMutation(() => ({
       variables: {
         token: token.value,
+        id: id.value,
         newPassword: password.value,
       },
     }))

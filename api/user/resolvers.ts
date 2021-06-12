@@ -65,9 +65,10 @@ export class Resolvers {
 
   async changePassword(
     token: string,
+    id: string,
     newPassword: string
   ): Promise<User | null> {
-    const user = await this.authService.updatePassword(token, newPassword)
+    const user = await this.authService.updatePassword(token, id, newPassword)
     return user
   }
 
@@ -97,8 +98,8 @@ export class Resolvers {
         forgotPassword: (_root, { email }, _context) => {
           return this.forgotPassword(email)
         },
-        changePassword: (_root, { token, newPassword }, _context) => {
-          return this.changePassword(token, newPassword)
+        changePassword: (_root, { token, id, newPassword }, _context) => {
+          return this.changePassword(token, id, newPassword)
         },
       },
 

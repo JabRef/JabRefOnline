@@ -1,4 +1,4 @@
-export function resetPasswordTemplate(token: string): string {
+export function resetPasswordTemplate(id: string, token: string): string {
   return `
   <!doctype html>
   <html lang="en-US">
@@ -41,7 +41,7 @@ export function resetPasswordTemplate(token: string): string {
                                               password has been generated for you. To reset your password, click the
                                               following link and follow the instructions.
                                           </p>
-                                          <a href="http://localhost:3000/change-password?token=${token}"
+                                          <a href="http://localhost:3000/change-password?id=${id}&token=${token}"
                                               style="background:black;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;">Reset
                                               Password</a>
                                       </td>

@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer'
 
 export async function sendEmail(to: string, html: string): Promise<void> {
   const testAccount = await nodemailer.createTestAccount()
+  console.log(testAccount)
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -11,10 +12,15 @@ export async function sendEmail(to: string, html: string): Promise<void> {
       pass: testAccount.pass, // generated ethereal password
     },
   })
-  await transporter.sendMail({
-    from: '"JabRef" <jabref@example.com>', // sender address
+  const info = await transporter.sendMail({
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
     to, // list of receivers
     subject: 'Reset your password', // Subject line
     html, // plain text body
   })
+  // eslint-disable-next-line no-console
+  console.log('Message sent: %s', info.messageId)
+  // Preview only available when sending through an Ethereal account
+  // eslint-disable-next-line no-console
+  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
 }

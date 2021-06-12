@@ -43,14 +43,12 @@ export class AuthService {
     if (!user) {
       return true
     }
+    const PREFIX = process.env.PREFIX || 'forgot-password'
+    const key = PREFIX + user.id
     const token = generateToken()
-    this.redisClient.set(
-      `forgot-password-${token}`,
-      email,
-      'EX',
-      1000 * 60 * 60 * 24
-    ) // VALID FOR ONE DAY
-    await sendEmail(email, resetPasswordTemplate(token))
+    const hashedToken = await this.hashString(token)
+    this.redisClient.set(key, hashedToken, 'ex', 1000 * 60 * 60 * 24) // VALID FOR ONE DAY
+    await sendEmail(email, resetPasswordTemplate(email, token))
     return true
   }
 
@@ -99,26 +97,32 @@ export class AuthService {
 
   async updatePassword(
     token: string,
+    id: string,
     newPassword: string
   ): Promise<User | null> {
     if (newPassword.length <= 6) {
       return null
     }
-    const key = `forgot-password-${token}`
+    const PREFIX = process.env.PREFIX || 'forgot-password'
+    const key = PREFIX + id
     const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
-    const email = await getAsync(key)
-    if (!email) {
+    const hashedToken = await getAsync(key)
+    if (!hashedToken) {
       return null
     }
-    this.redisClient.del(key)
-    const hashedPassword = await this.hashString(newPassword)
-    return await this.prisma.user.update({
-      where: {
-        email,
-      },
-      data: {
-        password: hashedPassword,
-      },
-    })
+    const checkToken = await bcrypt.compare(token, hashedToken)
+    if (checkToken) {
+      this.redisClient.del(key)
+      const hashedPassword = await this.hashString(newPassword)
+      return await this.prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          password: hashedPassword,
+        },
+      })
+    }
+    return null
   }
 }
