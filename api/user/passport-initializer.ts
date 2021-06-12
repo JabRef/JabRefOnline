@@ -1,6 +1,11 @@
+import connectRedis from 'connect-redis'
 import { Express } from 'express-serve-static-core'
 import session from 'express-session'
+<<<<<<< HEAD
 import connectRedis from 'connect-redis'
+=======
+import { RedisClient } from 'redis'
+>>>>>>> 61ca56cf9ce30c859db60171bea48ea706934832
 import passport from 'passport'
 import { RedisClient } from 'redis'
 import { injectable } from 'tsyringe'

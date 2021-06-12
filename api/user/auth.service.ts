@@ -26,7 +26,6 @@ export class AuthService {
         email,
       },
     })
-
     if (!user) {
       return null
     } else {
