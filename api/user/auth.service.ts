@@ -48,7 +48,7 @@ export class AuthService {
     const token = generateToken()
     const hashedToken = await this.hashString(token)
     this.redisClient.set(key, hashedToken, 'ex', 1000 * 60 * 60 * 24) // VALID FOR ONE DAY
-    await sendEmail(email, resetPasswordTemplate(email, token))
+    await sendEmail(email, resetPasswordTemplate(user.id, token))
     return true
   }
 
