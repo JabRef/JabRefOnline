@@ -59,6 +59,19 @@ export class Resolvers {
     return true
   }
 
+  async forgotPassword(email: string): Promise<boolean> {
+    return await this.authService.resetPassword(email)
+  }
+
+  async changePassword(
+    token: string,
+    id: string,
+    newPassword: string
+  ): Promise<User | null> {
+    const user = await this.authService.updatePassword(token, id, newPassword)
+    return user
+  }
+
   resolvers(): AllResolvers {
     return {
       Query: {
@@ -81,6 +94,12 @@ export class Resolvers {
 
         signup: (_root, { email, password }, context) => {
           return this.signup(email, password, context)
+        },
+        forgotPassword: (_root, { email }, _context) => {
+          return this.forgotPassword(email)
+        },
+        changePassword: (_root, { token, id, newPassword }, _context) => {
+          return this.changePassword(token, id, newPassword)
         },
       },
 

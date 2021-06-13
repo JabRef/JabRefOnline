@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { PrismaClient } from '@prisma/client'
-import { RedisClient, createClient } from 'redis'
+import { RedisClient, createClient, ClientOpts } from 'redis'
 
 import { container, instanceCachingFactory } from 'tsyringe'
 import { config } from '../config'
@@ -10,10 +10,14 @@ container.register<PrismaClient>(PrismaClient, {
 })
 
 container.register<RedisClient>(RedisClient, {
-  useFactory: instanceCachingFactory<RedisClient>(() =>
-    createClient({
+  useFactory: instanceCachingFactory<RedisClient>(() => {
+    const redisConfig: ClientOpts = {
       ...config.redis,
-      tls: { servername: config.redis.host },
-    })
-  ),
+    }
+    // Azure needs a TLS connection to Redis
+    if (process.env.NODE_ENV === 'production') {
+      redisConfig.tls = { servername: config.redis.host }
+    }
+    return createClient(redisConfig)
+  }),
 })

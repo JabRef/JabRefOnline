@@ -1,6 +1,8 @@
 import 'reflect-metadata'
 import '~/api/tsyringe.config'
 import { GraphQLResponse } from 'apollo-server-types'
+import { container } from 'tsyringe'
+import { RedisClient } from 'redis'
 
 // Minimize snapshot of GraphQL responses (no extensions and http field)
 expect.addSnapshotSerializer({
@@ -20,3 +22,5 @@ expect.addSnapshotSerializer({
     })
   },
 })
+
+afterAll(() => container.resolve(RedisClient).quit())

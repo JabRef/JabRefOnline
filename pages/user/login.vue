@@ -36,12 +36,9 @@
           </div>
 
           <div class="text-sm">
-            <a
-              href="#"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+            <t-nuxtlink to="./forgot-password"
+              >Forgot your password?</t-nuxtlink
             >
-              Forgot your password?
-            </a>
           </div>
         </div>
 
