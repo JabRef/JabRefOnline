@@ -21,13 +21,34 @@
           border-l border-gray-300
           z-40
           w-1/3
-          md:shadow-lg
+          md:shadow-sm
           p-4
         "
       >
-        <button @click="closePane">
+        <t-button
+          variant="plain"
+          class="
+            absolute
+            top-10
+            -left-3.5
+            w-7
+            h-7
+            rounded-full
+            bg-white
+            border border-gray-300
+            md:shadow-sm
+            flex
+            items-center
+            justify-center
+            active:border-gray-300
+            transform
+            text-gray-400
+            hover:scale-110 hover:border-gray-400 hover:text-gray-500
+          "
+          @click="closePane"
+        >
           <FontAwesomeIcon icon="times" />
-        </button>
+        </t-button>
         <slot>Test</slot>
       </div>
     </transition>
