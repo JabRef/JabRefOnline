@@ -1,9 +1,9 @@
 <template>
   <div class="space-y-1">
     <div class="flex flex-row justify-between space-x-10">
-      <a
+      <button
         class="font-semibold text-lg text-primary-800"
-        href="paper/3104609148/reference"
+        @click="displayDocumentDetails"
       >
         <FontAwesomeIcon
           v-if="typeIcon"
@@ -12,7 +12,7 @@
           :title="typeDescription"
         ></FontAwesomeIcon>
         <span>{{ document.title }}</span>
-      </a>
+      </button>
 
       <a
         class="text-sm whitespace-nowrap mt-1"
@@ -83,6 +83,7 @@ import {
   toRefs,
 } from '@nuxtjs/composition-api'
 import { Article, Document, DocumentType } from '../apollo/graphql'
+import { useUiStore } from '~/store'
 export default defineComponent({
   props: {
     document: {
@@ -108,10 +109,16 @@ export default defineComponent({
       }
     })
 
+    const ui = useUiStore()
+    function displayDocumentDetails() {
+      ui.displayDocumentDetails()
+    }
+
     return {
       typeIcon,
       typeDescription,
       viewFullAbstract,
+      displayDocumentDetails,
     }
   },
 })

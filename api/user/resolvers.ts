@@ -4,6 +4,8 @@ import { Context } from '../context'
 import {
   MutationLoginArgs,
   MutationSignupArgs,
+  MutationChangePasswordArgs,
+  MutationForgotPasswordArgs,
   QueryUserArgs,
   Resolvers,
 } from '../graphql'
@@ -79,6 +81,22 @@ export class Mutation {
   ): boolean {
     context.logout()
     return true
+  }
+
+  async forgotPassword(
+    _root: Record<string, never>,
+    { email }: MutationForgotPasswordArgs,
+    _context: Context
+  ): Promise<boolean> {
+    return await this.authService.resetPassword(email)
+  }
+
+  async changePassword(
+    _root: Record<string, never>,
+    { token, id, newPassword }: MutationChangePasswordArgs,
+    _context: Context
+  ): Promise<User | null> {
+    return await this.authService.updatePassword(token, id, newPassword)
   }
 }
 

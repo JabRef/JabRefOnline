@@ -11,7 +11,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
   ],
-  plugins: [],
+  plugins: ['unused-imports'],
   rules: {
     // Workaround for bug https://github.com/nuxt/eslint-config/issues/147
     'no-useless-constructor': 'off',
@@ -20,6 +20,18 @@ module.exports = {
       'error',
       {
         'ts-ignore': 'allow-with-description',
+      },
+    ],
+    // Report unused imports
+    'unused-imports/no-unused-imports': 'error',
+    // Report unused variables (except the ones prefixed with an underscore)
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
       },
     ],
     'prettier/prettier': [
