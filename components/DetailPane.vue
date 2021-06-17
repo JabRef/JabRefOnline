@@ -49,21 +49,92 @@
         >
           <FontAwesomeIcon icon="times" />
         </t-button>
-        <slot>Test</slot>
+        <slot>
+          <div class="flex flex-col">
+            <div>
+              <t-select
+                :options="{
+                  Article: 'Journal Article',
+                  PhDThesis: 'PhD Thesis',
+                }"
+                class="text-gray-500 focus-within:text-black"
+                variant="plain"
+              >
+                <template slot="arrow" slot-scope="{ className }">
+                  <FontAwesomeIcon
+                    icon="chevron-down"
+                    size="xs"
+                    :class="className"
+                  />
+                </template>
+              </t-select>
+            </div>
+            <div class="z-10 grid">
+              <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
+              <!-- prettier-ignore -->
+              <div
+                class="
+                  whitespace-pre-wrap
+                  text-xl
+                  row-span-1
+                  col-span-1 col-start-1
+                  row-start-1
+                  py-2
+                  px-3
+                  invisible
+                "
+              >{{ title + ' ' }}</div>
+              <t-textarea
+                v-model="title"
+                variant="plain"
+                class="
+                  text-xl
+                  resize-none
+                  overflow-hidden
+                  row-span-1
+                  col-span-1 col-start-1
+                  row-start-1
+                "
+              ></t-textarea>
+            </div>
+            <div>
+              <Tags
+                ref="myRef"
+                v-model="authors"
+                placeholder="Add author"
+                :delimiters="null"
+                :whitelist="authorSuggestions"
+              />
+            </div>
+          </div>
+        </slot>
       </div>
     </transition>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, computed } from '@nuxtjs/composition-api'
+import Tags from './tagify.vue'
 import { useUiStore } from './../store'
 
 export default defineComponent({
+  components: {
+    Tags,
+  },
   setup() {
     const ui = useUiStore()
+
+    const authors = [{ value: 'Tobias Diez' }, { value: 'Gerd Rudolph' }]
+
+    const authorSuggestions = [{ value: 'Linus' }]
+
     return {
       isDetailsOpen: computed(() => ui.isDetailsOpen),
       closePane: () => (ui.isDetailsOpen = false),
+      title:
+        'Clebsch-Lagrange variational principle and geometric constraint analysis of relativistic field theories',
+      authors,
+      authorSuggestions,
     }
   },
 })
