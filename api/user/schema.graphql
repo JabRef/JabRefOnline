@@ -16,7 +16,6 @@ extend type Mutation {
   signup(email: String!, password: String!): User
   forgotPassword(email: String!): Boolean
   changePassword(token: String!, id:String!, newPassword: String!): User
-
 }
 
 type User {
