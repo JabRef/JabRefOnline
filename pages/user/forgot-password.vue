@@ -37,7 +37,7 @@ export default defineComponent({
   setup() {
     const email = ref('')
     gql`
-      mutation ForgotPassword($email: String!) {
+      mutation ForgotPassword($email: EmailAddress!) {
         forgotPassword(email: $email)
       }
     `

@@ -22,6 +22,7 @@ const codegen = {
         },
         scalars: {
           DateTime: 'Date',
+          EmailAddress: 'string',
         },
       },
       plugins: ['typescript', 'typescript-resolvers'],
@@ -29,6 +30,12 @@ const codegen = {
     'apollo/graphql.ts': {
       documents: ['./pages/**/*.vue', './components/**/*.vue'],
       plugins: ['typescript', 'typescript-operations', 'typescript-vue-apollo'],
+      config: {
+        scalars: {
+          DateTime: 'Date',
+          EmailAddress: 'string',
+        },
+      },
     },
   },
 }

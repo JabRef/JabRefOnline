@@ -41,7 +41,7 @@ export default defineComponent({
     gql`
       mutation ChangePassword(
         $token: String!
-        $id: String!
+        $id: ID!
         $newPassword: String!
       ) {
         changePassword(token: $token, id: $id, newPassword: $newPassword) {

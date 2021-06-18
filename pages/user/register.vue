@@ -64,7 +64,7 @@ export default defineComponent({
     const password = ref('')
 
     gql`
-      mutation signup($email: String!, $password: String!) {
+      mutation signup($email: EmailAddress!, $password: String!) {
         signup(email: $email, password: $password) {
           id
         }

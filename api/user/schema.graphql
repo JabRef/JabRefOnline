@@ -1,3 +1,5 @@
+scalar EmailAddress
+
 extend type Query {
   """
   Get user by id.
@@ -12,16 +14,16 @@ extend type Query {
 
 extend type Mutation {
   logout: Boolean
-  login(email: String!, password: String!): User
-  signup(email: String!, password: String!): User
-  forgotPassword(email: String!): Boolean
-  changePassword(token: String!, id:String!, newPassword: String!): User
+  login(email: EmailAddress!, password: String!): User
+  signup(email: EmailAddress!, password: String!): User
+  forgotPassword(email: EmailAddress!): Boolean
+  changePassword(token: String!, id:ID!, newPassword: String!): User
 
 }
 
 type User {
     id: ID!
-    email: String!
+    email: EmailAddress!
 
     documentsRaw: [DocumentRaw!]!
     documents: [Document!]!
