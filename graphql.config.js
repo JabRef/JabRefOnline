@@ -28,7 +28,11 @@ const codegen = {
       plugins: ['typescript', 'typescript-resolvers'],
     },
     'apollo/graphql.ts': {
-      documents: ['./pages/**/*.vue', './components/**/*.vue'],
+      documents: [
+        './pages/**/*.vue',
+        './components/**/*.vue',
+        './middleware/**/*.*',
+      ],
       plugins: ['typescript', 'typescript-operations', 'typescript-vue-apollo'],
       config: {
         scalars: {
