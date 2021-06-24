@@ -4,7 +4,7 @@ import { Context } from '../context'
 import { Resolvers as AllResolvers } from '../graphql'
 import { Resolvers as DocumentResolvers } from '../documents/resolvers'
 import { Resolvers as GroupResolvers } from '../groups/resolvers'
-import { AuthService } from './auth.service'
+import { AuthService, UserResponse } from './auth.service'
 
 @injectable()
 export class Resolvers {
@@ -30,9 +30,9 @@ export class Resolvers {
     email: string,
     password: string,
     context: Context
-  ): Promise<User> {
+  ): Promise<UserResponse> {
     const newUser = await this.authService.createAccount(email, password)
-    context.login(newUser)
+    if ('user' in newUser) context.login(newUser.user)
     return newUser
   }
 
@@ -67,7 +67,7 @@ export class Resolvers {
     token: string,
     id: string,
     newPassword: string
-  ): Promise<User | null> {
+  ): Promise<UserResponse> {
     const user = await this.authService.updatePassword(token, id, newPassword)
     return user
   }

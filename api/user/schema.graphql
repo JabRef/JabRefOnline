@@ -15,11 +15,26 @@ extend type Query {
 extend type Mutation {
   logout: Boolean
   login(email: EmailAddress!, password: String!): User
-  signup(email: EmailAddress!, password: String!): User
+  signup(email: EmailAddress!, password: String!): UserResponse
   forgotPassword(email: EmailAddress!): Boolean
   changePassword(token: String!, id:ID!, newPassword: String!): User
 
 }
+union UserResponse = Success | Problem
+
+type Success {
+  user: User!
+}
+
+type Problem {
+  inputError: [InputError!]!
+}
+
+type InputError {
+  field: String!
+  message: String!
+}
+
 
 type User {
     id: ID!

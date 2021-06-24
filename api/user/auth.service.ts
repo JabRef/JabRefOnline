@@ -16,6 +16,20 @@ export interface AuthenticateReturn {
   message?: string
 }
 
+export type Success = {
+  user: User
+}
+
+export type InputError = {
+  field: string
+  message: string
+}
+export type Problem = {
+  inputError: InputError
+}
+
+export type UserResponse = Success | Problem
+
 @injectable()
 export class AuthService {
   constructor(private prisma: PrismaClient, private redisClient: RedisClient) {}
@@ -27,13 +41,13 @@ export class AuthService {
       },
     })
     if (!user) {
-      return null
+      throw new Error('Wrong email or password')
     } else {
       const correctPassword = await bcrypt.compare(password, user.password)
       if (correctPassword) {
         return user
       } else {
-        return null
+        throw new Error('Wrong email or password')
       }
     }
   }
@@ -75,7 +89,10 @@ export class AuthService {
     })
   }
 
-  async createAccount(email: string, password: string): Promise<User> {
+  async createAccount(
+    email: string,
+    password: string
+  ): Promise<Success | Problem> {
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email,
@@ -83,46 +100,77 @@ export class AuthService {
     })
     const userWithEmailAlreadyExists = existingUser !== null
     if (userWithEmailAlreadyExists) {
-      throw new Error(`User with email '${email}' already exists.`)
+      return {
+        inputError: {
+          field: 'Email',
+          message: `User with email '${email}' already exists.`,
+        },
+      }
+    }
+    if (password.length < 6) {
+      return {
+        inputError: {
+          field: 'Password',
+          message: 'Password too short',
+        },
+      }
     }
     const hashedPassword = await this.hashString(password)
 
-    return await this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: {
         email,
         password: hashedPassword,
       },
     })
+    return { user }
   }
 
   async updatePassword(
     token: string,
     id: string,
     newPassword: string
-  ): Promise<User | null> {
-    if (newPassword.length <= 6) {
-      return null
+  ): Promise<Success | Problem> {
+    if (newPassword.length < 6) {
+      return {
+        inputError: {
+          field: 'Password',
+          message: 'Password too short',
+        },
+      }
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + id
     const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
     const hashedToken = await getAsync(key)
     if (!hashedToken) {
-      return null
+      return {
+        inputError: {
+          field: 'Token',
+          message: 'Token Expired',
+        },
+      }
     }
     const checkToken = await bcrypt.compare(token, hashedToken)
-    if (checkToken) {
-      this.redisClient.del(key)
-      const hashedPassword = await this.hashString(newPassword)
-      return await this.prisma.user.update({
-        where: {
-          id,
+    if (!checkToken) {
+      return {
+        inputError: {
+          field: 'Token',
+          message: 'Token Expired',
         },
-        data: {
-          password: hashedPassword,
-        },
-      })
+      }
     }
-    return null
+
+    this.redisClient.del(key)
+    const hashedPassword = await this.hashString(newPassword)
+    const user = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    })
+    return { user }
   }
 }
