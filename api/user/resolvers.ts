@@ -1,5 +1,6 @@
 import { User } from '@prisma/client'
 import { injectable } from 'tsyringe'
+import { UserInputError } from 'apollo-server-express'
 import { Context } from '../context'
 import { Resolvers as AllResolvers } from '../graphql'
 import { Resolvers as DocumentResolvers } from '../documents/resolvers'
@@ -41,7 +42,7 @@ export class Resolvers {
     email: string,
     password: string
   ): Promise<User | null> {
-    const { user } = await context.authenticate('graphql-local', {
+    const { user, info } = await context.authenticate('graphql-local', {
       email,
       password,
     })
@@ -50,7 +51,9 @@ export class Resolvers {
       await context.login(user)
       return user
     } else {
-      return null
+      throw new UserInputError(
+        info?.message || 'Unknown error while logging in.'
+      )
     }
   }
 

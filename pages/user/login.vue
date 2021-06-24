@@ -100,8 +100,12 @@ export default defineComponent({
       },
     }))
     const router = useRouter()
-    onDone(() => {
-      router.push('/dashboard')
+    onDone((result) => {
+      if (result.data?.login) {
+        router.push('/dashboard')
+      } else {
+        error.value = new Error('Unknown error')
+      }
     })
 
     return { email, password, error, loginUser }
