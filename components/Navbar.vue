@@ -1,5 +1,5 @@
 <template>
-  <nav class="sticky top-0 z-30 flex-none md:shadow-md">
+  <nav class="sticky top-0 z-50 flex-none">
     <div
       class="
         w-full
