@@ -17,14 +17,14 @@ const settings = {
     component: TInput,
     props: {
       fixedClasses:
-        'block w-full transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+        'transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
       classes:
-        'text-black sm:text-sm placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500',
+        'block w-full text-black sm:text-sm placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500',
       variants: {
         error:
-          'sm:text-sm border-error-300 bg-error-50 placeholder-error-200 text-error-900',
+          'block w-full sm:text-sm border-error-300 bg-error-50 placeholder-error-200 text-error-900',
         success:
-          'sm:text-sm border-success-300 bg-success-50 placeholder-gray-400 text-success-900',
+          'block w-full sm:text-sm border-success-300 bg-success-50 placeholder-gray-400 text-success-900',
         plain:
           'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
       },

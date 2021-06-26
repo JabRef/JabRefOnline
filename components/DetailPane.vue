@@ -106,6 +106,27 @@
                 :whitelist="authorSuggestions"
               />
             </div>
+            <div>
+              <editor-input v-model="date"></editor-input>
+              <span class="text-gray-400">|</span>
+              <editor-input v-model="journal"></editor-input>
+            </div>
+            <div>
+              <span class="pl-3">
+                Volume:
+                <editor-input v-model="volume"></editor-input>
+              </span>
+              <span class="text-gray-400 pr-3">|</span>
+              <span>
+                Issue:
+                <editor-input v-model="issue"></editor-input>
+              </span>
+              <span class="text-gray-400 pr-3">|</span>
+              <span>
+                pp.
+                <editor-input v-model="pages"></editor-input>
+              </span>
+            </div>
           </div>
         </slot>
       </div>
@@ -116,10 +137,12 @@
 import { defineComponent, computed } from '@nuxtjs/composition-api'
 import Tags from './tagify.vue'
 import { useUiStore } from './../store'
+import EditorInput from './EditorInput.vue'
 
 export default defineComponent({
   components: {
     Tags,
+    EditorInput,
   },
   setup() {
     const ui = useUiStore()
@@ -135,6 +158,11 @@ export default defineComponent({
         'Clebsch-Lagrange variational principle and geometric constraint analysis of relativistic field theories',
       authors,
       authorSuggestions,
+      date: '2019 / 12',
+      journal: 'Journal of Mathematical Physics',
+      volume: '300',
+      issue: '3',
+      pages: '567-589',
     }
   },
 })
