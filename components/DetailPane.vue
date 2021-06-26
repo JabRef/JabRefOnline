@@ -98,7 +98,6 @@
             </div>
             <div class="-mt-3">
               <Tags
-                ref="myRef"
                 v-model="authors"
                 placeholder="Add author"
                 :delimiters="null"
@@ -127,23 +126,25 @@
               </span>
             </div>
             <div>
-              <p
-                class="
-                  pl-3
-                  uppercase
-                  text-xs text-gray-600
-                  mt-4
-                  -mb-1
-                  tracking-wider
-                "
-              >
-                Abstract
-              </p>
+              <editor-header
+                heading="Abstract"
+                class="mt-4 -mb-1"
+              ></editor-header>
               <t-textarea
                 v-model="abstract"
                 variant="plain"
                 rows="5"
               ></t-textarea>
+            </div>
+            <div>
+              <editor-header heading="Keywords" class="mt-4"></editor-header>
+              <Tags
+                v-model="keywords"
+                placeholder="Add keyword"
+                :delimiters="null"
+                :whitelist="keywordSuggestions"
+                tag-class="bg-highlight-50 rounded-md"
+              />
             </div>
           </div>
         </slot>
@@ -156,18 +157,25 @@ import { defineComponent, computed } from '@nuxtjs/composition-api'
 import Tags from './tagify.vue'
 import { useUiStore } from './../store'
 import EditorInput from './EditorInput.vue'
+import EditorHeader from './EditorHeader.vue'
 
 export default defineComponent({
   components: {
     Tags,
     EditorInput,
+    EditorHeader,
   },
   setup() {
     const ui = useUiStore()
 
     const authors = [{ value: 'Tobias Diez' }, { value: 'Gerd Rudolph' }]
-
     const authorSuggestions = [{ value: 'Linus' }]
+
+    const keywords = [
+      { value: 'Symplectic Geometry' },
+      { value: 'Yang-Mills Theory' },
+    ]
+    const keywordSuggestions = [{ value: 'Differential Geometry' }]
 
     return {
       isDetailsOpen: computed(() => ui.isDetailsOpen),
@@ -183,6 +191,8 @@ export default defineComponent({
       pages: '567-589',
       abstract:
         'Inspired by the Clebsch optimal control problem, we introduce a new variational principle that is suitable for capturing the geometry of relativistic field theories with constraints related to a gauge symmetry. Its special feature is that the Lagrange multipliers couple to the configuration variables via the symmetry group action. The resulting constraints are formulated as a condition on the momentum map of the gauge group action on the phase space of the system. We discuss the Hamiltonian picture and the reduction of the gauge symmetry by stages in this geometric setting. We show that the Yang-Mills-Higgs action and the Einstein--Hilbert action fit into this new framework after a (1+3)-splitting. Moreover, we recover the Gauß constraint of Yang-Mills-Higgs theory and the diffeomorphism constraint of general relativity as momentum map constraints.',
+      keywords,
+      keywordSuggestions,
     }
   },
 })
