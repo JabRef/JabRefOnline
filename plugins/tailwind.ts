@@ -10,6 +10,7 @@ import {
   TTag,
   TSelect,
   TTextarea,
+  TTable,
 } from 'vue-tailwind/dist/components'
 
 const settings = {
@@ -208,6 +209,31 @@ const settings = {
           input:
             'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
           arrowWrapper: 'text-current',
+        },
+      },
+    },
+  },
+  't-table': {
+    component: TTable,
+    props: {
+      classes: {
+        table:
+          'min-w-full divide-y divide-gray-100 shadow-sm border-gray-200 border',
+        thead: '',
+        theadTr: '',
+        theadTh: 'px-3 py-2 font-semibold text-left bg-gray-100 border-b',
+        tbody: 'bg-white divide-y divide-gray-100',
+        tr: '',
+        td: 'px-3 py-2 whitespace-no-wrap',
+        tfoot: '',
+        tfootTr: '',
+        tfootTd: '',
+      },
+      variants: {
+        plain: {
+          table: '',
+          td: 'px-3 py-1 whitespace-no-wrap',
+          tbody: 'bg-transparent',
         },
       },
     },

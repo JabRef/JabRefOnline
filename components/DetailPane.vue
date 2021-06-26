@@ -143,8 +143,29 @@
                 placeholder="Add keyword"
                 :delimiters="null"
                 :whitelist="keywordSuggestions"
+                tag-class="border rounded-md"
+              />
+            </div>
+            <div>
+              <editor-header heading="Groups" class="mt-4"></editor-header>
+              <Tags
+                v-model="groups"
+                placeholder="Add group"
+                :delimiters="null"
+                :whitelist="groupSuggestions"
                 tag-class="bg-highlight-50 rounded-md"
               />
+            </div>
+            <div>
+              <editor-header
+                heading="External"
+                class="mt-4 mb-1"
+              ></editor-header>
+              <t-table
+                :data="external"
+                variant="plain"
+                class="text-sm"
+              ></t-table>
             </div>
           </div>
         </slot>
@@ -177,6 +198,15 @@ export default defineComponent({
     ]
     const keywordSuggestions = [{ value: 'Differential Geometry' }]
 
+    const groups = [{ value: 'Chocolate Making' }, { value: 'Consumption' }]
+    const groupSuggestions = [{ value: 'Grinding' }]
+
+    const external = [
+      { name: 'DOI', value: '10.1063/1.5085764' },
+      { name: 'ArXiv', value: '1812.04695' },
+      { name: 'MathSciNet', value: 'MR3997558' },
+    ]
+
     return {
       isDetailsOpen: computed(() => ui.isDetailsOpen),
       closePane: () => (ui.isDetailsOpen = false),
@@ -193,6 +223,9 @@ export default defineComponent({
         'Inspired by the Clebsch optimal control problem, we introduce a new variational principle that is suitable for capturing the geometry of relativistic field theories with constraints related to a gauge symmetry. Its special feature is that the Lagrange multipliers couple to the configuration variables via the symmetry group action. The resulting constraints are formulated as a condition on the momentum map of the gauge group action on the phase space of the system. We discuss the Hamiltonian picture and the reduction of the gauge symmetry by stages in this geometric setting. We show that the Yang-Mills-Higgs action and the Einstein--Hilbert action fit into this new framework after a (1+3)-splitting. Moreover, we recover the Gauß constraint of Yang-Mills-Higgs theory and the diffeomorphism constraint of general relativity as momentum map constraints.',
       keywords,
       keywordSuggestions,
+      groups,
+      groupSuggestions,
+      external,
     }
   },
 })
