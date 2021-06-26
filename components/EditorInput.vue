@@ -1,4 +1,5 @@
 <template>
+  <!-- Auto-grow text-input, idea taken from https://css-tricks.com/auto-growing-inputs-textareas/ -->
   <span class="inline-block relative">
     <t-input
       :value="value"
