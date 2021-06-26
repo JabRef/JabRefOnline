@@ -50,7 +50,7 @@
           <FontAwesomeIcon icon="times" />
         </t-button>
         <slot>
-          <div class="flex flex-col">
+          <div class="flex flex-col overflow-y-auto pr-3">
             <div>
               <t-select
                 :options="{
