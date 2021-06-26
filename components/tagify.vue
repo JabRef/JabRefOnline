@@ -90,4 +90,10 @@ export default defineComponent({
   --tag-bg: transparent;
   --tag-hover: #c7d2fe; /* bg-highlight-300 */
 }
+.tagify__tag {
+  margin-left: 0.25rem;
+  margin-right: 0.2rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 </style>

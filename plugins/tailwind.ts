@@ -26,7 +26,7 @@ const settings = {
         success:
           'block w-full sm:text-sm border-success-300 bg-success-50 placeholder-gray-400 text-success-900',
         plain:
-          'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
+          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
       },
     },
   },
@@ -39,7 +39,7 @@ const settings = {
         'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 ',
       variants: {
         plain:
-          'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
+          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
       },
     },
   },
@@ -186,7 +186,7 @@ const settings = {
       fixedClasses: {
         wrapper: 'relative inline-block text-left',
         input:
-          'bg-none block w-full py-2 pl-3 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed sm:text-sm',
+          'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
         arrowWrapper:
           'pointer-events-none absolute inset-y-0 right-0 flex items-center px-2',
         arrow: 'fill-current h-4 w-4',
@@ -194,14 +194,19 @@ const settings = {
       classes: {
         wrapper: '',
         input:
-          'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500',
+          'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 sm:text-sm',
         arrowWrapper: 'text-gray-700',
         arrow: '',
       },
       variants: {
         plain: {
           input:
-            'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer',
+            'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
+          arrowWrapper: 'text-current',
+        },
+        plaincaps: {
+          input:
+            'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
           arrowWrapper: 'text-current',
         },
       },

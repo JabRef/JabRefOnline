@@ -57,8 +57,7 @@
                   Article: 'Journal Article',
                   PhDThesis: 'PhD Thesis',
                 }"
-                class="text-gray-500 focus-within:text-black"
-                variant="plain"
+                variant="plaincaps"
               >
                 <template slot="arrow" slot-scope="{ className }">
                   <FontAwesomeIcon
@@ -69,7 +68,7 @@
                 </template>
               </t-select>
             </div>
-            <div class="z-10 grid">
+            <div class="z-10 grid -mt-2">
               <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
               <!-- prettier-ignore -->
               <div
@@ -97,7 +96,7 @@
                 "
               ></t-textarea>
             </div>
-            <div>
+            <div class="-mt-3">
               <Tags
                 ref="myRef"
                 v-model="authors"
@@ -111,7 +110,7 @@
               <span class="text-gray-400">|</span>
               <editor-input v-model="journal"></editor-input>
             </div>
-            <div>
+            <div class="-mt-1">
               <span class="pl-3">
                 Volume:
                 <editor-input v-model="volume"></editor-input>
@@ -126,6 +125,25 @@
                 pp.
                 <editor-input v-model="pages"></editor-input>
               </span>
+            </div>
+            <div>
+              <p
+                class="
+                  pl-3
+                  uppercase
+                  text-xs text-gray-600
+                  mt-4
+                  -mb-1
+                  tracking-wider
+                "
+              >
+                Abstract
+              </p>
+              <t-textarea
+                v-model="abstract"
+                variant="plain"
+                rows="5"
+              ></t-textarea>
             </div>
           </div>
         </slot>
@@ -163,6 +181,8 @@ export default defineComponent({
       volume: '300',
       issue: '3',
       pages: '567-589',
+      abstract:
+        'Inspired by the Clebsch optimal control problem, we introduce a new variational principle that is suitable for capturing the geometry of relativistic field theories with constraints related to a gauge symmetry. Its special feature is that the Lagrange multipliers couple to the configuration variables via the symmetry group action. The resulting constraints are formulated as a condition on the momentum map of the gauge group action on the phase space of the system. We discuss the Hamiltonian picture and the reduction of the gauge symmetry by stages in this geometric setting. We show that the Yang-Mills-Higgs action and the Einstein--Hilbert action fit into this new framework after a (1+3)-splitting. Moreover, we recover the Gauß constraint of Yang-Mills-Higgs theory and the diffeomorphism constraint of general relativity as momentum map constraints.',
     }
   },
 })
