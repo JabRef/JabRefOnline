@@ -4,6 +4,7 @@ import session from 'express-session'
 import passport from 'passport'
 import { RedisClient } from 'redis'
 import { injectable } from 'tsyringe'
+import { config } from '../../config'
 import { AuthService } from './auth.service'
 import LocalStrategy from './local.strategy'
 
@@ -35,7 +36,7 @@ export default class PassportInitializer {
           disableTouch: true,
         }),
         // The secret used to sign the session cookie
-        secret: 'TODO: CHANGE THIS TO ENVIRONMENT VARIABLE',
+        secret: [config.session.primarySecret, config.session.secondarySecret],
         // Don't force session to be saved back to the session store unless it was modified
         resave: false,
         saveUninitialized: false,
