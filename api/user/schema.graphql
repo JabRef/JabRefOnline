@@ -17,7 +17,7 @@ extend type Mutation {
   login(email: EmailAddress!, password: String!): User
   signup(email: EmailAddress!, password: String!): UserResponse
   forgotPassword(email: EmailAddress!): Boolean
-  changePassword(token: String!, id:ID!, newPassword: String!): User
+  changePassword(token: String!, id:ID!, newPassword: String!): UserResponse
 
 }
 union UserResponse = Success | Problem
@@ -27,7 +27,7 @@ type Success {
 }
 
 type Problem {
-  inputError: [InputError!]!
+  inputError: InputError!
 }
 
 type InputError {

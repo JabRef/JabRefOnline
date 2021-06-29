@@ -111,7 +111,7 @@ export class AuthService {
       return {
         inputError: {
           field: 'Password',
-          message: 'Password too short',
+          message: 'Use 6 characters or more for your password',
         },
       }
     }
@@ -135,7 +135,7 @@ export class AuthService {
       return {
         inputError: {
           field: 'Password',
-          message: 'Password too short',
+          message: 'Use 6 characters or more for your password',
         },
       }
     }
