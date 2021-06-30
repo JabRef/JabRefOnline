@@ -10,12 +10,8 @@ Hey everyone!. Today's blog is about the projects selected for GSoC and a little
 
 
 ## Microsoft Word Integration
-We are working on a Word add-in that allows users to select and insert citations 
-directly from the Word document. The JabRef Word Add-in can be used without having your reference manager open 
-or even installed. All you need is your jabref account. Once you sign in to JabRef Word Addin, your JabRef 
-library is downloaded from the cloud, and you can continue working on your document. JabRef word addin opens 
-as a separate panel in Word alongside your document window. So your whole document remains in your view as you search, 
-select and insert references.
+We are working on a Word add-in that allows users to select and insert citations directly from the Word document. The JabRef Word Add-in can be used without having your reference manager open or even installed. All you need is your JabRef account, and If you wonder what a Jabref account is or how to get one, more on what's behind a JabRef account will be revealed in later blog posts. Once you sign in to JabRef Word Addin, your JabRef library is downloaded from the cloud, and you can continue working on your document. JabRef word addin opens as a separate panel in Word alongside your document window. So your whole document remains in your view as you search, select and insert references.
+
 
 
 ![in-3](https://user-images.githubusercontent.com/62339705/123989792-db4e9d80-d9e6-11eb-8f1b-0527ce94774d.gif)
@@ -25,7 +21,7 @@ select and insert references.
 
 For more information about the project, visit the links below.
 - GitHub: [JabRef Word Addin](https://github.com/JabRef/JabRef-Word-Addin/pulls)
-- Mentors: [@Siedlerchr](https://github.com/Siedlerchr), [@tobiasdiez](https://github.com/tobiasdiez), [@JonatanAsketorp](https://github.com/k3KAW8Pnf7mkmdSMPHz27)
-- Mentee: [@mohit038](https://github.com/mohit038)
+- Mentors: [@Siedlerchr](https://github.com/Siedlerchr), [@Tobiasdiez](https://github.com/tobiasdiez), [@JonatanAsketorp](https://github.com/k3KAW8Pnf7mkmdSMPHz27)
+- Mentee: [@Mohit](https://github.com/mohit038)
 
 
