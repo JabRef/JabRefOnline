@@ -17,16 +17,15 @@ extend type Mutation {
   login(email: EmailAddress!, password: String!): User
   signup(email: EmailAddress!, password: String!): User
   forgotPassword(email: EmailAddress!): Boolean
-  changePassword(token: String!, id:ID!, newPassword: String!): User
-
+  changePassword(token: String!, id: ID!, newPassword: String!): User
 }
 
 type User {
-    id: ID!
-    email: EmailAddress!
+  id: ID!
+  email: EmailAddress!
 
-    documentsRaw: [DocumentRaw!]!
-    documents: [Document!]!
+  documentsRaw: [DocumentRaw!]!
+  documents: [Document!]!
 
-    groups: [Group!]!
+  groups: [Group!]!
 }

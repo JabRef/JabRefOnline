@@ -22,5 +22,16 @@
     "coverage": true
   },
   "jest.jestCommandLine": "yarn test",
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "graphql"
+  ],
+  "eslint.options": {
+    "extentions": [
+      ".js",
+      ".graphql"
+    ]
+  },
   "vscode-graphql.useSchemaFileDefinitions": true
 }
