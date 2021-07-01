@@ -33,7 +33,7 @@ export class Resolvers {
     context: Context
   ): Promise<User> {
     const newUser = await this.authService.createAccount(email, password)
-    context.login(newUser)
+    await context.login(newUser)
     return newUser
   }
 

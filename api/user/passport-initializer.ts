@@ -21,7 +21,7 @@ export default class PassportInitializer {
       this.serializeUser(user, done)
     )
     passport.deserializeUser<string>((id, done) =>
-      this.deserializeUser(id as string, done)
+      this.deserializeUser(id, done)
     )
   }
 
@@ -61,19 +61,24 @@ export default class PassportInitializer {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private serializeUser(user: any, done: (err: unknown, id?: string) => void) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     done(null, user.id)
   }
 
-  private async deserializeUser(
+  private deserializeUser(
     id: string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     done: (err: unknown, user?: any) => void
   ) {
-    const user = await this.accountService.getUserById(id)
-    if (user === undefined) {
-      done("account doesn't exist", undefined)
-    } else {
-      done(null, user)
-    }
+    this.accountService
+      .getUserById(id)
+      .then((user) => {
+        if (user === undefined) {
+          done("account doesn't exist", undefined)
+        } else {
+          done(null, user)
+        }
+      })
+      .catch((error) => done(error, null))
   }
 }

@@ -90,6 +90,7 @@ function convertFromRaw(
   }
 
   if (special) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     convertedDocument = Object.assign(
       convertedDocument,
       Object.fromEntries(special)
@@ -144,8 +145,9 @@ export class Resolvers {
       otherFields = (document.other as Prisma.JsonArray)
         .map((item) => {
           if (item) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const [key, value] = Object.entries(item)[0]
-            return toPair(key as string, value as string)
+            return toPair(key, value as string)
           }
           return null
         })

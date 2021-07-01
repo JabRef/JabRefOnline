@@ -85,7 +85,7 @@ export default defineComponent({
     }))
     const router = useRouter()
     onDone(() => {
-      router.push('/dashboard')
+      void router.push('/dashboard')
     })
 
     return {
