@@ -10,4 +10,3 @@ export default defineComponent({
   props: { heading: { type: String, default: '' } },
 })
 </script>
-
