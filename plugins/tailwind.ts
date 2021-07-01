@@ -8,6 +8,9 @@ import {
   TAlert,
   TDropdown,
   TTag,
+  TSelect,
+  TTextarea,
+  TTable,
 } from 'vue-tailwind/dist/components'
 
 const settings = {
@@ -15,14 +18,29 @@ const settings = {
     component: TInput,
     props: {
       fixedClasses:
-        'block w-full sm:text-sm transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+        'transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
       classes:
-        'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500',
+        'block w-full text-black sm:text-sm placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500',
       variants: {
         error:
-          'border-error-300 bg-error-50 placeholder-error-200 text-error-900',
+          'block w-full sm:text-sm border-error-300 bg-error-50 placeholder-error-200 text-error-900',
         success:
-          'border-success-300 bg-success-50 placeholder-gray-400 text-success-900',
+          'block w-full sm:text-sm border-success-300 bg-success-50 placeholder-gray-400 text-success-900',
+        plain:
+          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
+      },
+    },
+  },
+  't-textarea': {
+    component: TTextarea,
+    props: {
+      fixedClasses:
+        'block w-full px-3 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      classes:
+        'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 ',
+      variants: {
+        plain:
+          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
       },
     },
   },
@@ -159,6 +177,64 @@ const settings = {
       classes: '',
       variants: {
         badge: 'inline-flex items-center px-2 rounded-lg',
+      },
+    },
+  },
+  't-select': {
+    component: TSelect,
+    props: {
+      wrapped: true,
+      fixedClasses: {
+        wrapper: 'relative inline-block text-left',
+        input:
+          'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+        arrowWrapper:
+          'pointer-events-none absolute inset-y-0 right-0 flex items-center px-2',
+        arrow: 'fill-current h-4 w-4',
+      },
+      classes: {
+        wrapper: '',
+        input:
+          'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 sm:text-sm',
+        arrowWrapper: 'text-gray-700',
+        arrow: '',
+      },
+      variants: {
+        plain: {
+          input:
+            'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
+          arrowWrapper: 'text-current',
+        },
+        plaincaps: {
+          input:
+            'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
+          arrowWrapper: 'text-current',
+        },
+      },
+    },
+  },
+  't-table': {
+    component: TTable,
+    props: {
+      classes: {
+        table:
+          'min-w-full divide-y divide-gray-100 shadow-sm border-gray-200 border',
+        thead: '',
+        theadTr: '',
+        theadTh: 'px-3 py-2 font-semibold text-left bg-gray-100 border-b',
+        tbody: 'bg-white divide-y divide-gray-100',
+        tr: '',
+        td: 'px-3 py-2 whitespace-no-wrap',
+        tfoot: '',
+        tfootTr: '',
+        tfootTd: '',
+      },
+      variants: {
+        plain: {
+          table: '',
+          td: 'px-3 py-1 whitespace-no-wrap',
+          tbody: 'bg-transparent',
+        },
       },
     },
   },

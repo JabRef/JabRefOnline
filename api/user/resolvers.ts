@@ -1,5 +1,6 @@
 import { User } from '@prisma/client'
 import { injectable } from 'tsyringe'
+import { UserInputError } from 'apollo-server-express'
 import { Context } from '../context'
 import { Resolvers as AllResolvers } from '../graphql'
 import { Resolvers as DocumentResolvers } from '../documents/resolvers'
@@ -41,7 +42,7 @@ export class Resolvers {
     email: string,
     password: string
   ): Promise<User | null> {
-    const { user } = await context.authenticate('graphql-local', {
+    const { user, info } = await context.authenticate('graphql-local', {
       email,
       password,
     })
@@ -50,13 +51,28 @@ export class Resolvers {
       await context.login(user)
       return user
     } else {
-      return null
+      throw new UserInputError(
+        info?.message || 'Unknown error while logging in.'
+      )
     }
   }
 
   logout(context: Context): boolean {
     context.logout()
     return true
+  }
+
+  async forgotPassword(email: string): Promise<boolean> {
+    return await this.authService.resetPassword(email)
+  }
+
+  async changePassword(
+    token: string,
+    id: string,
+    newPassword: string
+  ): Promise<User | null> {
+    const user = await this.authService.updatePassword(token, id, newPassword)
+    return user
   }
 
   resolvers(): AllResolvers {
@@ -81,6 +97,12 @@ export class Resolvers {
 
         signup: (_root, { email, password }, context) => {
           return this.signup(email, password, context)
+        },
+        forgotPassword: (_root, { email }, _context) => {
+          return this.forgotPassword(email)
+        },
+        changePassword: (_root, { token, id, newPassword }, _context) => {
+          return this.changePassword(token, id, newPassword)
         },
       },
 

@@ -36,12 +36,9 @@
           </div>
 
           <div class="text-sm">
-            <a
-              href="#"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+            <t-nuxtlink to="./forgot-password"
+              >Forgot your password?</t-nuxtlink
             >
-              Forgot your password?
-            </a>
           </div>
         </div>
 
@@ -83,7 +80,7 @@ export default defineComponent({
     const password = ref('')
 
     gql`
-      mutation Login($email: String!, $password: String!) {
+      mutation Login($email: EmailAddress!, $password: String!) {
         login(email: $email, password: $password) {
           id
         }
@@ -103,8 +100,12 @@ export default defineComponent({
       },
     }))
     const router = useRouter()
-    onDone(() => {
-      router.push('/dashboard')
+    onDone((result) => {
+      if (result.data?.login) {
+        router.push('/dashboard')
+      } else {
+        error.value = new Error('Unknown error')
+      }
     })
 
     return { email, password, error, loginUser }

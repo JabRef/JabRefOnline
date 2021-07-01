@@ -35,6 +35,18 @@ jobs:
         ports:
           - 5432:5432
 
+      redis:
+        image: redis
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps port 6379 on service container to port 6380 on host
+          - 6380:6379
+
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
 
@@ -42,7 +54,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup node
+      - name: Setup Node.js
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node }}
@@ -61,7 +73,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
 
       - name: Init database
         run: yarn prisma:push

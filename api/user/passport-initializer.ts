@@ -1,13 +1,19 @@
+import connectRedis from 'connect-redis'
 import { Express } from 'express-serve-static-core'
 import session from 'express-session'
 import passport from 'passport'
+import { RedisClient } from 'redis'
 import { injectable } from 'tsyringe'
+import { config } from '../../config'
 import { AuthService } from './auth.service'
 import LocalStrategy from './local.strategy'
 
 @injectable()
 export default class PassportInitializer {
-  constructor(private accountService: AuthService) {}
+  constructor(
+    private accountService: AuthService,
+    private redisClient: RedisClient
+  ) {}
 
   initialize(): void {
     passport.use(new LocalStrategy(this.accountService))
@@ -22,10 +28,15 @@ export default class PassportInitializer {
   install(app: Express): void {
     // Add middleware that sends and receives the session ID using cookies
     // See https://github.com/expressjs/session#readme
+    const RedisStore = connectRedis(session)
     app.use(
       session({
+        store: new RedisStore({
+          client: this.redisClient,
+          disableTouch: true,
+        }),
         // The secret used to sign the session cookie
-        secret: 'TODO: CHANGE THIS TO ENVIRONMENT VARIABLE',
+        secret: [config.session.primarySecret, config.session.secondarySecret],
         // Don't force session to be saved back to the session store unless it was modified
         resave: false,
         saveUninitialized: false,

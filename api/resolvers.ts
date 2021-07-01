@@ -1,6 +1,5 @@
-// @ts-ignore: No type information available yet https://github.com/waitandseeagency/graphql-type-datetime/issues/5
-import GraphQLDateTime from 'graphql-type-datetime'
 import { container } from 'tsyringe'
+import { DateTimeResolver, EmailAddressResolver } from 'graphql-scalars'
 import _ from 'lodash'
 import { Resolvers } from './graphql'
 import { Resolvers as UserResolvers } from './user/resolvers'
@@ -17,7 +16,8 @@ const resolvers: Resolvers = _.merge(
   groupResolvers.resolvers(),
   {
     // Custom scalar types
-    DateTime: GraphQLDateTime,
+    DateTime: DateTimeResolver,
+    EmailAddress: EmailAddressResolver,
   }
 )
 
