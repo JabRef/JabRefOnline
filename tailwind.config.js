@@ -1,5 +1,6 @@
 // Need to be a CommonJS module for now
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable */
+// TODO: Renable lint as soon as this file is converted to typescript
 const colors = require('tailwindcss/colors')
 
 module.exports = {

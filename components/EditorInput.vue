@@ -16,12 +16,13 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+export default defineComponent({
   props: ['value'],
   methods: {
     update(newValue) {
       this.$emit('input', newValue)
     },
   },
-}
+})
 </script>

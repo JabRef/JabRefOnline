@@ -133,7 +133,9 @@ const config: NuxtConfig = {
           babelrc: false,
           configFile: false,
           compact: false,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           retainLines:
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             typeof opts.retainLines === 'boolean' ? opts.retainLines : true,
           filename: '',
           cwd: '/',
@@ -150,22 +152,24 @@ const config: NuxtConfig = {
           ],
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         if (opts.ts) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          _opts.plugins!.push(
+          _opts.plugins.push(
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             require('@babel/plugin-transform-typescript')
           )
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         if (opts.legacy) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          _opts.plugins!.push(
+          _opts.plugins.push(
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             require('@babel/plugin-proposal-nullish-coalescing-operator')
           )
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          _opts.plugins!.push(
+          _opts.plugins.push(
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             require('@babel/plugin-proposal-optional-chaining')
           )
@@ -173,20 +177,27 @@ const config: NuxtConfig = {
 
         try {
           return {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             code: transformSync(opts.source, _opts)?.code || '',
           }
         } catch (err) {
           return {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             error: err,
             code:
               'exports.__JITI_ERROR__ = ' +
               JSON.stringify({
+                // eslint-disable-next-line
                 filename: opts.filename,
+                // eslint-disable-next-line
                 line: err.loc?.line || 0,
+                // eslint-disable-next-line
                 column: err.loc?.column || 0,
+                // eslint-disable-next-line
                 code: err.code
                   ?.replace('BABEL_', '')
                   .replace('PARSE_ERROR', 'ParseError'),
+                // eslint-disable-next-line
                 message: err.message
                   ?.replace('/: ', '')
                   .replace(/\(.+\)\s*$/, ''),

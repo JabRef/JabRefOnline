@@ -182,8 +182,11 @@ import EditorHeader from './EditorHeader.vue'
 
 export default defineComponent({
   components: {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     Tags,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     EditorInput,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     EditorHeader,
   },
   setup() {

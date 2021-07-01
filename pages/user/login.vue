@@ -102,7 +102,7 @@ export default defineComponent({
     const router = useRouter()
     onDone((result) => {
       if (result.data?.login) {
-        router.push('/dashboard')
+        void router.push('/dashboard')
       } else {
         error.value = new Error('Unknown error')
       }

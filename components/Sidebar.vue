@@ -131,6 +131,7 @@ import { useGetGroupsQuery } from '~/apollo/graphql'
 
 export default defineComponent({
   components: {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     VueTreeList,
   },
   setup() {
@@ -154,7 +155,8 @@ export default defineComponent({
     const { result } = useGetGroupsQuery()
     const groups = useResult(result, null, (data) => data.me?.groups)
     const groupsTree = computed(() =>
-      groups.value ? new Tree(groups.value) : null
+      // eslint-disable-next-line
+      groups.value === undefined ? new Tree(groups.value) : null
     )
 
     return {

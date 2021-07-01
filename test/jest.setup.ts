@@ -7,8 +7,12 @@ import { RedisClient } from 'redis'
 // Minimize snapshot of GraphQL responses (no extensions and http field)
 expect.addSnapshotSerializer({
   test: (value) => {
-    value = value as GraphQLResponse
-    return value && (value.data || value.errors) && value.http
+    return (
+      value !== undefined &&
+      ((value as GraphQLResponse).data !== undefined ||
+        (value as GraphQLResponse).errors !== undefined) &&
+      (value as GraphQLResponse).http !== undefined
+    )
   },
   print: (value: unknown, serialize) => {
     const { data, errors } = value as GraphQLResponse

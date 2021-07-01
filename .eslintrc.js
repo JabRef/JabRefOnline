@@ -6,8 +6,8 @@ module.exports = {
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
+    // Enable recommended rules for typescript
     'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'prettier',
     'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
@@ -41,6 +41,8 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    // Ensure void operator is not used, except for variable assignment or function return (might be handy for promises)
+    'no-void': ['error', { allowAsStatement: true }],
   },
   overrides: [
     {
@@ -97,6 +99,36 @@ module.exports = {
       rules: {
         // Workaround for for bug in prettier, can be removed after https://github.com/prettier/eslint-plugin-prettier/pull/415
         'prettier/prettier': 0,
+      },
+    },
+    {
+      files: ['*.ts', '*.vue'],
+      // Parser supporting vue files
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        // Parser used for non-vue files and for the script tag in vue files
+        parser: '@typescript-eslint/parser',
+        // Correct root
+        tsconfigRootDir: __dirname,
+        // Path to tsconfig to enable rules that require type information
+        project: './tsconfig.json',
+        // Correctly handle vue files
+        extraFileExtensions: ['.vue'],
+      },
+      extends: [
+        // Enable recommended rules for typescript that use typing information (may be CPU intensive)
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+      ],
+    },
+    {
+      // Special treatment for test files
+      files: ['**/*.test.ts', '**/*.spec.ts'],
+      plugins: ['jest'],
+      rules: {
+        // Disable typescript rule for unbound methods...
+        '@typescript-eslint/unbound-method': 'off',
+        // ...and enable the jest-specific one
+        'jest/unbound-method': 'error',
       },
     },
   ],

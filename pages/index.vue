@@ -2,8 +2,7 @@
   <div class="container">
     <div>
       <div v-if="authStatus">
-        <div>{{ user.name }}</div>
-        <button class="auth-button" @click="logOut">Log Out</button>
+        <button class="auth-button">Log Out</button>
       </div>
 
       <Logo />
@@ -33,7 +32,6 @@
           GitHub
         </a>
       </div>
-      {{ user }}
       <FontAwesomeIcon icon="laugh-beam" />
     </div>
   </div>
@@ -56,7 +54,6 @@ export default Vue.extend({
       variables: {
         id: 'cklzr73840000l8v7b4gthdts',
       },
-      update: (response) => response.user.email,
     },
   },
   data() {
