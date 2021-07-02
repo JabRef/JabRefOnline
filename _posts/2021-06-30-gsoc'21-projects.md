@@ -19,3 +19,42 @@ For more information about the project, visit the links below.
 - GitHub: [JabRef Word Addin](https://github.com/JabRef/JabRef-Word-Addin)
 - Mentors: [@Siedlerchr](https://github.com/Siedlerchr), [@Tobiasdiez](https://github.com/tobiasdiez), [@JonatanAsketorp](https://github.com/k3KAW8Pnf7mkmdSMPHz27)
 - Mentee: [@Mohit](https://github.com/mohit038)
+
+## Improved PDF Integration
+
+The second project is all about PDFs and is split into two main goals:
+[Fulltext search in linked PDFs](#fulltext-search) and
+[metadata extraction from new pdfs](#metadata-extraction).
+
+The people involved are:
+- Mentors: [@Koppor](https://github.com/koppor), [@Calixtus](https://github.com/calixtus), [@DominikVoigt](https://github.com/DominikVoigt)
+- Mentee: [@Btut](https://github.com/btut)
+
+### Fulltext search
+
+Over the duration of a scientists career, bibliographies tend to grow large in
+size.
+Currently, JabRef users can filter their bibliography by performing a search in the
+bib-entries.
+This search only looks for matches in the fields of the bibentry, but not in the
+linked documents.
+We want to change that by indexing all linked documents using
+[Apache Lucene](https://lucene.apache.org/).
+Additionally to the filtering in the table of entries, users are presented with
+a tab in the entry-editor containing a google-esque visualization of
+the matched text portions in the PDFs.
+Progress can be tracked [here](https://github.com/JabRef/jabref/pull/2838).
+
+### Metadata extraction
+
+An important aspect of a library is the ability to share items with others.
+The de-facto way of sharing work in the scientific community is to share PDF
+files.
+Unfortunately, most of the times, it is hard to automatically deduce metadata
+needed to build a JabRef entry from a PDF alone.
+We want to integrate with [GROBID](https://grobid.readthedocs.io), a machine
+learning library for extracting metadata from raw PDF documents.
+GROBID is learned to deduce the metadata from the content itself, as a human
+would.
+Checkout [the corresponding issue](https://github.com/JabRef/jabref/issues/6158)
+for more information.
