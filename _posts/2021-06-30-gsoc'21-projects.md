@@ -6,7 +6,7 @@ bg: jabref-font
 color: white
 ---
 
-Hey everyone!. Today's blog is about the projects selected for GSoC and a little sneak peek of the projects.
+Hey everyone, Today's blog is about the projects selected for GSoC and a little sneak peek into the projects.
 
 ## Microsoft Word Integration
 
