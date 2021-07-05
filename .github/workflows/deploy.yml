@@ -55,14 +55,26 @@ jobs:
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
 
-      - name: Deploy to Azure WebApp
+      - name: Deploy to Azure WebApp (Test server)
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: JabRef
+          publish-profile: ${{ secrets.AZURE_TEST_PUBLISH_PROFILE }}
+          package: ./artifact
+
+      - name: Reset database on Azure (Test database)
+        run: yarn prisma:migrate:reset
+        env:
+          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+
+      - name: Deploy to Azure WebApp (Staging server)
         uses: azure/webapps-deploy@v2
         with:
           app-name: JabRef
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: ./artifact
 
-      - name: Update database on Azure
+      - name: Update database on Azure (Production database)
         run: yarn prisma:migrate:deploy
         env:
           DATABASE_URL: ${{ secrets.AZURE_DATABASE_URL }}
