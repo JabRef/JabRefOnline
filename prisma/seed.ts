@@ -2,8 +2,6 @@ import { PrismaClient, GroupType, GroupHierarchyType } from '@prisma/client'
 
 async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.user.deleteMany({})
-  // Manually delete other fields first (at the moment, its not possible to do this automatically https://github.com/prisma/prisma/issues/2810)
-  await prisma.userDocumentOtherField.deleteMany({})
   await prisma.userDocument.deleteMany({})
   await prisma.group.deleteMany({})
 
