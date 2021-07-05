@@ -63,7 +63,7 @@ jobs:
           package: ./artifact
 
       - name: Reset database on Azure (Test database)
-        run: yarn prisma:migrate:reset
+        run: yarn prisma:migrate:reset --force
         env:
           DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
