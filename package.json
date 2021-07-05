@@ -10,7 +10,7 @@
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:dev:create": "prisma migrate dev --create-only",
-    "prisma:migrate:reset": "prisma migrate reset",
+    "prisma:migrate:reset": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json prisma migrate reset",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:status": "prisma migrate status",
     "prisma:migrate:resolve": "prisma migrate resolve",
