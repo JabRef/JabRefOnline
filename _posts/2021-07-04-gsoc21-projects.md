@@ -2,8 +2,6 @@
 title: "JabRef GSoC’21 Projects"
 id: gsoc'21-projects
 author: JabRef GSoC Mentee
-bg: jabref-font
-color: white
 ---
 
 Hey everyone, Today's blog is about the projects selected for GSoC and a little sneak peek into the projects.
