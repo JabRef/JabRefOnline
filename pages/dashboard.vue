@@ -47,7 +47,7 @@ export default defineComponent({
     `
 
     const { result } = useGetDocumentsQuery()
-    const documents = useResult(result, null, (data) => data.me?.documents)
+    const documents = useResult(result, null, (data) => data?.me?.documents)
     return {
       documents,
     }
