@@ -72,6 +72,9 @@ jobs:
       - name: Validate GraphQL operations
         run: yarn validate
 
+      - name: Build
+        run: yarn build
+
       - name: Run tests
         run: yarn test --ci --coverage
 
