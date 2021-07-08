@@ -53,7 +53,7 @@
           <img
             id="orcidLogoFooter"
             class="w-28"
-            src="https://info.orcid.org/wp-content/uploads/2020/01/orcid-logo.png"
+            src="~/assets/ORCID_logo.svg"
             alt="ORCID"
           />
         </div>
