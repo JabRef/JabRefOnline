@@ -120,6 +120,9 @@ const config: NuxtConfig = {
         config.devtool = 'source-map'
       }
     },
+    // @vue/apollo-composable is using nullish coalescing operator, which needs to be transpiled  with babel as it is not compatible with Webpack 4.
+    // See https://github.com/vuejs/vue-apollo/issues/1217
+    transpile: ['@vue/apollo-composable'],
   },
 
   // Workaround for https://github.com/nuxt/typescript/issues/494
