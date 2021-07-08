@@ -21,8 +21,26 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
 
+    - name: Start deployment (Staging server)
+      uses: bobheadxi/deployments@v0.4.3
+      id: deployment
+      with:
+        step: start
+        token: ${{ secrets.GITHUB_TOKEN }}
+        env: Production
+
     - name: Swap staging > production slot
       uses: azure/CLI@v1
       with:
         inlineScript: |
           az webapp deployment slot swap --name JabRef --resource-group JabRefOnline --slot staging --target-slot production --action swap
+
+    - name: Update deployment status
+      uses: bobheadxi/deployments@v0.4.3
+      if: always()
+      with:
+        step: finish
+        token: ${{ secrets.GITHUB_TOKEN }}
+        status: ${{ job.status }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env_url: https://jabref.azurewebsites.net/
