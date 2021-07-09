@@ -1,24 +1,29 @@
 <template>
   <div>
-    <Portal to="header">
-      <Logo class="mx-auto h-20 w-auto" />
-      <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
-        Sign in
-      </h2>
-      <p class="mt-8 text-center text-sm text-gray-600">
-        Don't have an account?
-        <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
-      </p>
-      <t-alert
-        v-if="error"
-        variant="error"
-        class="mt-8"
-        :dismissible="false"
-        show
-      >
-        {{ error }}
-      </t-alert>
+    <Portal to="side">
+      <div class="flex flex-col">
+        <img
+          class="w-11/12 mx-auto"
+          src="~/assets/undraw_book_lover_mkck.svg"
+        />
+        <div class="mt-7 mx-auto text-2xl">Stay on top of your literature!</div>
+      </div>
     </Portal>
+
+    <h2 class="text-center text-5xl font-extrabold text-gray-900">Sign in</h2>
+    <p class="mt-6 mb-8 text-center text-sm text-gray-600">
+      Don't have an account?
+      <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
+    </p>
+    <t-alert
+      v-if="error"
+      variant="error"
+      class="mt-8"
+      :dismissible="false"
+      show
+    >
+      {{ error }}
+    </t-alert>
     <form @submit.prevent="loginUser">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">

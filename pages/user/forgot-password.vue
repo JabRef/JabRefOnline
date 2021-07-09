@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Portal to="header">
-      <Logo class="mx-auto h-20 w-auto" />
-      <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
-        Reset Password
-      </h2>
+    <Portal to="side">
+      <img class="w-11/12 mx-auto" src="~/assets/undraw_join_of2w.svg" />
     </Portal>
+    <h2 class="mb-7 text-center text-5xl font-extrabold text-gray-900">
+      Reset Password
+    </h2>
     <div v-if="called">
       <h2>Email Sent</h2>
       <p>

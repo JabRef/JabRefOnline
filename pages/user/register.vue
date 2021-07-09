@@ -1,24 +1,30 @@
 <template>
   <div>
-    <Portal to="header">
-      <Logo class="mx-auto h-20 w-auto" />
-      <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
-        Create account
-      </h2>
-      <p class="mt-8 text-center text-sm text-gray-600">
-        Already have an account?
-        <t-nuxtlink to="/user/login">Sign in</t-nuxtlink>
-      </p>
-      <t-alert
-        v-if="error"
-        variant="error"
-        class="mt-8"
-        :dismissible="false"
-        show
-      >
-        {{ error }}
-      </t-alert>
+    <Portal to="side">
+      <div class="flex flex-col">
+        <img
+          class="w-11/12 mx-auto transform flip-horizontal"
+          src="~/assets/undraw_road_to_knowledge_m8s0.svg"
+        />
+        <div class="mt-7 mx-auto text-2xl">One last step!</div>
+      </div>
     </Portal>
+    <h2 class="text-center text-5xl font-extrabold text-gray-900">
+      Create account
+    </h2>
+    <p class="mt-6 mb-8 text-center text-sm text-gray-600">
+      Already have an account?
+      <t-nuxtlink to="/user/login">Sign in</t-nuxtlink>
+    </p>
+    <t-alert
+      v-if="error"
+      variant="error"
+      class="mt-8"
+      :dismissible="false"
+      show
+    >
+      {{ error }}
+    </t-alert>
     <form @submit.prevent="signup">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">
