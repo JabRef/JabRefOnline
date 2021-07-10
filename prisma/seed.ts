@@ -8,8 +8,8 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.user.create({
     data: {
       id: 'ckn4oul7100004cv7y3t94n8j',
-      email: `test@testum.de2`,
-      password: `$2a$10$d.P8dAo.0pmsvW2xwsH7sudRMhSBiCvOfEkN8JBeuvHBs1ZtLUdoe`, // EBNPXY35TYkYXHs
+      email: 'test@testum.de2',
+      password: '$2a$10$d.P8dAo.0pmsvW2xwsH7sudRMhSBiCvOfEkN8JBeuvHBs1ZtLUdoe', // EBNPXY35TYkYXHs
       name: 'Alice',
     },
   })
