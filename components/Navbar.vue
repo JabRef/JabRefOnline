@@ -176,6 +176,6 @@ export default defineComponent({
       await resolveClient().clearStore()
     }
     return { logout }
-  }
+  },
 })
 </script>
