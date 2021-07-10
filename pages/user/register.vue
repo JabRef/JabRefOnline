@@ -56,7 +56,7 @@
   </div>
 </template>
 <script lang="ts">
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client/core'
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { SignupDocument } from '~/apollo/graphql'

@@ -28,7 +28,7 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
-import { gql } from 'graphql-tag'
+import { gql } from '@apollo/client/core'
 import { useMutation } from '@vue/apollo-composable'
 import { ForgotPasswordDocument } from '../../apollo/graphql'
 

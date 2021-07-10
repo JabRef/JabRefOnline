@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client/core'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { GetDocumentsDocument } from '~/apollo/graphql'
 

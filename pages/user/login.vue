@@ -69,7 +69,7 @@
 <script lang="ts">
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client/core'
 import { useMutation } from '@vue/apollo-composable'
 import { currentUserVar } from '../../apollo/cache'
 import { LoginDocument } from '../../apollo/graphql'
