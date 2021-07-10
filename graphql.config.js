@@ -41,6 +41,10 @@ const codegen = {
         },
       },
     },
+    // Generate supertype-subtype relationships, needed for client-side caching
+    'apollo/introspection.ts': {
+      plugins: ['fragment-matcher'],
+    },
   },
 }
 
