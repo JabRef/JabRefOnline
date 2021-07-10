@@ -151,6 +151,7 @@
                   hover:bg-gray-100
                   focus:outline-none focus:bg-gray-100
                 "
+                @click="logout"
               >
                 Logout
               </button>
@@ -163,6 +164,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({})
+import { useApolloClient } from '@vue/apollo-composable'
+
+import { defineComponent } from '@nuxtjs/composition-api'
+export default defineComponent({
+  setup() {
+    const { resolveClient } = useApolloClient()
+
+    const logout = async () => {
+      // Reset graphql cache
+      await resolveClient().clearStore()
+    }
+    return { logout }
+  }
+})
 </script>
