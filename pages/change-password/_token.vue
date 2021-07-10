@@ -31,7 +31,9 @@ import {
 } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
 import { gql } from 'graphql-tag'
-import { useChangePasswordMutation } from '../../apollo/graphql'
+import { useMutation } from '@vue/apollo-composable'
+import { ChangePasswordDocument } from '../../apollo/graphql'
+
 export default defineComponent({
   name: 'ChangePassword',
   layout: 'bare',
@@ -56,7 +58,7 @@ export default defineComponent({
       mutate: changePassword,
       onDone,
       error,
-    } = useChangePasswordMutation(() => ({
+    } = useMutation(ChangePasswordDocument, () => ({
       variables: {
         token: token.value,
         id: id.value,

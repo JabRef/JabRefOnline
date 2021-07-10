@@ -13,8 +13,8 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import gql from 'graphql-tag'
-import { useResult } from '@vue/apollo-composable'
-import { useGetDocumentsQuery } from '~/apollo/graphql'
+import { useResult, useQuery } from '@vue/apollo-composable'
+import { GetDocumentsDocument } from '~/apollo/graphql'
 
 export default defineComponent({
   middleware: ['authenticated'],
@@ -46,7 +46,7 @@ export default defineComponent({
       }
     `
 
-    const { result } = useGetDocumentsQuery()
+    const { result } = useQuery(GetDocumentsDocument)
     const documents = useResult(result, null, (data) => data?.me?.documents)
     return {
       documents,

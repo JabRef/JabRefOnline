@@ -33,7 +33,7 @@ const codegen = {
         './components/**/*.vue',
         './middleware/**/*.*',
       ],
-      plugins: ['typescript', 'typescript-operations', 'typescript-vue-apollo'],
+      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
       config: {
         scalars: {
           DateTime: 'Date',

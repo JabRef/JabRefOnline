@@ -1155,7 +1155,7 @@
   dependencies:
     purgecss "^4.0.3"
 
-"@graphql-codegen/cli@1.21.6":
+"@graphql-codegen/cli@^1.21.6":
   version "1.21.6"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.21.6.tgz#d06b5f6cb625541f3981d69f99966e520b958072"
   integrity sha512-wtBk4lk/YxG6MrxnBOxE9nCfR9PNDjaqA8CF9hi6Q8jiSl4sV03tC2R+gE7+2EI8J6Xa1bxZe15LnBhVwb/mUA==
@@ -1221,6 +1221,17 @@
     lodash "~4.17.0"
     tslib "~2.2.0"
 
+"@graphql-codegen/typed-document-node@^1.18.9":
+  version "1.18.9"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typed-document-node/-/typed-document-node-1.18.9.tgz#36f382a5e5a30844403dd078d97d84b362e77dcf"
+  integrity sha512-ptWB8DObjPObepHKTSslnrx+tSbdYJgAU9UI5spN8jOJOhQ395talmosDlGcU+QXzkQm277+XH+QmVFkWMFjSg==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^1.18.7"
+    "@graphql-codegen/visitor-plugin-common" "1.21.3"
+    auto-bind "~4.0.0"
+    change-case-all "1.0.14"
+    tslib "~2.3.0"
+
 "@graphql-codegen/typescript-operations@^1.18.3":
   version "1.18.3"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-1.18.3.tgz#6b2097872eb559067d1d0f32cfa10b67a3427ed1"
@@ -1244,18 +1255,7 @@
     auto-bind "~4.0.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript-vue-apollo@^2.3.8":
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-vue-apollo/-/typescript-vue-apollo-2.3.8.tgz#8eccdf2d2b6e34328ceb579b939c8fd52c910287"
-  integrity sha512-mSNmMrVn9dcbbLJqvKETzUhXwkC2lkOqP13UBoC26P7lU4BvqhA2qSY4Gxtcjf4/RNsZfkz5GeMKM+uF6GtVBQ==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "^1.18.7"
-    "@graphql-codegen/visitor-plugin-common" "1.21.3"
-    auto-bind "~4.0.0"
-    change-case-all "1.0.14"
-    tslib "~2.3.0"
-
-"@graphql-codegen/typescript@^1.22.2", "@graphql-codegen/typescript@^1.22.4":
+"@graphql-codegen/typescript@^1.22.4":
   version "1.22.4"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-1.22.4.tgz#a580e40074925f72cc183e00d13580a9efadcf2b"
   integrity sha512-39g71++31Ki9AufBRPz4iHAZ3nboD6m+UJonYk/l3LrQEWcVxtNZXvUaoCyHSvKIysOv3IppqonrQf9eJACOdA==
@@ -1691,7 +1691,7 @@
     tslib "~2.2.0"
     value-or-promise "1.0.6"
 
-"@graphql-typed-document-node/core@^3.0.0":
+"@graphql-typed-document-node/core@^3.0.0", "@graphql-typed-document-node/core@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
   integrity sha512-wYn6r8zVZyQJ6rQaALBEln5B1pzxb9shV5Ef97kTvn6yVGrqyXVnDqnU24MXnFubR+rZjBY9NWuxX3FB2sTsjg==
