@@ -177,6 +177,10 @@ export class Resolvers {
               return 'Unknown'
           }
         },
+        keywords: (document, _args, _context) => {
+          // TODO: Already store keywords on save as a list?
+          return document.keywords?.split(',') ?? []
+        },
       },
 
       DocumentRaw: {
@@ -186,15 +190,18 @@ export class Resolvers {
       },
 
       Article: {
-        author: (document, _args, _context) => {
+        authors: (document, _args, _context) => {
           if (document.author) {
-            return {
-              id: 'TODO',
-              name: document.author,
-              __typename: 'Person',
-            }
+            // TODO: Already store authors separately on save?
+            return document.author.split(' and ').map((name) => {
+              return {
+                id: 'TODO' + name,
+                name,
+                __typename: 'Person',
+              }
+            })
           } else {
-            return null
+            return []
           }
         },
 
@@ -208,6 +215,18 @@ export class Resolvers {
           } else {
             return null
           }
+        },
+
+        keywords: (document, _args, _context) => {
+          // TODO: Why does this need to be specified again and is not enough on document?
+          return document.keywords?.split(',') ?? []
+        },
+      },
+
+      Unknown: {
+        keywords: (document, _args, _context) => {
+          // TODO: Why does this need to be specified again and is not enough on document?
+          return []
         },
       },
     }

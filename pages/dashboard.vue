@@ -15,6 +15,7 @@ import { defineComponent } from '@nuxtjs/composition-api'
 import { gql } from '@apollo/client/core'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { GetDocumentsDocument } from '~/apollo/graphql'
+import { DocumentForView } from '~/components/DocumentView.vue'
 
 export default defineComponent({
   middleware: ['authenticated'],
@@ -24,26 +25,11 @@ export default defineComponent({
       query getDocuments {
         me {
           documents {
-            id
-            type
-            title
-            ... on Article {
-              abstract
-              author {
-                ... on Person {
-                  name
-                }
-                ... on Organization {
-                  name
-                }
-              }
-              journal {
-                name
-              }
-            }
+            ...DocumentForView
           }
         }
       }
+      ${DocumentForView}
     `
 
     const { result } = useQuery(GetDocumentsDocument)

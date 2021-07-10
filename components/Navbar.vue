@@ -171,7 +171,7 @@ export default defineComponent({
   setup() {
     const { resolveClient } = useApolloClient()
 
-    const logout = async () => {
+    async function logout() {
       // Reset graphql cache
       await resolveClient().clearStore()
     }

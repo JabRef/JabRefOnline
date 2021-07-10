@@ -72,12 +72,15 @@ interface Document {
   id: ID!
   type: DocumentType
   title: String
+  "Keywords or tags used to describe the content."
+  keywords: [String]
 }
 
 type Article implements Document {
   id: ID!
   type: DocumentType
   title: String
+  keywords: [String!]!
 
   " The page on which the work starts; for example '135' or 'xiii'."
   pageStart: String
@@ -85,10 +88,8 @@ type Article implements Document {
   pageEnd: String
   " A short description that summarizes the work."
   abstract: String
-  " The author of this work."
-  author: Entity
-  " Keywords or tags used to describe the content."
-  keywords: [String]
+  " The authors of this work."
+  authors: [Entity!]!
   journal: Journal
 }
 
@@ -96,6 +97,7 @@ type Unknown implements Document {
   id: ID!
   type: DocumentType
   title: String
+  keywords: [String!]!
 }
 
 extend type Query {
