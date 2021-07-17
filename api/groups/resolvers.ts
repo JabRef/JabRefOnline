@@ -1,7 +1,7 @@
-import { Context } from '@apollo/client'
 import { Group, GroupType, GroupHierarchyType } from '@prisma/client'
 import { UserInputError } from 'apollo-server-errors'
 import { container, injectable } from 'tsyringe'
+import { Context } from '../context'
 import {
   Resolvers,
   QueryGroupArgs,
@@ -100,7 +100,7 @@ export class Mutation {
     return await this.groupService.addGroup({
       users: {
         connect: {
-          id: context.getUser().id,
+          id: context.getUser()?.id,
         },
       },
       name: group.name,
