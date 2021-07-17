@@ -12,13 +12,57 @@
       lg:px-8
     "
   >
-    <div class="max-w-md w-full space-y-8 -mt-20">
+    <div class="w-full space-y-8 -mt-20">
       <div>
         <PortalTarget name="header" />
       </div>
-      <div class="shadow sm:rounded-md sm:overflow-hidden">
-        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-          <Nuxt />
+      <div
+        class="
+          shadow-xl
+          sm:rounded-md sm:overflow-hidden
+          container
+          mx-auto
+          flex
+          sm:flex-nowrap
+          flex-wrap
+          max-w-4xl
+          bg-white
+        "
+      >
+        <div
+          class="
+            w-5/12
+            overflow-hidden
+            hidden
+            md:flex
+            px-5
+            pt-4
+            pb-14
+            items-center
+            justify-start
+            relative
+            bg-primary-50
+          "
+        >
+          <PortalTarget name="side" />
+          <div
+            class="
+              flex
+              text-lg
+              items-center
+              md:justify-start
+              justify-center
+              absolute
+              bottom-5
+            "
+          >
+            <Logo class="h-6 mr-3" /> JabRef
+          </div>
+        </div>
+        <div class="w-full md:w-6/12 md:mx-auto md:py-8 mt-8 md:mt-0 px-5 py-4">
+          <div class="px-4 py-5 space-y-6 sm:p-6">
+            <Nuxt />
+          </div>
         </div>
       </div>
     </div>

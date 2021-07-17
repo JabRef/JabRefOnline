@@ -105,6 +105,7 @@ export class AuthService {
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + id
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
     const hashedToken = await getAsync(key)
     if (!hashedToken) {

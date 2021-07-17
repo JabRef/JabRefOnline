@@ -33,6 +33,10 @@ export default defineComponent({
       type: Array as PropType<Tagify.TagData[]>,
       default: () => [],
     },
+    tagClass: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -47,13 +51,25 @@ export default defineComponent({
   },
   mounted() {
     // Install tagify
+    const tagifySettings: Tagify.TagifyConstructorSettings<Tagify.TagData> = {
+      delimiters: this.delimiters,
+      whitelist: this.whitelist,
+      ...this.settings,
+    }
+    if (this.tagClass) {
+      if (tagifySettings.classNames) {
+        tagifySettings.classNames.tag = 'tagify__tag ' + this.tagClass
+      } else {
+        // @ts-ignore: Typing information seems to be incorrect, don't need to provide a complete classNames object
+        tagifySettings.classNames = {
+          tag: 'tagify__tag ' + this.tagClass,
+        }
+      }
+    }
+
     this.tagify = new Tagify(
       this.$el as HTMLTextAreaElement | HTMLInputElement,
-      {
-        delimiters: this.delimiters,
-        whitelist: this.whitelist,
-        ...this.settings,
-      }
+      tagifySettings
     )
     // Using current data as initial tags
     this.tagify.removeAllTags()
@@ -67,3 +83,17 @@ export default defineComponent({
   },
 })
 </script>
+
+<style>
+.tagify {
+  --tags-border-color: transparent;
+  --tag-bg: transparent;
+  --tag-hover: #c7d2fe; /* bg-highlight-300 */
+}
+.tagify__tag {
+  margin-left: 0.25rem;
+  margin-right: 0.2rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+</style>

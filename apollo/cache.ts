@@ -1,5 +1,6 @@
 import { InMemoryCache, makeVar } from '@apollo/client/core'
 import { User } from '~/api/graphql'
+import introspection from '~/apollo/introspection'
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -13,6 +14,8 @@ export const cache = new InMemoryCache({
       },
     },
   },
+  // Specify supertype-subtype relationships, https://www.apollographql.com/docs/react/data/fragments/#defining-possibletypes-manually
+  possibleTypes: introspection.possibleTypes,
 })
 
 /**

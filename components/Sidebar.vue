@@ -125,12 +125,13 @@
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 // @ts-ignore: No type infos available
 import { VueTreeList, Tree } from 'vue-tree-list'
-import gql from 'graphql-tag'
-import { useResult } from '@vue/apollo-composable'
-import { useGetGroupsQuery } from '~/apollo/graphql'
+import { gql } from '@apollo/client/core'
+import { useResult, useQuery } from '@vue/apollo-composable'
+import { GetGroupsDocument } from '~/apollo/graphql'
 
 export default defineComponent({
   components: {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     VueTreeList,
   },
   setup() {
@@ -151,10 +152,11 @@ export default defineComponent({
       }
     `
 
-    const { result } = useGetGroupsQuery()
-    const groups = useResult(result, null, (data) => data.me?.groups)
+    const { result } = useQuery(GetGroupsDocument)
+    const groups = useResult(result, null, (data) => data?.me?.groups)
     const groupsTree = computed(() =>
-      groups.value ? new Tree(groups.value) : null
+      // eslint-disable-next-line
+      groups.value !== null ? new Tree(groups.value) : null
     )
 
     return {

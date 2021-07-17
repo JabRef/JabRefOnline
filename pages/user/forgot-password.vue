@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Portal to="header">
-      <Logo class="mx-auto h-20 w-auto" />
-      <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
-        Reset Password
-      </h2>
+    <Portal to="side">
+      <img class="w-11/12 mx-auto" src="~/assets/undraw_join_of2w.svg" />
     </Portal>
+    <h2 class="mb-7 text-center text-5xl font-extrabold text-gray-900">
+      Reset Password
+    </h2>
     <div v-if="called">
       <h2>Email Sent</h2>
       <p>
@@ -28,8 +28,9 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
-import { gql } from 'graphql-tag'
-import { useForgotPasswordMutation } from '../../apollo/graphql'
+import { gql } from '@apollo/client/core'
+import { useMutation } from '@vue/apollo-composable'
+import { ForgotPasswordDocument } from '../../apollo/graphql'
 
 export default defineComponent({
   name: 'ForgotPassword',
@@ -37,7 +38,7 @@ export default defineComponent({
   setup() {
     const email = ref('')
     gql`
-      mutation ForgotPassword($email: String!) {
+      mutation ForgotPassword($email: EmailAddress!) {
         forgotPassword(email: $email)
       }
     `
@@ -45,7 +46,7 @@ export default defineComponent({
       mutate: forgotPassword,
       called,
       error,
-    } = useForgotPasswordMutation(() => ({
+    } = useMutation(ForgotPasswordDocument, () => ({
       variables: {
         email: email.value,
       },

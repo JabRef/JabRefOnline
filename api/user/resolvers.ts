@@ -1,5 +1,6 @@
 import { User } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
+import { UserInputError } from 'apollo-server-express'
 import { Context } from '../context'
 import {
   MutationLoginArgs,
@@ -52,7 +53,7 @@ export class Mutation {
     context: Context
   ): Promise<User> {
     const newUser = await this.authService.createAccount(email, password)
-    context.login(newUser)
+    await context.login(newUser)
     return newUser
   }
 
@@ -61,7 +62,7 @@ export class Mutation {
     { email, password }: MutationLoginArgs,
     context: Context
   ): Promise<User | null> {
-    const { user } = await context.authenticate('graphql-local', {
+    const { user, info } = await context.authenticate('graphql-local', {
       email,
       password,
     })
@@ -70,7 +71,9 @@ export class Mutation {
       await context.login(user)
       return user
     } else {
-      return null
+      throw new UserInputError(
+        info?.message || 'Unknown error while logging in.'
+      )
     }
   }
 

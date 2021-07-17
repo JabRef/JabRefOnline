@@ -10,39 +10,41 @@ input FieldValueTupleInput {
   value: String!
 }
 
-# Articles, books etc
-# These *Raw*-types should only be used to sync with JabRef
+"""
+Articles, books etc
+These *Raw*-types should only be used to sync with JabRef
+"""
 input DocumentRawInput {
-    type: String!
-    citationKey: String
+  type: String!
+  citationKey: String
 
-    lastModified: DateTime
-    added: DateTime
+  lastModified: DateTime
+  added: DateTime
 
-    fields: [FieldValueTupleInput!]
+  fields: [FieldValueTupleInput!]
 }
 
 input DocumentRawUpdateInput {
-    id: ID!,
-    type: String
-    citationKey: String
+  id: ID!
+  type: String
+  citationKey: String
 
-    lastModified: DateTime
-    added: DateTime
+  lastModified: DateTime
+  added: DateTime
 
-    fields: [FieldValueTupleInput!]
+  fields: [FieldValueTupleInput!]
 }
 
 type DocumentRaw {
-    id: ID!
+  id: ID!
 
-    type: String!
-    citationKey: String
+  type: String!
+  citationKey: String
 
-    lastModified: DateTime
-    added: DateTime
+  lastModified: DateTime
+  added: DateTime
 
-    fields: [FieldValueTuple!]!
+  fields: [FieldValueTuple!]!
 }
 
 type Person {
@@ -70,23 +72,24 @@ interface Document {
   id: ID!
   type: DocumentType
   title: String
+  "Keywords or tags used to describe the content."
+  keywords: [String]
 }
 
 type Article implements Document {
   id: ID!
   type: DocumentType
   title: String
+  keywords: [String!]!
 
-  # The page on which the work starts; for example "135" or "xiii".
+  " The page on which the work starts; for example '135' or 'xiii'."
   pageStart: String
-  # The page on which the work ends; for example "138" or "xvi".
+  " The page on which the work ends; for example '138' or 'xvi'."
   pageEnd: String
-  # A short description that summarizes the work.
+  " A short description that summarizes the work."
   abstract: String
-  # The author of this work.
-  author: Entity
-  # Keywords or tags used to describe the content.
-  keywords: [String]
+  " The authors of this work."
+  authors: [Entity!]!
   journal: Journal
 }
 
@@ -94,8 +97,8 @@ type Unknown implements Document {
   id: ID!
   type: DocumentType
   title: String
+  keywords: [String!]!
 }
-
 
 extend type Query {
   userDocument(id: ID!): Document

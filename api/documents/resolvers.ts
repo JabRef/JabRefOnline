@@ -95,6 +95,7 @@ function convertFromRaw(
   }
 
   if (special) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     convertedDocument = Object.assign(
       convertedDocument,
       Object.fromEntries(special)
@@ -163,6 +164,11 @@ export class DocumentResolver {
         return 'Unknown'
     }
   }
+
+  keywords(document: UserDocument): string[] {
+    // TODO: Already store keywords on save as a list?
+    return document.keywords?.split(',') ?? []
+  }
 }
 
 @injectable()
@@ -179,8 +185,9 @@ export class DocumentRawResolver {
       otherFields = (document.other as Prisma.JsonArray)
         .map((item) => {
           if (item) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const [key, value] = Object.entries(item)[0]
-            return toPair(key as string, value as string)
+            return toPair(key, value as string)
           }
           return null
         })
@@ -192,15 +199,18 @@ export class DocumentRawResolver {
 
 @injectable()
 export class ArticleResolver {
-  author(document: UserDocument): Person | null {
+  author(document: UserDocument): Person[] {
     if (document.author) {
-      return {
-        id: 'TODO',
-        name: document.author,
-        __typename: 'Person',
-      }
+      // TODO: Already store authors separately on save?
+      return document.author.split(' and ').map((name) => {
+        return {
+          id: 'TODO' + name,
+          name,
+          __typename: 'Person',
+        }
+      })
     } else {
-      return null
+      return []
     }
   }
 

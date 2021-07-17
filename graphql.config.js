@@ -22,13 +22,28 @@ const codegen = {
         },
         scalars: {
           DateTime: 'Date',
+          EmailAddress: 'string',
         },
       },
       plugins: ['typescript', 'typescript-resolvers'],
     },
     'apollo/graphql.ts': {
-      documents: ['./pages/**/*.vue', './components/**/*.vue'],
-      plugins: ['typescript', 'typescript-operations', 'typescript-vue-apollo'],
+      documents: [
+        './pages/**/*.vue',
+        './components/**/*.vue',
+        './middleware/**/*.*',
+      ],
+      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
+      config: {
+        scalars: {
+          DateTime: 'Date',
+          EmailAddress: 'string',
+        },
+      },
+    },
+    // Generate supertype-subtype relationships, needed for client-side caching
+    'apollo/introspection.ts': {
+      plugins: ['fragment-matcher'],
     },
   },
 }

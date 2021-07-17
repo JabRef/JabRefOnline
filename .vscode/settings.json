@@ -6,6 +6,7 @@
     "jiti",
     "journaltitle",
     "nuxtjs",
+    "transpiled",
     "tsyringe",
     "upsert"
   ],
@@ -22,5 +23,18 @@
     "coverage": true
   },
   "jest.jestCommandLine": "yarn test",
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "graphql",
+    "vue"
+  ],
+  "eslint.options": {
+    "extentions": [
+      ".js",
+      ".graphql",
+      ".vue",
+    ]
+  },
   "vscode-graphql.useSchemaFileDefinitions": true
 }
