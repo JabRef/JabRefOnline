@@ -198,8 +198,8 @@ export class DocumentRawResolver {
 }
 
 @injectable()
-export class ArticleResolver {
-  author(document: UserDocument): Person[] {
+export class ArticleResolver extends DocumentResolver {
+  authors(document: UserDocument): Person[] {
     if (document.author) {
       // TODO: Already store authors separately on save?
       return document.author.split(' and ').map((name) => {
@@ -227,6 +227,9 @@ export class ArticleResolver {
   }
 }
 
+@injectable()
+export class UnknownResolver extends DocumentResolver {}
+
 export function resolvers(): Resolvers {
   return {
     Query: container.resolve(Query),
@@ -234,5 +237,6 @@ export function resolvers(): Resolvers {
     Document: container.resolve(DocumentResolver),
     DocumentRaw: container.resolve(DocumentRawResolver),
     Article: container.resolve(ArticleResolver),
+    Unknown: container.resolve(UnknownResolver),
   }
 }
