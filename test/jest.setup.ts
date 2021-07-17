@@ -8,7 +8,7 @@ import { RedisClient } from 'redis'
 expect.addSnapshotSerializer({
   test: (value) => {
     return (
-      value !== undefined &&
+      value != null &&
       ((value as GraphQLResponse).data !== undefined ||
         (value as GraphQLResponse).errors !== undefined) &&
       (value as GraphQLResponse).http !== undefined
