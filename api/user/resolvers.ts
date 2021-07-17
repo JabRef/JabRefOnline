@@ -1,35 +1,55 @@
 import { User } from '@prisma/client'
-import { injectable } from 'tsyringe'
+import { container, injectable } from 'tsyringe'
 import { UserInputError } from 'apollo-server-express'
 import { Context } from '../context'
-import { Resolvers as AllResolvers } from '../graphql'
-import { Resolvers as DocumentResolvers } from '../documents/resolvers'
-import { Resolvers as GroupResolvers } from '../groups/resolvers'
+import {
+  MutationLoginArgs,
+  MutationSignupArgs,
+  MutationChangePasswordArgs,
+  MutationForgotPasswordArgs,
+  QueryUserArgs,
+  Resolvers,
+} from '../graphql'
+import { GroupResolved } from '../groups/resolvers'
+import {
+  UserDocument,
+  UserDocumentService,
+} from '../documents/user.document.service'
+import { GroupService } from '../groups/service'
 import { AuthService } from './auth.service'
 
 @injectable()
-export class Resolvers {
-  constructor(
-    private authService: AuthService,
-    private documentResolver: DocumentResolvers,
-    private groupsResolver: GroupResolvers
-  ) {}
+export class Query {
+  constructor(private authService: AuthService) {}
 
-  async getUserById(id: string): Promise<User | null> {
+  async user(
+    _root: Record<string, never>,
+    { id }: QueryUserArgs,
+    _context: Context
+  ): Promise<User | null> {
     return await this.authService.getUserById(id)
   }
 
-  async me(context: Context): Promise<User | null> {
+  async me(
+    _root: Record<string, never>,
+    _args: Record<string, never>,
+    context: Context
+  ): Promise<User | null> {
     if (process.env.NODE_ENV === 'development') {
       return await this.authService.getUserByEmail('test@testum.de2')
     } else {
       return context.getUser() || null
     }
   }
+}
+
+@injectable()
+export class Mutation {
+  constructor(private authService: AuthService) {}
 
   async signup(
-    email: string,
-    password: string,
+    _root: Record<string, never>,
+    { email, password }: MutationSignupArgs,
     context: Context
   ): Promise<User> {
     const newUser = await this.authService.createAccount(email, password)
@@ -38,9 +58,9 @@ export class Resolvers {
   }
 
   async login(
-    context: Context,
-    email: string,
-    password: string
+    _root: Record<string, never>,
+    { email, password }: MutationLoginArgs,
+    context: Context
   ): Promise<User | null> {
     const { user, info } = await context.authenticate('graphql-local', {
       email,
@@ -57,60 +77,72 @@ export class Resolvers {
     }
   }
 
-  logout(context: Context): boolean {
+  logout(
+    _root: Record<string, never>,
+    _args: Record<string, never>,
+    context: Context
+  ): boolean {
     context.logout()
     return true
   }
 
-  async forgotPassword(email: string): Promise<boolean> {
+  async forgotPassword(
+    _root: Record<string, never>,
+    { email }: MutationForgotPasswordArgs,
+    _context: Context
+  ): Promise<boolean> {
     return await this.authService.resetPassword(email)
   }
 
   async changePassword(
-    token: string,
-    id: string,
-    newPassword: string
+    _root: Record<string, never>,
+    { token, id, newPassword }: MutationChangePasswordArgs,
+    _context: Context
   ): Promise<User | null> {
-    const user = await this.authService.updatePassword(token, id, newPassword)
-    return user
+    return await this.authService.updatePassword(token, id, newPassword)
+  }
+}
+
+@injectable()
+export class UserResolver {
+  constructor(
+    private userDocumentService: UserDocumentService,
+    private groupService: GroupService
+  ) {}
+
+  async documentsRaw(user: User): Promise<UserDocument[]> {
+    return await this.userDocumentService.getDocumentsOf(user)
   }
 
-  resolvers(): AllResolvers {
-    return {
-      Query: {
-        user: (_root, { id }, _context) => {
-          return this.getUserById(id)
-        },
-        me: (_root, _args, context) => {
-          return this.me(context)
-        },
-      },
+  async documents(user: User): Promise<UserDocument[]> {
+    return await this.userDocumentService.getDocumentsOf(user)
+  }
 
-      Mutation: {
-        logout: (_root, _args, context) => {
-          return this.logout(context)
-        },
+  async groups(user: User): Promise<GroupResolved[]> {
+    const groups = await this.groupService.getGroupsOf(user)
+    const groupsById = new Map<string, GroupResolved>()
+    groups.forEach((group) =>
+      groupsById.set(group.id, { ...group, parent: null, children: [] })
+    )
+    const roots: GroupResolved[] = []
 
-        login: (_root, { email, password }, context) => {
-          return this.login(context, email, password)
-        },
+    groupsById.forEach((group) => {
+      if (group.parentId === null) {
+        roots.push(group)
+      } else {
+        const parent = groupsById.get(group.parentId)
+        parent?.children.push(group)
+        group.parent = parent ?? null
+      }
+    })
+    return roots
+  }
+}
 
-        signup: (_root, { email, password }, context) => {
-          return this.signup(email, password, context)
-        },
-        forgotPassword: (_root, { email }, _context) => {
-          return this.forgotPassword(email)
-        },
-        changePassword: (_root, { token, id, newPassword }, _context) => {
-          return this.changePassword(token, id, newPassword)
-        },
-      },
-
-      User: {
-        documentsRaw: (user) => this.documentResolver.getDocumentsOf(user),
-        documents: (user) => this.documentResolver.getDocumentsOf(user),
-        groups: (user) => this.groupsResolver.getGroupsOf(user),
-      },
-    }
+export function resolvers(): Resolvers {
+  return {
+    Query: container.resolve(Query),
+    Mutation: container.resolve(Mutation),
+    User: container.resolve(UserResolver),
   }
 }

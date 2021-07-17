@@ -4,7 +4,7 @@ import * as prisma from '~/prisma/util'
 
 const authenticatedClient = createAuthenticatedClient()
 
-describe('User', () => {
+describe('Query', () => {
   beforeEach(async () => {
     await prisma.resetToSeed()
   })
@@ -13,9 +13,9 @@ describe('User', () => {
     await prisma.disconnect()
   })
 
-  describe('getCurrentUser', () => {
+  describe('me', () => {
     const query = gql`
-      query getCurrentUser {
+      query me {
         me {
           id
           email
@@ -38,7 +38,7 @@ describe('User', () => {
     })
   })
 
-  describe('getUserById', () => {
+  describe('user', () => {
     const query = gql`
       query getUserById($id: ID!) {
         user(id: $id) {

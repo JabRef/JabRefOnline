@@ -101,7 +101,8 @@ type Unknown implements Document {
 }
 
 extend type Query {
-  getUserDocumentRaw(id: ID!): DocumentRaw
+  userDocument(id: ID!): Document
+  userDocumentRaw(id: ID!): DocumentRaw
 }
 
 extend type Mutation {

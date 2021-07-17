@@ -8,7 +8,7 @@ import { ContextParams } from 'graphql-passport/lib/buildContext'
 export interface Context {
   isAuthenticated: () => boolean
   isUnauthenticated: () => boolean
-  getUser: () => User
+  getUser: () => User | null
   authenticate: (
     strategyName: string,
     options?: Record<string, unknown>
