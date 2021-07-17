@@ -155,8 +155,8 @@ export default defineComponent({
     const { result } = useQuery(GetGroupsDocument)
     const groups = useResult(result, null, (data) => data?.me?.groups)
     const groupsTree = computed(() =>
-      // eslint-disable-next-line
-      groups.value !== null ? new Tree(groups.value) : null
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+      groups.value != null ? new Tree(groups.value) : null
     )
 
     return {
