@@ -111,7 +111,7 @@ export class UserResolver {
   }
 
   async documents(user: User): Promise<UserDocument[]> {
-    return await this.userDocumentService.getDocumentsOf(user)
+    return await this.userDocumentService.getDocumentsOf(user, true)
   }
 
   async groups(user: User): Promise<GroupResolved[]> {

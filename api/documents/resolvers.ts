@@ -11,6 +11,7 @@ import {
   Person,
   Journal,
   QueryUserDocumentArgs,
+  Institution,
 } from '../graphql'
 import { UserDocumentService, UserDocument } from './user.document.service'
 
@@ -156,12 +157,33 @@ export class Mutation {
 
 @injectable()
 export class DocumentResolver {
-  __resolveType(document: UserDocument): 'Article' | 'Unknown' {
+  __resolveType(
+    document: UserDocument
+  ): 'Article' | 'InProceedings' | 'PhdThesis' | 'Unknown' {
     switch (parse(document.type)) {
       case DocumentType.Article:
         return 'Article'
+      case DocumentType.InProceedings:
+        return 'InProceedings'
+      case DocumentType.PhdThesis:
+        return 'PhdThesis'
       default:
         return 'Unknown'
+    }
+  }
+
+  authors(document: UserDocument): Person[] {
+    if (document.author) {
+      // TODO: Already store authors separately on save?
+      return document.author.split(' and ').map((name) => {
+        return {
+          id: 'TODO' + name,
+          name,
+          __typename: 'Person',
+        }
+      })
+    } else {
+      return []
     }
   }
 
@@ -199,27 +221,37 @@ export class DocumentRawResolver {
 
 @injectable()
 export class ArticleResolver extends DocumentResolver {
-  authors(document: UserDocument): Person[] {
-    if (document.author) {
-      // TODO: Already store authors separately on save?
-      return document.author.split(' and ').map((name) => {
-        return {
-          id: 'TODO' + name,
-          name,
-          __typename: 'Person',
-        }
-      })
-    } else {
-      return []
-    }
-  }
-
   journal(document: UserDocument): Journal | null {
     const journalName = document.journal ?? document.journaltitle
     if (journalName) {
       return {
-        id: 'TODO',
+        id: 'TODO' + journalName,
         name: journalName,
+      }
+    } else {
+      return null
+    }
+  }
+}
+
+@injectable()
+export class InProceedingsResolver extends DocumentResolver {
+  booktitle(document: UserDocument): string | null {
+    return document.booktitle
+  }
+}
+
+@injectable()
+export class PhdThesisResolver extends DocumentResolver {
+  institution(document: UserDocument): Institution | null {
+    const institutionName = document.other?.find(
+      (field) => field.field === 'institution'
+    )?.value
+
+    if (institutionName) {
+      return {
+        id: 'TODO' + institutionName,
+        name: institutionName,
       }
     } else {
       return null
@@ -237,6 +269,8 @@ export function resolvers(): Resolvers {
     Document: container.resolve(DocumentResolver),
     DocumentRaw: container.resolve(DocumentRawResolver),
     Article: container.resolve(ArticleResolver),
+    InProceedings: container.resolve(InProceedingsResolver),
+    PhdThesis: container.resolve(PhdThesisResolver),
     Unknown: container.resolve(UnknownResolver),
   }
 }

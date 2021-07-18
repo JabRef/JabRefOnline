@@ -64,8 +64,20 @@ type Journal {
   name: String!
 }
 
+"""
+A university or some other institution.
+"""
+type Institution {
+  "The unique identifier of the institution."
+  id: ID!
+  "The name of the university or institution."
+  name: String!
+}
+
 enum DocumentType {
   ARTICLE
+  PHD_THESIS
+  IN_PROCEEDINGS
 }
 
 interface Document {
@@ -74,30 +86,58 @@ interface Document {
   title: String
   "Keywords or tags used to describe the content."
   keywords: [String]
+  "A short description that summarizes the work."
+  abstract: String
+  "The authors of this work."
+  authors: [Entity!]!
 }
 
 type Article implements Document {
   id: ID!
   type: DocumentType
   title: String
-  keywords: [String!]!
-
-  " The page on which the work starts; for example '135' or 'xiii'."
-  pageStart: String
-  " The page on which the work ends; for example '138' or 'xvi'."
-  pageEnd: String
-  " A short description that summarizes the work."
-  abstract: String
-  " The authors of this work."
   authors: [Entity!]!
+  keywords: [String!]!
+  abstract: String
+
+  "The page on which the work starts; for example '135' or 'xiii'."
+  pageStart: String
+  "The page on which the work ends; for example '138' or 'xvi'."
+  pageEnd: String
   journal: Journal
+}
+
+type PhdThesis implements Document {
+  id: ID!
+  type: DocumentType
+  title: String
+  authors: [Entity!]!
+  keywords: [String!]!
+  abstract: String
+
+  "The university or some other institution where the thesis has been written at."
+  institution: Institution
+}
+
+type InProceedings implements Document {
+  id: ID!
+  type: DocumentType
+  title: String
+  authors: [Entity!]!
+  keywords: [String!]!
+  abstract: String
+
+  "The title of the proceedings."
+  booktitle: String
 }
 
 type Unknown implements Document {
   id: ID!
   type: DocumentType
   title: String
+  authors: [Entity!]!
   keywords: [String!]!
+  abstract: String
 }
 
 extend type Query {

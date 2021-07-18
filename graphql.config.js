@@ -18,6 +18,8 @@ const codegen = {
           Document: './documents/user.document.service#UserDocument',
           DocumentRaw: './documents/user.document.service#UserDocument',
           Article: './documents/user.document.service#UserDocument',
+          InProceedings: './documents/user.document.service#UserDocument',
+          PhdThesis: './documents/user.document.service#UserDocument',
           Unknown: './documents/user.document.service#UserDocument',
           Group: './groups/resolvers#GroupMaybeResolved',
         },

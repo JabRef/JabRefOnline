@@ -31,9 +31,17 @@
       <span class="font-semibold">2019</span>
       <a
         v-if="'journal' in document && document.journal"
-        href="journal/TODOid"
+        :href="'journal/' + document.journal.id"
         >{{ document.journal.name }}</a
       >
+      <a
+        v-if="'institution' in document && document.institution"
+        :href="'institution/' + document.institution.id"
+        >{{ document.institution.name }}</a
+      >
+      <span v-if="'booktitle' in document && document.booktitle">
+        {{ document.booktitle }}
+      </span>
     </div>
     <div
       v-if="document.keywords.length > 0"
@@ -94,19 +102,29 @@ export const DocumentForView = gql`
     id
     title
     keywords
-    ... on Article {
-      abstract
-      authors {
-        ... on Person {
-          id
-          name
-        }
-        ... on Organization {
-          id
-          name
-        }
+    abstract
+    authors {
+      ... on Person {
+        id
+        name
       }
+      ... on Organization {
+        id
+        name
+      }
+    }
+    ... on Article {
       journal {
+        id
+        name
+      }
+    }
+    ... on InProceedings {
+      booktitle
+    }
+    ... on PhdThesis {
+      institution {
+        id
         name
       }
     }
@@ -129,6 +147,12 @@ export default defineComponent({
       switch (document.value.__typename) {
         case 'Article':
           return 'newspaper'
+        case 'InProceedings':
+          return 'chalkboard-teacher'
+        case 'PhdThesis':
+          return 'graduation-cap'
+        default:
+          return 'file-alt'
       }
     })
 
@@ -136,6 +160,12 @@ export default defineComponent({
       switch (document.value.__typename) {
         case 'Article':
           return 'Journal Paper'
+        case 'InProceedings':
+          return 'Conference Paper'
+        case 'PhdThesis':
+          return 'PhD Thesis'
+        default:
+          return document.value.__typename
       }
     })
 

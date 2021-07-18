@@ -4,6 +4,7 @@ import { PrismaClient, GroupType, GroupHierarchyType } from '@prisma/client'
 async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.user.deleteMany({})
   await prisma.userDocument.deleteMany({})
+  await prisma.userDocumentOtherField.deleteMany({})
   await prisma.group.deleteMany({})
 
   await prisma.user.create({
@@ -80,7 +81,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
       author: 'Katz, David L. and Doughty, Kim and Ali, Ather',
       abstract:
         'Cocoa contains more phenolic antioxidants than most foods. Flavonoids, including catechin, epicatechin, and procyanidins predominate in antioxidant activity. The tricyclic structure of the flavonoids determines antioxidant effects that scavenge reactive oxygen species, chelate Fe2+ and Cu+, inhibit enzymes, and upregulate antioxidant defenses. The epicatechin content of cocoa is primarily responsible for its favorable impact on vascular endothelium via its effect on both acute and chronic upregulation of nitric oxide production. Other cardiovascular effects are mediated through anti-inflammatory effects of cocoa polyphenols, and modulated through the activity of NF-kappa B. Antioxidant effects of cocoa may directly influence insulin resistance and, in turn, reduce risk for diabetes. Further, cocoa consumption may stimulate changes in redox-sensitive signaling pathways involved in gene expression and the immune response. Cocoa can protect nerves from injury and inflammation, protect the skin from oxidative damage from UV radiation in topical preparations, and have beneficial effects on satiety, cognitive function, and mood. As cocoa is predominantly consumed as energy-dense chocolate, potential detrimental effects of overconsumption exist, including increased risk of weight gain. Overall, research to date suggests that the benefits of moderate cocoa or dark chocolate consumption likely outweigh the risks.',
-      keywords: 'dark chocolate, blood-pressure',
+      keywords: 'dark chocolate, blood pressure',
       doi: '10.1089/ars.2010.3697',
       volume: '15',
       issue: '10',
@@ -119,7 +120,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
       other: {
         create: [
           {
-            field: 'school',
+            field: 'institution',
             value: 'Ghent University',
           },
         ],
