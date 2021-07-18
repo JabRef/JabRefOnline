@@ -9,6 +9,7 @@
 - Test server: https://jabref-dev.azurewebsites.net
   This server runs the latest version of the main branch with test data that is usually reset on redeployment.
   The main use of this server is for developers to test the latest version against their application without the fear to delete user data.
+  In particular, you can log in using `alice@jabref.de / EBNPXY35TYkYXHs`.
 
 ## Getting started
 - Install [Node.js](https://nodejs.org/)

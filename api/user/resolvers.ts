@@ -30,16 +30,12 @@ export class Query {
     return await this.authService.getUserById(id)
   }
 
-  async me(
+  me(
     _root: Record<string, never>,
     _args: Record<string, never>,
     context: Context
-  ): Promise<User | null> {
-    if (process.env.NODE_ENV === 'development') {
-      return await this.authService.getUserByEmail('test@testum.de2')
-    } else {
-      return context.getUser() || null
-    }
+  ): User | null {
+    return context.getUser() || null
   }
 }
 
