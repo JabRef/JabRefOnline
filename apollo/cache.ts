@@ -6,7 +6,7 @@ export const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        currentUser: {
+        me: {
           read() {
             return currentUserVar()
           },
