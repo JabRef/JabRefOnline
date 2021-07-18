@@ -172,6 +172,10 @@ export class DocumentResolver {
     }
   }
 
+  type(document: UserDocument): DocumentType | null {
+    return parse(document.type)
+  }
+
   authors(document: UserDocument): Person[] {
     if (document.author) {
       // TODO: Already store authors separately on save?

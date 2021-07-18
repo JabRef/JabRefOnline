@@ -94,12 +94,13 @@ import {
   toRefs,
 } from '@nuxtjs/composition-api'
 import { gql } from '@apollo/client/core'
-import { DocumentForViewFragment } from '../apollo/graphql'
+import { DocumentForViewFragment, DocumentType } from '../apollo/graphql'
 import { useUiStore } from '~/store'
 
 export const DocumentForView = gql`
   fragment DocumentForView on Document {
     id
+    type
     title
     keywords
     abstract
@@ -142,14 +143,13 @@ export default defineComponent({
     const { document } = toRefs(props)
     const viewFullAbstract = ref(false)
 
-    // TODO: Convert the following switches to use `document.value.type`
     const typeIcon = computed(() => {
-      switch (document.value.__typename) {
-        case 'Article':
+      switch (document.value.type) {
+        case DocumentType.Article:
           return 'newspaper'
-        case 'InProceedings':
+        case DocumentType.InProceedings:
           return 'chalkboard-teacher'
-        case 'PhdThesis':
+        case DocumentType.PhdThesis:
           return 'graduation-cap'
         default:
           return 'file-alt'
@@ -157,15 +157,13 @@ export default defineComponent({
     })
 
     const typeDescription = computed(() => {
-      switch (document.value.__typename) {
-        case 'Article':
+      switch (document.value.type) {
+        case DocumentType.Article:
           return 'Journal Paper'
-        case 'InProceedings':
+        case DocumentType.InProceedings:
           return 'Conference Paper'
-        case 'PhdThesis':
+        case DocumentType.PhdThesis:
           return 'PhD Thesis'
-        default:
-          return document.value.__typename
       }
     })
 
