@@ -1,11 +1,17 @@
-import { Prisma, User } from '@prisma/client'
-import { injectable } from 'tsyringe'
+import { Prisma } from '@prisma/client'
+import { container, injectable } from 'tsyringe'
+import { Context } from '../context'
 import {
   FieldValueTuple,
   DocumentRawInput,
   DocumentRawUpdateInput,
   DocumentType,
-  Resolvers as AllResolvers,
+  Resolvers,
+  MutationAddUserDocumentRawArgs,
+  Person,
+  Journal,
+  QueryUserDocumentArgs,
+  Institution,
 } from '../graphql'
 import { UserDocumentService, UserDocument } from './user.document.service'
 
@@ -90,6 +96,7 @@ function convertFromRaw(
   }
 
   if (special) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     convertedDocument = Object.assign(
       convertedDocument,
       Object.fromEntries(special)
@@ -115,24 +122,84 @@ export function parse(type: string): DocumentType | null {
 }
 
 @injectable()
-export class Resolvers {
+export class Query {
   constructor(private userDocumentService: UserDocumentService) {}
 
-  async getDocumentsOf(user: User): Promise<UserDocument[]> {
-    return await this.userDocumentService.getDocumentsOf(user)
-  }
-
-  async getUserDocument(id: string): Promise<UserDocument | null> {
+  async userDocument(
+    _root: Record<string, never>,
+    { id }: QueryUserDocumentArgs,
+    _context: Context
+  ): Promise<UserDocument | null> {
     return await this.userDocumentService.getDocumentById(id, true)
   }
 
-  async addUserDocument(
-    document: DocumentRawInput
+  async userDocumentRaw(
+    _root: Record<string, never>,
+    { id }: QueryUserDocumentArgs,
+    _context: Context
+  ): Promise<UserDocument | null> {
+    return await this.userDocumentService.getDocumentById(id, true)
+  }
+}
+
+@injectable()
+export class Mutation {
+  constructor(private userDocumentService: UserDocumentService) {}
+
+  async addUserDocumentRaw(
+    _root: Record<string, never>,
+    { document }: MutationAddUserDocumentRawArgs,
+    _context: Context
   ): Promise<UserDocument | null> {
     return await this.userDocumentService.addDocument(convertFromRaw(document))
   }
+}
 
-  getAllFields(document: UserDocument): FieldValueTuple[] {
+@injectable()
+export class DocumentResolver {
+  __resolveType(
+    document: UserDocument
+  ): 'Article' | 'InProceedings' | 'PhdThesis' | 'Unknown' {
+    switch (parse(document.type)) {
+      case DocumentType.Article:
+        return 'Article'
+      case DocumentType.InProceedings:
+        return 'InProceedings'
+      case DocumentType.PhdThesis:
+        return 'PhdThesis'
+      default:
+        return 'Unknown'
+    }
+  }
+
+  type(document: UserDocument): DocumentType | null {
+    return parse(document.type)
+  }
+
+  authors(document: UserDocument): Person[] {
+    if (document.author) {
+      // TODO: Already store authors separately on save?
+      return document.author.split(' and ').map((name) => {
+        return {
+          id: 'TODO' + name,
+          name,
+          __typename: 'Person',
+        }
+      })
+    } else {
+      return []
+    }
+  }
+
+  keywords(document: UserDocument): string[] {
+    // TODO: Already store keywords on save as a list?
+    return document.keywords?.split(',') ?? []
+  }
+}
+
+@injectable()
+export class DocumentRawResolver {
+  fields(document: UserDocument): FieldValueTuple[] {
     const documentFields = Object.entries(document)
       .filter(([key, _]) => specialFields.includes(key))
       .map(([key, value]) => toPair(key, value as string))
@@ -144,8 +211,9 @@ export class Resolvers {
       otherFields = (document.other as Prisma.JsonArray)
         .map((item) => {
           if (item) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const [key, value] = Object.entries(item)[0]
-            return toPair(key as string, value as string)
+            return toPair(key, value as string)
           }
           return null
         })
@@ -153,61 +221,60 @@ export class Resolvers {
     }
     return [...documentFields, ...otherFields]
   }
+}
 
-  resolvers(): AllResolvers {
-    return {
-      Query: {
-        getUserDocumentRaw: (_parent, { id }, _context) =>
-          this.getUserDocument(id),
-      },
-
-      Mutation: {
-        addUserDocumentRaw: (_parent, { document }, _context) =>
-          this.addUserDocument(document),
-      },
-
-      Document: {
-        __resolveType(document, _context) {
-          switch (parse(document.type)) {
-            case DocumentType.Article:
-              return 'Article'
-            default:
-              return 'Unknown'
-          }
-        },
-      },
-
-      DocumentRaw: {
-        fields: (document, _args, _context) => {
-          return this.getAllFields(document)
-        },
-      },
-
-      Article: {
-        author: (document, _args, _context) => {
-          if (document.author) {
-            return {
-              id: 'TODO',
-              name: document.author,
-              __typename: 'Person',
-            }
-          } else {
-            return null
-          }
-        },
-
-        journal: (document, _args, _context) => {
-          const journalName = document.journal ?? document.journaltitle
-          if (journalName) {
-            return {
-              id: 'TODO',
-              name: journalName,
-            }
-          } else {
-            return null
-          }
-        },
-      },
+@injectable()
+export class ArticleResolver extends DocumentResolver {
+  journal(document: UserDocument): Journal | null {
+    const journalName = document.journal ?? document.journaltitle
+    if (journalName) {
+      return {
+        id: 'TODO' + journalName,
+        name: journalName,
+      }
+    } else {
+      return null
     }
+  }
+}
+
+@injectable()
+export class InProceedingsResolver extends DocumentResolver {
+  booktitle(document: UserDocument): string | null {
+    return document.booktitle
+  }
+}
+
+@injectable()
+export class PhdThesisResolver extends DocumentResolver {
+  institution(document: UserDocument): Institution | null {
+    const institutionName = document.other?.find(
+      (field) => field.field === 'institution'
+    )?.value
+
+    if (institutionName) {
+      return {
+        id: 'TODO' + institutionName,
+        name: institutionName,
+      }
+    } else {
+      return null
+    }
+  }
+}
+
+@injectable()
+export class UnknownResolver extends DocumentResolver {}
+
+export function resolvers(): Resolvers {
+  return {
+    Query: container.resolve(Query),
+    Mutation: container.resolve(Mutation),
+    Document: container.resolve(DocumentResolver),
+    DocumentRaw: container.resolve(DocumentRawResolver),
+    Article: container.resolve(ArticleResolver),
+    InProceedings: container.resolve(InProceedingsResolver),
+    PhdThesis: container.resolve(PhdThesisResolver),
+    Unknown: container.resolve(UnknownResolver),
   }
 }

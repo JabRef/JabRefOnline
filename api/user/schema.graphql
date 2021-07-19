@@ -17,31 +17,30 @@ extend type Mutation {
   login(email: EmailAddress!, password: String!): User
   signup(email: EmailAddress!, password: String!): UserResponse
   forgotPassword(email: EmailAddress!): Boolean
-  changePassword(token: String!, id:ID!, newPassword: String!): UserResponse
-
+  changePassword(token: String!, id: ID!, newPassword: String!): User
 }
-union UserResponse = Success | Problem
 
-type Success {
+union UserResponse = ReturnUser | InputValidationProblem
+
+type ReturnUser {
   user: User!
 }
 
-type Problem {
-  inputError: InputError!
+interface InputValidationProblem {
+  problems: [InputFieldValidationProblem]!
 }
 
-type InputError {
-  field: String!
+interface InputFieldValidationProblem {
   message: String!
+  path: String!
 }
-
 
 type User {
-    id: ID!
-    email: EmailAddress!
+  id: ID!
+  email: EmailAddress!
 
-    documentsRaw: [DocumentRaw!]!
-    documents: [Document!]!
+  documentsRaw: [DocumentRaw!]!
+  documents: [Document!]!
 
-    groups: [Group!]!
+  groups: [Group!]!
 }

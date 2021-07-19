@@ -1,5 +1,16 @@
 # JabRefOnline
 
+## Servers
+- Production server: https://jabref.azurewebsites.net
+  This server runs the last released version with data provided by the production database.
+- Staging server: https://jabref-staging.azurewebsites.net
+  This server usually runs the latest version of the main branch with data provided by the production database.
+  Usually, you do not want to target this server. Its main purpose is to test the main branch before a release.
+- Test server: https://jabref-dev.azurewebsites.net
+  This server runs the latest version of the main branch with test data that is usually reset on redeployment.
+  The main use of this server is for developers to test the latest version against their application without the fear to delete user data.
+  In particular, you can log in using `alice@jabref.de / EBNPXY35TYkYXHs`.
+
 ## Getting started
 - Install [Node.js](https://nodejs.org/)
 - Install [PostgreSQL](https://www.postgresql.org/)

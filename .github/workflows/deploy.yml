@@ -34,9 +34,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.2.0
         with:
           node-version: 14.x
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install
@@ -54,15 +55,63 @@ jobs:
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
 
-      - name: Deploy to Azure WebApp
+      - name: Start deployment (Test server)
+        uses: bobheadxi/deployments@v0.6.0
+        id: deployment-test
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: Test
+
+      - name: Deploy to Azure WebApp (Test server)
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: JabRef
+          publish-profile: ${{ secrets.AZURE_TEST_PUBLISH_PROFILE }}
+          package: ./artifact
+
+      - name: Reset database on Azure (Test database)
+        run: yarn prisma:migrate:reset --force
+        env:
+          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+
+      - name: Update deployment status (Test server)
+        uses: bobheadxi/deployments@v0.6.0
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment-test.outputs.deployment_id }}
+          env_url: https://jabref-dev.azurewebsites.net/
+
+      - name: Start deployment (Staging server)
+        uses: bobheadxi/deployments@v0.6.0
+        id: deployment-staging
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: Staging
+
+      - name: Deploy to Azure WebApp (Staging server)
         uses: azure/webapps-deploy@v2
         with:
           app-name: JabRef
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: ./artifact
 
-      - name: Update database on Azure
+      - name: Update database on Azure (Production database)
         run: yarn prisma:migrate:deploy
         env:
           DATABASE_URL: ${{ secrets.AZURE_DATABASE_URL }}
+
+      - name: Update deployment status (Staging server)
+        uses: bobheadxi/deployments@v0.6.0
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment-staging.outputs.deployment_id }}
+          env_url: https://jabref-staging.azurewebsites.net/
 

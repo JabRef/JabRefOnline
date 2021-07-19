@@ -16,19 +16,20 @@ export interface AuthenticateReturn {
   message?: string
 }
 
-export type Success = {
+export type UserRegistered = {
   user: User
 }
 
-export type InputError = {
-  field: string
+interface InputFieldValidationProblem {
   message: string
-}
-export type Problem = {
-  inputError: InputError
+  path: string
 }
 
-export type UserResponse = Success | Problem
+export type InputValidationProblem = {
+  problems: InputFieldValidationProblem[]
+}
+
+export type UserRegistrationResponse = UserRegistered | InputValidationProblem
 
 @injectable()
 export class AuthService {
@@ -89,10 +90,7 @@ export class AuthService {
     })
   }
 
-  async createAccount(
-    email: string,
-    password: string
-  ): Promise<Success | Problem> {
+  async createAccount(email: string, password: string): Promise<user> {
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email,
@@ -130,7 +128,7 @@ export class AuthService {
     token: string,
     id: string,
     newPassword: string
-  ): Promise<Success | Problem> {
+  ): Promise<UserRegistrationResponse> {
     if (newPassword.length < 6) {
       return {
         inputError: {
@@ -141,6 +139,7 @@ export class AuthService {
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + id
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
     const hashedToken = await getAsync(key)
     if (!hashedToken) {

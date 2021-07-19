@@ -18,6 +18,9 @@ const codegen = {
           Document: './documents/user.document.service#UserDocument',
           DocumentRaw: './documents/user.document.service#UserDocument',
           Article: './documents/user.document.service#UserDocument',
+          InProceedings: './documents/user.document.service#UserDocument',
+          PhdThesis: './documents/user.document.service#UserDocument',
+          Unknown: './documents/user.document.service#UserDocument',
           Group: './groups/resolvers#GroupMaybeResolved',
         },
         scalars: {
@@ -33,13 +36,17 @@ const codegen = {
         './components/**/*.vue',
         './middleware/**/*.*',
       ],
-      plugins: ['typescript', 'typescript-operations', 'typescript-vue-apollo'],
+      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
       config: {
         scalars: {
           DateTime: 'Date',
           EmailAddress: 'string',
         },
       },
+    },
+    // Generate supertype-subtype relationships, needed for client-side caching
+    'apollo/introspection.ts': {
+      plugins: ['fragment-matcher'],
     },
   },
 }

@@ -13,46 +13,57 @@
         ></FontAwesomeIcon>
         <span>{{ document.title }}</span>
       </button>
-
+      <!-- TOOD: Add citation display
       <a
         class="text-sm whitespace-nowrap mt-1"
-        href="/paper/3104609148/citedby"
+        href="/paper/id/citedby"
       >
         2 citations
       </a>
+      -->
     </div>
-    <div class="space-x-1">
-      <a href="author/2549788765/publication?paperId=3104609148">Tobias Diez</a>
-      <a href="author/2488101096/publication?paperId=3104609148"
-        >Gerd Rudolph</a
-      >
+    <div v-if="'authors' in document && document.authors" class="space-x-3">
+      <span v-for="author in document.authors" :key="author.id">{{
+        author.name
+      }}</span>
     </div>
     <div class="space-x-1 text-sm">
       <span class="font-semibold">2019</span>
       <a
         v-if="'journal' in document && document.journal"
-        href="journal/158241587"
+        :href="'journal/' + document.journal.id"
         >{{ document.journal.name }}</a
       >
+      <a
+        v-if="'institution' in document && document.institution"
+        :href="'institution/' + document.institution.id"
+        >{{ document.institution.name }}</a
+      >
+      <span v-if="'booktitle' in document && document.booktitle">
+        {{ document.booktitle }}
+      </span>
     </div>
-    <div class="flex flex-row space-x-2 text-sm">
-      <t-tag variant="badge" class="border border-gray-400">
-        Diffeomorphism constraint
+    <div
+      v-if="document.keywords.length > 0"
+      class="flex flex-row space-x-2 text-sm"
+    >
+      <t-tag
+        v-for="keyword in document.keywords"
+        :key="keyword"
+        variant="badge"
+        class="border border-gray-400"
+      >
+        <!-- TODO: Add icon of group <FontAwesomeIcon icon="dragon" size="xs" class="mr-2" /> -->
+        {{ keyword }}
       </t-tag>
-      <t-tag variant="badge" class="border border-gray-400">
-        Gauge symmetry
-      </t-tag>
-      <t-tag variant="badge" class="border border-gray-400">
-        <FontAwesomeIcon icon="dragon" size="xs" class="mr-2" />
-        Dragons
-      </t-tag>
-
+      <!-- TODO: Add overflow
       <t-button variant="linkplain" class="text-sm my-auto">
         <span>View More (8+)</span>
         <FontAwesomeIcon icon="chevron-down" size="xs" />
       </t-button>
+      -->
     </div>
-    <div v-if="document.abstract">
+    <div v-if="'abstract' in document && document.abstract">
       <span class="flex-grow" :class="{ 'line-clamp-2': !viewFullAbstract }">
         {{ document.abstract }}
       </span>
@@ -82,12 +93,49 @@ import {
   computed,
   toRefs,
 } from '@nuxtjs/composition-api'
-import { Article, Document, DocumentType } from '../apollo/graphql'
+import { gql } from '@apollo/client/core'
+import { DocumentForViewFragment, DocumentType } from '../apollo/graphql'
 import { useUiStore } from '~/store'
+
+export const DocumentForView = gql`
+  fragment DocumentForView on Document {
+    id
+    type
+    title
+    keywords
+    abstract
+    authors {
+      ... on Person {
+        id
+        name
+      }
+      ... on Organization {
+        id
+        name
+      }
+    }
+    ... on Article {
+      journal {
+        id
+        name
+      }
+    }
+    ... on InProceedings {
+      booktitle
+    }
+    ... on PhdThesis {
+      institution {
+        id
+        name
+      }
+    }
+  }
+`
+
 export default defineComponent({
   props: {
     document: {
-      type: Object as PropType<Document | Article>,
+      type: Object as PropType<DocumentForViewFragment>,
       required: true,
     },
   },
@@ -99,6 +147,12 @@ export default defineComponent({
       switch (document.value.type) {
         case DocumentType.Article:
           return 'newspaper'
+        case DocumentType.InProceedings:
+          return 'chalkboard-teacher'
+        case DocumentType.PhdThesis:
+          return 'graduation-cap'
+        default:
+          return 'file-alt'
       }
     })
 
@@ -106,6 +160,10 @@ export default defineComponent({
       switch (document.value.type) {
         case DocumentType.Article:
           return 'Journal Paper'
+        case DocumentType.InProceedings:
+          return 'Conference Paper'
+        case DocumentType.PhdThesis:
+          return 'PhD Thesis'
       }
     })
 

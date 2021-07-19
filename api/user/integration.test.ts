@@ -4,7 +4,7 @@ import * as prisma from '~/prisma/util'
 
 const authenticatedClient = createAuthenticatedClient()
 
-describe('User', () => {
+describe('Query', () => {
   beforeEach(async () => {
     await prisma.resetToSeed()
   })
@@ -13,9 +13,9 @@ describe('User', () => {
     await prisma.disconnect()
   })
 
-  describe('getCurrentUser', () => {
+  describe('me', () => {
     const query = gql`
-      query getCurrentUser {
+      query me {
         me {
           id
           email
@@ -29,7 +29,7 @@ describe('User', () => {
         Object {
           "data": Object {
             "me": Object {
-              "email": "test@testum.de2",
+              "email": "alice@jabref.de",
               "id": "ckn4oul7100004cv7y3t94n8j",
             },
           },
@@ -38,7 +38,7 @@ describe('User', () => {
     })
   })
 
-  describe('getUserById', () => {
+  describe('user', () => {
     const query = gql`
       query getUserById($id: ID!) {
         user(id: $id) {
@@ -71,13 +71,19 @@ describe('User', () => {
                   "id": "ckondtcaf000101mh7x9g4gia",
                 },
                 Object {
-                  "id": "ckondtpcn000301mhg9lvaqlu",
+                  "id": "ckr9eq4oc000101mk1ga9bxnt",
+                },
+                Object {
+                  "id": "ckr9eqap6000301mk20hycjqb",
+                },
+                Object {
+                  "id": "ckonduhjk000701mh12wia4nf",
                 },
                 Object {
                   "id": "ckondu6bh000501mh2o2tf00u",
                 },
                 Object {
-                  "id": "ckonduhjk000701mh12wia4nf",
+                  "id": "ckondtpcn000301mhg9lvaqlu",
                 },
               ],
               "documentsRaw": Array [
@@ -85,16 +91,22 @@ describe('User', () => {
                   "id": "ckondtcaf000101mh7x9g4gia",
                 },
                 Object {
-                  "id": "ckondtpcn000301mhg9lvaqlu",
+                  "id": "ckr9eq4oc000101mk1ga9bxnt",
+                },
+                Object {
+                  "id": "ckr9eqap6000301mk20hycjqb",
+                },
+                Object {
+                  "id": "ckonduhjk000701mh12wia4nf",
                 },
                 Object {
                   "id": "ckondu6bh000501mh2o2tf00u",
                 },
                 Object {
-                  "id": "ckonduhjk000701mh12wia4nf",
+                  "id": "ckondtpcn000301mhg9lvaqlu",
                 },
               ],
-              "email": "test@testum.de2",
+              "email": "alice@jabref.de",
               "groups": Array [
                 Object {
                   "id": "ckn4h9pl5000101le5bco3b8r",
