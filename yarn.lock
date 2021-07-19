@@ -1276,10 +1276,10 @@
     parse-filepath "^1.0.2"
     tslib "~2.3.0"
 
-"@graphql-eslint/eslint-plugin@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@graphql-eslint/eslint-plugin/-/eslint-plugin-1.1.3.tgz#da00b3f6c0aff87e0702a0b42519e31dfb3d7274"
-  integrity sha512-PLbNLFkfXOFI62qN644OiPk5iuX3YUpTs6KNCHGxyO9ZgHPxnU2XpOIW6rlQ8pqgJdOlEVLUn6u+7aGKOonGKA==
+"@graphql-eslint/eslint-plugin@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@graphql-eslint/eslint-plugin/-/eslint-plugin-1.1.4.tgz#42d685eec672520845d8626b074ee1de675c20da"
+  integrity sha512-Gpl+dC8WAxrwYlkKoZ1jDnyvCawL4B405bdsohPd85Jf4zhV7BAqyEzgNaN1fUY7699tZ1Tse0jZitjLRhhcoQ==
   dependencies:
     "@graphql-tools/code-file-loader" "~6.3.0"
     "@graphql-tools/graphql-file-loader" "~6.2.0"
@@ -1604,6 +1604,15 @@
     p-limit "3.1.0"
     tslib "~2.3.0"
 
+"@graphql-tools/merge@6.2.15-alpha-54818931.0":
+  version "6.2.15-alpha-54818931.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-6.2.15-alpha-54818931.0.tgz#35f8f36d29d1956627bd9ff54945272de3584308"
+  integrity sha512-xo9CNPgSUxmG7Huz8WDk0XdocwULN47U2NO9wwJ/bh6l5Dg8dHzAjfS9FUvhflQ4tL77ay7xQTH9zJF0VB+5rA==
+  dependencies:
+    "@graphql-tools/schema" "8.0.0-alpha-54818931.0"
+    "@graphql-tools/utils" "8.0.0-alpha-54818931.0"
+    tslib "~2.3.0"
+
 "@graphql-tools/merge@6.2.15-alpha-e6320b00.0", "@graphql-tools/merge@^6.2.15-alpha-e6320b00.0":
   version "6.2.15-alpha-e6320b00.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-6.2.15-alpha-e6320b00.0.tgz#9fc692bd60d046528529728e6b7ca65cf5ca08af"
@@ -1676,7 +1685,17 @@
     relay-compiler "10.1.0"
     tslib "~2.0.1"
 
-"@graphql-tools/schema@8.0.0-alpha-e6320b00.0", "@graphql-tools/schema@^8.0.0-alpha-e6320b00.0":
+"@graphql-tools/schema@8.0.0-alpha-54818931.0", "@graphql-tools/schema@^8.0.0-alpha-54818931.0":
+  version "8.0.0-alpha-54818931.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.0.0-alpha-54818931.0.tgz#95f807a29abdbb26ceaddb8855a2cd9310d70fc8"
+  integrity sha512-2am0hSpQIn0Sq835KGYQnLmwM053uLoSIS8CAenmV17N3tbZVvjdQLY1O4GGXXlHMOhhuqY8ZQmkPt8Ft0oGiA==
+  dependencies:
+    "@graphql-tools/merge" "6.2.15-alpha-54818931.0"
+    "@graphql-tools/utils" "8.0.0-alpha-54818931.0"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/schema@8.0.0-alpha-e6320b00.0":
   version "8.0.0-alpha-e6320b00.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.0.0-alpha-e6320b00.0.tgz#b552e122980e90de4ca3cc0da6958ed290dca3ce"
   integrity sha512-6kme+JuqcCIJ4TYvfThsamN3xcvjIaCyfYQaB6jt8/tK4QmqUpRFhxzN5mNz9NJ63sfYOHTU9pt89/ZmlIS/yA==
@@ -1719,6 +1738,15 @@
     tslib "~2.2.0"
     valid-url "1.0.9"
     ws "7.4.5"
+
+"@graphql-tools/utils@8.0.0-alpha-54818931.0":
+  version "8.0.0-alpha-54818931.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.0.0-alpha-54818931.0.tgz#71ff678b0f6054e47136fb490d79dbecf4522fe9"
+  integrity sha512-QdKeWOkGh0kynLwnymzxOhfOPHUauZ2kwH5G1hsHGczGA5UIF/RM/lzvDRCT6nTgo2xmSA4Kw+WWKG/9JWUOYg==
+  dependencies:
+    "@ardatan/aggregate-error" "0.0.6"
+    camel-case "4.1.2"
+    tslib "~2.3.0"
 
 "@graphql-tools/utils@8.0.0-alpha-e6320b00.0":
   version "8.0.0-alpha-e6320b00.0"
