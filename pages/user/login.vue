@@ -70,7 +70,7 @@
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
 import { gql } from '@apollo/client/core'
-import { useMutation } from '@vue/apollo-composable'
+import { useMutation, ApolloError } from '@vue/apollo-composable'
 import { currentUserVar } from '../../apollo/cache'
 import { LoginDocument } from '../../apollo/graphql'
 
@@ -110,7 +110,7 @@ export default defineComponent({
       if (result.data?.login) {
         void router.push('/dashboard')
       } else {
-        error.value = new Error('Unknown error')
+        error.value = new ApolloError('Unknown error')
       }
     })
 
