@@ -16,6 +16,21 @@ export interface AuthenticateReturn {
   message?: string
 }
 
+export type UserRegistered = {
+  user: User
+}
+
+interface InputFieldValidationProblem {
+  message: string
+  path: string
+}
+
+export type InputValidationProblem = {
+  problems: InputFieldValidationProblem[]
+}
+
+export type UserResponse = UserRegistered | InputValidationProblem
+
 @injectable()
 export class AuthService {
   constructor(private prisma: PrismaClient, private redisClient: RedisClient) {}
