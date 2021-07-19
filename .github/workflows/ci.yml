@@ -79,6 +79,6 @@ jobs:
         run: yarn test --ci --coverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@2.0.0
+        uses: codecov/codecov-action@2.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
