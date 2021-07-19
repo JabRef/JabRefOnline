@@ -16,7 +16,7 @@ export interface AuthenticateReturn {
   message?: string
 }
 
-export type UserRegistered = {
+type UserReturned = {
   user: User
 }
 
@@ -29,7 +29,7 @@ export type InputValidationProblem = {
   problems: InputFieldValidationProblem[]
 }
 
-export type UserRegistrationResponse = UserRegistered | InputValidationProblem
+export type UserRegistrationResponse = UserReturned | InputValidationProblem
 
 @injectable()
 export class AuthService {
@@ -90,7 +90,10 @@ export class AuthService {
     })
   }
 
-  async createAccount(email: string, password: string): Promise<user> {
+  async createAccount(
+    email: string,
+    password: string
+  ): Promise<UserRegistrationResponse> {
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email,
@@ -99,18 +102,22 @@ export class AuthService {
     const userWithEmailAlreadyExists = existingUser !== null
     if (userWithEmailAlreadyExists) {
       return {
-        inputError: {
-          field: 'Email',
-          message: `User with email '${email}' already exists.`,
-        },
+        problems: [
+          {
+            path: 'Email',
+            message: `User with email '${email}' already exists.`,
+          },
+        ],
       }
     }
     if (password.length < 6) {
       return {
-        inputError: {
-          field: 'Password',
-          message: 'Use 6 characters or more for your password',
-        },
+        problems: [
+          {
+            path: 'Password',
+            message: 'Use 6 characters or more for your password',
+          },
+        ],
       }
     }
     const hashedPassword = await this.hashString(password)
@@ -131,10 +138,12 @@ export class AuthService {
   ): Promise<UserRegistrationResponse> {
     if (newPassword.length < 6) {
       return {
-        inputError: {
-          field: 'Password',
-          message: 'Use 6 characters or more for your password',
-        },
+        problems: [
+          {
+            path: 'Password',
+            message: 'Use 6 characters or more for your password',
+          },
+        ],
       }
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
@@ -144,19 +153,23 @@ export class AuthService {
     const hashedToken = await getAsync(key)
     if (!hashedToken) {
       return {
-        inputError: {
-          field: 'Token',
-          message: 'Token Expired',
-        },
+        problems: [
+          {
+            path: 'Token',
+            message: 'Token Expired',
+          },
+        ],
       }
     }
     const checkToken = await bcrypt.compare(token, hashedToken)
     if (!checkToken) {
       return {
-        inputError: {
-          field: 'Token',
-          message: 'Token Expired',
-        },
+        problems: [
+          {
+            path: 'Token',
+            message: 'Token Expired',
+          },
+        ],
       }
     }
 
