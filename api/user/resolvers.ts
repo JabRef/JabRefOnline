@@ -47,9 +47,9 @@ export class Mutation {
     _root: Record<string, never>,
     { email, password }: MutationSignupArgs,
     context: Context
-  ): Promise<User> {
+  ): Promise<UserResponse> {
     const newUser = await this.authService.createAccount(email, password)
-    await context.login(newUser)
+    if ('user' in newUser) context.login(newUser.user)
     return newUser
   }
 

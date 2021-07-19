@@ -15,14 +15,14 @@ extend type Query {
 extend type Mutation {
   logout: Boolean
   login(email: EmailAddress!, password: String!): User
-  signup(email: EmailAddress!, password: String!): UserRegistrationResponse
+  signup(email: EmailAddress!, password: String!): UserResponse
   forgotPassword(email: EmailAddress!): Boolean
   changePassword(token: String!, id: ID!, newPassword: String!): User
 }
 
-union UserRegistrationResponse = UserRegistered | InputValidationProblem
+union UserResponse = ReturnUser | InputValidationProblem
 
-type UserRegistered {
+type ReturnUser {
   user: User!
 }
 
