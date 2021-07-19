@@ -25,11 +25,17 @@ interface InputFieldValidationProblem {
   path: string
 }
 
+interface ExpiredTokenProblem {
+  problems: InputFieldValidationProblem[]
+}
+
 export type InputValidationProblem = {
   problems: InputFieldValidationProblem[]
 }
 
-export type UserRegistrationResponse = UserReturned | InputValidationProblem
+export type RegisterUserResponse = UserReturned | InputValidationProblem
+
+export type ChangePasswordResponse = UserReturned | ExpiredTokenProblem
 
 @injectable()
 export class AuthService {
@@ -93,7 +99,7 @@ export class AuthService {
   async createAccount(
     email: string,
     password: string
-  ): Promise<UserRegistrationResponse> {
+  ): Promise<RegisterUserResponse> {
     const existingUser = await this.prisma.user.findFirst({
       where: {
         email,
@@ -135,7 +141,7 @@ export class AuthService {
     token: string,
     id: string,
     newPassword: string
-  ): Promise<UserRegistrationResponse> {
+  ): Promise<ChangePasswordResponse> {
     if (newPassword.length < 6) {
       return {
         problems: [
