@@ -16,7 +16,11 @@ import {
   UserDocumentService,
 } from '../documents/user.document.service'
 import { GroupService } from '../groups/service'
-import { AuthService } from './auth.service'
+import {
+  AuthService,
+  ChangePasswordPayload,
+  SignupPayload,
+} from './auth.service'
 
 @injectable()
 export class Query {
@@ -47,9 +51,9 @@ export class Mutation {
     _root: Record<string, never>,
     { email, password }: MutationSignupArgs,
     context: Context
-  ): Promise<UserResponse> {
+  ): Promise<SignupPayload> {
     const newUser = await this.authService.createAccount(email, password)
-    if ('user' in newUser) context.login(newUser.user)
+    if ('user' in newUser) void context.login(newUser.user)
     return newUser
   }
 
@@ -94,7 +98,7 @@ export class Mutation {
     _root: Record<string, never>,
     { token, id, newPassword }: MutationChangePasswordArgs,
     _context: Context
-  ): Promise<User | null> {
+  ): Promise<ChangePasswordPayload> {
     return await this.authService.updatePassword(token, id, newPassword)
   }
 }

@@ -6,6 +6,10 @@
       }
       const result: PossibleTypesResultData = {
   "possibleTypes": {
+    "ChangePasswordPayload": [
+      "UserReturned",
+      "ExpiredTokenProblem"
+    ],
     "Document": [
       "Article",
       "InProceedings",
@@ -25,6 +29,11 @@
       "SearchGroup",
       "TexGroup",
       "WordKeywordGroup"
+    ],
+    "InputFieldValidationProblem": [],
+    "SignupPayload": [
+      "UserReturned",
+      "InputValidationProblem"
     ]
   }
 };

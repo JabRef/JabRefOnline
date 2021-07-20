@@ -15,28 +15,28 @@ extend type Query {
 extend type Mutation {
   logout: Boolean
   login(email: EmailAddress!, password: String!): User
-  signup(email: EmailAddress!, password: String!): RegisterUserResponse
+  signup(email: EmailAddress!, password: String!): SignupPayload
   forgotPassword(email: EmailAddress!): Boolean
   changePassword(
     token: String!
     id: ID!
     newPassword: String!
-  ): ChangePasswordResponse
+  ): ChangePasswordPayload
 }
 
-union ChangePasswordResponse = UserReturned | ExpiredTokenProblem
+union ChangePasswordPayload = UserReturned | ExpiredTokenProblem
 
-union RegisterUserResponse = UserReturned | InputValidationProblem
+union SignupPayload = UserReturned | InputValidationProblem
 
 type UserReturned {
   user: User!
 }
 
-interface InputValidationProblem {
+type InputValidationProblem {
   problems: [InputFieldValidationProblem]!
 }
 
-interface ExpiredTokenProblem {
+type ExpiredTokenProblem {
   problems: [InputFieldValidationProblem]!
 }
 
