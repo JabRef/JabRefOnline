@@ -86,4 +86,5 @@ See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecyc
 - Example application for authentication using GraphQL Shield and Prisma: https://github.com/prisma/prisma-examples/tree/latest/typescript/graphql-auth
 - Example server using Prisma and GraphQL: https://github.com/prisma-labs/graphql-prisma-typescript
 - Example application for vue-apollo: https://github.com/Akryum/vue-apollo-todos
+- Example application using a similar stack as we (GraphQL, Vue): https://github.com/Akryum/guijs/tree/master/packages/@guijs
 - Best practices: [Node](https://github.com/goldbergyoni/nodebestpractices)
