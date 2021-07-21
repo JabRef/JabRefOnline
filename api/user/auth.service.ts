@@ -6,6 +6,7 @@ import { v4 as generateToken } from 'uuid'
 import { RedisClient } from 'redis'
 import { sendEmail } from '../utils/sendEmail'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
+import { ResolversTypes } from '../graphql'
 
 export interface AuthenticationMessage {
   message?: string
@@ -16,26 +17,8 @@ export interface AuthenticateReturn {
   message?: string
 }
 
-type UserReturned = {
-  user: User
-}
-
-interface InputFieldValidationProblem {
-  message: string
-  path: string
-}
-
-type ExpiredTokenProblem = {
-  problems: InputFieldValidationProblem[]
-}
-
-type InputValidationProblem = {
-  problems: InputFieldValidationProblem[]
-}
-
-export type SignupPayload = UserReturned | InputValidationProblem
-
-export type ChangePasswordPayload = UserReturned | ExpiredTokenProblem
+export type SignupPayload = ResolversTypes['SignupPayload']
+export type ChangePasswordPayload = ResolversTypes['ChangePasswordPayload']
 
 @injectable()
 export class AuthService {
