@@ -6,6 +6,7 @@ import {
   UserDocumentOtherField,
 } from '@prisma/client'
 import { injectable } from 'tsyringe'
+import { DocumentFilters } from '../graphql'
 
 export type UserDocument = PlainUserDocument & {
   other?: UserDocumentOtherField[]
@@ -31,6 +32,7 @@ export class UserDocumentService {
 
   async getDocumentsOf(
     user: User | string,
+    filterBy: DocumentFilters | null = null,
     includeOtherFields = false
   ): Promise<UserDocument[]> {
     const userId = typeof user === 'string' ? user : user.id
@@ -41,6 +43,13 @@ export class UserDocumentService {
             id: userId,
           },
         },
+        ...(filterBy?.groupId != null && {
+          explicitGroups: {
+            some: {
+              id: filterBy.groupId,
+            },
+          },
+        }),
       },
       include: {
         other: includeOtherFields,

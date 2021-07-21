@@ -88,6 +88,7 @@
         class="groupsTree"
         :model="groupsTree"
         :default-expanded="true"
+        @click="onGroupClicked"
       >
         <template #leafNameDisplay="slotProps">
           <span
@@ -128,6 +129,7 @@ import { VueTreeList, Tree } from 'vue-tree-list'
 import { gql } from '@apollo/client/core'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { GetGroupsDocument } from '~/apollo/graphql'
+import { useUiStore } from '~/store'
 
 export default defineComponent({
   components: {
@@ -159,8 +161,14 @@ export default defineComponent({
       groups.value != null ? new Tree(groups.value) : null
     )
 
+    const ui = useUiStore()
+    function onGroupClicked(group: { id: string }) {
+      ui.selectedGroupId = group.id
+    }
+
     return {
       groupsTree,
+      onGroupClicked,
       sideBarOpen: true,
     }
   },

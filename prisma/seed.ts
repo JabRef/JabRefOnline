@@ -312,6 +312,51 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
     })
   }
 
+  // Assign documents to group
+  for (const document of [
+    'ckondtcaf000101mh7x9g4gia',
+    'ckr9eq4oc000101mk1ga9bxnt',
+    'ckr9eqap6000301mk20hycjqb',
+    'ckonduhjk000701mh12wia4nf',
+    'ckondu6bh000501mh2o2tf00u',
+    'ckondtpcn000301mhg9lvaqlu',
+  ]) {
+    await prisma.userDocument.update({
+      where: {
+        id: document,
+      },
+      data: {
+        explicitGroups: {
+          connect: {
+            // Health
+            id: 'ckn4iar8j000n01mc7feq709f',
+          },
+        },
+      },
+    })
+  }
+  for (const document of [
+    'ckondtcaf000101mh7x9g4gia',
+    'ckr9eq4oc000101mk1ga9bxnt',
+    'ckr9eqap6000301mk20hycjqb',
+    'ckonduhjk000701mh12wia4nf',
+    'ckondu6bh000501mh2o2tf00u',
+  ]) {
+    await prisma.userDocument.update({
+      where: {
+        id: document,
+      },
+      data: {
+        explicitGroups: {
+          connect: {
+            // Positive Health Effects
+            id: 'ckn4iazmc000r01mc1a0d6l0s',
+          },
+        },
+      },
+    })
+  }
+
   // Assign groups to user
   for (const group of [
     'ckn4h9pl5000101le5bco3b8r',
