@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { User } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { UserInputError } from 'apollo-server-express'
@@ -109,6 +111,18 @@ export class UserResolver {
     private userDocumentService: UserDocumentService,
     private groupService: GroupService
   ) {}
+
+  __resolveType(
+    signup: SignupPayload
+  ): 'UserReturned' | 'InputValidationProblem' | 'undefined' {
+    if ('user' in signup) {
+      return 'UserReturned'
+    }
+    if ('problems' in signup) {
+      return 'InputValidationProblem'
+    }
+    return 'undefined'
+  }
 
   async documentsRaw(user: User): Promise<UserDocument[]> {
     return await this.userDocumentService.getDocumentsOf(user)
