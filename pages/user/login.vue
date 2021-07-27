@@ -101,7 +101,7 @@ export default defineComponent({
       variables: {
         email: email.value,
         password: password.value,
-      }
+      },
     }))
     const router = useRouter()
     onDone((result) => {
