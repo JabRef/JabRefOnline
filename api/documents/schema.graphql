@@ -41,6 +41,8 @@ Ways in which to filter a list of documents.
 input DocumentFilters {
   "Only include documents that belong to the group with this ID."
   groupId: ID
+  "Only include documents that match the given search string."
+  query: String
 }
 
 extend type User {

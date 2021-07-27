@@ -161,9 +161,9 @@ export default defineComponent({
       groups.value != null ? new Tree(groups.value) : null
     )
 
-    const ui = useUiStore()
+    const uiStore = useUiStore()
     function onGroupClicked(group: { id: string }) {
-      ui.selectedGroupId = group.id
+      uiStore.selectedGroupId = group.id
     }
 
     return {

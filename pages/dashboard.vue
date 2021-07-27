@@ -36,6 +36,7 @@ export default defineComponent({
     `
     const { result } = useQuery(GetDocumentsDocument, () => ({
       groupId: ui.selectedGroupId,
+      query: ui.activeSearchQuery,
     }))
     const documents = useResult(result, null, (data) => data?.me?.documents)
     return {

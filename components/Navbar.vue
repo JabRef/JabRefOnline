@@ -23,8 +23,8 @@
         <!-- Search bar -->
         <div class="relative text-gray-600">
           <t-input
+            v-model="searchQuery"
             type="search"
-            name="serch"
             placeholder="Search..."
             class="
               w-full
@@ -166,9 +166,10 @@
 <script lang="ts">
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { gql } from '@apollo/client/core'
-import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, useRouter, ref, watch } from '@nuxtjs/composition-api'
 import { LogoutDocument } from '~/apollo/graphql'
 import { currentUserVar } from '~/apollo/cache'
+import { useUiStore } from '~/store'
 
 export default defineComponent({
   setup() {
@@ -188,7 +189,17 @@ export default defineComponent({
 
       void router.push({ name: 'index' })
     })
-    return { logout }
+
+    const uiStore = useUiStore()
+    // TODO:Don't update store immediately to avoid unnecessary queries to the server.
+    // For some reason `toRef(uiStore.activeSearchQuery) + useDebounce` or `debouncedWatch` doesn't work here
+    const searchQuery = ref(uiStore.activeSearchQuery ?? '')
+
+    watch(searchQuery, (newQuery) => {
+      uiStore.activeSearchQuery = newQuery
+    })
+
+    return { logout, searchQuery }
   },
 })
 </script>

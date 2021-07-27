@@ -36,7 +36,7 @@ export class UserDocumentService {
     includeOtherFields = false
   ): Promise<UserDocument[]> {
     const userId = typeof user === 'string' ? user : user.id
-    return await this.prisma.userDocument.findMany({
+    const documents = await this.prisma.userDocument.findMany({
       where: {
         users: {
           some: {
@@ -55,6 +55,19 @@ export class UserDocumentService {
         other: includeOtherFields,
       },
     })
+
+    if (filterBy?.query) {
+      // Filtering documents by hand until Prisma.findMany supports full text search
+      // TODO: https://github.com/prisma/prisma/issues/1684
+      const query = new RegExp(filterBy.query, 'i')
+      return documents.filter((document) => {
+        return (
+          query.test(document.title ?? '') || query.test(document.author ?? '')
+        )
+      })
+    } else {
+      return documents
+    }
   }
 
   async addDocument(

@@ -13,6 +13,11 @@ export const useUiStore = defineStore({
        * The id of the currently selected group.
        */
       selectedGroupId: null as string | null,
+
+      /**
+       * The currently active search query, or null if no search is in progress.
+       */
+      activeSearchQuery: null as string | null,
     }
   },
   actions: {
