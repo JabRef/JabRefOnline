@@ -140,6 +140,7 @@ export default defineComponent({
     gql`
       query getGroups {
         me {
+          id
           groups {
             id
             name

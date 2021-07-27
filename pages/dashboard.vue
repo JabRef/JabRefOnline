@@ -25,9 +25,10 @@ export default defineComponent({
     const ui = useUiStore()
 
     gql`
-      query getDocuments($groupId: ID) {
+      query getDocuments($groupId: ID, $query: String) {
         me {
-          documents(filterBy: { groupId: $groupId }) {
+          id
+          documents(filterBy: { groupId: $groupId, query: $query }) {
             ...DocumentForView
           }
         }
