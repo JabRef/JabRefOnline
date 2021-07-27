@@ -67,7 +67,7 @@ export default defineComponent({
     }))
     const router = useRouter()
     onDone(() => {
-      void router.push('../user/login')
+      void router.push({ name: 'user-login' })
     })
     return { password, error, changePassword, repeatPassword }
   },

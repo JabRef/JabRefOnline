@@ -101,16 +101,15 @@ export default defineComponent({
       variables: {
         email: email.value,
         password: password.value,
-      },
-      update(_context, { data }) {
-        currentUserVar(data?.login ?? null)
-      },
+      }
     }))
     const router = useRouter()
     onDone((result) => {
       if (result.data?.login) {
-        void router.push('/dashboard')
+        currentUserVar(result.data.login)
+        void router.push({ name: 'dashboard' })
       } else {
+        currentUserVar(null)
         otherError.value = 'Unknown error'
       }
     })
