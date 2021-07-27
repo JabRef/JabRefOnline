@@ -33,8 +33,12 @@
       "pathMappings": [
         {
           "url": "webpack:///",
-          "path": "${webRoot}/"
-        }
+          "path": "${workspaceFolder}/"
+        },
+        {
+          "url": "webpack:///ignore/",
+          "path": null
+        },
       ]
     },
     {
@@ -45,7 +49,7 @@
       "webRoot": "${workspaceFolder}",
       "sourceMapPathOverrides": {
         "webpack:///*": "${workspaceRoot}/*"
-      },
+      }
     },
     {
       "type": "pwa-node",
