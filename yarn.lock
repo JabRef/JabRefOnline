@@ -1605,13 +1605,13 @@
     unixify "1.0.0"
     valid-url "1.0.9"
 
-"@graphql-tools/load@^7.0.0-alpha-6813e81f.0":
-  version "7.0.0-alpha-6813e81f.0"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/load/-/load-7.0.0-alpha-6813e81f.0.tgz#caf6eaa375deccd320400210847cf6bed5fc2440"
-  integrity sha512-/UHi6simQIKeNs+TjEYqWji0F+v6E5hrXl2kLBB5ai+s1B/IRR5XJBrasusU+RwUR8yDrpHVgukLCrozIsUTBQ==
+"@graphql-tools/load@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/load/-/load-7.0.0.tgz#c082c124e7e51c514315d15b7f6fb7752f11da97"
+  integrity sha512-HaW4802K+r9oL3yDf+w+JzilycMWodAeZCeL9Rs9vw2LzFIkMWDMdvbsyNDF4xxwUh7boMb6eGlkClb9rzbAfQ==
   dependencies:
-    "@graphql-tools/merge" "6.2.15-alpha-6813e81f.0"
-    "@graphql-tools/utils" "8.0.0-alpha-6813e81f.0"
+    "@graphql-tools/merge" "^6.2.15"
+    "@graphql-tools/utils" "^8.0.0"
     import-from "4.0.0"
     p-limit "3.1.0"
     tslib "~2.3.0"
@@ -1623,15 +1623,6 @@
   dependencies:
     "@graphql-tools/schema" "^8.0.0"
     "@graphql-tools/utils" "^8.0.0"
-    tslib "~2.3.0"
-
-"@graphql-tools/merge@6.2.15-alpha-6813e81f.0":
-  version "6.2.15-alpha-6813e81f.0"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-6.2.15-alpha-6813e81f.0.tgz#6723ce9b52d1042753ca09794e46d0a8fcfac6a9"
-  integrity sha512-x+7csqKggKdIyGIpAqE8XhDpOFvCiy4wJUVmjH245FNhjUir+9228U7oVcmRudC19pVss3EGTwrgCcd/M5949Q==
-  dependencies:
-    "@graphql-tools/schema" "8.0.0-alpha-6813e81f.0"
-    "@graphql-tools/utils" "8.0.0-alpha-6813e81f.0"
     tslib "~2.3.0"
 
 "@graphql-tools/mock@^8.1.2":
@@ -1687,16 +1678,6 @@
     "@graphql-tools/utils" "^7.1.0"
     relay-compiler "10.1.0"
     tslib "~2.0.1"
-
-"@graphql-tools/schema@8.0.0-alpha-6813e81f.0":
-  version "8.0.0-alpha-6813e81f.0"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.0.0-alpha-6813e81f.0.tgz#9b422e753974f52fb15d706fb1f1a06b037cb405"
-  integrity sha512-vq2aSxAMHLaEPbh+zM0c11ir+/f4c7vQxVDcdo9AFwer5bQq/z8Qr68biM+jrPfG3k4FvQri3gled+xUeSpDMQ==
-  dependencies:
-    "@graphql-tools/merge" "6.2.15-alpha-6813e81f.0"
-    "@graphql-tools/utils" "8.0.0-alpha-6813e81f.0"
-    tslib "~2.3.0"
-    value-or-promise "1.0.10"
 
 "@graphql-tools/schema@^7.0.0", "@graphql-tools/schema@^7.1.5":
   version "7.1.5"
