@@ -113,16 +113,49 @@ const config: NuxtConfig = {
    */
   build: {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    extend: (config, { isClient }): void => {
-      // Extensions for client bundling
+    extend: (config, { isDev, isClient }): void => {
       if (isClient) {
-        // Create source maps to enable debugging from VS Code
-        config.devtool = 'source-map'
+        // Extensions for client bundling
+        if (isDev) {
+          // Create source maps to enable debugging from VS Code
+          config.devtool = 'source-map'
+        }
+      } else {
+        // Extensions for server bundling
+        // eslint-disable-next-line no-lonely-if
+        if (isDev) {
+          // Create source maps to enable debugging from VS Code (needs to be inline)
+          config.devtool = 'inline-source-map'
+        }
+      }
+
+      // @ts-ignore: config.output is not null
+      config.output.devtoolModuleFilenameTemplate = (info) => {
+        // There are some problems with the source-map support of the vue-loader
+        // In particular, there are many different files for each vue file which confuses VS code
+        // So we use the workaround https://github.com/vuejs/vue-loader/issues/146#issuecomment-877869882 to only keep the file necessary for debugging
+        // while moving all the other files to the ignore folder.
+        if (info.resourcePath.endsWith('.vue')) {
+          // The <script> block from vue files
+          if (
+            info.query.startsWith('?vue&type=script') &&
+            !info.allLoaders.includes('babel')
+          ) {
+            return `webpack:///${info.resourcePath}?script${info.hash}`
+          }
+
+          // The full vue file
+          else if (info.query === '' && info.allLoaders === []) {
+            return `webpack:///${info.resourcePath}?render${info.hash}`
+          } else {
+            // All other files
+            return `webpack:///ignore/${info.resourcePath}?${info.hash}`
+          }
+        } else {
+          return `webpack:///${info.resourcePath}?${info.hash}`
+        }
       }
     },
-    // @vue/apollo-composable is using nullish coalescing operator, which needs to be transpiled  with babel as it is not compatible with Webpack 4.
-    // See https://github.com/vuejs/vue-apollo/issues/1217
-    transpile: ['@vue/apollo-composable'],
   },
 
   // Workaround for https://github.com/nuxt/typescript/issues/494

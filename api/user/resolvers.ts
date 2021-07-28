@@ -11,6 +11,7 @@ import {
   MutationForgotPasswordArgs,
   QueryUserArgs,
   Resolvers,
+  UserDocumentsArgs,
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
 import {
@@ -128,8 +129,11 @@ export class UserResolver {
     return await this.userDocumentService.getDocumentsOf(user)
   }
 
-  async documents(user: User): Promise<UserDocument[]> {
-    return await this.userDocumentService.getDocumentsOf(user, true)
+  async documents(
+    user: User,
+    { filterBy }: UserDocumentsArgs
+  ): Promise<UserDocument[]> {
+    return await this.userDocumentService.getDocumentsOf(user, filterBy, true)
   }
 
   async groups(user: User): Promise<GroupResolved[]> {

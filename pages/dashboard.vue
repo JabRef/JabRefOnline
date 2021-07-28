@@ -16,23 +16,29 @@ import { gql } from '@apollo/client/core'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { GetDocumentsDocument } from '~/apollo/graphql'
 import { DocumentForView } from '~/components/DocumentView.vue'
+import { useUiStore } from '~/store'
 
 export default defineComponent({
   middleware: ['authenticated'],
 
   setup() {
+    const ui = useUiStore()
+
     gql`
-      query getDocuments {
+      query getDocuments($groupId: ID, $query: String) {
         me {
-          documents {
+          id
+          documents(filterBy: { groupId: $groupId, query: $query }) {
             ...DocumentForView
           }
         }
       }
       ${DocumentForView}
     `
-
-    const { result } = useQuery(GetDocumentsDocument)
+    const { result } = useQuery(GetDocumentsDocument, () => ({
+      groupId: ui.selectedGroupId,
+      query: ui.activeSearchQuery,
+    }))
     const documents = useResult(result, null, (data) => data?.me?.documents)
     return {
       documents,

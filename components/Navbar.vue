@@ -23,8 +23,8 @@
         <!-- Search bar -->
         <div class="relative text-gray-600">
           <t-input
+            v-model="searchQuery"
             type="search"
-            name="serch"
             placeholder="Search..."
             class="
               w-full
@@ -164,18 +164,42 @@
 </template>
 
 <script lang="ts">
-import { useApolloClient } from '@vue/apollo-composable'
+import { useApolloClient, useMutation } from '@vue/apollo-composable'
+import { gql } from '@apollo/client/core'
+import { defineComponent, useRouter, ref, watch } from '@nuxtjs/composition-api'
+import { LogoutDocument } from '~/apollo/graphql'
+import { currentUserVar } from '~/apollo/cache'
+import { useUiStore } from '~/store'
 
-import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   setup() {
     const { resolveClient } = useApolloClient()
 
-    async function logout() {
+    gql`
+      mutation logout {
+        logout
+      }
+    `
+    const { mutate: logout, onDone } = useMutation(LogoutDocument)
+    const router = useRouter()
+    onDone(() => {
       // Reset graphql cache
-      await resolveClient().clearStore()
-    }
-    return { logout }
+      void resolveClient().clearStore()
+      currentUserVar(null)
+
+      void router.push({ name: 'index' })
+    })
+
+    const uiStore = useUiStore()
+    // TODO:Don't update store immediately to avoid unnecessary queries to the server.
+    // For some reason `toRef(uiStore.activeSearchQuery) + useDebounce` or `debouncedWatch` doesn't work here
+    const searchQuery = ref(uiStore.activeSearchQuery ?? '')
+
+    watch(searchQuery, (newQuery) => {
+      uiStore.activeSearchQuery = newQuery
+    })
+
+    return { logout, searchQuery }
   },
 })
 </script>
