@@ -16,7 +16,6 @@ const codegen = {
         mappers: {
           User: '@prisma/client/index.d#User',
           Document: './documents/user.document.service#UserDocument',
-          DocumentRaw: './documents/user.document.service#UserDocument',
           Article: './documents/user.document.service#UserDocument',
           InProceedings: './documents/user.document.service#UserDocument',
           PhdThesis: './documents/user.document.service#UserDocument',

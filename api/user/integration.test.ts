@@ -44,9 +44,6 @@ describe('Query', () => {
         user(id: $id) {
           id
           email
-          documentsRaw {
-            id
-          }
           documents {
             id
           }
@@ -67,26 +64,6 @@ describe('Query', () => {
           "data": Object {
             "user": Object {
               "documents": Array [
-                Object {
-                  "id": "ckondtcaf000101mh7x9g4gia",
-                },
-                Object {
-                  "id": "ckr9eq4oc000101mk1ga9bxnt",
-                },
-                Object {
-                  "id": "ckr9eqap6000301mk20hycjqb",
-                },
-                Object {
-                  "id": "ckonduhjk000701mh12wia4nf",
-                },
-                Object {
-                  "id": "ckondu6bh000501mh2o2tf00u",
-                },
-                Object {
-                  "id": "ckondtpcn000301mhg9lvaqlu",
-                },
-              ],
-              "documentsRaw": Array [
                 Object {
                   "id": "ckondtcaf000101mh7x9g4gia",
                 },

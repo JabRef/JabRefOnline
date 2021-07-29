@@ -107,10 +107,6 @@ export class UserResolver {
     private groupService: GroupService
   ) {}
 
-  async documentsRaw(user: User): Promise<UserDocument[]> {
-    return await this.userDocumentService.getDocumentsOf(user)
-  }
-
   async documents(
     user: User,
     { filterBy }: UserDocumentsArgs
