@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { User } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { UserInputError } from 'apollo-server-express'
@@ -17,7 +19,7 @@ import {
   UserDocumentService,
 } from '../documents/user.document.service'
 import { GroupService } from '../groups/service'
-import { AuthService } from './auth.service'
+import { AuthService, ChangePasswordPayload } from './auth.service'
 
 @injectable()
 export class Query {
@@ -48,9 +50,9 @@ export class Mutation {
     _root: Record<string, never>,
     { email, password }: MutationSignupArgs,
     context: Context
-  ): Promise<User> {
+  ): Promise<SignupPayload> {
     const newUser = await this.authService.createAccount(email, password)
-    await context.login(newUser)
+    if ('user' in newUser) void context.login(newUser.user)
     return newUser
   }
 
@@ -95,8 +97,23 @@ export class Mutation {
     _root: Record<string, never>,
     { token, id, newPassword }: MutationChangePasswordArgs,
     _context: Context
-  ): Promise<User | null> {
+  ): Promise<ChangePasswordPayload> {
     return await this.authService.updatePassword(token, id, newPassword)
+  }
+}
+
+@injectable()
+export class SignupPayload {
+  __resolveType(
+    signup: SignupPayload
+  ): 'UserReturned' | 'InputValidationProblem' | 'undefine' {
+    if ('user' in signup) {
+      return 'UserReturned'
+    }
+    if ('problems' in signup) {
+      return 'InputValidationProblem'
+    }
+    return 'undefine'
   }
 }
 
@@ -140,5 +157,6 @@ export function resolvers(): Resolvers {
     Query: container.resolve(Query),
     Mutation: container.resolve(Mutation),
     User: container.resolve(UserResolver),
+    SignupPayload: container.resolve(SignupPayload),
   }
 }
