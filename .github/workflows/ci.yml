@@ -72,6 +72,11 @@ jobs:
       - name: Validate GraphQL operations
         run: yarn validate
 
+      - name: Check schema
+        uses: kamilkisiela/graphql-inspector@v2.6.2
+        with:
+          schema: 'main:api/**/*.graphql'
+
       - name: Build
         run: yarn build
 
