@@ -58,6 +58,7 @@ module.exports = {
           2,
           {
             parser: 'graphql',
+            endOfLine: 'auto',
           },
         ],
         // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.
