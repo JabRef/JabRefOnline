@@ -5,3 +5,8 @@ type Query {
 type Mutation {
   _empty: String
 }
+
+interface Node {
+  "The ID of the node."
+  id: ID!
+}
