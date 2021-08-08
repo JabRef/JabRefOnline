@@ -2,16 +2,17 @@ import { Prisma } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
 import {
-  DocumentInput,
-  DocumentUpdateInput,
-  DocumentType,
+  UserDocumentInput,
+  UserDocumentUpdateInput,
   Resolvers,
   MutationAddUserDocumentArgs,
   Person,
   Journal,
   QueryUserDocumentArgs,
   Institution,
+  DocumentResolvers,
 } from '../graphql'
+import { ResolveType } from '../utils/extractResolveType'
 import { UserDocumentService, UserDocument } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
@@ -48,7 +49,7 @@ const specialFields: string[] = [
 ]
 
 function convertDocumentInput(
-  document: DocumentInput | DocumentUpdateInput
+  document: UserDocumentInput | UserDocumentUpdateInput
 ): Prisma.UserDocumentCreateInput {
   const special = document.fields
     ?.filter((item) => specialFields.includes(item.field))
@@ -93,18 +94,6 @@ function convertDocumentInput(
   return convertedDocument
 }
 
-export function parse(type: string): DocumentType | null {
-  const found = Object.entries(DocumentType).find(
-    ([key, _value]) =>
-      key.localeCompare(type, undefined, { sensitivity: 'accent' }) === 0
-  )
-  if (found) {
-    return found[1]
-  } else {
-    return null
-  }
-}
-
 @injectable()
 export class Query {
   constructor(private userDocumentService: UserDocumentService) {}
@@ -135,23 +124,16 @@ export class Mutation {
 
 @injectable()
 export class DocumentResolver {
-  __resolveType(
-    document: UserDocument
-  ): 'Article' | 'InProceedings' | 'PhdThesis' | 'Unknown' {
-    switch (parse(document.type)) {
-      case DocumentType.Article:
-        return 'Article'
-      case DocumentType.InProceedings:
-        return 'InProceedings'
-      case DocumentType.PhdThesis:
-        return 'PhdThesis'
+  __resolveType(document: UserDocument): ResolveType<DocumentResolvers> {
+    switch (document.type) {
+      case 'JournalArticle':
+      case 'ProceedingsArticle':
+      case 'Thesis':
+      case 'Other':
+        return document.type
       default:
-        return 'Unknown'
+        return 'Other'
     }
-  }
-
-  type(document: UserDocument): DocumentType | null {
-    return parse(document.type)
   }
 
   authors(document: UserDocument): Person[] {
@@ -176,7 +158,7 @@ export class DocumentResolver {
 }
 
 @injectable()
-export class ArticleResolver extends DocumentResolver {
+export class JournalArticleResolver extends DocumentResolver {
   journal(document: UserDocument): Journal | null {
     const journalName = document.journal ?? document.journaltitle
     if (journalName) {
@@ -191,14 +173,14 @@ export class ArticleResolver extends DocumentResolver {
 }
 
 @injectable()
-export class InProceedingsResolver extends DocumentResolver {
+export class ProceedingsArticleResolver extends DocumentResolver {
   booktitle(document: UserDocument): string | null {
     return document.booktitle
   }
 }
 
 @injectable()
-export class PhdThesisResolver extends DocumentResolver {
+export class ThesisResolver extends DocumentResolver {
   institution(document: UserDocument): Institution | null {
     const institutionName = document.other?.find(
       (field) => field.field === 'institution'
@@ -216,16 +198,16 @@ export class PhdThesisResolver extends DocumentResolver {
 }
 
 @injectable()
-export class UnknownResolver extends DocumentResolver {}
+export class OtherResolver extends DocumentResolver {}
 
 export function resolvers(): Resolvers {
   return {
     Query: container.resolve(Query),
     Mutation: container.resolve(Mutation),
     Document: container.resolve(DocumentResolver),
-    Article: container.resolve(ArticleResolver),
-    InProceedings: container.resolve(InProceedingsResolver),
-    PhdThesis: container.resolve(PhdThesisResolver),
-    Unknown: container.resolve(UnknownResolver),
+    JournalArticle: container.resolve(JournalArticleResolver),
+    ProceedingsArticle: container.resolve(ProceedingsArticleResolver),
+    Thesis: container.resolve(ThesisResolver),
+    Other: container.resolve(OtherResolver),
   }
 }
