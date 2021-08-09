@@ -1,5 +1,6 @@
 import { ApolloClient, NormalizedCache } from '@apollo/client/core'
 import { Context, Middleware } from '@nuxt/types'
+import { gql } from '~/apollo'
 
 /**
  * Middleware that checks the user is logged in, and redirects her to the login page if not.
