@@ -1201,6 +1201,14 @@
   dependencies:
     purgecss "^4.0.3"
 
+"@graphql-codegen/add@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/add/-/add-3.0.0.tgz#8a4ac54809de22140c2e6e49f3ec83ea8020ff44"
+  integrity sha512-JUUnFXVG2ciQuUi0dWfEsZOl5lCfXivl2CiOCgAbAeeU7Yt4WUiP65XhXX3CeANjDN/5N0NPjgmxfVTBi8Obeg==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.0.0"
+    tslib "~2.3.0"
+
 "@graphql-codegen/cli@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.0.1.tgz#4b1aeb080a1f3abe02d9bb8ad9bdb4280135c3af"
@@ -1265,6 +1273,29 @@
     "@graphql-codegen/plugin-helpers" "^2.0.0"
     tslib "~2.3.0"
 
+"@graphql-codegen/gql-tag-operations-preset@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/gql-tag-operations-preset/-/gql-tag-operations-preset-1.0.1.tgz#e177b0dc5426b815dcd066c6257e33340231f50d"
+  integrity sha512-qIGCIXcbmUAKoaIC+bN2w2TB28fsdcJdrsMVGZZLrNV5vLFnilp8XFVrzJeIQCU2rAv79bOdrUszsvMaz6aIGg==
+  dependencies:
+    "@graphql-codegen/add" "3.0.0"
+    "@graphql-codegen/gql-tag-operations" "1.0.0"
+    "@graphql-codegen/typed-document-node" "2.0.0"
+    "@graphql-codegen/typescript" "2.0.0"
+    "@graphql-codegen/typescript-operations" "2.0.1"
+    tslib "2.3.0"
+
+"@graphql-codegen/gql-tag-operations@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/gql-tag-operations/-/gql-tag-operations-1.0.0.tgz#bd0c183db2fedc55b0bfd6ce7ec8cff4d9d48d3c"
+  integrity sha512-M+8hCpd9Jct5bJd9GRJgsBtftNqWM4YcYbPchu1Mzfp2XYmxBpbHoTWpytFYEpd6MIbcFLi4AsyKYg/OtiEx9g==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.0.0"
+    "@graphql-codegen/visitor-plugin-common" "2.0.0"
+    "@graphql-tools/utils" "^8.0.1"
+    auto-bind "~4.0.0"
+    tslib "~2.3.0"
+
 "@graphql-codegen/plugin-helpers@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-2.0.0.tgz#8c66be320f63a69760112c46fc7c23c2de53382b"
@@ -1276,7 +1307,7 @@
     lodash "~4.17.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/typed-document-node@^2.0.0":
+"@graphql-codegen/typed-document-node@2.0.0", "@graphql-codegen/typed-document-node@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typed-document-node/-/typed-document-node-2.0.0.tgz#e374f4c69c8662c2a83619a3059f7182d8631fa2"
   integrity sha512-jRtW457xuzoevsL4hKjBkw+MnO5bIIrzCBweLIIDXrFUEABW762u7K8JDdMLHL7ug1MW3lW1nCAvHL95aIpvSA==
@@ -1287,7 +1318,7 @@
     change-case-all "1.0.14"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript-operations@^2.0.1":
+"@graphql-codegen/typescript-operations@2.0.1", "@graphql-codegen/typescript-operations@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.0.1.tgz#e4e6ccafa7cb3b4c8b4820e26e470785748ad937"
   integrity sha512-AY0iwqPjlxLsdUskQAP/vhpA9Kp+OZl35B6Pp2UOlQzs6eQ/8yHtlFFRdo5Pn9D+S3u4zQxLZvK03fV6lxxPrA==
@@ -1310,7 +1341,7 @@
     auto-bind "~4.0.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript@^2.0.0":
+"@graphql-codegen/typescript@2.0.0", "@graphql-codegen/typescript@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-2.0.0.tgz#59270ccac6c222ef773be18486149398e90f5199"
   integrity sha512-SsgN3DG0MntpMENkMEzbLSUQr8HBVqEcuDY5259+aJM4TizfVVfxbpWuBCxBLz2d0RdQpF5YzkzdDrJ123rQ0g==
@@ -14541,15 +14572,15 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
+tslib@2.3.0, tslib@^2, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0, tslib@~2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
-
-tslib@^2, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0, tslib@~2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
-  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
 
 tslib@~2.0.1:
   version "2.0.3"

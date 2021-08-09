@@ -45,7 +45,7 @@ export default Vue.extend({
   apollo: {
     user: {
       query: gql`
-        query getUserById($id: ID!) {
+        query GetUserById($id: ID!) {
           user(id: $id) {
             email
           }

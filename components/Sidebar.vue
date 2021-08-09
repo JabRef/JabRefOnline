@@ -138,7 +138,7 @@ export default defineComponent({
   },
   setup() {
     gql`
-      query getGroups {
+      query GetGroups {
         me {
           id
           groups {
