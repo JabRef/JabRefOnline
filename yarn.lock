@@ -1230,20 +1230,31 @@
     "@graphql-tools/utils" "^7.9.1"
     tslib "~2.2.0"
 
-"@graphql-codegen/fragment-matcher@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-2.0.1.tgz#be1bdb7590952304639b4c58dc2074e14e1663c0"
-  integrity sha512-CUHmeunK2xz9P5XBOPYeJwuQCa/7YnwmXJzuLMs+6fKa43KlFTTmpzYHh4p4Hx2lHAsZUpuWSD9/KSptvSG4aA==
+"@graphql-codegen/fragment-matcher@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/fragment-matcher/-/fragment-matcher-3.0.0.tgz#0a688b38f5081ba0023c450732a2eee614f18438"
+  integrity sha512-tSxS0v3AQ5kl08KXVfFCCoYjcPsKeG7DeH3FNoCztr/Cdxf6gwApmlr0rZQLcWPLsyV89cqGw3d2kf+oy8J99Q==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^1.18.2"
-    tslib "~2.0.1"
+    "@graphql-codegen/plugin-helpers" "^2.0.0"
+    tslib "~2.3.0"
 
-"@graphql-codegen/plugin-helpers@^1.18.2", "@graphql-codegen/plugin-helpers@^1.18.7", "@graphql-codegen/plugin-helpers@^1.18.8":
+"@graphql-codegen/plugin-helpers@^1.18.7", "@graphql-codegen/plugin-helpers@^1.18.8":
   version "1.18.8"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.18.8.tgz#39aac745b9e22e28c781cc07cf74836896a3a905"
   integrity sha512-mb4I9j9lMGqvGggYuZ0CV+Hme08nar68xkpPbAVotg/ZBmlhZIok/HqW2BcMQi7Rj+Il5HQMeQ1wQ1M7sv/TlQ==
   dependencies:
     "@graphql-tools/utils" "^7.9.1"
+    common-tags "1.8.0"
+    import-from "4.0.0"
+    lodash "~4.17.0"
+    tslib "~2.3.0"
+
+"@graphql-codegen/plugin-helpers@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-2.0.0.tgz#8c66be320f63a69760112c46fc7c23c2de53382b"
+  integrity sha512-SkJeDIpSZbQA+t86t7y5yHn7uN6W/lDxiOi/JWxZRPW5Y5pZY+SP1GMOQgKUkwcS9jF3+ISSxBcE+KDVqluqCg==
+  dependencies:
+    "@graphql-tools/utils" "^8.0.1"
     common-tags "1.8.0"
     import-from "4.0.0"
     lodash "~4.17.0"
@@ -1759,6 +1770,13 @@
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.2"
     tslib "~2.2.0"
+
+"@graphql-tools/utils@^8.0.1":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.0.2.tgz#795a8383cdfdc89855707d62491c576f439f3c51"
+  integrity sha512-gzkavMOgbhnwkHJYg32Adv6f+LxjbQmmbdD5Hty0+CWxvaiuJq+nU6tzb/7VSU4cwhbNLx/lGu2jbCPEW1McZQ==
+  dependencies:
+    tslib "~2.3.0"
 
 "@graphql-tools/wrap@^7.0.4":
   version "7.0.8"
