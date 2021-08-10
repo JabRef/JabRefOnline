@@ -30,17 +30,22 @@
     <div class="space-x-1 text-sm">
       <span class="font-semibold">2019</span>
       <a
-        v-if="'journal' in document && document.journal"
-        :href="'journal/' + document.journal.id"
-        >{{ document.journal.name }}</a
+        v-if="
+          'in' in document &&
+          document.in &&
+          'journal' in document.in &&
+          document.in.journal
+        "
+        :href="'journal/' + document.in.journal.id"
+        >{{ document.in.journal.name }}</a
       >
       <a
         v-if="'institution' in document && document.institution"
         :href="'institution/' + document.institution.id"
         >{{ document.institution.name }}</a
       >
-      <span v-if="'booktitle' in document && document.booktitle">
-        {{ document.booktitle }}
+      <span v-if="'in' in document && document.in && 'title' in document.in">
+        {{ document.in.title }}
       </span>
     </div>
     <div
@@ -94,13 +99,12 @@ import {
   toRefs,
 } from '@nuxtjs/composition-api'
 import { gql } from '@apollo/client/core'
-import { DocumentForViewFragment, DocumentType } from '../apollo/graphql'
+import { DocumentForViewFragment } from '../apollo/graphql'
 import { useUiStore } from '~/store'
 
 export const DocumentForView = gql`
   fragment DocumentForView on Document {
     id
-    type
     title
     keywords
     abstract
@@ -114,16 +118,20 @@ export const DocumentForView = gql`
         name
       }
     }
-    ... on Article {
-      journal {
-        id
-        name
+    ... on JournalArticle {
+      in {
+        journal {
+          id
+          name
+        }
       }
     }
-    ... on InProceedings {
-      booktitle
+    ... on ProceedingsArticle {
+      in {
+        title
+      }
     }
-    ... on PhdThesis {
+    ... on Thesis {
       institution {
         id
         name
@@ -144,12 +152,12 @@ export default defineComponent({
     const viewFullAbstract = ref(false)
 
     const typeIcon = computed(() => {
-      switch (document.value.type) {
-        case DocumentType.Article:
+      switch (document.value.__typename) {
+        case 'JournalArticle':
           return 'newspaper'
-        case DocumentType.InProceedings:
+        case 'ProceedingsArticle':
           return 'chalkboard-teacher'
-        case DocumentType.PhdThesis:
+        case 'Thesis':
           return 'graduation-cap'
         default:
           return 'file-alt'
@@ -157,12 +165,12 @@ export default defineComponent({
     })
 
     const typeDescription = computed(() => {
-      switch (document.value.type) {
-        case DocumentType.Article:
+      switch (document.value.__typename) {
+        case 'JournalArticle':
           return 'Journal Paper'
-        case DocumentType.InProceedings:
+        case 'ProceedingsArticle':
           return 'Conference Paper'
-        case DocumentType.PhdThesis:
+        case 'Thesis':
           return 'PhD Thesis'
       }
     })
