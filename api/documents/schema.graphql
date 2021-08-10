@@ -87,6 +87,7 @@ type Journal {
 
   """
   An annex to the name of the journal.
+  This may be useful in case a journal has been renamed or if the journal name isn't unique.
 
   Biblatex: journaltitleaddon
   """
@@ -135,6 +136,9 @@ type JournalIssue implements Node {
 
   """
   An annex to the title of the specific issue of a journal.
+  This may be useful when a special issue of a journal has a title that doesn't make it clear that it is a special issue and one wants to emphasize that.
+
+  Biblatex: issuetitleaddon
   """
   titleAddon: String
 
