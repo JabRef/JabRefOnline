@@ -1,3 +1,5 @@
+# eslint-disable @graphql-eslint/no-unreachable-types -- due to bug https://github.com/dotansimha/graphql-eslint/issues/571
+
 type Query {
   _empty: String
 }
@@ -6,6 +8,9 @@ type Mutation {
   _empty: String
 }
 
+"""
+An object with an identifier that is unique across all objects in the graph.
+"""
 interface Node {
   "The ID of the node."
   id: ID!
