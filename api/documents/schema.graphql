@@ -271,6 +271,12 @@ The different types of documents are mostly compatible with the types listed in 
 
 The fields for each type are mostly compatible with the fields in the following sources. If known, the mapping is indicated in the comment of each field.
   - Biblatex: https://github.com/plk/biblatex/blob/dev/tex/latex/biblatex/blx-dm.def
+  - CSL: https://github.com/citation-style-language/schema/blob/master/schemas/input/csl-data.json
+  - ORCID: https://github.com/ORCID/orcid-model
+
+The mapping was based on the following sources:
+  - https://github.com/retorquere/zotero-better-bibtex/blob/master/translators/Better%20BibLaTeX.ts
+  - https://github.com/fiduswriter/biblatex-csl-converter/blob/main/src/const.ts
 """
 interface Document implements Node {
   id: ID!
