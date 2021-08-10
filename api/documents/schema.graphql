@@ -113,14 +113,6 @@ type JournalIssue implements Node {
   journal: Journal
 
   """
-  This field is intended for journals whose individual issues are identified by a designation such as ‘Spring’ or ‘Summer’ rather than the month or a number.
-  Usually the issue name is displayed in front of the year.
-
-  Biblatex: issue
-  """
-  name: String
-
-  """
   The title of a specific issue of a journal.
 
   Biblatex: issuetitle
@@ -146,10 +138,19 @@ type JournalIssue implements Node {
   The number of the issue.
 
   Normally this field will be an integer or an integer range, but it may also be a short designator that is not entirely numeric such as “S1”, “Suppl. 2”, “3es”.
+  Usually, the number is displayed close to the volume, e.g. 10.2 (volume: 10, number: 2).
 
   Biblatex: number
   """
   number: String
+
+  """
+  This field is intended for journals whose individual issues are identified by a designation such as Lent, Michaelmas, Summer or Spring rather than the month or a number.
+  Usually the issue name is displayed in front of the year and not the volume.
+
+  Biblatex: issue
+  """
+  name: String
 
   """
   The name or number of a journal series.
