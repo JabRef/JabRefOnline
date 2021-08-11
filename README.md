@@ -30,6 +30,8 @@ Now you can start the server by using `yarn dev`.
 | yarn build | Build the nuxt.js web application for production. |
 | yarn start | Start ExpressJS server in production. |
 | yarn prisma:studio | Explore data in the database using a visual editor. |
+| yarn storybook | Start [Storybook](#ui-workflow-storybook) in your browser. |
+
 
 ### Workflow for editing the database schema
 
@@ -39,6 +41,19 @@ Now you can start the server by using `yarn dev`.
 4. Run `yarn prisma:migrate:dev` to generate new migration based on the schema changes.
 
 See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecycle/prototyping-schema-db-push) for more details.
+
+### UI workflow: Storybook
+As the primary UI development flow, we use Storybook which allows developing UI components in isolation without the need to start the whole application.
+Storybook uses so-called stories.
+Each story represents a single visual state of a component.
+For each component its stories should be placed in the same directory, with the suffix `.stories.ts` appended.
+For example, 
+```
+components
+│   Button.vue
+│   Button.stories.ts
+```
+To start developing with Storybook, simply run `yarn storybook`, which opens Storybook in the browser.
 
 ## Backend: Overall Structure
 - `Resolver` aggregates the data, and transforms in a representation suitable for the domain layer.
