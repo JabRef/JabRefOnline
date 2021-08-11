@@ -84,7 +84,7 @@ jobs:
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: 71e604036188
+          projectToken: 'b3787adf2fa5'
           buildScriptName: storybook:build
 
       - name: Upload coverage to Codecov
