@@ -26,7 +26,9 @@ Now you can start the server by using `yarn dev`.
 
 | Command | Description |
 |---------|-------------|
+| yarn install | Install project dependencies and generate code. |
 | yarn dev | Start ExpressJS server in development with Nuxt.js in dev mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
+| yarn test | Execute all tests. Pass `-u` to update all Jest snapshots.|
 | yarn build | Build the nuxt.js web application for production. |
 | yarn start | Start ExpressJS server in production. |
 | yarn prisma:studio | Explore data in the database using a visual editor. |
@@ -54,6 +56,8 @@ components
 │   Button.stories.ts
 ```
 To start developing with Storybook, simply run `yarn storybook`, which opens Storybook in the browser.
+
+An up-to-date version of all Storybook components can be found [online](https://www.chromatic.com/library?appId=61142988527d34003b1e783d&branch=main).
 
 ## Backend: Overall Structure
 - `Resolver` aggregates the data, and transforms in a representation suitable for the domain layer.
@@ -93,6 +97,16 @@ To start developing with Storybook, simply run `yarn storybook`, which opens Sto
    - [Vue Apollo](https://apollo.vuejs.org/): Graphql integration for Vue [Documentation](https://v4.apollo.vuejs.org/guide-option/)
 - [Tailwind CSS](https://tailwindcss.com/): CSS framework [Documentation](https://tailwindcss.com/docs), including [Vue Tailwind](https://www.vue-tailwind.com/docs/installation) to extract reusable components 
 - [Font Awesome](https://fontawesome.com/icons?d=gallery&p=2): Font-based icons
+
+## Conventions
+- Vue: Single File Components are used for all components, with a PascalCase name.
+- Tests are placed next to the file containing the code-under-test, and have the same file name with a `.spec.ts` suffix added.
+  For example, 
+  ```
+  api
+  │   Resolver.ts
+  │   Resolver.spec.ts
+  ```
 
 ## References
 - Prisma used in different contexts: https://github.com/prisma/prisma-examples
