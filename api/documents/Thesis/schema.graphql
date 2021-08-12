@@ -1,0 +1,16 @@
+input AddThesisInput {
+  id: ID!
+  title: String
+  subtitle: String
+  titleAddon: String
+  abstract: String
+  authors: [AddEntityInput!]!
+  note: String
+  languages: [String]
+  publicationState: String
+  keywords: [String!]!
+  degreeType: String
+  # TODO: make this AddInstitutionInput
+  institution: String
+  pageTotal: String
+}
