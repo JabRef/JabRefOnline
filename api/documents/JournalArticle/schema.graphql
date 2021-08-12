@@ -183,11 +183,11 @@ input AddJournalArticleInput {
   languages: [String]
   publicationState: String
   keywords: [String!]
-  in: JournalIssueInput
+  in: AddJournalIssueInput
   pageStart: String
   pageEnd: String
   electronicId: String
-  translated: TranslatedInput
+  translated: AddTranslatedInput
   date: Date
   annotators: [AddEntityInput!]
   commentators: [AddEntityInput!]

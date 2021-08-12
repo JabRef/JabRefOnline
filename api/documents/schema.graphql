@@ -2,11 +2,6 @@
 scalar DateTime
 scalar Date
 
-input FieldValueTupleInput {
-  field: String!
-  value: String!
-}
-
 """
 Ways in which to filter a list of documents.
 """
@@ -34,7 +29,7 @@ input AddPersonInput {
   name: String!
 }
 
-type AddOrganizationInput {
+input AddOrganizationInput {
   name: String!
 }
 
@@ -488,8 +483,8 @@ input UserDocumentUpdateInput {
 
   #### Only one of the following fields should be filled
   journalArticle: AddJournalArticleInput
-  proceedingsArticle: AddJournalArticleInput
-  thesisArticle: AddJournalArticleInput
+  proceedingsArticle: AddProceedingsArticleInput
+  thesisArticle: AddThesisInput
 }
 
 extend type Query {
