@@ -1,38 +1,8 @@
 scalar DateTime
 
-type FieldValueTuple {
-  field: String!
-  value: String!
-}
-
 input FieldValueTupleInput {
   field: String!
   value: String!
-}
-
-"""
-Articles, books etc
-These *Raw*-types should only be used to sync with JabRef
-"""
-input DocumentRawInput {
-  type: String!
-  citationKey: String
-
-  lastModified: DateTime
-  added: DateTime
-
-  fields: [FieldValueTupleInput!]
-}
-
-input DocumentRawUpdateInput {
-  id: ID!
-  type: String
-  citationKey: String
-
-  lastModified: DateTime
-  added: DateTime
-
-  fields: [FieldValueTupleInput!]
 }
 
 """
@@ -51,18 +21,6 @@ extend type User {
     "Filtering options for documents returned."
     filterBy: DocumentFilters
   ): [Document!]!
-}
-
-type DocumentRaw {
-  id: ID!
-
-  type: String!
-  citationKey: String
-
-  lastModified: DateTime
-  added: DateTime
-
-  fields: [FieldValueTuple!]!
 }
 
 type Person {
@@ -158,12 +116,35 @@ type Unknown implements Document {
   abstract: String
 }
 
+"""
+Articles, books etc
+"""
+input DocumentInput {
+  type: String!
+  citationKey: String
+
+  lastModified: DateTime
+  added: DateTime
+
+  fields: [FieldValueTupleInput!]
+}
+
+input DocumentUpdateInput {
+  id: ID!
+  type: String
+  citationKey: String
+
+  lastModified: DateTime
+  added: DateTime
+
+  fields: [FieldValueTupleInput!]
+}
+
 extend type Query {
   userDocument(id: ID!): Document
-  userDocumentRaw(id: ID!): DocumentRaw
 }
 
 extend type Mutation {
-  addUserDocumentRaw(document: DocumentRawInput!): DocumentRaw
-  updateUserDocumentRaw(document: DocumentRawUpdateInput!): DocumentRaw
+  addUserDocument(document: DocumentInput!): Document
+  updateUserDocument(document: DocumentUpdateInput!): Document
 }

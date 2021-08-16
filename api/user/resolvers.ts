@@ -19,7 +19,11 @@ import {
   UserDocumentService,
 } from '../documents/user.document.service'
 import { GroupService } from '../groups/service'
-import { AuthService, ChangePasswordPayload } from './auth.service'
+import {
+  AuthService,
+  ChangePasswordPayload,
+  SignupPayload,
+} from './auth.service'
 
 @injectable()
 export class Query {
@@ -103,17 +107,16 @@ export class Mutation {
 }
 
 @injectable()
-export class SignupPayload {
+export class SignupPayloadResolver {
   __resolveType(
     signup: SignupPayload
-  ): 'UserReturned' | 'InputValidationProblem' | 'undefine' {
+  ): 'UserReturned' | 'InputValidationProblem' {
     if ('user' in signup) {
       return 'UserReturned'
     }
     if ('problems' in signup) {
       return 'InputValidationProblem'
     }
-    return 'undefine'
   }
 }
 
@@ -123,10 +126,6 @@ export class UserResolver {
     private userDocumentService: UserDocumentService,
     private groupService: GroupService
   ) {}
-
-  async documentsRaw(user: User): Promise<UserDocument[]> {
-    return await this.userDocumentService.getDocumentsOf(user)
-  }
 
   async documents(
     user: User,
@@ -161,6 +160,6 @@ export function resolvers(): Resolvers {
     Query: container.resolve(Query),
     Mutation: container.resolve(Mutation),
     User: container.resolve(UserResolver),
-    SignupPayload: container.resolve(SignupPayload),
+    SignupPayload: container.resolve(SignupPayloadResolver),
   }
 }

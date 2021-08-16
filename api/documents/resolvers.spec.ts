@@ -3,13 +3,7 @@ import { mock, mockReset } from 'jest-mock-extended'
 import { UserDocument } from '@prisma/client'
 import { DocumentType } from '../graphql'
 import { UserDocumentService } from './user.document.service'
-import {
-  parse,
-  Query,
-  Mutation,
-  DocumentResolver,
-  DocumentRawResolver,
-} from './resolvers'
+import { parse, Query, Mutation, DocumentResolver } from './resolvers'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 
 const userDocumentService = mock<UserDocumentService>()
@@ -44,7 +38,7 @@ describe('Query', () => {
 describe('Mutation', () => {
   describe('addUserDocument', () => {
     it('converts other fields correctly', async () => {
-      await mutation.addUserDocumentRaw(
+      await mutation.addUserDocument(
         {},
         {
           document: {
@@ -78,7 +72,7 @@ describe('Mutation', () => {
     })
 
     it('converts special fields correctly', async () => {
-      await mutation.addUserDocumentRaw(
+      await mutation.addUserDocument(
         {},
         {
           document: {
@@ -112,41 +106,6 @@ describe('DocumentResolver', () => {
         type: DocumentType.Article,
       } as UserDocument
       expect(documentResolver.__resolveType(article)).toEqual('Article')
-    })
-  })
-})
-
-describe('DocumentRawResolver', () => {
-  const documentResolver = new DocumentRawResolver()
-  describe('fields', () => {
-    it('contains special field', () => {
-      const document = {
-        id: 'uniqueId',
-        author: 'JabRef devs',
-      } as UserDocument
-      expect(documentResolver.fields(document)).toStrictEqual([
-        {
-          field: 'author',
-          value: 'JabRef devs',
-        },
-      ])
-    })
-
-    it('contains other field', () => {
-      const document = {
-        id: 'uniqueId',
-        other: [
-          {
-            some: 'random field',
-          },
-        ],
-      } as unknown as UserDocument
-      expect(documentResolver.fields(document)).toStrictEqual([
-        {
-          field: 'some',
-          value: 'random field',
-        },
-      ])
     })
   })
 })

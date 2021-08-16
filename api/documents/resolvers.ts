@@ -2,12 +2,11 @@ import { Prisma } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
 import {
-  FieldValueTuple,
-  DocumentRawInput,
-  DocumentRawUpdateInput,
+  DocumentInput,
+  DocumentUpdateInput,
   DocumentType,
   Resolvers,
-  MutationAddUserDocumentRawArgs,
+  MutationAddUserDocumentArgs,
   Person,
   Journal,
   QueryUserDocumentArgs,
@@ -48,23 +47,8 @@ const specialFields: string[] = [
   'isbn',
 ]
 
-function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
-  return value !== null && value !== undefined
-}
-
-function toPair(field: string, value: string | null): FieldValueTuple | null {
-  if (value) {
-    return {
-      field,
-      value,
-    }
-  } else {
-    return null
-  }
-}
-
-function convertFromRaw(
-  document: DocumentRawInput | DocumentRawUpdateInput
+function convertDocumentInput(
+  document: DocumentInput | DocumentUpdateInput
 ): Prisma.UserDocumentCreateInput {
   const special = document.fields
     ?.filter((item) => specialFields.includes(item.field))
@@ -132,26 +116,20 @@ export class Query {
   ): Promise<UserDocument | null> {
     return await this.userDocumentService.getDocumentById(id, true)
   }
-
-  async userDocumentRaw(
-    _root: Record<string, never>,
-    { id }: QueryUserDocumentArgs,
-    _context: Context
-  ): Promise<UserDocument | null> {
-    return await this.userDocumentService.getDocumentById(id, true)
-  }
 }
 
 @injectable()
 export class Mutation {
   constructor(private userDocumentService: UserDocumentService) {}
 
-  async addUserDocumentRaw(
+  async addUserDocument(
     _root: Record<string, never>,
-    { document }: MutationAddUserDocumentRawArgs,
+    { document }: MutationAddUserDocumentArgs,
     _context: Context
   ): Promise<UserDocument | null> {
-    return await this.userDocumentService.addDocument(convertFromRaw(document))
+    return await this.userDocumentService.addDocument(
+      convertDocumentInput(document)
+    )
   }
 }
 
@@ -194,32 +172,6 @@ export class DocumentResolver {
   keywords(document: UserDocument): string[] {
     // TODO: Already store keywords on save as a list?
     return document.keywords?.split(',') ?? []
-  }
-}
-
-@injectable()
-export class DocumentRawResolver {
-  fields(document: UserDocument): FieldValueTuple[] {
-    const documentFields = Object.entries(document)
-      .filter(([key, _]) => specialFields.includes(key))
-      .map(([key, value]) => toPair(key, value as string))
-      .filter(notEmpty)
-
-    let otherFields: FieldValueTuple[] = []
-    if (document.other) {
-      // document.other is an array of objects of the form { field: value }
-      otherFields = (document.other as Prisma.JsonArray)
-        .map((item) => {
-          if (item) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const [key, value] = Object.entries(item)[0]
-            return toPair(key, value as string)
-          }
-          return null
-        })
-        .filter(notEmpty)
-    }
-    return [...documentFields, ...otherFields]
   }
 }
 
@@ -271,7 +223,6 @@ export function resolvers(): Resolvers {
     Query: container.resolve(Query),
     Mutation: container.resolve(Mutation),
     Document: container.resolve(DocumentResolver),
-    DocumentRaw: container.resolve(DocumentRawResolver),
     Article: container.resolve(ArticleResolver),
     InProceedings: container.resolve(InProceedingsResolver),
     PhdThesis: container.resolve(PhdThesisResolver),
