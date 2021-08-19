@@ -2,11 +2,6 @@
 scalar DateTime
 scalar Date
 
-input FieldValueTupleInput {
-  field: String!
-  value: String!
-}
-
 """
 Ways in which to filter a list of documents.
 """
@@ -30,12 +25,25 @@ type Person {
   name: String!
 }
 
+input AddPersonInput {
+  name: String!
+}
+
+input AddOrganizationInput {
+  name: String!
+}
+
 type Organization {
   id: ID!
   name: String!
 }
 
 union Entity = Person | Organization
+input AddEntityInput {
+  ### Only one of the following fields can be specified.
+  person: AddPersonInput
+  organization: AddOrganizationInput
+}
 
 """
 A document that can be translated.
@@ -67,104 +75,9 @@ type Translated {
   originalLanguages: [String]
 }
 
-type Journal {
-  id: ID!
-
-  """
-  The name of the journal.
-
-  Biblatex: journaltitle
-  """
-  name: String!
-
-  """
-  The subtitle of a journal.
-
-  Biblatex: journalsubtitle
-  """
-  subtitle: String
-
-  """
-  An annex to the name of the journal.
-  This may be useful in case a journal has been renamed or if the journal name isn't unique.
-
-  Biblatex: journaltitleaddon
-  """
-  titleAddon: String
-
-  """
-  The International Standard Serial Number of a journal.
-
-  Biblatex: issn
-  """
-  issn: String
-}
-
-"""
-An issue of a journal.
-"""
-type JournalIssue implements Node {
-  id: ID!
-
-  """
-  The journal in which the article has been published.
-  """
-  journal: Journal
-
-  """
-  The title of a specific issue of a journal.
-
-  Biblatex: issuetitle
-  """
-  title: String
-
-  """
-  The subtitle of a specific issue of a journal.
-
-  Biblatex: issuesubtitle
-  """
-  subtitle: String
-
-  """
-  An annex to the title of the specific issue of a journal.
-  This may be useful when a special issue of a journal has a title that doesn't make it clear that it is a special issue and one wants to emphasize that.
-
-  Biblatex: issuetitleaddon
-  """
-  titleAddon: String
-
-  """
-  The number of the issue.
-
-  Normally this field will be an integer or an integer range, but it may also be a short designator that is not entirely numeric such as “S1”, “Suppl. 2”, “3es”.
-  Usually, the number is displayed close to the volume, e.g. 10.2 (volume: 10, number: 2).
-
-  Biblatex: number
-  """
-  number: String
-
-  """
-  This field is intended for journals whose individual issues are identified by a designation such as Lent, Michaelmas, Summer or Spring rather than the month or a number.
-  Usually the issue name is displayed in front of the year and not the volume.
-
-  Biblatex: issue
-  """
-  name: String
-
-  """
-  The name or number of a journal series.
-  Usually, after the journal has restarted publication with a new numbering.
-
-  Biblatex: series
-  """
-  series: String
-
-  """
-  The volume of the journal this issue is part of.
-
-  Biblatex: volume
-  """
-  volume: String
+input AddTranslatedInput {
+  translators: [AddEntityInput!]!
+  originalLanguages: [String]
 }
 
 """
@@ -279,6 +192,28 @@ The mapping was based on the following sources:
 """
 interface Document implements Node {
   id: ID!
+
+  """
+  The keys by which the document can be cited.
+  The first key is the preferred one, the others are aliases to aid users who change their citation keys but have legacy documents which use older keys for the same entry.
+
+  Biblatex: citekey (primary) and ids (secondary)
+  """
+  citationKeys: [String!]
+
+  """
+  The date when the metadata of the document was modified last.
+
+  Biblatex: no standard field
+  """
+  lastModified: DateTime
+
+  """
+  The date when the document was added to the library.
+
+  Biblatex: no standard field
+  """
+  added: DateTime
 
   """
   The title of the document.
@@ -450,6 +385,9 @@ An article is a usually self-contained nonfiction prose.
 """
 interface Article implements Node & Document {
   id: ID!
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
   title: String
   subtitle: String
   titleAddon: String
@@ -471,243 +409,6 @@ interface DocumentMultiVolume {
 }
 
 """
-An article published in a journal disseminates the results of original research and scholarship.
-It is usually peer-reviewed and published under a separate title in a journal issue or periodical containing other works of the same form.
-
-Biblatex: article
-CSL: article-journal or article
-ORCID: journal-article
-CERIF: JournalArticle
-
-TODO:
-- Decide if "editor" should be added (it is supported by biblatex). What's the purpose, and does it refer to an editor of the article or an editor of the journal?
-- Decide if "version" should be added (it is supported by biblatex, but the definition says "The revision number of a piece of software, a manual, etc." which is not very specific).
-"""
-type JournalArticle implements Node & Document & Article & HasParent & Translatable {
-  id: ID!
-  title: String
-  subtitle: String
-  titleAddon: String
-  abstract: String
-  authors: [Entity!]!
-  note: String
-  languages: [String]
-  publicationState: String
-  keywords: [String!]!
-  """
-  The issue of the journal in which the article has been published.
-  """
-  in: JournalIssue
-  pageStart: String
-  pageEnd: String
-  electronicId: String
-  translated: Translated
-
-  """
-  The publication date.
-
-  Biblatex: date (or month + year)
-  """
-  date: Date
-
-  """
-  The authors of annotations to the article.
-
-  Biblatex: annotator
-  """
-  annotators: [Entity!]!
-
-  """
-  The authors of a commentary to the work.
-  Note that this field is intended for commented editions which have a commentator in addition to the author. If the work is a stand-alone commentary, the commentator should be given in the author.
-
-  Biblatex: commentator
-  """
-  commentators: [Entity!]!
-}
-
-"""
-A dissertation/thesis is written for an educational institution that leads to the acquirement of a degree.
-
-Biblatex: thesis (or phdthesis or mastersthesis)
-CSL: thesis
-ORCID: dissertation or dissertation-thesis
-CERIF: PhD Thesis or Doctoral Thesis
-
-TODO: Decide what to do with biblatex fields "chapter, eid, pages" that are used to limit the reference to a specific part of the thesis. They are not really metadata of the thesis, but only of the citation.
-"""
-type Thesis implements Node & Document {
-  id: ID!
-  title: String
-  subtitle: String
-  titleAddon: String
-  abstract: String
-  authors: [Entity!]!
-  note: String
-  languages: [String]
-  publicationState: String
-  keywords: [String!]!
-
-  """
-  The type of the degree obtained by the author.
-
-  Biblatex: type
-  """
-  degreeType: String
-
-  """
-  The university or some other institution where the thesis has been written at.
-  """
-  institution: Institution
-
-  """
-  The total number of pages of the thesis.
-
-  Biblatex: pagetotal
-  """
-  pageTotal: String
-}
-
-"""
-An article that has been presented at a conference and published in a proceedings (not in scholarly journals).
-
-Biblatex: inproceedings (or conference)
-CSL: paper-conference
-ORCID: conference-paper
-CERIF: Conference Proceedings Article
-"""
-type ProceedingsArticle implements Node & Document & Article & HasParent & HasBooklikeParent {
-  id: ID!
-  title: String
-  subtitle: String
-  titleAddon: String
-  abstract: String
-  authors: [Entity!]!
-  note: String
-  languages: [String]
-  publicationState: String
-  keywords: [String!]!
-  """
-  The proceedings in which the article has been published.
-  """
-  in: Proceedings
-  pageStart: String
-  pageEnd: String
-  electronicId: String
-  chapter: String
-}
-
-"""
-A collection of articles, published abstracts or posters gathered from a conference.
-This may be a single volume in a multi-volume proceedings or a publication consisting only of a single volume.
-
-Biblatex: proceedings
-CSL: book
-ORCID: book
-CERIF: Conference Proceedings
-
-TODO:
-  - Decide what to do with biblatex fields "chapter, eid, pages" that are used to limit the citation to a specific part of the proceedings (right?). They are not really metadata of the proceedings, but only of the citation.
-  - Add editors with their roles.
-"""
-type Proceedings implements Node & Document & Booklike & PartOfSeries & HasMultiVolumeParent {
-  id: ID!
-  """
-  The title of the document.
-
-  Biblatex: title (or booktitle in a ProceedingsArticle)
-  """
-  title: String
-  """
-  The subtitle of the document.
-
-  Biblatex: subtitle (or booksubtitle in a ProceedingsArticle)
-  """
-  subtitle: String
-
-  """
-  An annex to the title of the document.
-
-  Biblatex: titleaddon (or booktitleaddon in a ProceedingsArticle)
-  """
-  titleAddon: String
-  abstract: String
-  authors: [Entity!]!
-  note: String
-  languages: [String]
-  publicationState: String
-  keywords: [String!]!
-  isbn: String
-  publishers: [Publisher]
-  pageTotal: String
-  number: String
-  series: String
-  """
-  The multi-volume proceedings of which this proceedings is part of.
-  """
-  in: ProceedingsMultiVolume
-  part: String
-  volume: String
-
-  """
-  The conference of the proceedings.
-  """
-  conference: Event
-}
-
-"""
-A multi-volume conference proceedings.
-
-Biblatex: mvproceedings
-CSL: book
-ORCID: book
-CERIF: Conference Proceedings
-
-TODO:
-  - Decide what to do with biblatex fields "chapter, eid, pages" that are used to limit the citation to a specific part of the proceedings (right?). They are not really metadata of the proceedings, but only of the citation.
-  - Add editors with their roles.
-"""
-type ProceedingsMultiVolume implements DocumentMultiVolume & Booklike & PartOfSeries {
-  id: ID!
-  """
-  The title of the document.
-
-  Biblatex: title (or maintitle in a ProceedingsArticle or Proceedings)
-  """
-  title: String
-  """
-  The subtitle of the document.
-
-  Biblatex: subtitle (or mainsubtitle in a ProceedingsArticle or Proceedings)
-  """
-  subtitle: String
-
-  """
-  An annex to the title of the document.
-
-  Biblatex: titleaddon (or maintitleaddon in a ProceedingsArticle or Proceedings)
-  """
-  titleAddon: String
-  abstract: String
-  authors: [Entity!]!
-  note: String
-  languages: [String]
-  publicationState: String
-  keywords: [String!]!
-  totalVolumes: String
-  isbn: String
-  publishers: [Publisher]
-  pageTotal: String
-  number: String
-  series: String
-
-  """
-  The conference of the proceedings.
-  """
-  conference: Event
-}
-
-"""
 A fallback type for works which do not fit into any other category.
 
 Biblatex: value of "type" field, or "misc" if not present
@@ -720,6 +421,9 @@ TODO:
 """
 type Other implements Node & Document {
   id: ID!
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
   title: String
   subtitle: String
   titleAddon: String
@@ -751,27 +455,22 @@ type Other implements Node & Document {
 }
 
 """
-Articles, books etc
+Input for creating a new user document.
 """
-input UserDocumentInput {
-  type: String!
-  citationKey: String
-
-  lastModified: DateTime
-  added: DateTime
-
-  fields: [FieldValueTupleInput!]
+input AddUserDocumentInput {
+  #### Only one of the following fields should be filled
+  journalArticle: AddJournalArticleInput
+  proceedingsArticle: AddProceedingsArticleInput
+  thesis: AddThesisInput
 }
 
-input UserDocumentUpdateInput {
+input UpdateUserDocumentInput {
   id: ID!
-  type: String
-  citationKey: String
 
-  lastModified: DateTime
-  added: DateTime
-
-  fields: [FieldValueTupleInput!]
+  #### Only one of the following fields should be filled
+  journalArticle: AddJournalArticleInput
+  proceedingsArticle: AddProceedingsArticleInput
+  thesis: AddThesisInput
 }
 
 extend type Query {
@@ -779,6 +478,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  addUserDocument(document: UserDocumentInput!): Document
-  updateUserDocument(document: UserDocumentUpdateInput!): Document
+  addUserDocument(input: AddUserDocumentInput!): Document
+  updateUserDocument(input: UpdateUserDocumentInput!): Document
 }

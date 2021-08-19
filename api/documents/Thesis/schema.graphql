@@ -1,0 +1,63 @@
+"""
+A dissertation/thesis is written for an educational institution that leads to the acquirement of a degree.
+
+Biblatex: thesis (or phdthesis or mastersthesis)
+CSL: thesis
+ORCID: dissertation or dissertation-thesis
+CERIF: PhD Thesis or Doctoral Thesis
+
+TODO: Decide what to do with biblatex fields "chapter, eid, pages" that are used to limit the reference to a specific part of the thesis. They are not really metadata of the thesis, but only of the citation.
+"""
+type Thesis implements Node & Document {
+  id: ID!
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
+  title: String
+  subtitle: String
+  titleAddon: String
+  abstract: String
+  authors: [Entity!]!
+  note: String
+  languages: [String]
+  publicationState: String
+  keywords: [String!]!
+
+  """
+  The type of the degree obtained by the author.
+
+  Biblatex: type
+  """
+  degreeType: String
+
+  """
+  The university or some other institution where the thesis has been written at.
+  """
+  institution: Institution
+
+  """
+  The total number of pages of the thesis.
+
+  Biblatex: pagetotal
+  """
+  pageTotal: String
+}
+
+input AddThesisInput {
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
+  title: String
+  subtitle: String
+  titleAddon: String
+  abstract: String
+  authors: [AddEntityInput!]!
+  note: String
+  languages: [String]
+  publicationState: String
+  keywords: [String!]!
+  degreeType: String
+  # TODO: make this AddInstitutionInput
+  institution: String
+  pageTotal: String
+}

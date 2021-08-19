@@ -29,7 +29,7 @@ model UserDocument {
   users User[]
 
   type String
-  citationKey String?
+  citationKeys String[]
 
   lastModified DateTime?
   added DateTime?

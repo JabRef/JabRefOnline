@@ -36,18 +36,20 @@ describe('Query', () => {
 
 describe('Mutation', () => {
   describe('addUserDocument', () => {
-    it('converts other fields correctly', async () => {
+    /* TODO: Handle other fields
+    it('converts other unknown fields correctly', async () => {
       await mutation.addUserDocument(
         {},
         {
-          document: {
-            type: 'something',
-            fields: [
-              {
-                field: 'some',
-                value: 'random field',
-              },
-            ],
+          input: {
+            journalArticle: {
+              other: [
+                {
+                  field: 'some',
+                  value: 'random field',
+                },
+              ],
+            }
           },
         },
         context
@@ -69,28 +71,31 @@ describe('Mutation', () => {
         },
       })
     })
+    */
 
-    it('converts special fields correctly', async () => {
+    it('converts single person author correctly', async () => {
       await mutation.addUserDocument(
         {},
         {
-          document: {
-            type: 'something',
-            fields: [
-              {
-                field: 'author',
-                value: 'JabRef devs',
-              },
-            ],
+          input: {
+            journalArticle: {
+              authors: [
+                {
+                  person: {
+                    name: 'JabRef devs',
+                  },
+                },
+              ],
+            },
           },
         },
         context
       )
       expect(userDocumentService.addDocument).toHaveBeenCalledWith({
         added: null,
-        citationKey: null,
+        citationKeys: [],
         lastModified: null,
-        type: 'something',
+        type: 'JournalArticle',
         author: 'JabRef devs',
       })
     })

@@ -10,7 +10,7 @@ const userDocumentService = container.resolve(UserDocumentService)
 const testDocument: UserDocument = {
   id: 'test',
   type: 'article',
-  citationKey: 'testArticle',
+  citationKeys: ['testArticle'],
   lastModified: null,
   added: null,
   author: 'JabRef team',
