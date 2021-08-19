@@ -2,8 +2,9 @@ import { Prisma } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
 import {
-  UserDocumentInput,
-  UserDocumentUpdateInput,
+  AddJournalArticleInput,
+  AddProceedingsArticleInput,
+  AddThesisInput,
   Resolvers,
   MutationAddUserDocumentArgs,
   Person,
@@ -49,8 +50,10 @@ const specialFields: string[] = [
 ]
 
 function convertDocumentInput(
-  document: UserDocumentInput | UserDocumentUpdateInput
+  type: string,
+  document: AddJournalArticleInput | AddProceedingsArticleInput | AddThesisInput
 ): Prisma.UserDocumentCreateInput {
+  /* TODO: Save those fields as well
   const special = document.fields
     ?.filter((item) => specialFields.includes(item.field))
     .map((item) => {
@@ -64,12 +67,14 @@ function convertDocumentInput(
         value: item.value,
       }
     })
+    */
 
-  let convertedDocument: Prisma.UserDocumentCreateInput = {
-    type: document.type ?? 'unknown',
-    citationKey: document.citationKey ?? null,
+  const convertedDocument: Prisma.UserDocumentCreateInput = {
+    type,
+    citationKeys: document.citationKeys ?? [],
     lastModified: document.lastModified ?? null,
     added: document.added ?? null,
+    /*
     ...(other &&
       other.length > 0 && {
         other: {
@@ -78,8 +83,10 @@ function convertDocumentInput(
           },
         },
       }),
+      */
   }
 
+  /*
   if (special) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     convertedDocument = Object.assign(
@@ -87,9 +94,13 @@ function convertDocumentInput(
       Object.fromEntries(special)
     )
   }
+  */
+  // TODO: For update
+  /*
   if ('id' in document) {
     convertedDocument = Object.assign(convertedDocument, { id: document.id })
   }
+  */
 
   return convertedDocument
 }
@@ -113,11 +124,24 @@ export class Mutation {
 
   async addUserDocument(
     _root: Record<string, never>,
-    { document }: MutationAddUserDocumentArgs,
+    { input }: MutationAddUserDocumentArgs,
     _context: Context
   ): Promise<UserDocument | null> {
+    const document =
+      input.journalArticle ?? input.proceedingsArticle ?? input.thesis
+    let documentType: string | null = null
+    if (input.journalArticle) {
+      documentType = 'JournalArticle'
+    } else if (input.proceedingsArticle) {
+      documentType = 'ProceedingsArticle'
+    } else if (input.thesis) {
+      documentType = 'Thesis'
+    }
+    if (!document || !documentType) {
+      throw new Error('No document given')
+    }
     return await this.userDocumentService.addDocument(
-      convertDocumentInput(document)
+      convertDocumentInput(documentType, document)
     )
   }
 }

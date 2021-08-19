@@ -8,6 +8,9 @@ CERIF: Conference Proceedings Article
 """
 type ProceedingsArticle implements Node & Document & Article & HasParent & HasBooklikeParent {
   id: ID!
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
   title: String
   subtitle: String
   titleAddon: String
@@ -28,7 +31,9 @@ type ProceedingsArticle implements Node & Document & Article & HasParent & HasBo
 }
 
 input AddProceedingsArticleInput {
-  id: ID!
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
   title: String
   subtitle: String
   titleAddon: String
@@ -61,6 +66,9 @@ TODO:
 """
 type Proceedings implements Node & Document & Booklike & PartOfSeries & HasMultiVolumeParent {
   id: ID!
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
   """
   The title of the document.
 
