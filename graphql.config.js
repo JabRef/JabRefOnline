@@ -10,16 +10,15 @@ const codegen = {
   generates: {
     'api/graphql.ts': {
       config: {
-        useIndexSignature: true,
         mapperTypeSuffix: 'Model',
         contextType: './context#Context',
         mappers: {
           User: '@prisma/client/index.d#User',
           Document: './documents/user.document.service#UserDocument',
-          Article: './documents/user.document.service#UserDocument',
-          InProceedings: './documents/user.document.service#UserDocument',
-          PhdThesis: './documents/user.document.service#UserDocument',
-          Unknown: './documents/user.document.service#UserDocument',
+          JournalArticle: './documents/user.document.service#UserDocument',
+          ProceedingsArticle: './documents/user.document.service#UserDocument',
+          Thesis: './documents/user.document.service#UserDocument',
+          Other: './documents/user.document.service#UserDocument',
           Group: './groups/resolvers#GroupMaybeResolved',
         },
         scalars: {

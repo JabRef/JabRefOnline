@@ -1,9 +1,8 @@
 import { container } from 'tsyringe'
 import { mock, mockReset } from 'jest-mock-extended'
 import { UserDocument } from '@prisma/client'
-import { DocumentType } from '../graphql'
 import { UserDocumentService } from './user.document.service'
-import { parse, Query, Mutation, DocumentResolver } from './resolvers'
+import { Query, Mutation, DocumentResolver } from './resolvers'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 
 const userDocumentService = mock<UserDocumentService>()
@@ -101,21 +100,11 @@ describe('Mutation', () => {
 describe('DocumentResolver', () => {
   const documentResolver = new DocumentResolver()
   describe('resolveType', () => {
-    it('returns Article for articles', () => {
+    it('returns JournalArticle for articles', () => {
       const article = {
-        type: DocumentType.Article,
+        type: 'JournalArticle',
       } as UserDocument
-      expect(documentResolver.__resolveType(article)).toEqual('Article')
+      expect(documentResolver.__resolveType(article)).toEqual('JournalArticle')
     })
-  })
-})
-
-describe('parse', () => {
-  it('converts lowercase type correctly', () => {
-    expect(parse('article')).toEqual(DocumentType.Article)
-  })
-
-  it('converts uppercase type correctly', () => {
-    expect(parse('Article')).toEqual(DocumentType.Article)
   })
 })

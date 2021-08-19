@@ -158,6 +158,12 @@ const config: NuxtConfig = {
     },
   },
 
+  /**
+   * Storybook integration with Nuxt
+   * See https://storybook.nuxtjs.org/
+   */
+  storybook: {},
+
   // Workaround for https://github.com/nuxt/typescript/issues/494
   createRequire: (jsFileName: string) => {
     return jiti(jsFileName, {
