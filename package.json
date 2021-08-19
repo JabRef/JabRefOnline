@@ -27,7 +27,6 @@
     "lint": "yarn lint:js && yarn lint:graphql",
     "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "lint:graphql": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json eslint --ext .graphql,.vue --ignore-path .gitignore .",
-    "postinstall": "yarn generate",
     "test": "jest --runInBand",
     "test:integration": "jest integration.test.ts --runInBand",
     "test:unit": "jest spec.ts",
@@ -83,7 +82,9 @@
     "typescript": "^4.3.5",
     "vue-apollo": "^3.0.7",
     "vue-tailwind": "^2.4.2",
-    "vue-tree-list": "^1.5.0"
+    "vue-tree-list": "^1.5.0",
+    "skip-postinstall": "^1.0.0"
+
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
