@@ -16,7 +16,9 @@
 - Install [PostgreSQL](https://www.postgresql.org/)
 - Checkout
 - Create a `.env` file in the root containing the connection URL for the database, e.g. `DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
-- Install and start [Redis](https://redis.io/). Perhaps the most straightforward way to do this is via Docker: `yarn docker:redis`. 
+- Install and start [Redis](https://redis.io/).
+  Perhaps the most straightforward way to do this is via Docker: `yarn docker:redis`.
+  If you do not use this command, make sure that Redis is available through the port `6380` or, alternatively, add the configuration `REDIS_PORT=<your port>` to the `.env` file. 
 - Run `yarn install` to install all dependencies.
 - Run `yarn prisma:migrate:dev` to initialize the database. You may also want to use `yarn prisma:seed` to fill the database with some initial test data.
 
