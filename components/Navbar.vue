@@ -175,9 +175,11 @@ export default defineComponent({
     const { resolveClient } = useApolloClient()
 
     const { mutate: logout, onDone } = useMutation(
-      gql(/* GraphQL */ `mutation Logout {
+      gql(/* GraphQL */ `
+        mutation Logout {
           logout
-        }`)
+        }
+      `)
     )
     const router = useRouter()
     onDone(() => {
