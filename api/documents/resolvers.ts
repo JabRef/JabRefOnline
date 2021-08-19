@@ -74,6 +74,9 @@ function convertDocumentInput(
     citationKeys: document.citationKeys ?? [],
     lastModified: document.lastModified ?? null,
     added: document.added ?? null,
+    author: document.authors
+      ?.map((author) => author.person?.name)
+      .join(' and '),
     /*
     ...(other &&
       other.length > 0 && {
