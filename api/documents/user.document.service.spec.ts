@@ -34,7 +34,7 @@ const testDocument: UserDocument = {
   urldate: null,
   publisher: null,
   abstract: null,
-  keywords: null,
+  keywords: [],
   priority: null,
   doi: null,
   eprint: null,
