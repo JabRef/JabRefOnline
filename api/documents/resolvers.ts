@@ -196,6 +196,18 @@ export class JournalArticleResolver extends DocumentResolver {
       return null
     }
   }
+
+  published(document: UserDocument): string | null {
+    return document.publishedAt
+  }
+
+  annotators(_document: UserDocument): Person[] {
+    return []
+  }
+
+  commentators(_document: UserDocument): Person[] {
+    return []
+  }
 }
 
 @injectable()

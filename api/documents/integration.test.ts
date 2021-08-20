@@ -29,6 +29,7 @@ describe('Query', () => {
       query userDocumentById($id: ID!) {
         userDocument(id: $id) {
           id
+          __typename
           citationKeys
           lastModified
           added
@@ -69,7 +70,7 @@ describe('Query', () => {
                 ...EntityFragment
               }
             }
-            date
+            published
             annotators {
               ...EntityFragment
             }
@@ -90,8 +91,10 @@ describe('Query', () => {
         Object {
           "data": Object {
             "userDocument": Object {
+              "__typename": "JournalArticle",
               "abstract": "Epidemiological data demonstrate that regular dietary intake of plant-derived foods and beverages reduces the risk of coronary heart disease and stroke. Among many ingredients, cocoa might be an important mediator. Indeed, recent research demonstrates a beneficial effect of cocoa on blood pressure, insulin resistance, and vascular and platelet function. Although still debated, a range of potential mechanisms through which cocoa might exert its benefits on cardiovascular health have been proposed, including activation of nitric oxide and antioxidant and antiinflammatory effects. This review summarizes the available data on the cardiovascular effects of cocoa, outlines potential mechanisms involved in the response to cocoa, and highlights the potential clinical implications associated with its consumption. ( Circulation. 2009; 119: 1433-1441.)",
               "added": null,
+              "annotators": Array [],
               "authors": Array [
                 Object {
                   "id": "TODOCorti, Roberto",
@@ -111,7 +114,10 @@ describe('Query', () => {
                 },
               ],
               "citationKeys": Array [],
+              "commentators": Array [],
+              "electronicId": null,
               "id": "ckondtcaf000101mh7x9g4gia",
+              "in": null,
               "keywords": Array [
                 "cocoa",
                 "endothelium",
@@ -121,10 +127,14 @@ describe('Query', () => {
               "languages": null,
               "lastModified": null,
               "note": null,
+              "pageEnd": null,
+              "pageStart": null,
               "publicationState": null,
+              "published": "2009",
               "subtitle": null,
               "title": "Cocoa and Cardiovascular Health",
               "titleAddon": null,
+              "translated": null,
             },
           },
         }

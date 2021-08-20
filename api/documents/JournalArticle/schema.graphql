@@ -157,7 +157,7 @@ type JournalArticle implements Node & Document & Article & HasParent & Translata
 
   Biblatex: date (or month + year)
   """
-  date: Date
+  published: Date
 
   """
   The authors of annotations to the article.
@@ -193,7 +193,7 @@ input AddJournalArticleInput {
   pageEnd: String
   electronicId: String
   translated: AddTranslatedInput
-  date: Date
+  published: Date
   annotators: [AddEntityInput!]
   commentators: [AddEntityInput!]
 }

@@ -19,7 +19,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckondtcaf000101mh7x9g4gia',
-      type: 'Article',
+      type: 'JournalArticle',
       title: 'Cocoa and Cardiovascular Health',
       author:
         'Corti, Roberto and Flammer, Andreas J. and Hollenberg, Norman K. and Luscher, Thomas F.',
@@ -31,13 +31,13 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
       issue: '10',
       pages: '1433-1441',
       journal: 'Circulation',
-      year: '2009',
+      publishedAt: '2009',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckr9eq4oc000101mk1ga9bxnt',
-      type: 'Article',
+      type: 'JournalArticle',
       title: 'Cocoa and health: a decade of research',
       author:
         'Cooper, Karen A. and Donovan, Jennifer L. and Waterhouse, Andrew L. and Williamson, Gary',
@@ -49,13 +49,13 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
       issue: '1',
       pages: '1-11',
       journal: 'British Journal of Nutrition',
-      year: '2008',
+      publishedAt: '2008',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckr9eqap6000301mk20hycjqb',
-      type: 'Article',
+      type: 'JournalArticle',
       title:
         'Chocolate and prevention of cardiovascular disease: A systematic review',
       author:
@@ -70,13 +70,13 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
       volume: '3',
       issue: '2',
       journal: 'Nutrition & Metabolism',
-      year: '2006',
+      publishedAt: '2006',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckonduhjk000701mh12wia4nf',
-      type: 'Article',
+      type: 'JournalArticle',
       title: 'Cocoa and Chocolate in Human Health and Disease',
       author: 'Katz, David L. and Doughty, Kim and Ali, Ather',
       abstract:
@@ -87,13 +87,13 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
       issue: '10',
       pages: '2779-2811',
       journal: 'Antioxidants & Redox Signaling',
-      year: '2011',
+      publishedAt: '2011',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckondu6bh000501mh2o2tf00u',
-      type: 'InProceedings',
+      type: 'ProceedingsArticle',
       title: 'Chocolate: food as medicine/medicine as food',
       author: 'Keen, Carl L.',
       abstract:
@@ -108,17 +108,17 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
       doi: '10.1080/07315724.2001.10719181',
       booktitle:
         'Ross Products Research Conference on Medical Issues, Synergy in Medical and Nutrition Therapy',
-      year: '2001',
+      publishedAt: '2001',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckondtpcn000301mhg9lvaqlu',
-      type: 'PhdThesis',
+      type: 'Thesis',
       title:
         'Functionality of inulin and polydextrose in stevia or thaumatin sweetened dark chocolate',
       author: 'Roger Aidoo',
-      year: '2015',
+      publishedAt: '2015',
       abstract:
         'Chocolate is a high energy product with carbohydrates, including sugar, together with fat, as the main sources of energy. Sucrose is utilized up to 30-60% in chocolate and this confers multiple functional properties on chocolate including sweetness, bulkiness and mouthfeel (texture). Today’s consumers are concerned about the high sugar levels, calories and cariogenicity effects in confectionery products, hence growing the popularity of “light” and “sugar-free” products. This has led to the search for low calorie, low glycemic index, healthier alternatives. Polydextrose and inulin are considered as fibers with many interesting functional attributes that meet the needs of the food industry for healthy foods. Stevia and thaumatin are natural high potency (intense) sweeteners with sensory properties superior to those of other sweeteners. This research investigated the functionality of inulin and polydextrose as sucrose replacers (bulking agents) in sugar-free dark chocolates with stevia or thaumatin as intense sweeteners. The type of bulking agent and concentrations used greatly influenced the rheological properties, textural, melting behaviours and other physical quality characteristics of the developed sugar-free chocolates. Microstructural examination revealed that inulin, which had a lower density than polydextrose tend to have more solids per volume and increased particle volume fraction and solid’s surface area, resulting in a higher particle collision and aggregation thereby limiting chocolate flow. This research also reports for the first time, results of a comparative study of the sweetness brought by the intense sweeteners (stevia and thaumatin) in the sugar-free dark chocolates. With opportunity for improvements in quality of reduced calorie chocolates, findings from this research could be applied to develop or reformulate diabetic and/or reduced calorie chocolates to better meet consumer expectations.',
       keywords: ['polydextrose', 'chocolate', 'inulin', 'stevia'],
