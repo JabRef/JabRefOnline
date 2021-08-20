@@ -41,9 +41,7 @@ model UserDocument {
   journal String?
   journaltitle String?
   booktitle String?
-  date String?
-  year String?
-  month String?
+  publishedAt String? // format: YYYY(-MM-DD) TODO: Should use Date format once https://github.com/prisma/prisma/issues/4355 is resolved
   number String?
   volume String?
   edition String?
