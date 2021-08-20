@@ -19,7 +19,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckondtcaf000101mh7x9g4gia',
-      type: 'JournalArticle',
+      type: 'JOURNAL_ARTICLE',
       title: 'Cocoa and Cardiovascular Health',
       author:
         'Corti, Roberto and Flammer, Andreas J. and Hollenberg, Norman K. and Luscher, Thomas F.',
@@ -37,7 +37,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckr9eq4oc000101mk1ga9bxnt',
-      type: 'JournalArticle',
+      type: 'JOURNAL_ARTICLE',
       title: 'Cocoa and health: a decade of research',
       author:
         'Cooper, Karen A. and Donovan, Jennifer L. and Waterhouse, Andrew L. and Williamson, Gary',
@@ -55,7 +55,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckr9eqap6000301mk20hycjqb',
-      type: 'JournalArticle',
+      type: 'JOURNAL_ARTICLE',
       title:
         'Chocolate and prevention of cardiovascular disease: A systematic review',
       author:
@@ -76,7 +76,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckonduhjk000701mh12wia4nf',
-      type: 'JournalArticle',
+      type: 'JOURNAL_ARTICLE',
       title: 'Cocoa and Chocolate in Human Health and Disease',
       author: 'Katz, David L. and Doughty, Kim and Ali, Ather',
       abstract:
@@ -93,7 +93,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckondu6bh000501mh2o2tf00u',
-      type: 'ProceedingsArticle',
+      type: 'PROCEEDINGS_ARTICLE',
       title: 'Chocolate: food as medicine/medicine as food',
       author: 'Keen, Carl L.',
       abstract:
@@ -114,7 +114,7 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckondtpcn000301mhg9lvaqlu',
-      type: 'Thesis',
+      type: 'THESIS',
       title:
         'Functionality of inulin and polydextrose in stevia or thaumatin sweetened dark chocolate',
       author: 'Roger Aidoo',
