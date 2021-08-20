@@ -56,7 +56,7 @@ model UserDocument {
   urldate String?
   publisher String?
   abstract String?
-  keywords String?
+  keywords String[]
 
   // JabRef-specific
   explicitGroups Group[]

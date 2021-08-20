@@ -179,8 +179,7 @@ export class DocumentResolver {
   }
 
   keywords(document: UserDocument): string[] {
-    // TODO: Already store keywords on save as a list?
-    return document.keywords?.split(',') ?? []
+    return document.keywords
   }
 }
 
