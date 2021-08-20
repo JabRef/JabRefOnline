@@ -22,13 +22,20 @@ model User {
   groups Group[]
 }
 
+enum DocumentType {
+  JOURNAL_ARTICLE
+  PROCEEDINGS_ARTICLE
+  THESIS
+  OTHER
+}
+
 // Articles, books etc added by users
 // We do not know what users put in their fields, thus we assume everything is a string
 model UserDocument {
   id String @id @default(cuid())
   users User[]
 
-  type String
+  type DocumentType
   citationKeys String[]
 
   lastModified DateTime?

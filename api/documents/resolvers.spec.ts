@@ -23,12 +23,12 @@ describe('Query', () => {
         .calledWith('uniqueId')
         .mockResolvedValueOnce({
           id: 'uniqueId',
-          type: 'something',
+          type: 'OTHER',
         } as UserDocument)
       const document = await query.userDocument({}, { id: 'uniqueId' }, context)
       expect(document).toEqual({
         id: 'uniqueId',
-        type: 'something',
+        type: 'OTHER',
       })
     })
   })
@@ -95,7 +95,7 @@ describe('Mutation', () => {
         added: null,
         citationKeys: [],
         lastModified: null,
-        type: 'JournalArticle',
+        type: 'JOURNAL_ARTICLE',
         author: 'JabRef devs',
       })
     })
@@ -107,7 +107,7 @@ describe('DocumentResolver', () => {
   describe('resolveType', () => {
     it('returns JournalArticle for articles', () => {
       const article = {
-        type: 'JournalArticle',
+        type: 'JOURNAL_ARTICLE',
       } as UserDocument
       expect(documentResolver.__resolveType(article)).toEqual('JournalArticle')
     })

@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { DocumentType, Prisma } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
 import {
@@ -50,7 +50,7 @@ const specialFields: string[] = [
 ]
 
 function convertDocumentInput(
-  type: string,
+  type: DocumentType,
   document: AddJournalArticleInput | AddProceedingsArticleInput | AddThesisInput
 ): Prisma.UserDocumentCreateInput {
   /* TODO: Save those fields as well
@@ -132,13 +132,13 @@ export class Mutation {
   ): Promise<UserDocument | null> {
     const document =
       input.journalArticle ?? input.proceedingsArticle ?? input.thesis
-    let documentType: string | null = null
+    let documentType: DocumentType | null = null
     if (input.journalArticle) {
-      documentType = 'JournalArticle'
+      documentType = 'JOURNAL_ARTICLE'
     } else if (input.proceedingsArticle) {
-      documentType = 'ProceedingsArticle'
+      documentType = 'PROCEEDINGS_ARTICLE'
     } else if (input.thesis) {
-      documentType = 'Thesis'
+      documentType = 'THESIS'
     }
     if (!document || !documentType) {
       throw new Error('No document given')
@@ -153,11 +153,13 @@ export class Mutation {
 export class DocumentResolver {
   __resolveType(document: UserDocument): ResolveType<DocumentResolvers> {
     switch (document.type) {
-      case 'JournalArticle':
-      case 'ProceedingsArticle':
-      case 'Thesis':
-      case 'Other':
-        return document.type
+      case 'JOURNAL_ARTICLE':
+        return 'JournalArticle'
+      case 'PROCEEDINGS_ARTICLE':
+        return 'ProceedingsArticle'
+      case 'THESIS':
+        return 'Thesis'
+      case 'OTHER':
       default:
         return 'Other'
     }
