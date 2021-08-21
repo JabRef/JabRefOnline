@@ -49,10 +49,12 @@ model UserDocument {
   // Type-specific
   journalIssue JournalIssue? @relation(fields: [journalIssueId], references: [id])
   journalIssueId String?
+  
   booktitle String?
   publishedAt String? // format: YYYY(-MM-DD) TODO: Should use Date format once https://github.com/prisma/prisma/issues/4355 is resolved
   edition String?
-  pages String?
+  pageStart String?
+  pageEnd String?
   pagetotal String?
   note String?
   url String?

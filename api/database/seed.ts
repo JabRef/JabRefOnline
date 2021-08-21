@@ -40,7 +40,8 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
           number: '10',
         },
       },
-      pages: '1433-1441',
+      pageStart: '1433',
+      pageEnd: '1441',
       publishedAt: '2009',
     },
   })
@@ -68,7 +69,8 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
           number: '1',
         },
       },
-      pages: '1-11',
+      pageStart: '1',
+      pageEnd: '11',
       publishedAt: '2008',
     },
   })
@@ -126,7 +128,8 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
           number: '10',
         },
       },
-      pages: '2779-2811',
+      pageStart: '2779',
+      pageEnd: '2811',
       publishedAt: '2011',
     },
   })
