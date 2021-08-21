@@ -8,10 +8,10 @@ import {
   Resolvers,
   MutationAddUserDocumentArgs,
   Person,
-  Journal,
   QueryUserDocumentArgs,
   Institution,
   DocumentResolvers,
+  JournalIssue,
 } from '../graphql'
 import { ResolveType } from '../utils/extractResolveType'
 import { UserDocumentService, UserDocument } from './user.document.service'
@@ -187,16 +187,8 @@ export class DocumentResolver {
 
 @injectable()
 export class JournalArticleResolver extends DocumentResolver {
-  journal(document: UserDocument): Journal | null {
-    const journalName = document.journal ?? document.journaltitle
-    if (journalName) {
-      return {
-        id: 'TODO' + journalName,
-        name: journalName,
-      }
-    } else {
-      return null
-    }
+  in(document: UserDocument): JournalIssue | null {
+    return document.journalIssue ?? null
   }
 
   published(document: UserDocument): string | null {
