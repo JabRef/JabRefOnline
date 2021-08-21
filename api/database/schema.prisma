@@ -45,17 +45,15 @@ model UserDocument {
   author String?
   editor String?
   title String?
-  journal String?
-  journaltitle String?
+
+  // Type-specific
+  journalIssue JournalIssue? @relation(fields: [journalIssueId], references: [id])
+  journalIssueId String?
   booktitle String?
   publishedAt String? // format: YYYY(-MM-DD) TODO: Should use Date format once https://github.com/prisma/prisma/issues/4355 is resolved
-  number String?
-  volume String?
   edition String?
-  series String?
   pages String?
   pagetotal String?
-  issue String?
   note String?
   url String?
   urldate String?
@@ -72,11 +70,33 @@ model UserDocument {
   eprint String?
   eprintclass String?
   eprinttype String?
-  issn String?
   isbn String?
 
   // Other fields that are not often used
   other UserDocumentOtherField[]
+}
+
+model JournalIssue {
+  id String @id @default(cuid())
+  articles UserDocument[]
+  journal Journal? @relation(fields: [journalId], references: [id])
+  journalId String?
+  title String?
+  subtitle String?
+  titleAddon String?
+  number String?
+  name String?
+  series String?
+  volume String?
+}
+
+model Journal {
+  id String @id @default(cuid())
+  issues JournalIssue[]
+  name String
+  subtitle String?
+  titleAddon String?
+  issn String?
 }
 
 model UserDocumentOtherField {

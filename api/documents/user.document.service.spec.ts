@@ -16,17 +16,30 @@ const testDocument: UserDocument = {
   author: 'JabRef team',
   editor: null,
   title: 'This is a test document',
-  journal: null,
-  journaltitle: 'Journal of JabRef',
+  journalIssueId: 'testIssue',
+  journalIssue: {
+    id: 'testIssue',
+    title: null,
+    subtitle: null,
+    titleAddon: null,
+    number: null,
+    name: null,
+    series: null,
+    volume: null,
+    journalId: 'test_journal',
+    journal: {
+      id: 'test_journal',
+      name: 'Test Journal',
+      issn: null,
+      subtitle: null,
+      titleAddon: null,
+    },
+  },
   booktitle: null,
   publishedAt: '2021',
-  number: null,
-  volume: null,
   edition: null,
-  series: null,
   pages: null,
   pagetotal: null,
-  issue: null,
   note: null,
   url: null,
   urldate: null,
@@ -38,7 +51,6 @@ const testDocument: UserDocument = {
   eprint: null,
   eprintclass: null,
   eprinttype: null,
-  issn: null,
   isbn: null,
 }
 
@@ -60,6 +72,11 @@ describe('getDocumentById', () => {
       },
       include: {
         other: false,
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
       },
     })
   })

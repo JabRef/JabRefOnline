@@ -27,10 +27,20 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
         'Epidemiological data demonstrate that regular dietary intake of plant-derived foods and beverages reduces the risk of coronary heart disease and stroke. Among many ingredients, cocoa might be an important mediator. Indeed, recent research demonstrates a beneficial effect of cocoa on blood pressure, insulin resistance, and vascular and platelet function. Although still debated, a range of potential mechanisms through which cocoa might exert its benefits on cardiovascular health have been proposed, including activation of nitric oxide and antioxidant and antiinflammatory effects. This review summarizes the available data on the cardiovascular effects of cocoa, outlines potential mechanisms involved in the response to cocoa, and highlights the potential clinical implications associated with its consumption. ( Circulation. 2009; 119: 1433-1441.)',
       keywords: ['cocoa', 'endothelium', 'hypertension', 'platelets'],
       doi: '10.1161/CIRCULATIONAHA.108.827022',
-      volume: '119',
-      issue: '10',
+      journalIssue: {
+        create: {
+          id: 'ckslizms5000109jv3yx80ujf',
+          journal: {
+            create: {
+              id: 'ckslj094u000309jvdpng93mk',
+              name: 'Circulation',
+            },
+          },
+          volume: '119',
+          number: '10',
+        },
+      },
       pages: '1433-1441',
-      journal: 'Circulation',
       publishedAt: '2009',
     },
   })
@@ -45,10 +55,20 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
         'It has been over 10 years since the first mention in a medical journal about cocoa and chocolate as potential sources of antioxidants for health. During this time, cocoa has been found to improve antioxidant status, reduce inflammation and correlate with reduced heart disease risk; with these results, and its popularity, it has received wide coverage in the press. However, after 10 years of research, what is known about the potential health benefits of cocoa and what are the important next steps in understanding this decadent source of antioxidants?',
       keywords: ['cocoa', 'chocolate', 'health', 'polyphenols', 'antioxident'],
       doi: '10.1017/S0007114507795296',
-      volume: '99',
-      issue: '1',
+      journalIssue: {
+        create: {
+          id: 'ckslj1d4t000509jv5j9n0mz0',
+          journal: {
+            create: {
+              id: 'ckslj1heh000709jv5ja9dcyn',
+              name: 'British Journal of Nutrition',
+            },
+          },
+          volume: '99',
+          number: '1',
+        },
+      },
       pages: '1-11',
-      journal: 'British Journal of Nutrition',
       publishedAt: '2008',
     },
   })
@@ -67,9 +87,19 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
         Conclusion: Multiple lines of evidence from laboratory experiments and randomized trials suggest stearic acid may be neutral, while flavonoids are likely protective against CHD mortality. The highest priority now is to conduct larger randomized trials to definitively investigate the impact of chocolate consumption on long-term cardiovascular outcomes.`,
       keywords: ['dark chocolate', 'flavonoid intake'],
       doi: '10.1186/1743-7075-3-2',
-      volume: '3',
-      issue: '2',
-      journal: 'Nutrition & Metabolism',
+      journalIssue: {
+        create: {
+          id: 'ckslj284j000909jv42d1efc6',
+          journal: {
+            create: {
+              id: 'ckslj2ca3000b09jvdmyj6552',
+              name: 'Nutrition & Metabolism',
+            },
+          },
+          volume: '3',
+          number: '2',
+        },
+      },
       publishedAt: '2006',
     },
   })
@@ -83,10 +113,20 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
         'Cocoa contains more phenolic antioxidants than most foods. Flavonoids, including catechin, epicatechin, and procyanidins predominate in antioxidant activity. The tricyclic structure of the flavonoids determines antioxidant effects that scavenge reactive oxygen species, chelate Fe2+ and Cu+, inhibit enzymes, and upregulate antioxidant defenses. The epicatechin content of cocoa is primarily responsible for its favorable impact on vascular endothelium via its effect on both acute and chronic upregulation of nitric oxide production. Other cardiovascular effects are mediated through anti-inflammatory effects of cocoa polyphenols, and modulated through the activity of NF-kappa B. Antioxidant effects of cocoa may directly influence insulin resistance and, in turn, reduce risk for diabetes. Further, cocoa consumption may stimulate changes in redox-sensitive signaling pathways involved in gene expression and the immune response. Cocoa can protect nerves from injury and inflammation, protect the skin from oxidative damage from UV radiation in topical preparations, and have beneficial effects on satiety, cognitive function, and mood. As cocoa is predominantly consumed as energy-dense chocolate, potential detrimental effects of overconsumption exist, including increased risk of weight gain. Overall, research to date suggests that the benefits of moderate cocoa or dark chocolate consumption likely outweigh the risks.',
       keywords: ['dark chocolate', 'blood pressure'],
       doi: '10.1089/ars.2010.3697',
-      volume: '15',
-      issue: '10',
+      journalIssue: {
+        create: {
+          id: 'ckslj3bi8000d09jvhcsx7d3e',
+          journal: {
+            create: {
+              id: 'ckslj3f10000f09jvc1xifgi9',
+              name: 'Antioxidants & Redox Signaling',
+            },
+          },
+          volume: '15',
+          number: '10',
+        },
+      },
       pages: '2779-2811',
-      journal: 'Antioxidants & Redox Signaling',
       publishedAt: '2011',
     },
   })
