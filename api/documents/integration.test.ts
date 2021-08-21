@@ -43,6 +43,7 @@ describe('Query', () => {
           note
           languages
           publicationState
+          doi
           keywords
           ... on JournalArticle {
             in {
@@ -115,6 +116,7 @@ describe('Query', () => {
               ],
               "citationKeys": Array [],
               "commentators": Array [],
+              "doi": "10.1161/CIRCULATIONAHA.108.827022",
               "electronicId": null,
               "id": "ckondtcaf000101mh7x9g4gia",
               "in": Object {

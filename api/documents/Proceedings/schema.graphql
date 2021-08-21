@@ -19,6 +19,7 @@ type ProceedingsArticle implements Node & Document & Article & HasParent & HasBo
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]!
   """
   The proceedings in which the article has been published.
@@ -42,6 +43,7 @@ input AddProceedingsArticleInput {
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]!
   # TODO: Make this ProceedingsInput
   in: String
@@ -93,6 +95,7 @@ type Proceedings implements Node & Document & Booklike & PartOfSeries & HasMulti
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]!
   isbn: String
   publishers: [Publisher]
@@ -150,6 +153,7 @@ type ProceedingsMultiVolume implements DocumentMultiVolume & Booklike & PartOfSe
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]!
   totalVolumes: String
   isbn: String
