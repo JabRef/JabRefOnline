@@ -272,6 +272,13 @@ interface Document implements Node {
   """
   publicationState: String
 
+  """
+  The Digital Object Identifier of the document.
+
+  Biblatex: doi
+  """
+  doi: String
+
   #### JabRef specific fields. ####
 
   "Keywords or tags used to describe the content."
@@ -396,6 +403,7 @@ interface Article implements Node & Document {
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]!
 }
 
@@ -432,6 +440,7 @@ type Other implements Node & Document {
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]!
 
   """

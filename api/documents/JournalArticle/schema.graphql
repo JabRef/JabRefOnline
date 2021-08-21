@@ -142,6 +142,7 @@ type JournalArticle implements Node & Document & Article & HasParent & Translata
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]!
   """
   The issue of the journal in which the article has been published.
@@ -187,6 +188,7 @@ input AddJournalArticleInput {
   note: String
   languages: [String]
   publicationState: String
+  doi: String
   keywords: [String!]
   in: AddJournalIssueInput
   pageStart: String
