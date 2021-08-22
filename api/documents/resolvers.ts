@@ -7,11 +7,14 @@ import {
   AddThesisInput,
   Resolvers,
   MutationAddUserDocumentArgs,
+  MutationUpdateUserDocumentArgs,
   Person,
   QueryUserDocumentArgs,
   Institution,
   DocumentResolvers,
   JournalIssue,
+  AddUserDocumentInput,
+  UpdateUserDocumentInput,
 } from '../graphql'
 import { ResolveType } from '../utils/extractResolveType'
 import { UserDocumentService, UserDocument } from './user.document.service'
@@ -176,19 +179,45 @@ export class Mutation {
   ): Promise<UserDocument | null> {
     const document =
       input.journalArticle ?? input.proceedingsArticle ?? input.thesis
-    let documentType: DocumentType | null = null
-    if (input.journalArticle) {
-      documentType = 'JOURNAL_ARTICLE'
-    } else if (input.proceedingsArticle) {
-      documentType = 'PROCEEDINGS_ARTICLE'
-    } else if (input.thesis) {
-      documentType = 'THESIS'
-    }
+    const documentType = this.getDocumentType(input)
     if (!document || !documentType) {
       throw new Error('No document given')
     }
     return await this.userDocumentService.addDocument(
       convertDocumentInput(documentType, document)
+    )
+  }
+
+  private getDocumentType(
+    input: AddUserDocumentInput | UpdateUserDocumentInput
+  ): DocumentType | null {
+    if (input.journalArticle) {
+      return 'JOURNAL_ARTICLE'
+    } else if (input.proceedingsArticle) {
+      return 'PROCEEDINGS_ARTICLE'
+    } else if (input.thesis) {
+      return 'THESIS'
+    }
+    return null
+  }
+
+  async updateUserDocument(
+    _root: Record<string, never>,
+    { input }: MutationUpdateUserDocumentArgs,
+    _context: Context
+  ): Promise<UserDocument | null> {
+    const document =
+      input.journalArticle ?? input.proceedingsArticle ?? input.thesis
+    const documentType = this.getDocumentType(input)
+    if (!document || !documentType) {
+      throw new Error('No document given')
+    }
+
+    const convertedDocument = convertDocumentInput(documentType, document)
+    convertedDocument.id = input.id
+    return await this.userDocumentService.updateDocument(
+      input.id,
+      convertedDocument
     )
   }
 }

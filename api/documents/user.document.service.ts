@@ -101,4 +101,23 @@ export class UserDocumentService {
       },
     })
   }
+
+  async updateDocument(
+    id: string,
+    document: Prisma.UserDocumentUpdateInput
+  ): Promise<UserDocument | null> {
+    return await this.prisma.userDocument.update({
+      where: {
+        id,
+      },
+      data: document,
+      include: {
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
+      },
+    })
+  }
 }
