@@ -68,8 +68,6 @@ function convertDocumentInput(
       }
     })
     */
-  // TODO: handle 'in' for journals
-
   const convertedDocument: Prisma.UserDocumentCreateInput = {
     type,
     citationKeys: document.citationKeys ?? [],
@@ -111,6 +109,28 @@ function convertDocumentInput(
         },
       }),
       */
+  }
+
+  if ('in' in document && document.in && typeof document.in !== 'string') {
+    convertedDocument.journalIssue = {
+      create: {
+        journal: {
+          create: {
+            name: document.in.journal.name,
+            subtitle: document.in.journal.subtitle,
+            titleAddon: document.in.journal.titleAddon,
+            issn: document.in.journal.issn,
+          },
+        },
+        title: document.in.title,
+        subtitle: document.in.subtitle,
+        titleAddon: document.in.titleAddon,
+        number: document.in.number,
+        name: document.in.name,
+        series: document.in.series,
+        volume: document.in.volume,
+      },
+    }
   }
 
   /*

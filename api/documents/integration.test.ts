@@ -229,6 +229,14 @@ describe('Roundtrip', () => {
             userDocument: {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(String),
+              in: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(String),
+                journal: {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  id: expect.any(String),
+                },
+              },
             },
           },
         },
@@ -255,7 +263,23 @@ describe('Roundtrip', () => {
               "doi": "doi which does not exist",
               "electronicId": null,
               "id": Any<String>,
-              "in": null,
+              "in": Object {
+                "id": Any<String>,
+                "journal": Object {
+                  "id": Any<String>,
+                  "issn": null,
+                  "name": "Journal of great things",
+                  "subtitle": null,
+                  "titleAddon": null,
+                },
+                "name": null,
+                "number": "10",
+                "series": null,
+                "subtitle": null,
+                "title": null,
+                "titleAddon": null,
+                "volume": "15",
+              },
               "keywords": Array [
                 "keyword1",
                 "keyword2",
