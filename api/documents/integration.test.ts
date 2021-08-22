@@ -4,88 +4,87 @@ import * as prisma from '~/api/database/util'
 
 const authenticatedClient = createAuthenticatedClient()
 
-describe('Query', () => {
-  beforeEach(async () => {
-    await prisma.resetToSeed()
-  })
+beforeEach(async () => {
+  await prisma.resetToSeed()
+})
 
-  afterAll(async () => {
-    await prisma.disconnect()
-  })
+afterAll(async () => {
+  await prisma.disconnect()
+})
 
-  describe('userDocument', () => {
-    const query = gql`
-      fragment EntityFragment on Entity {
-        ... on Person {
-          id
-          name
-        }
-        ... on Organization {
-          id
-          name
-        }
+const userDocumentById = gql`
+  fragment EntityFragment on Entity {
+    ... on Person {
+      id
+      name
+    }
+    ... on Organization {
+      id
+      name
+    }
+  }
+  query userDocumentById($id: ID!) {
+    userDocument(id: $id) {
+      id
+      __typename
+      citationKeys
+      lastModified
+      added
+      title
+      subtitle
+      titleAddon
+      abstract
+      authors {
+        ...EntityFragment
       }
-
-      query userDocumentById($id: ID!) {
-        userDocument(id: $id) {
+      note
+      languages
+      publicationState
+      doi
+      keywords
+      ... on JournalArticle {
+        in {
           id
-          __typename
-          citationKeys
-          lastModified
-          added
+          journal {
+            id
+            name
+            subtitle
+            titleAddon
+            issn
+          }
           title
           subtitle
           titleAddon
-          abstract
-          authors {
+          number
+          name
+          series
+          volume
+        }
+        pageStart
+        pageEnd
+        electronicId
+        translated {
+          translators {
             ...EntityFragment
           }
-          note
-          languages
-          publicationState
-          doi
-          keywords
-          ... on JournalArticle {
-            in {
-              id
-              journal {
-                id
-                name
-                subtitle
-                titleAddon
-                issn
-              }
-              title
-              subtitle
-              titleAddon
-              number
-              name
-              series
-              volume
-            }
-            pageStart
-            pageEnd
-            electronicId
-            translated {
-              translators {
-                ...EntityFragment
-              }
-            }
-            published
-            annotators {
-              ...EntityFragment
-            }
-            commentators {
-              ...EntityFragment
-            }
-          }
+        }
+        published
+        annotators {
+          ...EntityFragment
+        }
+        commentators {
+          ...EntityFragment
         }
       }
-    `
+    }
+  }
+`
 
+describe('Query', () => {
+  describe('userDocument', () => {
     it('retrieves fields for articles in journals', async () => {
       const result = await authenticatedClient.executeOperation({
-        query,
+        query: userDocumentById,
         variables: { id: 'ckondtcaf000101mh7x9g4gia' },
       })
       expect(result).toMatchInlineSnapshot(`
@@ -142,7 +141,7 @@ describe('Query', () => {
                 "hypertension",
                 "platelets",
               ],
-              "languages": null,
+              "languages": Array [],
               "lastModified": null,
               "note": null,
               "pageEnd": "1441",
@@ -157,6 +156,150 @@ describe('Query', () => {
           },
         }
       `)
+    })
+  })
+})
+
+describe('Roundtrip', () => {
+  describe('addUserDocument + query', () => {
+    it('journal articles', async () => {
+      const addUserDocument = gql`
+        mutation addUserDocument($input: AddUserDocumentInput!) {
+          addUserDocument(input: $input) {
+            id
+          }
+        }
+      `
+      const addResult = await authenticatedClient.executeOperation({
+        query: addUserDocument,
+        variables: {
+          input: {
+            journalArticle: {
+              title: 'Test Title',
+              authors: [
+                { person: { name: 'Test Author' } },
+                { person: { name: 'Second Test Author' } },
+              ],
+              abstract: 'Some abstract',
+              keywords: ['keyword1', 'keyword2'],
+              doi: 'doi which does not exist',
+              in: {
+                journal: {
+                  name: 'Journal of great things',
+                },
+                volume: '15',
+                number: '10',
+              },
+              pageStart: '2779',
+              pageEnd: '2811',
+              published: '2011',
+            },
+          },
+        },
+      })
+      expect(addResult).toMatchInlineSnapshot(
+        {
+          data: {
+            addUserDocument: {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(String),
+            },
+          },
+        },
+        `
+        Object {
+          "data": Object {
+            "addUserDocument": Object {
+              "id": Any<String>,
+            },
+          },
+        }
+      `
+      )
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const id = addResult.data?.addUserDocument.id as string
+      const result = await authenticatedClient.executeOperation({
+        query: userDocumentById,
+        variables: { id },
+      })
+      expect(result).toMatchInlineSnapshot(
+        {
+          data: {
+            userDocument: {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              id: expect.any(String),
+              in: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(String),
+                journal: {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  id: expect.any(String),
+                },
+              },
+            },
+          },
+        },
+        `
+        Object {
+          "data": Object {
+            "userDocument": Object {
+              "__typename": "JournalArticle",
+              "abstract": "Some abstract",
+              "added": null,
+              "annotators": Array [],
+              "authors": Array [
+                Object {
+                  "id": "TODOTest Author",
+                  "name": "Test Author",
+                },
+                Object {
+                  "id": "TODOSecond Test Author",
+                  "name": "Second Test Author",
+                },
+              ],
+              "citationKeys": Array [],
+              "commentators": Array [],
+              "doi": "doi which does not exist",
+              "electronicId": null,
+              "id": Any<String>,
+              "in": Object {
+                "id": Any<String>,
+                "journal": Object {
+                  "id": Any<String>,
+                  "issn": null,
+                  "name": "Journal of great things",
+                  "subtitle": null,
+                  "titleAddon": null,
+                },
+                "name": null,
+                "number": "10",
+                "series": null,
+                "subtitle": null,
+                "title": null,
+                "titleAddon": null,
+                "volume": "15",
+              },
+              "keywords": Array [
+                "keyword1",
+                "keyword2",
+              ],
+              "languages": Array [],
+              "lastModified": null,
+              "note": null,
+              "pageEnd": "2811",
+              "pageStart": "2779",
+              "publicationState": null,
+              "published": "2011",
+              "subtitle": null,
+              "title": "Test Title",
+              "titleAddon": null,
+              "translated": null,
+            },
+          },
+        }
+      `
+      )
     })
   })
 })

@@ -8,7 +8,7 @@ CERIF: Conference Proceedings Article
 """
 type ProceedingsArticle implements Node & Document & Article & HasParent & HasBooklikeParent {
   id: ID!
-  citationKeys: [String!]
+  citationKeys: [String!]!
   lastModified: DateTime
   added: DateTime
   title: String
@@ -17,7 +17,7 @@ type ProceedingsArticle implements Node & Document & Article & HasParent & HasBo
   abstract: String
   authors: [Entity!]!
   note: String
-  languages: [String]
+  languages: [String!]!
   publicationState: String
   doi: String
   keywords: [String!]!
@@ -39,12 +39,12 @@ input AddProceedingsArticleInput {
   subtitle: String
   titleAddon: String
   abstract: String
-  authors: [AddEntityInput!]!
+  authors: [AddEntityInput!]
   note: String
-  languages: [String]
+  languages: [String!]
   publicationState: String
   doi: String
-  keywords: [String!]!
+  keywords: [String!]
   # TODO: Make this ProceedingsInput
   in: String
   pageStart: String
@@ -68,7 +68,7 @@ TODO:
 """
 type Proceedings implements Node & Document & Booklike & PartOfSeries & HasMultiVolumeParent {
   id: ID!
-  citationKeys: [String!]
+  citationKeys: [String!]!
   lastModified: DateTime
   added: DateTime
   """
@@ -93,12 +93,12 @@ type Proceedings implements Node & Document & Booklike & PartOfSeries & HasMulti
   abstract: String
   authors: [Entity!]!
   note: String
-  languages: [String]
+  languages: [String!]!
   publicationState: String
   doi: String
   keywords: [String!]!
   isbn: String
-  publishers: [Publisher]
+  publishers: [Publisher!]!
   pageTotal: String
   number: String
   series: String
@@ -151,13 +151,13 @@ type ProceedingsMultiVolume implements DocumentMultiVolume & Booklike & PartOfSe
   abstract: String
   authors: [Entity!]!
   note: String
-  languages: [String]
+  languages: [String!]!
   publicationState: String
   doi: String
   keywords: [String!]!
   totalVolumes: String
   isbn: String
-  publishers: [Publisher]
+  publishers: [Publisher!]!
   pageTotal: String
   number: String
   series: String

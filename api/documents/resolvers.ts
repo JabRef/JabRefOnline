@@ -68,15 +68,37 @@ function convertDocumentInput(
       }
     })
     */
-
   const convertedDocument: Prisma.UserDocumentCreateInput = {
     type,
     citationKeys: document.citationKeys ?? [],
     lastModified: document.lastModified ?? null,
     added: document.added ?? null,
+    title: document.title,
+    subtitle: document.subtitle,
+    titleAddon: document.titleAddon,
+    abstract: document.abstract,
     author: document.authors
       ?.map((author) => author.person?.name)
       .join(' and '),
+    note: document.note,
+    languages: document.languages ?? [],
+    publicationState: document.publicationState,
+    doi: document.doi,
+    keywords: document.keywords ?? [],
+    pageStart: 'pageStart' in document ? document.pageStart : null,
+    pageEnd: 'pageEnd' in document ? document.pageEnd : null,
+    electronicId: 'electronicId' in document ? document.electronicId : null,
+    originalLanguages:
+      'translated' in document
+        ? document.translated?.originalLanguages ?? []
+        : [],
+    translators:
+      'translated' in document
+        ? document.translated?.translators?.map(
+            (entity) => entity.person?.name ?? ''
+          ) ?? []
+        : [],
+    publishedAt: 'published' in document ? document.published : null,
     /*
     ...(other &&
       other.length > 0 && {
@@ -87,6 +109,28 @@ function convertDocumentInput(
         },
       }),
       */
+  }
+
+  if ('in' in document && document.in && typeof document.in !== 'string') {
+    convertedDocument.journalIssue = {
+      create: {
+        journal: {
+          create: {
+            name: document.in.journal.name,
+            subtitle: document.in.journal.subtitle,
+            titleAddon: document.in.journal.titleAddon,
+            issn: document.in.journal.issn,
+          },
+        },
+        title: document.in.title,
+        subtitle: document.in.subtitle,
+        titleAddon: document.in.titleAddon,
+        number: document.in.number,
+        name: document.in.name,
+        series: document.in.series,
+        volume: document.in.volume,
+      },
+    }
   }
 
   /*
@@ -222,6 +266,7 @@ export class ThesisResolver extends DocumentResolver {
       return {
         id: 'TODO' + institutionName,
         name: institutionName,
+        locations: [],
       }
     } else {
       return null
