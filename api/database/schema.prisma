@@ -51,26 +51,34 @@ model UserDocument {
   added DateTime?
 
   // Common fields
-  author String?
-  editor String?
   title String?
+  subtitle String?
+  titleAddon String?
+  abstract String?
+  author String?
+  note String?
+  languages String[]
+  publicationState String?
+  keywords String[]
 
   // Type-specific
   journalIssue JournalIssue? @relation(fields: [journalIssueId], references: [id])
   journalIssueId String?
-
-  booktitle String?
-  publishedAt String? // format: YYYY(-MM-DD) TODO: Should use Date format once https://github.com/prisma/prisma/issues/4355 is resolved
-  edition String?
   pageStart String?
   pageEnd String?
+  electronicId String?
+  originalLanguages String[]
+  translators String[]
+  publishedAt String? // format: YYYY(-MM-DD) TODO: Should use Date format once https://github.com/prisma/prisma/issues/4355 is resolved
+
+  // TODO: Check if they are really needed (in this form)
+  editor String?
+  booktitle String?
+  edition String?
   pagetotal String?
-  note String?
   url String?
   urldate String?
   publisher String?
-  abstract String?
-  keywords String[]
 
   // JabRef-specific
   explicitGroups Group[]

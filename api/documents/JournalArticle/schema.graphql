@@ -131,7 +131,7 @@ TODO:
 """
 type JournalArticle implements Node & Document & Article & HasParent & Translatable {
   id: ID!
-  citationKeys: [String!]
+  citationKeys: [String!]!
   lastModified: DateTime
   added: DateTime
   title: String
@@ -140,7 +140,7 @@ type JournalArticle implements Node & Document & Article & HasParent & Translata
   abstract: String
   authors: [Entity!]!
   note: String
-  languages: [String]
+  languages: [String!]!
   publicationState: String
   doi: String
   keywords: [String!]!
@@ -186,7 +186,7 @@ input AddJournalArticleInput {
   abstract: String
   authors: [AddEntityInput!]
   note: String
-  languages: [String]
+  languages: [String!]
   publicationState: String
   doi: String
   keywords: [String!]

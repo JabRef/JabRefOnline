@@ -72,12 +72,12 @@ type Translated {
 
   Biblatex: origlanguage
   """
-  originalLanguages: [String]
+  originalLanguages: [String!]!
 }
 
 input AddTranslatedInput {
-  translators: [AddEntityInput!]!
-  originalLanguages: [String]
+  translators: [AddEntityInput!]
+  originalLanguages: [String!]
 }
 
 """
@@ -98,7 +98,7 @@ type Institution {
 
   Biblatex: location (or address)
   """
-  locations: [String]
+  locations: [String!]!
 }
 
 type Publisher {
@@ -112,7 +112,7 @@ type Publisher {
 
   Biblatex: location
   """
-  locations: [String]
+  locations: [String!]!
 
   """
   The name of the publisher.
@@ -164,14 +164,14 @@ type Event {
 
   Biblatex: organization
   """
-  sponsors: [String]
+  sponsors: [String!]!
 
   """
   The locations where the event happened.
 
   Biblatex: venue
   """
-  locations: [String]
+  locations: [String!]!
 }
 
 """
@@ -199,7 +199,7 @@ interface Document implements Node {
 
   Biblatex: citekey (primary) and ids (secondary)
   """
-  citationKeys: [String!]
+  citationKeys: [String!]!
 
   """
   The date when the metadata of the document was modified last.
@@ -262,7 +262,7 @@ interface Document implements Node {
 
   Biblatex: language
   """
-  languages: [String]
+  languages: [String!]!
 
   """
   The publication state of the article.
@@ -282,7 +282,7 @@ interface Document implements Node {
   #### JabRef specific fields. ####
 
   "Keywords or tags used to describe the content."
-  keywords: [String]
+  keywords: [String!]!
 }
 
 interface Booklike {
@@ -392,7 +392,7 @@ An article is a usually self-contained nonfiction prose.
 """
 interface Article implements Node & Document {
   id: ID!
-  citationKeys: [String!]
+  citationKeys: [String!]!
   lastModified: DateTime
   added: DateTime
   title: String
@@ -401,7 +401,7 @@ interface Article implements Node & Document {
   abstract: String
   authors: [Entity!]!
   note: String
-  languages: [String]
+  languages: [String!]!
   publicationState: String
   doi: String
   keywords: [String!]!
@@ -429,7 +429,7 @@ TODO:
 """
 type Other implements Node & Document {
   id: ID!
-  citationKeys: [String!]
+  citationKeys: [String!]!
   lastModified: DateTime
   added: DateTime
   title: String
@@ -438,7 +438,7 @@ type Other implements Node & Document {
   abstract: String
   authors: [Entity!]!
   note: String
-  languages: [String]
+  languages: [String!]!
   publicationState: String
   doi: String
   keywords: [String!]!

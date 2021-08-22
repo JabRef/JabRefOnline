@@ -10,7 +10,7 @@ TODO: Decide what to do with biblatex fields "chapter, eid, pages" that are used
 """
 type Thesis implements Node & Document {
   id: ID!
-  citationKeys: [String!]
+  citationKeys: [String!]!
   lastModified: DateTime
   added: DateTime
   title: String
@@ -19,7 +19,7 @@ type Thesis implements Node & Document {
   abstract: String
   authors: [Entity!]!
   note: String
-  languages: [String]
+  languages: [String!]!
   publicationState: String
   doi: String
   keywords: [String!]!
@@ -52,12 +52,12 @@ input AddThesisInput {
   subtitle: String
   titleAddon: String
   abstract: String
-  authors: [AddEntityInput!]!
+  authors: [AddEntityInput!]
   note: String
-  languages: [String]
+  languages: [String!]
   publicationState: String
   doi: String
-  keywords: [String!]!
+  keywords: [String!]
   degreeType: String
   # TODO: make this AddInstitutionInput
   institution: String

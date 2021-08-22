@@ -22,6 +22,7 @@ const codegen = {
           Group: './groups/resolvers#GroupMaybeResolved',
         },
         scalars: {
+          Date: 'string',
           DateTime: 'Date',
           EmailAddress: 'string',
         },

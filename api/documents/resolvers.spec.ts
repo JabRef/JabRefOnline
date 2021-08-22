@@ -97,6 +97,21 @@ describe('Mutation', () => {
         lastModified: null,
         type: 'JOURNAL_ARTICLE',
         author: 'JabRef devs',
+        abstract: undefined,
+        doi: undefined,
+        electronicId: null,
+        keywords: [],
+        languages: [],
+        note: undefined,
+        originalLanguages: [],
+        pageEnd: null,
+        pageStart: null,
+        publicationState: undefined,
+        publishedAt: null,
+        subtitle: undefined,
+        title: undefined,
+        titleAddon: undefined,
+        translators: [],
       })
     })
   })
