@@ -1,6 +1,6 @@
 import { ApolloClient, NormalizedCache } from '@apollo/client/core'
 import { Context, Middleware } from '@nuxt/types'
-import { CheckLoggedInDocument } from '~/apollo/graphql'
+import { gql } from '~/apollo'
 
 /**
  * Middleware that checks the user is logged in, and redirects her to the login page if not.
@@ -13,7 +13,13 @@ const authenticated: Middleware = async function (context) {
   try {
     // TODO: Only call this if we have a session cookie?
     const response = await apolloClient.query({
-      query: CheckLoggedInDocument,
+      query: gql(/* GraphQL */ `
+        query CheckLoggedIn {
+          me {
+            id
+          }
+        }
+      `),
       fetchPolicy: 'network-only', // TODO: Reenable caching by removing this line; currently this leads to a bug where login -> logout -> dashboard -> login doesn't work
     })
 

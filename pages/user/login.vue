@@ -69,10 +69,9 @@
 <script lang="ts">
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 import { computed, ref } from '@vue/composition-api'
-import { gql } from '@apollo/client/core'
 import { useMutation } from '@vue/apollo-composable'
 import { currentUserVar } from '../../apollo/cache'
-import { LoginDocument } from '../../apollo/graphql'
+import { gql } from '~/apollo'
 
 export default defineComponent({
   name: 'Login',
@@ -86,23 +85,25 @@ export default defineComponent({
     const password = ref('')
     const otherError = ref('')
 
-    gql`
-      mutation Login($email: EmailAddress!, $password: String!) {
-        login(email: $email, password: $password) {
-          id
-        }
-      }
-    `
     const {
       mutate: loginUser,
       onDone,
       error: graphqlError,
-    } = useMutation(LoginDocument, () => ({
-      variables: {
-        email: email.value,
-        password: password.value,
-      },
-    }))
+    } = useMutation(
+      gql(/* GraphQL */ `
+        mutation Login($email: EmailAddress!, $password: String!) {
+          login(email: $email, password: $password) {
+            id
+          }
+        }
+      `),
+      () => ({
+        variables: {
+          email: email.value,
+          password: password.value,
+        },
+      })
+    )
     const router = useRouter()
     onDone((result) => {
       if (result.data?.login) {
