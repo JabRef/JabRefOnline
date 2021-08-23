@@ -30,9 +30,8 @@ import {
   computed,
 } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
-import { gql } from '@apollo/client/core'
 import { useMutation } from '@vue/apollo-composable'
-import { ChangePasswordDocument } from '../../apollo/graphql'
+import { gql } from '~/apollo'
 
 export default defineComponent({
   name: 'ChangePassword',
@@ -40,17 +39,7 @@ export default defineComponent({
   setup() {
     const password = ref('')
     const repeatPassword = ref('')
-    gql`
-      mutation ChangePassword(
-        $token: String!
-        $id: ID!
-        $newPassword: String!
-      ) {
-        changePassword(token: $token, id: $id, newPassword: $newPassword) {
-          id
-        }
-      }
-    `
+
     const route = useRoute()
     const token = computed(() => route.value.query.token)
     const id = computed(() => route.value.query.id)
@@ -58,13 +47,26 @@ export default defineComponent({
       mutate: changePassword,
       onDone,
       error,
-    } = useMutation(ChangePasswordDocument, () => ({
-      variables: {
-        token: token.value,
-        id: id.value,
-        newPassword: password.value,
-      },
-    }))
+    } = useMutation(
+      gql(/* GraphQL */ `
+        mutation ChangePassword(
+          $token: String!
+          $id: ID!
+          $newPassword: String!
+        ) {
+          changePassword(token: $token, id: $id, newPassword: $newPassword) {
+            id
+          }
+        }
+      `),
+      () => ({
+        variables: {
+          token: token.value,
+          id: id.value,
+          newPassword: password.value,
+        },
+      })
+    )
     const router = useRouter()
     onDone(() => {
       void router.push({ name: 'user-login' })

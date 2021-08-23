@@ -56,11 +56,10 @@
   </div>
 </template>
 <script lang="ts">
-import { gql } from '@apollo/client/core'
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
+import { gql } from '~/apollo'
 import { currentUserVar } from '~/apollo/cache'
-import { SignupDocument } from '~/apollo/graphql'
 
 export default defineComponent({
   name: 'Register',
@@ -70,23 +69,25 @@ export default defineComponent({
     const email = ref('')
     const password = ref('')
 
-    gql`
-      mutation Signup($email: EmailAddress!, $password: String!) {
-        signup(email: $email, password: $password) {
-          id
-        }
-      }
-    `
     const {
       mutate: signup,
       onDone,
       error,
-    } = useMutation(SignupDocument, () => ({
-      variables: {
-        email: email.value,
-        password: password.value,
-      },
-    }))
+    } = useMutation(
+      gql(/* GraphQL */ `
+        mutation Signup($email: EmailAddress!, $password: String!) {
+          signup(email: $email, password: $password) {
+            id
+          }
+        }
+      `),
+      () => ({
+        variables: {
+          email: email.value,
+          password: password.value,
+        },
+      })
+    )
     const router = useRouter()
     onDone((response) => {
       currentUserVar(response.data?.signup ?? null)
