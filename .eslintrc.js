@@ -53,14 +53,6 @@ module.exports = {
       },
       plugins: ['@graphql-eslint'],
       rules: {
-        // Workaround for for bug in prettier, can be removed after https://github.com/prettier/eslint-plugin-prettier/pull/413
-        'prettier/prettier': [
-          2,
-          {
-            parser: 'graphql',
-            endOfLine: 'auto',
-          },
-        ],
         // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.
         '@graphql-eslint/avoid-typename-prefix': 'error',
         // Requires all types to be reachable at some level by root level fields.
