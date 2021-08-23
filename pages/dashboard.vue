@@ -14,7 +14,6 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
-import { DocumentForView } from '~/components/DocumentView.vue'
 import { useUiStore } from '~/store'
 
 export default defineComponent({
@@ -33,7 +32,6 @@ export default defineComponent({
             }
           }
         }
-        ${DocumentForView}
       `),
       () => ({
         groupId: ui.selectedGroupId,
