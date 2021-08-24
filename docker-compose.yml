@@ -1,0 +1,26 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+    - POSTGRES_PASSWORD=yourPassword
+    - POSTGRES_HOST_AUTH_METHOD=trust
+    - POSTGRES_USER=postgress
+    - POSTGRES_DB=jabref
+    command: " postgres -c listen_addresses=* "
+    command: " postgres -c port=5432 "
+    volumes:
+          - ./data/db:/var/lib/postgresql/data
+
+  jabref-online:
+    build:
+      context: .
+    image: ghcr.io/jabref/jabrefonline:latest
+    container_name: jabref-online
+    hostname: jabref-chatbot
+    environment:
+      - PORT=3560
+    ports:
+      - 3560:3560
