@@ -38,7 +38,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        endOfLine: 'auto',
+        endOfLine: 'lf',
       },
     ],
     // Ensure void operator is not used, except for variable assignment or function return (might be handy for promises)
