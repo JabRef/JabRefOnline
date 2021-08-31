@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   publish:
@@ -16,6 +16,6 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
       - uses: bahmutov/npm-install@v1
       - name: Build and Deploy Jekyll
-        uses: helaili/jekyll-action@2.0.4
+        uses: helaili/jekyll-action@v2
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
