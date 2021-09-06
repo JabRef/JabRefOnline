@@ -16,7 +16,9 @@
 - Install [PostgreSQL](https://www.postgresql.org/)
 - Checkout
 - Create a `.env` file in the root containing the connection URL for the database, e.g. `DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
-- Install and start [Redis](https://redis.io/). Perhaps the most straightforward way to do this is via Docker: `yarn docker:redis`. 
+- Install and start [Redis](https://redis.io/).
+  Perhaps the most straightforward way to do this is via Docker: `yarn docker:redis`.
+  If you do not use this command, make sure that Redis is available through the port `6380` or, alternatively, add the configuration `REDIS_PORT=<your port>` to the `.env` file. 
 - Run `yarn install` to install all dependencies.
 - Run `yarn prisma:migrate:dev` to initialize the database. You may also want to use `yarn prisma:seed` to fill the database with some initial test data.
 
@@ -26,10 +28,14 @@ Now you can start the server by using `yarn dev`.
 
 | Command | Description |
 |---------|-------------|
+| yarn install | Install project dependencies and generate code. |
 | yarn dev | Start ExpressJS server in development with Nuxt.js in dev mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
+| yarn test | Execute all tests. Pass `-u` to update all Jest snapshots.|
 | yarn build | Build the nuxt.js web application for production. |
 | yarn start | Start ExpressJS server in production. |
 | yarn prisma:studio | Explore data in the database using a visual editor. |
+| yarn storybook | Start [Storybook](#ui-workflow-storybook) in your browser. |
+
 
 ### Workflow for editing the database schema
 
@@ -39,6 +45,21 @@ Now you can start the server by using `yarn dev`.
 4. Run `yarn prisma:migrate:dev` to generate new migration based on the schema changes.
 
 See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecycle/prototyping-schema-db-push) for more details.
+
+### UI workflow: Storybook
+As the primary UI development flow, we use Storybook which allows developing UI components in isolation without the need to start the whole application.
+Storybook uses so-called stories.
+Each story represents a single visual state of a component.
+For each component its stories should be placed in the same directory, with the suffix `.stories.ts` appended.
+For example, 
+```
+components
+│   Button.vue
+│   Button.stories.ts
+```
+To start developing with Storybook, simply run `yarn storybook`, which opens Storybook in the browser.
+
+An up-to-date version of all Storybook components can be found [online](https://www.chromatic.com/library?appId=61142988527d34003b1e783d&branch=main).
 
 ## Backend: Overall Structure
 - `Resolver` aggregates the data, and transforms in a representation suitable for the domain layer.
@@ -78,6 +99,16 @@ See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecyc
    - [Vue Apollo](https://apollo.vuejs.org/): Graphql integration for Vue [Documentation](https://v4.apollo.vuejs.org/guide-option/)
 - [Tailwind CSS](https://tailwindcss.com/): CSS framework [Documentation](https://tailwindcss.com/docs), including [Vue Tailwind](https://www.vue-tailwind.com/docs/installation) to extract reusable components 
 - [Font Awesome](https://fontawesome.com/icons?d=gallery&p=2): Font-based icons
+
+## Conventions
+- Vue: Single File Components are used for all components, with a PascalCase name.
+- Tests are placed next to the file containing the code-under-test, and have the same file name with a `.spec.ts` suffix added.
+  For example, 
+  ```
+  api
+  │   Resolver.ts
+  │   Resolver.spec.ts
+  ```
 
 ## References
 - Prisma used in different contexts: https://github.com/prisma/prisma-examples

@@ -1,0 +1,169 @@
+"""
+An article that has been presented at a conference and published in a proceedings (not in scholarly journals).
+
+Biblatex: inproceedings (or conference)
+CSL: paper-conference
+ORCID: conference-paper
+CERIF: Conference Proceedings Article
+"""
+type ProceedingsArticle implements Node & Document & Article & HasParent & HasBooklikeParent {
+  id: ID!
+  citationKeys: [String!]!
+  lastModified: DateTime
+  added: DateTime
+  title: String
+  subtitle: String
+  titleAddon: String
+  abstract: String
+  authors: [Entity!]!
+  note: String
+  languages: [String!]!
+  publicationState: String
+  doi: String
+  keywords: [String!]!
+  """
+  The proceedings in which the article has been published.
+  """
+  in: Proceedings
+  pageStart: String
+  pageEnd: String
+  electronicId: String
+  chapter: String
+}
+
+input AddProceedingsArticleInput {
+  citationKeys: [String!]
+  lastModified: DateTime
+  added: DateTime
+  title: String
+  subtitle: String
+  titleAddon: String
+  abstract: String
+  authors: [AddEntityInput!]
+  note: String
+  languages: [String!]
+  publicationState: String
+  doi: String
+  keywords: [String!]
+  # TODO: Make this ProceedingsInput
+  in: String
+  pageStart: String
+  pageEnd: String
+  electronicId: String
+  chapter: String
+}
+
+"""
+A collection of articles, published abstracts or posters gathered from a conference.
+This may be a single volume in a multi-volume proceedings or a publication consisting only of a single volume.
+
+Biblatex: proceedings
+CSL: book
+ORCID: book
+CERIF: Conference Proceedings
+
+TODO:
+  - Decide what to do with biblatex fields "chapter, eid, pages" that are used to limit the citation to a specific part of the proceedings (right?). They are not really metadata of the proceedings, but only of the citation.
+  - Add editors with their roles.
+"""
+type Proceedings implements Node & Document & Booklike & PartOfSeries & HasMultiVolumeParent {
+  id: ID!
+  citationKeys: [String!]!
+  lastModified: DateTime
+  added: DateTime
+  """
+  The title of the document.
+
+  Biblatex: title (or booktitle in a ProceedingsArticle)
+  """
+  title: String
+  """
+  The subtitle of the document.
+
+  Biblatex: subtitle (or booksubtitle in a ProceedingsArticle)
+  """
+  subtitle: String
+
+  """
+  An annex to the title of the document.
+
+  Biblatex: titleaddon (or booktitleaddon in a ProceedingsArticle)
+  """
+  titleAddon: String
+  abstract: String
+  authors: [Entity!]!
+  note: String
+  languages: [String!]!
+  publicationState: String
+  doi: String
+  keywords: [String!]!
+  isbn: String
+  publishers: [Publisher!]!
+  pageTotal: String
+  number: String
+  series: String
+  """
+  The multi-volume proceedings of which this proceedings is part of.
+  """
+  in: ProceedingsMultiVolume
+  part: String
+  volume: String
+
+  """
+  The conference of the proceedings.
+  """
+  conference: Event
+}
+
+"""
+A multi-volume conference proceedings.
+
+Biblatex: mvproceedings
+CSL: book
+ORCID: book
+CERIF: Conference Proceedings
+
+TODO:
+  - Decide what to do with biblatex fields "chapter, eid, pages" that are used to limit the citation to a specific part of the proceedings (right?). They are not really metadata of the proceedings, but only of the citation.
+  - Add editors with their roles.
+"""
+type ProceedingsMultiVolume implements DocumentMultiVolume & Booklike & PartOfSeries {
+  id: ID!
+  """
+  The title of the document.
+
+  Biblatex: title (or maintitle in a ProceedingsArticle or Proceedings)
+  """
+  title: String
+  """
+  The subtitle of the document.
+
+  Biblatex: subtitle (or mainsubtitle in a ProceedingsArticle or Proceedings)
+  """
+  subtitle: String
+
+  """
+  An annex to the title of the document.
+
+  Biblatex: titleaddon (or maintitleaddon in a ProceedingsArticle or Proceedings)
+  """
+  titleAddon: String
+  abstract: String
+  authors: [Entity!]!
+  note: String
+  languages: [String!]!
+  publicationState: String
+  doi: String
+  keywords: [String!]!
+  totalVolumes: String
+  isbn: String
+  publishers: [Publisher!]!
+  pageTotal: String
+  number: String
+  series: String
+
+  """
+  The conference of the proceedings.
+  """
+  conference: Event
+}

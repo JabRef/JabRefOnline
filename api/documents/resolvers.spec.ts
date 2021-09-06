@@ -1,9 +1,8 @@
 import { container } from 'tsyringe'
 import { mock, mockReset } from 'jest-mock-extended'
 import { UserDocument } from '@prisma/client'
-import { DocumentType } from '../graphql'
 import { UserDocumentService } from './user.document.service'
-import { parse, Query, Mutation, DocumentResolver } from './resolvers'
+import { Query, Mutation, DocumentResolver } from './resolvers'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 
 const userDocumentService = mock<UserDocumentService>()
@@ -24,12 +23,12 @@ describe('Query', () => {
         .calledWith('uniqueId')
         .mockResolvedValueOnce({
           id: 'uniqueId',
-          type: 'something',
+          type: 'OTHER',
         } as UserDocument)
       const document = await query.userDocument({}, { id: 'uniqueId' }, context)
       expect(document).toEqual({
         id: 'uniqueId',
-        type: 'something',
+        type: 'OTHER',
       })
     })
   })
@@ -37,18 +36,20 @@ describe('Query', () => {
 
 describe('Mutation', () => {
   describe('addUserDocument', () => {
-    it('converts other fields correctly', async () => {
+    /* TODO: Handle other fields
+    it('converts other unknown fields correctly', async () => {
       await mutation.addUserDocument(
         {},
         {
-          document: {
-            type: 'something',
-            fields: [
-              {
-                field: 'some',
-                value: 'random field',
-              },
-            ],
+          input: {
+            journalArticle: {
+              other: [
+                {
+                  field: 'some',
+                  value: 'random field',
+                },
+              ],
+            }
           },
         },
         context
@@ -70,29 +71,47 @@ describe('Mutation', () => {
         },
       })
     })
+    */
 
-    it('converts special fields correctly', async () => {
+    it('converts single person author correctly', async () => {
       await mutation.addUserDocument(
         {},
         {
-          document: {
-            type: 'something',
-            fields: [
-              {
-                field: 'author',
-                value: 'JabRef devs',
-              },
-            ],
+          input: {
+            journalArticle: {
+              authors: [
+                {
+                  person: {
+                    name: 'JabRef devs',
+                  },
+                },
+              ],
+            },
           },
         },
         context
       )
       expect(userDocumentService.addDocument).toHaveBeenCalledWith({
         added: null,
-        citationKey: null,
+        citationKeys: [],
         lastModified: null,
-        type: 'something',
+        type: 'JOURNAL_ARTICLE',
         author: 'JabRef devs',
+        abstract: undefined,
+        doi: undefined,
+        electronicId: null,
+        keywords: [],
+        languages: [],
+        note: undefined,
+        originalLanguages: [],
+        pageEnd: null,
+        pageStart: null,
+        publicationState: undefined,
+        publishedAt: null,
+        subtitle: undefined,
+        title: undefined,
+        titleAddon: undefined,
+        translators: [],
       })
     })
   })
@@ -101,21 +120,11 @@ describe('Mutation', () => {
 describe('DocumentResolver', () => {
   const documentResolver = new DocumentResolver()
   describe('resolveType', () => {
-    it('returns Article for articles', () => {
+    it('returns JournalArticle for articles', () => {
       const article = {
-        type: DocumentType.Article,
+        type: 'JOURNAL_ARTICLE',
       } as UserDocument
-      expect(documentResolver.__resolveType(article)).toEqual('Article')
+      expect(documentResolver.__resolveType(article)).toEqual('JournalArticle')
     })
-  })
-})
-
-describe('parse', () => {
-  it('converts lowercase type correctly', () => {
-    expect(parse('article')).toEqual(DocumentType.Article)
-  })
-
-  it('converts uppercase type correctly', () => {
-    expect(parse('Article')).toEqual(DocumentType.Article)
   })
 })

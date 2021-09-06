@@ -1,9 +1,6 @@
+# eslint-disable @graphql-eslint/no-unreachable-types -- due to bug https://github.com/dotansimha/graphql-eslint/issues/571
 scalar DateTime
-
-input FieldValueTupleInput {
-  field: String!
-  value: String!
-}
+scalar Date
 
 """
 Ways in which to filter a list of documents.
@@ -28,16 +25,59 @@ type Person {
   name: String!
 }
 
+input AddPersonInput {
+  name: String!
+}
+
+input AddOrganizationInput {
+  name: String!
+}
+
 type Organization {
   id: ID!
   name: String!
 }
 
 union Entity = Person | Organization
+input AddEntityInput {
+  ### Only one of the following fields can be specified.
+  person: AddPersonInput
+  organization: AddOrganizationInput
+}
 
-type Journal {
-  id: ID!
-  name: String!
+"""
+A document that can be translated.
+"""
+interface Translatable {
+  """
+  Contains information if the document has been translated.
+  """
+  translated: Translated
+}
+
+"""
+Information about a translation of a document.
+"""
+type Translated {
+  """
+  The translators of the document.
+
+  Biblatex: translator
+  """
+  translators: [Entity!]!
+
+  """
+  The languages of the original document.
+  TODO: Introduce type for languages.
+
+  Biblatex: origlanguage
+  """
+  originalLanguages: [String!]!
+}
+
+input AddTranslatedInput {
+  translators: [AddEntityInput!]
+  originalLanguages: [String!]
 }
 
 """
@@ -46,98 +86,400 @@ A university or some other institution.
 type Institution {
   "The unique identifier of the institution."
   id: ID!
-  "The name of the university or institution."
+  """
+  The name of the university or institution.
+
+  Biblatex: institution
+  """
   name: String!
+
+  """
+  The locations of the institution.
+
+  Biblatex: location (or address)
+  """
+  locations: [String!]!
 }
 
-enum DocumentType {
-  ARTICLE
-  PHD_THESIS
-  IN_PROCEEDINGS
-}
-
-interface Document {
+type Publisher {
+  """
+  The unique identifier of the publisher.
+  """
   id: ID!
-  type: DocumentType
+
+  """
+  The locations of the publisher.
+
+  Biblatex: location
+  """
+  locations: [String!]!
+
+  """
+  The name of the publisher.
+
+  Biblatex: publisher, or organization for Other
+  """
+  name: String
+}
+
+"""
+A conference, a symposium, or some other event.
+"""
+type Event {
+  """
+  The unique identifier of the event.
+  """
+  id: ID!
+
+  """
+  The date when the event started.
+
+  Biblatex: eventday,eventhour, eventminute, eventmonth, eventsecond, eventtimezone, eventyear, eventyeardivision
+  """
+  startDate: DateTime
+
+  """
+  The date when the event ended.
+
+  Biblatex: eventendday, eventendhour, eventendminute, eventendmonth, eventendsecond, eventendtimezone, eventendyear, eventendyeardivision
+  """
+  endDate: DateTime
+
+  """
+  The title of the event.
+
+  Biblatex: eventtitle
+  """
+  title: String!
+
+  """
+  An annex to the title. Can be used for known event acronyms, for example.
+
+  Biblatex: eventtitleaddon
+  """
+  titleAddon: String
+
+  """
+  The organizations that sponsored the event.
+
+  Biblatex: organization
+  """
+  sponsors: [String!]!
+
+  """
+  The locations where the event happened.
+
+  Biblatex: venue
+  """
+  locations: [String!]!
+}
+
+"""
+The different types of documents are mostly compatible with the types listed in the following sources. If known, the mapping is indicated in the comment of each type.
+  - Biblatex http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+  - CSL https://github.com/citation-style-language/schema/blob/master/schemas/styles/csl-types.rnc (and outdated https://docs.citationstyles.org/en/stable/specification.html?highlight=entry-dictionary#appendix-iii-types)
+  - ORCID https://info.orcid.org/documentation/integration-and-api-faq/#easy-faq-2682
+  - CERIF https://cerif.eurocris.org/vocab/html/OutputTypes.html
+
+The fields for each type are mostly compatible with the fields in the following sources. If known, the mapping is indicated in the comment of each field.
+  - Biblatex: https://github.com/plk/biblatex/blob/dev/tex/latex/biblatex/blx-dm.def
+  - CSL: https://github.com/citation-style-language/schema/blob/master/schemas/input/csl-data.json
+  - ORCID: https://github.com/ORCID/orcid-model
+
+The mapping was based on the following sources:
+  - https://github.com/retorquere/zotero-better-bibtex/blob/master/translators/Better%20BibLaTeX.ts
+  - https://github.com/fiduswriter/biblatex-csl-converter/blob/main/src/const.ts
+"""
+interface Document implements Node {
+  id: ID!
+
+  """
+  The keys by which the document can be cited.
+  The first key is the preferred one, the others are aliases to aid users who change their citation keys but have legacy documents which use older keys for the same entry.
+
+  Biblatex: citekey (primary) and ids (secondary)
+  """
+  citationKeys: [String!]!
+
+  """
+  The date when the metadata of the document was modified last.
+
+  Biblatex: no standard field
+  """
+  lastModified: DateTime
+
+  """
+  The date when the document was added to the library.
+
+  Biblatex: no standard field
+  """
+  added: DateTime
+
+  """
+  The title of the document.
+
+  Biblatex: title
+  """
   title: String
+  """
+  The subtitle of the document.
+
+  Biblatex: subtitle
+  """
+  subtitle: String
+
+  """
+  An annex to the title of the document.
+
+  Biblatex: titleaddon
+  """
+  titleAddon: String
+
+  """
+  A short description that summarizes the document.
+
+  Biblatex: abstract
+  """
+  abstract: String
+  """
+  The authors of this document.
+
+  Biblatex: author
+  """
+  authors: [Entity!]!
+
+  """
+  Miscellaneous bibliographic data which does not fit into any other field.
+  Publication facts such as “Reprint of the edition London 1831” are typical candidates.
+
+  Biblatex: note
+  """
+  note: String
+
+  """
+  The languages of the article.
+  TODO: Introduce type for languages.
+
+  Biblatex: language
+  """
+  languages: [String!]!
+
+  """
+  The publication state of the article.
+  TODO: Introduce type for publication states.
+
+  Biblatex: pubstate
+  """
+  publicationState: String
+
+  """
+  The Digital Object Identifier of the document.
+
+  Biblatex: doi
+  """
+  doi: String
+
+  #### JabRef specific fields. ####
+
   "Keywords or tags used to describe the content."
-  keywords: [String]
-  "A short description that summarizes the work."
-  abstract: String
-  "The authors of this work."
-  authors: [Entity!]!
+  keywords: [String!]!
 }
 
-type Article implements Document {
-  id: ID!
-  type: DocumentType
-  title: String
-  authors: [Entity!]!
-  keywords: [String!]!
-  abstract: String
+interface Booklike {
+  """
+  The International Standard Book Number of the document.
 
-  "The page on which the work starts; for example '135' or 'xiii'."
+  Biblatex: isbn
+  """
+  isbn: String
+
+  """
+  The publisher of the document.
+  """
+  publishers: [Publisher]
+
+  """
+  The total number of pages of the document.
+
+  Biblatex: pagetotal
+  """
+  pageTotal: String
+}
+
+interface PartOfSeries {
+  """
+  The number of the document in a series.
+  Document in a publication series are usually numbered and the number or volume of a document in a series is given in this field.
+
+  Biblatex: number
+  """
+  number: String
+
+  """
+  The name of a publication series, such as “Studies in ...”.
+
+  Biblatex: series
+  """
+  series: String
+}
+
+interface HasParent {
+  """
+  The parent document in which the document has been published.
+  """
+  in: Node
+
+  """
+  The page on which the article starts; for example '135' or 'xiii'.
+  For articles in electronic journals with a non-classical pagination setup the electricId may be more suitable.
+
+  Biblatex: page
+  """
   pageStart: String
-  "The page on which the work ends; for example '138' or 'xvi'."
+
+  """
+  The page on which the article ends; for example '138' or 'xvi'.
+
+  Biblatex: page
+  """
   pageEnd: String
-  journal: Journal
+
+  """
+  The electronic identifier which should be used for journals deviating from the classic pagination scheme of printed journals by only enumerating articles and not pages.
+
+  Biblatex: eid
+  """
+  electronicId: String
 }
 
-type PhdThesis implements Document {
-  id: ID!
-  type: DocumentType
-  title: String
-  authors: [Entity!]!
-  keywords: [String!]!
-  abstract: String
+interface HasBooklikeParent implements HasParent {
+  in: Document
+  pageStart: String
+  pageEnd: String
+  electronicId: String
 
-  "The university or some other institution where the thesis has been written at."
-  institution: Institution
+  """
+  A chapter or section or any other unit in the parent document.
+  """
+  chapter: String
 }
 
-type InProceedings implements Document {
-  id: ID!
-  type: DocumentType
-  title: String
-  authors: [Entity!]!
-  keywords: [String!]!
-  abstract: String
+interface HasMultiVolumeParent {
+  """
+  The multi-volume document of which this document is part of.
+  """
+  in: DocumentMultiVolume
 
-  "The title of the proceedings."
-  booktitle: String
-}
+  """
+  The number of a partial volume.
+  It may be used when a logical volume consists of two or more physical ones.
+  In this case the number of the logical volume goes in the volume field and the number of the part of that volume in the part field.
 
-type Unknown implements Document {
-  id: ID!
-  type: DocumentType
-  title: String
-  authors: [Entity!]!
-  keywords: [String!]!
-  abstract: String
+  Biblatex: part
+  """
+  part: String
+
+  """
+  The volume of a multi-volume proceedings.
+
+  Biblatex: volume
+  """
+  volume: String
 }
 
 """
-Articles, books etc
+An article is a usually self-contained nonfiction prose.
 """
-input DocumentInput {
-  type: String!
-  citationKey: String
-
+interface Article implements Node & Document {
+  id: ID!
+  citationKeys: [String!]!
   lastModified: DateTime
   added: DateTime
-
-  fields: [FieldValueTupleInput!]
+  title: String
+  subtitle: String
+  titleAddon: String
+  abstract: String
+  authors: [Entity!]!
+  note: String
+  languages: [String!]!
+  publicationState: String
+  doi: String
+  keywords: [String!]!
 }
 
-input DocumentUpdateInput {
+interface DocumentMultiVolume {
+  """
+  The total number of volumes of a multi-volume document.
+
+  Biblatex: volumes
+  """
+  totalVolumes: String
+}
+
+"""
+A fallback type for works which do not fit into any other category.
+
+Biblatex: value of "type" field, or "misc" if not present
+CSL: article
+ORCID: other
+CERIF: Other
+
+TODO:
+- Add editor with roles.
+"""
+type Other implements Node & Document {
   id: ID!
+  citationKeys: [String!]!
+  lastModified: DateTime
+  added: DateTime
+  title: String
+  subtitle: String
+  titleAddon: String
+  abstract: String
+  authors: [Entity!]!
+  note: String
+  languages: [String!]!
+  publicationState: String
+  doi: String
+  keywords: [String!]!
+
+  """
+  A publication notice.
+
+  Biblatex: howpublished
+  """
+  howPublished: String
+
+  """
+  The publishers of this document.
+  """
+  publishers: [Publisher]
+
+  """
+  The type of this document.
+
+  Biblatex: entry type
+  """
   type: String
-  citationKey: String
+}
 
-  lastModified: DateTime
-  added: DateTime
+"""
+Input for creating a new user document.
+"""
+input AddUserDocumentInput {
+  #### Only one of the following fields should be filled
+  journalArticle: AddJournalArticleInput
+  proceedingsArticle: AddProceedingsArticleInput
+  thesis: AddThesisInput
+}
 
-  fields: [FieldValueTupleInput!]
+input UpdateUserDocumentInput {
+  id: ID!
+
+  #### Only one of the following fields should be filled
+  journalArticle: AddJournalArticleInput
+  proceedingsArticle: AddProceedingsArticleInput
+  thesis: AddThesisInput
 }
 
 extend type Query {
@@ -145,6 +487,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  addUserDocument(document: DocumentInput!): Document
-  updateUserDocument(document: DocumentUpdateInput!): Document
+  addUserDocument(input: AddUserDocumentInput!): Document
+  updateUserDocument(input: UpdateUserDocumentInput!): Document
 }

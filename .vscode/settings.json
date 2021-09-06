@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "Biblatex",
     "Nuxt",
     "booktitle",
     "codegen",
@@ -16,7 +17,16 @@
     "editor.formatOnSave": true
   },
   "[typescript]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+  },
+  "[vue]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
   },
   "files.exclude": {
     "node_modules/": true,

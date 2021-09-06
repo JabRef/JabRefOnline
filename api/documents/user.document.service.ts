@@ -4,12 +4,19 @@ import {
   Prisma,
   User,
   UserDocumentOtherField,
+  JournalIssue,
+  Journal,
 } from '@prisma/client'
 import { injectable } from 'tsyringe'
 import { DocumentFilters } from '../graphql'
 
 export type UserDocument = PlainUserDocument & {
   other?: UserDocumentOtherField[]
+  journalIssue?:
+    | (JournalIssue & {
+        journal: Journal | null
+      })
+    | null
 }
 
 @injectable()
@@ -26,6 +33,11 @@ export class UserDocumentService {
       },
       include: {
         other: includeOtherFields,
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
       },
     })
   }
@@ -53,6 +65,11 @@ export class UserDocumentService {
       },
       include: {
         other: includeOtherFields,
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
       },
     })
 
@@ -73,6 +90,34 @@ export class UserDocumentService {
   async addDocument(
     document: Prisma.UserDocumentCreateInput
   ): Promise<UserDocument | null> {
-    return await this.prisma.userDocument.create({ data: document })
+    return await this.prisma.userDocument.create({
+      data: document,
+      include: {
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
+      },
+    })
+  }
+
+  async updateDocument(
+    id: string,
+    document: Prisma.UserDocumentUpdateInput
+  ): Promise<UserDocument | null> {
+    return await this.prisma.userDocument.update({
+      where: {
+        id,
+      },
+      data: document,
+      include: {
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
+      },
+    })
   }
 }

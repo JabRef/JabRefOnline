@@ -1,17 +1,22 @@
-import { Prisma } from '@prisma/client'
+import { DocumentType, Prisma } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
 import {
-  DocumentInput,
-  DocumentUpdateInput,
-  DocumentType,
+  AddJournalArticleInput,
+  AddProceedingsArticleInput,
+  AddThesisInput,
   Resolvers,
   MutationAddUserDocumentArgs,
+  MutationUpdateUserDocumentArgs,
   Person,
-  Journal,
   QueryUserDocumentArgs,
   Institution,
+  DocumentResolvers,
+  JournalIssue,
+  AddUserDocumentInput,
+  UpdateUserDocumentInput,
 } from '../graphql'
+import { ResolveType } from '../utils/extractResolveType'
 import { UserDocumentService, UserDocument } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
@@ -48,8 +53,10 @@ const specialFields: string[] = [
 ]
 
 function convertDocumentInput(
-  document: DocumentInput | DocumentUpdateInput
+  type: DocumentType,
+  document: AddJournalArticleInput | AddProceedingsArticleInput | AddThesisInput
 ): Prisma.UserDocumentCreateInput {
+  /* TODO: Save those fields as well
   const special = document.fields
     ?.filter((item) => specialFields.includes(item.field))
     .map((item) => {
@@ -63,12 +70,39 @@ function convertDocumentInput(
         value: item.value,
       }
     })
-
-  let convertedDocument: Prisma.UserDocumentCreateInput = {
-    type: document.type ?? 'unknown',
-    citationKey: document.citationKey ?? null,
+    */
+  const convertedDocument: Prisma.UserDocumentCreateInput = {
+    type,
+    citationKeys: document.citationKeys ?? [],
     lastModified: document.lastModified ?? null,
     added: document.added ?? null,
+    title: document.title,
+    subtitle: document.subtitle,
+    titleAddon: document.titleAddon,
+    abstract: document.abstract,
+    author: document.authors
+      ?.map((author) => author.person?.name)
+      .join(' and '),
+    note: document.note,
+    languages: document.languages ?? [],
+    publicationState: document.publicationState,
+    doi: document.doi,
+    keywords: document.keywords ?? [],
+    pageStart: 'pageStart' in document ? document.pageStart : null,
+    pageEnd: 'pageEnd' in document ? document.pageEnd : null,
+    electronicId: 'electronicId' in document ? document.electronicId : null,
+    originalLanguages:
+      'translated' in document
+        ? document.translated?.originalLanguages ?? []
+        : [],
+    translators:
+      'translated' in document
+        ? document.translated?.translators?.map(
+            (entity) => entity.person?.name ?? ''
+          ) ?? []
+        : [],
+    publishedAt: 'published' in document ? document.published : null,
+    /*
     ...(other &&
       other.length > 0 && {
         other: {
@@ -77,8 +111,32 @@ function convertDocumentInput(
           },
         },
       }),
+      */
   }
 
+  if ('in' in document && document.in && typeof document.in !== 'string') {
+    convertedDocument.journalIssue = {
+      create: {
+        journal: {
+          create: {
+            name: document.in.journal.name,
+            subtitle: document.in.journal.subtitle,
+            titleAddon: document.in.journal.titleAddon,
+            issn: document.in.journal.issn,
+          },
+        },
+        title: document.in.title,
+        subtitle: document.in.subtitle,
+        titleAddon: document.in.titleAddon,
+        number: document.in.number,
+        name: document.in.name,
+        series: document.in.series,
+        volume: document.in.volume,
+      },
+    }
+  }
+
+  /*
   if (special) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     convertedDocument = Object.assign(
@@ -86,23 +144,15 @@ function convertDocumentInput(
       Object.fromEntries(special)
     )
   }
+  */
+  // TODO: For update
+  /*
   if ('id' in document) {
     convertedDocument = Object.assign(convertedDocument, { id: document.id })
   }
+  */
 
   return convertedDocument
-}
-
-export function parse(type: string): DocumentType | null {
-  const found = Object.entries(DocumentType).find(
-    ([key, _value]) =>
-      key.localeCompare(type, undefined, { sensitivity: 'accent' }) === 0
-  )
-  if (found) {
-    return found[1]
-  } else {
-    return null
-  }
 }
 
 @injectable()
@@ -124,34 +174,68 @@ export class Mutation {
 
   async addUserDocument(
     _root: Record<string, never>,
-    { document }: MutationAddUserDocumentArgs,
+    { input }: MutationAddUserDocumentArgs,
     _context: Context
   ): Promise<UserDocument | null> {
+    const document =
+      input.journalArticle ?? input.proceedingsArticle ?? input.thesis
+    const documentType = this.getDocumentType(input)
+    if (!document || !documentType) {
+      throw new Error('No document given')
+    }
     return await this.userDocumentService.addDocument(
-      convertDocumentInput(document)
+      convertDocumentInput(documentType, document)
+    )
+  }
+
+  private getDocumentType(
+    input: AddUserDocumentInput | UpdateUserDocumentInput
+  ): DocumentType | null {
+    if (input.journalArticle) {
+      return 'JOURNAL_ARTICLE'
+    } else if (input.proceedingsArticle) {
+      return 'PROCEEDINGS_ARTICLE'
+    } else if (input.thesis) {
+      return 'THESIS'
+    }
+    return null
+  }
+
+  async updateUserDocument(
+    _root: Record<string, never>,
+    { input }: MutationUpdateUserDocumentArgs,
+    _context: Context
+  ): Promise<UserDocument | null> {
+    const document =
+      input.journalArticle ?? input.proceedingsArticle ?? input.thesis
+    const documentType = this.getDocumentType(input)
+    if (!document || !documentType) {
+      throw new Error('No document given')
+    }
+
+    const convertedDocument = convertDocumentInput(documentType, document)
+    convertedDocument.id = input.id
+    return await this.userDocumentService.updateDocument(
+      input.id,
+      convertedDocument
     )
   }
 }
 
 @injectable()
 export class DocumentResolver {
-  __resolveType(
-    document: UserDocument
-  ): 'Article' | 'InProceedings' | 'PhdThesis' | 'Unknown' {
-    switch (parse(document.type)) {
-      case DocumentType.Article:
-        return 'Article'
-      case DocumentType.InProceedings:
-        return 'InProceedings'
-      case DocumentType.PhdThesis:
-        return 'PhdThesis'
+  __resolveType(document: UserDocument): ResolveType<DocumentResolvers> {
+    switch (document.type) {
+      case 'JOURNAL_ARTICLE':
+        return 'JournalArticle'
+      case 'PROCEEDINGS_ARTICLE':
+        return 'ProceedingsArticle'
+      case 'THESIS':
+        return 'Thesis'
+      case 'OTHER':
       default:
-        return 'Unknown'
+        return 'Other'
     }
-  }
-
-  type(document: UserDocument): DocumentType | null {
-    return parse(document.type)
   }
 
   authors(document: UserDocument): Person[] {
@@ -170,35 +254,38 @@ export class DocumentResolver {
   }
 
   keywords(document: UserDocument): string[] {
-    // TODO: Already store keywords on save as a list?
-    return document.keywords?.split(',') ?? []
+    return document.keywords
   }
 }
 
 @injectable()
-export class ArticleResolver extends DocumentResolver {
-  journal(document: UserDocument): Journal | null {
-    const journalName = document.journal ?? document.journaltitle
-    if (journalName) {
-      return {
-        id: 'TODO' + journalName,
-        name: journalName,
-      }
-    } else {
-      return null
-    }
+export class JournalArticleResolver extends DocumentResolver {
+  in(document: UserDocument): JournalIssue | null {
+    return document.journalIssue ?? null
+  }
+
+  published(document: UserDocument): string | null {
+    return document.publishedAt
+  }
+
+  annotators(_document: UserDocument): Person[] {
+    return []
+  }
+
+  commentators(_document: UserDocument): Person[] {
+    return []
   }
 }
 
 @injectable()
-export class InProceedingsResolver extends DocumentResolver {
+export class ProceedingsArticleResolver extends DocumentResolver {
   booktitle(document: UserDocument): string | null {
     return document.booktitle
   }
 }
 
 @injectable()
-export class PhdThesisResolver extends DocumentResolver {
+export class ThesisResolver extends DocumentResolver {
   institution(document: UserDocument): Institution | null {
     const institutionName = document.other?.find(
       (field) => field.field === 'institution'
@@ -208,6 +295,7 @@ export class PhdThesisResolver extends DocumentResolver {
       return {
         id: 'TODO' + institutionName,
         name: institutionName,
+        locations: [],
       }
     } else {
       return null
@@ -216,16 +304,16 @@ export class PhdThesisResolver extends DocumentResolver {
 }
 
 @injectable()
-export class UnknownResolver extends DocumentResolver {}
+export class OtherResolver extends DocumentResolver {}
 
 export function resolvers(): Resolvers {
   return {
     Query: container.resolve(Query),
     Mutation: container.resolve(Mutation),
     Document: container.resolve(DocumentResolver),
-    Article: container.resolve(ArticleResolver),
-    InProceedings: container.resolve(InProceedingsResolver),
-    PhdThesis: container.resolve(PhdThesisResolver),
-    Unknown: container.resolve(UnknownResolver),
+    JournalArticle: container.resolve(JournalArticleResolver),
+    ProceedingsArticle: container.resolve(ProceedingsArticleResolver),
+    Thesis: container.resolve(ThesisResolver),
+    Other: container.resolve(OtherResolver),
   }
 }

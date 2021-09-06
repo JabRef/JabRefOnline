@@ -38,7 +38,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        endOfLine: 'auto',
+        endOfLine: 'lf',
       },
     ],
     // Ensure void operator is not used, except for variable assignment or function return (might be handy for promises)
@@ -53,13 +53,6 @@ module.exports = {
       },
       plugins: ['@graphql-eslint'],
       rules: {
-        // Workaround for for bug in prettier, can be removed after https://github.com/prettier/eslint-plugin-prettier/pull/413
-        'prettier/prettier': [
-          2,
-          {
-            parser: 'graphql',
-          },
-        ],
         // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.
         '@graphql-eslint/avoid-typename-prefix': 'error',
         // Requires all types to be reachable at some level by root level fields.
