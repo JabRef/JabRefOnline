@@ -107,7 +107,7 @@ export class Mutation {
 }
 
 @injectable()
-export class SignupPayloadResolver {
+class SignupPayloadResolver {
   __resolveType(
     signup: SignupPayload
   ): 'UserReturned' | 'InputValidationProblem' {
@@ -115,6 +115,18 @@ export class SignupPayloadResolver {
       return 'UserReturned'
     }
     return 'InputValidationProblem'
+  }
+}
+
+@injectable()
+class ChangePasswordPayloadResolver {
+  __resolveType(
+    changePassword: ChangePasswordPayload
+  ): 'UserReturned' | 'ExpiredTokenProblem' {
+    if ('user' in changePassword) {
+      return 'UserReturned'
+    }
+    return 'ExpiredTokenProblem'
   }
 }
 
@@ -159,5 +171,6 @@ export function resolvers(): Resolvers {
     Mutation: container.resolve(Mutation),
     User: container.resolve(UserResolver),
     SignupPayload: container.resolve(SignupPayloadResolver),
+    ChangePasswordPayload: container.resolve(ChangePasswordPayloadResolver),
   }
 }
