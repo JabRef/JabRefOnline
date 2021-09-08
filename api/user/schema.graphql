@@ -40,7 +40,7 @@ type ExpiredTokenProblem {
   problems: [InputFieldValidationProblem]!
 }
 
-interface InputFieldValidationProblem {
+type InputFieldValidationProblem {
   message: String!
   path: String!
 }
