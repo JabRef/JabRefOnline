@@ -79,7 +79,6 @@ export default defineComponent({
           ... on UserReturned {
             user {
               id
-              email
             }
           }
           ... on InputValidationProblem {
@@ -101,7 +100,11 @@ export default defineComponent({
         signupPassword: password.value,
       },
       update(_context, { data }) {
-        currentUserVar(data?.signup ?? null)
+        currentUserVar(
+          data?.signup?.__typename === 'UserReturned'
+            ? data?.signup?.user
+            : null
+        )
       },
     }))
     const router = useRouter()

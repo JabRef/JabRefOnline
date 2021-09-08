@@ -95,7 +95,6 @@ export default defineComponent({
           ... on UserReturned {
             user {
               id
-              email
             }
           }
           ... on InputValidationProblem {
@@ -120,7 +119,11 @@ export default defineComponent({
     const router = useRouter()
     onDone((result) => {
       if (result.data?.login) {
-        currentUserVar(result.data)
+        currentUserVar(
+          result.data.login.__typename === 'UserReturned'
+            ? result.data.login.user
+            : null
+        )
         void router.push({ name: 'dashboard' })
       } else {
         currentUserVar(null)
