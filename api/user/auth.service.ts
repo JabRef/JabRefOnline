@@ -21,6 +21,7 @@ export type ChangePasswordPayload = ResolversTypes['ChangePasswordPayload']
 export type SignupPayload = ResolversTypes['SignupPayload']
 export type LogoutPayload = ResolversTypes['LogoutPayload']
 export type ForgotPasswordPayload = ResolversTypes['ForgotPasswordPayload']
+export type LoginPayload = ResolversTypes['LoginPayload']
 
 @injectable()
 export class AuthService {

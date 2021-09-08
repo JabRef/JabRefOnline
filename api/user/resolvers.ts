@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { User } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
-import { UserInputError } from 'apollo-server-express'
 import { Context } from '../context'
 import {
   MutationLoginArgs,
@@ -23,6 +22,7 @@ import { GroupService } from '../groups/service'
 import {
   AuthService,
   ChangePasswordPayload,
+  LoginPayload,
   LogoutPayload,
   SignupPayload,
 } from './auth.service'
@@ -66,7 +66,7 @@ export class Mutation {
     _root: Record<string, never>,
     { email, password }: MutationLoginArgs,
     context: Context
-  ): Promise<User | null> {
+  ): Promise<LoginPayload> {
     const { user, info } = await context.authenticate('graphql-local', {
       email,
       password,
@@ -74,11 +74,16 @@ export class Mutation {
     if (user) {
       // Make login persistent by putting it in the express session store
       await context.login(user)
-      return user
+      return { user }
     } else {
-      throw new UserInputError(
-        info?.message || 'Unknown error while logging in.'
-      )
+      return {
+        problems: [
+          {
+            path: 'email or password',
+            message: info?.message || 'Unknown error while logging in.',
+          },
+        ],
+      }
     }
   }
 
@@ -137,6 +142,18 @@ class ChangePasswordPayloadResolver {
 }
 
 @injectable()
+class LoginPayloadResolver {
+  __resolveType(
+    login: LoginPayload
+  ): 'UserReturned' | 'InputValidationProblem' {
+    if ('user' in login) {
+      return 'UserReturned'
+    }
+    return 'InputValidationProblem'
+  }
+}
+
+@injectable()
 export class UserResolver {
   constructor(
     private userDocumentService: UserDocumentService,
@@ -176,6 +193,7 @@ export function resolvers(): Resolvers {
     Query: container.resolve(Query),
     Mutation: container.resolve(Mutation),
     User: container.resolve(UserResolver),
+    LoginPayload: container.resolve(LoginPayloadResolver),
     SignupPayload: container.resolve(SignupPayloadResolver),
     ChangePasswordPayload: container.resolve(ChangePasswordPayloadResolver),
   }

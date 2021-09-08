@@ -14,7 +14,7 @@ extend type Query {
 
 extend type Mutation {
   logout: LogoutPayload
-  login(email: EmailAddress!, password: String!): User
+  login(email: EmailAddress!, password: String!): LoginPayload
   signup(email: EmailAddress!, password: String!): SignupPayload
   forgotPassword(email: EmailAddress!): ForgotPasswordPayload
   changePassword(
@@ -23,6 +23,8 @@ extend type Mutation {
     newPassword: String!
   ): ChangePasswordPayload
 }
+
+union LoginPayload = UserReturned | InputValidationProblem
 
 union ChangePasswordPayload = UserReturned | ExpiredTokenProblem
 
