@@ -56,7 +56,7 @@ export class Mutation {
     context: Context
   ): Promise<SignupPayload> {
     const newUser = await this.authService.createAccount(email, password)
-    if ('user' in newUser) void context.login(newUser.user)
+    if ('user' in newUser) void context.login(await newUser.user)
     return newUser
   }
 

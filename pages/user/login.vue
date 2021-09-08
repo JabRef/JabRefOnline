@@ -67,55 +67,55 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, useRouter } from '@nuxtjs/composition-api'
-import { computed, ref } from '@vue/composition-api'
-import { gql } from '@apollo/client/core'
-import { useMutation } from '@vue/apollo-composable'
-import { currentUserVar } from '../../apollo/cache'
-import { LoginDocument } from '../../apollo/graphql'
+// import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+// import { computed, ref } from '@vue/composition-api'
+// import { gql } from '@apollo/client/core'
+// import { useMutation } from '@vue/apollo-composable'
+// import { currentUserVar } from '../../apollo/cache'
+// import { LoginDocument } from '../../apollo/graphql'
 
-export default defineComponent({
-  name: 'Login',
-  layout: 'bare',
+// export default defineComponent({
+//   name: 'Login',
+//   layout: 'bare',
 
-  // TODO: Automatically go to home if already loggin in
-  // middleware: 'guest',
+//   // TODO: Automatically go to home if already loggin in
+//   // middleware: 'guest',
 
-  setup() {
-    const email = ref('')
-    const password = ref('')
-    const otherError = ref('')
+//   setup() {
+//     const email = ref('')
+//     const password = ref('')
+//     const otherError = ref('')
 
-    gql`
-      mutation Login($email: EmailAddress!, $password: String!) {
-        login(email: $email, password: $password) {
-          id
-        }
-      }
-    `
-    const {
-      mutate: loginUser,
-      onDone,
-      error: graphqlError,
-    } = useMutation(LoginDocument, () => ({
-      variables: {
-        email: email.value,
-        password: password.value,
-      },
-    }))
-    const router = useRouter()
-    onDone((result) => {
-      if (result.data?.login) {
-        currentUserVar(result.data.login)
-        void router.push({ name: 'dashboard' })
-      } else {
-        currentUserVar(null)
-        otherError.value = 'Unknown error'
-      }
-    })
-    const error = computed(() => graphqlError.value || otherError.value)
+//     gql`
+//       mutation Login($email: EmailAddress!, $password: String!) {
+//         login(email: $email, password: $password) {
+//           id
+//         }
+//       }
+//     `
+//     const {
+//       mutate: loginUser,
+//       onDone,
+//       error: graphqlError,
+//     } = useMutation(LoginDocument, () => ({
+//       variables: {
+//         email: email.value,
+//         password: password.value,
+//       },
+//     }))
+//     const router = useRouter()
+//     onDone((result) => {
+//       if (result.data?.login) {
+//         currentUserVar(result.data.login)
+//         void router.push({ name: 'dashboard' })
+//       } else {
+//         currentUserVar(null)
+//         otherError.value = 'Unknown error'
+//       }
+//     })
+//     const error = computed(() => graphqlError.value || otherError.value)
 
-    return { email, password, error, loginUser }
-  },
-})
+//     return { email, password, error, loginUser }
+//   },
+// })
 </script>

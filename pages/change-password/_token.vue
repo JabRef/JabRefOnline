@@ -22,7 +22,8 @@
   </div>
 </template>
 
-// <script>
+//
+<script>
 // import {
 //   defineComponent,
 //   useRouter,
@@ -72,4 +73,5 @@
 //     return { password, error, changePassword, repeatPassword }
 //   },
 // })
-// </script>
+//
+</script>
