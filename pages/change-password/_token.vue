@@ -24,54 +24,68 @@
 
 //
 <script>
-// import {
-//   defineComponent,
-//   useRouter,
-//   useRoute,
-//   computed,
-// } from '@nuxtjs/composition-api'
-// import { ref } from '@vue/composition-api'
-// import { gql } from '@apollo/client/core'
-// import { useMutation } from '@vue/apollo-composable'
-// import { ChangePasswordDocument } from '../../apollo/graphql'
+import {
+  defineComponent,
+  useRouter,
+  useRoute,
+  computed,
+} from '@nuxtjs/composition-api'
+import { ref } from '@vue/composition-api'
+import { gql } from '@apollo/client/core'
+import { useMutation } from '@vue/apollo-composable'
+import { ChangePasswordMutationDocument } from '~/apollo/graphql'
 
-// export default defineComponent({
-//   name: 'ChangePassword',
-//   layout: 'bare',
-//   setup() {
-//     const password = ref('')
-//     const repeatPassword = ref('')
-//     gql`
-//       mutation ChangePassword(
-//         $token: String!
-//         $id: ID!
-//         $newPassword: String!
-//       ) {
-//         changePassword(token: $token, id: $id, newPassword: $newPassword) {
-//           id
-//         }
-//       }
-//     `
-//     const route = useRoute()
-//     const token = computed(() => route.value.query.token)
-//     const id = computed(() => route.value.query.id)
-//     const {
-//       mutate: changePassword,
-//       onDone,
-//       error,
-//     } = useMutation(ChangePasswordDocument, () => ({
-//       variables: {
-//         token: token.value,
-//         id: id.value,
-//         newPassword: password.value,
-//       },
-//     }))
-//     const router = useRouter()
-//     onDone(() => {
-//       void router.push('../user/login')
-//     })
-//     return { password, error, changePassword, repeatPassword }
-//   },
-// })
-//
+export default defineComponent({
+  name: 'ChangePassword',
+  layout: 'bare',
+  setup() {
+    const password = ref('')
+    const repeatPassword = ref('')
+    gql`
+      mutation ChangePasswordMutation(
+        $changePasswordToken: String!
+        $changePasswordId: ID!
+        $changePasswordNewPassword: String!
+      ) {
+        changePassword(
+          token: $changePasswordToken
+          id: $changePasswordId
+          newPassword: $changePasswordNewPassword
+        ) {
+          ... on UserReturned {
+            user {
+              id
+              email
+            }
+          }
+          ... on ExpiredTokenProblem {
+            problems {
+              message
+              path
+            }
+          }
+        }
+      }
+    `
+    const route = useRoute()
+    const token = computed(() => route.value.query.token)
+    const id = computed(() => route.value.query.id)
+    const {
+      mutate: changePassword,
+      onDone,
+      error,
+    } = useMutation(ChangePasswordMutationDocument, () => ({
+      variables: {
+        token: token.value,
+        id: id.value,
+        newPassword: password.value,
+      },
+    }))
+    const router = useRouter()
+    onDone(() => {
+      void router.push('../user/login')
+    })
+    return { password, error, changePassword, repeatPassword }
+  },
+})
 </script>

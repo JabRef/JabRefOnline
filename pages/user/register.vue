@@ -56,52 +56,65 @@
   </div>
 </template>
 <script lang="ts">
-// import { gql } from '@apollo/client/core'
-// import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
-// import { useMutation } from '@vue/apollo-composable'
-// import { SignupDocument } from '~/apollo/graphql'
-// import { currentUserVar } from '~/apollo/cache'
+import { gql } from '@apollo/client/core'
+import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import { useMutation } from '@vue/apollo-composable'
+import { currentUserVar } from '~/apollo/cache'
+import { SignupMutationDocument } from '~/apollo/graphql'
 
-// export default defineComponent({
-//   name: 'Register',
-//   layout: 'bare',
+export default defineComponent({
+  name: 'Register',
+  layout: 'bare',
 
-//   setup() {
-//     const email = ref('')
-//     const password = ref('')
+  setup() {
+    const email = ref('')
+    const password = ref('')
 
-//     gql`
-//       mutation signup($email: EmailAddress!, $password: String!) {
-//         signup(email: $email, password: $password) {
-//           id
-//         }
-//       }
-//     `
-//     const {
-//       mutate: signup,
-//       onDone,
-//       error,
-//     } = useMutation(SignupDocument, () => ({
-//       variables: {
-//         email: email.value,
-//         password: password.value,
-//       },
-//       update(_context, { data }) {
-//         currentUserVar(data?.signup ?? null)
-//       },
-//     }))
-//     const router = useRouter()
-//     onDone(() => {
-//       void router.push('/dashboard')
-//     })
+    gql`
+      mutation SignupMutation(
+        $signupEmail: EmailAddress!
+        $signupPassword: String!
+      ) {
+        signup(email: $signupEmail, password: $signupPassword) {
+          ... on UserReturned {
+            user {
+              id
+              email
+            }
+          }
+          ... on InputValidationProblem {
+            problems {
+              path
+              message
+            }
+          }
+        }
+      }
+    `
+    const {
+      mutate: signup,
+      onDone,
+      error,
+    } = useMutation(SignupMutationDocument, () => ({
+      variables: {
+        signupEmail: email.value,
+        signupPassword: password.value,
+      },
+      update(_context, { data }) {
+        currentUserVar(data?.signup ?? null)
+      },
+    }))
+    const router = useRouter()
+    onDone(() => {
+      void router.push('/dashboard')
+    })
 
-//     return {
-//       error,
-//       email,
-//       password,
-//       signup,
-//     }
-//   },
-// })
-//
+    return {
+      error,
+      email,
+      password,
+      signup,
+    }
+  },
+})
 </script>
