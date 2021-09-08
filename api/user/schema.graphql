@@ -13,10 +13,10 @@ extend type Query {
 }
 
 extend type Mutation {
-  logout: Boolean
+  logout: LogoutPayload
   login(email: EmailAddress!, password: String!): User
   signup(email: EmailAddress!, password: String!): SignupPayload
-  forgotPassword(email: EmailAddress!): Boolean
+  forgotPassword(email: EmailAddress!): ForgotPasswordPayload
   changePassword(
     token: String!
     id: ID!
@@ -27,6 +27,14 @@ extend type Mutation {
 union ChangePasswordPayload = UserReturned | ExpiredTokenProblem
 
 union SignupPayload = UserReturned | InputValidationProblem
+
+type ForgotPasswordPayload {
+  result: Boolean!
+}
+
+type LogoutPayload {
+  result: Boolean!
+}
 
 type UserReturned {
   user: User!

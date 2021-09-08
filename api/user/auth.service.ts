@@ -19,6 +19,8 @@ export interface AuthenticateReturn {
 
 export type ChangePasswordPayload = ResolversTypes['ChangePasswordPayload']
 export type SignupPayload = ResolversTypes['SignupPayload']
+export type LogoutPayload = ResolversTypes['LogoutPayload']
+export type ForgotPasswordPayload = ResolversTypes['ForgotPasswordPayload']
 
 @injectable()
 export class AuthService {

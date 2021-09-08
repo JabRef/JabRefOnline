@@ -12,6 +12,7 @@ import {
   QueryUserArgs,
   Resolvers,
   UserDocumentsArgs,
+  ForgotPasswordPayload,
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
 import {
@@ -22,6 +23,7 @@ import { GroupService } from '../groups/service'
 import {
   AuthService,
   ChangePasswordPayload,
+  LogoutPayload,
   SignupPayload,
 } from './auth.service'
 
@@ -84,17 +86,21 @@ export class Mutation {
     _root: Record<string, never>,
     _args: Record<string, never>,
     context: Context
-  ): boolean {
+  ): LogoutPayload {
     context.logout()
-    return true
+    return {
+      result: true,
+    }
   }
 
   async forgotPassword(
     _root: Record<string, never>,
     { email }: MutationForgotPasswordArgs,
     _context: Context
-  ): Promise<boolean> {
-    return await this.authService.resetPassword(email)
+  ): Promise<ForgotPasswordPayload> {
+    return {
+      result: await this.authService.resetPassword(email),
+    }
   }
 
   async changePassword(
