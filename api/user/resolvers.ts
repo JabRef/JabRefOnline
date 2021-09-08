@@ -118,6 +118,18 @@ export class Mutation {
 }
 
 @injectable()
+class LoginPayloadResolver {
+  __resolveType(
+    login: LoginPayload
+  ): 'UserReturned' | 'InputValidationProblem' {
+    if ('user' in login) {
+      return 'UserReturned'
+    }
+    return 'InputValidationProblem'
+  }
+}
+
+@injectable()
 class SignupPayloadResolver {
   __resolveType(
     signup: SignupPayload
@@ -138,18 +150,6 @@ class ChangePasswordPayloadResolver {
       return 'UserReturned'
     }
     return 'ExpiredTokenProblem'
-  }
-}
-
-@injectable()
-class LoginPayloadResolver {
-  __resolveType(
-    login: LoginPayload
-  ): 'UserReturned' | 'InputValidationProblem' {
-    if ('user' in login) {
-      return 'UserReturned'
-    }
-    return 'InputValidationProblem'
   }
 }
 

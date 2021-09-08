@@ -6,7 +6,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "yarn prisma:generate && yarn graphql:generate",
+    "generate": "graphql-codegen --config codegen.yml",
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:dev:create": "prisma migrate dev --create-only",
@@ -87,11 +87,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
-    "@graphql-codegen/cli": "^2.1.1",
+    "@graphql-codegen/cli": "2.2.0",
     "@graphql-codegen/fragment-matcher": "^3.1.0",
     "@graphql-codegen/typed-document-node": "^2.1.3",
-    "@graphql-codegen/typescript": "^2.2.0",
-    "@graphql-codegen/typescript-operations": "^2.1.3",
+    "@graphql-codegen/typescript": "2.2.1",
+    "@graphql-codegen/typescript-operations": "2.1.3",
     "@graphql-codegen/typescript-resolvers": "^2.2.0",
     "@graphql-eslint/eslint-plugin": "^1.1.4",
     "@graphql-inspector/cli": "^2.9.0",
@@ -133,7 +133,8 @@
     "prettier": "^2.3.2",
     "prisma": "2.30.3",
     "ts-jest": "^26.5.6",
-    "vue-jest": "4.0.1"
+    "vue-jest": "4.0.1",
+    "@graphql-codegen/introspection": "2.1.0"
   },
   "workspaces": {
     "nohoist": [
