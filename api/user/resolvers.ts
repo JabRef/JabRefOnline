@@ -114,9 +114,7 @@ export class SignupPayloadResolver {
     if ('user' in signup) {
       return 'UserReturned'
     }
-    if ('problems' in signup) {
-      return 'InputValidationProblem'
-    }
+    return 'InputValidationProblem'
   }
 }
 
