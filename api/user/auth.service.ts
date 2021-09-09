@@ -27,20 +27,28 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 export class AuthService {
   constructor(private prisma: PrismaClient, private redisClient: RedisClient) {}
 
-  async validateUser(email: string, password: string): Promise<User | null> {
+  async validateUser(email: string, password: string): Promise<LoginPayload> {
     const user = await this.prisma.user.findUnique({
       where: {
         email,
       },
     })
     if (!user) {
-      throw new Error('Wrong email or password')
+      return {
+        problems: [
+          { path: 'Email or Password', message: 'Wrong email or password' },
+        ],
+      }
     } else {
       const correctPassword = await bcrypt.compare(password, user.password)
       if (correctPassword) {
-        return user
+        return { user }
       } else {
-        throw new Error('Wrong email or password')
+        return {
+          problems: [
+            { path: 'Email or Password', message: 'Wrong email or password' },
+          ],
+        }
       }
     }
   }
