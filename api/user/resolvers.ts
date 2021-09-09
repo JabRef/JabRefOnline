@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { User } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
@@ -44,7 +42,7 @@ export class Query {
     _args: Record<string, never>,
     context: Context
   ): User | null {
-    return context.getUser() || null
+    return context.getUser()
   }
 }
 
@@ -79,7 +77,7 @@ export class Mutation {
       return {
         problems: [
           {
-            path: 'email or password',
+            path: 'Email or Password',
             message: info?.message || 'Unknown error while logging in.',
           },
         ],
