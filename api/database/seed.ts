@@ -439,15 +439,20 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
 }
 
 export async function seed(): Promise<void> {
-  console.log(`Seeding database...`)
   const prisma = new PrismaClient()
-
   try {
     await seedInternal(prisma)
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
+export async function runSeed(): Promise<void> {
+  console.log(`Seeding database...`)
+  try {
+    await seed()
   } catch (e) {
     console.error(e)
     process.exit(1)
-  } finally {
-    await prisma.$disconnect()
   }
 }
