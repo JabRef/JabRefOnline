@@ -164,7 +164,7 @@ export class AuthService {
         problems: [
           {
             path: 'Token',
-            message: 'Token Expired',
+            message: 'Invalid Token',
           },
         ],
       }

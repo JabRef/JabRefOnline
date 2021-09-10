@@ -55,7 +55,6 @@ export default defineComponent({
           ... on UserReturned {
             user {
               id
-              email
             }
           }
           ... on ExpiredTokenProblem {
