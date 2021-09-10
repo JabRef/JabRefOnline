@@ -15,25 +15,22 @@ export async function truncate(): Promise<void> {
   const dbSchemaName = 'public'
 
   try {
-    for (const { tablename } of await prisma.$queryRaw(
+    for (const { tablename } of await prisma.$queryRawUnsafe(
       `SELECT tablename FROM pg_tables WHERE schemaname='${dbSchemaName}';`
     )) {
-      await prisma.$queryRaw(
+      await prisma.$queryRawUnsafe(
         `TRUNCATE TABLE "${dbSchemaName}"."${tablename as string}" CASCADE;`
       )
     }
-    for (const { relname } of await prisma.$queryRaw(
+    for (const { relname } of await prisma.$queryRawUnsafe(
       `SELECT c.relname FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${dbSchemaName}';`
     )) {
-      await prisma.$queryRaw(
+      await prisma.$queryRawUnsafe(
         `ALTER SEQUENCE "${dbSchemaName}"."${
           relname as string
         }" RESTART WITH 1;`
       )
     }
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err)
   } finally {
     await prisma.$disconnect()
   }
