@@ -15,7 +15,7 @@
     "prisma:migrate:status": "prisma migrate status",
     "prisma:migrate:resolve": "prisma migrate resolve",
     "prisma:push": "prisma db push",
-    "prisma:seed": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json prisma db seed --preview-feature",
+    "prisma:seed": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json prisma db seed",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
     "prisma:generate:watch": "prisma generate --watch",
@@ -143,6 +143,6 @@
   },
   "prisma": {
     "schema": "api/database/schema.prisma",
-    "seed": "ts-node -e \"import runSeed from './api/database/seed.ts'; runSeed()\""
+    "seed": "ts-node ./api/database/runSeed.ts"
   }
 }
