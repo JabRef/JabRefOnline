@@ -444,10 +444,16 @@ export async function seed(): Promise<void> {
 
   try {
     await seedInternal(prisma)
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
+export async function runSeed(): Promise<void> {
+  try {
+    await seed()
   } catch (e) {
     console.error(e)
     process.exit(1)
-  } finally {
-    await prisma.$disconnect()
   }
 }
