@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { PrismaClient, GroupType, GroupHierarchyType } from '@prisma/client'
 
 async function seedInternal(prisma: PrismaClient): Promise<void> {
@@ -444,15 +443,5 @@ export async function seed(): Promise<void> {
     await seedInternal(prisma)
   } finally {
     await prisma.$disconnect()
-  }
-}
-
-export async function runSeed(): Promise<void> {
-  console.log(`Seeding database...`)
-  try {
-    await seed()
-  } catch (e) {
-    console.error(e)
-    process.exit(1)
   }
 }
