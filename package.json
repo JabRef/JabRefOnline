@@ -143,6 +143,6 @@
   },
   "prisma": {
     "schema": "api/database/schema.prisma",
-    "seed": "ts-node -e \"import seed from './api/database/seed.ts'; seed()\""
+    "seed": "ts-node -e \"import runSeed from './api/database/seed.ts'; runSeed()\""
   }
 }
