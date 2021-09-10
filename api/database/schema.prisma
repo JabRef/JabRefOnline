@@ -7,6 +7,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  // Enable cascading deletes and updates
   previewFeatures = ["referentialActions"]
 }
 
