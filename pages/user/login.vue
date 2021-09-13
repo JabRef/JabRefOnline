@@ -87,11 +87,8 @@ export default defineComponent({
     const otherError = ref('')
 
     gql`
-      mutation LoginMutation(
-        $loginEmail: EmailAddress!
-        $loginPassword: String!
-      ) {
-        login(email: $loginEmail, password: $loginPassword) {
+      mutation LoginMutation($email: EmailAddress!, $password: String!) {
+        login(email: $email, password: $password) {
           ... on UserReturned {
             user {
               id
@@ -112,22 +109,22 @@ export default defineComponent({
       error: graphqlError,
     } = useMutation(LoginMutationDocument, () => ({
       variables: {
-        loginEmail: email.value,
-        loginPassword: password.value,
+        email: email.value,
+        password: password.value,
       },
     }))
     const router = useRouter()
     onDone((result) => {
-      if (result.data?.login) {
-        currentUserVar(
-          result.data.login.__typename === 'UserReturned'
-            ? result.data.login.user
-            : null
-        )
+      if (result.data?.login?.__typename === 'UserReturned') {
+        currentUserVar(result.data.login.user)
         void router.push({ name: 'dashboard' })
       } else {
         currentUserVar(null)
-        otherError.value = 'Unknown error'
+        otherError.value =
+          result.data?.login?.__typename === 'InputValidationProblem' &&
+          result.data.login.problems[0]
+            ? result.data.login.problems[0].message
+            : 'Unknown error'
       }
     })
     const error = computed(() => graphqlError.value || otherError.value)

@@ -71,11 +71,8 @@ export default defineComponent({
     const password = ref('')
 
     gql`
-      mutation SignupMutation(
-        $signupEmail: EmailAddress!
-        $signupPassword: String!
-      ) {
-        signup(email: $signupEmail, password: $signupPassword) {
+      mutation SignupMutation($email: EmailAddress!, $password: String!) {
+        signup(email: $email, password: $password) {
           ... on UserReturned {
             user {
               id
@@ -96,8 +93,8 @@ export default defineComponent({
       error,
     } = useMutation(SignupMutationDocument, () => ({
       variables: {
-        signupEmail: email.value,
-        signupPassword: password.value,
+        email: email.value,
+        password: password.value,
       },
       update(_context, { data }) {
         currentUserVar(

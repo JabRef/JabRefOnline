@@ -26,7 +26,10 @@ extend type Mutation {
 
 union LoginPayload = UserReturned | InputValidationProblem
 
-union ChangePasswordPayload = UserReturned | ExpiredTokenProblem
+union ChangePasswordPayload =
+    UserReturned
+  | ExpiredTokenProblem
+  | InputValidationProblem
 
 union SignupPayload = UserReturned | InputValidationProblem
 
@@ -47,7 +50,7 @@ type InputValidationProblem {
 }
 
 type ExpiredTokenProblem {
-  problems: [InputFieldValidationProblem]!
+  message: String!
 }
 
 type InputFieldValidationProblem {

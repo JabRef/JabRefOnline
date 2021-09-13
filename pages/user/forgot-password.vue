@@ -38,8 +38,8 @@ export default defineComponent({
   setup() {
     const email = ref('')
     gql`
-      mutation ForgotPasswordMutation($forgotPasswordEmail: EmailAddress!) {
-        forgotPassword(email: $forgotPasswordEmail) {
+      mutation ForgotPasswordMutation($email: EmailAddress!) {
+        forgotPassword(email: $email) {
           result
         }
       }
@@ -50,7 +50,7 @@ export default defineComponent({
       error,
     } = useMutation(ForgotPasswordMutationDocument, () => ({
       variables: {
-        forgotPasswordEmail: email.value,
+        email: email.value,
       },
     }))
     return { email, error, called, forgotPassword }

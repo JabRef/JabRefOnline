@@ -55,9 +55,9 @@ export class Mutation {
     { email, password }: MutationSignupArgs,
     context: Context
   ): Promise<SignupPayload> {
-    const newUser = await this.authService.createAccount(email, password)
-    if ('user' in newUser) void context.login(await newUser.user)
-    return newUser
+    const newUserPayload = await this.authService.createAccount(email, password)
+    if ('user' in newUserPayload) void context.login(await newUserPayload.user)
+    return newUserPayload
   }
 
   async login(
@@ -131,10 +131,9 @@ class SignupPayloadResolver {
 class ChangePasswordPayloadResolver {
   __resolveType(
     changePassword: ChangePasswordPayload
-  ): 'UserReturned' | 'ExpiredTokenProblem' {
-    if ('user' in changePassword) {
-      return 'UserReturned'
-    }
+  ): 'UserReturned' | 'ExpiredTokenProblem' | 'InputValidationProblem' {
+    if ('user' in changePassword) return 'UserReturned'
+    else if ('problems' in changePassword) return 'InputValidationProblem'
     return 'ExpiredTokenProblem'
   }
 }

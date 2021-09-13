@@ -163,7 +163,6 @@
   </nav>
 </template>
 
-//
 <script lang="ts">
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { gql } from '@apollo/client/core'

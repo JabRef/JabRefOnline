@@ -22,7 +22,6 @@
   </div>
 </template>
 
-//
 <script>
 import {
   defineComponent,
@@ -43,15 +42,11 @@ export default defineComponent({
     const repeatPassword = ref('')
     gql`
       mutation ChangePasswordMutation(
-        $changePasswordToken: String!
-        $changePasswordId: ID!
-        $changePasswordNewPassword: String!
+        $token: String!
+        $id: ID!
+        $newPassword: String!
       ) {
-        changePassword(
-          token: $changePasswordToken
-          id: $changePasswordId
-          newPassword: $changePasswordNewPassword
-        ) {
+        changePassword(token: $token, id: $id, newPassword: $newPassword) {
           ... on UserReturned {
             user {
               id
@@ -82,7 +77,7 @@ export default defineComponent({
     }))
     const router = useRouter()
     onDone(() => {
-      void router.push('../user/login')
+      void router.push({ name: 'user-login' })
     })
     return { password, error, changePassword, repeatPassword }
   },
