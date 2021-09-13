@@ -43,7 +43,9 @@ export default defineComponent({
     } = useMutation(
       gql(/* GraphQL */ `
         mutation ForgotPassword($email: EmailAddress!) {
-          forgotPassword(email: $email)
+          forgotPassword(email: $email) {
+            result
+          }
         }
       `),
       () => ({

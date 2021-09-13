@@ -177,7 +177,9 @@ export default defineComponent({
     const { mutate: logout, onDone } = useMutation(
       gql(/* GraphQL */ `
         mutation Logout {
-          logout
+          logout {
+            result
+          }
         }
       `)
     )
