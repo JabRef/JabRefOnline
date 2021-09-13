@@ -96,6 +96,13 @@ export default defineComponent({
           email: email.value,
           password: password.value,
         },
+        update(_context, { data }) {
+          currentUserVar(
+            data?.signup?.__typename === 'UserReturned'
+              ? data?.signup?.user
+              : null
+          )
+        },
       })
     )
     const router = useRouter()
