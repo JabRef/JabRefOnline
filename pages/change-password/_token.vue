@@ -52,11 +52,14 @@ export default defineComponent({
               id
             }
           }
-          ... on ExpiredTokenProblem {
+          ... on InputValidationProblem {
             problems {
-              message
               path
+              message
             }
+          }
+          ... on ExpiredTokenProblem {
+            message
           }
         }
       }
