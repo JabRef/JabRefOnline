@@ -58,7 +58,7 @@ export default defineComponent({
               message
             }
           }
-          ... on ExpiredTokenProblem {
+          ... on TokenProblem {
             message
           }
         }

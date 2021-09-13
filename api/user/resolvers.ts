@@ -131,10 +131,10 @@ class SignupPayloadResolver {
 class ChangePasswordPayloadResolver {
   __resolveType(
     changePassword: ChangePasswordPayload
-  ): 'UserReturned' | 'ExpiredTokenProblem' | 'InputValidationProblem' {
+  ): 'UserReturned' | 'TokenProblem' | 'InputValidationProblem' {
     if ('user' in changePassword) return 'UserReturned'
     else if ('problems' in changePassword) return 'InputValidationProblem'
-    return 'ExpiredTokenProblem'
+    return 'TokenProblem'
   }
 }
 

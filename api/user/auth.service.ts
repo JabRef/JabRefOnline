@@ -150,23 +150,13 @@ export class AuthService {
     const hashedToken = await getAsync(key)
     if (!hashedToken) {
       return {
-        problems: [
-          {
-            path: 'Token',
-            message: 'Token Expired',
-          },
-        ],
+        message: 'Token Expired',
       }
     }
     const checkToken = await bcrypt.compare(token, hashedToken)
     if (!checkToken) {
       return {
-        problems: [
-          {
-            path: 'Token',
-            message: 'Invalid Token',
-          },
-        ],
+        message: 'Invalid Token',
       }
     }
 
