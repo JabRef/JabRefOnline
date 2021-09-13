@@ -23,12 +23,12 @@ export default class EmailStrategy extends GraphQLLocalStrategy<
             email as string,
             password as string
           )
-          if (!user) {
+          if ('user' in user) {
+            // Authentication succeeded
+            done(null, await user.user)
+          } else {
             // Wrong email-password combination
             done(null, null, { message: 'Wrong email or password.' })
-          } else {
-            // Authentication succeeded
-            done(null, user)
           }
         } catch (err) {
           done(err)

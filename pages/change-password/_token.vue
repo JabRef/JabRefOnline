@@ -32,7 +32,7 @@ import {
 import { ref } from '@vue/composition-api'
 import { gql } from '@apollo/client/core'
 import { useMutation } from '@vue/apollo-composable'
-import { ChangePasswordDocument } from '../../apollo/graphql'
+import { ChangePasswordMutationDocument } from '~/apollo/graphql'
 
 export default defineComponent({
   name: 'ChangePassword',
@@ -41,13 +41,26 @@ export default defineComponent({
     const password = ref('')
     const repeatPassword = ref('')
     gql`
-      mutation ChangePassword(
+      mutation ChangePasswordMutation(
         $token: String!
         $id: ID!
         $newPassword: String!
       ) {
         changePassword(token: $token, id: $id, newPassword: $newPassword) {
-          id
+          ... on UserReturned {
+            user {
+              id
+            }
+          }
+          ... on InputValidationProblem {
+            problems {
+              path
+              message
+            }
+          }
+          ... on TokenProblem {
+            message
+          }
         }
       }
     `
@@ -58,7 +71,7 @@ export default defineComponent({
       mutate: changePassword,
       onDone,
       error,
-    } = useMutation(ChangePasswordDocument, () => ({
+    } = useMutation(ChangePasswordMutationDocument, () => ({
       variables: {
         token: token.value,
         id: id.value,
