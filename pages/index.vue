@@ -39,18 +39,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { gql } from '@apollo/client/core'
+import { gql } from '~/apollo'
 
 export default Vue.extend({
   apollo: {
     user: {
-      query: gql`
-        query getUserById($id: ID!) {
+      query: gql(/* GraphQL */ `
+        query GetUserById($id: ID!) {
           user(id: $id) {
             email
           }
         }
-      `,
+      `),
       variables: {
         id: 'cklzr73840000l8v7b4gthdts',
       },

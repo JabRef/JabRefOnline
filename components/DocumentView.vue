@@ -98,11 +98,10 @@ import {
   computed,
   toRefs,
 } from '@nuxtjs/composition-api'
-import { gql } from '@apollo/client/core'
-import { DocumentForViewFragment } from '../apollo/graphql'
+import { gql, DocumentType } from '~/apollo'
 import { useUiStore } from '~/store'
 
-export const DocumentForView = gql`
+export const DocumentForView = gql(/* GraphQL */ `
   fragment DocumentForView on Document {
     id
     title
@@ -138,12 +137,12 @@ export const DocumentForView = gql`
       }
     }
   }
-`
+`)
 
 export default defineComponent({
   props: {
     document: {
-      type: Object as PropType<DocumentForViewFragment>,
+      type: Object as PropType<DocumentType<typeof DocumentForView>>,
       required: true,
     },
   },

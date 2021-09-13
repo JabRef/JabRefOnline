@@ -29,13 +29,13 @@ const codegen = {
       },
       plugins: ['typescript', 'typescript-resolvers'],
     },
-    'apollo/graphql.ts': {
+    apollo: {
       documents: [
         './pages/**/*.vue',
         './components/**/*.vue',
-        './middleware/**/*.*',
+        './middleware/**/*.ts',
       ],
-      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
+      preset: 'gql-tag-operations-preset',
       config: {
         scalars: {
           DateTime: 'Date',

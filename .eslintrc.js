@@ -48,9 +48,6 @@ module.exports = {
     {
       files: ['*.graphql'],
       parser: '@graphql-eslint/eslint-plugin',
-      parserOptions: {
-        operations: ['./middleware/**/*.graphql'],
-      },
       plugins: ['@graphql-eslint'],
       rules: {
         // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.

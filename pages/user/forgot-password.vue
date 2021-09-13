@@ -28,31 +28,32 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { ref } from '@vue/composition-api'
-import { gql } from '@apollo/client/core'
 import { useMutation } from '@vue/apollo-composable'
-import { ForgotPasswordMutationDocument } from '~/apollo/graphql'
+import { gql } from '~/apollo'
 
 export default defineComponent({
   name: 'ForgotPassword',
   layout: 'bare',
   setup() {
     const email = ref('')
-    gql`
-      mutation ForgotPasswordMutation($email: EmailAddress!) {
-        forgotPassword(email: $email) {
-          result
-        }
-      }
-    `
     const {
       mutate: forgotPassword,
       called,
       error,
-    } = useMutation(ForgotPasswordMutationDocument, () => ({
-      variables: {
-        email: email.value,
-      },
-    }))
+    } = useMutation(
+      gql(/* GraphQL */ `
+        mutation ForgotPassword($email: EmailAddress!) {
+          forgotPassword(email: $email) {
+            result
+          }
+        }
+      `),
+      () => ({
+        variables: {
+          email: email.value,
+        },
+      })
+    )
     return { email, error, called, forgotPassword }
   },
 })

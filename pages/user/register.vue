@@ -56,11 +56,10 @@
   </div>
 </template>
 <script lang="ts">
-import { gql } from '@apollo/client/core'
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
+import { gql } from '~/apollo'
 import { currentUserVar } from '~/apollo/cache'
-import { SignupMutationDocument } from '~/apollo/graphql'
 
 export default defineComponent({
   name: 'Register',
@@ -70,40 +69,42 @@ export default defineComponent({
     const email = ref('')
     const password = ref('')
 
-    gql`
-      mutation SignupMutation($email: EmailAddress!, $password: String!) {
-        signup(email: $email, password: $password) {
-          ... on UserReturned {
-            user {
-              id
-            }
-          }
-          ... on InputValidationProblem {
-            problems {
-              path
-              message
-            }
-          }
-        }
-      }
-    `
     const {
       mutate: signup,
       onDone,
       error,
-    } = useMutation(SignupMutationDocument, () => ({
-      variables: {
-        email: email.value,
-        password: password.value,
-      },
-      update(_context, { data }) {
-        currentUserVar(
-          data?.signup?.__typename === 'UserReturned'
-            ? data?.signup?.user
-            : null
-        )
-      },
-    }))
+    } = useMutation(
+      gql(/* GraphQL */ `
+        mutation Signup($email: EmailAddress!, $password: String!) {
+          signup(email: $email, password: $password) {
+            ... on UserReturned {
+              user {
+                id
+              }
+            }
+            ... on InputValidationProblem {
+              problems {
+                path
+                message
+              }
+            }
+          }
+        }
+      `),
+      () => ({
+        variables: {
+          email: email.value,
+          password: password.value,
+        },
+        update(_context, { data }) {
+          currentUserVar(
+            data?.signup?.__typename === 'UserReturned'
+              ? data?.signup?.user
+              : null
+          )
+        },
+      })
+    )
     const router = useRouter()
     onDone(() => {
       void router.push('/dashboard')

@@ -165,9 +165,8 @@
 
 <script lang="ts">
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
-import { gql } from '@apollo/client/core'
 import { defineComponent, useRouter, ref, watch } from '@nuxtjs/composition-api'
-import { LoginMutationDocument } from '~/apollo/graphql'
+import { gql } from '~/apollo'
 import { currentUserVar } from '~/apollo/cache'
 import { useUiStore } from '~/store'
 
@@ -175,14 +174,15 @@ export default defineComponent({
   setup() {
     const { resolveClient } = useApolloClient()
 
-    gql`
-      mutation LogoutMutation {
-        logout {
-          result
+    const { mutate: logout, onDone } = useMutation(
+      gql(/* GraphQL */ `
+        mutation Logout {
+          logout {
+            result
+          }
         }
-      }
-    `
-    const { mutate: logout, onDone } = useMutation(LoginMutationDocument)
+      `)
+    )
     const router = useRouter()
     onDone(() => {
       // Reset graphql cache
