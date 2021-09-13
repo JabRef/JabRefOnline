@@ -77,7 +77,17 @@ export default defineComponent({
       gql(/* GraphQL */ `
         mutation Signup($email: EmailAddress!, $password: String!) {
           signup(email: $email, password: $password) {
-            id
+            ... on UserReturned {
+              user {
+                id
+              }
+            }
+            ... on InputValidationProblem {
+              problems {
+                path
+                message
+              }
+            }
           }
         }
       `),
@@ -89,9 +99,8 @@ export default defineComponent({
       })
     )
     const router = useRouter()
-    onDone((response) => {
-      currentUserVar(response.data?.signup ?? null)
-      void router.push({ name: 'dashboard' })
+    onDone(() => {
+      void router.push('/dashboard')
     })
 
     return {

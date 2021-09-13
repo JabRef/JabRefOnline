@@ -93,7 +93,17 @@ export default defineComponent({
       gql(/* GraphQL */ `
         mutation Login($email: EmailAddress!, $password: String!) {
           login(email: $email, password: $password) {
-            id
+            ... on UserReturned {
+              user {
+                id
+              }
+            }
+            ... on InputValidationProblem {
+              problems {
+                path
+                message
+              }
+            }
           }
         }
       `),
@@ -106,12 +116,16 @@ export default defineComponent({
     )
     const router = useRouter()
     onDone((result) => {
-      if (result.data?.login) {
-        currentUserVar(result.data.login)
+      if (result.data?.login?.__typename === 'UserReturned') {
+        currentUserVar(result.data.login.user)
         void router.push({ name: 'dashboard' })
       } else {
         currentUserVar(null)
-        otherError.value = 'Unknown error'
+        otherError.value =
+          result.data?.login?.__typename === 'InputValidationProblem' &&
+          result.data.login.problems[0]
+            ? result.data.login.problems[0].message
+            : 'Unknown error'
       }
     })
     const error = computed(() => graphqlError.value || otherError.value)

@@ -36,7 +36,6 @@ export default defineComponent({
   layout: 'bare',
   setup() {
     const email = ref('')
-
     const {
       mutate: forgotPassword,
       called,

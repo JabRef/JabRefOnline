@@ -38,7 +38,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        endOfLine: 'auto',
+        endOfLine: 'lf',
       },
     ],
     // Ensure void operator is not used, except for variable assignment or function return (might be handy for promises)
@@ -81,6 +81,8 @@ module.exports = {
         // Requires mutation argument to be always called "input" and input type to be called Mutation name + "Input".
         // TODO: Set this to error once we follow this convention
         '@graphql-eslint/input-name': ['warn', { checkInputType: true }],
+        // Spaced-comment rule only works for JS-style comments using /* or // but not for GraphQL comments using #
+        'spaced-comment': 'off',
       },
     },
     {
