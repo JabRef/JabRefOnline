@@ -59,7 +59,7 @@
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
-import { currentUserVar } from '~/apollo/cache'
+import { cacheCurrentUser } from '~/apollo/cache'
 
 export default defineComponent({
   name: 'Register',
@@ -97,7 +97,7 @@ export default defineComponent({
           password: password.value,
         },
         update(_context, { data }) {
-          currentUserVar(
+          cacheCurrentUser(
             data?.signup?.__typename === 'UserReturned'
               ? data?.signup?.user
               : null

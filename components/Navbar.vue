@@ -167,8 +167,8 @@
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { defineComponent, useRouter, ref, watch } from '@nuxtjs/composition-api'
 import { gql } from '~/apollo'
-import { currentUserVar } from '~/apollo/cache'
 import { useUiStore } from '~/store'
+import { cacheCurrentUser } from '~/apollo/cache'
 
 export default defineComponent({
   setup() {
@@ -181,13 +181,17 @@ export default defineComponent({
             result
           }
         }
-      `)
+      `),
+      {
+        update(_cache, _data) {
+          cacheCurrentUser(null)
+        },
+      }
     )
     const router = useRouter()
     onDone(() => {
       // Reset graphql cache
       void resolveClient().clearStore()
-      currentUserVar(null)
 
       void router.push({ name: 'index' })
     })

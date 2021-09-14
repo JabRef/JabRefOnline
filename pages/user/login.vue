@@ -70,8 +70,8 @@
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 import { computed, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { currentUserVar } from '../../apollo/cache'
 import { gql } from '~/apollo'
+import { cacheCurrentUser } from '~/apollo/cache'
 
 export default defineComponent({
   name: 'Login',
@@ -112,15 +112,21 @@ export default defineComponent({
           email: email.value,
           password: password.value,
         },
+        update(_cache, { data: login }) {
+          if (login?.login?.__typename === 'UserReturned') {
+            const { user } = login.login
+            cacheCurrentUser(user)
+          } else {
+            cacheCurrentUser(null)
+          }
+        },
       })
     )
     const router = useRouter()
     onDone((result) => {
       if (result.data?.login?.__typename === 'UserReturned') {
-        currentUserVar(result.data.login.user)
         void router.push({ name: 'dashboard' })
       } else {
-        currentUserVar(null)
         otherError.value =
           result.data?.login?.__typename === 'InputValidationProblem' &&
           result.data.login.problems[0]
