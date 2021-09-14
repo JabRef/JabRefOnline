@@ -7,10 +7,10 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
+import { config, Environment } from '../config'
 import { buildContext } from './context'
 import { loadSchema } from './schema'
 import PassportInitializer from './user/passport-initializer'
-import { config, Environment } from '~/config'
 
 // Create express instance
 const app = express()
