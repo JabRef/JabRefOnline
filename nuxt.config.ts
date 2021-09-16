@@ -65,6 +65,7 @@ const config: NuxtConfig = {
    ** Nuxt.js dev-modules
    */
   buildModules: [
+    '@nuxt/bridge',
     // TODO: Play again with vite once it is more stable
     // 'nuxt-vite',
     // https://go.nuxtjs.dev/typescript
@@ -98,6 +99,10 @@ const config: NuxtConfig = {
    ** Restarts the server when dependencies change.
    */
   watch: ['api/**/*.graphql'],
+
+  nitro: {
+    preset: 'browser',
+  },
 
   /*
    ** For deployment you might want to edit host and port
