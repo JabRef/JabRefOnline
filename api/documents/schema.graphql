@@ -18,22 +18,22 @@ extend type User {
     "Filtering options for documents returned."
     filterBy: DocumentFilters
   ): [Document!]!
-  documents(first: String!, after: String!): [UserConnection!]!
+  documentsConnection(first: Int, after: String!): [UserDocumentsConnection!]!
 }
 
-type UserConnection {
-  edges: [Edge!]
+type UserDocumentsConnection {
+  edges: [UserDocumentsEdge!]
   pageInfo: PageInfo!
 }
 
-type Edge {
+type UserDocumentsEdge {
   cursor: String!
   node: Document
 }
 
 type PageInfo {
+  startCursor: String!
   hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
 }
 
 type Person {
