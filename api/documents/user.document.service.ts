@@ -23,6 +23,39 @@ export type UserDocument = PlainUserDocument & {
 export class UserDocumentService {
   constructor(private prisma: PrismaClient) {}
 
+  async getDocumentWithPagination(
+    user: User | string,
+    first: number,
+    cursor: string,
+    includeOtherFields = false
+  ): Promise<UserDocument[]> {
+    const userId = typeof user === 'string' ? user : user.id
+    const documents = await this.prisma.userDocument.findMany({
+      take: first + 1,
+      ...(cursor !== null && {
+        cursor: {
+          id: cursor,
+        },
+      }),
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      include: {
+        other: includeOtherFields,
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
+      },
+    })
+    return documents
+  }
+
   async getDocumentById(
     id: string,
     includeOtherFields = false

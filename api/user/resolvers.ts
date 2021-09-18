@@ -164,6 +164,19 @@ export class UserResolver {
     return await this.userDocumentService.getDocumentsOf(user, filterBy, true)
   }
 
+  async documentsConnection(
+    user: User,
+    first: number,
+    after: string
+  ): Promise<UserDocument[]> {
+    return await this.userDocumentService.getDocumentWithPagination(
+      user,
+      first,
+      after,
+      true
+    )
+  }
+
   async groups(user: User): Promise<GroupResolved[]> {
     const groups = await this.groupService.getGroupsOf(user)
     const groupsById = new Map<string, GroupResolved>()
