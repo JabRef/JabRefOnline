@@ -20,7 +20,7 @@ export type UserDocument = PlainUserDocument & {
 }
 
 export type PaginationResult = Omit<UserDocumentsConnection, 'edges'> & {
-  edges?: { node?: UserDocument }[]
+  edges: { node: UserDocument }[]
 }
 
 @injectable()

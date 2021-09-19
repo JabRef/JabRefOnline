@@ -18,11 +18,11 @@ extend type User {
     "Filtering options for documents returned."
     filterBy: DocumentFilters
   ): [Document!]!
-  documentsConnection(first: Int!, after: String!): [UserDocumentsConnection!]!
+  documentsConnection(first: Int!, after: String!): UserDocumentsConnection!
 }
 
 type UserDocumentsConnection {
-  edges: [UserDocumentsEdge!]
+  edges: [UserDocumentsEdge]
   pageInfo: PageInfo!
 }
 
