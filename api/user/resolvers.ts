@@ -10,9 +10,11 @@ import {
   Resolvers,
   UserDocumentsArgs,
   ForgotPasswordPayload,
+  UserDocumentsConnectionArgs,
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
 import {
+  PaginationResult,
   UserDocument,
   UserDocumentService,
 } from '../documents/user.document.service'
@@ -166,9 +168,8 @@ export class UserResolver {
 
   async documentsConnection(
     user: User,
-    first: number,
-    after: string
-  ): Promise<UserDocument[]> {
+    { first, after }: UserDocumentsConnectionArgs
+  ): Promise<PaginationResult> {
     return await this.userDocumentService.getDocumentWithPagination(
       user,
       first,

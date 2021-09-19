@@ -8,7 +8,7 @@ import {
   Journal,
 } from '@prisma/client'
 import { injectable } from 'tsyringe'
-import { DocumentFilters } from '../graphql'
+import { DocumentFilters, UserDocumentsConnection } from '../graphql'
 
 export type UserDocument = PlainUserDocument & {
   other?: UserDocumentOtherField[]
@@ -17,6 +17,10 @@ export type UserDocument = PlainUserDocument & {
         journal: Journal | null
       })
     | null
+}
+
+export type PaginationResult = Omit<UserDocumentsConnection, 'edges'> & {
+  edges?: { node?: UserDocument }[]
 }
 
 @injectable()
@@ -28,15 +32,11 @@ export class UserDocumentService {
     first: number,
     cursor: string,
     includeOtherFields = false
-  ): Promise<UserDocument[]> {
+  ): Promise<PaginationResult> {
     const userId = typeof user === 'string' ? user : user.id
+    console.log(first)
     const documents = await this.prisma.userDocument.findMany({
       take: first + 1,
-      ...(cursor !== null && {
-        cursor: {
-          id: cursor,
-        },
-      }),
       where: {
         users: {
           some: {
@@ -53,7 +53,14 @@ export class UserDocumentService {
         },
       },
     })
-    return documents
+    console.log('document', documents)
+    const nextCursor = documents.length > first ? documents[first].id : ''
+    return {
+      edges: documents.slice(0, first).map((document) => ({ node: document })),
+      pageInfo: {
+        nextCursor,
+      },
+    }
   }
 
   async getDocumentById(
