@@ -34,7 +34,6 @@ export class UserDocumentService {
     includeOtherFields = false
   ): Promise<PaginationResult> {
     const userId = typeof user === 'string' ? user : user.id
-    console.log(first)
     const documents = await this.prisma.userDocument.findMany({
       take: first + 1,
       where: {
@@ -44,6 +43,11 @@ export class UserDocumentService {
           },
         },
       },
+      ...(cursor && {
+        cursor: {
+          id: cursor,
+        },
+      }),
       include: {
         other: includeOtherFields,
         journalIssue: {
@@ -53,8 +57,7 @@ export class UserDocumentService {
         },
       },
     })
-    console.log('document', documents)
-    const nextCursor = documents.length > first ? documents[first].id : ''
+    const nextCursor = documents.length > first ? documents[first].id : null
     return {
       edges: documents.slice(0, first).map((document) => ({ node: document })),
       pageInfo: {
