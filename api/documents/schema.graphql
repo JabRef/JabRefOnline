@@ -17,8 +17,9 @@ extend type User {
   documents(
     "Filtering options for documents returned."
     filterBy: DocumentFilters
-  ): [Document!]!
-  documentsConnection(first: Int!, after: String!): UserDocumentsConnection!
+    first: Int
+    cursor: String
+  ): UserDocumentsConnection!
 }
 
 type UserDocumentsConnection {

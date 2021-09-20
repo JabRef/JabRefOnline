@@ -27,45 +27,6 @@ export type PaginationResult = Omit<UserDocumentsConnection, 'edges'> & {
 export class UserDocumentService {
   constructor(private prisma: PrismaClient) {}
 
-  async getDocumentWithPagination(
-    user: User | string,
-    first: number,
-    cursor: string,
-    includeOtherFields = false
-  ): Promise<PaginationResult> {
-    const userId = typeof user === 'string' ? user : user.id
-    const documents = await this.prisma.userDocument.findMany({
-      take: first + 1,
-      where: {
-        users: {
-          some: {
-            id: userId,
-          },
-        },
-      },
-      ...(cursor && {
-        cursor: {
-          id: cursor,
-        },
-      }),
-      include: {
-        other: includeOtherFields,
-        journalIssue: {
-          include: {
-            journal: true,
-          },
-        },
-      },
-    })
-    const nextCursor = documents.length > first ? documents[first].id : null
-    return {
-      edges: documents.slice(0, first).map((document) => ({ node: document })),
-      pageInfo: {
-        nextCursor,
-      },
-    }
-  }
-
   async getDocumentById(
     id: string,
     includeOtherFields = false
@@ -88,8 +49,10 @@ export class UserDocumentService {
   async getDocumentsOf(
     user: User | string,
     filterBy: DocumentFilters | null = null,
+    first: number | null = null,
+    cursor: string | null = null,
     includeOtherFields = false
-  ): Promise<UserDocument[]> {
+  ): Promise<PaginationResult> {
     const userId = typeof user === 'string' ? user : user.id
     const documents = await this.prisma.userDocument.findMany({
       where: {
@@ -98,6 +61,11 @@ export class UserDocumentService {
             id: userId,
           },
         },
+        ...(cursor && {
+          cusor: {
+            id: cursor,
+          },
+        }),
         ...(filterBy?.groupId != null && {
           explicitGroups: {
             some: {
@@ -106,6 +74,14 @@ export class UserDocumentService {
           },
         }),
       },
+      ...(first && {
+        take: first + 1,
+      }),
+      ...(cursor && {
+        cursor: {
+          id: cursor,
+        },
+      }),
       include: {
         other: includeOtherFields,
         journalIssue: {
@@ -115,18 +91,35 @@ export class UserDocumentService {
         },
       },
     })
+    const nextCursor = first
+      ? documents.length > first
+        ? documents[first].id
+        : null
+      : null
 
     if (filterBy?.query) {
       // Filtering documents by hand until Prisma.findMany supports full text search
       // TODO: https://github.com/prisma/prisma/issues/1684
       const query = new RegExp(filterBy.query, 'i')
-      return documents.filter((document) => {
+      const searchResult = documents.filter((document) => {
         return (
           query.test(document.title ?? '') || query.test(document.author ?? '')
         )
       })
+      return {
+        edges: searchResult.map((document) => ({ node: document })),
+        pageInfo: {
+          nextCursor: null,
+        },
+      }
     } else {
-      return documents
+      const userDocuments = first ? documents.slice(0, first) : documents
+      return {
+        edges: userDocuments.map((document) => ({ node: document })),
+        pageInfo: {
+          nextCursor,
+        },
+      }
     }
   }
 
