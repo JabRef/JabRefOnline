@@ -61,11 +61,6 @@ export class UserDocumentService {
             id: userId,
           },
         },
-        ...(cursor && {
-          cusor: {
-            id: cursor,
-          },
-        }),
         ...(filterBy?.groupId != null && {
           explicitGroups: {
             some: {
@@ -91,11 +86,8 @@ export class UserDocumentService {
         },
       },
     })
-    const nextCursor = first
-      ? documents.length > first
-        ? documents[first].id
-        : null
-      : null
+    const nextCursor =
+      first && documents.length > first ? documents[first].id : null
 
     if (filterBy?.query) {
       // Filtering documents by hand until Prisma.findMany supports full text search

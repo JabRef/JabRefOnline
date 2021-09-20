@@ -17,7 +17,9 @@ extend type User {
   documents(
     "Filtering options for documents returned."
     filterBy: DocumentFilters
+    "Number of documents to be returned"
     first: Int
+    "Cursor for pagination"
     cursor: String
   ): UserDocumentsConnection!
 }
