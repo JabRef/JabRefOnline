@@ -11,38 +11,56 @@
 </template>
 
 <script lang="ts">
-// import { defineComponent } from '@nuxtjs/composition-api'
-// import { useResult, useQuery } from '@vue/apollo-composable'
-// import { gql } from '~/apollo'
-// import { useUiStore } from '~/store'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { useResult, useQuery } from '@vue/apollo-composable'
+import { gql } from '~/apollo'
+import { useUiStore } from '~/store'
 
-// export default defineComponent({
-//   middleware: ['authenticated'],
+const FIRST = 10
 
-//   setup() {
-//     const ui = useUiStore()
+export default defineComponent({
+  middleware: ['authenticated'],
 
-//     const { result } = useQuery(
-//       gql(/* GraphQL */ `
-//         query GetDocuments($groupId: ID, $query: String) {
-//           me {
-//             id
-//             documents(filterBy: { groupId: $groupId, query: $query }) {
-//               ...DocumentForView
-//             }
-//           }
-//         }
-//       `),
-//       () => ({
-//         groupId: ui.selectedGroupId,
-//         query: ui.activeSearchQuery,
-//       })
-//     )
-//     const documents = useResult(result, null, (data) => data?.me?.documents)
-//     return {
-//       documents,
-//     }
-//   },
-// })
-//
+  setup() {
+    const ui = useUiStore()
+
+    const { result } = useQuery(
+      gql(/* GraphQL */ `
+        query GetDocuments(
+          $groupId: ID
+          $query: String
+          $first: Int
+          $cursor: String
+        ) {
+          me {
+            id
+            documents(
+              filterBy: { groupId: $groupId, query: $query }
+              first: $first
+              cursor: $cursor
+            ) {
+              edges {
+                node {
+                  ...DocumentForView
+                }
+              }
+              pageInfo {
+                nextCursor
+              }
+            }
+          }
+        }
+      `),
+      () => ({
+        groupId: ui.selectedGroupId,
+        query: ui.activeSearchQuery,
+        first: FIRST,
+      })
+    )
+    const documents = useResult(result, null, (data) => data?.me?.documents)
+    return {
+      documents,
+    }
+  },
+})
 </script>
