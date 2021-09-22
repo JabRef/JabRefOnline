@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="documents" class="space-y-4 p-4">
+    <div v-if="documents" ref="scrollComponent" class="space-y-4 p-4">
       <DocumentView
         v-for="document of documents"
         :key="document.id"
@@ -11,7 +11,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+} from '@nuxtjs/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
@@ -23,8 +28,11 @@ export default defineComponent({
 
   setup() {
     const ui = useUiStore()
+    const scrollComponent = ref(null)
+    const cursor = ref('')
+    const documents = ref([])
 
-    const { result } = useQuery(
+    const { result, refetch } = useQuery(
       gql(/* GraphQL */ `
         query GetDocuments(
           $groupId: ID
@@ -55,11 +63,30 @@ export default defineComponent({
         groupId: ui.selectedGroupId,
         query: ui.activeSearchQuery,
         first: FIRST,
+        cursor: cursor.value,
       })
     )
-    const documents = useResult(result, null, (data) => data?.me?.documents)
+    const document = useResult(result, null, (data) =>
+      data?.me?.documents?.edges?.map((edge) => edge?.node)
+    )
+    onMounted(() => {
+      window.addEventListener('scroll', handleScroll)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll)
+    })
+
+    const handleScroll = (e) => {
+      const element = scrollComponent.value
+      if (element.getBoundingClientRect().bottom < window.innerHeight) {
+        loadMorePosts()
+      }
+    }
+    documents.value.push(...document)
     return {
       documents,
+      scrollComponent,
     }
   },
 })
