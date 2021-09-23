@@ -28,7 +28,7 @@ export default defineComponent({
 
   setup() {
     const ui = useUiStore()
-    const scrollComponent = ref(null)
+    const scrollComponent = ref<Element>()
     const cursor = ref<string>('')
     // eslint-disable-next-line @typescript-eslint/no-array-constructor
     const documents = ref(Array())
@@ -67,11 +67,9 @@ export default defineComponent({
         cursor: cursor.value,
       })
     )
-
     const documentResult = useResult(result, null, (data) =>
       data?.me?.documents?.edges?.map((edge) => edge?.node)
     )
-
     const newCursor = useResult(
       result,
       null,
@@ -81,7 +79,6 @@ export default defineComponent({
     if (documentResult.value) {
       documents.value.push(...documentResult.value)
     }
-
     cursor.value = newCursor.value ? newCursor.value : ''
 
     onMounted(() => {
@@ -105,9 +102,10 @@ export default defineComponent({
       cursor.value =
         documentResult?.data.me?.documents.pageInfo.nextCursor || ''
 
-      const newDocuments = documentResult?.data.me?.documents.edges?.map(
-        (edge) => (edge?.node ? edge.node : null)
-      )
+      const newDocuments = documentResult?.data.me?.documents.edges
+        ?.filter((edge) => edge?.node)
+        .map((edge) => edge?.node)
+
       if (newDocuments) {
         documents.value.push(...newDocuments)
       }
@@ -117,6 +115,7 @@ export default defineComponent({
       const element = scrollComponent.value
       if (
         cursor.value &&
+        element &&
         element.getBoundingClientRect().bottom < window.innerHeight
       ) {
         await loadMoreDocuments()
