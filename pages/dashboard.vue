@@ -29,8 +29,9 @@ export default defineComponent({
   setup() {
     const ui = useUiStore()
     const scrollComponent = ref(null)
-    const cursor = ref('')
-    const documents = ref([])
+    const cursor = ref<string>('')
+    // eslint-disable-next-line @typescript-eslint/no-array-constructor
+    const documents = ref(Array())
 
     const { result, refetch } = useQuery(
       gql(/* GraphQL */ `
@@ -66,24 +67,61 @@ export default defineComponent({
         cursor: cursor.value,
       })
     )
-    const document = useResult(result, null, (data) =>
+
+    const documentResult = useResult(result, null, (data) =>
       data?.me?.documents?.edges?.map((edge) => edge?.node)
     )
+
+    const newCursor = useResult(
+      result,
+      null,
+      (data) => data?.me?.documents.pageInfo.nextCursor
+    )
+
+    if (documentResult.value) {
+      documents.value.push(...documentResult.value)
+    }
+
+    cursor.value = newCursor.value ? newCursor.value : ''
+
     onMounted(() => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       window.addEventListener('scroll', handleScroll)
     })
 
     onUnmounted(() => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       window.removeEventListener('scroll', handleScroll)
     })
 
-    const handleScroll = (e) => {
-      const element = scrollComponent.value
-      if (element.getBoundingClientRect().bottom < window.innerHeight) {
-        loadMorePosts()
+    const loadMoreDocuments = async () => {
+      const documentResult = await refetch({
+        groupId: ui.selectedGroupId,
+        query: ui.activeSearchQuery,
+        cursor: cursor.value,
+        first: FIRST,
+      })
+
+      cursor.value =
+        documentResult?.data.me?.documents.pageInfo.nextCursor || ''
+
+      const newDocuments = documentResult?.data.me?.documents.edges?.map(
+        (edge) => (edge?.node ? edge.node : null)
+      )
+      if (newDocuments) {
+        documents.value.push(...newDocuments)
       }
     }
-    documents.value.push(...document)
+
+    const handleScroll = async () => {
+      const element = scrollComponent.value
+      if (
+        cursor.value &&
+        element.getBoundingClientRect().bottom < window.innerHeight
+      ) {
+        await loadMoreDocuments()
+      }
+    }
     return {
       documents,
       scrollComponent,
