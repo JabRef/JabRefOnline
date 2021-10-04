@@ -50,6 +50,9 @@ module.exports = {
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
       rules: {
+        // Make sure that mutations returns not a scalar type (best pratice: have special return type for each mutation)
+        // TODO: Set this to error once we follow this convention
+        '@graphql-eslint/avoid-scalar-result-type-on-mutation': 'warn',
         // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.
         '@graphql-eslint/avoid-typename-prefix': 'error',
         // Requires all types to be reachable at some level by root level fields.
