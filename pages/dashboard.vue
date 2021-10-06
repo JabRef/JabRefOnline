@@ -11,12 +11,12 @@
 </template>
 
 <script lang="ts">
-import { useQuery } from '@vue/apollo-composable'
+import { useQuery, useResult } from '@vue/apollo-composable'
 import { defineComponent, onMounted, onUnmounted } from '@vue/composition-api'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
-const FIRST = 3
+const FIRST = 6
 
 export default defineComponent({
   middleware: ['authenticated'],
@@ -59,11 +59,12 @@ export default defineComponent({
       })
     )
 
+    const documents = useResult(result, null, (data) =>
+      data?.me?.documents.edges.map((edge) => edge.node)
+    )
+
     const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
-        result.value?.me?.documents.pageInfo.nextCursor !== ''
-      ) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         loadMoreDocuments()
       }
     }
@@ -79,25 +80,34 @@ export default defineComponent({
     const loadMoreDocuments = () => {
       void fetchMore({
         variables: {
-          cursor: result.value?.me?.documents.pageInfo.nextCursor,
+          groupId: ui.selectedGroupId,
+          query: ui.activeSearchQuery,
           first: FIRST,
+          cursor: result.value?.me?.documents.pageInfo.nextCursor,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          if (fetchMoreResult) {
-            return {
-              ...previousResult,
-              me: {
-                ...previousResult.me,
-                documents: fetchMoreResult?.me?.documents,
-              },
-            }
-          }
+          const newEdges = fetchMoreResult?.me?.documents.edges
+          const nextCursor = fetchMoreResult?.me?.documents.pageInfo.nextCursor
+          return newEdges?.length && previousResult.me?.documents.edges.length
+            ? {
+                ...previousResult,
+                me: {
+                  ...previousResult.me,
+                  documents: {
+                    edges: [...previousResult.me?.documents.edges, ...newEdges],
+                    pageInfo: {
+                      nextCursor,
+                    },
+                  },
+                },
+              }
+            : previousResult
         },
       })
     }
 
     return {
-      result: document,
+      documents,
     }
   },
 })
