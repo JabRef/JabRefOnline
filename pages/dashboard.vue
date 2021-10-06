@@ -78,42 +78,19 @@ export default defineComponent({
 
     const loadMoreDocuments = () => {
       void fetchMore({
-        query: gql(/* GraphQL */ `
-          query GetDocuments(
-            $groupId: ID
-            $query: String
-            $first: Int
-            $cursor: String
-          ) {
-            me {
-              id
-              documents(
-                filterBy: { groupId: $groupId, query: $query }
-                first: $first
-                cursor: $cursor
-              ) {
-                edges {
-                  node {
-                    ...DocumentForView
-                  }
-                }
-                pageInfo {
-                  nextCursor
-                }
-              }
-            }
-          }
-        `),
         variables: {
           cursor: result.value?.me?.documents.pageInfo.nextCursor,
+          first: FIRST,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          return {
-            ...previousResult,
-            me: {
-              ...previousResult.me,
-              documents: fetchMoreResult?.me?.documents,
-            },
+          if (fetchMoreResult) {
+            return {
+              ...previousResult,
+              me: {
+                ...previousResult.me,
+                documents: fetchMoreResult?.me?.documents,
+              },
+            }
           }
         },
       })
