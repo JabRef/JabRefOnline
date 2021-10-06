@@ -15,7 +15,7 @@ let httpLink
 if (process.env.NODE_ENV === 'production') {
   httpLink = new HttpLink({ uri: '/api', fetch })
 } else {
-  httpLink = new HttpLink({ uri: 'http://localhost:3000/api', fetch })
+  httpLink = new HttpLink({ uri: 'http://localhost:5000/api', fetch })
 }
 
 // Print errors

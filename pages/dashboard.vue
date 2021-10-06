@@ -11,29 +11,28 @@
 </template>
 
 <script lang="ts">
+import { useResult, useQuery } from '@vue/apollo-composable'
 import {
+  ref,
   defineComponent,
   onMounted,
   onUnmounted,
-  ref,
-} from '@nuxtjs/composition-api'
-import { useResult, useQuery } from '@vue/apollo-composable'
+} from '@vue/composition-api'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
-const FIRST = 10
+const FIRST = 5
 
 export default defineComponent({
   middleware: ['authenticated'],
 
   setup() {
     const ui = useUiStore()
-    const scrollComponent = ref<Element>()
     const cursor = ref<string>('')
     // eslint-disable-next-line @typescript-eslint/no-array-constructor
     const documents = ref(Array())
 
-    const { result, refetch } = useQuery(
+    const { result, refetch, onResult } = useQuery(
       gql(/* GraphQL */ `
         query GetDocuments(
           $groupId: ID
@@ -67,19 +66,28 @@ export default defineComponent({
         cursor: cursor.value,
       })
     )
-    const documentResult = useResult(result, null, (data) =>
-      data?.me?.documents?.edges?.map((edge) => edge?.node)
-    )
+
+    onResult((data) => {
+      const documentResult = data.data.me?.documents.edges.map(
+        (edge) => edge.node
+      )
+      if (documentResult !== undefined) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        documents.value = [...documents.value, ...documentResult]
+      }
+    })
     const newCursor = useResult(
       result,
       null,
       (data) => data?.me?.documents.pageInfo.nextCursor
     )
-
-    if (documentResult.value) {
-      documents.value.push(...documentResult.value)
-    }
     cursor.value = newCursor.value ? newCursor.value : ''
+
+    const handleScroll = async () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        await loadMoreDocuments()
+      }
+    }
 
     onMounted(() => {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -111,19 +119,8 @@ export default defineComponent({
       }
     }
 
-    const handleScroll = async () => {
-      const element = scrollComponent.value
-      if (
-        cursor.value &&
-        element &&
-        element.getBoundingClientRect().bottom < window.innerHeight
-      ) {
-        await loadMoreDocuments()
-      }
-    }
     return {
       documents,
-      scrollComponent,
     }
   },
 })
