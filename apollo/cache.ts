@@ -1,5 +1,6 @@
 import { InMemoryCache, makeVar } from '@apollo/client/core'
-import { User, Document } from '~/api/graphql'
+import { relayStylePagination } from '@apollo/client/utilities'
+import { User } from '~/api/graphql'
 import introspection from '~/apollo/introspection'
 
 export const cache = new InMemoryCache({
@@ -13,13 +14,9 @@ export const cache = new InMemoryCache({
         },
       },
     },
-    documents: {
+    User: {
       fields: {
-        edges: {
-          merge(existing: Array<Document> = [], incoming: Array<Document>) {
-            return [...existing, ...incoming]
-          },
-        },
+        documents: relayStylePagination(),
       },
     },
   },

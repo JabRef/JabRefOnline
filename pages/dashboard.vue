@@ -10,6 +10,7 @@
   </div>
 </template>
 
+//
 <script lang="ts">
 import { useQuery, useResult } from '@vue/apollo-composable'
 import { defineComponent, onMounted, onUnmounted } from '@vue/composition-api'
@@ -30,14 +31,14 @@ export default defineComponent({
           $groupId: ID
           $query: String
           $first: Int
-          $cursor: String
+          $after: String
         ) {
           me {
             id
             documents(
               filterBy: { groupId: $groupId, query: $query }
               first: $first
-              cursor: $cursor
+              after: $after
             ) {
               edges {
                 node {
@@ -45,7 +46,8 @@ export default defineComponent({
                 }
               }
               pageInfo {
-                nextCursor
+                endCursor
+                hasNextPage
               }
             }
           }
@@ -60,7 +62,7 @@ export default defineComponent({
     )
 
     const documents = useResult(result, null, (data) =>
-      data?.me?.documents.edges.map((edge) => edge.node)
+      data?.me?.documents.edges.map((edge) => edge?.node)
     )
 
     const handleScroll = () => {
@@ -78,14 +80,12 @@ export default defineComponent({
     })
 
     const loadMoreDocuments = () => {
-      console.log('load more documents')
-      console.log(result)
       void fetchMore({
         variables: {
           groupId: ui.selectedGroupId,
           query: ui.activeSearchQuery,
           first: FIRST,
-          cursor: result.value?.me?.documents.pageInfo.nextCursor,
+          after: result.value?.me?.documents.pageInfo.endCursor,
         },
       })
     }

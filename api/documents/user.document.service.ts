@@ -50,7 +50,7 @@ export class UserDocumentService {
     user: User | string,
     filterBy: DocumentFilters | null = null,
     first: number | null = null,
-    cursor: string | null = null,
+    after: string | null = null,
     includeOtherFields = false
   ): Promise<PaginationResult> {
     const userId = typeof user === 'string' ? user : user.id
@@ -72,10 +72,11 @@ export class UserDocumentService {
       ...(first && {
         take: first + 1,
       }),
-      ...(cursor && {
+      ...(after && {
         cursor: {
-          id: cursor,
+          id: after,
         },
+        skip: 1,
       }),
       include: {
         other: includeOtherFields,
@@ -86,8 +87,12 @@ export class UserDocumentService {
         },
       },
     })
-    const nextCursor =
-      first && documents.length > first ? documents[first].id : null
+    const endCursor =
+      first && documents.length > first
+        ? documents[first - 1].id
+        : documents[documents.length - 1].id
+
+    const hasNextPage = !!(first && documents.length > first)
 
     if (filterBy?.query) {
       // Filtering documents by hand until Prisma.findMany supports full text search
@@ -101,7 +106,8 @@ export class UserDocumentService {
       return {
         edges: searchResult.map((document) => ({ node: document })),
         pageInfo: {
-          nextCursor: null,
+          endCursor: null,
+          hasNextPage: false,
         },
       }
     } else {
@@ -109,7 +115,8 @@ export class UserDocumentService {
       return {
         edges: userDocuments.map((document) => ({ node: document })),
         pageInfo: {
-          nextCursor,
+          endCursor,
+          hasNextPage,
         },
       }
     }

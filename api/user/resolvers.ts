@@ -159,13 +159,13 @@ export class UserResolver {
 
   async documents(
     user: User,
-    { filterBy, first, cursor }: UserDocumentsArgs
+    { filterBy, first, after }: UserDocumentsArgs
   ): Promise<PaginationResult> {
     return await this.userDocumentService.getDocumentsOf(
       user,
       filterBy,
       first,
-      cursor,
+      after,
       true
     )
   }
