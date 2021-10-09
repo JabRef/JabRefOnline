@@ -5,15 +5,6 @@ import introspection from '~/apollo/introspection'
 
 export const cache = new InMemoryCache({
   typePolicies: {
-    Query: {
-      fields: {
-        me: {
-          read() {
-            return currentUserVar()
-          },
-        },
-      },
-    },
     User: {
       fields: {
         documents: relayStylePagination(),

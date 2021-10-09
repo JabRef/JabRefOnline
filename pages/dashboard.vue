@@ -57,18 +57,26 @@ export default defineComponent({
         groupId: ui.selectedGroupId,
         query: ui.activeSearchQuery,
         first: FIRST,
-        cursor: '',
+        after: '',
       })
     )
 
     const documents = useResult(result, null, (data) =>
-      data?.me?.documents.edges.map((edge) => edge?.node)
+      data?.me?.documents.edges.map((edge) => edge.node)
+    )
+
+    const hasNextPage = useResult(
+      result,
+      null,
+      (data) => data?.me?.documents.pageInfo.hasNextPage
     )
 
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      if (
+        result.value?.me?.documents.pageInfo.hasNextPage &&
+        window.innerHeight + window.scrollY >= document.body.offsetHeight
+      )
         loadMoreDocuments()
-      }
     }
 
     onMounted(() => {
