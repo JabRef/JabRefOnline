@@ -7,12 +7,18 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
+import { config, Environment } from '../config'
 import { buildContext } from './context'
 import { loadSchema } from './schema'
 import PassportInitializer from './user/passport-initializer'
 
 // Create express instance
 const app = express()
+if (config.environment === Environment.Production) {
+  // Azure uses a reverse proxy, which changes some API values (notably express things it is not accessed through a secure https connection)
+  // So we need to adjust for this, see http://expressjs.com/en/guide/behind-proxies.html
+  app.set('trust proxy', 1)
+}
 const httpServer = http.createServer(app)
 
 const passportInitializer = container.resolve(PassportInitializer)

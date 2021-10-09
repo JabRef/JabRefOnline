@@ -65,8 +65,9 @@ const config: NuxtConfig = {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    // TODO: Play again with vite once it is more stable
-    // 'nuxt-vite',
+    // Use Vite instead of Webpack during development
+    // https://vite.nuxtjs.org/
+    'nuxt-vite',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss

@@ -20,11 +20,10 @@ const authenticated: Middleware = async function (context) {
           }
         }
       `),
-      fetchPolicy: 'network-only', // TODO: Reenable caching by removing this line; currently this leads to a bug where login -> logout -> dashboard -> login doesn't work
     })
 
     // If the user is not authenticated, then redirect
-    if (!response.data?.me?.id || response.errors) {
+    if (response.data?.me?.id === undefined || response.errors !== undefined) {
       redirectToLogin(context)
     }
   } catch (error) {
