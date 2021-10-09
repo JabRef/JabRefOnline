@@ -8,11 +8,12 @@ import { onError } from '@apollo/client/link/error'
 import { logErrorMessages } from '@vue/apollo-util'
 import { provide, onGlobalSetup } from '@nuxtjs/composition-api'
 import { cache } from '../apollo/cache'
+import { config, Environment } from '~/config'
 
 Vue.use(VueApollo)
 
 let httpLink
-if (process.env.NODE_ENV === 'production') {
+if (config.environment === Environment.Production) {
   httpLink = new HttpLink({ uri: '/api', fetch })
 } else {
   httpLink = new HttpLink({ uri: 'http://localhost:5000/api', fetch })
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Print errors
 const errorLink = onError((error) => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (config.environment !== Environment.Production) {
     logErrorMessages(error)
   }
 })
