@@ -87,10 +87,8 @@ export class UserDocumentService {
         },
       },
     })
-    const endCursor =
-      first && documents.length > first
-        ? documents[first - 1].id
-        : documents[documents.length - 1].id
+
+    const endCursor = documents[documents.length - 2].id
 
     const hasNextPage = !!(first && documents.length > first)
 
