@@ -1,5 +1,5 @@
 import { InMemoryCache, makeVar } from '@apollo/client/core'
-import { User } from '~/api/graphql'
+import { User, Document } from '~/api/graphql'
 import introspection from '~/apollo/introspection'
 
 export const cache = new InMemoryCache({
@@ -9,6 +9,15 @@ export const cache = new InMemoryCache({
         me: {
           read() {
             return currentUserVar()
+          },
+        },
+      },
+    },
+    documents: {
+      fields: {
+        edges: {
+          merge(existing: Array<Document> = [], incoming: Array<Document>) {
+            return [...existing, ...incoming]
           },
         },
       },

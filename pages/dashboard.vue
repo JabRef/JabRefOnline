@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="documents" ref="scrollComponent" class="space-y-4 p-4">
+    <div v-if="documents" class="space-y-4 p-4">
       <DocumentView
         v-for="document of documents"
         :key="document.id"
@@ -16,7 +16,7 @@ import { defineComponent, onMounted, onUnmounted } from '@vue/composition-api'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
-const FIRST = 6
+const FIRST = 4
 
 export default defineComponent({
   middleware: ['authenticated'],
@@ -78,30 +78,14 @@ export default defineComponent({
     })
 
     const loadMoreDocuments = () => {
+      console.log('load more documents')
+      console.log(result)
       void fetchMore({
         variables: {
           groupId: ui.selectedGroupId,
           query: ui.activeSearchQuery,
           first: FIRST,
           cursor: result.value?.me?.documents.pageInfo.nextCursor,
-        },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          const newEdges = fetchMoreResult?.me?.documents.edges
-          const nextCursor = fetchMoreResult?.me?.documents.pageInfo.nextCursor
-          return newEdges?.length && previousResult.me?.documents.edges.length
-            ? {
-                ...previousResult,
-                me: {
-                  ...previousResult.me,
-                  documents: {
-                    edges: [...previousResult.me?.documents.edges, ...newEdges],
-                    pageInfo: {
-                      nextCursor,
-                    },
-                  },
-                },
-              }
-            : previousResult
         },
       })
     }
