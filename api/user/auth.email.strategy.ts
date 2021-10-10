@@ -28,10 +28,13 @@ export default class EmailStrategy extends GraphQLLocalStrategy<
             done(null, await user.user)
           } else {
             // Wrong email-password combination
-            done(null, null, { message: 'Wrong email or password.' })
+            done(null, null, {
+              message: 'Wrong email or password.',
+              info: false,
+            })
           }
         } catch (err) {
-          done(err)
+          done(err as Error)
         }
       }
     )
