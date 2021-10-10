@@ -69,9 +69,8 @@ jobs:
       - name: Run linter
         run: yarn lint
 
-    # TODO: Reactivate as soon as https://github.com/kamilkisiela/graphql-inspector/issues/1991 is fixed
-    #  - name: Validate GraphQL operations
-    #    run: yarn validate
+      - name: Validate GraphQL operations
+        run: yarn validate
 
       - name: Build
         run: yarn build
