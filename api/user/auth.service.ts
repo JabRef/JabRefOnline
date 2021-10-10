@@ -8,9 +8,7 @@ import { sendEmail } from '../utils/sendEmail'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { ResolversTypes } from '../graphql'
 
-export interface AuthenticationMessage {
-  message?: string
-}
+export { InfoArgument as AuthenticationMessage } from 'graphql-passport'
 
 export interface AuthenticateReturn {
   user?: User
