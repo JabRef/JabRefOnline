@@ -13,8 +13,8 @@ import {
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
 import {
-  PaginationResult,
   UserDocumentService,
+  UserDocumentsResult,
 } from '../documents/user.document.service'
 import { GroupService } from '../groups/service'
 import {
@@ -160,7 +160,7 @@ export class UserResolver {
   async documents(
     user: User,
     { filterBy, first, after }: UserDocumentsArgs
-  ): Promise<PaginationResult> {
+  ): Promise<UserDocumentsResult> {
     return await this.userDocumentService.getDocumentsOf(
       user,
       filterBy,

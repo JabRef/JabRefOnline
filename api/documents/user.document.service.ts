@@ -19,7 +19,7 @@ export type UserDocument = PlainUserDocument & {
     | null
 }
 
-export type PaginationResult = Omit<UserDocumentsConnection, 'edges'> & {
+export type UserDocumentsResult = Omit<UserDocumentsConnection, 'edges'> & {
   edges: { node: UserDocument }[]
 }
 
@@ -52,7 +52,7 @@ export class UserDocumentService {
     first: number | null = null,
     after: string | null = null,
     includeOtherFields = false
-  ): Promise<PaginationResult> {
+  ): Promise<UserDocumentsResult> {
     const userId = typeof user === 'string' ? user : user.id
     const documents = await this.prisma.userDocument.findMany({
       where: {
