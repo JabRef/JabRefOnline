@@ -23,14 +23,9 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  useRouter,
-  useRoute,
-  computed,
-  ref,
-} from '@vue/composition-api'
+import { defineComponent, computed, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
+import { useRouter, useRoute } from '#app'
 import { gql } from '~/apollo'
 
 export default defineComponent({

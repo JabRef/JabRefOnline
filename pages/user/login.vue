@@ -67,8 +67,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, useRouter, computed, ref } from '@vue/composition-api'
+import { defineComponent, computed, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
+import { useRouter } from '#app'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 
