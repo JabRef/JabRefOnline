@@ -78,7 +78,7 @@ export class Mutation {
         problems: [
           {
             path: 'Email or Password',
-            message: info?.message || 'Unknown error while logging in.',
+            message: (typeof info === 'string' ? info : info?.message) || 'Unknown error while logging in.',
           },
         ],
       }

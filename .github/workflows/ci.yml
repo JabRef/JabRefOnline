@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.4.0
+        uses: actions/setup-node@v2.4.1
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
@@ -69,9 +69,8 @@ jobs:
       - name: Run linter
         run: yarn lint
 
-    # TODO: Reactivate as soon as https://github.com/kamilkisiela/graphql-inspector/issues/1991 is fixed
-    #  - name: Validate GraphQL operations
-    #    run: yarn validate
+      - name: Validate GraphQL operations
+        run: yarn validate
 
       - name: Build
         run: yarn build
