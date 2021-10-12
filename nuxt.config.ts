@@ -1,8 +1,8 @@
 import { transformSync } from '@babel/core'
-import { NuxtConfig } from '@nuxt/types'
 import jiti from 'jiti'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
-const config: NuxtConfig = {
+export default defineNuxtConfig({
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -65,19 +65,11 @@ const config: NuxtConfig = {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    '@nuxt/bridge',
-    // TODO: Play again with vite once it is more stable
-    // 'nuxt-vite',
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // Allows more control where component's templates are rendered
     // https://portal-vue.linusb.org/
     'portal-vue/nuxt',
-    // Enables Vue 3 composition API
-    // https://composition-api.nuxtjs.org/
-    '@nuxtjs/composition-api/module',
     // Use postcss v8
     '@nuxt/postcss8',
     // Use Pinia for state management
@@ -254,5 +246,4 @@ const config: NuxtConfig = {
       },
     })
   },
-}
-export default config
+})
