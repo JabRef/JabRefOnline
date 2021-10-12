@@ -56,7 +56,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useRouter } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'

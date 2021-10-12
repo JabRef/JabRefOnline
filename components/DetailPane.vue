@@ -174,7 +174,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
 import Tags from './tagify.vue'
 import { useUiStore } from './../store'
 import EditorInput from './EditorInput.vue'

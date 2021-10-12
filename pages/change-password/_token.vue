@@ -28,8 +28,8 @@ import {
   useRouter,
   useRoute,
   computed,
-} from '@nuxtjs/composition-api'
-import { ref } from '@vue/composition-api'
+  ref,
+} from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 

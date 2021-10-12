@@ -123,7 +123,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '@vue/composition-api'
 // @ts-ignore: No type infos available
 import { VueTreeList, Tree } from 'vue-tree-list'
 import { useResult, useQuery } from '@vue/apollo-composable'
