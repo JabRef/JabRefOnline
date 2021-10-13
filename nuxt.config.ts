@@ -107,10 +107,6 @@ export default defineNuxtConfig({
    */
   watch: ['api/**/*.graphql'],
 
-  nitro: {
-    preset: 'browser',
-  },
-
   /*
    ** For deployment you might want to edit host and port
    */
