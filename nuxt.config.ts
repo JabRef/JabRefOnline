@@ -21,7 +21,8 @@ export default defineNuxtConfig({
   /*
    ** Disable server-side rendering
    */
-  ssr: false,
+  // TODO: Currently does not work due to https://github.com/nuxt/framework/issues/886.
+  // ssr: false,
 
   /*
    ** Headers of the page
