@@ -2539,7 +2539,7 @@
     node-html-parser "^4.1.4"
     ufo "^0.7.9"
 
-"@nuxt/kit@npm:@nuxt/kit-edge@3.0.0-27235451.ece0e01":
+"@nuxt/kit@npm:@nuxt/kit-edge@3.0.0-27235451.ece0e01", "@nuxt/kit@npm:@nuxt/kit-edge@latest":
   version "3.0.0-27235451.ece0e01"
   resolved "https://registry.yarnpkg.com/@nuxt/kit-edge/-/kit-edge-3.0.0-27235451.ece0e01.tgz#8b13ac0713c04a043578d6509428177d06d2b054"
   integrity sha512-uu9t6w7mYVE31bcTPmBxgL9pQ3g10DW/xccLdBjR+Y2FIupjOSxBXJB7qo5O8GcFgyQTiXvEIK9BYpS7o00wyg==
@@ -2923,6 +2923,14 @@
     cookie "^0.3.1"
     mustache "^2.3.0"
     stack-trace "0.0.10"
+
+"@pinia/nuxt@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@pinia/nuxt/-/nuxt-0.0.4.tgz#9ae82d53df6fb183cd903e12560e3b523985d299"
+  integrity sha512-ExQdTFWWAA+ruAoY54pjCEQDPivmPKdukjn8pmI36xZx/smoYTxeLsEA/oUvcXHTduxNblVc5T0009RYYFmORg==
+  dependencies:
+    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    upath "^2.0.1"
 
 "@polka/url@^1.0.0-next.20":
   version "1.0.0-next.21"
@@ -4912,6 +4920,11 @@
   integrity sha512-8LVV6O4slsroBhRKxly3em5H3D5Q+ggPG75lcilh5MfLGs69LEdwm6dKhSOXtQoSyMGF4Rq30E4DcouopM8Rxg==
   dependencies:
     tslib "^2.3.0"
+
+"@vue/devtools-api@^6.0.0-beta.19":
+  version "6.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.0-beta.19.tgz#f8e88059daa424515992426a0c7ea5cde07e99bf"
+  integrity sha512-ObzQhgkoVeoyKv+e8+tB/jQBL2smtk/NmC9OmFK8UqdDpoOdv/Kf9pyDWL+IFyM7qLD2C75rszJujvGSPSpGlw==
 
 "@vue/reactivity@3.2.20":
   version "3.2.20"
@@ -12472,10 +12485,20 @@ jest@^26.6.3:
     import-local "^3.0.2"
     jest-cli "^26.6.3"
 
-jiti@^1.10.1, jiti@^1.11.0, jiti@^1.12.7, jiti@^1.9.2:
+jiti@^1.10.1:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.11.0.tgz#64120a30d97b9bf37b8b032cf4564dfadc28984c"
+  integrity sha512-/2c7e61hxxTIN34UeHBB0LCJ5Tq64kgJDV7GR+++e8XRxCKRIKmB8tH6ww1W+Z6Kgd6By+C3RSCu1lXjbPT68A==
+
+jiti@^1.11.0, jiti@^1.12.7:
   version "1.12.7"
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.12.7.tgz#745074d5a6f88c29152b32a99f4a2de23bd22a3f"
   integrity sha512-2v5iYsJp5l7iX6ettW/hD7A9qZtsib3gMBfxbQxASszzOpZ0dFZBZAUQGKKIQ780XGR3sGEp1L/8t1JyyPq5Fg==
+
+jiti@^1.9.2:
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.10.1.tgz#bc2a175b9435274dc8659d3d9a121a91c6b3a1af"
+  integrity sha512-qux9juDtAC8HlZxAk/fku73ak4TWNLigRFTNzFShE/kw4bXVFsVu538vLXAxvNyPszXgpX4YxkXfwTYEi+zf5A==
 
 js-beautify@^1.6.12:
   version "1.14.0"
@@ -14869,10 +14892,13 @@ pify@^5.0.0:
   resolved "https://registry.yarnpkg.com/pify/-/pify-5.0.0.tgz#1f5eca3f5e87ebec28cc6d54a0e4aaf00acc127f"
   integrity sha512-eW/gHNMlxdSP6dmG6uJip6FXN0EQBwm2clYYd8Wul42Cwu/DK8HEftzsapcNdYe2MfLiIwZqsDk2RDEsTE79hA==
 
-pinia@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-0.5.4.tgz#8bbbeda6f8244a7afd2177889be712fe6fbba212"
-  integrity sha512-gQEmLlnNdLOgIVrONxpO0/6AidD7lqdaRFJT0w7j1YYw+GxKX+5+mtYdh42F3q5zLKPeQ8dUTKMfIps6Q8MR2w==
+pinia@^2.0.0-rc.13:
+  version "2.0.0-rc.13"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.0-rc.13.tgz#b9f858da278130469ed8dd89f8348de54f216541"
+  integrity sha512-NLOqK+tCIx1a4qZByqLZVdAK7ilTxkG6Opmj1O8hTjxpu4VSO2+eL2pPcO3JE/4ifZ6FBx87X2DU7NTY36z7Bw==
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.19"
+    vue-demi "*"
 
 pirates@^4.0.0, pirates@^4.0.1:
   version "4.0.1"
