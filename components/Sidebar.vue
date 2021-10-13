@@ -82,7 +82,7 @@
       <p class="uppercase text-xs text-gray-600 mb-2 mt-4 tracking-wider">
         Groups
       </p>
-
+      <!--
       <vue-tree-list
         v-if="groupsTree"
         class="groupsTree"
@@ -119,13 +119,14 @@
           />
         </template>
       </vue-tree-list>
+      -->
     </div>
   </div>
 </template>
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 // @ts-ignore: No type infos available
-import { VueTreeList, Tree } from 'vue-tree-list'
+// import { VueTreeList, Tree } from 'vue-tree-list'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
@@ -133,7 +134,7 @@ import { useUiStore } from '~/store'
 export default defineComponent({
   components: {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    VueTreeList,
+    // VueTreeList,
   },
   setup() {
     const { result } = useQuery(
@@ -156,9 +157,11 @@ export default defineComponent({
       `)
     )
     const groups = useResult(result, null, (data) => data?.me?.groups)
-    const groupsTree = computed(() =>
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-      groups.value != null ? new Tree(groups.value) : null
+    const groupsTree = computed(
+      () =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+        // groups.value != null ? new Tree(groups.value) : null
+        null
     )
 
     const uiStore = useUiStore()
