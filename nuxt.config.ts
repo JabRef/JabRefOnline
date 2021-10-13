@@ -10,6 +10,15 @@ export default defineNuxtConfig({
   target: 'server',
 
   /*
+  bridge: {
+    // Use Vite instead of Webpack during development
+    // https://vite.nuxtjs.org/
+    // TODO: Currently not possible due to https://github.com/nuxt/framework/issues/941.
+    vite: true,
+  },
+  */
+
+  /*
    ** Disable server-side rendering
    */
   ssr: false,
