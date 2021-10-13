@@ -2,10 +2,9 @@ import Vue from 'vue'
 import VueApollo from 'vue-apollo'
 import { ApolloClient, HttpLink } from '@apollo/client/core'
 import fetch from 'cross-fetch'
-import { DefaultApolloClient } from '@vue/apollo-composable'
 import { onError } from '@apollo/client/link/error'
 import { logErrorMessages } from '@vue/apollo-util'
-import { provide } from '@vue/composition-api'
+import { provideApolloClient } from '@vue/apollo-composable'
 import { cache } from '../apollo/cache'
 import { defineNuxtPlugin } from '#app'
 import { config, Environment } from '~/config'
@@ -40,7 +39,7 @@ const apolloProvider = new VueApollo({
 
 const apolloPlugin = defineNuxtPlugin((app) => {
   app.apolloProvider = apolloProvider
-  provide(DefaultApolloClient, apolloProvider.defaultClient)
+  provideApolloClient(apolloProvider?.defaultClient)
 })
 
 export default apolloPlugin
