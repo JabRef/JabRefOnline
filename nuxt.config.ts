@@ -71,6 +71,11 @@ export default defineNuxtConfig({
    */
   components: true,
 
+  // TODO: Reenable config viewer as soon as https://github.com/nuxt/framework/issues/865 is fixed.
+  tailwindcss: {
+    viewer: false,
+  },
+
   /*
    ** Nuxt.js dev-modules
    */
