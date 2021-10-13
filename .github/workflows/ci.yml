@@ -66,8 +66,8 @@ jobs:
       - name: Init database
         run: yarn prisma:push
 
-      #- name: Run linter
-      #  run: yarn lint
+      - name: Run linter
+        run: yarn lint
 
       - name: Validate GraphQL operations
         run: yarn validate
