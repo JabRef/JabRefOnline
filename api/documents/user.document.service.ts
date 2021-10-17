@@ -19,6 +19,11 @@ export type UserDocument = PlainUserDocument & {
     | null
 }
 
+type Documents = {
+  documents: UserDocument[]
+  hasNextPage: boolean
+}
+
 export type UserDocumentsResult = Omit<UserDocumentsConnection, 'edges'> & {
   edges: { node: UserDocument }[]
 }
@@ -52,7 +57,7 @@ export class UserDocumentService {
     first: number | null = null,
     after: string | null = null,
     includeOtherFields = false
-  ): Promise<UserDocumentsResult> {
+  ): Promise<Documents> {
     const userId = typeof user === 'string' ? user : user.id
     const documents = await this.prisma.userDocument.findMany({
       where: {
@@ -69,6 +74,7 @@ export class UserDocumentService {
           },
         }),
       },
+
       ...(first && {
         take: first + 1,
       }),
@@ -88,14 +94,8 @@ export class UserDocumentService {
       },
     })
 
-    const endCursor =
-      first && documents.length > first
-        ? documents[documents.length - 2].id
-        : documents.length
-        ? documents[documents.length - 1].id
-        : null
-
     const hasNextPage = !!(first && documents.length > first)
+    const userDocuments = first ? documents.slice(0, first) : documents
 
     if (filterBy?.query) {
       // Filtering documents by hand until Prisma.findMany supports full text search
@@ -107,20 +107,13 @@ export class UserDocumentService {
         )
       })
       return {
-        edges: searchResult.map((document) => ({ node: document })),
-        pageInfo: {
-          endCursor: null,
-          hasNextPage: false,
-        },
+        documents: searchResult,
+        hasNextPage,
       }
     } else {
-      const userDocuments = first ? documents.slice(0, first) : documents
       return {
-        edges: userDocuments.map((document) => ({ node: document })),
-        pageInfo: {
-          endCursor,
-          hasNextPage,
-        },
+        documents: userDocuments,
+        hasNextPage,
       }
     }
   }

@@ -161,13 +161,26 @@ export class UserResolver {
     user: User,
     { filterBy, first, after }: UserDocumentsArgs
   ): Promise<UserDocumentsResult> {
-    return await this.userDocumentService.getDocumentsOf(
-      user,
-      filterBy,
-      first,
-      after,
-      true
-    )
+    const { documents, hasNextPage } =
+      await this.userDocumentService.getDocumentsOf(
+        user,
+        filterBy,
+        first,
+        after,
+        true
+      )
+
+    const endCursor = documents.length
+      ? documents[documents.length - 1].id
+      : null
+
+    return {
+      edges: documents.map((document) => ({ node: document })),
+      pageInfo: {
+        endCursor,
+        hasNextPage,
+      },
+    }
   }
 
   async groups(user: User): Promise<GroupResolved[]> {
