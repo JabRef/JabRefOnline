@@ -1,11 +1,13 @@
 <template>
   <div>
     <div v-if="documents" class="space-y-4 p-4">
-      <DocumentView
-        v-for="document of documents"
-        :key="document.id"
-        :document="document"
-      />
+      <virtual-list
+        :data-key="'id'"
+        :data-sources="documents"
+        :data-component="DocumentView"
+      >
+        <div slot="footer" class="loading-spinner">Loading ...</div>
+      </virtual-list>
     </div>
   </div>
 </template>
@@ -13,12 +15,17 @@
 <script lang="ts">
 import { useQuery, useResult } from '@vue/apollo-composable'
 import { defineComponent, onMounted, onUnmounted } from '@vue/composition-api'
+import virtualList from 'vue-virtual-scroll-list'
+import DocumentView from '../components/DocumentView.vue'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
 const FIRST = 4
 
 export default defineComponent({
+  components: {
+    'virtual-list': virtualList,
+  },
   middleware: ['authenticated'],
 
   setup() {
@@ -93,6 +100,7 @@ export default defineComponent({
 
     return {
       documents,
+      DocumentView,
     }
   },
 })

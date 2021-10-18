@@ -11,7 +11,7 @@
           class="mr-1"
           :title="typeDescription"
         ></FontAwesomeIcon>
-        <span>{{ document.title }}</span>
+        <span>{{ source.title }}</span>
       </button>
       <!-- TOOD: Add citation display
       <a
@@ -22,8 +22,8 @@
       </a>
       -->
     </div>
-    <div v-if="'authors' in document && document.authors" class="space-x-3">
-      <span v-for="author in document.authors" :key="author.id">{{
+    <div v-if="'authors' in source && source.authors" class="space-x-3">
+      <span v-for="author in source.authors" :key="author.id">{{
         author.name
       }}</span>
     </div>
@@ -31,29 +31,29 @@
       <span class="font-semibold">2019</span>
       <a
         v-if="
-          'in' in document &&
-          document.in &&
-          'journal' in document.in &&
-          document.in.journal
+          'in' in source &&
+          source.in &&
+          'journal' in source.in &&
+          source.in.journal
         "
-        :href="'journal/' + document.in.journal.id"
-        >{{ document.in.journal.name }}</a
+        :href="'journal/' + source.in.journal.id"
+        >{{ source.in.journal.name }}</a
       >
       <a
-        v-if="'institution' in document && document.institution"
-        :href="'institution/' + document.institution.id"
-        >{{ document.institution.name }}</a
+        v-if="'institution' in source && source.institution"
+        :href="'institution/' + source.institution.id"
+        >{{ source.institution.name }}</a
       >
-      <span v-if="'in' in document && document.in && 'title' in document.in">
-        {{ document.in.title }}
+      <span v-if="'in' in source && source.in && 'title' in source.in">
+        {{ source.in.title }}
       </span>
     </div>
     <div
-      v-if="document.keywords.length > 0"
+      v-if="source.keywords.length > 0"
       class="flex flex-row space-x-2 text-sm"
     >
       <t-tag
-        v-for="keyword in document.keywords"
+        v-for="keyword in source.keywords"
         :key="keyword"
         variant="badge"
         class="border border-gray-400"
@@ -68,9 +68,9 @@
       </t-button>
       -->
     </div>
-    <div v-if="'abstract' in document && document.abstract">
+    <div v-if="'abstract' in source && source.abstract">
       <span class="flex-grow" :class="{ 'line-clamp-2': !viewFullAbstract }">
-        {{ document.abstract }}
+        {{ source.abstract }}
       </span>
       <t-button
         variant="linkplain"
@@ -141,13 +141,13 @@ export const DocumentForView = gql(/* GraphQL */ `
 
 export default defineComponent({
   props: {
-    document: {
+    source: {
       type: Object as PropType<DocumentType<typeof DocumentForView>>,
       required: true,
     },
   },
   setup(props) {
-    const { document } = toRefs(props)
+    const { source: document } = toRefs(props)
     const viewFullAbstract = ref(false)
 
     const typeIcon = computed(() => {
