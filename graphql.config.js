@@ -39,6 +39,7 @@ const codegen = {
       preset: 'gql-tag-operations-preset',
       config: {
         scalars: {
+          Date: 'Date',
           DateTime: 'Date',
           EmailAddress: 'string',
         },
