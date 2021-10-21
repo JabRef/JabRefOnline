@@ -10,12 +10,12 @@
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:dev:create": "prisma migrate dev --create-only",
-    "prisma:migrate:reset": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json prisma migrate reset",
+    "prisma:migrate:reset": "prisma migrate reset",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:status": "prisma migrate status",
     "prisma:migrate:resolve": "prisma migrate resolve",
     "prisma:push": "prisma db push",
-    "prisma:seed": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json prisma db seed",
+    "prisma:seed": "prisma db seed",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
     "prisma:generate:watch": "prisma generate --watch",
@@ -145,6 +145,6 @@
   },
   "prisma": {
     "schema": "api/database/schema.prisma",
-    "seed": "ts-node ./api/database/runSeed.ts"
+    "seed": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json ts-node ./api/database/runSeed.ts"
   }
 }
