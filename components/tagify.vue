@@ -1,6 +1,6 @@
 <template v-once>
-  <textarea v-if="type === 'textarea'" :value="value" @change="onChange" />
-  <input v-else :value="value" @change="onChange" />
+  <textarea v-if="type === 'textarea'" @change="onChange" />
+  <input v-else @change="onChange" />
 </template>
 
 <script lang="ts">
@@ -54,7 +54,7 @@ export default defineComponent({
     const tagifySettings: Tagify.TagifyConstructorSettings<Tagify.TagData> = {
       delimiters: this.delimiters,
       whitelist: this.whitelist,
-      ...this.settings,
+      ...(this.settings ?? []),
     }
     if (this.tagClass) {
       if (tagifySettings.classNames) {
@@ -71,9 +71,9 @@ export default defineComponent({
       this.$el as HTMLTextAreaElement | HTMLInputElement,
       tagifySettings
     )
-    // Using current data as initial tags
-    this.tagify.removeAllTags()
-    this.tagify.addTags(this.value)
+  },
+  unmounted() {
+    this.tagify?.destroy()
   },
   methods: {
     onChange(event: { target: HTMLInputElement | null }) {
