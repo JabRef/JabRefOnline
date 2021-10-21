@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Ensure dependencies",
+      "type": "shell",
+      "command": "yarn docker:redis",
+      "problemMatcher": [],
+      // Start the task on folder open
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+    },
+    {
+      "label": "Generate code",
+      "type": "shell",
+      "command": "yarn generate:watch",
+      "problemMatcher": [],
+      // Start the task on folder open
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      // Mark as a background task to avoid the spinner animation on the terminal tab
+      "isBackground": true,
+    },
+    {
+      "label": "Run dev server",
+      "type": "shell",
+      "command": "yarn dev",
+      "problemMatcher": [],
+      // Start the task on folder open
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      // Mark as a background task to avoid the spinner animation on the terminal tab
+      "isBackground": true,
+    },
+    {
+      "label": "Prisma Studio",
+      "type": "shell",
+      "command": "yarn prisma:studio",
+      "problemMatcher": [],
+      // Mark as a background task to avoid the spinner animation on the terminal tab
+      "isBackground": true,
+    }
+  ]
+}
