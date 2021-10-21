@@ -24,6 +24,11 @@
 
 Now you can start the server by using `yarn dev`.
 
+If you use Visual Studio Code, you might also want to activate automatic tasks which would then be run whenever you open the project and run the usual commands to get you running in no time.
+For this, open the command palette (Shift + Cmd + P) and choose "Tasks: Manage Automatic Tasks in Folder".
+Then accept "Allow Automatic Tasks in Folder".
+Now close and re-open the workspace. 
+
 ## Commands
 
 | Command | Description |
