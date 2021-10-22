@@ -3,11 +3,25 @@ image: gitpod/workspace-postgres
 
 # Start up tasks: https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - name: Dev Server
+  - name: Setup
     init: yarn install
     command: |
+      yarn prisma:migrate:dev
+      yarn prisma:seed
       yarn docker:redis
+      yarn generate:watch
+      gp sync-done setup
       yarn dev
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+  - name: Dev Server
+    init: gp sync-await setup
+    command: yarn dev
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+  - name: Prisma Studio
+    init: gp sync-await setup
+    command: yarn prisma:studio
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
 
@@ -19,3 +33,6 @@ ports:
   # Dev server
   - port: 3000
     onOpen: open-preview
+  # Prisma Studio
+  - port: 5555
+    onOpen: ignore
