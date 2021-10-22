@@ -9,9 +9,8 @@ tasks:
       yarn prisma:migrate:dev
       yarn prisma:seed
       yarn docker:redis
-      yarn generate:watch
       gp sync-done setup
-      yarn dev
+      yarn generate:watch
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
   - name: Dev Server
@@ -29,6 +28,9 @@ tasks:
 ports:
   # Redis
   - port: 6380
+    onOpen: ignore
+  # Database
+  - port: 5432
     onOpen: ignore
   # Dev server
   - port: 3000
