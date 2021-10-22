@@ -12,7 +12,7 @@
   In particular, you can log in using `alice@jabref.de / EBNPXY35TYkYXHs`.
 
 ## Getting started
-The simplest way to start is by [Opening this project in Gitpod](https://gitpod.io/#https://github.com/JabRef/JabRefOnline/).
+The simplest way to start is by [opening this project in Gitpod](https://gitpod.io/#https://github.com/JabRef/JabRefOnline/).
 
 - Install [Node.js](https://nodejs.org/)
 - Install [PostgreSQL](https://www.postgresql.org/)
