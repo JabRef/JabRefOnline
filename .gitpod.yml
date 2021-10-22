@@ -1,0 +1,21 @@
+# Use docker image with postgres support: https://www.gitpod.io/docs/config-docker
+image: gitpod/workspace-postgres
+
+# Start up tasks: https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - name: Dev Server
+    init: yarn install
+    command: |
+      yarn docker:redis
+      yarn dev
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+
+# Expose ports: https://www.gitpod.io/docs/config-ports/
+ports:
+  # Redis
+  - port: 6380
+    onOpen: ignore
+  # Dev server
+  - port: 3000
+    onOpen: open-preview
