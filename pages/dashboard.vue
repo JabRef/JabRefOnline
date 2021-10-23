@@ -17,6 +17,7 @@
 import { useQuery, useResult } from '@vue/apollo-composable'
 import { defineComponent } from '@vue/composition-api'
 import virtualList from 'vue-virtual-scroll-list'
+import { WatchQueryFetchPolicy } from '@apollo/client/core'
 import DocumentView from '../components/DocumentView.vue'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
@@ -63,8 +64,13 @@ export default defineComponent({
       () => ({
         groupId: ui.selectedGroupId,
         query: ui.activeSearchQuery,
-        first: FIRST,
+        first: ui.activeSearchQuery ? null : FIRST,
         after: '',
+      }),
+      () => ({
+        fetchPolicy: ui.activeSearchQuery
+          ? ('no-cache' as WatchQueryFetchPolicy)
+          : ('cache-first' as WatchQueryFetchPolicy),
       })
     )
 
