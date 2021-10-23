@@ -19,7 +19,7 @@ export type UserDocument = PlainUserDocument & {
     | null
 }
 
-type Documents = {
+type UserDocumentsAndPageInfo = {
   documents: UserDocument[]
   hasNextPage: boolean
 }
@@ -57,7 +57,7 @@ export class UserDocumentService {
     first: number | null = null,
     after: string | null = null,
     includeOtherFields = false
-  ): Promise<Documents> {
+  ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
     const documents = await this.prisma.userDocument.findMany({
       where: {
