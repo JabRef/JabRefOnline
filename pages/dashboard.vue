@@ -1,20 +1,21 @@
 <template>
   <div>
-    <div v-if="documents" class="space-y-4 p-4">
+    <div v-if="documents" class="space-y-4 p-4 h-full">
       <virtual-list
+        class="virtual-list"
         :data-key="'id'"
+        :page-mode="true"
         :data-sources="documents"
         :data-component="DocumentView"
-      >
-        <div slot="footer" class="loading-spinner">Loading ...</div>
-      </virtual-list>
+        @tobottom="onScrollToBottom"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { useQuery, useResult } from '@vue/apollo-composable'
-import { defineComponent, onMounted, onUnmounted } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
 import virtualList from 'vue-virtual-scroll-list'
 import DocumentView from '../components/DocumentView.vue'
 import { gql } from '~/apollo'
@@ -71,36 +72,23 @@ export default defineComponent({
       data?.me?.documents.edges.map((edge) => edge.node)
     )
 
-    const loadMoreDocuments = () => {
-      void fetchMore({
-        variables: {
-          groupId: ui.selectedGroupId,
-          query: ui.activeSearchQuery,
-          first: FIRST,
-          after: result.value?.me?.documents.pageInfo.endCursor,
-        },
-      })
+    const onScrollToBottom = () => {
+      if (result.value?.me?.documents.pageInfo.hasNextPage) {
+        void fetchMore({
+          variables: {
+            groupId: ui.selectedGroupId,
+            query: ui.activeSearchQuery,
+            first: FIRST,
+            after: result.value?.me?.documents.pageInfo.endCursor,
+          },
+        })
+      }
     }
-
-    const handleScroll = () => {
-      if (
-        result.value?.me?.documents.pageInfo.hasNextPage &&
-        window.innerHeight + window.scrollY >= document.body.offsetHeight
-      )
-        loadMoreDocuments()
-    }
-
-    onMounted(() => {
-      window.addEventListener('scroll', handleScroll)
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('scroll', handleScroll)
-    })
 
     return {
       documents,
       DocumentView,
+      onScrollToBottom,
     }
   },
 })

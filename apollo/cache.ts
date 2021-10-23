@@ -1,5 +1,5 @@
 import { InMemoryCache } from '@apollo/client/core'
-import { relayStylePagination } from '@apollo/client/utilities'
+import { relayStylePagination } from '@apollo/client/utilities/policies/pagination'
 import { MeQuery } from './graphql'
 import { gql } from '.'
 import introspection from '~/apollo/introspection'
