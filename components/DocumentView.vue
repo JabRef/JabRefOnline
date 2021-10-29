@@ -176,7 +176,7 @@ export default defineComponent({
 
     const ui = useUiStore()
     function displayDocumentDetails() {
-      ui.displayDocumentDetails()
+      ui.displayDocumentDetails(document.value.id)
     }
 
     return {

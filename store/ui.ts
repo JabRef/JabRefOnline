@@ -10,6 +10,11 @@ export const useUiStore = defineStore({
       isDetailsOpen: false,
 
       /**
+       * The id of the currently selected document.
+       */
+      selectedDocumentId: null as string | null,
+
+      /**
        * The id of the currently selected group.
        */
       selectedGroupId: null as string | null,
@@ -21,7 +26,8 @@ export const useUiStore = defineStore({
     }
   },
   actions: {
-    displayDocumentDetails() {
+    displayDocumentDetails(documentId: string) {
+      this.selectedDocumentId = documentId
       this.isDetailsOpen = true
     },
   },

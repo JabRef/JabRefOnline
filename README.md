@@ -12,6 +12,8 @@
   In particular, you can log in using `alice@jabref.de / EBNPXY35TYkYXHs`.
 
 ## Getting started
+The simplest way to start is by [opening this project in Gitpod](https://gitpod.io/#https://github.com/JabRef/JabRefOnline/).
+
 - Install [Node.js](https://nodejs.org/)
 - Install [PostgreSQL](https://www.postgresql.org/)
 - Checkout
@@ -23,6 +25,11 @@
 - Run `yarn prisma:migrate:dev` to initialize the database. You may also want to use `yarn prisma:seed` to fill the database with some initial test data.
 
 Now you can start the server by using `yarn dev`.
+
+If you use Visual Studio Code, you might also want to activate automatic tasks which would then be run whenever you open the project and run the usual commands to get you running in no time.
+For this, open the command palette (Shift + Cmd + P) and choose "Tasks: Manage Automatic Tasks in Folder".
+Then accept "Allow Automatic Tasks in Folder".
+Now close and re-open the workspace. 
 
 ## Commands
 
