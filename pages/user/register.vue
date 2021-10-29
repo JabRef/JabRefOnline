@@ -63,7 +63,7 @@ import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 
 export default defineComponent({
-  name: 'Register',
+  name: 'UserRegister',
   layout: 'bare',
 
   setup() {
