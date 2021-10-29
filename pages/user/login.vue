@@ -74,7 +74,7 @@ import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 
 export default defineComponent({
-  name: 'Login',
+  name: 'UserLogin',
   layout: 'bare',
 
   // TODO: Automatically go to home if already loggin in
