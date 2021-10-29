@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxi dev",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs",
     "generate": "yarn prisma:generate && yarn graphql:generate",
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
