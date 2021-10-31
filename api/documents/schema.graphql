@@ -17,7 +17,49 @@ extend type User {
   documents(
     "Filtering options for documents returned."
     filterBy: DocumentFilters
-  ): [Document!]!
+    "Number of documents to be returned"
+    first: Int
+    "A cursor for use in pagination."
+    after: String
+  ): UserDocumentsConnection!
+}
+
+"""
+A connection model between user and documents.
+"""
+type UserDocumentsConnection {
+  """
+  A list of edges.
+  """
+  edges: [UserDocumentsEdge!]!
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+An edge connecting the user to a document node
+"""
+type UserDocumentsEdge {
+  """
+  A node containing a document
+  """
+  node: Document
+}
+
+"""
+Information about the next page and end cursor for pagination.
+"""
+type PageInfo {
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+  """
+  When paginating forwards, are there more items?.
+  """
+  hasNextPage: Boolean!
 }
 
 type Person {

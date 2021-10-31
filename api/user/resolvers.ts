@@ -13,8 +13,8 @@ import {
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
 import {
-  UserDocument,
   UserDocumentService,
+  UserDocumentsResult,
 } from '../documents/user.document.service'
 import { GroupService } from '../groups/service'
 import {
@@ -159,9 +159,28 @@ export class UserResolver {
 
   async documents(
     user: User,
-    { filterBy }: UserDocumentsArgs
-  ): Promise<UserDocument[]> {
-    return await this.userDocumentService.getDocumentsOf(user, filterBy, true)
+    { filterBy, first, after }: UserDocumentsArgs
+  ): Promise<UserDocumentsResult> {
+    const { documents, hasNextPage } =
+      await this.userDocumentService.getDocumentsOf(
+        user,
+        filterBy,
+        first,
+        after,
+        true
+      )
+
+    const endCursor = documents.length
+      ? documents[documents.length - 1].id
+      : null
+
+    return {
+      edges: documents.map((document) => ({ node: document })),
+      pageInfo: {
+        endCursor,
+        hasNextPage,
+      },
+    }
   }
 
   async groups(user: User): Promise<GroupResolved[]> {

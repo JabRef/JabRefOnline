@@ -45,7 +45,12 @@ describe('Query', () => {
           id
           email
           documents {
-            id
+            edges {
+              node {
+                id
+                title
+              }
+            }
           }
           groups {
             id
@@ -63,26 +68,46 @@ describe('Query', () => {
         Object {
           "data": Object {
             "user": Object {
-              "documents": Array [
-                Object {
-                  "id": "ckondtcaf000101mh7x9g4gia",
-                },
-                Object {
-                  "id": "ckr9eq4oc000101mk1ga9bxnt",
-                },
-                Object {
-                  "id": "ckr9eqap6000301mk20hycjqb",
-                },
-                Object {
-                  "id": "ckonduhjk000701mh12wia4nf",
-                },
-                Object {
-                  "id": "ckondu6bh000501mh2o2tf00u",
-                },
-                Object {
-                  "id": "ckondtpcn000301mhg9lvaqlu",
-                },
-              ],
+              "documents": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "ckondtcaf000101mh7x9g4gia",
+                      "title": "Cocoa and Cardiovascular Health",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "ckr9eq4oc000101mk1ga9bxnt",
+                      "title": "Cocoa and health: a decade of research",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "ckr9eqap6000301mk20hycjqb",
+                      "title": "Chocolate and prevention of cardiovascular disease: A systematic review",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "ckonduhjk000701mh12wia4nf",
+                      "title": "Cocoa and Chocolate in Human Health and Disease",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "ckondu6bh000501mh2o2tf00u",
+                      "title": "Chocolate: food as medicine/medicine as food",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "ckondtpcn000301mhg9lvaqlu",
+                      "title": "Functionality of inulin and polydextrose in stevia or thaumatin sweetened dark chocolate",
+                    },
+                  },
+                ],
+              },
               "email": "alice@jabref.de",
               "groups": Array [
                 Object {
