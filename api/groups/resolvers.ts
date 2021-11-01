@@ -1,4 +1,5 @@
-import { Group, GroupType, GroupHierarchyType } from '@prisma/client'
+import * as Prisma from '@prisma/client'
+import { Group } from '@prisma/client'
 import { UserInputError } from 'apollo-server-errors'
 import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
@@ -9,6 +10,7 @@ import {
   MutationCreateGroupArgs,
 } from '../graphql'
 import { GroupService } from './service'
+const { GroupType, GroupHierarchyType } = Prisma
 
 export type GroupResolved = Group & {
   parent: GroupResolved | null
