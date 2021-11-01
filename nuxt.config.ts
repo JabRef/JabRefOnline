@@ -4,15 +4,16 @@ import jiti from 'jiti'
 
 const config: NuxtConfig = {
   /*
-   ** Nuxt target
+   ** Enable static site generation
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'server',
+  target: 'static',
 
   /*
-   ** Disable server-side rendering
+   ** Enable server-side rendering (needed for 'static' target)
+   ** See https://nuxtjs.org/docs/configuration-glossary/configuration-ssr
    */
-  ssr: false,
+  ssr: true,
 
   /*
    ** Headers of the page
