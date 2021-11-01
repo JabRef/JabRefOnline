@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev --spa",
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
+    "build": "nuxt generate",
     "start": "nuxt start",
     "generate": "yarn prisma:generate && yarn graphql:generate",
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
