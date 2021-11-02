@@ -4,10 +4,10 @@ import { defineNuxtConfig } from '@nuxt/bridge'
 
 export default defineNuxtConfig({
   /*
-   ** Nuxt target
+   ** Enable static site generation
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'server',
+  target: 'static',
 
   /*
   bridge: {
@@ -19,10 +19,10 @@ export default defineNuxtConfig({
   */
 
   /*
-   ** Disable server-side rendering
+   ** Enable server-side rendering (needed for 'static' target)
+   ** See https://nuxtjs.org/docs/configuration-glossary/configuration-ssr
    */
-  // TODO: Currently does not work due to https://github.com/nuxt/framework/issues/886.
-  // ssr: false,
+  ssr: true,
 
   /*
    ** Headers of the page
