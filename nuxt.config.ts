@@ -1,6 +1,7 @@
 import { transformSync } from '@babel/core'
 import jiti from 'jiti'
 import { defineNuxtConfig } from '@nuxt/bridge'
+import typescript from '@rollup/plugin-typescript'
 
 export default defineNuxtConfig({
   /*
@@ -9,14 +10,40 @@ export default defineNuxtConfig({
    */
   target: 'static',
 
-  /*
   bridge: {
     // Use Vite instead of Webpack during development
     // https://vite.nuxtjs.org/
     // TODO: Currently not possible due to https://github.com/nuxt/framework/issues/941.
     vite: true,
   },
-  */
+
+  vite: {
+    // @ts-ignore: no typing information, but it is a workaround anyway
+    ssr: {
+      // TODO: Remove these once new versions of the libraries are used that support esm
+      noExternal: [
+        '@vue/devtools-api',
+        // Remove once vue-demi >= 0.12.1 is used, which includes esm support
+        'vue-demi',
+      ],
+    },
+  },
+
+  alias: {
+    // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
+    tslib: 'tslib/tslib.es6.js',
+  },
+
+  nitro: {
+    hooks: {
+      'nitro:rollup:before'(ctx) {
+        // Needed for emitting decorator metadata (which is not supported by esbuild)
+        ctx.rollupConfig?.plugins?.unshift(typescript())
+      },
+    },
+    // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
+    moduleSideEffects: ['reflect-metadata'],
+  },
 
   /*
    ** Enable server-side rendering (needed for 'static' target)
@@ -120,6 +147,15 @@ export default defineNuxtConfig({
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
+    // TODO: Remove these once new versions of the libraries are used that support esm
+    transpile: [
+      // TODO: Remove once apollo/client/utilities supports esm (https://github.com/apollographql/apollo-client/issues/9008)
+      '@apollo/client',
+      // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
+      'tslib',
+      // TODO: Remove this as soon as ts-invariant supports esm (https://github.com/apollographql/invariant-packages/issues/227)
+      'ts-invariant/process',
+    ],
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     extend: (config, { isDev, isClient }): void => {
       if (isClient) {
