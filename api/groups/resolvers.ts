@@ -1,7 +1,7 @@
-import * as Prisma from '@prisma/client'
-import { Group } from '@prisma/client'
+import type { Group, GroupType as GroupTypeT } from '@prisma/client'
 import { UserInputError } from 'apollo-server-errors'
 import { container, injectable } from 'tsyringe'
+import prisma from '@prisma/client'
 import { Context } from '../context'
 import {
   Resolvers,
@@ -10,7 +10,7 @@ import {
   MutationCreateGroupArgs,
 } from '../graphql'
 import { GroupService } from './service'
-const { GroupType, GroupHierarchyType } = Prisma
+const { GroupType, GroupHierarchyType } = prisma
 
 export type GroupResolved = Group & {
   parent: GroupResolved | null
@@ -155,7 +155,7 @@ export class Mutation {
 export class GroupResolver {
   constructor(private groupService: GroupService) {}
 
-  __resolveType(group: GroupMaybeResolved): GroupType {
+  __resolveType(group: GroupMaybeResolved): GroupTypeT {
     return group.type
   }
 

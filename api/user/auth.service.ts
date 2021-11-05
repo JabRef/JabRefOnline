@@ -1,7 +1,7 @@
 import { promisify } from 'util'
-import { PrismaClient, User } from '@prisma/client'
+import type { PrismaClient, User } from '@prisma/client'
 import * as bcrypt from 'bcryptjs'
-import { injectable } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 import { v4 as generateToken } from 'uuid'
 import { RedisClient } from 'redis'
 import { sendEmail } from '../utils/sendEmail'
@@ -23,7 +23,10 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 
 @injectable()
 export class AuthService {
-  constructor(private prisma: PrismaClient, private redisClient: RedisClient) {}
+  constructor(
+    @inject('PrismaClient') private prisma: PrismaClient,
+    private redisClient: RedisClient
+  ) {}
 
   async validateUser(email: string, password: string): Promise<LoginPayload> {
     const user = await this.prisma.user.findUnique({

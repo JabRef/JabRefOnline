@@ -1,4 +1,4 @@
-import {
+import type {
   PrismaClient,
   UserDocument as PlainUserDocument,
   Prisma,
@@ -7,7 +7,7 @@ import {
   JournalIssue,
   Journal,
 } from '@prisma/client'
-import { injectable } from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 import { DocumentFilters, UserDocumentsConnection } from '../graphql'
 
 export type UserDocument = PlainUserDocument & {
@@ -30,7 +30,7 @@ export type UserDocumentsResult = Omit<UserDocumentsConnection, 'edges'> & {
 
 @injectable()
 export class UserDocumentService {
-  constructor(private prisma: PrismaClient) {}
+  constructor(@inject('PrismaClient') private prisma: PrismaClient) {}
 
   async getDocumentById(
     id: string,

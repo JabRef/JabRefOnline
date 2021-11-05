@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '@prisma/client'
 import { seed } from './seed'
+const { PrismaClient } = prisma
 
 /**
  * Drop all data from the (Postgres) database.
@@ -15,16 +16,16 @@ export async function truncate(): Promise<void> {
   const dbSchemaName = 'public'
 
   try {
-    for (const { tablename } of await prisma.$queryRawUnsafe(
+    for (const { tablename } of (await prisma.$queryRawUnsafe(
       `SELECT tablename FROM pg_tables WHERE schemaname='${dbSchemaName}';`
-    ) as any) {
+    )) as any) {
       await prisma.$queryRawUnsafe(
         `TRUNCATE TABLE "${dbSchemaName}"."${tablename as string}" CASCADE;`
       )
     }
-    for (const { relname } of await prisma.$queryRawUnsafe(
+    for (const { relname } of (await prisma.$queryRawUnsafe(
       `SELECT c.relname FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${dbSchemaName}';`
-    ) as any) {
+    )) as any) {
       await prisma.$queryRawUnsafe(
         `ALTER SEQUENCE "${dbSchemaName}"."${
           relname as string
