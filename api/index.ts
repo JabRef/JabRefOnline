@@ -1,13 +1,14 @@
 import http from 'http'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import './tsyringe.config'
+import 'reflect-metadata' // Needed for tsyringe
 import { container } from 'tsyringe'
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
 import { config, Environment } from '../config'
+import { configure as configureTsyringe } from './tsyringe.config'
 import { buildContext } from './context'
 import { loadSchema } from './schema'
 import PassportInitializer from './user/passport-initializer'
@@ -21,6 +22,7 @@ if (config.environment === Environment.Production) {
 }
 const httpServer = http.createServer(app)
 
+configureTsyringe()
 const passportInitializer = container.resolve(PassportInitializer)
 passportInitializer.initialize()
 passportInitializer.install(app)
@@ -43,4 +45,4 @@ async function startServer() {
 }
 void startServer()
 
-module.exports = app
+export default app
