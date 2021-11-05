@@ -56,7 +56,7 @@ jobs:
           creds: ${{secrets.AZURE_CREDENTIALS}}
 
       - name: Start deployment (Test server)
-        uses: bobheadxi/deployments@v0.6.0
+        uses: bobheadxi/deployments@v0.6.1
         id: deployment-test
         with:
           step: start
@@ -76,7 +76,7 @@ jobs:
           DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
       - name: Update deployment status (Test server)
-        uses: bobheadxi/deployments@v0.6.0
+        uses: bobheadxi/deployments@v0.6.1
         if: always()
         with:
           step: finish
@@ -86,7 +86,7 @@ jobs:
           env_url: https://jabref-dev.azurewebsites.net/
 
       - name: Start deployment (Staging server)
-        uses: bobheadxi/deployments@v0.6.0
+        uses: bobheadxi/deployments@v0.6.1
         id: deployment-staging
         with:
           step: start
@@ -106,7 +106,7 @@ jobs:
           DATABASE_URL: ${{ secrets.AZURE_DATABASE_URL }}
 
       - name: Update deployment status (Staging server)
-        uses: bobheadxi/deployments@v0.6.0
+        uses: bobheadxi/deployments@v0.6.1
         if: always()
         with:
           step: finish
