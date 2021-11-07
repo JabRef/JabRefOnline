@@ -155,6 +155,8 @@ export default defineNuxtConfig({
       'tslib',
       // TODO: Remove this as soon as ts-invariant supports esm (https://github.com/apollographql/invariant-packages/issues/227)
       'ts-invariant/process',
+      // TODO: Remove this as soon as vue-property-decorator supports esm (https://github.com/kaorun343/vue-property-decorator/issues/385)
+      'vue-property-decorator',
     ],
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     extend: (config, { isDev, isClient }): void => {
