@@ -50,7 +50,7 @@
           <FontAwesomeIcon icon="times" />
         </t-button>
         <slot>
-          <Editor :document-id="selectedDocumentId"></Editor>
+          <document-editor :document-id="selectedDocumentId"></document-editor>
         </slot>
       </div>
     </transition>
@@ -59,11 +59,11 @@
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 import { useUiStore } from './../store'
-import Editor from './Editor.vue'
+import DocumentEditor from './DocumentEditor.vue'
 
 export default defineComponent({
   components: {
-    Editor,
+    DocumentEditor,
   },
   setup() {
     const ui = useUiStore()

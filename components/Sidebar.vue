@@ -27,7 +27,7 @@
         px-6
       "
     >
-      <Logo class="w-10 flex-none" />
+      <jabref-logo class="w-10 flex-none" />
       <strong class="ml-3 flex-1">JabRef</strong>
     </div>
 

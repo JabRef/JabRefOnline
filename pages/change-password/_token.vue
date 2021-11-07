@@ -1,7 +1,7 @@
 <template>
   <div>
     <Portal to="header">
-      <Logo class="mx-auto h-20 w-auto" />
+      <jabref-logo class="mx-auto h-20 w-auto" />
       <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
         Change Password
       </h2>
