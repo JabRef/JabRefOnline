@@ -116,6 +116,13 @@ module.exports = {
       ],
     },
     {
+      files: ['layouts/**/*.vue', 'pages/**/*.vue'],
+      rules: {
+        // Layouts and pages cannot be confused with HTML components as they are used differently, so no need to worry about single-word names
+        'vue/multi-word-component-names': 'off',
+      },
+    },
+    {
       // Special treatment for test files
       files: ['**/*.test.ts', '**/*.spec.ts'],
       plugins: ['jest'],
