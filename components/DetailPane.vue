@@ -59,12 +59,8 @@
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
 import { useUiStore } from './../store'
-import DocumentEditor from './DocumentEditor.vue'
 
 export default defineComponent({
-  components: {
-    DocumentEditor,
-  },
   setup() {
     const ui = useUiStore()
     return {
