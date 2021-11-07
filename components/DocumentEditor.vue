@@ -51,32 +51,38 @@
       />
     </div>
     <div>
-      <editor-input v-model="published"></editor-input>
+      <document-editor-input v-model="published"></document-editor-input>
       <span class="text-gray-400">|</span>
-      <editor-input v-model="journal"></editor-input>
+      <document-editor-input v-model="journal"></document-editor-input>
     </div>
     <div class="-mt-1">
       <span class="pl-3">
         Volume:
-        <editor-input v-model="volume"></editor-input>
+        <document-editor-input v-model="volume"></document-editor-input>
       </span>
       <span class="text-gray-400 pr-3">|</span>
       <span>
         Issue:
-        <editor-input v-model="issue"></editor-input>
+        <document-editor-input v-model="issue"></document-editor-input>
       </span>
       <span class="text-gray-400 pr-3">|</span>
       <span>
         pp.
-        <editor-input v-model="pages"></editor-input>
+        <document-editor-input v-model="pages"></document-editor-input>
       </span>
     </div>
     <div>
-      <editor-header heading="Abstract" class="mt-4 -mb-1"></editor-header>
+      <document-editor-header
+        heading="Abstract"
+        class="mt-4 -mb-1"
+      ></document-editor-header>
       <t-textarea v-model="abstract" variant="plain" rows="5"></t-textarea>
     </div>
     <div>
-      <editor-header heading="Keywords" class="mt-4"></editor-header>
+      <document-editor-header
+        heading="Keywords"
+        class="mt-4"
+      ></document-editor-header>
       <Tags
         v-model="keywords"
         placeholder="Add keyword"
@@ -86,7 +92,10 @@
       />
     </div>
     <div>
-      <editor-header heading="Groups" class="mt-4"></editor-header>
+      <document-editor-header
+        heading="Groups"
+        class="mt-4"
+      ></document-editor-header>
       <Tags
         v-model="groups"
         placeholder="Add group"
@@ -96,7 +105,10 @@
       />
     </div>
     <div>
-      <editor-header heading="External" class="mt-4 mb-1"></editor-header>
+      <document-editor-header
+        heading="External"
+        class="mt-4 mb-1"
+      ></document-editor-header>
       <t-table :data="external" variant="plain" class="text-sm"></t-table>
     </div>
   </div>
@@ -106,8 +118,6 @@
 import { defineComponent, computed } from '@nuxtjs/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import Tags from './tagify.vue'
-import EditorInput from './EditorInput.vue'
-import EditorHeader from './EditorHeader.vue'
 import { gql } from '~/apollo'
 
 export const DocumentDetails = gql(/* GraphQL */ `
@@ -157,8 +167,6 @@ export const DocumentDetails = gql(/* GraphQL */ `
 export default defineComponent({
   components: {
     Tags,
-    EditorInput,
-    EditorHeader,
   },
   props: {
     documentId: {
