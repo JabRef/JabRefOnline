@@ -1421,6 +1421,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.7.7":
+  version "7.16.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.16.0.tgz#e27b977f2e2088ba24748bf99b5e1dece64e4f0b"
+  integrity sha512-Nht8L0O8YCktmsDV6FqFue7vQLRx3Hb0B37lS5y0jDRqRxlBG4wIJHnf9/bgSE2UyipKFA01YtS+npRdTWBUyw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/standalone@^7.15.7":
   version "7.15.7"
   resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.15.7.tgz#97c04d0dda7c3b2b8d2679957d619ac581471d4d"
@@ -2337,6 +2344,19 @@
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
   integrity sha512-wYn6r8zVZyQJ6rQaALBEln5B1pzxb9shV5Ef97kTvn6yVGrqyXVnDqnU24MXnFubR+rZjBY9NWuxX3FB2sTsjg==
+
+"@he-tree/vue2@^1.3.5":
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/@he-tree/vue2/-/vue2-1.3.5.tgz#d7dbc78cb24788851c82c1af9d21db8f227dcc2d"
+  integrity sha512-qsB+UsgAz+zS5m+x/CNllqXwDmGD/PuD7q4kdO0RhlE6yk+3LDWk/uGcGAJuTQOGGSmMK0zeNzAe/fxij/hYow==
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    draggable-helper "^6.0.4"
+    helper-js "^2.0.6"
+    tslib "^1.14.1"
+    vue-class-component "^7.2.3"
+    vue-property-decorator "^9.1.2"
+    vue-runtime-helpers "^1.1.2"
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
@@ -8747,6 +8767,24 @@ downshift@^6.0.15:
     react-is "^17.0.2"
     tslib "^2.3.0"
 
+drag-event-service@^1.1.7:
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/drag-event-service/-/drag-event-service-1.1.10.tgz#707254d67a9543efe8fdb2325cfb9f9c40991103"
+  integrity sha512-V7WhmEIRLWnuj0sLRHAy5Ce5Q5ZOX4kh4SYY+z4JbUON+WykPyUS0EhZNhF2NjAbnEieMfXUw35lFlI+b6pNZA==
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    helper-js "^2.0.0"
+
+draggable-helper@^6.0.4:
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/draggable-helper/-/draggable-helper-6.0.4.tgz#35552709aa39cfb0d11c24ebf0b8c9361ada8726"
+  integrity sha512-tlchJ+0pEBEHd0QvmzDq04/GQBrI3Xunw8Ikso2dURZ4W8y8CepbmxZFCrQMms1exblKK1Z6nPhyWQcBZWj5hA==
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    drag-event-service "^1.1.7"
+    helper-js "^2.0.4"
+    tslib "^1.11.2"
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -10842,6 +10880,14 @@ header-case@^2.0.4:
   dependencies:
     capital-case "^1.0.4"
     tslib "^2.0.3"
+
+helper-js@^2.0.0, helper-js@^2.0.4, helper-js@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/helper-js/-/helper-js-2.0.6.tgz#ae0d350f6dbf357a028bf70a9cbb8854f2fdf7a9"
+  integrity sha512-hjEuGw3+8O1qrjtDcduUfLVkbE8jHMIfvN1tXBlT/0fygiGKxz37q+nD8dgJRrq0CqsvMKfJBfpyEm33ye+J8Q==
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    tslib "^1.11.2"
 
 hex-color-regex@^1.1.0:
   version "1.1.0"
@@ -18246,7 +18292,7 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.11.2, tslib@^1.14.1, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
@@ -18891,6 +18937,11 @@ vue-apollo@^3.0.8:
     serialize-javascript "^4.0.0"
     throttle-debounce "^2.1.0"
 
+vue-class-component@^7.2.3:
+  version "7.2.6"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.6.tgz#8471e037b8e4762f5a464686e19e5afc708502e4"
+  integrity sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==
+
 vue-client-only@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.1.0.tgz#1a67a47b8ecacfa86d75830173fffee3bf8a4ee3"
@@ -19000,10 +19051,20 @@ vue-no-ssr@^1.1.1:
   resolved "https://registry.yarnpkg.com/vue-no-ssr/-/vue-no-ssr-1.1.1.tgz#875f3be6fb0ae41568a837f3ac1a80eaa137b998"
   integrity sha512-ZMjqRpWabMPqPc7gIrG0Nw6vRf1+itwf0Itft7LbMXs2g3Zs/NFmevjZGN1x7K3Q95GmIjWbQZTVerxiBxI+0g==
 
+vue-property-decorator@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-9.1.2.tgz#266a2eac61ba6527e2e68a6933cfb98fddab5457"
+  integrity sha512-xYA8MkZynPBGd/w5QFJ2d/NM0z/YeegMqYTphy7NJQXbZcuU6FC6AOdUAcy4SXP+YnkerC6AfH+ldg7PDk9ESQ==
+
 vue-router@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.1.tgz#edf3cf4907952d1e0583e079237220c5ff6eb6c9"
   integrity sha512-RRQNLT8Mzr8z7eL4p7BtKvRaTSGdCbTy2+Mm5HTJvLGYSSeG9gDzNasJPP/yOYKLy+/cLG/ftrqq5fvkFwBJEw==
+
+vue-runtime-helpers@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vue-runtime-helpers/-/vue-runtime-helpers-1.1.2.tgz#446b7b820888ab0c5264d2c3a32468e72e4100f3"
+  integrity sha512-pZfGp+PW/IXEOyETE09xQHR1CKkR9HfHZdnMD/FVLUNI+HxYTa82evx5WrF6Kz4s82qtqHvMZ8MZpbk2zT2E1Q==
 
 vue-server-renderer@^2.6.12:
   version "2.6.14"
@@ -19056,11 +19117,6 @@ vue-template-es2015-compiler@^1.9.0, vue-template-es2015-compiler@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
-
-vue-tree-list@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/vue-tree-list/-/vue-tree-list-1.5.0.tgz#aa596dc63597ea23d0aee9e6955cfa43bef58501"
-  integrity sha512-qHRJtPMmjCYA9I9kpHgIT6F1H7leR1ZxcNETrP2r97otSHYdHdK42qt12t4glf2mNvI+wBpY2fLClUGcaQJnpg==
 
 vue-virtual-scroll-list@^2.3.3:
   version "2.3.3"
