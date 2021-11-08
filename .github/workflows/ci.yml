@@ -53,6 +53,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v2.4.1
@@ -77,6 +79,13 @@ jobs:
 
       - name: Run tests
         run: yarn test --ci --coverage
+
+      - name: Publish and test Storybook
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: 'b3787adf2fa5'
+          buildScriptName: storybook:build
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
