@@ -7,8 +7,6 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  // Enable cascading deletes and updates
-  previewFeatures = ["referentialActions"]
 }
 
 model User {
@@ -22,41 +20,63 @@ model User {
   groups Group[]
 }
 
+enum DocumentType {
+  JOURNAL_ARTICLE
+  PROCEEDINGS_ARTICLE
+  THESIS
+  OTHER
+}
+
 // Articles, books etc added by users
 // We do not know what users put in their fields, thus we assume everything is a string
+// TODO: Parallel to the GraphQL api, we would like to have JournalArticle, ProceedingsArticle, etc as derived types.
+//       However, this is not possible with the current version of Prisma, see:
+//          https://github.com/prisma/prisma/issues/2505
+//       There are different ways to handle polymorphism in relational databases, see:
+//          https://www.martinfowler.com/eaaCatalog/singleTableInheritance.html
+//          https://www.martinfowler.com/eaaCatalog/concreteTableInheritance.html
+//          https://www.martinfowler.com/eaaCatalog/classTableInheritance.html
+//          https://stackoverflow.com/questions/45621/how-do-you-deal-with-polymorphism-in-a-database
+//       What we use below is essentially a "single table inheritance" approach combined with the "class table inheritence" by encapsulating certain information specific to a type in a separate table.
 model UserDocument {
   id String @id @default(cuid())
   users User[]
 
-  type String
-  citationKey String?
+  type DocumentType
+  citationKeys String[]
 
   lastModified DateTime?
   added DateTime?
 
   // Common fields
-  author String?
-  editor String?
   title String?
-  journal String?
-  journaltitle String?
-  booktitle String?
-  date String?
-  year String?
-  month String?
-  number String?
-  volume String?
-  edition String?
-  series String?
-  pages String?
-  pagetotal String?
-  issue String?
+  subtitle String?
+  titleAddon String?
+  abstract String?
+  author String?
   note String?
+  languages String[]
+  publicationState String?
+  keywords String[]
+
+  // Type-specific
+  journalIssue JournalIssue? @relation(fields: [journalIssueId], references: [id])
+  journalIssueId String?
+  pageStart String?
+  pageEnd String?
+  electronicId String?
+  originalLanguages String[]
+  translators String[]
+  publishedAt String? // format: YYYY(-MM-DD) TODO: Should use Date format once https://github.com/prisma/prisma/issues/4355 is resolved
+
+  // TODO: Check if they are really needed (in this form)
+  editor String?
+  booktitle String?
+  edition String?
+  pagetotal String?
   url String?
   urldate String?
   publisher String?
-  abstract String?
-  keywords String?
 
   // JabRef-specific
   explicitGroups Group[]
@@ -67,11 +87,33 @@ model UserDocument {
   eprint String?
   eprintclass String?
   eprinttype String?
-  issn String?
   isbn String?
 
   // Other fields that are not often used
   other UserDocumentOtherField[]
+}
+
+model JournalIssue {
+  id String @id @default(cuid())
+  articles UserDocument[]
+  journal Journal? @relation(fields: [journalId], references: [id])
+  journalId String?
+  title String?
+  subtitle String?
+  titleAddon String?
+  number String?
+  name String?
+  series String?
+  volume String?
+}
+
+model Journal {
+  id String @id @default(cuid())
+  issues JournalIssue[]
+  name String
+  subtitle String?
+  titleAddon String?
+  issn String?
 }
 
 model UserDocumentOtherField {

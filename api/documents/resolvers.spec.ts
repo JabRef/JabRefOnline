@@ -23,12 +23,12 @@ describe('Query', () => {
         .calledWith('uniqueId')
         .mockResolvedValueOnce({
           id: 'uniqueId',
-          type: 'something',
+          type: 'OTHER',
         } as UserDocument)
       const document = await query.userDocument({}, { id: 'uniqueId' }, context)
       expect(document).toEqual({
         id: 'uniqueId',
-        type: 'something',
+        type: 'OTHER',
       })
     })
   })
@@ -36,18 +36,20 @@ describe('Query', () => {
 
 describe('Mutation', () => {
   describe('addUserDocument', () => {
-    it('converts other fields correctly', async () => {
+    /* TODO: Handle other fields
+    it('converts other unknown fields correctly', async () => {
       await mutation.addUserDocument(
         {},
         {
-          document: {
-            type: 'something',
-            fields: [
-              {
-                field: 'some',
-                value: 'random field',
-              },
-            ],
+          input: {
+            journalArticle: {
+              other: [
+                {
+                  field: 'some',
+                  value: 'random field',
+                },
+              ],
+            }
           },
         },
         context
@@ -69,29 +71,47 @@ describe('Mutation', () => {
         },
       })
     })
+    */
 
-    it('converts special fields correctly', async () => {
+    it('converts single person author correctly', async () => {
       await mutation.addUserDocument(
         {},
         {
-          document: {
-            type: 'something',
-            fields: [
-              {
-                field: 'author',
-                value: 'JabRef devs',
-              },
-            ],
+          input: {
+            journalArticle: {
+              authors: [
+                {
+                  person: {
+                    name: 'JabRef devs',
+                  },
+                },
+              ],
+            },
           },
         },
         context
       )
       expect(userDocumentService.addDocument).toHaveBeenCalledWith({
         added: null,
-        citationKey: null,
+        citationKeys: [],
         lastModified: null,
-        type: 'something',
+        type: 'JOURNAL_ARTICLE',
         author: 'JabRef devs',
+        abstract: undefined,
+        doi: undefined,
+        electronicId: null,
+        keywords: [],
+        languages: [],
+        note: undefined,
+        originalLanguages: [],
+        pageEnd: null,
+        pageStart: null,
+        publicationState: undefined,
+        publishedAt: null,
+        subtitle: undefined,
+        title: undefined,
+        titleAddon: undefined,
+        translators: [],
       })
     })
   })
@@ -102,7 +122,7 @@ describe('DocumentResolver', () => {
   describe('resolveType', () => {
     it('returns JournalArticle for articles', () => {
       const article = {
-        type: 'JournalArticle',
+        type: 'JOURNAL_ARTICLE',
       } as UserDocument
       expect(documentResolver.__resolveType(article)).toEqual('JournalArticle')
     })

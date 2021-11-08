@@ -38,7 +38,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        endOfLine: 'auto',
+        endOfLine: 'lf',
       },
     ],
     // Ensure void operator is not used, except for variable assignment or function return (might be handy for promises)
@@ -48,19 +48,11 @@ module.exports = {
     {
       files: ['*.graphql'],
       parser: '@graphql-eslint/eslint-plugin',
-      parserOptions: {
-        operations: ['./middleware/**/*.graphql'],
-      },
       plugins: ['@graphql-eslint'],
       rules: {
-        // Workaround for for bug in prettier, can be removed after https://github.com/prettier/eslint-plugin-prettier/pull/413
-        'prettier/prettier': [
-          2,
-          {
-            parser: 'graphql',
-            endOfLine: 'auto',
-          },
-        ],
+        // Make sure that mutations returns not a scalar type (best pratice: have special return type for each mutation)
+        // TODO: Set this to error once we follow this convention
+        '@graphql-eslint/avoid-scalar-result-type-on-mutation': 'warn',
         // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.
         '@graphql-eslint/avoid-typename-prefix': 'error',
         // Requires all types to be reachable at some level by root level fields.
@@ -92,6 +84,8 @@ module.exports = {
         // Requires mutation argument to be always called "input" and input type to be called Mutation name + "Input".
         // TODO: Set this to error once we follow this convention
         '@graphql-eslint/input-name': ['warn', { checkInputType: true }],
+        // Spaced-comment rule only works for JS-style comments using /* or // but not for GraphQL comments using #
+        'spaced-comment': 'off',
       },
     },
     {
@@ -120,6 +114,13 @@ module.exports = {
         // Enable recommended rules for typescript that use typing information (may be CPU intensive)
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
+    },
+    {
+      files: ['layouts/**/*.vue', 'pages/**/*.vue'],
+      rules: {
+        // Layouts and pages cannot be confused with HTML components as they are used differently, so no need to worry about single-word names
+        'vue/multi-word-component-names': 'off',
+      },
     },
     {
       // Special treatment for test files

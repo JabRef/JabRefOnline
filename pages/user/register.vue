@@ -56,41 +56,58 @@
   </div>
 </template>
 <script lang="ts">
-import { gql } from '@apollo/client/core'
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { currentUserVar } from '~/apollo/cache'
-import { SignupDocument } from '~/apollo/graphql'
+import { gql } from '~/apollo'
+import { cacheCurrentUser } from '~/apollo/cache'
 
 export default defineComponent({
-  name: 'Register',
+  name: 'UserRegister',
   layout: 'bare',
 
   setup() {
     const email = ref('')
     const password = ref('')
 
-    gql`
-      mutation signup($email: EmailAddress!, $password: String!) {
-        signup(email: $email, password: $password) {
-          id
-        }
-      }
-    `
     const {
       mutate: signup,
       onDone,
       error,
-    } = useMutation(SignupDocument, () => ({
-      variables: {
-        email: email.value,
-        password: password.value,
-      },
-    }))
+    } = useMutation(
+      gql(/* GraphQL */ `
+        mutation Signup($email: EmailAddress!, $password: String!) {
+          signup(email: $email, password: $password) {
+            ... on UserReturned {
+              user {
+                id
+              }
+            }
+            ... on InputValidationProblem {
+              problems {
+                path
+                message
+              }
+            }
+          }
+        }
+      `),
+      () => ({
+        variables: {
+          email: email.value,
+          password: password.value,
+        },
+        update(_context, { data }) {
+          cacheCurrentUser(
+            data?.signup?.__typename === 'UserReturned'
+              ? data?.signup?.user
+              : null
+          )
+        },
+      })
+    )
     const router = useRouter()
-    onDone((response) => {
-      currentUserVar(response.data?.signup ?? null)
-      void router.push({ name: 'dashboard' })
+    onDone(() => {
+      void router.push('/dashboard')
     })
 
     return {

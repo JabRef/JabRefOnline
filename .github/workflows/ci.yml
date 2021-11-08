@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.4.0
+        uses: actions/setup-node@v2.4.1
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
@@ -88,6 +88,6 @@ jobs:
           buildScriptName: storybook:build
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2.0.2
+        uses: codecov/codecov-action@v2.1.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

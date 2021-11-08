@@ -1,16 +1,14 @@
-import { InMemoryCache, makeVar } from '@apollo/client/core'
-import { User } from '~/api/graphql'
+import { InMemoryCache } from '@apollo/client/core'
+import { relayStylePagination } from '@apollo/client/utilities/policies/pagination'
+import { MeQuery } from './graphql'
+import { gql } from '.'
 import introspection from '~/apollo/introspection'
 
 export const cache = new InMemoryCache({
   typePolicies: {
-    Query: {
+    User: {
       fields: {
-        me: {
-          read() {
-            return currentUserVar()
-          },
-        },
+        documents: relayStylePagination(),
       },
     },
   },
@@ -18,7 +16,15 @@ export const cache = new InMemoryCache({
   possibleTypes: introspection.possibleTypes,
 })
 
-/**
- * The currently logged-in user, or null if not logged in.
- */
-export const currentUserVar = makeVar<Pick<User, 'id'> | null>(null)
+export function cacheCurrentUser(user: MeQuery['me'] | null): void {
+  cache.writeQuery({
+    query: gql(/* GraphQL */ `
+      query Me {
+        me {
+          id
+        }
+      }
+    `),
+    data: { me: user },
+  })
+}

@@ -13,11 +13,49 @@ extend type Query {
 }
 
 extend type Mutation {
-  logout: Boolean
-  login(email: EmailAddress!, password: String!): User
-  signup(email: EmailAddress!, password: String!): User
-  forgotPassword(email: EmailAddress!): Boolean
-  changePassword(token: String!, id: ID!, newPassword: String!): User
+  logout: LogoutPayload
+  login(email: EmailAddress!, password: String!): LoginPayload
+  signup(email: EmailAddress!, password: String!): SignupPayload
+  forgotPassword(email: EmailAddress!): ForgotPasswordPayload
+  changePassword(
+    token: String!
+    id: ID!
+    newPassword: String!
+  ): ChangePasswordPayload
+}
+
+union LoginPayload = UserReturned | InputValidationProblem
+
+union ChangePasswordPayload =
+    UserReturned
+  | TokenProblem
+  | InputValidationProblem
+
+union SignupPayload = UserReturned | InputValidationProblem
+
+type ForgotPasswordPayload {
+  result: Boolean!
+}
+
+type LogoutPayload {
+  result: Boolean!
+}
+
+type UserReturned {
+  user: User!
+}
+
+type InputValidationProblem {
+  problems: [InputFieldValidationProblem]!
+}
+
+type TokenProblem {
+  message: String!
+}
+
+type InputFieldValidationProblem {
+  message: String!
+  path: String!
 }
 
 type User {

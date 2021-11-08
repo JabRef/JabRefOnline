@@ -1,6 +1,5 @@
 import { User } from '@prisma/client'
 import { container, injectable } from 'tsyringe'
-import { UserInputError } from 'apollo-server-express'
 import { Context } from '../context'
 import {
   MutationLoginArgs,
@@ -10,14 +9,21 @@ import {
   QueryUserArgs,
   Resolvers,
   UserDocumentsArgs,
+  ForgotPasswordPayload,
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
 import {
-  UserDocument,
   UserDocumentService,
+  UserDocumentsResult,
 } from '../documents/user.document.service'
 import { GroupService } from '../groups/service'
-import { AuthService } from './auth.service'
+import {
+  AuthService,
+  ChangePasswordPayload,
+  LoginPayload,
+  LogoutPayload,
+  SignupPayload,
+} from './auth.service'
 
 @injectable()
 export class Query {
@@ -36,7 +42,7 @@ export class Query {
     _args: Record<string, never>,
     context: Context
   ): User | null {
-    return context.getUser() || null
+    return context.getUser()
   }
 }
 
@@ -48,17 +54,17 @@ export class Mutation {
     _root: Record<string, never>,
     { email, password }: MutationSignupArgs,
     context: Context
-  ): Promise<User> {
-    const newUser = await this.authService.createAccount(email, password)
-    await context.login(newUser)
-    return newUser
+  ): Promise<SignupPayload> {
+    const newUserPayload = await this.authService.createAccount(email, password)
+    if ('user' in newUserPayload) void context.login(await newUserPayload.user)
+    return newUserPayload
   }
 
   async login(
     _root: Record<string, never>,
     { email, password }: MutationLoginArgs,
     context: Context
-  ): Promise<User | null> {
+  ): Promise<LoginPayload> {
     const { user, info } = await context.authenticate('graphql-local', {
       email,
       password,
@@ -66,11 +72,16 @@ export class Mutation {
     if (user) {
       // Make login persistent by putting it in the express session store
       await context.login(user)
-      return user
+      return { user }
     } else {
-      throw new UserInputError(
-        info?.message || 'Unknown error while logging in.'
-      )
+      return {
+        problems: [
+          {
+            path: 'Email or Password',
+            message: (typeof info === 'string' ? info : info?.message) || 'Unknown error while logging in.',
+          },
+        ],
+      }
     }
   }
 
@@ -78,25 +89,64 @@ export class Mutation {
     _root: Record<string, never>,
     _args: Record<string, never>,
     context: Context
-  ): boolean {
+  ): LogoutPayload {
     context.logout()
-    return true
+    return {
+      result: true,
+    }
   }
 
   async forgotPassword(
     _root: Record<string, never>,
     { email }: MutationForgotPasswordArgs,
     _context: Context
-  ): Promise<boolean> {
-    return await this.authService.resetPassword(email)
+  ): Promise<ForgotPasswordPayload> {
+    return {
+      result: await this.authService.resetPassword(email),
+    }
   }
 
   async changePassword(
     _root: Record<string, never>,
     { token, id, newPassword }: MutationChangePasswordArgs,
     _context: Context
-  ): Promise<User | null> {
+  ): Promise<ChangePasswordPayload> {
     return await this.authService.updatePassword(token, id, newPassword)
+  }
+}
+
+@injectable()
+class SignupPayloadResolver {
+  __resolveType(
+    signup: SignupPayload
+  ): 'UserReturned' | 'InputValidationProblem' {
+    if ('user' in signup) {
+      return 'UserReturned'
+    }
+    return 'InputValidationProblem'
+  }
+}
+
+@injectable()
+class ChangePasswordPayloadResolver {
+  __resolveType(
+    changePassword: ChangePasswordPayload
+  ): 'UserReturned' | 'TokenProblem' | 'InputValidationProblem' {
+    if ('user' in changePassword) return 'UserReturned'
+    else if ('problems' in changePassword) return 'InputValidationProblem'
+    return 'TokenProblem'
+  }
+}
+
+@injectable()
+class LoginPayloadResolver {
+  __resolveType(
+    login: LoginPayload
+  ): 'UserReturned' | 'InputValidationProblem' {
+    if ('user' in login) {
+      return 'UserReturned'
+    }
+    return 'InputValidationProblem'
   }
 }
 
@@ -109,9 +159,28 @@ export class UserResolver {
 
   async documents(
     user: User,
-    { filterBy }: UserDocumentsArgs
-  ): Promise<UserDocument[]> {
-    return await this.userDocumentService.getDocumentsOf(user, filterBy, true)
+    { filterBy, first, after }: UserDocumentsArgs
+  ): Promise<UserDocumentsResult> {
+    const { documents, hasNextPage } =
+      await this.userDocumentService.getDocumentsOf(
+        user,
+        filterBy,
+        first,
+        after,
+        true
+      )
+
+    const endCursor = documents.length
+      ? documents[documents.length - 1].id
+      : null
+
+    return {
+      edges: documents.map((document) => ({ node: document })),
+      pageInfo: {
+        endCursor,
+        hasNextPage,
+      },
+    }
   }
 
   async groups(user: User): Promise<GroupResolved[]> {
@@ -140,5 +209,8 @@ export function resolvers(): Resolvers {
     Query: container.resolve(Query),
     Mutation: container.resolve(Mutation),
     User: container.resolve(UserResolver),
+    LoginPayload: container.resolve(LoginPayloadResolver),
+    SignupPayload: container.resolve(SignupPayloadResolver),
+    ChangePasswordPayload: container.resolve(ChangePasswordPayloadResolver),
   }
 }

@@ -4,15 +4,16 @@ import jiti from 'jiti'
 
 const config: NuxtConfig = {
   /*
-   ** Nuxt target
+   ** Enable static site generation
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'server',
+  target: 'static',
 
   /*
-   ** Disable server-side rendering
+   ** Enable server-side rendering (needed for 'static' target)
+   ** See https://nuxtjs.org/docs/configuration-glossary/configuration-ssr
    */
-  ssr: false,
+  ssr: true,
 
   /*
    ** Headers of the page
@@ -65,8 +66,9 @@ const config: NuxtConfig = {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    // TODO: Play again with vite once it is more stable
-    // 'nuxt-vite',
+    // Use Vite instead of Webpack during development
+    // https://vite.nuxtjs.org/
+    'nuxt-vite',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
@@ -80,7 +82,7 @@ const config: NuxtConfig = {
     // Use postcss v8
     '@nuxt/postcss8',
     // Use Pinia for state management
-    'pinia/nuxt',
+    '@pinia/nuxt',
   ],
 
   /*

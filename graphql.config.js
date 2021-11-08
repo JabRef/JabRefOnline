@@ -22,21 +22,24 @@ const codegen = {
           Group: './groups/resolvers#GroupMaybeResolved',
         },
         scalars: {
+          Date: 'string',
           DateTime: 'Date',
           EmailAddress: 'string',
         },
       },
       plugins: ['typescript', 'typescript-resolvers'],
     },
-    'apollo/graphql.ts': {
+    apollo: {
       documents: [
         './pages/**/*.vue',
         './components/**/*.vue',
-        './middleware/**/*.*',
+        './middleware/**/*.ts',
+        './apollo/cache.ts',
       ],
-      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
+      preset: 'gql-tag-operations-preset',
       config: {
         scalars: {
+          Date: 'Date',
           DateTime: 'Date',
           EmailAddress: 'string',
         },

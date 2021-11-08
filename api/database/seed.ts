@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { PrismaClient, GroupType, GroupHierarchyType } from '@prisma/client'
 
 async function seedInternal(prisma: PrismaClient): Promise<void> {
@@ -19,43 +18,65 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.userDocument.create({
     data: {
       id: 'ckondtcaf000101mh7x9g4gia',
-      type: 'Article',
+      type: 'JOURNAL_ARTICLE',
       title: 'Cocoa and Cardiovascular Health',
       author:
         'Corti, Roberto and Flammer, Andreas J. and Hollenberg, Norman K. and Luscher, Thomas F.',
       abstract:
         'Epidemiological data demonstrate that regular dietary intake of plant-derived foods and beverages reduces the risk of coronary heart disease and stroke. Among many ingredients, cocoa might be an important mediator. Indeed, recent research demonstrates a beneficial effect of cocoa on blood pressure, insulin resistance, and vascular and platelet function. Although still debated, a range of potential mechanisms through which cocoa might exert its benefits on cardiovascular health have been proposed, including activation of nitric oxide and antioxidant and antiinflammatory effects. This review summarizes the available data on the cardiovascular effects of cocoa, outlines potential mechanisms involved in the response to cocoa, and highlights the potential clinical implications associated with its consumption. ( Circulation. 2009; 119: 1433-1441.)',
-      keywords: 'cocoa, endothelium, hypertension, platelets',
+      keywords: ['cocoa', 'endothelium', 'hypertension', 'platelets'],
       doi: '10.1161/CIRCULATIONAHA.108.827022',
-      volume: '119',
-      issue: '10',
-      pages: '1433-1441',
-      journal: 'Circulation',
-      year: '2009',
+      journalIssue: {
+        create: {
+          id: 'ckslizms5000109jv3yx80ujf',
+          journal: {
+            create: {
+              id: 'ckslj094u000309jvdpng93mk',
+              name: 'Circulation',
+            },
+          },
+          volume: '119',
+          number: '10',
+        },
+      },
+      pageStart: '1433',
+      pageEnd: '1441',
+      publishedAt: '2009',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckr9eq4oc000101mk1ga9bxnt',
-      type: 'Article',
+      type: 'JOURNAL_ARTICLE',
       title: 'Cocoa and health: a decade of research',
       author:
         'Cooper, Karen A. and Donovan, Jennifer L. and Waterhouse, Andrew L. and Williamson, Gary',
       abstract:
         'It has been over 10 years since the first mention in a medical journal about cocoa and chocolate as potential sources of antioxidants for health. During this time, cocoa has been found to improve antioxidant status, reduce inflammation and correlate with reduced heart disease risk; with these results, and its popularity, it has received wide coverage in the press. However, after 10 years of research, what is known about the potential health benefits of cocoa and what are the important next steps in understanding this decadent source of antioxidants?',
-      keywords: 'cocoa, chocolate, health, polyphenols, antioxident',
+      keywords: ['cocoa', 'chocolate', 'health', 'polyphenols', 'antioxident'],
       doi: '10.1017/S0007114507795296',
-      volume: '99',
-      issue: '1',
-      pages: '1-11',
-      journal: 'British Journal of Nutrition',
-      year: '2008',
+      journalIssue: {
+        create: {
+          id: 'ckslj1d4t000509jv5j9n0mz0',
+          journal: {
+            create: {
+              id: 'ckslj1heh000709jv5ja9dcyn',
+              name: 'British Journal of Nutrition',
+            },
+          },
+          volume: '99',
+          number: '1',
+        },
+      },
+      pageStart: '1',
+      pageEnd: '11',
+      publishedAt: '2008',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckr9eqap6000301mk20hycjqb',
-      type: 'Article',
+      type: 'JOURNAL_ARTICLE',
       title:
         'Chocolate and prevention of cardiovascular disease: A systematic review',
       author:
@@ -65,58 +86,84 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
         Methods: We reviewed English-language MEDLINE publications from 1966 through January 2005 for experimental, observational, and clinical studies of relations between cocoa, cacao, chocolate, stearic acid, flavonoids ( including flavonols, flavanols, catechins, epicatechins, and procynadins) and the risk of cardiovascular disease ( coronary heart disease (CHD), stroke). A total of 136 publications were selected based on relevance, and quality of design and methods. An updated meta-analysis of flavonoid intake and CHD mortality was also conducted.
         Results: The body of short-term randomized feeding trials suggests cocoa and chocolate may exert beneficial effects on cardiovascular risk via effects on lowering blood pressure, anti-inflammation, anti-platelet function, higher HDL, decreased LDL oxidation. Additionally, a large body of trials of stearic acid suggests it is indeed cholesterol-neutral. However, epidemiologic studies of serum and dietary stearic acid are inconclusive due to many methodologic limitations. Meanwhile, the large body of prospective studies of flavonoids suggests the flavonoid content of chocolate may reduce risk of cardiovascular mortality. Our updated meta-analysis indicates that intake of flavonoids may lower risk of CHD mortality, RR = 0.81 (95% CI: 0.71 - 0.92) comparing highest and lowest tertiles.
         Conclusion: Multiple lines of evidence from laboratory experiments and randomized trials suggest stearic acid may be neutral, while flavonoids are likely protective against CHD mortality. The highest priority now is to conduct larger randomized trials to definitively investigate the impact of chocolate consumption on long-term cardiovascular outcomes.`,
-      keywords: 'dark chocolate, flavonoid intake',
+      keywords: ['dark chocolate', 'flavonoid intake'],
       doi: '10.1186/1743-7075-3-2',
-      volume: '3',
-      issue: '2',
-      journal: 'Nutrition & Metabolism',
-      year: '2006',
+      journalIssue: {
+        create: {
+          id: 'ckslj284j000909jv42d1efc6',
+          journal: {
+            create: {
+              id: 'ckslj2ca3000b09jvdmyj6552',
+              name: 'Nutrition & Metabolism',
+            },
+          },
+          volume: '3',
+          number: '2',
+        },
+      },
+      publishedAt: '2006',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckonduhjk000701mh12wia4nf',
-      type: 'Article',
+      type: 'JOURNAL_ARTICLE',
       title: 'Cocoa and Chocolate in Human Health and Disease',
       author: 'Katz, David L. and Doughty, Kim and Ali, Ather',
       abstract:
         'Cocoa contains more phenolic antioxidants than most foods. Flavonoids, including catechin, epicatechin, and procyanidins predominate in antioxidant activity. The tricyclic structure of the flavonoids determines antioxidant effects that scavenge reactive oxygen species, chelate Fe2+ and Cu+, inhibit enzymes, and upregulate antioxidant defenses. The epicatechin content of cocoa is primarily responsible for its favorable impact on vascular endothelium via its effect on both acute and chronic upregulation of nitric oxide production. Other cardiovascular effects are mediated through anti-inflammatory effects of cocoa polyphenols, and modulated through the activity of NF-kappa B. Antioxidant effects of cocoa may directly influence insulin resistance and, in turn, reduce risk for diabetes. Further, cocoa consumption may stimulate changes in redox-sensitive signaling pathways involved in gene expression and the immune response. Cocoa can protect nerves from injury and inflammation, protect the skin from oxidative damage from UV radiation in topical preparations, and have beneficial effects on satiety, cognitive function, and mood. As cocoa is predominantly consumed as energy-dense chocolate, potential detrimental effects of overconsumption exist, including increased risk of weight gain. Overall, research to date suggests that the benefits of moderate cocoa or dark chocolate consumption likely outweigh the risks.',
-      keywords: 'dark chocolate, blood pressure',
+      keywords: ['dark chocolate', 'blood pressure'],
       doi: '10.1089/ars.2010.3697',
-      volume: '15',
-      issue: '10',
-      pages: '2779-2811',
-      journal: 'Antioxidants & Redox Signaling',
-      year: '2011',
+      journalIssue: {
+        create: {
+          id: 'ckslj3bi8000d09jvhcsx7d3e',
+          journal: {
+            create: {
+              id: 'ckslj3f10000f09jvc1xifgi9',
+              name: 'Antioxidants & Redox Signaling',
+            },
+          },
+          volume: '15',
+          number: '10',
+        },
+      },
+      pageStart: '2779',
+      pageEnd: '2811',
+      publishedAt: '2011',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckondu6bh000501mh2o2tf00u',
-      type: 'InProceedings',
+      type: 'PROCEEDINGS_ARTICLE',
       title: 'Chocolate: food as medicine/medicine as food',
       author: 'Keen, Carl L.',
       abstract:
         'Cocoa and chocolate products have been delicacies for hundreds of years. Only recently have they been recognized as significant sources of phytochemicals with healthful effects. These foods are among the most concentrated sources of the procyanidin flavonoids, catechin and epicatechin. Recent studies have shown that these polyphenols are absorbed from the intestine of animals and humans with epicatechin absorbed much more than catechin. These flavonoids have potent antioxidant and antiplatelet activities following consumption of cocoa or chocolate.',
-      keywords:
-        'chocolate, flavonoids, antioxidants, procyanidins, epicatechin',
+      keywords: [
+        'chocolate',
+        'flavonoids',
+        'antioxidants',
+        'procyanidins',
+        'epicatechin',
+      ],
       doi: '10.1080/07315724.2001.10719181',
       booktitle:
         'Ross Products Research Conference on Medical Issues, Synergy in Medical and Nutrition Therapy',
-      year: '2001',
+      publishedAt: '2001',
     },
   })
   await prisma.userDocument.create({
     data: {
       id: 'ckondtpcn000301mhg9lvaqlu',
-      type: 'PhdThesis',
+      type: 'THESIS',
       title:
         'Functionality of inulin and polydextrose in stevia or thaumatin sweetened dark chocolate',
       author: 'Roger Aidoo',
-      year: '2015',
+      publishedAt: '2015',
       abstract:
         'Chocolate is a high energy product with carbohydrates, including sugar, together with fat, as the main sources of energy. Sucrose is utilized up to 30-60% in chocolate and this confers multiple functional properties on chocolate including sweetness, bulkiness and mouthfeel (texture). Today’s consumers are concerned about the high sugar levels, calories and cariogenicity effects in confectionery products, hence growing the popularity of “light” and “sugar-free” products. This has led to the search for low calorie, low glycemic index, healthier alternatives. Polydextrose and inulin are considered as fibers with many interesting functional attributes that meet the needs of the food industry for healthy foods. Stevia and thaumatin are natural high potency (intense) sweeteners with sensory properties superior to those of other sweeteners. This research investigated the functionality of inulin and polydextrose as sucrose replacers (bulking agents) in sugar-free dark chocolates with stevia or thaumatin as intense sweeteners. The type of bulking agent and concentrations used greatly influenced the rheological properties, textural, melting behaviours and other physical quality characteristics of the developed sugar-free chocolates. Microstructural examination revealed that inulin, which had a lower density than polydextrose tend to have more solids per volume and increased particle volume fraction and solid’s surface area, resulting in a higher particle collision and aggregation thereby limiting chocolate flow. This research also reports for the first time, results of a comparative study of the sweetness brought by the intense sweeteners (stevia and thaumatin) in the sugar-free dark chocolates. With opportunity for improvements in quality of reduced calorie chocolates, findings from this research could be applied to develop or reformulate diabetic and/or reduced calorie chocolates to better meet consumer expectations.',
-      keywords: 'polydextrose, chocolate, inulin, stevia',
+      keywords: ['polydextrose', 'chocolate', 'inulin', 'stevia'],
       other: {
         create: [
           {
@@ -391,14 +438,9 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
 }
 
 export async function seed(): Promise<void> {
-  console.log(`Seeding database...`)
   const prisma = new PrismaClient()
-
   try {
     await seedInternal(prisma)
-  } catch (e) {
-    console.error(e)
-    process.exit(1)
   } finally {
     await prisma.$disconnect()
   }

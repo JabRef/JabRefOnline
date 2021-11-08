@@ -69,13 +69,12 @@
 <script lang="ts">
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 import { computed, ref } from '@vue/composition-api'
-import { gql } from '@apollo/client/core'
 import { useMutation } from '@vue/apollo-composable'
-import { currentUserVar } from '../../apollo/cache'
-import { LoginDocument } from '../../apollo/graphql'
+import { gql } from '~/apollo'
+import { cacheCurrentUser } from '~/apollo/cache'
 
 export default defineComponent({
-  name: 'Login',
+  name: 'UserLogin',
   layout: 'bare',
 
   // TODO: Automatically go to home if already loggin in
@@ -86,31 +85,53 @@ export default defineComponent({
     const password = ref('')
     const otherError = ref('')
 
-    gql`
-      mutation Login($email: EmailAddress!, $password: String!) {
-        login(email: $email, password: $password) {
-          id
-        }
-      }
-    `
     const {
       mutate: loginUser,
       onDone,
       error: graphqlError,
-    } = useMutation(LoginDocument, () => ({
-      variables: {
-        email: email.value,
-        password: password.value,
-      },
-    }))
+    } = useMutation(
+      gql(/* GraphQL */ `
+        mutation Login($email: EmailAddress!, $password: String!) {
+          login(email: $email, password: $password) {
+            ... on UserReturned {
+              user {
+                id
+              }
+            }
+            ... on InputValidationProblem {
+              problems {
+                path
+                message
+              }
+            }
+          }
+        }
+      `),
+      () => ({
+        variables: {
+          email: email.value,
+          password: password.value,
+        },
+        update(_cache, { data: login }) {
+          if (login?.login?.__typename === 'UserReturned') {
+            const { user } = login.login
+            cacheCurrentUser(user)
+          } else {
+            cacheCurrentUser(null)
+          }
+        },
+      })
+    )
     const router = useRouter()
     onDone((result) => {
-      if (result.data?.login) {
-        currentUserVar(result.data.login)
+      if (result.data?.login?.__typename === 'UserReturned') {
         void router.push({ name: 'dashboard' })
       } else {
-        currentUserVar(null)
-        otherError.value = 'Unknown error'
+        otherError.value =
+          result.data?.login?.__typename === 'InputValidationProblem' &&
+          result.data.login.problems[0]
+            ? result.data.login.problems[0].message
+            : 'Unknown error'
       }
     })
     const error = computed(() => graphqlError.value || otherError.value)
