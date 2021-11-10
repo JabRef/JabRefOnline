@@ -6,39 +6,39 @@ import { onError } from '@apollo/client/link/error'
 import { logErrorMessages } from '@vue/apollo-util'
 import { provideApolloClient } from '@vue/apollo-composable'
 import { cache } from '../apollo/cache'
-import { defineNuxtPlugin } from '#app'
-import { config, Environment } from '~/config'
+import { defineNuxtPlugin, useRuntimeConfig } from '#app'
+import { Environment } from '~/config'
 
 Vue.use(VueApollo)
 
-let httpLink
-if (config.environment === Environment.Production) {
-  httpLink = new HttpLink({ uri: '/api', fetch })
-} else {
-  httpLink = new HttpLink({ uri: 'http://localhost:3000/api', fetch })
-}
-
-// Print errors
-const errorLink = onError((error) => {
-  if (config.environment !== Environment.Production) {
-    logErrorMessages(error)
+const apolloPlugin = defineNuxtPlugin(() => {
+  const config = useRuntimeConfig()
+  let httpLink
+  if (config.environment === Environment.Production) {
+    httpLink = new HttpLink({ uri: '/api', fetch })
+  } else {
+    httpLink = new HttpLink({ uri: 'http://localhost:3000/api', fetch })
   }
-})
 
-// Create the apollo client
-const apolloClient = new ApolloClient({
-  cache,
-  link: errorLink.concat(httpLink),
-  // Send cookies along with every request (needed for authentication)
-  credentials: 'include',
-})
+  // Print errors
+  const errorLink = onError((error) => {
+    if (config.environment !== Environment.Production) {
+      logErrorMessages(error)
+    }
+  })
 
-const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
-})
+  // Create the apollo client
+  const apolloClient = new ApolloClient({
+    cache,
+    link: errorLink.concat(httpLink),
+    // Send cookies along with every request (needed for authentication)
+    credentials: 'include',
+  })
 
-const apolloPlugin = defineNuxtPlugin((app) => {
-  app.apolloProvider = apolloProvider
+  const apolloProvider = new VueApollo({
+    defaultClient: apolloClient,
+  })
+
   provideApolloClient(apolloProvider?.defaultClient)
 })
 
