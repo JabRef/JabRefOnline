@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import { defineComponent, computed } from '@nuxtjs/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import Tags from './tagify.vue'
 import { gql } from '~/apollo'
