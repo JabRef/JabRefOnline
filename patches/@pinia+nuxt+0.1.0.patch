@@ -1,0 +1,26 @@
+diff --git a/node_modules/@pinia/nuxt/dist/index.js b/node_modules/@pinia/nuxt/dist/index.js
+index a9a41a2..0046a54 100644
+--- a/node_modules/@pinia/nuxt/dist/index.js
++++ b/node_modules/@pinia/nuxt/dist/index.js
+@@ -13,7 +13,7 @@ const module$1 = kit.defineNuxtModule({
+     if (nuxt.options.features && options.disableVuex) {
+       nuxt.options.features.store = false;
+     }
+-    nuxt.options.alias.pinia = "pinia/dist/pinia.mjs";
++    //nuxt.options.alias.pinia = "pinia/dist/pinia.mjs";
+     kit.addPlugin({ src: require.resolve("./templates/plugin.mjs") });
+     if (vueDemi.isVue2 && !nuxt.options.build.transpile.includes("pinia")) {
+       nuxt.options.build.transpile.push("pinia");
+diff --git a/node_modules/@pinia/nuxt/dist/index.mjs b/node_modules/@pinia/nuxt/dist/index.mjs
+index 56f9326..82bfc4b 100644
+--- a/node_modules/@pinia/nuxt/dist/index.mjs
++++ b/node_modules/@pinia/nuxt/dist/index.mjs
+@@ -11,7 +11,7 @@ const module = defineNuxtModule({
+     if (nuxt.options.features && options.disableVuex) {
+       nuxt.options.features.store = false;
+     }
+-    nuxt.options.alias.pinia = "pinia/dist/pinia.mjs";
++    //nuxt.options.alias.pinia = "pinia/dist/pinia.mjs";
+     addPlugin({ src: require.resolve("./templates/plugin.mjs") });
+     if (isVue2 && !nuxt.options.build.transpile.includes("pinia")) {
+       nuxt.options.build.transpile.push("pinia");
