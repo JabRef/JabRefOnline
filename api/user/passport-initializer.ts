@@ -4,9 +4,10 @@ import session from 'express-session'
 import passport from 'passport'
 import { RedisClient } from 'redis'
 import { injectable } from 'tsyringe'
-import { config, Environment } from '../../config'
 import { AuthService } from './auth.service'
 import EmailStrategy from './auth.email.strategy'
+import config from '#config'
+import { Environment } from '~/config'
 
 @injectable()
 export default class PassportInitializer {

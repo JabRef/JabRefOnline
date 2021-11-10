@@ -2,6 +2,7 @@ import { transformSync } from '@babel/core'
 import jiti from 'jiti'
 import { defineNuxtConfig } from '@nuxt/bridge'
 import typescript from '@rollup/plugin-typescript'
+import { constructPrivateConfig } from './config'
 
 export default defineNuxtConfig({
   /*
@@ -141,6 +142,12 @@ export default defineNuxtConfig({
   //  port: 8000, // default: 3000
   //  host: '0.0.0.0' // default: localhost
   // },
+
+  /*
+   ** Server-side configuration
+   ** See https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
+   */
+  privateRuntimeConfig: constructPrivateConfig(),
 
   /*
    ** Build configuration

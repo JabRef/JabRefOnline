@@ -2,7 +2,9 @@ import prisma from '@prisma/client'
 import { RedisClient, createClient, ClientOpts } from 'redis'
 import './tsyringe.config'
 import { container, instanceCachingFactory } from 'tsyringe'
-import { config, Environment } from '../config'
+import { Environment } from '../config'
+import config from '#config'
+
 const { PrismaClient } = prisma
 
 export function configure(): void {
