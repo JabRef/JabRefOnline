@@ -171,6 +171,8 @@ export default defineComponent({
           return 'Conference Paper'
         case 'Thesis':
           return 'PhD Thesis'
+        default:
+          return document.value.__typename
       }
     })
 

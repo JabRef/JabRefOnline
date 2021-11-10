@@ -35,8 +35,8 @@ export default defineComponent({
     const password = ref('')
     const repeatPassword = ref('')
     const route = useRoute()
-    const token = computed(() => route.value.query.token)
-    const id = computed(() => route.value.query.id)
+    const token = computed(() => route.query.token)
+    const id = computed(() => route.query.id)
     const {
       mutate: changePassword,
       onDone,
