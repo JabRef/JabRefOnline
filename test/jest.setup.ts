@@ -1,8 +1,9 @@
 import 'reflect-metadata'
-import '~/api/tsyringe.config'
 import { GraphQLResponse } from 'apollo-server-types'
-import { container } from 'tsyringe'
+import { container, instanceCachingFactory } from 'tsyringe'
 import { RedisClient } from 'redis'
+import redis from 'redis-mock'
+import { PrismaClient } from '@prisma/client'
 
 // Minimize snapshot of GraphQL responses (no extensions and http field)
 expect.addSnapshotSerializer({
@@ -27,4 +28,11 @@ expect.addSnapshotSerializer({
   },
 })
 
-afterAll(() => container.resolve(RedisClient).quit())
+// Setup dependencies for tests
+container.register('PrismaClient', {
+  useFactory: instanceCachingFactory(() => new PrismaClient()),
+})
+
+container.register(RedisClient, {
+  useFactory: instanceCachingFactory(() => redis.createClient()),
+})
