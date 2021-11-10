@@ -1,9 +1,9 @@
 import { promisify } from 'util'
 import { PrismaClient, User } from '@prisma/client'
-import * as bcrypt from 'bcryptjs'
 import { injectable } from 'tsyringe'
 import { v4 as generateToken } from 'uuid'
 import { RedisClient } from 'redis'
+import { hash, verifyHash } from '../utils/crypto'
 import { sendEmail } from '../utils/sendEmail'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { ResolversTypes } from '../graphql'
@@ -38,7 +38,7 @@ export class AuthService {
         ],
       }
     } else {
-      const correctPassword = await bcrypt.compare(password, user.password)
+      const correctPassword = await verifyHash(password, user.password)
       if (correctPassword) {
         return { user }
       } else {
@@ -59,17 +59,10 @@ export class AuthService {
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + user.id
     const token = generateToken()
-    const hashedToken = await this.hashString(token)
+    const hashedToken = await hash(token)
     this.redisClient.set(key, hashedToken, 'ex', 1000 * 60 * 60 * 24) // VALID FOR ONE DAY
     await sendEmail(email, resetPasswordTemplate(user.id, token))
     return true
-  }
-
-  async hashString(password: string): Promise<string> {
-    // Hash password before saving in database
-    // We use salted hashing to prevent rainbow table attacks
-    const salt = await bcrypt.genSalt()
-    return await bcrypt.hash(password, salt)
   }
 
   async getUserById(id: string): Promise<User | null> {
@@ -115,7 +108,7 @@ export class AuthService {
         ],
       }
     }
-    const hashedPassword = await this.hashString(password)
+    const hashedPassword = await hash(password)
 
     const user = await this.prisma.user.create({
       data: {
@@ -151,7 +144,7 @@ export class AuthService {
         message: 'Token Expired',
       }
     }
-    const checkToken = await bcrypt.compare(token, hashedToken)
+    const checkToken = await verifyHash(token, hashedToken)
     if (!checkToken) {
       return {
         message: 'Invalid Token',
@@ -159,7 +152,7 @@ export class AuthService {
     }
 
     this.redisClient.del(key)
-    const hashedPassword = await this.hashString(newPassword)
+    const hashedPassword = await hash(newPassword)
     const user = await this.prisma.user.update({
       where: {
         id,
