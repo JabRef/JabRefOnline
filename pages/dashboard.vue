@@ -28,7 +28,8 @@ export default defineComponent({
   components: {
     'virtual-list': virtualList,
   },
-  middleware: ['authenticated'],
+  // TODO: Reenable this when nuxt/bridge supports middleware
+  //  middleware: ['authenticated'],
 
   setup() {
     const ui = useUiStore()
