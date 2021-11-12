@@ -6,9 +6,9 @@ import { gql } from '~/apollo'
 /**
  * Plugin that adds checks if the user is logged in, and redirects her to the login page if not.
  */
-const authenticated: Plugin = async function ({ app }, _inject) {
-  app.router?.beforeEach(async (to, from, next) => {
-    console.log(to.meta)
+export default <Plugin>function ({ app }, _inject) {
+  app.router?.beforeEach(async (to, _from, next) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- There is no type info for meta
     if (to.matched.some((record) => record.meta.requiresAuth)) {
       // TODO: Special type treatment should no longer be necessary with vue-apollo v4
       const apolloClient = app.apolloProvider
@@ -47,5 +47,3 @@ function redirectToLogin(next: NavigationGuardNext) {
   // TODO: Remember the intended url by appending something like ?redirect=context.route.fullPath
   next({ path: '/user/login' })
 }
-
-export default authenticated
