@@ -28,7 +28,9 @@ export default defineComponent({
   components: {
     'virtual-list': virtualList,
   },
-  middleware: ['authenticated'],
+  meta: {
+    requiresAuth: true,
+  },
 
   setup() {
     const ui = useUiStore()
