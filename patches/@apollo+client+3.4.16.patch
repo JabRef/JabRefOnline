@@ -1,0 +1,13 @@
+diff --git a/node_modules/@apollo/client/utilities/globals/globals.cjs.js b/node_modules/@apollo/client/utilities/globals/globals.cjs.js
+index a650f90..4f9c677 100644
+--- a/node_modules/@apollo/client/utilities/globals/globals.cjs.js
++++ b/node_modules/@apollo/client/utilities/globals/globals.cjs.js
+@@ -3,7 +3,7 @@
+ Object.defineProperty(exports, '__esModule', { value: true });
+ 
+ var tsInvariant = require('ts-invariant');
+-var process$1 = require('ts-invariant/process');
++var process$1 = require('ts-invariant/process/main.js');
+ var graphql = require('graphql');
+ 
+ function maybe(thunk) {
