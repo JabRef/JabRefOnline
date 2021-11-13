@@ -54,6 +54,8 @@ const config: NuxtConfig = {
     '~/plugins/apollo.ts',
     // Custom Vue directives
     '~/plugins/vue.directives.ts',
+    // Authentication check
+    '~/plugins/authenticated.ts',
   ],
 
   /*
@@ -83,6 +85,8 @@ const config: NuxtConfig = {
     '@nuxt/postcss8',
     // Use Pinia for state management
     '@pinia/nuxt',
+    // Make route meta information available to plugins
+    'nuxt-route-meta',
   ],
 
   /*

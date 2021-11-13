@@ -33,7 +33,7 @@ const codegen = {
       documents: [
         './pages/**/*.vue',
         './components/**/*.vue',
-        './middleware/**/*.ts',
+        './plugins/**/*.ts',
         './apollo/cache.ts',
       ],
       preset: 'gql-tag-operations-preset',

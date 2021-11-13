@@ -10,7 +10,8 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
     data: {
       id: 'ckn4oul7100004cv7y3t94n8j',
       email: 'alice@jabref.de',
-      password: '$2a$10$d.P8dAo.0pmsvW2xwsH7sudRMhSBiCvOfEkN8JBeuvHBs1ZtLUdoe', // EBNPXY35TYkYXHs
+      password:
+        'saltsaltsaltsaltsaltsaltsaltsalt63f7e072b6a9faf6e77616c098c4bb3ac69c58d249e620e1dd51257018ac7fcb40b576e9f69e9c556c70a980327dac12b1ee76a76f22b249d585fe2de10b365a', // EBNPXY35TYkYXHs
       name: 'Alice',
     },
   })
