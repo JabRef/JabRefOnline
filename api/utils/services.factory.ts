@@ -1,6 +1,7 @@
 import redis, { ClientOpts, RedisClient } from 'redis'
 import redisMock from 'redis-mock'
-import { config, Environment } from '~/config'
+import { Environment } from 'config'
+import config from '#config'
 
 export function createRedisClient(): RedisClient {
   if (config.environment === Environment.LocalDevelopment) {
