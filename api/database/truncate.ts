@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import prismaClient from '@prisma/client'
 import { seed } from './seed'
 
 /**
@@ -11,20 +11,20 @@ import { seed } from './seed'
  * It is necessary as long as https://github.com/prisma/prisma/issues/5596 is not implemented.
  */
 export async function truncate(): Promise<void> {
-  const prisma = new PrismaClient()
+  const prisma = new prismaClient.PrismaClient()
   const dbSchemaName = 'public'
 
   try {
-    for (const { tablename } of await prisma.$queryRawUnsafe(
+    for (const { tablename } of (await prisma.$queryRawUnsafe(
       `SELECT tablename FROM pg_tables WHERE schemaname='${dbSchemaName}';`
-    ) as any) {
+    )) as any) {
       await prisma.$queryRawUnsafe(
         `TRUNCATE TABLE "${dbSchemaName}"."${tablename as string}" CASCADE;`
       )
     }
-    for (const { relname } of await prisma.$queryRawUnsafe(
+    for (const { relname } of (await prisma.$queryRawUnsafe(
       `SELECT c.relname FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${dbSchemaName}';`
-    ) as any) {
+    )) as any) {
       await prisma.$queryRawUnsafe(
         `ALTER SEQUENCE "${dbSchemaName}"."${
           relname as string
