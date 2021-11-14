@@ -30,7 +30,7 @@
     "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "lint:graphql": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json eslint --ext .graphql,.vue --ignore-path .gitignore .",
     "postinstall": "yarn generate",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand --no-cache",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
     "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test.ts --runInBand",
     "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest spec.ts",
     "validate": "yarn graphql:validate"
@@ -125,6 +125,7 @@
     "@vue/compiler-sfc": "^3.2.21",
     "@vue/test-utils": "^1.2.2",
     "@vue/vue2-jest": "^27.0.0-alpha.3",
+    "babel-jest": "^27.3.1",
     "chromatic": "^6.0.6",
     "concurrently": "^6.3.0",
     "cross-env": "^7.0.3",
@@ -140,8 +141,7 @@
     "prettier": "^2.4.1",
     "prisma": "3.4.2",
     "redis-mock": "^0.56.3",
-    "ts-jest": "^27.0.7",
-    "vue-jest": "4.0.1"
+    "ts-jest": "^27.0.7"
   },
   "workspaces": {
     "nohoist": [
