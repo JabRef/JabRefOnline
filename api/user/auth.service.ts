@@ -1,7 +1,7 @@
 import { promisify } from 'util'
 import type { PrismaClient, User } from '@prisma/client'
 import { inject, injectable } from 'tsyringe'
-import { v4 as generateToken } from 'uuid'
+import uuid from 'uuid' // TODO: Change to { v4 as generateToken } as soon as uuid is a proper esm module / jest supports it (https://github.com/uuidjs/uuid/issues/451)
 import { RedisClient } from 'redis'
 import { hash, verifyHash } from '../utils/crypto'
 import { sendEmail } from '../utils/sendEmail'
@@ -61,7 +61,7 @@ export class AuthService {
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + user.id
-    const token = generateToken()
+    const token = uuid.v4()
     const hashedToken = await hash(token)
     this.redisClient.set(key, hashedToken, 'ex', 1000 * 60 * 60 * 24) // VALID FOR ONE DAY
     await sendEmail(email, resetPasswordTemplate(user.id, token))

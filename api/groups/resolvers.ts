@@ -1,7 +1,7 @@
-import type { Group, GroupType as GroupTypeT } from '@prisma/client'
 import { UserInputError } from 'apollo-server-errors'
 import { container, injectable } from 'tsyringe'
 import prisma from '@prisma/client'
+import type { Group, GroupType as GroupTypeT } from '@prisma/client'
 import { Context } from '../context'
 import {
   Resolvers,

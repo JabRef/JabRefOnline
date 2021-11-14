@@ -1,6 +1,5 @@
-import prisma from '@prisma/client'
+import prismaClient from '@prisma/client'
 import { seed } from './seed'
-const { PrismaClient } = prisma
 
 /**
  * Drop all data from the (Postgres) database.
@@ -12,7 +11,7 @@ const { PrismaClient } = prisma
  * It is necessary as long as https://github.com/prisma/prisma/issues/5596 is not implemented.
  */
 export async function truncate(): Promise<void> {
-  const prisma = new PrismaClient()
+  const prisma = new prismaClient.PrismaClient()
   const dbSchemaName = 'public'
 
   try {
