@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { useRouter, useRoute } from '#app'
