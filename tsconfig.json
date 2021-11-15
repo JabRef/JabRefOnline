@@ -25,6 +25,12 @@
       "@pinia/nuxt",
     ]
   },
+  "ts-node": {
+    "moduleTypes": {
+      // Workaround for https://github.com/facebook/jest/issues/11453
+      "jest.config.ts": "cjs"
+    }
+  },
   "exclude": [
     "node_modules",
     ".nuxt",

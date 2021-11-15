@@ -1,6 +1,6 @@
 import redis, { ClientOpts, RedisClient } from 'redis'
 import redisMock from 'redis-mock'
-import { Environment } from 'config'
+import { Environment } from '~/config'
 import config from '#config'
 
 export function createRedisClient(): RedisClient {
