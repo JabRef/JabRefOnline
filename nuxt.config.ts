@@ -1,5 +1,3 @@
-import { transformSync } from '@babel/core'
-import jiti from 'jiti'
 import { defineNuxtConfig } from '@nuxt/bridge'
 import typescript from '@rollup/plugin-typescript'
 import { constructPrivateConfig } from './config'
