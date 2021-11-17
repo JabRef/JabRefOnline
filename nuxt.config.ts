@@ -100,6 +100,7 @@ export default defineNuxtConfig({
   // TODO: Reenable config viewer as soon as https://github.com/nuxt/framework/issues/865 is fixed.
   tailwindcss: {
     viewer: false,
+    configPath: '~/tailwind.config.cjs',
   },
 
   /*
@@ -111,8 +112,6 @@ export default defineNuxtConfig({
     // Allows more control where component's templates are rendered
     // https://portal-vue.linusb.org/
     'portal-vue/nuxt',
-    // Use postcss v8
-    '@nuxt/postcss8',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Make route meta information available to plugins
