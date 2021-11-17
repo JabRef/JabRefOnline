@@ -10,6 +10,11 @@ config.autoAddCss = false
 library.add(fas)
 
 export default defineNuxtPlugin((nuxtApp) => {
+  if (!nuxtApp) {
+    // For some strange reason, nuxtApp is not defined for storybook, so don't do anything in this case
+    return
+  }
+
   // Register the component globally
   nuxtApp.vueApp.component('FontAwesomeIcon', FontAwesomeIcon)
 })

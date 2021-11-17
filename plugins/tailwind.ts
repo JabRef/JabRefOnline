@@ -241,6 +241,11 @@ const settings = {
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
+  if (!nuxtApp) {
+    // For some strange reason, nuxtApp is not defined for storybook, so don't do anything in this case
+    return
+  }
+
   // @ts-ignore: Bridge is messing with the import for some reason
   if (VueTailwind.install) {
     nuxtApp.vueApp.use(VueTailwind, settings)
