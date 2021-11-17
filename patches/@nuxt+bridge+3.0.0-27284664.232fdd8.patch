@@ -45,3 +45,27 @@ index 41e88bd..3581d70 100644
        const { ViteBuilder } = await import('./vite.mjs');
        builder.bundleBuilder = new ViteBuilder(builder);
      });
+diff --git a/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs b/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs
+index 522b5e0..6515e77 100644
+--- a/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs
++++ b/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs
+@@ -23,7 +23,8 @@ export default (ctx, inject) => {
+     vueApp: {
+       component: Vue.component.bind(Vue),
+       config: {
+-        globalProperties: {}
++        globalProperties: {},
++        optionMergeStrategies: Vue.config.optionMergeStrategies
+       },
+       directive: Vue.directive.bind(Vue),
+       mixin: Vue.mixin.bind(Vue),
+@@ -33,7 +34,8 @@ export default (ctx, inject) => {
+       use (vuePlugin) {
+         vuePlugin.install(this)
+       },
+-      version: Vue.version
++      version: Vue.version,
++      prototype: {}
+     },
+     provide: inject,
+     globalName: 'nuxt',
