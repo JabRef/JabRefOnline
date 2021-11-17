@@ -45,6 +45,36 @@ index 41e88bd..3581d70 100644
        const { ViteBuilder } = await import('./vite.mjs');
        builder.bundleBuilder = new ViteBuilder(builder);
      });
+diff --git a/node_modules/@nuxt/bridge/dist/runtime/app.d.ts b/node_modules/@nuxt/bridge/dist/runtime/app.d.ts
+index c7dff20..7644e20 100644
+--- a/node_modules/@nuxt/bridge/dist/runtime/app.d.ts
++++ b/node_modules/@nuxt/bridge/dist/runtime/app.d.ts
+@@ -1,7 +1,8 @@
+ import type { Hookable } from 'hookable';
+-import type { Vue } from 'vue/types/vue';
++import type { VueConstructor } from 'vue/types/vue';
+ import type { ComponentOptions } from 'vue';
+ import { defineComponent } from './composables';
++import { Plugin } from '@nuxt/types';
+ export declare const isVue2 = true;
+ export declare const isVue3 = false;
+ export declare const defineNuxtComponent: typeof defineComponent;
+@@ -24,7 +25,7 @@ export interface VueAppCompat {
+ export interface NuxtAppCompat {
+     nuxt2Context: Vue;
+     vue2App: ComponentOptions<Vue>;
+-    vueApp: VueAppCompat;
++    vueApp: VueConstructor;
+     globalName: string;
+     hooks: Hookable<RuntimeNuxtHooks>;
+     hook: NuxtAppCompat['hooks']['hook'];
+@@ -40,5 +41,5 @@ export interface Context {
+     $_nuxtApp: NuxtAppCompat;
+ }
+ export declare const setNuxtAppInstance: (nuxt: NuxtAppCompat | null) => void;
+-export declare const defineNuxtPlugin: (plugin: any) => (ctx: Context) => void;
++export declare function defineNuxtPlugin (plugin: (nuxtApp: NuxtAppCompat) => void): (ctx: Context) => void;
+ export declare const useNuxtApp: () => any;
 diff --git a/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs b/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs
 index 522b5e0..6515e77 100644
 --- a/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs

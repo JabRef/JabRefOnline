@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import VueTailwind from 'vue-tailwind'
 import {
   TInput,
@@ -12,6 +11,7 @@ import {
   TTextarea,
   TTable,
 } from 'vue-tailwind/dist/components'
+import { defineNuxtPlugin } from '#app'
 
 const settings = {
   't-input': {
@@ -240,4 +240,12 @@ const settings = {
   },
 }
 
-Vue.use(VueTailwind, settings)
+export default defineNuxtPlugin((nuxtApp) => {
+  // @ts-ignore: Bridge is messing with the import for some reason
+  if (VueTailwind.install) {
+    nuxtApp.vueApp.use(VueTailwind, settings)
+  } else {
+    // @ts-ignore: Bridge is messing with the import for some reason (so that everything lands in default)
+    nuxtApp.vueApp.use(VueTailwind.default, settings)
+  }
+})
