@@ -1,0 +1,38 @@
+diff --git a/node_modules/@nuxt/bridge/dist/chunks/module.mjs b/node_modules/@nuxt/bridge/dist/chunks/module.mjs
+index 7e5831c..c67fb46 100644
+--- a/node_modules/@nuxt/bridge/dist/chunks/module.mjs
++++ b/node_modules/@nuxt/bridge/dist/chunks/module.mjs
+@@ -128,7 +128,7 @@ const distDir$1 = join(pkgDir, "dist");
+ function setupNitroBridge() {
+   const nuxt = useNuxt();
+   if (!nuxt.options.dev && nuxt.options.target === "static" && !nuxt.options._prepare && !nuxt.options._export && !nuxt.options._legacyGenerate) {
+-    throw new Error("[nitro] Please use `nuxt generate` for static target");
++    // throw new Error("[nitro] Please use `nuxt generate` for static target");
+   }
+   nuxt.options.build.loadingScreen = false;
+   nuxt.options.build.indicator = false;
+diff --git a/node_modules/@nuxt/bridge/dist/chunks/module2.mjs b/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
+index 41e88bd..3581d70 100644
+--- a/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
++++ b/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
+@@ -2,6 +2,7 @@ import consola from 'consola';
+ import { defineNuxtModule, addPluginTemplate } from '@nuxt/kit';
+ import hash from 'hash-sum';
+ import { resolve } from 'pathe';
++import { build } from 'vite';
+ 
+ const version = "3.0.0-27284664.232fdd8";
+ 
+@@ -151,8 +152,10 @@ const module = defineNuxtModule({
+     }
+     addPluginTemplate(middlewareTemplate);
+     nuxt.hook("builder:prepared", async (builder) => {
+-      builder.bundleBuilder.close();
+-      delete builder.bundleBuilder;
++      if (builder.bundleBuilder && builder.bundleBuilder.close) {
++        builder.bundleBuilder.close();
++        delete builder.bundleBuilder;
++      }
+       const { ViteBuilder } = await import('./vite.mjs');
+       builder.bundleBuilder = new ViteBuilder(builder);
+     });
