@@ -11,7 +11,12 @@ import { Environment } from '~/config'
 
 Vue.use(VueApollo)
 
-const apolloPlugin = defineNuxtPlugin(() => {
+// @ts-ignore: strange typing from bridge
+export default defineNuxtPlugin((nuxtApp) => {
+  if (!nuxtApp) {
+    // For some strange reason, nuxtApp is not defined for storybook, so don't do anything in this case
+    return
+  }
   const config = useRuntimeConfig()
   let httpLink
   if (config.environment === Environment.Production) {
@@ -41,5 +46,3 @@ const apolloPlugin = defineNuxtPlugin(() => {
 
   provideApolloClient(apolloProvider?.defaultClient)
 })
-
-export default apolloPlugin
