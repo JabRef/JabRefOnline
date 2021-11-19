@@ -1,4 +1,5 @@
 import VueTailwind from 'vue-tailwind'
+import Vue from 'vue'
 import {
   TInput,
   TCheckbox,
@@ -11,7 +12,6 @@ import {
   TTextarea,
   TTable,
 } from 'vue-tailwind/dist/components'
-import { defineNuxtPlugin } from '#app'
 
 const settings = {
   't-input': {
@@ -240,17 +240,12 @@ const settings = {
   },
 }
 
-export default defineNuxtPlugin((nuxtApp) => {
-  if (!nuxtApp) {
-    // For some strange reason, nuxtApp is not defined for storybook, so don't do anything in this case
-    return
-  }
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VueTailwindPlugin =
+  // @ts-ignore: Bridge is messing with the import as VueTailwind is not yet an ES module
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  VueTailwind.default?.default || VueTailwind.default || VueTailwind
 
-  // @ts-ignore: Bridge is messing with the import for some reason
-  if (VueTailwind.install) {
-    nuxtApp.vueApp.use(VueTailwind, settings)
-  } else {
-    // @ts-ignore: Bridge is messing with the import for some reason (so that everything lands in default)
-    nuxtApp.vueApp.use(VueTailwind.default, settings)
-  }
-})
+Vue.use(VueTailwindPlugin, settings)
+
+export default {}
