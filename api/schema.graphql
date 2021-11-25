@@ -1,10 +1,12 @@
 # eslint-disable @graphql-eslint/no-unreachable-types -- due to bug https://github.com/dotansimha/graphql-eslint/issues/571
 
 type Query {
+  # eslint-disable-next-line @graphql-eslint/naming-convention -- this is a workaround anyhow to not have an empty type
   _empty: String
 }
 
 type Mutation {
+  # eslint-disable-next-line @graphql-eslint/naming-convention -- this is a workaround anyhow to not have an empty type
   _empty: String
 }
 

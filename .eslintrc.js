@@ -50,11 +50,12 @@ module.exports = {
       parser: '@graphql-eslint/eslint-plugin',
       plugins: ['@graphql-eslint'],
       rules: {
-        // Make sure that mutations returns not a scalar type (best pratice: have special return type for each mutation)
+        // TODO: Use recommended rules once we follow most conventions
+        // Make sure that mutations returns not a scalar type (best practice: have special return type for each mutation)
         // TODO: Set this to error once we follow this convention
-        '@graphql-eslint/avoid-scalar-result-type-on-mutation': 'warn',
+        '@graphql-eslint/no-scalar-result-type-on-mutation': 'warn',
         // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.
-        '@graphql-eslint/avoid-typename-prefix': 'error',
+        '@graphql-eslint/no-typename-prefix': 'error',
         // Requires all types to be reachable at some level by root level fields.
         '@graphql-eslint/no-unreachable-types': 'error',
         // Enforces that deprecated fields or enum values are not in use by operations.
@@ -70,17 +71,30 @@ module.exports = {
         '@graphql-eslint/no-hashtag-description': 'warn',
         // Requires sname for your GraphQL operations.
         '@graphql-eslint/no-anonymous-operations': 'error',
-        // Make sure to not add the operation type to the name of the operation, e.g. 'user' instead of 'userQuery'.
-        '@graphql-eslint/no-operation-name-suffix': 'error',
+        "@graphql-eslint/naming-convention": [
+          "error",
+          {
+            "OperationDefinition": {
+              "style": "PascalCase",
+              // Make sure to not add the operation type to the name of the operation, e.g. 'user' instead of 'userQuery'.
+              "forbiddenPrefixes": ["Query", "Mutation", "Subscription", "Get"],
+              "forbiddenSuffixes": ["Query", "Mutation", "Subscription"]
+            }
+          }
+        ],
         // Requires all deprecation directives to specify a reason
         '@graphql-eslint/require-deprecation-reason': ['error'],
         // Enforces descriptions in your type definitions
         '@graphql-eslint/require-description': [
           'warn',
-          { on: ['ObjectTypeDefinition', 'FieldDefinition'] },
+          {
+            "types": true,
+            "FieldDefinition": true,
+            "ObjectTypeDefinition": true,
+          }
         ],
         // Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.
-        '@graphql-eslint/avoid-duplicate-fields': ['error'],
+        '@graphql-eslint/no-duplicate-fields': ['error'],
         // Requires mutation argument to be always called "input" and input type to be called Mutation name + "Input".
         // TODO: Set this to error once we follow this convention
         '@graphql-eslint/input-name': ['warn', { checkInputType: true }],
