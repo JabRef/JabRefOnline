@@ -8,16 +8,7 @@
       x-model="password"
     />
     <div
-      class="
-        absolute
-        inset-y-0
-        right-0
-        pr-3
-        flex
-        items-center
-        text-sm
-        leading-5
-      "
+      class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
     >
       <FontAwesomeIcon
         class="text-gray-500"
