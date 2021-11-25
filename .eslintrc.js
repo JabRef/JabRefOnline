@@ -77,7 +77,11 @@ module.exports = {
         // Enforces descriptions in your type definitions
         '@graphql-eslint/require-description': [
           'warn',
-          { on: ['ObjectTypeDefinition', 'FieldDefinition'] },
+          {
+            "types": true,
+            "FieldDefinition": true,
+            "ObjectTypeDefinition": true,
+          }
         ],
         // Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.
         '@graphql-eslint/avoid-duplicate-fields': ['error'],
