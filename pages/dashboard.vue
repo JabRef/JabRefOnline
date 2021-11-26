@@ -87,7 +87,7 @@ export default defineComponent({
             groupId: ui.selectedGroupId,
             query: ui.activeSearchQuery,
             first: FIRST,
-            after: result.value?.me?.documents.pageInfo.endCursor,
+            after: result.value?.me?.documents.pageInfo.endCursor ?? undefined,
           },
         })
       }

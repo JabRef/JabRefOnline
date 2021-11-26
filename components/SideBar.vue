@@ -2,30 +2,11 @@
   <div
     v-if="sideBarOpen"
     id="sideBar"
-    class="
-      flex flex-col flex-wrap
-      bg-white
-      border-r border-gray-300
-      w-64
-      fixed
-      md:top-0 md:left-0
-      z-40
-      h-screen
-    "
+    class="flex flex-col flex-wrap bg-white border-r border-gray-300 w-64 fixed md:top-0 md:left-0 z-40 h-screen"
   >
     <!-- Logo -->
     <div
-      class="
-        hidden
-        flex-none
-        md:flex
-        flex-row
-        items-center
-        w-full
-        h-20
-        border-b
-        px-6
-      "
+      class="hidden flex-none md:flex flex-row items-center w-full h-20 border-b px-6"
     >
       <jabref-logo class="w-10 flex-none" />
       <strong class="ml-3 flex-1">JabRef</strong>
@@ -37,16 +18,7 @@
 
       <a
         href="#"
-        class="
-          mb-3
-          capitalize
-          font-medium
-          text-sm
-          hover:text-teal-600
-          transition
-          ease-in-out
-          duration-500
-        "
+        class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
       >
         <FontAwesomeIcon
           icon="list"
@@ -59,16 +31,7 @@
 
       <a
         href="#"
-        class="
-          mb-3
-          capitalize
-          font-medium
-          text-sm
-          hover:text-teal-600
-          transition
-          ease-in-out
-          duration-500
-        "
+        class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
       >
         <FontAwesomeIcon
           icon="exchange-alt"
