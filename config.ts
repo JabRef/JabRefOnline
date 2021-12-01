@@ -1,4 +1,4 @@
-import type { PrivateRuntimeConfig } from '@nuxt/kit'
+import type { PrivateRuntimeConfig } from '@nuxt/schema'
 
 export enum Environment {
   /**
