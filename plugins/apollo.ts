@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import VueApollo from 'vue-apollo'
 import { ApolloClient, HttpLink } from '@apollo/client/core'
 import fetch from 'cross-fetch'
@@ -8,13 +9,13 @@ import { cache } from '../apollo/cache'
 import { defineNuxtPlugin, useRuntimeConfig } from '#app'
 import { Environment } from '~/config'
 
+Vue.use(VueApollo)
+
 export default defineNuxtPlugin((nuxtApp) => {
   if (!nuxtApp) {
     // For some strange reason, nuxtApp is not defined for storybook, so don't do anything in this case
     return
   }
-
-  nuxtApp.vueApp.use(VueApollo)
 
   const config = useRuntimeConfig()
   let httpLink
