@@ -18,11 +18,7 @@ export default defineNuxtConfig({
     // @ts-ignore: no typing information, but it is a workaround anyway
     ssr: {
       // TODO: Remove these once new versions of the libraries are used that support esm
-      noExternal: [
-        '@vue/devtools-api',
-        // Remove once vue-demi >= 0.12.1 is used, which includes esm support
-        'vue-demi',
-      ],
+      noExternal: ['@vue/devtools-api', 'pinia'],
     },
   },
 
