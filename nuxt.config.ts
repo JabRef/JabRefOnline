@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
-import typescript from '@rollup/plugin-typescript'
+import typescript from 'rollup-plugin-typescript2'
 import { constructPrivateConfig } from './config'
 
 export default defineNuxtConfig({
