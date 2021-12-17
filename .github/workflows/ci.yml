@@ -83,7 +83,6 @@ jobs:
       - name: Publish and test Storybook
         uses: chromaui/action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: 'b3787adf2fa5'
           buildScriptName: storybook:build
 
