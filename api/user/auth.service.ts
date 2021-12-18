@@ -62,7 +62,7 @@ export class AuthService {
     const key = PREFIX + user.id
     const token = uuid.v4()
     const hashedToken = await hash(token)
-    this.redisClient.set(key, hashedToken, { EX: 1000 * 60 * 60 * 24 }) // VALID FOR ONE DAY
+    await this.redisClient.set(key, hashedToken, { EX: 1000 * 60 * 60 * 24 }) // VALID FOR ONE DAY
     await sendEmail(email, resetPasswordTemplate(user.id, token))
     return true
   }
@@ -151,7 +151,7 @@ export class AuthService {
       }
     }
 
-    this.redisClient.del(key)
+    await this.redisClient.del(key)
     const hashedPassword = await hash(newPassword)
     const user = await this.prisma.user.update({
       where: {
