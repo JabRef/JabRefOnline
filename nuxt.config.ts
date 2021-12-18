@@ -12,6 +12,10 @@ export default defineNuxtConfig({
   bridge: {
     // Use Vite instead of Webpack
     vite: true,
+    // Disable legacy composition API support (we no longer need this)
+    capi: {
+      legacy: false,
+    },
   },
 
   vite: {
