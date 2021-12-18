@@ -5,9 +5,11 @@ import { createRedisClient } from '~/api/utils/services.factory'
 
 // Register services for all tests
 container.register('RedisClient', {
-  useFactory: instanceCachingFactory(async () => await createRedisClient()),
+  useValue: await createRedisClient(),
 })
-afterAll(() => container.resolve<RedisClientType>('RedisClient').quit())
+afterAll(async () => {
+  await container.resolve<RedisClientType>('RedisClient').quit()
+})
 
 // Setup services for integration tests
 // @ts-ignore: Jest doesn't allow an easy way to add typescript info

@@ -12,10 +12,13 @@ export async function createRedisClient(): Promise<RedisClientType<any, any>> {
     // TODO: Remove this workaround once https://github.com/yeahoffline/redis-mock/issues/195 is fixed
     return {
       get: promisify(mockRedis.get).bind(mockRedis),
+      quit: promisify(mockRedis.quit).bind(mockRedis),
+      /*
       delete: promisify(mockRedis.del).bind(mockRedis),
       flushAll: promisify(mockRedis.flushAll).bind(mockRedis),
       setEx: promisify(mockRedis.setEx).bind(mockRedis),
       expire: promisify(mockRedis.expire).bind(mockRedis),
+      */
     } as unknown as RedisClientType
   } else {
     const redisConfig = {
