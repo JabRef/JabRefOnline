@@ -5,7 +5,7 @@ import { createRedisClient } from '~/api/utils/services.factory'
 
 // Register services for all tests
 container.register('RedisClient', {
-  useFactory: instanceCachingFactory(() => createRedisClient()),
+  useFactory: instanceCachingFactory(async () => await createRedisClient()),
 })
 afterAll(() => container.resolve<RedisClientType>('RedisClient').quit())
 

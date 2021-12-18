@@ -5,7 +5,7 @@ import redis, { RedisClientType } from 'redis'
 import redisMock from 'redis-mock'
 import { config, Environment } from '~/config'
 
-export function createRedisClient(): RedisClientType<any, any> {
+export async function createRedisClient(): Promise<RedisClientType<any, any>> {
   if (config.environment === Environment.LocalDevelopment) {
     const mockRedis = redisMock.createClient()
     // Workaround for redis-mock being not compatible with redis@4
@@ -35,6 +35,8 @@ export function createRedisClient(): RedisClientType<any, any> {
     if (config.environment === Environment.CI) {
       delete redisConfig.password
     }
-    return redis.createClient(redisConfig)
+    const client = redis.createClient(redisConfig)
+    await client.connect()
+    return client
   }
 }
