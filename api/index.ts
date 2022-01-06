@@ -23,27 +23,29 @@ if (config.environment === Environment.Production) {
 }
 const httpServer = http.createServer(app)
 
-await configureTsyringe()
-const passportInitializer = container.resolve(PassportInitializer)
-passportInitializer.initialize()
-passportInitializer.install(app)
+// TODO: Replace this with await, once esbuild supports top-level await
+void configureTsyringe().then(() => {
+  const passportInitializer = container.resolve(PassportInitializer)
+  passportInitializer.initialize()
+  passportInitializer.install(app)
 
-const server = new ApolloServer({
-  schema: loadSchema(),
-  context: buildContext,
-  introspection: true,
-  plugins: [
-    // Enable Apollo Studio in development, and also in production (at least for now)
-    ApolloServerPluginLandingPageLocalDefault({ footer: false }),
-    // Gracefully shutdown HTTP server when Apollo server terminates
-    ApolloServerPluginDrainHttpServer({ httpServer }),
-  ],
+  const server = new ApolloServer({
+    schema: loadSchema(),
+    context: buildContext,
+    introspection: true,
+    plugins: [
+      // Enable Apollo Studio in development, and also in production (at least for now)
+      ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+      // Gracefully shutdown HTTP server when Apollo server terminates
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+    ],
+  })
+
+  async function startServer() {
+    await server.start()
+    server.applyMiddleware({ app, path: '/' })
+  }
+  void startServer()
 })
-
-async function startServer() {
-  await server.start()
-  server.applyMiddleware({ app, path: '/' })
-}
-void startServer()
 
 export default app
