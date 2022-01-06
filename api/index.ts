@@ -23,7 +23,7 @@ if (config.environment === Environment.Production) {
 }
 const httpServer = http.createServer(app)
 
-configureTsyringe()
+await configureTsyringe()
 const passportInitializer = container.resolve(PassportInitializer)
 passportInitializer.initialize()
 passportInitializer.install(app)

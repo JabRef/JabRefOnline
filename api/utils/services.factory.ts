@@ -1,23 +1,46 @@
-import redis, { ClientOpts, RedisClient } from 'redis'
+/* eslint-disable @typescript-eslint/no-misused-promises */ // TODO: Remove once redis-mock is updated
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
+import { promisify } from 'util'
+import redis, { RedisClientType } from 'redis'
 import redisMock from 'redis-mock'
 import { Environment } from '~/config'
 import config from '#config'
 
-export function createRedisClient(): RedisClient {
+export async function createRedisClient(): Promise<RedisClientType<any, any>> {
   if (config.environment === Environment.LocalDevelopment) {
-    return redisMock.createClient()
+    const mockRedis = redisMock.createClient()
+    // Workaround for redis-mock being not compatible with redis@4
+    // TODO: Remove this workaround once https://github.com/yeahoffline/redis-mock/issues/195 is fixed
+    return {
+      get: promisify(mockRedis.get).bind(mockRedis),
+      quit: promisify(mockRedis.quit).bind(mockRedis),
+      /*
+      delete: promisify(mockRedis.del).bind(mockRedis),
+      flushAll: promisify(mockRedis.flushAll).bind(mockRedis),
+      setEx: promisify(mockRedis.setEx).bind(mockRedis),
+      expire: promisify(mockRedis.expire).bind(mockRedis),
+      */
+    } as unknown as RedisClientType
   } else {
-    const redisConfig: ClientOpts = {
-      ...config.redis,
+    const redisConfig = {
+      password: config.redis.password as string | undefined,
+      socket: {
+        port: config.redis.port,
+        host: config.redis.host,
+        tls: true as true | undefined,
+      },
     }
-    // Azure needs a TLS connection to Redis
-    if (config.environment === Environment.Production) {
-      redisConfig.tls = { servername: config.redis.host }
+
+    // Only Azure needs a TLS connection to Redis
+    if (config.environment !== Environment.Production) {
+      delete redisConfig.socket.tls
     }
     // Redis on Github Actions does not need a password
     if (config.environment === Environment.CI) {
       delete redisConfig.password
     }
-    return redis.createClient(redisConfig)
+    const client = redis.createClient(redisConfig)
+    await client.connect()
+    return client
   }
 }

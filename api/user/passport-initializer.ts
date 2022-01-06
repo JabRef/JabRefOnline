@@ -2,8 +2,8 @@ import connectRedis from 'connect-redis'
 import { Express } from 'express-serve-static-core'
 import session from 'express-session'
 import passport from 'passport'
-import { RedisClient } from 'redis'
-import { injectable } from 'tsyringe'
+import { RedisClientType } from 'redis'
+import { inject, injectable } from 'tsyringe'
 import { AuthService } from './auth.service'
 import EmailStrategy from './auth.email.strategy'
 import config from '#config'
@@ -13,7 +13,7 @@ import { Environment } from '~/config'
 export default class PassportInitializer {
   constructor(
     private accountService: AuthService,
-    private redisClient: RedisClient
+    @inject('RedisClient') private redisClient: RedisClientType
   ) {}
 
   initialize(): void {
