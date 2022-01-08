@@ -1,5 +1,5 @@
 diff --git a/node_modules/@nuxt/bridge/dist/chunks/module.mjs b/node_modules/@nuxt/bridge/dist/chunks/module.mjs
-index 8fe7644..aae7f46 100644
+index afb41a1..fdd707b 100644
 --- a/node_modules/@nuxt/bridge/dist/chunks/module.mjs
 +++ b/node_modules/@nuxt/bridge/dist/chunks/module.mjs
 @@ -128,7 +128,7 @@ const distDir$1 = join(pkgDir, "dist");
@@ -11,7 +11,7 @@ index 8fe7644..aae7f46 100644
    }
    nuxt.options.build.loadingScreen = false;
    nuxt.options.build.indicator = false;
-@@ -245,7 +245,7 @@ function setupNitroBridge() {
+@@ -255,7 +255,7 @@ function setupNitroBridge() {
    });
    nuxt.hook("generate:extendRoutes", async () => {
      await build(nitroDevContext);
@@ -21,10 +21,10 @@ index 8fe7644..aae7f46 100644
    nuxt.hook("generate:done", async () => {
      await nuxt.server.close();
 diff --git a/node_modules/@nuxt/bridge/dist/chunks/module2.mjs b/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
-index 61f1978..9c8fe05 100644
+index 399cc56..f571b6f 100644
 --- a/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
 +++ b/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
-@@ -151,8 +151,10 @@ const module = defineNuxtModule({
+@@ -158,8 +158,10 @@ const module = defineNuxtModule({
      }
      addPluginTemplate(middlewareTemplate);
      nuxt.hook("builder:prepared", async (builder) => {
