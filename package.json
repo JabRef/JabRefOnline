@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi generate",
-    "start": "node .output/server/index.mjs",
+    "start": "nuxi preview",
     "generate": "yarn prisma:generate && yarn graphql:generate",
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
