@@ -5,7 +5,7 @@
     style="--bg: white; --p: 0 10px; --trans-x: -50%; --trans-y: -50%"
   />
 </template>
-<script>
+<script lang="ts">
 export default {
   props: {
     content: {
