@@ -17,7 +17,8 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from '@vue/composition-api'
+export default defineComponent({
   layout: 'bare',
   props: {
     error: {
@@ -25,5 +26,5 @@ export default {
       default: null,
     },
   },
-}
+})
 </script>

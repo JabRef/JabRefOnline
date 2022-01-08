@@ -18,9 +18,14 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 export default defineComponent({
-  props: ['value'],
+  props: {
+    value: {
+      type: String,
+      default: '',
+    },
+  },
   methods: {
-    update(newValue) {
+    update(newValue: string) {
       this.$emit('input', newValue)
     },
   },

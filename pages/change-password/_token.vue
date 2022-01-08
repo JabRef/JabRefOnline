@@ -6,7 +6,7 @@
         Change Password
       </h2>
     </Portal>
-    <form @submit.prevent="changePassword">
+    <form @submit.prevent="changePassword()">
       <div class="space-y-5">
         <t-input-group label="New Password" variant="important">
           <PasswordInput v-model="password" />
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { useRouter, useRoute } from '#app'
 import { gql } from '~/apollo'
@@ -35,8 +35,9 @@ export default defineComponent({
     const password = ref('')
     const repeatPassword = ref('')
     const route = useRoute()
-    const token = computed(() => route.query.token)
-    const id = computed(() => route.query.id)
+    const token = route.query.token as string
+    const id = route.query.id as string
+
     const {
       mutate: changePassword,
       onDone,
@@ -68,8 +69,8 @@ export default defineComponent({
       `),
       () => ({
         variables: {
-          token: token.value,
-          id: id.value,
+          token,
+          id,
           newPassword: password.value,
         },
       })

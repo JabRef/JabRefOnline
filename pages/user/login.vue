@@ -24,7 +24,7 @@
     >
       {{ error }}
     </t-alert>
-    <form @submit.prevent="loginUser">
+    <form @submit.prevent="loginUser()">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">
           <t-input v-model="email" v-focus />
