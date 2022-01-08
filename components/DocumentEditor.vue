@@ -8,7 +8,7 @@
         }"
         variant="plaincaps"
       >
-        <template slot="arrow" slot-scope="{ className }">
+        <template #arrow="{ className }">
           <FontAwesomeIcon icon="chevron-down" size="xs" :class="className" />
         </template>
       </t-select>

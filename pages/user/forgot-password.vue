@@ -13,7 +13,7 @@
         to {{ email }}.
       </p>
     </div>
-    <form v-else @submit.prevent="forgotPassword">
+    <form v-else @submit.prevent="forgotPassword()">
       <div class="space-y-5">
         <t-input-group label="Email address" variant="important">
           <t-input v-model="email" v-focus />

@@ -76,9 +76,12 @@ export default defineComponent({
     this.tagify?.destroy()
   },
   methods: {
-    onChange(event: { target: HTMLInputElement | null }) {
+    onChange(event: { target: EventTarget | null }) {
       // Update value prop
-      this.$emit('input', event.target?.value || [])
+      this.$emit(
+        'input',
+        (event.target as HTMLInputElement | null)?.value || []
+      )
     },
   },
 })
