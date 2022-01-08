@@ -85,6 +85,8 @@ jobs:
         with:
           projectToken: 'b3787adf2fa5'
           buildScriptName: storybook:build
+          # Don't wait until Chroma verified the build (for this we have the Github check)
+          exitOnceUploaded: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
