@@ -29,7 +29,8 @@ export default defineComponent({
     'virtual-list': virtualList,
   },
   meta: {
-    requiresAuth: true,
+    // TODO: Reactivate login check
+    // requiresAuth: true,
   },
 
   setup() {
