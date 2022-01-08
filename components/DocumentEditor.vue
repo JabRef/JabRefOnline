@@ -30,7 +30,7 @@
       <Tags
         v-model="authors"
         placeholder="Add author"
-        :delimiters="null"
+        :delimiters="undefined"
         :whitelist="authorSuggestions"
       />
     </div>
@@ -70,7 +70,7 @@
       <Tags
         v-model="keywords"
         placeholder="Add keyword"
-        :delimiters="null"
+        :delimiters="undefined"
         :whitelist="keywordSuggestions"
         tag-class="border rounded-md"
       />
@@ -83,7 +83,7 @@
       <Tags
         v-model="groups"
         placeholder="Add group"
-        :delimiters="null"
+        :delimiters="undefined"
         :whitelist="groupSuggestions"
         tag-class="bg-highlight-50 rounded-md"
       />

@@ -6,14 +6,15 @@
   />
 </template>
 <script lang="ts">
-export default {
+import { defineComponent } from '@vue/composition-api'
+export default defineComponent({
   props: {
     content: {
       type: String,
       default: '',
     },
   },
-}
+})
 </script>
 <style>
 .hr-with-text::after {
