@@ -3,7 +3,8 @@
 import { promisify } from 'util'
 import redis, { RedisClientType } from 'redis'
 import redisMock from 'redis-mock'
-import { config, Environment } from '~/config'
+import { Environment } from '~/config'
+import config from '#config'
 
 export async function createRedisClient(): Promise<RedisClientType<any, any>> {
   if (config.environment === Environment.LocalDevelopment) {

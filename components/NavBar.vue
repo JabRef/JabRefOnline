@@ -107,7 +107,8 @@
 
 <script lang="ts">
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
-import { defineComponent, useRouter, ref, watch } from '@nuxtjs/composition-api'
+import { defineComponent, ref, watch } from '@vue/composition-api'
+import { useRouter } from '#app'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 import { cacheCurrentUser } from '~/apollo/cache'

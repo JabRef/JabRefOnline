@@ -1,5 +1,5 @@
-import type { PrismaClient } from '@prisma/client'
-import {
+import type {
+  PrismaClient,
   UserDocument as PlainUserDocument,
   Prisma,
   User,

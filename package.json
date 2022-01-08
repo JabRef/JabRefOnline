@@ -2,10 +2,11 @@
   "name": "jabref-online",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "nuxt dev --spa",
-    "build": "nuxt generate",
-    "start": "nuxt start",
+    "dev": "nuxi dev",
+    "build": "nuxi generate",
+    "start": "nuxi preview",
     "generate": "yarn prisma:generate && yarn graphql:generate",
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
@@ -21,15 +22,17 @@
     "prisma:generate:watch": "prisma generate --watch",
     "storybook": "nuxt storybook",
     "storybook:build": "nuxt storybook build",
+    "storybook@17": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxt storybook",
+    "storybook:build@17": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxt storybook build",
     "storybook:publish": "chromatic --exit-zero-on-changes --build-script-name storybook:build",
-    "graphql:generate": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json graphql-codegen",
-    "graphql:generate:watch": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json graphql-codegen --watch",
+    "graphql:generate": "graphql-codegen",
+    "graphql:generate:watch": "graphql-codegen --watch",
     "graphql:validate": "graphql-inspector validate --apollo '{pages,components}/**/*.vue' 'api/**/*.graphql'",
     "docker:redis": "docker run -d --rm --name JabRefRedis -p 6380:6379 redis --requirepass jabref",
     "lint": "yarn lint:js && yarn lint:graphql",
     "lint:js": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "lint:graphql": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json eslint --ext .graphql,.vue --ignore-path .gitignore .",
-    "postinstall": "yarn generate",
+    "lint:graphql": "eslint --ext .graphql,.vue --ignore-path .gitignore .",
+    "postinstall": "patch-package && nuxi prepare && yarn generate",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
     "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test.ts --runInBand",
     "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest spec.ts",
@@ -51,7 +54,6 @@
     "@graphql-tools/merge": "^8.2.1",
     "@graphql-tools/schema": "^8.3.0",
     "@he-tree/vue2": "^1.3.9",
-    "@nuxtjs/composition-api": "^0.31.0",
     "@pinia/nuxt": "^0.1.8",
     "@prisma/client": "^3.7.0",
     "@vue/apollo-composable": "4.0.0-alpha.16",
@@ -60,9 +62,6 @@
     "@yaireo/tagify": "^4.9.4",
     "apollo-server-express": "^3.6.1",
     "autoprefixer": "^10.4.2",
-    "babel-plugin-transform-import-meta": "^2.1.0",
-    "babel-plugin-transform-typescript": "^7.0.0-alpha.19",
-    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "connect-redis": "^6.0.0",
     "cross-fetch": "^3.1.4",
     "eslint-plugin-jest": "^25.3.4",
@@ -74,7 +73,7 @@
     "graphql-scalars": "^1.14.1",
     "lodash": "^4.17.21",
     "nodemailer": "^6.7.2",
-    "nuxt": "^2.15.8",
+    "nuxt-edge": "latest",
     "nuxt-route-meta": "^2.3.4",
     "passport": "^0.5.2",
     "pinia": "^2.0.9",
@@ -82,7 +81,7 @@
     "redis": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "ts-loader": "^8.3.0",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.4.0",
     "tsyringe": "^4.6.0",
     "typescript": "^4.5.4",
     "vue-apollo": "^3.1.0",
@@ -101,6 +100,7 @@
     "@graphql-eslint/eslint-plugin": "^3.6.0",
     "@graphql-inspector/cli": "^3.0.2",
     "@graphql-typed-document-node/core": "^3.1.1",
+    "@nuxt/bridge": "npm:@nuxt/bridge-edge",
     "@nuxt/postcss8": "^1.1.3",
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.0.6",
@@ -137,11 +137,19 @@
     "eslint-plugin-vue": "^8.2.0",
     "jest": "^27.4.7",
     "jest-mock-extended": "^2.0.4",
-    "nuxt-vite": "^0.3.5",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.5.1",
     "prisma": "3.7.0",
     "redis-mock": "^0.56.3",
+    "rollup-plugin-typescript2": "^0.31.1",
     "ts-jest": "^27.1.2"
+  },
+  "resolutions": {
+    "@graphql-tools/mock": "^8.4.3"
+  },
+  "resolutionsComments": {
+    "@graphql-tools/mock": "Can be removed once apollo-server updated its dependencies: https://github.com/apollographql/apollo-server/issues/5901"
   },
   "workspaces": {
     "nohoist": [
@@ -151,6 +159,6 @@
   },
   "prisma": {
     "schema": "api/database/schema.prisma",
-    "seed": "cross-env TS_NODE_PROJECT=./tsconfig.cjs.json ts-node ./api/database/runSeed.ts"
+    "seed": "node --experimental-specifier-resolution=node --loader ts-node/esm ./api/database/runSeed.ts"
   }
 }

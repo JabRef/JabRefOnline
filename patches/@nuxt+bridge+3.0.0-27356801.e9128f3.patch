@@ -1,0 +1,63 @@
+diff --git a/node_modules/@nuxt/bridge/dist/chunks/module.mjs b/node_modules/@nuxt/bridge/dist/chunks/module.mjs
+index afb41a1..fdd707b 100644
+--- a/node_modules/@nuxt/bridge/dist/chunks/module.mjs
++++ b/node_modules/@nuxt/bridge/dist/chunks/module.mjs
+@@ -128,7 +128,7 @@ const distDir$1 = join(pkgDir, "dist");
+ function setupNitroBridge() {
+   const nuxt = useNuxt();
+   if (!nuxt.options.dev && nuxt.options.target === "static" && !nuxt.options._prepare && !nuxt.options._export && !nuxt.options._legacyGenerate) {
+-    throw new Error("[nitro] Please use `nuxt generate` for static target");
++    // throw new Error("[nitro] Please use `nuxt generate` for static target");
+   }
+   nuxt.options.build.loadingScreen = false;
+   nuxt.options.build.indicator = false;
+@@ -255,7 +255,7 @@ function setupNitroBridge() {
+   });
+   nuxt.hook("generate:extendRoutes", async () => {
+     await build(nitroDevContext);
+-    await nuxt.server.reload();
++    //await nuxt.server.reload();
+   });
+   nuxt.hook("generate:done", async () => {
+     await nuxt.server.close();
+diff --git a/node_modules/@nuxt/bridge/dist/chunks/module2.mjs b/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
+index 399cc56..f571b6f 100644
+--- a/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
++++ b/node_modules/@nuxt/bridge/dist/chunks/module2.mjs
+@@ -158,8 +158,10 @@ const module = defineNuxtModule({
+     }
+     addPluginTemplate(middlewareTemplate);
+     nuxt.hook("builder:prepared", async (builder) => {
+-      builder.bundleBuilder.close();
+-      delete builder.bundleBuilder;
++      if (builder.bundleBuilder && builder.bundleBuilder.close) {
++        builder.bundleBuilder.close();
++        delete builder.bundleBuilder;
++      }
+       const { ViteBuilder } = await import('./vite.mjs');
+       builder.bundleBuilder = new ViteBuilder(builder);
+     });
+diff --git a/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs b/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs
+index 159e000..9b41cfa 100644
+--- a/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs
++++ b/node_modules/@nuxt/bridge/dist/runtime/app.plugin.mjs
+@@ -24,7 +24,8 @@ export default (ctx, inject) => {
+     vueApp: {
+       component: Vue.component.bind(Vue),
+       config: {
+-        globalProperties: {}
++        globalProperties: {},
++        optionMergeStrategies: Vue.config.optionMergeStrategies
+       },
+       directive: Vue.directive.bind(Vue),
+       mixin: Vue.mixin.bind(Vue),
+@@ -34,7 +35,8 @@ export default (ctx, inject) => {
+       use (vuePlugin) {
+         vuePlugin.install(this)
+       },
+-      version: Vue.version
++      version: Vue.version,
++      prototype: {}
+     },
+     provide: inject,
+     globalName: 'nuxt',

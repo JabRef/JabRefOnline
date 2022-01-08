@@ -28,7 +28,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
 import { useUiStore } from './../store'
 
 export default defineComponent({

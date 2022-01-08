@@ -93,7 +93,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from '@vue/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import { BaseTree } from '@he-tree/vue2'
 import { gql } from '~/apollo'

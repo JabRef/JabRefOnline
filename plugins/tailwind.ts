@@ -1,5 +1,5 @@
-import Vue from 'vue'
 import VueTailwind from 'vue-tailwind'
+import Vue from 'vue'
 import {
   TInput,
   TCheckbox,
@@ -240,4 +240,12 @@ const settings = {
   },
 }
 
-Vue.use(VueTailwind, settings)
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const VueTailwindPlugin =
+  // @ts-ignore: Bridge is messing with the import as VueTailwind is not yet an ES module
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  VueTailwind.default?.default || VueTailwind.default || VueTailwind
+
+Vue.use(VueTailwindPlugin, settings)
+
+export default {}

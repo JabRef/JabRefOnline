@@ -6,6 +6,7 @@ const config: Config.InitialOptions = {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js',
+    '#config': '<rootDir>/test/config.ts',
   },
   moduleFileExtensions: ['js', 'ts', 'vue', 'json'],
   transform: {

@@ -4,9 +4,10 @@ import session from 'express-session'
 import passport from 'passport'
 import { RedisClientType } from 'redis'
 import { inject, injectable } from 'tsyringe'
-import { config, Environment } from '../../config'
 import { AuthService } from './auth.service'
 import EmailStrategy from './auth.email.strategy'
+import config from '#config'
+import { Environment } from '~/config'
 
 @injectable()
 export default class PassportInitializer {
@@ -26,15 +27,23 @@ export default class PassportInitializer {
   }
 
   install(app: Express): void {
+    // TODO: Use redis store also for development as soon as https://github.com/tj/connect-redis/issues/336 is fixed (and mock-redis is compatible with redis v4)
+    let store
+    if (config.environment === Environment.Production) {
+      const RedisStore = connectRedis(session)
+      store = new RedisStore({
+        client: this.redisClient,
+        disableTouch: true,
+      })
+    } else {
+      store = new session.MemoryStore()
+    }
+
     // Add middleware that sends and receives the session ID using cookies
     // See https://github.com/expressjs/session#readme
-    const RedisStore = connectRedis(session)
     app.use(
       session({
-        store: new RedisStore({
-          client: this.redisClient,
-          disableTouch: true,
-        }),
+        store,
         // The secret used to sign the session cookie
         secret: [config.session.primarySecret, config.session.secondarySecret],
         // Don't force session to be saved back to the session store unless it was modified
