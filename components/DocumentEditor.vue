@@ -16,30 +16,14 @@
     <div class="z-10 grid -mt-2">
       <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
       <div
-        class="
-          whitespace-pre-wrap
-          text-xl
-          row-span-1
-          col-span-1 col-start-1
-          row-start-1
-          py-2
-          px-3
-          invisible
-        "
+        class="whitespace-pre-wrap text-xl row-span-1 col-span-1 col-start-1 row-start-1 py-2 px-3 invisible"
       >
         {{ title + ' ' }}
       </div>
       <t-textarea
         v-model="title"
         variant="plain"
-        class="
-          text-xl
-          resize-none
-          overflow-hidden
-          row-span-1
-          col-span-1 col-start-1
-          row-start-1
-        "
+        class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
       ></t-textarea>
     </div>
     <div class="-mt-3">
@@ -114,8 +98,8 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, computed } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent, computed } from '@vue/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
 import Tags from './tagify.vue'
 import { gql } from '~/apollo'

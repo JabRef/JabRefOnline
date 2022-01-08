@@ -1,0 +1,13 @@
+diff --git a/node_modules/@pinia/nuxt/dist/module.mjs b/node_modules/@pinia/nuxt/dist/module.mjs
+index c8c5975..606d0fb 100644
+--- a/node_modules/@pinia/nuxt/dist/module.mjs
++++ b/node_modules/@pinia/nuxt/dist/module.mjs
+@@ -20,7 +20,7 @@ const module = (function(_options) {
+   if (nuxt.options.features && options.disableVuex) {
+     nuxt.options.features.store = false;
+   }
+-  nuxt.options.alias.pinia = "pinia/dist/pinia.mjs";
++  //nuxt.options.alias.pinia = "pinia/dist/pinia.mjs";
+   this.addPlugin({ src: require.resolve("./plugin.mjs") });
+ });
+ 

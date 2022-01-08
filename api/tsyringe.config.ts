@@ -1,14 +1,15 @@
-import 'reflect-metadata'
-import { PrismaClient } from '@prisma/client'
-import { RedisClient } from 'redis'
-
+import prisma from '@prisma/client'
 import { container, instanceCachingFactory } from 'tsyringe'
 import { createRedisClient } from './utils/services.factory'
 
-container.register<PrismaClient>('PrismaClient', {
-  useFactory: instanceCachingFactory<PrismaClient>(() => new PrismaClient()),
-})
+const { PrismaClient } = prisma
 
-container.register<RedisClient>(RedisClient, {
-  useFactory: instanceCachingFactory(() => createRedisClient()),
-})
+export async function configure(): Promise<void> {
+  container.register('PrismaClient', {
+    useFactory: instanceCachingFactory(() => new PrismaClient()),
+  })
+
+  container.register('RedisClient', {
+    useValue: await createRedisClient(),
+  })
+}

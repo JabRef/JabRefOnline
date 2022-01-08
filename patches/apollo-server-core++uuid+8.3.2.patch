@@ -1,0 +1,22 @@
+diff --git a/node_modules/apollo-server-core/node_modules/uuid/package.json b/node_modules/apollo-server-core/node_modules/uuid/package.json
+index f0ab371..8785812 100644
+--- a/node_modules/apollo-server-core/node_modules/uuid/package.json
++++ b/node_modules/apollo-server-core/node_modules/uuid/package.json
+@@ -18,17 +18,6 @@
+   },
+   "sideEffects": false,
+   "main": "./dist/index.js",
+-  "exports": {
+-    ".": {
+-      "node": {
+-        "module": "./dist/esm-node/index.js",
+-        "require": "./dist/index.js",
+-        "import": "./wrapper.mjs"
+-      },
+-      "default": "./dist/esm-browser/index.js"
+-    },
+-    "./package.json": "./package.json"
+-  },
+   "module": "./dist/esm-node/index.js",
+   "browser": {
+     "./dist/md5.js": "./dist/md5-browser.js",

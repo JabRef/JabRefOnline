@@ -29,7 +29,8 @@ export default defineComponent({
     'virtual-list': virtualList,
   },
   meta: {
-    requiresAuth: true,
+    // TODO: Reactivate login check
+    // requiresAuth: true,
   },
 
   setup() {
@@ -87,7 +88,7 @@ export default defineComponent({
             groupId: ui.selectedGroupId,
             query: ui.activeSearchQuery,
             first: FIRST,
-            after: result.value?.me?.documents.pageInfo.endCursor,
+            after: result.value?.me?.documents.pageInfo.endCursor ?? undefined,
           },
         })
       }

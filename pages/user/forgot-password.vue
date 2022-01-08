@@ -26,8 +26,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
-import { ref } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 

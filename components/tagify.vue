@@ -6,7 +6,7 @@
 <script lang="ts">
 import Tagify from '@yaireo/tagify'
 import '@yaireo/tagify/dist/tagify.css'
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { defineComponent, PropType } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'TagsInput',

@@ -1,8 +1,7 @@
-import { promisify } from 'util'
 import type { PrismaClient, User } from '@prisma/client'
 import { inject, injectable } from 'tsyringe'
 import uuid from 'uuid' // TODO: Change to { v4 as generateToken } as soon as uuid is a proper esm module / jest supports it (https://github.com/uuidjs/uuid/issues/451)
-import { RedisClient } from 'redis'
+import { RedisClientType } from 'redis'
 import { hash, verifyHash } from '../utils/crypto'
 import { sendEmail } from '../utils/sendEmail'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
@@ -25,7 +24,7 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
-    private redisClient: RedisClient
+    @inject('RedisClient') private redisClient: RedisClientType
   ) {}
 
   async validateUser(email: string, password: string): Promise<LoginPayload> {
@@ -63,7 +62,7 @@ export class AuthService {
     const key = PREFIX + user.id
     const token = uuid.v4()
     const hashedToken = await hash(token)
-    this.redisClient.set(key, hashedToken, 'ex', 1000 * 60 * 60 * 24) // VALID FOR ONE DAY
+    await this.redisClient.set(key, hashedToken, { EX: 1000 * 60 * 60 * 24 }) // VALID FOR ONE DAY
     await sendEmail(email, resetPasswordTemplate(user.id, token))
     return true
   }
@@ -139,9 +138,7 @@ export class AuthService {
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + id
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const getAsync = promisify(this.redisClient.get).bind(this.redisClient)
-    const hashedToken = await getAsync(key)
+    const hashedToken = await this.redisClient.get(key)
     if (!hashedToken) {
       return {
         message: 'Token Expired',
@@ -154,7 +151,7 @@ export class AuthService {
       }
     }
 
-    this.redisClient.del(key)
+    await this.redisClient.del(key)
     const hashedPassword = await hash(newPassword)
     const user = await this.prisma.user.update({
       where: {

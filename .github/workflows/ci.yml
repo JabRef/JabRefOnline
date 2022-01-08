@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.4.1
+        uses: actions/setup-node@v2.5.1
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
@@ -86,7 +86,6 @@ jobs:
       - name: Publish and test Storybook
         uses: chromaui/action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: 'b3787adf2fa5'
           buildScriptName: storybook:build
 

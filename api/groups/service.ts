@@ -1,14 +1,9 @@
-import type {
-  PrismaClient as PrismaClientT,
-  Group,
-  User,
-  Prisma,
-} from '@prisma/client'
+import type { Group, Prisma, PrismaClient, User } from '@prisma/client'
 import { inject, injectable } from 'tsyringe'
 
 @injectable()
 export class GroupService {
-  constructor(@inject('PrismaClient') private prisma: PrismaClientT) {}
+  constructor(@inject('PrismaClient') private prisma: PrismaClient) {}
 
   async getGroupById(id: string): Promise<Group | null> {
     return await this.prisma.group.findUnique({

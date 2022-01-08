@@ -22,15 +22,10 @@
   </div>
 </template>
 
-<script>
-import {
-  defineComponent,
-  useRouter,
-  useRoute,
-  computed,
-} from '@nuxtjs/composition-api'
-import { ref } from '@vue/composition-api'
+<script lang="ts">
+import { defineComponent, computed, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
+import { useRouter, useRoute } from '#app'
 import { gql } from '~/apollo'
 
 export default defineComponent({
@@ -40,8 +35,8 @@ export default defineComponent({
     const password = ref('')
     const repeatPassword = ref('')
     const route = useRoute()
-    const token = computed(() => route.value.query.token)
-    const id = computed(() => route.value.query.id)
+    const token = computed(() => route.query.token)
+    const id = computed(() => route.query.id)
     const {
       mutate: changePassword,
       onDone,

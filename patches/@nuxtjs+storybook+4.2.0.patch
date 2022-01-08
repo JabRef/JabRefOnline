@@ -1,0 +1,42 @@
+diff --git a/node_modules/@nuxtjs/storybook/dist/index.js b/node_modules/@nuxtjs/storybook/dist/index.js
+index e12f0ba..e25ab8b 100644
+--- a/node_modules/@nuxtjs/storybook/dist/index.js
++++ b/node_modules/@nuxtjs/storybook/dist/index.js
+@@ -175,6 +175,11 @@ function generateStorybookFiles(options) {
+         fileName: path_1.default.join('storybook', 'nuxt-entry.js'),
+         options
+     });
++    this.addTemplate({
++      src: path_1.default.resolve(templatesRoot, 'package-template.json'),
++      fileName: path_1.default.join('storybook', 'package.json'),
++      options
++  });
+ }
+ function eject(options) {
+     const configDir = path_1.default.resolve(options.rootDir, '.storybook');
+diff --git a/node_modules/@nuxtjs/storybook/storybook/middleware.js b/node_modules/@nuxtjs/storybook/storybook/middleware.js
+index 561bbaf..ec729be 100644
+--- a/node_modules/@nuxtjs/storybook/storybook/middleware.js
++++ b/node_modules/@nuxtjs/storybook/storybook/middleware.js
+@@ -21,7 +21,11 @@ module.exports = function (app) {
+       _handler = _handler.default || _handler
+     }
+ 
+-    app.use(_route, _handler)
++    if (_handler) {
++      app.use(_route, _handler)
++    } else {
++      console.log(`[nuxt-storybook] Middleware ${middleware} has no handler`)
++    }
+   }
+ 
+   middlewares.forEach(m => addServerMiddleware(m))
+diff --git a/node_modules/@nuxtjs/storybook/storybook/package-template.json b/node_modules/@nuxtjs/storybook/storybook/package-template.json
+new file mode 100644
+index 0000000..a0df0c8
+--- /dev/null
++++ b/node_modules/@nuxtjs/storybook/storybook/package-template.json
+@@ -0,0 +1,3 @@
++{
++	"type": "commonjs"
++}

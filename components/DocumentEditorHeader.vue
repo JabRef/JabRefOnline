@@ -3,8 +3,8 @@
     {{ heading }}
   </p>
 </template>
-<script>
-import { defineComponent } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
   props: { heading: { type: String, default: '' } },

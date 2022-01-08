@@ -97,7 +97,7 @@ import {
   ref,
   computed,
   toRefs,
-} from '@nuxtjs/composition-api'
+} from '@vue/composition-api'
 import { gql, DocumentType } from '~/apollo'
 import { useUiStore } from '~/store'
 
@@ -171,6 +171,8 @@ export default defineComponent({
           return 'Conference Paper'
         case 'Thesis':
           return 'PhD Thesis'
+        default:
+          return document.value.__typename
       }
     })
 
