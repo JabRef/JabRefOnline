@@ -67,11 +67,8 @@ jobs:
         include:
           - environment: Test
             url: https://jabref-dev.azurewebsites.net/
-            # TODO: Replace by environment-specific variables https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#environment-secrets
-            publish-profile: ${{ secrets.AZURE_TEST_PUBLISH_PROFILE }}
           - environment: Staging
             url: https://jabref-staging.azurewebsites.net/
-            publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
 
     name: Deploy to ${{ matrix.environment }}
 
@@ -94,7 +91,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: JabRef
-          publish-profile: ${{ matrix.publish-profile }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
           package: ./artifact
 
       - name: Reset database on Azure (Test database)
