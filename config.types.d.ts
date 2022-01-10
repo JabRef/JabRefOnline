@@ -4,7 +4,6 @@ import { Environment } from './config'
 // TODO: Remove this as soon as https://github.com/nuxt/framework/issues/1785 is resolved.
 declare module '@nuxt/schema' {
   interface PrivateRuntimeConfig {
-    environment: Environment
     redis: {
       port: number
       host: string
@@ -14,6 +13,10 @@ declare module '@nuxt/schema' {
       primarySecret: string
       secondarySecret: string
     }
+  }
+
+  interface PublicRuntimeConfig {
+    environment: Environment
   }
 }
 export {}
