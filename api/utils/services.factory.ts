@@ -7,7 +7,7 @@ import config from '#config'
 
 export async function createRedisClient(): Promise<RedisClientType<any, any>> {
   if (config.environment === Environment.LocalDevelopment) {
-    const redisMock = await import('redis-mock')
+    const redisMock = (await import('redis-mock')).default
     const mockRedis = redisMock.createClient()
     // Workaround for redis-mock being not compatible with redis@4
     // TODO: Remove this workaround once https://github.com/yeahoffline/redis-mock/issues/195 is fixed
