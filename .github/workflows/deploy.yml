@@ -96,6 +96,18 @@ jobs:
           app-name: JabRef
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
 
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 14.x
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
       - name: Reset database on Azure (Test database)
         if: matrix.environment == 'Test'
         run: yarn prisma:migrate:reset --force
