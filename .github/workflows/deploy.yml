@@ -67,8 +67,10 @@ jobs:
         include:
           - environment: Test
             url: https://jabref-dev.azurewebsites.net/
+            slot: dev
           - environment: Staging
             url: https://jabref-staging.azurewebsites.net/
+            slot: staging
 
     name: Deploy to ${{ matrix.environment }}
 
@@ -95,6 +97,7 @@ jobs:
         with:
           app-name: JabRef
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          slot-name: ${{ matrix.slot }}
 
       - name: Checkout
         uses: actions/checkout@v2
