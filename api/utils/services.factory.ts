@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
 import { promisify } from 'util'
 import redis, { RedisClientType } from 'redis'
-import redisMock from 'redis-mock'
 import { Environment } from '~/config'
 import config from '#config'
 
 export async function createRedisClient(): Promise<RedisClientType<any, any>> {
   if (config.environment === Environment.LocalDevelopment) {
+    const redisMock = (await import('redis-mock')).default
     const mockRedis = redisMock.createClient()
     // Workaround for redis-mock being not compatible with redis@4
     // TODO: Remove this workaround once https://github.com/yeahoffline/redis-mock/issues/195 is fixed

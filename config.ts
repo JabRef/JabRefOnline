@@ -1,4 +1,4 @@
-import type { PrivateRuntimeConfig } from '@nuxt/schema'
+import type { PrivateRuntimeConfig, PublicRuntimeConfig } from '@nuxt/schema'
 
 export enum Environment {
   /**
@@ -45,5 +45,11 @@ export function constructPrivateConfig(): PrivateRuntimeConfig {
       primarySecret: process.env.SESSION_SECRET_PRIMARY || 'session_secret',
       secondarySecret: process.env.SESSION_SECRET_SECONDARY || 'session_secret',
     },
+  }
+}
+
+export function constructPublicConfig(): PublicRuntimeConfig {
+  return {
+    environment: getEnvironment(),
   }
 }

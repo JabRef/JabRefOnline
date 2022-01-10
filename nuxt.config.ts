@@ -1,6 +1,6 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 import typescript from 'rollup-plugin-typescript2'
-import { constructPrivateConfig } from './config'
+import { constructPrivateConfig, constructPublicConfig } from './config'
 
 export default defineNuxtConfig({
   /*
@@ -147,6 +147,12 @@ export default defineNuxtConfig({
    ** See https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
    */
   privateRuntimeConfig: constructPrivateConfig(),
+
+  /*
+   ** Client and server-side configuration
+   ** See https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
+   */
+  publicRuntimeConfig: constructPublicConfig(),
 
   /*
    ** Build configuration

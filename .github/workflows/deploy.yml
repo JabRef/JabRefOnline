@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    name: Build
 
     runs-on: ubuntu-latest
 
@@ -36,6 +36,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2.5.1
         with:
+          # Should be kept in sync with version configured in Azure
           node-version: 14.x
           cache: 'yarn'
 
@@ -48,70 +49,91 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir artifact
-          cp -r .nuxt nuxt.config.ts package.json config.ts ./api ./static ./node_modules artifact
+          cp -r .output ecosystem.config.js artifact
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: server-build
+          path: artifact
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    strategy:
+      matrix:
+        include:
+          - environment: Test
+            url: https://jabref-dev.azurewebsites.net/
+          - environment: Staging
+            url: https://jabref-staging.azurewebsites.net/
+
+    name: Deploy to ${{ matrix.environment }}
+
+    environment:
+      name: ${{ matrix.environment }}
+      url: ${{ matrix.url }}
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: server-build
 
       - name: Login to Azure
         uses: Azure/login@v1
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
 
-      - name: Start deployment (Test server)
-        uses: bobheadxi/deployments@v0.6.2
-        id: deployment-test
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: Test
-
-      - name: Deploy to Azure WebApp (Test server)
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: JabRef
-          publish-profile: ${{ secrets.AZURE_TEST_PUBLISH_PROFILE }}
-          package: ./artifact
-
-      - name: Reset database on Azure (Test database)
-        run: yarn prisma:migrate:reset --force
-        env:
-          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
-
-      - name: Update deployment status (Test server)
-        uses: bobheadxi/deployments@v0.6.2
-        if: always()
-        with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment-test.outputs.deployment_id }}
-          env_url: https://jabref-dev.azurewebsites.net/
-
-      - name: Start deployment (Staging server)
-        uses: bobheadxi/deployments@v0.6.2
-        id: deployment-staging
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: Staging
-
-      - name: Deploy to Azure WebApp (Staging server)
+      - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
           app-name: JabRef
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: ./artifact
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 14.x
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Reset database on Azure (Test database)
+        if: matrix.environment == 'Test'
+        run: yarn prisma:migrate:reset --force
+        env:
+          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
       - name: Update database on Azure (Production database)
+        if: matrix.environment == 'Staging'
         run: yarn prisma:migrate:deploy
         env:
           DATABASE_URL: ${{ secrets.AZURE_DATABASE_URL }}
 
-      - name: Update deployment status (Staging server)
-        uses: bobheadxi/deployments@v0.6.2
-        if: always()
+  deploy-prod:
+    name: Deploy to Production
+
+    runs-on: ubuntu-latest
+
+    needs: deploy
+
+    environment:
+      name: Production
+      url: https://jabref.azurewebsites.net/
+
+    steps:
+      - name: Login to Azure
+        uses: Azure/login@v1
         with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment-staging.outputs.deployment_id }}
-          env_url: https://jabref-staging.azurewebsites.net/
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+
+      - name: Swap staging and production deployment slots
+        run: az webapp deployment slot swap -g JabRefOnline -n JabRef --slot staging --target-slot production
 
