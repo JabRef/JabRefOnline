@@ -20,7 +20,7 @@ export async function createRedisClient(): Promise<RedisClientType<any, any>> {
       setEx: promisify(mockRedis.setEx).bind(mockRedis),
       expire: promisify(mockRedis.expire).bind(mockRedis),
       */
-    } as unknown as RedisClientType
+    } as unknown as RedisClientType<any, any>
   } else {
     const redisConfig = {
       password: config.redis.password as string | undefined,
