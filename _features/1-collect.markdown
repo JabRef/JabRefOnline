@@ -18,7 +18,7 @@ title: Collect
 
     <a
       class="mr-2 d-flex"
-      href="https://addons.mozilla.org/en-US/firefox/addon/jabref/?src=website"
+      href="https://addons.mozilla.org/en-US/firefox/addon/jabref?utm_source=www.jabref.org"
     >
       <img class="browserIcon" src="img/firefox.png" />
     </a>
