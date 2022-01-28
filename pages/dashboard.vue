@@ -24,13 +24,13 @@ import { useUiStore } from '~/store'
 
 const FIRST = 4
 
+definePageMeta({
+  middleware: 'authenticated',
+})
+
 export default defineComponent({
   components: {
     'virtual-list': virtualList,
-  },
-  meta: {
-    // TODO: Reactivate login check
-    // requiresAuth: true,
   },
 
   setup() {
