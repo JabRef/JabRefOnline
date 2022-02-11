@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nuxi dev",
-    "build": "nuxi generate",
+    "build": "nuxi generate --fail-on-error",
     "start": "nuxi preview",
     "generate": "yarn prisma:generate && yarn graphql:generate",
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
