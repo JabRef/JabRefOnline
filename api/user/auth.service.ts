@@ -24,7 +24,7 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
-    @inject('RedisClient') private redisClient: RedisClientType<any, any>
+    @inject('RedisClient') private redisClient: RedisClientType
   ) {}
 
   async validateUser(email: string, password: string): Promise<LoginPayload> {

@@ -5,7 +5,7 @@ import redis, { RedisClientType } from 'redis'
 import { Environment } from '~/config'
 import config from '#config'
 
-export async function createRedisClient(): Promise<RedisClientType<any, any>> {
+export async function createRedisClient(): Promise<RedisClientType> {
   if (config.environment === Environment.LocalDevelopment) {
     const redisMock = (await import('redis-mock')).default
     const mockRedis = redisMock.createClient()
@@ -20,7 +20,7 @@ export async function createRedisClient(): Promise<RedisClientType<any, any>> {
       setEx: promisify(mockRedis.setEx).bind(mockRedis),
       expire: promisify(mockRedis.expire).bind(mockRedis),
       */
-    } as unknown as RedisClientType<any, any>
+    } as unknown as RedisClientType
   } else {
     const redisConfig = {
       password: config.redis.password as string | undefined,
