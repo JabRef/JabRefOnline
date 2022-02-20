@@ -1,0 +1,15 @@
+query Groups {
+  me {
+    id
+    groups {
+      id
+      name
+      icon
+      children {
+        id
+        name
+        icon
+      }
+    }
+  }
+}

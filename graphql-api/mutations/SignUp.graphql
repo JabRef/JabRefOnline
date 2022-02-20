@@ -1,0 +1,15 @@
+mutation Signup($email: EmailAddress!, $password: String!) {
+  signup(email: $email, password: $password) {
+    ... on UserReturned {
+      user {
+        id
+      }
+    }
+    ... on InputValidationProblem {
+      problems {
+        path
+        message
+      }
+    }
+  }
+}

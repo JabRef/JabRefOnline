@@ -1,0 +1,20 @@
+query Documents($groupId: ID, $query: String, $first: Int, $after: String) {
+  me {
+    id
+    documents(
+      filterBy: { groupId: $groupId, query: $query }
+      first: $first
+      after: $after
+    ) {
+      edges {
+        node {
+          ...DocumentForView
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}

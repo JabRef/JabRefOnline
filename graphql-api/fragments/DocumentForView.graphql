@@ -1,0 +1,35 @@
+fragment DocumentForView on Document {
+  id
+  title
+  keywords
+  abstract
+  authors {
+    ... on Person {
+      id
+      name
+    }
+    ... on Organization {
+      id
+      name
+    }
+  }
+  ... on JournalArticle {
+    in {
+      journal {
+        id
+        name
+      }
+    }
+  }
+  ... on ProceedingsArticle {
+    in {
+      title
+    }
+  }
+  ... on Thesis {
+    institution {
+      id
+      name
+    }
+  }
+}
