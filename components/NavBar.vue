@@ -112,7 +112,7 @@ import { defineComponent, ref, watch } from '@vue/composition-api'
 import { useRouter } from '#app'
 import { useUiStore } from '~/store'
 import { cacheCurrentUser } from '~/apollo/cache'
-import { useLogoutMutation } from '~~/generated/graphql'
+import { useLogoutMutation } from '~/types/graphql'
 
 export default defineComponent({
   setup() {

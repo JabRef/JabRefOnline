@@ -27,26 +27,23 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { useForgotPasswordMutation } from '~~/generated/graphql'
+import { useForgotPasswordMutation } from '~/types/graphql'
 
 export default defineComponent({
   name: 'ForgotPassword',
   layout: 'bare',
   setup() {
     const email = ref('')
-    const called = ref(false)
     const {
       mutate: forgotPassword,
       loading,
       error,
-      onDone,
+      called,
     } = useForgotPasswordMutation(() => ({
       variables: {
         email: email.value,
       },
     }))
-
-    onDone(() => (called.value = true))
 
     return { email, error, loading, called, forgotPassword }
   },

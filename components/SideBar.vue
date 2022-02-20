@@ -98,7 +98,7 @@ import { useResult } from '@vue/apollo-composable'
 import { BaseTree } from '@he-tree/vue2'
 import { useUiStore } from '~/store'
 import '@he-tree/vue2/dist/he-tree-vue2.css'
-import { useGroupsQuery } from '~~/generated/graphql'
+import { useGroupsQuery } from '~/types/graphql'
 
 export default defineComponent({
   components: {

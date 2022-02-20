@@ -20,7 +20,7 @@ import virtualList from 'vue-virtual-scroll-list'
 import { WatchQueryFetchPolicy } from '@apollo/client/core'
 import DocumentView from '../components/DocumentView.vue'
 import { useUiStore } from '~/store'
-import { useDocumentsQuery } from '~~/generated/graphql'
+import { useDocumentsQuery } from '~/types/graphql'
 
 const FIRST = 4
 

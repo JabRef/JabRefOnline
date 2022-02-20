@@ -1,5 +1,5 @@
 query DocumentDetails($documentId: ID!) {
   userDocument(id: $documentId) {
-    ...DocumentDetailsFragment
+    ...DocumentDetails
   }
 }

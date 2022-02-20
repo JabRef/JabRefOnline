@@ -70,7 +70,7 @@
 import { defineComponent, computed, ref } from '@vue/composition-api'
 import { useRouter } from '#app'
 import { cacheCurrentUser } from '~/apollo/cache'
-import { useLoginMutation } from '~/generated/graphql'
+import { useLoginMutation } from '~/types/graphql'
 
 export default defineComponent({
   name: 'UserLogin',
@@ -113,7 +113,7 @@ export default defineComponent({
     })
     const error = computed(() => graphqlError.value || otherError.value)
 
-    return { email, password, error, loginUser }
+    return { email, password, error, loading, loginUser }
   },
 })
 </script>

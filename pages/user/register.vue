@@ -57,7 +57,7 @@
 import { defineComponent, ref, computed } from '@vue/composition-api'
 import { useRouter } from '#app'
 import { cacheCurrentUser } from '~/apollo/cache'
-import { useSignupMutation } from '~~/generated/graphql'
+import { useSignupMutation } from '~/types/graphql'
 
 export default defineComponent({
   name: 'UserRegister',

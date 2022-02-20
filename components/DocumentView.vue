@@ -98,14 +98,13 @@ import {
   computed,
   toRefs,
 } from '@vue/composition-api'
-import { DocumentType } from '~/apollo'
 import { useUiStore } from '~/store'
-import { DocumentDetailsFragmentDoc } from '~~/apollo/graphql'
+import { DocumentForViewFragment } from '~/types/graphql'
 
 export default defineComponent({
   props: {
     source: {
-      type: Object as PropType<DocumentType<typeof DocumentDetailsFragmentDoc>>,
+      type: Object as PropType<DocumentForViewFragment>,
       required: true,
     },
   },
