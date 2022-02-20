@@ -94,36 +94,18 @@
 </template>
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { useResult, useQuery } from '@vue/apollo-composable'
+import { useResult } from '@vue/apollo-composable'
 import { BaseTree } from '@he-tree/vue2'
-import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 import '@he-tree/vue2/dist/he-tree-vue2.css'
+import { useGroupsQuery } from '~~/generated/graphql'
 
 export default defineComponent({
   components: {
     BaseTree,
   },
   setup() {
-    const { result } = useQuery(
-      gql(/* GraphQL */ `
-        query GetGroups {
-          me {
-            id
-            groups {
-              id
-              name
-              icon
-              children {
-                id
-                name
-                icon
-              }
-            }
-          }
-        }
-      `)
-    )
+    const { result, loading, error } = useGroupsQuery()
     const groups = useResult(result, null, (data) => data?.me?.groups)
 
     const uiStore = useUiStore()

@@ -98,51 +98,14 @@ import {
   computed,
   toRefs,
 } from '@vue/composition-api'
-import { gql, DocumentType } from '~/apollo'
+import { DocumentType } from '~/apollo'
 import { useUiStore } from '~/store'
-
-export const DocumentForView = gql(/* GraphQL */ `
-  fragment DocumentForView on Document {
-    id
-    title
-    keywords
-    abstract
-    authors {
-      ... on Person {
-        id
-        name
-      }
-      ... on Organization {
-        id
-        name
-      }
-    }
-    ... on JournalArticle {
-      in {
-        journal {
-          id
-          name
-        }
-      }
-    }
-    ... on ProceedingsArticle {
-      in {
-        title
-      }
-    }
-    ... on Thesis {
-      institution {
-        id
-        name
-      }
-    }
-  }
-`)
+import { DocumentDetailsFragmentDoc } from '~~/apollo/graphql'
 
 export default defineComponent({
   props: {
     source: {
-      type: Object as PropType<DocumentType<typeof DocumentForView>>,
+      type: Object as PropType<DocumentType<typeof DocumentDetailsFragmentDoc>>,
       required: true,
     },
   },

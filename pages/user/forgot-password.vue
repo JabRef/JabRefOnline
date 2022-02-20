@@ -27,33 +27,28 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { useMutation } from '@vue/apollo-composable'
-import { gql } from '~/apollo'
+import { useForgotPasswordMutation } from '~~/generated/graphql'
 
 export default defineComponent({
   name: 'ForgotPassword',
   layout: 'bare',
   setup() {
     const email = ref('')
+    const called = ref(false)
     const {
       mutate: forgotPassword,
-      called,
+      loading,
       error,
-    } = useMutation(
-      gql(/* GraphQL */ `
-        mutation ForgotPassword($email: EmailAddress!) {
-          forgotPassword(email: $email) {
-            result
-          }
-        }
-      `),
-      () => ({
-        variables: {
-          email: email.value,
-        },
-      })
-    )
-    return { email, error, called, forgotPassword }
+      onDone,
+    } = useForgotPasswordMutation(() => ({
+      variables: {
+        email: email.value,
+      },
+    }))
+
+    onDone(() => (called.value = true))
+
+    return { email, error, loading, called, forgotPassword }
   },
 })
 </script>

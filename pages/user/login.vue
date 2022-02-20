@@ -68,10 +68,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed, ref } from '@vue/composition-api'
-import { useMutation } from '@vue/apollo-composable'
 import { useRouter } from '#app'
-import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
+import { useLoginMutation } from '~/generated/graphql'
 
 export default defineComponent({
   name: 'UserLogin',
@@ -87,46 +86,24 @@ export default defineComponent({
 
     const {
       mutate: loginUser,
-      onDone,
+      loading,
       error: graphqlError,
-    } = useMutation(
-      gql(/* GraphQL */ `
-        mutation Login($email: EmailAddress!, $password: String!) {
-          login(email: $email, password: $password) {
-            ... on UserReturned {
-              user {
-                id
-              }
-            }
-            ... on InputValidationProblem {
-              problems {
-                path
-                message
-              }
-            }
-          }
-        }
-      `),
-      () => ({
-        variables: {
-          email: email.value,
-          password: password.value,
-        },
-        update(_cache, { data: login }) {
-          if (login?.login?.__typename === 'UserReturned') {
-            const { user } = login.login
-            cacheCurrentUser(user)
-          } else {
-            cacheCurrentUser(null)
-          }
-        },
-      })
-    )
+      onDone,
+    } = useLoginMutation(() => ({
+      variables: {
+        email: email.value,
+        password: password.value,
+      },
+    }))
+
     const router = useRouter()
     onDone((result) => {
       if (result.data?.login?.__typename === 'UserReturned') {
+        const { user } = result.data.login
+        cacheCurrentUser(user)
         void router.push({ name: 'dashboard' })
       } else {
+        cacheCurrentUser(null)
         otherError.value =
           result.data?.login?.__typename === 'InputValidationProblem' &&
           result.data.login.problems[0]

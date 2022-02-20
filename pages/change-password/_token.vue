@@ -24,9 +24,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { useMutation } from '@vue/apollo-composable'
 import { useRouter, useRoute } from '#app'
-import { gql } from '~/apollo'
+import { useChangePasswordMutation } from '~~/generated/graphql'
 
 export default defineComponent({
   name: 'ChangePassword',
@@ -40,46 +39,22 @@ export default defineComponent({
 
     const {
       mutate: changePassword,
-      onDone,
+      loading,
       error,
-    } = useMutation(
-      gql(/* GraphQL */ `
-        mutation ChangePassword(
-          $token: String!
-          $id: ID!
-          $newPassword: String!
-        ) {
-          changePassword(token: $token, id: $id, newPassword: $newPassword) {
-            ... on UserReturned {
-              user {
-                id
-              }
-            }
-            ... on InputValidationProblem {
-              problems {
-                path
-                message
-              }
-            }
-            ... on TokenProblem {
-              message
-            }
-          }
-        }
-      `),
-      () => ({
-        variables: {
-          token,
-          id,
-          newPassword: password.value,
-        },
-      })
-    )
+      onDone,
+    } = useChangePasswordMutation(() => ({
+      variables: {
+        token,
+        id,
+        newPassword: password.value,
+      },
+    }))
+
     const router = useRouter()
     onDone(() => {
       void router.push({ name: 'user-login' })
     })
-    return { password, error, changePassword, repeatPassword }
+    return { password, error, loading, changePassword, repeatPassword }
   },
 })
 </script>

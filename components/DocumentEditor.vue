@@ -100,53 +100,9 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api'
-import { useResult, useQuery } from '@vue/apollo-composable'
+import { useResult } from '@vue/apollo-composable'
 import Tags from './tagify.vue'
-import { gql } from '~/apollo'
-
-export const DocumentDetails = gql(/* GraphQL */ `
-  fragment DocumentDetails on Document {
-    id
-    title
-    keywords
-    abstract
-    doi
-    authors {
-      ... on Person {
-        id
-        name
-      }
-      ... on Organization {
-        id
-        name
-      }
-    }
-    ... on JournalArticle {
-      in {
-        volume
-        number
-        journal {
-          id
-          name
-        }
-      }
-      published
-      pageStart
-      pageEnd
-    }
-    ... on ProceedingsArticle {
-      in {
-        title
-      }
-    }
-    ... on Thesis {
-      institution {
-        id
-        name
-      }
-    }
-  }
-`)
+import { useDocumentDetailsQuery } from '~~/generated/graphql'
 
 export default defineComponent({
   components: {
@@ -159,18 +115,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { result } = useQuery(
-      gql(/* GraphQL */ `
-        query GetDocumentDetails($documentId: ID!) {
-          userDocument(id: $documentId) {
-            ...DocumentDetails
-          }
-        }
-      `),
-      () => ({
-        documentId: props.documentId,
-      })
-    )
+    const { result, loading, error } = useDocumentDetailsQuery(() => ({
+      documentId: props.documentId,
+    }))
     const document = useResult(result)
 
     const authors = computed({
@@ -216,7 +163,7 @@ export default defineComponent({
       published: computed({
         get: () =>
           document.value && 'published' in document.value
-            ? document.value.published
+            ? (document.value.published as Date)
             : null,
         set: (value) => {
           // TODO: implement
