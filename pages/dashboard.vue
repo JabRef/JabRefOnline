@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts">
-import { useQuery, useResult } from '@vue/apollo-composable'
+import { useResult } from '@vue/apollo-composable'
 import { defineComponent } from '@vue/composition-api'
 import virtualList from 'vue-virtual-scroll-list'
 import { WatchQueryFetchPolicy } from '@apollo/client/core'
 import DocumentView from '../components/DocumentView.vue'
-import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
+import { useDocumentsQuery } from '~~/generated/graphql'
 
 const FIRST = 4
 
@@ -36,34 +36,7 @@ export default defineComponent({
   setup() {
     const ui = useUiStore()
 
-    const { result, fetchMore } = useQuery(
-      gql(/* GraphQL */ `
-        query GetDocuments(
-          $groupId: ID
-          $query: String
-          $first: Int
-          $after: String
-        ) {
-          me {
-            id
-            documents(
-              filterBy: { groupId: $groupId, query: $query }
-              first: $first
-              after: $after
-            ) {
-              edges {
-                node {
-                  ...DocumentForView
-                }
-              }
-              pageInfo {
-                endCursor
-                hasNextPage
-              }
-            }
-          }
-        }
-      `),
+    const { result, loading, error, fetchMore } = useDocumentsQuery(
       () => ({
         groupId: ui.selectedGroupId,
         query: ui.activeSearchQuery,

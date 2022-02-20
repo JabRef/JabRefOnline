@@ -9,9 +9,7 @@
         <div class="mt-7 mx-auto text-2xl">One last step!</div>
       </div>
     </Portal>
-    <h2 class="text-center text-5xl font-extrabold text-gray-900">
-      Create account
-    </h2>
+    <h2 class="text-center text-5xl font-bold text-gray-900">Create account</h2>
     <p class="mt-6 mb-8 text-center text-sm text-gray-600">
       Already have an account?
       <t-nuxtlink to="/user/login">Sign in</t-nuxtlink>
@@ -19,7 +17,7 @@
     <t-alert
       v-if="error"
       variant="error"
-      class="mt-8"
+      class="mt-6 mb-6"
       :dismissible="false"
       show
     >
@@ -56,7 +54,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, ref, computed } from '@vue/composition-api'
 import { useRouter } from '#app'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useSignupMutation } from '~~/generated/graphql'
@@ -68,11 +66,12 @@ export default defineComponent({
   setup() {
     const email = ref('')
     const password = ref('')
+    const otherError = ref('')
 
     const {
       mutate: signup,
       loading,
-      error,
+      error: graphqlError,
       onDone,
     } = useSignupMutation(() => ({
       variables: {
@@ -89,8 +88,14 @@ export default defineComponent({
         void router.push('/dashboard')
       } else {
         cacheCurrentUser(null)
+        otherError.value =
+          result.data?.signup?.__typename === 'InputValidationProblem' &&
+          result.data.signup.problems[0]
+            ? result.data.signup.problems[0].message
+            : 'Unknown error'
       }
     })
+    const error = computed(() => graphqlError.value || otherError.value)
 
     return {
       error,

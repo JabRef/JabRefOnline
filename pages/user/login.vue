@@ -10,7 +10,7 @@
       </div>
     </Portal>
 
-    <h2 class="text-center text-5xl font-extrabold text-gray-900">Sign in</h2>
+    <h2 class="text-center text-5xl font-bold text-gray-900">Sign in</h2>
     <p class="mt-6 mb-8 text-center text-sm text-gray-600">
       Don't have an account?
       <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
@@ -18,7 +18,7 @@
     <t-alert
       v-if="error"
       variant="error"
-      class="mt-8"
+      class="mt-6 mb-6"
       :dismissible="false"
       show
     >
