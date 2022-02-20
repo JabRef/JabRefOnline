@@ -37,7 +37,8 @@
     "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test.ts --runInBand",
     "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest spec.ts",
     "typecheck": "nuxi typecheck",
-    "validate": "yarn graphql:validate"
+    "validate": "yarn graphql:validate",
+    "generate-api": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "^3.5.9",
@@ -91,13 +92,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
-    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/fragment-matcher": "^3.2.1",
     "@graphql-codegen/gql-tag-operations-preset": "^1.3.0",
     "@graphql-codegen/typed-document-node": "^2.2.3",
-    "@graphql-codegen/typescript": "^2.4.5",
-    "@graphql-codegen/typescript-operations": "^2.3.0",
+    "@graphql-codegen/typescript": "2.4.5",
+    "@graphql-codegen/typescript-operations": "2.3.2",
     "@graphql-codegen/typescript-resolvers": "^2.5.2",
+    "@graphql-codegen/typescript-vue-apollo": "^3.2.6",
     "@graphql-eslint/eslint-plugin": "^3.8.0",
     "@graphql-inspector/cli": "^3.1.1",
     "@graphql-typed-document-node/core": "^3.1.1",
