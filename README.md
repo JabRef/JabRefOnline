@@ -1,4 +1,4 @@
-# JabRef's blog.
+# JabRef's blog
 
 > This repository contains the source of the [JabRef blog](https://blog.jabref.org/).
 
@@ -9,20 +9,18 @@ The layout is based on [github.com/t413/SinglePaged](https://github.com/t413/Sin
 We use [jekyll](https://jekyllrb.com/) as static site generator.
 See [GitHub pages](https://pages.github.com/) for more details on the mechanics behnd.
 
-
 ## Testing the blog entry
 
-Execute `bundle exec jekyll serve` to serve this page locally at http://localhost:4000/.
+Execute `bundle exec jekyll serve` to serve this page locally at <http://localhost:4000/>.
 
 For running htmlproof, execute these two commands:
 
     bundle exec jekyll build
     bundle exec htmlproof ./_site
 
-
 ## Installation
 
-Source: https://help.github.com/articles/using-jekyll-with-pages/#installing-jekyll
+Source: <https://help.github.com/articles/using-jekyll-with-pages/#installing-jekyll>
 
 1. Install Ruby by using the [RubyInstaller](http://rubyinstaller.org/downloads) or [choco install ruby](https://chocolatey.org/packages/ruby)
 1. Install the [Development Kit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (or by [choco install ruby2.devkit](https://chocolatey.org/packages/ruby2.devkit))
@@ -31,15 +29,13 @@ Source: https://help.github.com/articles/using-jekyll-with-pages/#installing-jek
 
 Note that [JRuby](http://jruby.org/) doesn't work as the [C extensions were dropped](http://stackoverflow.com/a/32135381/873282).
 
-
 ### htmlproof
 
 On Windows, you have to do following steps to let [htmlproof] work.
 
-  - Download libcurl https://curl.haxx.se/download.html. Current version: http://curl.haxx.se/gknw.net/7.40.0/dist-w32/renamed-curl-7.40.0-devel-mingw32.zip
-  - Extract subfolder `curl-7.40.0-devel-mingw32` into `c:\temp`
-  - Exec `SET PATH=%PATH%;c:\temp\curl-7.40.0-devel-mingw32\bin`
-
+- Download libcurl <https://curl.haxx.se/download.html>. Current version: <http://curl.haxx.se/gknw.net/7.40.0/dist-w32/renamed-curl-7.40.0-devel-mingw32.zip>
+- Extract subfolder `curl-7.40.0-devel-mingw32` into `c:\temp`
+- Exec `SET PATH=%PATH%;c:\temp\curl-7.40.0-devel-mingw32\bin`
 
 ## Updating jekyll
 

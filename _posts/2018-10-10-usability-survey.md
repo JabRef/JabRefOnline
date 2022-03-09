@@ -1,13 +1,13 @@
 ---
 title: "2018 Survey on Feature Usage in JabRef"
 id: survey-usability-2018
-author: "[JabRef Developers](https://github.com/JabRef/jabref/blob/master/DEVELOPERS)"
+author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
 bg: jabref-font
 color: white
 ---
 
 As we have mentioned in the [previous post](https://blog.jabref.org/#october-02-2018-%E2%80%93-hacktoberfest-and-jabref-5-0-development), the development of JabRef 5.0 is underway.
-Since this will bring substantial changes to the user interface, we want to make sure that we consider your workflow in JabRef. 
+Since this will bring substantial changes to the user interface, we want to make sure that we consider your workflow in JabRef.
 Therefore, we need to learn how you, the users, use JabRef!
 
 For this we are supported by Martin Simon, a student of Ergonomics - Human Factors Engineering at the Technical University of Munich, who has developed a short questionnaire on the feature usage of JabRef.

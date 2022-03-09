@@ -6,7 +6,6 @@ author: "[JabRef StuPro](https://github.com/orgs/JabRef/teams/stupro)"
 
 In the next release of JabRef a revised hotkey system is introduced. The two goals of this revision is to improve maneuverability through the keyboard and streamlining hotkeys. Sometimes, related hotkeys (like the ones covering the side panes) were scattered across the keyboard, so we grouped them together. You might be wondering what has changed, so have a look at them:
 
-
 Keys - new | Keys - old | Function
 -----------|------------|---------
 <kbd>F7</kbd>	| <kbd>alt</kbd> + <kbd>F</kbd> | Automatically set file links

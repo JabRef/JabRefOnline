@@ -12,10 +12,10 @@ You can find it by now in the top navigation bar on JabRef.org or directly here:
 
 The main reasons for introducing the forum are:
 
- - Foster the communication between the large user base and the developers of JabRef, creation of an active *"JabRef community"*
- - Provide an easier to use, searchable, more modern way to give feedback and request help
- - Provide a better place for feature and enhancement discussions by a [dedicated category for such topics](http://discourse.jabref.org/c/features)
- - Reduce the number of created issues at the GitHub tracker - only real bugs and work-in-progress feature requests should be handled there
+- Foster the communication between the large user base and the developers of JabRef, creation of an active *"JabRef community"*
+- Provide an easier to use, searchable, more modern way to give feedback and request help
+- Provide a better place for feature and enhancement discussions by a [dedicated category for such topics](http://discourse.jabref.org/c/features)
+- Reduce the number of created issues at the GitHub tracker - only real bugs and work-in-progress feature requests should be handled there
 
 We hope you'll like the new forum as much as we do and join us at [http://discourse.jabref.org](http://discourse.jabref.org) to contribute with your knowledge!
 
