@@ -1,7 +1,7 @@
 ---
 title: JabRef Hacktoberfest 2019 Reflection
 id: hacktoberfest2019-reflection
-author: "[JabRef Developers](https://github.com/JabRef/jabref/blob/master/DEVELOPERS)"
+author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
 ---
 
 # JabRef Hacktoberfest 2019 Reflection
@@ -13,7 +13,7 @@ Outside the desktop application, our [browser integration](https://github.com/Ja
 We are currently publishing the new extensions on the app stores.
 Finally, the Linux snap build process has been improved.
 
-In total, there were 
+In total, there were
 
 - 80 pull requests (for each contributor: min: 1, max: 22, avg: 7, med: 4),
 - 222 files changed (for each contributor: min: 1, max: 37, avg: 16, med: 11),

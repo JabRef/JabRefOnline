@@ -1,7 +1,7 @@
 ---
 title: "Google Summer of Code 2019: 'LaTeX Citations' tab"
 id: gsoc-2019-latex-citations-tab
-author: "[JabRef Developers](https://github.com/JabRef/jabref/blob/master/DEVELOPERS)"
+author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
 bg: jabref-font
 color: white
 ---

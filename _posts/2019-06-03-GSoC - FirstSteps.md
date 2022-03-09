@@ -1,7 +1,7 @@
 ---
 title: "Google Summer of Code 2019: First Steps"
 id: gsoc-2019-first-steps
-author: "[JabRef Developers](https://github.com/JabRef/jabref/blob/master/DEVELOPERS)"
+author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
 bg: jabref-font
 color: white
 ---

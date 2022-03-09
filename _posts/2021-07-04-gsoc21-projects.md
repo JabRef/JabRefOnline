@@ -25,6 +25,7 @@ The second project is all about PDFs and is split into two main goals:
 [metadata extraction from new pdfs](#metadata-extraction).
 
 The people involved are:
+
 - Mentors: [@Koppor](https://github.com/koppor), [@Calixtus](https://github.com/calixtus), [@DominikVoigt](https://github.com/DominikVoigt)
 - Mentee: [@Btut](https://github.com/btut)
 

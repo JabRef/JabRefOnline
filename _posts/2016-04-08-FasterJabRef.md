@@ -8,6 +8,7 @@ author: "[mlep](https://github.com/mlep)"
 
 Some users reported JabRef was slow on large databases (thank you for the feedback!).
 This was especially the case for three operations:
+
 - loading a database
 - saving a database
 - searching through a database.
