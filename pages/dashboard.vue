@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="documents" class="space-y-4 p-4 h-full">
+    <div
+      v-if="documents"
+      class="space-y-4 p-4 h-full"
+    >
       <virtual-list
         class="virtual-list"
         :data-key="'id'"

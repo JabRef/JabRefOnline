@@ -26,16 +26,28 @@
     </t-alert>
     <form @submit.prevent="loginUser()">
       <div class="space-y-5">
-        <t-input-group label="Email address" variant="important">
-          <t-input v-model="email" v-focus />
+        <t-input-group
+          label="Email address"
+          variant="important"
+        >
+          <t-input
+            v-model="email"
+            v-focus
+          />
         </t-input-group>
-        <t-input-group label="Password" variant="important">
+        <t-input-group
+          label="Password"
+          variant="important"
+        >
           <PasswordInput v-model="password" />
         </t-input-group>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <t-checkbox id="remember_me" />
-            <label for="remember_me" class="ml-2 block text-sm text-gray-900">
+            <label
+              for="remember_me"
+              class="ml-2 block text-sm text-gray-900"
+            >
               Keep me logged in
             </label>
           </div>
@@ -48,7 +60,11 @@
         </div>
 
         <div class="py-2">
-          <t-button class="w-full" type="submit">Sign in</t-button>
+          <t-button
+            class="w-full"
+            type="submit"
+            >Sign in</t-button
+          >
         </div>
 
         <div>
