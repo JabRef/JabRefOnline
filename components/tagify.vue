@@ -1,6 +1,12 @@
 <template v-once>
-  <textarea v-if="type === 'textarea'" @change="onChange" />
-  <input v-else @change="onChange" />
+  <textarea
+    v-if="type === 'textarea'"
+    @change="onChange"
+  />
+  <input
+    v-else
+    @change="onChange"
+  />
 </template>
 
 <script lang="ts">
