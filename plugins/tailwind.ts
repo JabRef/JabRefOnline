@@ -112,9 +112,9 @@ const settings = {
     props: {
       fixedClasses: {
         wrapper: 'relative flex items-center p-4 border-l-4  rounded shadow-sm',
-        body: 'flex-grow',
+        body: 'grow',
         close:
-          'absolute relative flex items-center justify-center ml-4 flex-shrink-0 w-6 h-6 transition duration-100 ease-in-out rounded  focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50',
+          'absolute relative flex items-center justify-center ml-4 shrink-0 w-6 h-6 transition duration-100 ease-in-out rounded focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50',
         closeIcon: 'fill-current h-4 w-4',
       },
       classes: {

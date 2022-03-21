@@ -75,7 +75,7 @@
     </div>
     <div v-if="'abstract' in source && source.abstract">
       <span
-        class="flex-grow"
+        class="grow"
         :class="{ 'line-clamp-2': !viewFullAbstract }"
       >
         {{ source.abstract }}
