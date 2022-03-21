@@ -22,10 +22,15 @@
       </a>
       -->
     </div>
-    <div v-if="'authors' in source && source.authors" class="space-x-3">
-      <span v-for="author in source.authors" :key="author.id">{{
-        author.name
-      }}</span>
+    <div
+      v-if="'authors' in source && source.authors"
+      class="space-x-3"
+    >
+      <span
+        v-for="author in source.authors"
+        :key="author.id"
+        >{{ author.name }}</span
+      >
     </div>
     <div class="space-x-1 text-sm">
       <span class="font-semibold">2019</span>
@@ -69,7 +74,10 @@
       -->
     </div>
     <div v-if="'abstract' in source && source.abstract">
-      <span class="flex-grow" :class="{ 'line-clamp-2': !viewFullAbstract }">
+      <span
+        class="flex-grow"
+        :class="{ 'line-clamp-2': !viewFullAbstract }"
+      >
         {{ source.abstract }}
       </span>
       <t-button
@@ -79,11 +87,17 @@
       >
         <template v-if="viewFullAbstract">
           <span>View less</span>
-          <FontAwesomeIcon icon="chevron-up" size="xs" />
+          <FontAwesomeIcon
+            icon="chevron-up"
+            size="xs"
+          />
         </template>
         <template v-else>
           <span>View full abstract</span>
-          <FontAwesomeIcon icon="chevron-down" size="xs" />
+          <FontAwesomeIcon
+            icon="chevron-down"
+            size="xs"
+          />
         </template>
       </t-button>
     </div>
