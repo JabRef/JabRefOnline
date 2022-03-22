@@ -5,7 +5,7 @@
     <div class="min-h-screen w-full pl-64 flex flex-col">
       <NavBar />
       <div class="relative h-full overflow-hidden">
-        <div class="bg-gray-50 flex-grow p-6 h-full">
+        <div class="bg-gray-50 grow p-6 h-full">
           <Nuxt />
         </div>
         <DetailPane />
