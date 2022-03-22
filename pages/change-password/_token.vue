@@ -8,15 +8,25 @@
     </Portal>
     <form @submit.prevent="changePassword()">
       <div class="space-y-5">
-        <t-input-group label="New Password" variant="important">
+        <t-input-group
+          label="New Password"
+          variant="important"
+        >
           <PasswordInput v-model="password" />
         </t-input-group>
-        <t-input-group label="Confirm Password" variant="important">
+        <t-input-group
+          label="Confirm Password"
+          variant="important"
+        >
           <PasswordInput v-model="repeatPassword" />
         </t-input-group>
       </div>
       <div class="py-2">
-        <t-button class="w-full" type="submit">Change Password</t-button>
+        <t-button
+          class="w-full"
+          type="submit"
+          >Change Password</t-button
+        >
       </div>
     </form>
   </div>
