@@ -27,8 +27,14 @@
     </t-alert>
     <form @submit.prevent="signup()">
       <div class="space-y-5">
-        <t-input-group label="Email address" variant="important">
-          <t-input v-model="email" v-focus />
+        <t-input-group
+          label="Email address"
+          variant="important"
+        >
+          <t-input
+            v-model="email"
+            v-focus
+          />
         </t-input-group>
         <t-input-group
           label="Password"
@@ -38,7 +44,11 @@
           <PasswordInput v-model="password" />
         </t-input-group>
         <div class="py-2">
-          <t-button class="w-full" type="submit">Create your account</t-button>
+          <t-button
+            class="w-full"
+            type="submit"
+            >Create your account</t-button
+          >
         </div>
         <div>
           <HorizontalRule content="or sign up with" />

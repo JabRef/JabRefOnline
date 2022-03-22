@@ -9,7 +9,11 @@
         variant="plaincaps"
       >
         <template #arrow="{ className }">
-          <FontAwesomeIcon icon="chevron-down" size="xs" :class="className" />
+          <FontAwesomeIcon
+            icon="chevron-down"
+            size="xs"
+            :class="className"
+          />
         </template>
       </t-select>
     </div>
@@ -60,7 +64,11 @@
         heading="Abstract"
         class="mt-4 -mb-1"
       ></document-editor-header>
-      <t-textarea v-model="abstract" variant="plain" rows="5"></t-textarea>
+      <t-textarea
+        v-model="abstract"
+        variant="plain"
+        rows="5"
+      ></t-textarea>
     </div>
     <div>
       <document-editor-header
@@ -93,7 +101,11 @@
         heading="External"
         class="mt-4 mb-1"
       ></document-editor-header>
-      <t-table :data="external" variant="plain" class="text-sm"></t-table>
+      <t-table
+        :data="external"
+        variant="plain"
+        class="text-sm"
+      ></t-table>
     </div>
   </div>
 </template>
