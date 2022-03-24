@@ -62,7 +62,7 @@ module.exports = {
         // TODO: Set this to error once we follow this convention
         '@graphql-eslint/no-deprecated': 'warn',
         // Enforces unique fragment name.
-        '@graphql-eslint/unique-fragment-name': 'error',
+        '@graphql-eslint/unique-fragment-name': 'off',
         // Enforces unique operation names.
         // TODO: Does not work yet
         // '@graphql-eslint/unique-operation-name': 'error',

@@ -1,9 +1,0 @@
-overwrite: true
-schema: "http://localhost:3000/api"
-documents: "graphql-api/**/*.graphql"
-generates:
-  types/graphql.ts:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-vue-apollo"

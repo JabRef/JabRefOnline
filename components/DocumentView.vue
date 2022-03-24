@@ -99,7 +99,7 @@ import {
   toRefs,
 } from '@vue/composition-api'
 import { useUiStore } from '~/store'
-import { DocumentForViewFragment } from '~/types/graphql'
+import { DocumentForViewFragment } from '~composables/graphql'
 
 export default defineComponent({
   props: {

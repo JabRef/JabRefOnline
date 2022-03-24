@@ -37,8 +37,7 @@
     "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test.ts --runInBand",
     "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest spec.ts",
     "typecheck": "nuxi typecheck",
-    "validate": "yarn graphql:validate",
-    "generate-api": "graphql-codegen --config codegen.yml"
+    "validate": "yarn graphql:validate"
   },
   "dependencies": {
     "@apollo/client": "^3.5.9",

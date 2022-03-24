@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { useForgotPasswordMutation } from '~/types/graphql'
+import { useForgotPasswordMutation } from '~composables/graphql'
 
 export default defineComponent({
   name: 'ForgotPassword',

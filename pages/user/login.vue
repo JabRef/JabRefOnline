@@ -68,9 +68,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed, ref } from '@vue/composition-api'
+import { useLogoutMutation } from '~composables/graphql'
 import { useRouter } from '#app'
 import { cacheCurrentUser } from '~/apollo/cache'
-import { useLoginMutation } from '~/types/graphql'
 
 export default defineComponent({
   name: 'UserLogin',
@@ -89,7 +89,7 @@ export default defineComponent({
       loading,
       error: graphqlError,
       onDone,
-    } = useLoginMutation(() => ({
+    } = useLogoutMutation(() => ({
       variables: {
         email: email.value,
         password: password.value,
