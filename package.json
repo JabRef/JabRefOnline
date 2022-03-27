@@ -150,11 +150,13 @@
   },
   "resolutions": {
     "@graphql-tools/mock": "^8.4.3",
-    "@types/react": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.1.1.tgz"
+    "@types/react": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.1.1.tgz",
+    "jest": "^27.5.1"
   },
   "resolutionsComments": {
     "@graphql-tools/mock": "Can be removed once apollo-server updated its dependencies: https://github.com/apollographql/apollo-server/issues/5901",
-    "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518"
+    "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
+    "jest": "Workaround for https://github.com/hypervillain/ast-to-literal/issues/11 which pulls in old version of jest"
   },
   "workspaces": {
     "nohoist": [
