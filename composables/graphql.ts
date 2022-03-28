@@ -1345,8 +1345,7 @@ export type GroupsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GroupsQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: string, groups: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null, children: Array<{ __typename?: 'AutomaticKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'AutomaticPersonsGroup', id: string, name: string, icon?: string | null } | { __typename?: 'ExplicitGroup', id: string, name: string, icon?: string | null } | { __typename?: 'LastNameGroup', id: string, name: string, icon?: string | null } | { __typename?: 'RegexKeywordGroup', id: string, name: string, icon?: string | null } | { __typename?: 'SearchGroup', id: string, name: string, icon?: string | null } | { __typename?: 'TexGroup', id: string, name: string, icon?: string | null } | { __typename?: 'WordKeywordGroup', id: string, name: string, icon?: string | null }> }> } | null };
 
-export const DocumentDetailsFragmentDoc = gql`
-    fragment DocumentDetails on Document {
+export const DocumentDetailsFragmentDoc = gql`fragment DocumentDetails on Document {
   id
   title
   keywords
@@ -1387,9 +1386,8 @@ export const DocumentDetailsFragmentDoc = gql`
     }
   }
 }
-    `;
-export const DocumentForViewFragmentDoc = gql`
-    fragment DocumentForView on Document {
+`;
+export const DocumentForViewFragmentDoc = gql`fragment DocumentForView on Document {
   id
   title
   keywords
@@ -1424,9 +1422,8 @@ export const DocumentForViewFragmentDoc = gql`
     }
   }
 }
-    `;
-export const ChangePasswordDocument = gql`
-    mutation ChangePassword($token: String!, $id: ID!, $newPassword: String!) {
+`;
+export const ChangePasswordDocument = gql`mutation ChangePassword($token: String!, $id: ID!, $newPassword: String!) {
   changePassword(token: $token, id: $id, newPassword: $newPassword) {
     ... on UserReturned {
       user {
@@ -1444,7 +1441,7 @@ export const ChangePasswordDocument = gql`
     }
   }
 }
-    `;
+`;
 
 /**
  * __useChangePasswordMutation__
@@ -1469,13 +1466,12 @@ export function useChangePasswordMutation(options: VueApolloComposable.UseMutati
   return VueApolloComposable.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, options);
 }
 export type ChangePasswordMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<ChangePasswordMutation, ChangePasswordMutationVariables>;
-export const ForgotPasswordDocument = gql`
-    mutation ForgotPassword($email: EmailAddress!) {
+export const ForgotPasswordDocument = gql`mutation ForgotPassword($email: EmailAddress!) {
   forgotPassword(email: $email) {
     result
   }
 }
-    `;
+`;
 
 /**
  * __useForgotPasswordMutation__
@@ -1498,8 +1494,7 @@ export function useForgotPasswordMutation(options: VueApolloComposable.UseMutati
   return VueApolloComposable.useMutation<ForgotPasswordMutation, ForgotPasswordMutationVariables>(ForgotPasswordDocument, options);
 }
 export type ForgotPasswordMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
-export const LoginDocument = gql`
-    mutation Login($email: EmailAddress!, $password: String!) {
+export const LoginDocument = gql`mutation Login($email: EmailAddress!, $password: String!) {
   login(email: $email, password: $password) {
     ... on UserReturned {
       user {
@@ -1514,7 +1509,7 @@ export const LoginDocument = gql`
     }
   }
 }
-    `;
+`;
 
 /**
  * __useLoginMutation__
@@ -1538,13 +1533,12 @@ export function useLoginMutation(options: VueApolloComposable.UseMutationOptions
   return VueApolloComposable.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
 }
 export type LoginMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<LoginMutation, LoginMutationVariables>;
-export const LogoutDocument = gql`
-    mutation Logout {
+export const LogoutDocument = gql`mutation Logout {
   logout {
     result
   }
 }
-    `;
+`;
 
 /**
  * __useLogoutMutation__
@@ -1563,8 +1557,7 @@ export function useLogoutMutation(options: VueApolloComposable.UseMutationOption
   return VueApolloComposable.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument, options);
 }
 export type LogoutMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<LogoutMutation, LogoutMutationVariables>;
-export const SignupDocument = gql`
-    mutation Signup($email: EmailAddress!, $password: String!) {
+export const SignupDocument = gql`mutation Signup($email: EmailAddress!, $password: String!) {
   signup(email: $email, password: $password) {
     ... on UserReturned {
       user {
@@ -1579,7 +1572,7 @@ export const SignupDocument = gql`
     }
   }
 }
-    `;
+`;
 
 /**
  * __useSignupMutation__
@@ -1603,13 +1596,12 @@ export function useSignupMutation(options: VueApolloComposable.UseMutationOption
   return VueApolloComposable.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument, options);
 }
 export type SignupMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<SignupMutation, SignupMutationVariables>;
-export const DocumentDetailsDocument = gql`
-    query DocumentDetails($documentId: ID!) {
+export const DocumentDetailsDocument = gql`query DocumentDetails($documentId: ID!) {
   userDocument(id: $documentId) {
     ...DocumentDetails
   }
 }
-    ${DocumentDetailsFragmentDoc}`;
+${DocumentDetailsFragmentDoc}`;
 
 /**
  * __useDocumentDetailsQuery__
@@ -1633,12 +1625,11 @@ export function useDocumentDetailsLazyQuery(variables: DocumentDetailsQueryVaria
   return VueApolloComposable.useLazyQuery<DocumentDetailsQuery, DocumentDetailsQueryVariables>(DocumentDetailsDocument, variables, options);
 }
 export type DocumentDetailsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<DocumentDetailsQuery, DocumentDetailsQueryVariables>;
-export const DocumentsDocument = gql`
-    query Documents($groupId: ID, $query: String, $first: Int, $after: String) {
+export const DocumentsDocument = gql`query Documents($groupId: ID, $query: String, $first: Int, $after: String) {
   me {
     id
     documents(
-      filterBy: {groupId: $groupId, query: $query}
+      filterBy: { groupId: $groupId, query: $query }
       first: $first
       after: $after
     ) {
@@ -1654,7 +1645,7 @@ export const DocumentsDocument = gql`
     }
   }
 }
-    ${DocumentForViewFragmentDoc}`;
+${DocumentForViewFragmentDoc}`;
 
 /**
  * __useDocumentsQuery__
@@ -1681,8 +1672,7 @@ export function useDocumentsLazyQuery(variables: DocumentsQueryVariables | VueCo
   return VueApolloComposable.useLazyQuery<DocumentsQuery, DocumentsQueryVariables>(DocumentsDocument, variables, options);
 }
 export type DocumentsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<DocumentsQuery, DocumentsQueryVariables>;
-export const GroupsDocument = gql`
-    query Groups {
+export const GroupsDocument = gql`query Groups {
   me {
     id
     groups {
@@ -1697,7 +1687,7 @@ export const GroupsDocument = gql`
     }
   }
 }
-    `;
+`;
 
 /**
  * __useGroupsQuery__

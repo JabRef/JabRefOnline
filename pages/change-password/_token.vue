@@ -25,7 +25,7 @@
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
 import { useRouter, useRoute } from '#app'
-import { useChangePasswordMutation } from '~composables/graphql'
+import { useChangePasswordMutation } from '~/composables/graphql'
 
 export default defineComponent({
   name: 'ChangePassword',

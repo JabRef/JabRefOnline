@@ -102,7 +102,7 @@
 import { defineComponent, computed } from '@vue/composition-api'
 import { useResult } from '@vue/apollo-composable'
 import Tags from './tagify.vue'
-import { useDocumentDetailsQuery } from '~composables/graphql'
+import { useDocumentDetailsQuery } from '~/composables/graphql'
 
 export default defineComponent({
   components: {

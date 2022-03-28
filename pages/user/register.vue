@@ -57,7 +57,7 @@
 import { defineComponent, ref, computed } from '@vue/composition-api'
 import { useRouter } from '#app'
 import { cacheCurrentUser } from '~/apollo/cache'
-import { useSignupMutation } from '~composables/graphql'
+import { useSignupMutation } from '~/composables/graphql'
 
 export default defineComponent({
   name: 'UserRegister',
@@ -80,23 +80,6 @@ export default defineComponent({
       },
     }))
 
-    gql`
-      mutation Login($email: EmailAddress!, $password: String!) {
-        login(email: $email, password: $password) {
-          ... on UserReturned {
-            user {
-              id
-            }
-          }
-          ... on InputValidationProblem {
-            problems {
-              path
-              message
-            }
-          }
-        }
-      }
-    `
     const router = useRouter()
     onDone((result) => {
       if (result.data?.signup?.__typename === 'UserReturned') {
