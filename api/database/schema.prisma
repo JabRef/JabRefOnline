@@ -12,7 +12,6 @@ generator client {
 model User {
   id String @id @default(cuid())
   email String @unique
-  test String
   emailIsVerified Boolean @default(false)
   name String?
   password String
