@@ -11,7 +11,7 @@
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:dev:create": "prisma migrate dev --create-only",
-    "prisma:migrate:diff": "prisma migrate diff --preview-feature --exit-code --from-migrations .\\api\\database\\migrations --to-schema-datamodel .\\api\\database\\schema.prisma --shadow-database-url",
+    "prisma:migrate:diff": "prisma migrate diff --preview-feature --exit-code --from-migrations api\\database\\migrations\\ --to-schema-datamodel api\\database\\schema.prisma --shadow-database-url",
     "prisma:migrate:reset": "prisma migrate reset",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:status": "prisma migrate status",

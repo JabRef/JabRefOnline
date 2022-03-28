@@ -77,12 +77,12 @@ jobs:
       - name: Validate GraphQL operations
         run: yarn validate
 
+      - name: Build
+        run: yarn build
+
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
         run: yarn prisma:migrate:diff $DATABASE_URL
-
-      - name: Build
-        run: yarn build
 
       - name: Run tests
         run: yarn test --ci --coverage
