@@ -6,7 +6,10 @@
       <div class="flex">
         <!-- Hamburger icon for small screens -->
         <div class="flex md:hidden mr-5 items-center">
-          <button id="sidebarToggle" class="text-right text-gray-900 h-6 w-6">
+          <button
+            id="sidebarToggle"
+            class="text-right text-gray-900 h-6 w-6"
+          >
             <FontAwesomeIcon icon="list-ul" />
           </button>
         </div>
@@ -19,8 +22,14 @@
             placeholder="Search..."
             class="w-full xl:w-96 px-5 border-none shadow-none pl-10 font-semibold text-lg"
           />
-          <button type="submit" class="absolute left-0 top-0 bottom-0 ml-2">
-            <FontAwesomeIcon icon="search" class="text-gray-400" />
+          <button
+            type="submit"
+            class="absolute left-0 top-0 bottom-0 ml-2"
+          >
+            <FontAwesomeIcon
+              icon="search"
+              class="text-gray-400"
+            />
           </button>
         </div>
       </div>
@@ -34,7 +43,11 @@
             Subscriptions
           </span>
           <div class="inline-block align-top pl-0.5 -mt-1">
-            <FontAwesomeIcon icon="circle" class="text-primary-600" size="xs" />
+            <FontAwesomeIcon
+              icon="circle"
+              class="text-primary-600"
+              size="xs"
+            />
           </div>
         </div>
       </div>

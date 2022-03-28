@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Login to Azure
       uses: Azure/login@v1
@@ -22,7 +22,7 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
 
     - name: Start deployment (Staging server)
-      uses: bobheadxi/deployments@v0.6.2
+      uses: bobheadxi/deployments@v1.1.0
       id: deployment
       with:
         step: start
@@ -36,11 +36,12 @@ jobs:
           az webapp deployment slot swap --name JabRef --resource-group JabRefOnline --slot staging --target-slot production --action swap
 
     - name: Update deployment status
-      uses: bobheadxi/deployments@v0.6.2
+      uses: bobheadxi/deployments@v1.1.0
       if: always()
       with:
         step: finish
         token: ${{ secrets.GITHUB_TOKEN }}
         status: ${{ job.status }}
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env: ${{ steps.deployment.outputs.env }}
         env_url: https://jabref.azurewebsites.net/

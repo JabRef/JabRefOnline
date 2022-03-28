@@ -19,14 +19,18 @@ const flip = plugin(({ addUtilities, theme, variants }) => {
 })
 
 module.exports = {
-  plugins: [require('@tailwindcss/line-clamp'), require('@tailwindcss/forms'), flip],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/forms'),
+    flip,
+  ],
   theme: {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
-      gray: colors.trueGray,
+      gray: colors.neutral,
       primary: colors.indigo,
       secondary: colors.rose,
       highlight: colors.indigo,

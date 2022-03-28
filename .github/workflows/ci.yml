@@ -52,12 +52,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
@@ -76,6 +76,10 @@ jobs:
 
       - name: Validate GraphQL operations
         run: yarn validate
+
+      # Check that no schema changes have been done without corresponding migration files have been added
+      - name: Detect database schema drift
+        run: yarn prisma:migrate:diff $DATABASE_URL
 
       - name: Build
         run: yarn build
