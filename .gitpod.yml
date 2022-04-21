@@ -15,14 +15,16 @@ tasks:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
       NUXT_TELEMETRY_DISABLED: 1
   - name: Dev Server
-    init: gp sync-await setup
-    command: yarn dev
+    command: |
+      gp sync-await setup
+      yarn dev
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
       NUXT_TELEMETRY_DISABLED: 1
   - name: Prisma Studio
-    init: gp sync-await setup
-    command: yarn prisma:studio
+    command: |
+      gp sync-await setup
+      yarn prisma:studio
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
 
