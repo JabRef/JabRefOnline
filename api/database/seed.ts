@@ -6,6 +6,8 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
   await prisma.user.deleteMany({})
   await prisma.userDocument.deleteMany({})
   await prisma.userDocumentOtherField.deleteMany({})
+  await prisma.journal.deleteMany({})
+  await prisma.journalIssue.deleteMany({})
   await prisma.group.deleteMany({})
 
   await prisma.user.create({
