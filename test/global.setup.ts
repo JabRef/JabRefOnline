@@ -2,7 +2,7 @@ import { RedisClientType } from 'redis'
 import prisma from '@prisma/client'
 import { container, instanceCachingFactory } from 'tsyringe'
 import dotenv from 'dotenv'
-import { createRedisClient } from '~/api/utils/services.factory'
+import { createRedisClient } from '~~/server/utils/services.factory'
 
 // Register services for all tests
 container.register('RedisClient', {

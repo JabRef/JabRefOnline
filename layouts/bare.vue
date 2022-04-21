@@ -21,7 +21,7 @@
         </div>
         <div class="w-full md:w-6/12 md:mx-auto md:py-8 mt-8 md:mt-0 px-5 py-4">
           <div class="px-4 py-5 space-y-6 sm:p-6">
-            <Nuxt />
+            <slot />
           </div>
         </div>
       </div>

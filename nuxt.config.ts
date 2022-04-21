@@ -1,6 +1,6 @@
-import { defineNuxtConfig } from '@nuxt/bridge'
+import { defineNuxtConfig } from 'nuxt'
 import typescript from 'rollup-plugin-typescript2'
-import { constructPrivateConfig, constructPublicConfig } from './config'
+import { constructConfig } from './config'
 
 export default defineNuxtConfig({
   /*
@@ -52,7 +52,7 @@ export default defineNuxtConfig({
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
    */
-  head: {
+  meta: {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -74,29 +74,6 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css',
   ],
 
-  /*
-   * Front-end plugins to load before mounting the App
-   * https://nuxtjs.org/guide/plugins
-   */
-  plugins: [
-    // FontAwesome support
-    '~/plugins/fontawesome.ts',
-    // Tailwind CSS support
-    '~/plugins/tailwind.ts',
-    // Graphql support
-    '~/plugins/apollo.ts',
-    // Custom Vue directives
-    '~/plugins/vue.directives.ts',
-    // Authentication check
-    '~/plugins/authenticated.ts',
-  ],
-
-  /*
-   ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
-   */
-  components: true,
-
   // TODO: Reenable config viewer as soon as https://github.com/nuxt/framework/issues/865 is fixed.
   tailwindcss: {
     viewer: false,
@@ -104,35 +81,19 @@ export default defineNuxtConfig({
   },
 
   /*
-   ** Nuxt.js dev-modules
+   ** Nuxt.js modules
    */
-  buildModules: [
+  modules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    // Allows more control where component's templates are rendered
-    // https://portal-vue.linusb.org/
-    'portal-vue/nuxt',
     // Use Pinia for state management
     '@pinia/nuxt',
-    // Make route meta information available to plugins
-    'nuxt-route-meta',
   ],
-
-  /*
-   * Front-end Nuxt.js modules
-   * See https://nuxtjs.org/docs/2.x/directory-structure/modules
-   */
-  modules: [],
-
-  /*
-   ** Server Middleware
-   */
-  serverMiddleware: [{ path: '/api', handler: '~/api' }],
 
   /*
    ** Restarts the server when dependencies change.
    */
-  watch: ['api/**/*.graphql'],
+  watch: ['server/**/*.graphql'],
 
   /*
    ** For deployment you might want to edit host and port
@@ -143,16 +104,10 @@ export default defineNuxtConfig({
   // },
 
   /*
-   ** Server-side configuration
-   ** See https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
-   */
-  privateRuntimeConfig: constructPrivateConfig(),
-
-  /*
    ** Client and server-side configuration
    ** See https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
    */
-  publicRuntimeConfig: constructPublicConfig(),
+  runtimeConfig: constructConfig(),
 
   /*
    ** Build configuration

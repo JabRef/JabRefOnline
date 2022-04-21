@@ -85,13 +85,12 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { useRouter } from '#app'
+import { navigateTo, useRouter } from '#app'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
-
+definePageMeta({layout: 'bare'})
 export default defineComponent({
   name: 'UserLogin',
-  layout: 'bare',
 
   // TODO: Automatically go to home if already loggin in
   // middleware: 'guest',
@@ -138,10 +137,9 @@ export default defineComponent({
         },
       })
     )
-    const router = useRouter()
-    onDone((result) => {
+    onDone(async (result) => {
       if (result.data?.login?.__typename === 'UserReturned') {
-        void router.push({ name: 'dashboard' })
+        await navigateTo({ name: 'dashboard' })
       } else {
         otherError.value =
           result.data?.login?.__typename === 'InputValidationProblem' &&

@@ -95,10 +95,10 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
-import { BaseTree } from '@he-tree/vue2'
+import { BaseTree } from '@he-tree/vue3'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
-import '@he-tree/vue2/dist/he-tree-vue2.css'
+import '@he-tree/vue3/dist/he-tree-vue3.css'
 
 export default defineComponent({
   components: {

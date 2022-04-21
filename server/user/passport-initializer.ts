@@ -6,7 +6,7 @@ import { RedisClientType } from 'redis'
 import { inject, injectable } from 'tsyringe'
 import { AuthService } from './auth.service'
 import EmailStrategy from './auth.email.strategy'
-import config from '#config'
+const config = useRuntimeConfig()
 import { Environment } from '~/config'
 
 @injectable()
@@ -29,7 +29,7 @@ export default class PassportInitializer {
   install(app: Express): void {
     // TODO: Use redis store also for development as soon as https://github.com/tj/connect-redis/issues/336 is fixed (and mock-redis is compatible with redis v4)
     let store
-    if (config.environment === Environment.Production) {
+    if (config.public.environment === Environment.Production) {
       const RedisStore = connectRedis(session)
       store = new RedisStore({
         client: this.redisClient,

@@ -68,13 +68,12 @@
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { useRouter } from '#app'
+import { navigateTo, useRouter } from '#app'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
-
+definePageMeta({layout: 'bare'})
 export default defineComponent({
   name: 'UserRegister',
-  layout: 'bare',
 
   setup() {
     const email = ref('')
@@ -116,9 +115,8 @@ export default defineComponent({
         },
       })
     )
-    const router = useRouter()
-    onDone(() => {
-      void router.push('/dashboard')
+    onDone(async () => {
+      await navigateTo({ path: '/dashboard' })
     })
 
     return {

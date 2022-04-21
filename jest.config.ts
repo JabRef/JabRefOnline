@@ -6,7 +6,6 @@ const config: Config.InitialOptions = {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js',
-    '#config': '<rootDir>/test/config.ts',
   },
   moduleFileExtensions: ['js', 'ts', 'vue', 'json'],
   transform: {
@@ -17,7 +16,7 @@ const config: Config.InitialOptions = {
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
     '<rootDir>/pages/**/*.vue',
-    '<rootDir>/api/**/*.ts',
+    '<rootDir>/server/**/*.ts',
   ],
   snapshotSerializers: ['<rootDir>/test/snapshot.graphql.cjs'],
   testEnvironment: '<rootDir>/test/testenv.ts',

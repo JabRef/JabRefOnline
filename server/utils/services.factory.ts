@@ -3,7 +3,7 @@
 import { promisify } from 'util'
 import redis, { RedisClientType } from 'redis'
 import { Environment } from '~/config'
-import config from '#config'
+const config = useRuntimeConfig().public
 
 export async function createRedisClient(): Promise<RedisClientType<any, any>> {
   if (config.environment === Environment.LocalDevelopment) {

@@ -35,12 +35,11 @@
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { useRouter, useRoute } from '#app'
+import { useRouter, useRoute, navigateTo } from '#app'
 import { gql } from '~/apollo'
-
+definePageMeta({layout: 'bare'})
 export default defineComponent({
   name: 'ChangePassword',
-  layout: 'bare',
   setup() {
     const password = ref('')
     const repeatPassword = ref('')
@@ -85,9 +84,8 @@ export default defineComponent({
         },
       })
     )
-    const router = useRouter()
-    onDone(() => {
-      void router.push({ name: 'user-login' })
+    onDone(async () => {
+      await navigateTo({ name: 'user-login' })
     })
     return { password, error, changePassword, repeatPassword }
   },

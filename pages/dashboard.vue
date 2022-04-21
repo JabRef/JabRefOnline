@@ -19,7 +19,7 @@
 <script lang="ts">
 import { useQuery, useResult } from '@vue/apollo-composable'
 import { defineComponent } from '@vue/composition-api'
-import virtualList from 'vue-virtual-scroll-list'
+import VirtualList from '@supertiger/vue-3-virtual-scroll-list'
 import { WatchQueryFetchPolicy } from '@apollo/client/core'
 import DocumentView from '../components/DocumentView.vue'
 import { gql } from '~/apollo'
@@ -29,7 +29,7 @@ const FIRST = 4
 
 export default defineComponent({
   components: {
-    'virtual-list': virtualList,
+    'virtual-list': VirtualList,
   },
   meta: {
     // TODO: Reactivate login check

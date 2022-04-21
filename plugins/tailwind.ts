@@ -1,4 +1,4 @@
-import VueTailwind from 'vue-tailwind'
+import { variantJS, VariantJSConfiguration } from '@variantjs/vue'
 import Vue from 'vue'
 import {
   TInput,
@@ -11,9 +11,9 @@ import {
   TSelect,
   TTextarea,
   TTable,
-} from 'vue-tailwind/dist/components'
+} from '@variantjs/vue'
 
-const settings = {
+const settings: VariantJSConfiguration = {
   't-input': {
     component: TInput,
     props: {
@@ -240,12 +240,6 @@ const settings = {
   },
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const VueTailwindPlugin =
-  // @ts-ignore: Bridge is messing with the import as VueTailwind is not yet an ES module
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  VueTailwind.default?.default || VueTailwind.default || VueTailwind
-
-Vue.use(VueTailwindPlugin, settings)
-
-export default {}
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(variantJS, settings)
+})

@@ -1,4 +1,4 @@
-import { constructPrivateConfig } from '~/config'
+import { constructConfig } from '~/config'
 
-// Support for #config import in tests
-export default constructPrivateConfig()
+// TODO: Support for #config import in tests
+export default constructConfig()

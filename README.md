@@ -86,7 +86,7 @@ An up-to-date version of all Storybook components can be found [online](https://
 - `store` contains Vuex Store files. [Nuxt documentation](https://nuxtjs.org/guide/vuex-store).
 
 ## Recommended VS Code and Browser extensions
-- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur): Add syntax highlighting and other tooling for Vue. 
+- [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar): Add syntax highlighting and other tooling for Vue. 
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma): Add syntax highlighting, formatting, jump-to-definition and linting for Prisma Schema files. 
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style.
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): Override user/workspace VS Code settings with the provided settings in `.editorconfig`.

@@ -45,10 +45,9 @@
 import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
-
+definePageMeta({layout: 'bare'})
 export default defineComponent({
   name: 'ForgotPassword',
-  layout: 'bare',
   setup() {
     const email = ref('')
     const {

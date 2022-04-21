@@ -7,12 +7,12 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
-import { Environment } from '../config'
-import { configure as configureTsyringe } from './tsyringe.config'
-import { buildContext } from './context'
-import { loadSchema } from './schema'
-import PassportInitializer from './user/passport-initializer'
-import config from '#config'
+import { Environment } from '../../config'
+import { configure as configureTsyringe } from '../tsyringe.config'
+import { buildContext } from '../context'
+import { loadSchema } from '../schema'
+import PassportInitializer from '../user/passport-initializer'
+const config = useRuntimeConfig().public
 
 // Create express instance
 const app = express()

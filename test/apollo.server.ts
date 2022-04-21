@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-express'
 import { container } from 'tsyringe'
-import { AuthService } from '../api/user/auth.service'
-import { loadSchema } from '~/api/schema'
+import { AuthService } from '../server/user/auth.service'
+import { loadSchema } from '~~/server/schema'
 
 export function createAuthenticatedClient(): ApolloServer {
   return new ApolloServer({

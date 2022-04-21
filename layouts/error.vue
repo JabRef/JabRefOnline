@@ -25,8 +25,8 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
+definePageMeta({layout: 'bare'})
 export default defineComponent({
-  layout: 'bare',
   props: {
     error: {
       type: Object,
