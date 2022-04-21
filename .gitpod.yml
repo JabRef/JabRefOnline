@@ -10,7 +10,6 @@ tasks:
       yarn prisma:seed
       yarn docker:redis
       gp sync-done setup
-      yarn generate:watch
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
       NUXT_TELEMETRY_DISABLED: 1
@@ -18,6 +17,13 @@ tasks:
     command: |
       gp sync-await setup
       yarn dev
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_TELEMETRY_DISABLED: 1
+  - name: Generate
+    command: |
+      gp sync-await setup
+      yarn generate:watch
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
       NUXT_TELEMETRY_DISABLED: 1
