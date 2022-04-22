@@ -1,0 +1,13 @@
+diff --git a/node_modules/nitropack/dist/runtime/entries/nitro-dev.mjs b/node_modules/nitropack/dist/runtime/entries/nitro-dev.mjs
+index 943f3e9..9b691a3 100644
+--- a/node_modules/nitropack/dist/runtime/entries/nitro-dev.mjs
++++ b/node_modules/nitropack/dist/runtime/entries/nitro-dev.mjs
+@@ -28,5 +28,6 @@ server.listen(listenAddress, () => {
+     address: typeof _address === "string" ? { socketPath: _address } : { host: "localhost", port: _address.port }
+   });
+ });
+-process.on("unhandledRejection", (err) => console.error("[nitro] [dev] [unhandledRejection] " + err));
+-process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException] " + err));
++// CHANGED: Better error handling with stack traces
++process.on("unhandledRejection", (err) => console.error("[nitro] [dev] [unhandledRejection]", err));
++process.on("uncaughtException", (err) => console.error("[nitro] [dev] [uncaughtException]", err));

@@ -1,5 +1,3 @@
-import type { RuntimeConfig } from '@nuxt/schema'
-
 export enum Environment {
   /**
    * Locally, on the developers machine.
@@ -33,7 +31,7 @@ function getEnvironment(): Environment {
     : Environment.LocalDevelopment
 }
 
-export function constructConfig(): RuntimeConfig {
+export function constructConfig() {
   return {
     redis: {
       port: Number(process.env.REDIS_PORT) || 6380,
@@ -46,6 +44,6 @@ export function constructConfig(): RuntimeConfig {
     },
     public: {
       environment: getEnvironment(),
-    }
+    },
   }
 }

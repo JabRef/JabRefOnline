@@ -7,14 +7,16 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
-import { defineEventHandler } from 'h3'
 import { Environment } from '../../config'
 import { configure as configureTsyringe } from '../tsyringe.config'
 import { buildContext } from '../context'
 import { loadSchema } from '../schema'
 import PassportInitializer from '../user/passport-initializer'
-import { useRuntimeConfig } from '#app'
-const config = useRuntimeConfig().public
+// import { useRuntimeConfig } from 'nuxt/dist/app'
+// const config = useRuntimeConfig().public
+const config = {
+  environment: Environment.LocalDevelopment,
+}
 
 // Create express instance
 const app = express()
@@ -50,8 +52,4 @@ void configureTsyringe().then(() => {
   void startServer()
 })
 
-export default defineEventHandler((event) => {
-  return {
-    api: 'works',
-  }
-})
+export default app

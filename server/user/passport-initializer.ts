@@ -6,8 +6,17 @@ import { RedisClientType } from 'redis'
 import { inject, injectable } from 'tsyringe'
 import { AuthService } from './auth.service'
 import EmailStrategy from './auth.email.strategy'
-const config = useRuntimeConfig()
+// const config = useRuntimeConfig()
 import { Environment } from '~/config'
+const config = {
+  public: {
+    environment: Environment.LocalDevelopment,
+  },
+  session: {
+    primarySecret: 'session_secret',
+    secondarySecret: 'session_secret',
+  },
+}
 
 @injectable()
 export default class PassportInitializer {
@@ -52,7 +61,7 @@ export default class PassportInitializer {
         name: 'session',
         cookie: {
           // Serve secure cookies (requires HTTPS, so only in production)
-          secure: config.environment === Environment.Production,
+          secure: config.public.environment === Environment.Production,
           // Blocks the access cooky from javascript, preventing XSS attacks
           httpOnly: true,
           // Blocks sending a cookie in a cross-origin request, protects somewhat against CORS attacks

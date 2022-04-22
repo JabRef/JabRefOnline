@@ -33,9 +33,9 @@ export default defineNuxtConfig({
 
   nitro: {
     hooks: {
-      'nitro:rollup:before'(ctx) {
+      'rollup:before'(ctx) {
         // Needed for emitting decorator metadata (which is not supported by esbuild)
-        ctx.rollupConfig?.plugins?.unshift(typescript())
+        ctx.options.rollupConfig?.plugins?.unshift(typescript())
       },
     },
     // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
