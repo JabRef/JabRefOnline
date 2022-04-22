@@ -34,6 +34,19 @@ tasks:
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
 
+vscode:
+  # Add handy VS Code extensions: https://www.gitpod.io/docs/ides-and-editors/vscode-extensions
+  extensions:
+    - johnsoncodehk.volar
+    - dbaeumer.vscode-eslint
+    - GitHub.copilot
+    - eamodio.gitlens
+    - GraphQL.vscode-graphql
+    - Orta.vscode-jest
+    - esbenp.prettier-vscode
+    - Prisma.prisma
+    - bradlc.vscode-tailwindcss
+
 # Expose ports: https://www.gitpod.io/docs/config-ports/
 ports:
   # Redis

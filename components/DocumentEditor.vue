@@ -111,8 +111,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
 import { useResult, useQuery } from '@vue/apollo-composable'
+import { defineComponent, computed } from 'vue'
 import Tags from './tagify.vue'
 import { gql } from '~/apollo'
 
