@@ -21,7 +21,10 @@
           <FontAwesomeIcon icon="times" />
         </t-button>
         <slot>
-          <document-editor :document-id="selectedDocumentId"></document-editor>
+          <document-editor
+            v-if="selectedDocumentId"
+            :document-id="selectedDocumentId"
+          ></document-editor>
         </slot>
       </div>
     </transition>

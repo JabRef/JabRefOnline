@@ -1,5 +1,4 @@
-import { ApolloClient, NormalizedCache } from '@apollo/client/core'
-import { gql } from '~/apollo'
+import { ApolloClient, gql, NormalizedCache } from '@apollo/client/core'
 
 /**
  * Plugin that adds checks if the user is logged in, and redirects her to the login page if not.
