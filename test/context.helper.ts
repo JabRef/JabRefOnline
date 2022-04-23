@@ -1,5 +1,5 @@
 import mocking, { MockProxy } from 'jest-mock-extended'
-import { Context } from '~~/server/context'
+import { Context } from '~/server/context'
 
 export function createUnauthenticatedContext(): MockProxy<Context> {
   const context = mocking.mock<Context>()
