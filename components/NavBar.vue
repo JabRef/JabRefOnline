@@ -146,11 +146,11 @@ export default defineComponent({
       }
     )
 
-    onDone(async () => {
+    onDone(() => {
       // Reset graphql cache
       void resolveClient().clearStore()
 
-      await navigateTo({ name: 'index' })
+      void navigateTo({ name: 'index' })
     })
 
     const uiStore = useUiStore()

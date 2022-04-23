@@ -1,6 +1,5 @@
-import TInput from 'vue-tailwind/dist/t-input'
-
 import { Story, Meta } from '@storybook/vue'
+import { TInput } from '@variantjs/vue'
 
 export default {
   component: TInput,

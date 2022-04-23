@@ -6,6 +6,8 @@
     >
       <virtual-list
         class="virtual-list"
+        :size="10"
+        :remain="10"
         :data-key="'id'"
         :page-mode="true"
         :data-sources="documents"
@@ -18,7 +20,6 @@
 
 <script lang="ts">
 import { useQuery, useResult } from '@vue/apollo-composable'
-import { defineComponent } from '@vue/composition-api'
 import VirtualList from '@supertiger/vue-3-virtual-scroll-list'
 import { WatchQueryFetchPolicy } from '@apollo/client/core'
 import DocumentView from '../components/DocumentView.vue'

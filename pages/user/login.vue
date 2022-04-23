@@ -83,12 +83,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { navigateTo, useRouter } from '#app'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
-definePageMeta({layout: 'bare'})
+definePageMeta({ layout: 'bare' })
 export default defineComponent({
   name: 'UserLogin',
 
@@ -137,9 +135,9 @@ export default defineComponent({
         },
       })
     )
-    onDone(async (result) => {
+    onDone((result) => {
       if (result.data?.login?.__typename === 'UserReturned') {
-        await navigateTo({ name: 'dashboard' })
+        void navigateTo({ name: 'dashboard' })
       } else {
         otherError.value =
           result.data?.login?.__typename === 'InputValidationProblem' &&

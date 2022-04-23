@@ -42,10 +42,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
-definePageMeta({layout: 'bare'})
+definePageMeta({ layout: 'bare' })
 export default defineComponent({
   name: 'ForgotPassword',
   setup() {

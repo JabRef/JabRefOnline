@@ -66,12 +66,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { navigateTo, useRouter } from '#app'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
-definePageMeta({layout: 'bare'})
+definePageMeta({ layout: 'bare' })
 export default defineComponent({
   name: 'UserRegister',
 
@@ -115,8 +113,8 @@ export default defineComponent({
         },
       })
     )
-    onDone(async () => {
-      await navigateTo({ path: '/dashboard' })
+    onDone(() => {
+      void navigateTo({ path: '/dashboard' })
     })
 
     return {

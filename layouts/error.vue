@@ -24,8 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-definePageMeta({layout: 'bare'})
+definePageMeta({ layout: 'bare' })
 export default defineComponent({
   props: {
     error: {
