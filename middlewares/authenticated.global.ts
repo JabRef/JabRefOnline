@@ -26,6 +26,7 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
 
       // If the user is not authenticated, then redirect
       if (
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         response.data?.me?.id === undefined ||
         response.errors !== undefined
       ) {
