@@ -15,7 +15,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const config = useRuntimeConfig()
   let httpLink
-  if (config.environment === Environment.LocalDevelopment) {
+  if (config.public.environment === Environment.LocalDevelopment) {
     httpLink = new HttpLink({ uri: 'http://localhost:3000/api/', fetch })
   } else {
     httpLink = new HttpLink({ uri: 'http://0.0.0.0:8080/api/', fetch })
@@ -23,7 +23,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // Print errors
   const errorLink = onError((error) => {
-    if (config.environment !== Environment.Production) {
+    if (config.public.environment !== Environment.Production) {
       logErrorMessages(error)
     }
   })

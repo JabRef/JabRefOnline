@@ -3,18 +3,10 @@
 import { promisify } from 'util'
 import redis, { RedisClientType } from 'redis'
 import { Environment } from '~/config'
-// const config = useRuntimeConfig().public
-const config = {
-  environment: Environment.LocalDevelopment,
-  redis: {
-    host: 'localhost',
-    port: 6380,
-    password: 'jabref',
-  },
-}
+const config = useRuntimeConfig()
 
 export async function createRedisClient(): Promise<RedisClientType<any, any>> {
-  if (config.environment === Environment.LocalDevelopment) {
+  if (config.public.environment === Environment.LocalDevelopment) {
     const redisMock = (await import('redis-mock')).default
     const mockRedis = redisMock.createClient()
     // Workaround for redis-mock being not compatible with redis@4

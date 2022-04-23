@@ -12,15 +12,10 @@ import { configure as configureTsyringe } from '../tsyringe.config'
 import { buildContext } from '../context'
 import { loadSchema } from '../schema'
 import PassportInitializer from '../user/passport-initializer'
-// import { useRuntimeConfig } from 'nuxt/dist/app'
-// const config = useRuntimeConfig().public
-const config = {
-  environment: Environment.LocalDevelopment,
-}
 
 // Create express instance
 const app = express()
-if (config.environment === Environment.Production) {
+if (useRuntimeConfig().public.environment === Environment.Production) {
   // Azure uses a reverse proxy, which changes some API values (notably express things it is not accessed through a secure https connection)
   // So we need to adjust for this, see http://expressjs.com/en/guide/behind-proxies.html
   app.set('trust proxy', 1)

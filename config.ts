@@ -31,7 +31,22 @@ function getEnvironment(): Environment {
     : Environment.LocalDevelopment
 }
 
-export function constructConfig() {
+export interface Config {
+  redis: {
+    port: number
+    host: string
+    password: string
+  }
+  session: {
+    primarySecret: string
+    secondarySecret: string
+  }
+  public: {
+    environment: Environment
+  }
+}
+
+export function constructConfig(): Config {
   return {
     redis: {
       port: Number(process.env.REDIS_PORT) || 6380,

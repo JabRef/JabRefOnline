@@ -6,17 +6,8 @@ import { RedisClientType } from 'redis'
 import { inject, injectable } from 'tsyringe'
 import { AuthService } from './auth.service'
 import EmailStrategy from './auth.email.strategy'
-// const config = useRuntimeConfig()
 import { Environment } from '~/config'
-const config = {
-  public: {
-    environment: Environment.LocalDevelopment,
-  },
-  session: {
-    primarySecret: 'session_secret',
-    secondarySecret: 'session_secret',
-  },
-}
+const config = useRuntimeConfig()
 
 @injectable()
 export default class PassportInitializer {
