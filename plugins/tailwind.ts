@@ -141,16 +141,6 @@ const settings: VariantJSConfiguration = {
       },
     },
   },
-  /*
-  't-nuxtlink': {
-    // TButton has builtin support for NuxtLink, so we just reuse it
-    component: TButton,
-    props: {
-      tagName: 'a',
-      classes: 'text-primary-500 hover:text-highlight-600',
-    },
-  },
-  */
   TDropdown: {
     fixedClasses: {
       button:
@@ -242,7 +232,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('t-input', TInput)
   nuxtApp.vueApp.component('t-checkbox', TCheckbox)
   nuxtApp.vueApp.component('t-button', TButton)
-  nuxtApp.vueApp.component('t-inputgroup', TInputGroup)
+  nuxtApp.vueApp.component('t-input-group', TInputGroup)
   nuxtApp.vueApp.component('t-alert', TAlert)
   nuxtApp.vueApp.component('t-dropdown', TDropdown)
   nuxtApp.vueApp.component('t-tag', TTag)
