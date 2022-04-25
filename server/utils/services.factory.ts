@@ -32,11 +32,11 @@ export async function createRedisClient(): Promise<RedisClientType<any, any>> {
     }
 
     // Only Azure needs a TLS connection to Redis
-    if (config.environment !== Environment.Production) {
+    if (config.public.environment !== Environment.Production) {
       delete redisConfig.socket.tls
     }
     // Redis on Github Actions does not need a password
-    if (config.environment === Environment.CI) {
+    if (config.public.environment === Environment.CI) {
       delete redisConfig.password
     }
     const client = redis.createClient(redisConfig)
