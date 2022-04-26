@@ -121,7 +121,6 @@
 
 <script lang="ts">
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
-import { defineComponent, ref, watch } from 'vue'
 import { navigateTo } from '#app'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'

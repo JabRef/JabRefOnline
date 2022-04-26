@@ -105,7 +105,7 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent, ref, computed, toRefs } from 'vue'
+import type { PropType } from 'vue'
 import { gql, DocumentType } from '~/apollo'
 import { useUiStore } from '~/store'
 

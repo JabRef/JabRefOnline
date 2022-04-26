@@ -31,7 +31,6 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
 import { useUiStore } from './../store'
 
 export default defineComponent({
