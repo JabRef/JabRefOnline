@@ -12,8 +12,6 @@ import {
   VariantJSConfiguration,
 } from '@variantjs/vue'
 
-import { defineNuxtPlugin } from '#app'
-
 const settings: VariantJSConfiguration = {
   TInput: {
     fixedClasses:

@@ -4,7 +4,6 @@ import { onError } from '@apollo/client/link/error'
 import { logErrorMessages } from '@vue/apollo-util'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { cache } from '../apollo/cache'
-import { defineNuxtPlugin, useRuntimeConfig } from '#app'
 import { Environment } from '~/config'
 
 export default defineNuxtPlugin((nuxtApp) => {
