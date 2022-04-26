@@ -21,7 +21,7 @@
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
     "prisma:generate:watch": "prisma generate --watch",
-    "storybook": "nuxt storybook",
+    "storybook": "start-storybook -p 6006 --preview-url http://localhost:3000/_storybook/external-iframe",
     "storybook:build": "nuxt storybook build",
     "storybook@17": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxt storybook",
     "storybook:build@17": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxt storybook build",
@@ -38,7 +38,8 @@
     "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test.ts --runInBand",
     "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest spec.ts",
     "typecheck": "nuxi typecheck",
-    "validate": "yarn graphql:validate"
+    "validate": "yarn graphql:validate",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
@@ -53,6 +54,7 @@
     "@pinia/nuxt": "^0.1.8",
     "@popperjs/core": "^2.11.5",
     "@prisma/client": "^3.12.0",
+    "@supertiger/vue-3-virtual-scroll-list": "^1.0.8",
     "@variantjs/core": "^0.0.89",
     "@variantjs/vue": "^0.0.22",
     "@vue/apollo-composable": "4.0.0-alpha.16",
@@ -80,8 +82,7 @@
     "ts-loader": "^8.3.0",
     "ts-node": "^10.7.0",
     "tsyringe": "^4.6.0",
-    "typescript": "^4.6.3",
-    "@supertiger/vue-3-virtual-scroll-list": "^1.0.8"
+    "typescript": "^4.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -102,6 +103,10 @@
     "@nuxtjs/eslint-module": "^3.1.0",
     "@nuxtjs/storybook": "^4.3.0",
     "@nuxtjs/tailwindcss": "5.0.2",
+    "@storybook/addon-actions": "^6.4.22",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-links": "^6.4.22",
+    "@storybook/vue3": "^6.4.22",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@types/bcryptjs": "^2.4.2",
@@ -120,6 +125,7 @@
     "@vue/test-utils": "^1.3.0",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
     "babel-jest": "^27.5.1",
+    "babel-loader": "^8.2.5",
     "chromatic": "^6.5.4",
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
@@ -139,6 +145,7 @@
     "redis-mock": "^0.56.3",
     "rollup-plugin-typescript2": "^0.31.2",
     "ts-jest": "^27.1.4",
+    "vue-loader": "^16.8.3",
     "vue-tsc": "^0.34.7"
   },
   "resolutions": {
@@ -152,12 +159,6 @@
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "jest": "Workaround for https://github.com/hypervillain/ast-to-literal/issues/11 which pulls in old version of jest",
     "ts-invariant": "Workaround for https://github.com/apollographql/apollo-client/issues/9535"
-  },
-  "workspaces": {
-    "nohoist": [
-      "**/tailwindcss",
-      "**/@tailwindcss/**"
-    ]
   },
   "prisma": {
     "schema": "server/database/schema.prisma",
