@@ -120,8 +120,6 @@ export default defineNuxtConfig({
       'tslib',
       // TODO: Remove this as soon as vue-property-decorator supports esm (https://github.com/kaorun343/vue-property-decorator/issues/385)
       'vue-property-decorator',
-      // TODO: Remove this as soon as vue-tailwind supports esm (https://github.com/alfonsobries/vue-tailwind/issues/236)
-      'vue-tailwind',
     ],
   },
 
