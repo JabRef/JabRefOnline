@@ -116,12 +116,8 @@ export default defineNuxtConfig({
   build: {
     // TODO: Remove these once new versions of the libraries are used that support esm
     transpile: [
-      // TODO: Remove once apollo/client/utilities supports esm (https://github.com/apollographql/apollo-client/issues/9008)
-      '@apollo/client',
       // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
       'tslib',
-      // TODO: Remove this as soon as ts-invariant supports esm (https://github.com/apollographql/invariant-packages/issues/227)
-      'ts-invariant/process',
       // TODO: Remove this as soon as vue-property-decorator supports esm (https://github.com/kaorun343/vue-property-decorator/issues/385)
       'vue-property-decorator',
       // TODO: Remove this as soon as vue-tailwind supports esm (https://github.com/alfonsobries/vue-tailwind/issues/236)
