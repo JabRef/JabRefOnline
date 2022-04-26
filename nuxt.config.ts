@@ -18,14 +18,6 @@ export default defineNuxtConfig({
     },
   },
 
-  vite: {
-    // @ts-ignore: no typing information, but it is a workaround anyway
-    ssr: {
-      // TODO: Remove these once new versions of the libraries are used that support esm
-      noExternal: ['@vue/devtools-api'],
-    },
-  },
-
   alias: {
     // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
     tslib: 'tslib/tslib.es6.js',
@@ -118,8 +110,6 @@ export default defineNuxtConfig({
     transpile: [
       // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
       'tslib',
-      // TODO: Remove this as soon as vue-property-decorator supports esm (https://github.com/kaorun343/vue-property-decorator/issues/385)
-      'vue-property-decorator',
     ],
   },
 
