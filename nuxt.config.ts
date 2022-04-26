@@ -9,15 +9,6 @@ export default defineNuxtConfig({
    */
   target: 'static',
 
-  bridge: {
-    // Use Vite instead of Webpack
-    vite: true,
-    // Disable legacy composition API support (we no longer need this)
-    capi: {
-      legacy: false,
-    },
-  },
-
   alias: {
     // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
     tslib: 'tslib/tslib.es6.js',
@@ -86,14 +77,6 @@ export default defineNuxtConfig({
    ** Restarts the server when dependencies change.
    */
   watch: ['server/**/*.graphql'],
-
-  /*
-   ** For deployment you might want to edit host and port
-   */
-  // server: {
-  //  port: 8000, // default: 3000
-  //  host: '0.0.0.0' // default: localhost
-  // },
 
   /*
    ** Client and server-side configuration
