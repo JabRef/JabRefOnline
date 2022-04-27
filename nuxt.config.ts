@@ -78,6 +78,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     // Use Pinia for state management
     '@pinia/nuxt',
+    // Add storybook support
     './modules/storybook',
   ],
 
