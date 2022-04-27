@@ -9,9 +9,16 @@ export default defineNuxtConfig({
    */
   target: 'static',
 
+  /*
+   ** Add alias for library imports
+   ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
+   */
   alias: {
     // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
     tslib: 'tslib/tslib.es6.js',
+    // Support `import 'global'` used by storybook
+    // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
+    global: 'global.ts',
   },
 
   nitro: {

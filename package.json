@@ -21,10 +21,8 @@
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
     "prisma:generate:watch": "prisma generate --watch",
-    "storybook": "start-storybook -p 6006 --preview-url http://localhost:3000/_storybook/external-iframe",
-    "storybook:build": "nuxt storybook build",
-    "storybook@17": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxt storybook",
-    "storybook:build@17": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxt storybook build",
+    "storybook": "start-storybook -p 6006 --preview-url=http://localhost:3000/_storybook/external-iframe --no-manager-cache",
+    "storybook:build": "build-storybook",
     "storybook:publish": "chromatic --exit-zero-on-changes --build-script-name storybook:build",
     "graphql:generate": "graphql-codegen",
     "graphql:generate:watch": "graphql-codegen --watch",
@@ -38,8 +36,7 @@
     "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test.ts --runInBand",
     "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest spec.ts",
     "typecheck": "nuxi typecheck",
-    "validate": "yarn graphql:validate",
-    "build-storybook": "build-storybook"
+    "validate": "yarn graphql:validate"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
