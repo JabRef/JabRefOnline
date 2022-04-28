@@ -15,7 +15,7 @@ export default defineNuxtConfig({
    */
   alias: {
     // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
-    tslib: 'tslib/tslib.es6.js',
+    // tslib: 'tslib/tslib.es6.js',
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
     global: 'global.ts',
@@ -101,7 +101,7 @@ export default defineNuxtConfig({
     // TODO: Remove these once new versions of the libraries are used that support esm
     transpile: [
       // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
-      'tslib',
+      // 'tslib',
     ],
   },
 
