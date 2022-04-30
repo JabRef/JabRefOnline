@@ -48,10 +48,10 @@
 
       <BaseTree
         v-if="groups"
-        :tree-data="{
+        :tree-data="
           // @ts-ignore -- issue with BaseTree not being generic
-          groups,
-        }"
+          groups as any
+        "
         children-key="children"
         :gap="7"
         class="groupsTree"
