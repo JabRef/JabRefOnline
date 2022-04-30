@@ -21,5 +21,10 @@ import * as Comp1 from '~/components/t-input.stories'
 
 definePageMeta({ layout: false })
 
-configure(() => [Comp1], module)
+export default defineComponent({
+  setup: () => {
+    // @ts-ignore: module is not used
+    configure(() => [Comp1], null)
+  },
+})
 </script>
