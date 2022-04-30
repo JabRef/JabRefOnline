@@ -101,15 +101,21 @@ const settings: VariantJSConfiguration = {
     },
     variants: {
       error: {
-        label: 'text-error-500',
-        feedback: 'text-error-500',
+        classes: {
+          label: 'text-error-500',
+          feedback: 'text-error-500',
+        },
       },
       success: {
-        label: 'text-success-500',
-        feedback: 'text-success-500',
+        classes: {
+          label: 'text-success-500',
+          feedback: 'text-success-500',
+        },
       },
       important: {
-        label: 'font-semibold',
+        classes: {
+          label: 'font-semibold',
+        },
       },
     },
   },
@@ -128,14 +134,18 @@ const settings: VariantJSConfiguration = {
     },
     variants: {
       error: {
-        wrapper: 'bg-error-50 border-error-500',
-        body: 'text-error-700',
-        close: 'text-error-500 hover:bg-error-200',
+        classes: {
+          wrapper: 'bg-error-50 border-error-500',
+          body: 'text-error-700',
+          close: 'text-error-500 hover:bg-error-200',
+        },
       },
       success: {
-        wrapper: 'bg-success-50 border-success-500',
-        body: 'text-success-700',
-        close: 'text-success-500 hover:bg-success-200',
+        classes: {
+          wrapper: 'bg-success-50 border-success-500',
+          body: 'text-success-700',
+          close: 'text-success-500 hover:bg-success-200',
+        },
       },
     },
   },
@@ -158,7 +168,9 @@ const settings: VariantJSConfiguration = {
     },
     variants: {
       left: {
-        dropdown: 'bg-white origin-top-right right-0',
+        classes: {
+          dropdown: 'bg-white origin-top-right right-0',
+        },
       },
     },
   },
@@ -190,14 +202,18 @@ const settings: VariantJSConfiguration = {
     },
     variants: {
       plain: {
-        input:
-          'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
-        arrowWrapper: 'text-current',
+        classes: {
+          input:
+            'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
+          arrowWrapper: 'text-current',
+        },
       },
       plaincaps: {
-        input:
-          'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
-        arrowWrapper: 'text-current',
+        classes: {
+          input:
+            'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
+          arrowWrapper: 'text-current',
+        },
       },
     },
   },
@@ -217,9 +233,11 @@ const settings: VariantJSConfiguration = {
     },
     variants: {
       plain: {
-        table: '',
-        td: 'px-3 py-1 whitespace-no-wrap',
-        tbody: 'bg-transparent',
+        classes: {
+          table: '',
+          td: 'px-3 py-1 whitespace-no-wrap',
+          tbody: 'bg-transparent',
+        },
       },
     },
   },
