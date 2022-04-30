@@ -3,6 +3,21 @@ import typescript from 'rollup-plugin-typescript2'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
+  vite: {
+      server: {
+        // Configure vite for HMR with Gitpod
+        // From https://mattjennings.io/blog/how-to-enable-hmr-for-sveltekit-on-gitpod
+        hmr: process.env.GITPOD_WORKSPACE_URL
+          ? {
+              // Host is something like 3000-jabref-jabrefonline-m9io3khd3eh.ws-eu43.gitpod.io/
+              host: process.env.GITPOD_WORKSPACE_URL.replace('https://', '3000-'),
+              protocol: 'wss',
+              clientPort: 443
+            }
+          : true
+      }
+    },
+  
   /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
