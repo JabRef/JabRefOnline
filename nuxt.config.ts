@@ -4,12 +4,6 @@ import { constructConfig } from './config'
 
 export default defineNuxtConfig({
   /*
-   ** Enable static site generation
-   ** See https://nuxtjs.org/api/configuration-target
-   */
-  target: 'static',
-
-  /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
    */
@@ -33,10 +27,11 @@ export default defineNuxtConfig({
   },
 
   /*
-   ** Enable server-side rendering (needed for 'static' target)
-   ** See https://nuxtjs.org/docs/configuration-glossary/configuration-ssr
+   ** Disable server-side rendering for now
+   ** See https://v3.nuxtjs.org/api/configuration/nuxt.config#ssr
+   ** and https://v3.nuxtjs.org/guide/concepts/rendering for a big-picture overview.
    */
-  ssr: true,
+  ssr: false,
 
   /*
    ** Headers of the page
