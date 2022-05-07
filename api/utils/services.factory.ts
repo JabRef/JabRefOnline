@@ -5,7 +5,7 @@ import redis, { RedisClientType } from 'redis'
 import { Environment } from '~/config'
 import config from '#config'
 
-export async function createRedisClient(): Promise<RedisClientType<any, any>> {
+export async function createRedisClient(): Promise<RedisClientType<any, any, any>> {
   if (config.environment === Environment.LocalDevelopment) {
     const redisMock = (await import('redis-mock')).default
     const mockRedis = redisMock.createClient()

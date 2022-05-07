@@ -9,7 +9,7 @@ container.register('RedisClient', {
   useValue: await createRedisClient(),
 })
 afterAll(async () => {
-  await container.resolve<RedisClientType<any, any>>('RedisClient').quit()
+  await container.resolve<RedisClientType>('RedisClient').quit()
 })
 
 // Setup services for integration tests
