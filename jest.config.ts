@@ -26,6 +26,8 @@ const config: Config.InitialOptions = {
   globals: {
     'ts-jest': { useESM: true },
   },
+  // GitHub Actions Reporter will annotate changed files with test failure messages on PRs
+  reporters: ["default", "github-actions"],
 }
 
 export default config
