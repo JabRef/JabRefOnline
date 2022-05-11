@@ -1,31 +1,31 @@
 import TInput from 'vue-tailwind/dist/t-input'
 
-import { Story, Meta } from '@storybook/vue'
+import { defineMeta, defineStory } from '~/utils/storybook'
 
-export default {
+export default defineMeta({
   component: TInput,
   title: 't-input',
   args: {
     value: 'Input text',
   },
-} as Meta
-
-const Template: Story = (args) => ({
-  setup() {
-    return { args }
-  },
-  template: '<t-input v-bind="args" />',
 })
-export const Default = Template.bind({})
-export const Error = Template.bind({})
-Error.args = {
-  variant: 'error',
-}
-export const Success = Template.bind({})
-Success.args = {
-  variant: 'success',
-}
-export const Plain = Template.bind({})
-Plain.args = {
-  variant: 'plain',
-}
+
+export const Default = defineStory({})
+export const Error = defineStory({
+  ...Default,
+  args: {
+    variant: 'error',
+  },
+})
+export const Success = defineStory({
+  ...Default,
+  args: {
+    variant: 'success',
+  },
+})
+export const Plain = defineStory({
+  ...Default,
+  args: {
+    variant: 'plain',
+  },
+})
