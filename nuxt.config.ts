@@ -75,6 +75,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     // Add storybook support
     './modules/storybook',
+    // Add vue runtime compiler as temporary workaround for https://github.com/nuxt/framework/issues/4661
+    'nuxt3-runtime-compiler-module',
   ],
 
   /*
