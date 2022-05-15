@@ -38,6 +38,9 @@ void configureTsyringe().then(() => {
       // Gracefully shutdown HTTP server when Apollo server terminates
       ApolloServerPluginDrainHttpServer({ httpServer }),
     ],
+    // Only reply to requests with a Content-Type header to prevent CSRF and XS-Search attacks
+    // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
+    csrfPrevention: true,
   })
 
   async function startServer() {

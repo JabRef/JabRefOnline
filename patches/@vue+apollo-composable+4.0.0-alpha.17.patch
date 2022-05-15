@@ -1,0 +1,26 @@
+diff --git a/node_modules/@vue/apollo-composable/dist/index.esm.js b/node_modules/@vue/apollo-composable/dist/index.esm.js
+index b692c88..c5ea171 100644
+--- a/node_modules/@vue/apollo-composable/dist/index.esm.js
++++ b/node_modules/@vue/apollo-composable/dist/index.esm.js
+@@ -221,7 +221,7 @@ function trackSubscription(loading) {
+ }
+ 
+ // src/util/toApolloError.ts
+-import {ApolloError, isApolloError} from "@apollo/client/core";
++import {ApolloError, isApolloError} from "@apollo/client/core/index.js";
+ function toApolloError(error) {
+   if (!(error instanceof Error)) {
+     return new ApolloError({
+diff --git a/node_modules/@vue/apollo-composable/dist/index.js b/node_modules/@vue/apollo-composable/dist/index.js
+index 02bbd5e..4756e24 100644
+--- a/node_modules/@vue/apollo-composable/dist/index.js
++++ b/node_modules/@vue/apollo-composable/dist/index.js
+@@ -256,7 +256,7 @@ function trackSubscription(loading) {
+ }
+ 
+ // src/util/toApolloError.ts
+-var import_core = __toModule(require("@apollo/client/core"));
++var import_core = __toModule(require("@apollo/client/core/core.cjs"));
+ function toApolloError(error) {
+   if (!(error instanceof Error)) {
+     return new import_core.ApolloError({

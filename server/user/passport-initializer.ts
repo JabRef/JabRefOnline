@@ -13,7 +13,7 @@ const config = useRuntimeConfig()
 export default class PassportInitializer {
   constructor(
     private accountService: AuthService,
-    @inject('RedisClient') private redisClient: RedisClientType<any, any>
+    @inject('RedisClient') private redisClient: RedisClientType
   ) {}
 
   initialize(): void {
