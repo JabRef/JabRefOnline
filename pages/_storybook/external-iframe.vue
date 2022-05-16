@@ -14,28 +14,23 @@
 <script lang="ts">
 // Based on https://github.com/storybookjs/storybook/tree/next/examples/standalone-preview
 // The idea is that we use nuxt to render the stories
-import { start } from '@storybook/core'
+import { RenderContext, start } from '@storybook/core'
+import { VueFramework } from '@storybook/vue3'
+// @ts-expect-error: This is not officially exported to use ugly workaround
 import { decorateStory } from '@storybook/vue3/dist/esm/client/preview/decorateStory'
 import { mount } from 'mount-vue-component'
 import * as Comp1 from '~/components/t-input.stories'
 
 export function renderToDOM(
-  {
-    title,
-    name,
-    storyFn,
-    showMain,
-    showError,
-    showException,
-  }: RenderContext<VueFramework>,
+  { title, name, storyFn, showMain, showError }: RenderContext<VueFramework>,
   domElement: HTMLElement
-) {
-  const element: StoryFnVueReturnType = storyFn()
+): void {
+  const element = storyFn()
 
   if (!element) {
     showError({
       title: `Expecting a Vue component from the story: "${name}" of "${title}".`,
-      description: dedent`
+      description: `
         Did you forget to return the Vue component from the story?
         Use "() => ({ template: '<my-comp></my-comp>' })" or "() => ({ components: MyComp, template: '<my-comp></my-comp>' })" when defining the story.
       `,
@@ -47,6 +42,8 @@ export function renderToDOM(
 
   mount(element, { element: domElement, app: useNuxtApp().vueApp })
 }
+// @ts-expect-error: storybook typing is inconsistent
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const api = start(renderToDOM, { decorateStory })
 const framework = 'vue3'
 definePageMeta({ layout: false })
