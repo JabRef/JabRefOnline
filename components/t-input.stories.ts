@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/vue'
+import { Story, Meta } from '@storybook/vue3'
 import { TInput } from '@variantjs/vue'
 
 export default {
