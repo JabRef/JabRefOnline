@@ -1,5 +1,4 @@
 import { DocumentType, Prisma } from '@prisma/client'
-import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
 import {
   AddJournalArticleInput,
@@ -17,6 +16,7 @@ import {
   UpdateUserDocumentInput,
 } from '../graphql'
 import { ResolveType } from '../utils/extractResolveType'
+import { resolve, injectable, inject } from './../tsyringe'
 import { UserDocumentService, UserDocument } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
@@ -157,7 +157,10 @@ function convertDocumentInput(
 
 @injectable()
 export class Query {
-  constructor(private userDocumentService: UserDocumentService) {}
+  constructor(
+    @inject('UserDocumentService')
+    private userDocumentService: UserDocumentService
+  ) {}
 
   async userDocument(
     _root: Record<string, never>,
@@ -170,7 +173,10 @@ export class Query {
 
 @injectable()
 export class Mutation {
-  constructor(private userDocumentService: UserDocumentService) {}
+  constructor(
+    @inject('UserDocumentService')
+    private userDocumentService: UserDocumentService
+  ) {}
 
   async addUserDocument(
     _root: Record<string, never>,
@@ -308,12 +314,12 @@ export class OtherResolver extends DocumentResolver {}
 
 export function resolvers(): Resolvers {
   return {
-    Query: container.resolve(Query),
-    Mutation: container.resolve(Mutation),
-    Document: container.resolve(DocumentResolver),
-    JournalArticle: container.resolve(JournalArticleResolver),
-    ProceedingsArticle: container.resolve(ProceedingsArticleResolver),
-    Thesis: container.resolve(ThesisResolver),
-    Other: container.resolve(OtherResolver),
+    Query: resolve('DocumentQuery'),
+    Mutation: resolve('DocumentMutation'),
+    Document: resolve('DocumentResolver'),
+    JournalArticle: resolve('JournalArticleResolver'),
+    ProceedingsArticle: resolve('ProceedingsArticleResolver'),
+    Thesis: resolve('ThesisResolver'),
+    Other: resolve('OtherResolver'),
   }
 }

@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt'
-import typescript from 'rollup-plugin-typescript2'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
@@ -16,12 +15,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    hooks: {
-      'rollup:before'(ctx) {
-        // Needed for emitting decorator metadata (which is not supported by esbuild)
-        ctx.options.rollupConfig?.plugins?.unshift(typescript())
-      },
-    },
     // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata'],
   },

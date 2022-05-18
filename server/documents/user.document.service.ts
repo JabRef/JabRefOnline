@@ -7,8 +7,8 @@ import type {
   JournalIssue,
   Journal,
 } from '@prisma/client'
-import { inject, injectable } from 'tsyringe'
 import { DocumentFilters, UserDocumentsConnection } from '../graphql'
+import { inject, injectable } from './../tsyringe'
 
 export type UserDocument = PlainUserDocument & {
   other?: UserDocumentOtherField[]
