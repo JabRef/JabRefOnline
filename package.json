@@ -96,7 +96,7 @@
     "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.1.0",
-    "@nuxtjs/tailwindcss": "5.0.4",
+    "@nuxtjs/tailwindcss": "^5.0.4",
     "@storybook/vue3": "^6.4.22",
     "@tailwindcss/forms": "^0.5.1",
     "@tailwindcss/line-clamp": "^0.4.0",
@@ -131,24 +131,28 @@
     "nuxt": "^3.0.0-rc.3",
     "nuxt3-runtime-compiler-module": "^1.0.4",
     "patch-package": "^6.4.7",
+    "postcss-custom-properties": "^12.1.7",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.6.2",
     "prisma": "3.14.0",
     "redis-mock": "^0.56.3",
     "ts-jest": "^28.0.2",
+    "ufo": "^0.8.4",
     "vue-tsc": "^0.34.13"
   },
   "resolutions": {
     "@graphql-tools/mock": "^8.4.3",
     "@types/react": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.1.1.tgz",
     "jest": "^27.5.1",
-    "ts-invariant": "^0.10.0"
+    "ts-invariant": "^0.10.0",
+    "ufo": "^0.8.4"
   },
   "resolutionsComments": {
     "@graphql-tools/mock": "Can be removed once apollo-server updated its dependencies: https://github.com/apollographql/apollo-server/issues/5901",
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "jest": "Workaround for https://github.com/hypervillain/ast-to-literal/issues/11 which pulls in old version of jest",
-    "ts-invariant": "Workaround for https://github.com/apollographql/apollo-client/issues/9535"
+    "ts-invariant": "Workaround for https://github.com/apollographql/apollo-client/issues/9535",
+    "ufo": "Workaround for https://github.com/nuxt/framework/issues/4883, should be fixed with next release of @nuxt/tailwindcss"
   },
   "prisma": {
     "schema": "server/database/schema.prisma",
