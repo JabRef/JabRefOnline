@@ -1,11 +1,11 @@
-import { container } from 'tsyringe'
 import { mockDeep, mockReset } from 'jest-mock-extended'
 import type { PrismaClient } from '@prisma/client'
-import { UserDocument, UserDocumentService } from './user.document.service'
+import { register, resolve } from '../tsyringe'
+import { UserDocument } from './user.document.service'
 
 const prisma = mockDeep<PrismaClient>()
-container.registerInstance('PrismaClient', prisma)
-const userDocumentService = container.resolve(UserDocumentService)
+register('PrismaClient', { useValue: prisma })
+const userDocumentService = resolve('UserDocumentService')
 
 const testDocument: UserDocument = {
   id: 'test',

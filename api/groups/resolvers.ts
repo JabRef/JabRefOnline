@@ -1,5 +1,4 @@
 import { UserInputError } from 'apollo-server-errors'
-import { container, injectable } from 'tsyringe'
 import prisma from '@prisma/client'
 import type { Group, GroupType as GroupTypeT } from '@prisma/client'
 import { Context } from '../context'
@@ -9,6 +8,7 @@ import {
   MutationUpdateGroupArgs,
   MutationCreateGroupArgs,
 } from '../graphql'
+import { resolve, injectable, inject } from './../tsyringe'
 import { GroupService } from './service'
 const { GroupType, GroupHierarchyType } = prisma
 
@@ -21,7 +21,7 @@ export type GroupMaybeResolved = Group | GroupResolved
 
 @injectable()
 export class Query {
-  constructor(private groupService: GroupService) {}
+  constructor(@inject('GroupService') private groupService: GroupService) {}
 
   async group(
     _root: Record<string, never>,
@@ -34,7 +34,7 @@ export class Query {
 
 @injectable()
 export class Mutation {
-  constructor(private groupService: GroupService) {}
+  constructor(@inject('GroupService') private groupService: GroupService) {}
 
   async createGroup(
     _root: Record<string, never>,
@@ -153,7 +153,7 @@ export class Mutation {
 
 @injectable()
 export class GroupResolver {
-  constructor(private groupService: GroupService) {}
+  constructor(@inject('GroupService') private groupService: GroupService) {}
 
   __resolveType(group: GroupMaybeResolved): GroupTypeT {
     return group.type
@@ -178,8 +178,8 @@ export class GroupResolver {
 
 export function resolvers(): Resolvers {
   return {
-    Query: container.resolve(Query),
-    Mutation: container.resolve(Mutation),
-    Group: container.resolve(GroupResolver),
+    Query: resolve('GroupQuery'),
+    Mutation: resolve('GroupMutation'),
+    Group: resolve('GroupResolver'),
   }
 }

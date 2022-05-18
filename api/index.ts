@@ -2,16 +2,15 @@ import http from 'http'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import 'reflect-metadata' // Needed for tsyringe
-import { container } from 'tsyringe'
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
 import { Environment } from '../config'
+import { resolve } from './tsyringe'
 import { configure as configureTsyringe } from './tsyringe.config'
 import { buildContext } from './context'
 import { loadSchema } from './schema'
-import PassportInitializer from './user/passport-initializer'
 import config from '#config'
 
 // Create express instance
@@ -25,7 +24,7 @@ const httpServer = http.createServer(app)
 
 // TODO: Replace this with await, once esbuild supports top-level await
 void configureTsyringe().then(() => {
-  const passportInitializer = container.resolve(PassportInitializer)
+  const passportInitializer = resolve('PassportInitializer')
   passportInitializer.initialize()
   passportInitializer.install(app)
 

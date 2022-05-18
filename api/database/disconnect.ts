@@ -1,6 +1,5 @@
-import { container } from 'tsyringe'
-import type { PrismaClient } from '@prisma/client'
+import { resolve } from './../tsyringe'
 
 export async function disconnect(): Promise<void> {
-  await container.resolve<PrismaClient>('PrismaClient').$disconnect()
+  await resolve('PrismaClient').$disconnect()
 }
