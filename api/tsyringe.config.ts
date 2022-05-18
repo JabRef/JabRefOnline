@@ -19,6 +19,11 @@ export async function configure(): Promise<void> {
   register('RedisClient', {
     useValue: await createRedisClient(),
   })
+  registerClasses()
+}
+
+export function registerClasses(): void {
+  // Tools
   register('PassportInitializer', PassportInitializer)
 
   // Services

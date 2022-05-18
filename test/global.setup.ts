@@ -1,9 +1,11 @@
 import prisma from '@prisma/client'
 import dotenv from 'dotenv'
-import { register, resolve, instanceCachingFactory } from '~/api/tsyringe'
+import { instanceCachingFactory, register, resolve } from '~/api/tsyringe'
+import { registerClasses } from '~/api/tsyringe.config'
 import { createRedisClient } from '~/api/utils/services.factory'
 
 // Register services for all tests
+registerClasses()
 register('RedisClient', {
   useValue: await createRedisClient(),
 })
