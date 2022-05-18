@@ -1,11 +1,11 @@
 import type { PrismaClient, User } from '@prisma/client'
-import { inject, injectable } from 'tsyringe'
 import uuid from 'uuid' // TODO: Change to { v4 as generateToken } as soon as uuid is a proper esm module / jest supports it (https://github.com/uuidjs/uuid/issues/451)
 import { RedisClientType } from 'redis'
 import { hash, verifyHash } from '../utils/crypto'
 import { sendEmail } from '../utils/sendEmail'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { ResolversTypes } from '../graphql'
+import { inject, injectable } from './../tsyringe'
 
 export { InfoArgument as AuthenticationMessage } from 'graphql-passport'
 

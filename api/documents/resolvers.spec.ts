@@ -1,14 +1,14 @@
-import { container } from 'tsyringe'
 import mocking from 'jest-mock-extended'
 import { UserDocument } from '@prisma/client'
+import { register, resolve } from '../tsyringe'
 import { UserDocumentService } from './user.document.service'
-import { Query, Mutation, DocumentResolver } from './resolvers'
+import { DocumentResolver } from './resolvers'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 
 const userDocumentService = mocking.mock<UserDocumentService>()
-container.registerInstance(UserDocumentService, userDocumentService)
-const query = container.resolve(Query)
-const mutation = container.resolve(Mutation)
+register('UserDocumentService', { useValue: userDocumentService })
+const query = resolve('DocumentQuery')
+const mutation = resolve('DocumentMutation')
 
 const context = createUnauthenticatedContext()
 

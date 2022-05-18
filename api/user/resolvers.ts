@@ -1,5 +1,4 @@
 import { User } from '@prisma/client'
-import { container, injectable } from 'tsyringe'
 import { Context } from '../context'
 import {
   MutationLoginArgs,
@@ -17,6 +16,7 @@ import {
   UserDocumentsResult,
 } from '../documents/user.document.service'
 import { GroupService } from '../groups/service'
+import { resolve, injectable, inject } from './../tsyringe'
 import {
   AuthService,
   ChangePasswordPayload,
@@ -27,7 +27,7 @@ import {
 
 @injectable()
 export class Query {
-  constructor(private authService: AuthService) {}
+  constructor(@inject('AuthService') private authService: AuthService) {}
 
   async user(
     _root: Record<string, never>,
@@ -48,7 +48,7 @@ export class Query {
 
 @injectable()
 export class Mutation {
-  constructor(private authService: AuthService) {}
+  constructor(@inject('AuthService') private authService: AuthService) {}
 
   async signup(
     _root: Record<string, never>,
@@ -118,7 +118,7 @@ export class Mutation {
 }
 
 @injectable()
-class SignupPayloadResolver {
+export class SignupPayloadResolver {
   __resolveType(
     signup: SignupPayload
   ): 'UserReturned' | 'InputValidationProblem' {
@@ -130,7 +130,7 @@ class SignupPayloadResolver {
 }
 
 @injectable()
-class ChangePasswordPayloadResolver {
+export class ChangePasswordPayloadResolver {
   __resolveType(
     changePassword: ChangePasswordPayload
   ): 'UserReturned' | 'TokenProblem' | 'InputValidationProblem' {
@@ -141,7 +141,7 @@ class ChangePasswordPayloadResolver {
 }
 
 @injectable()
-class LoginPayloadResolver {
+export class LoginPayloadResolver {
   __resolveType(
     login: LoginPayload
   ): 'UserReturned' | 'InputValidationProblem' {
@@ -155,8 +155,9 @@ class LoginPayloadResolver {
 @injectable()
 export class UserResolver {
   constructor(
+    @inject('UserDocumentService')
     private userDocumentService: UserDocumentService,
-    private groupService: GroupService
+    @inject('GroupService') private groupService: GroupService
   ) {}
 
   async documents(
@@ -208,11 +209,11 @@ export class UserResolver {
 
 export function resolvers(): Resolvers {
   return {
-    Query: container.resolve(Query),
-    Mutation: container.resolve(Mutation),
-    User: container.resolve(UserResolver),
-    LoginPayload: container.resolve(LoginPayloadResolver),
-    SignupPayload: container.resolve(SignupPayloadResolver),
-    ChangePasswordPayload: container.resolve(ChangePasswordPayloadResolver),
+    Query: resolve('UserQuery'),
+    Mutation: resolve('UserMutation'),
+    User: resolve('UserResolver'),
+    LoginPayload: resolve('LoginPayloadResolver'),
+    SignupPayload: resolve('SignupPayloadResolver'),
+    ChangePasswordPayload: resolve('ChangePasswordPayloadResolver'),
   }
 }

@@ -12,7 +12,7 @@ import { Environment } from '~/config'
 @injectable()
 export default class PassportInitializer {
   constructor(
-    private accountService: AuthService,
+    @inject('AuthService') private accountService: AuthService,
     @inject('RedisClient') private redisClient: RedisClientType
   ) {}
 

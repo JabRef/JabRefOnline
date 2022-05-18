@@ -1,5 +1,5 @@
 import type { Group, Prisma, PrismaClient, User } from '@prisma/client'
-import { inject, injectable } from 'tsyringe'
+import { inject, injectable } from './../tsyringe'
 
 @injectable()
 export class GroupService {
