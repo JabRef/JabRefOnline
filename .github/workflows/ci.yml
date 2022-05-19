@@ -88,7 +88,11 @@ jobs:
         run: yarn test --ci --coverage
 
       - name: Build Storybook
-        run: yarn nuxi generate
+        run: |
+          yarn nuxi generate
+          yarn storybook:build
+          cp .output/public/_storybook/external-iframe/index.html storybook-static/iframe.html
+          cp -r .output/public/_nuxt storybook-static
 
       - name: Publish and test Storybook
         uses: chromaui/action@v1
@@ -96,7 +100,7 @@ jobs:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
           exitOnceUploaded: true
-          storybookBuildDir: .output/public/_storybook/external-iframe/
+          storybookBuildDir: storybook-static
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.0
