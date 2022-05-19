@@ -91,9 +91,10 @@ jobs:
         uses: chromaui/action@v1
         with:
           projectToken: 'b3787adf2fa5'
-          buildScriptName: storybook:build
+          buildScriptName: nuxi generate
           # Don't wait until Chroma verified the build (for this we have the Github check)
           exitOnceUploaded: true
+          storybookBuildDir: .output/public/_storybook/external-iframe/
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.0

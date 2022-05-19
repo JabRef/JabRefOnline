@@ -17,6 +17,9 @@ export default defineNuxtConfig({
   nitro: {
     // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata'],
+    prerender: {
+      routes: ['_storybook/external-iframe'],
+    },
   },
 
   /*
