@@ -127,5 +127,5 @@ An up-to-date version of all Storybook components can be found [online](https://
 - Example application using a similar stack as we (GraphQL, Vue): https://github.com/Akryum/guijs/tree/master/packages/@guijs
 - Best practices: [Node](https://github.com/goldbergyoni/nodebestpractices)
 
-# Sponsors
+## Sponsors
 Thanks to [Chromatic](https://www.chromatic.com/) for providing the visual testing platform that helps us review UI changes and catch visual regressions.
