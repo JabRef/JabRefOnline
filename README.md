@@ -106,6 +106,7 @@ An up-to-date version of all Storybook components can be found [online](https://
    - [Vue Apollo](https://apollo.vuejs.org/): Graphql integration for Vue [Documentation](https://v4.apollo.vuejs.org/guide-option/)
 - [Tailwind CSS](https://tailwindcss.com/): CSS framework [Documentation](https://tailwindcss.com/docs), including [Vue Tailwind](https://www.vue-tailwind.com/docs/installation) to extract reusable components 
 - [Font Awesome](https://fontawesome.com/icons?d=gallery&p=2): Font-based icons
+- [Storybook](https://storybook.js.org/): Visual testing
 
 ## Conventions
 - Vue: Single File Components are used for all components, with a PascalCase name.
