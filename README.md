@@ -106,6 +106,7 @@ An up-to-date version of all Storybook components can be found [online](https://
    - [Vue Apollo](https://apollo.vuejs.org/): Graphql integration for Vue [Documentation](https://v4.apollo.vuejs.org/guide-option/)
 - [Tailwind CSS](https://tailwindcss.com/): CSS framework [Documentation](https://tailwindcss.com/docs), including [Vue Tailwind](https://www.vue-tailwind.com/docs/installation) to extract reusable components 
 - [Font Awesome](https://fontawesome.com/icons?d=gallery&p=2): Font-based icons
+- [Storybook](https://storybook.js.org/): Visual testing
 
 ## Conventions
 - Vue: Single File Components are used for all components, with a PascalCase name.
@@ -126,3 +127,6 @@ An up-to-date version of all Storybook components can be found [online](https://
 - Example application for vue-apollo: https://github.com/Akryum/vue-apollo-todos
 - Example application using a similar stack as we (GraphQL, Vue): https://github.com/Akryum/guijs/tree/master/packages/@guijs
 - Best practices: [Node](https://github.com/goldbergyoni/nodebestpractices)
+
+## Sponsors
+Thanks to [Chromatic](https://www.chromatic.com/) for providing the visual testing platform that helps us review UI changes and catch visual regressions.
