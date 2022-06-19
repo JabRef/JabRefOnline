@@ -99,6 +99,12 @@ export default defineNuxtConfig({
   },
 
   /**
+   * Add global Graphql server endpoint
+   * See https://v3.nuxtjs.org/api/configuration/nuxt.config#serverhandlers
+   */
+  serverHandlers: [{ route: '/api', handler: '~/server/index.ts' }],
+
+  /**
    * Storybook integration with Nuxt
    * See https://storybook.nuxtjs.org/
    */

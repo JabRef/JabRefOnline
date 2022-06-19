@@ -6,11 +6,11 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
-import { Environment } from '../../config'
-import { configure as configureTsyringe } from '../tsyringe.config'
-import { buildContext } from '../context'
-import { loadSchema } from '../schema'
-import { resolve } from '../tsyringe'
+import { Environment } from '../config'
+import { configure as configureTsyringe } from './tsyringe.config'
+import { buildContext } from './context'
+import { loadSchema } from './schema'
+import { resolve } from './tsyringe'
 
 // Create express instance
 const app = express()

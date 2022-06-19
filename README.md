@@ -36,7 +36,7 @@ Now close and re-open the workspace.
 | Command | Description |
 |---------|-------------|
 | yarn install | Install project dependencies and generate code. |
-| yarn dev | Start ExpressJS server in development with Nuxt.js in dev mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api/](http://localhost:3000/api/) |
+| yarn dev | Start ExpressJS server in development with Nuxt.js in dev mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
 | yarn test | Execute all tests. Pass `-u` to update all Jest snapshots.|
 | yarn build | Build the nuxt.js web application for production. |
 | yarn start | Start ExpressJS server (for testing purposes). |
