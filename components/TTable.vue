@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 interface Props {
   headers?: string[]
-  data?: string[][]
+  data?: any[]
   variant?: string
 }
 
