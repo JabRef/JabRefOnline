@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/vue'
-import { TTag } from 'vue-tailwind/dist/components'
+import { Story, Meta } from '@storybook/vue3'
+import { TTag } from '@variantjs/vue'
 
 export default {
   component: TTag,

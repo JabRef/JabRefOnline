@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/vue'
-import { TInputGroup } from 'vue-tailwind/dist/components'
+import { Story, Meta } from '@storybook/vue3'
+import { TInputGroup } from '@variantjs/vue'
 
 export default {
   component: TInputGroup,

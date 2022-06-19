@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/vue'
-import { TSelect } from 'vue-tailwind/dist/components'
+import { Story, Meta } from '@storybook/vue3'
+import { TSelect } from '@variantjs/vue'
 
 export default {
   component: TSelect,
