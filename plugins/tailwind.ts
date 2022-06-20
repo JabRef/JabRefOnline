@@ -115,6 +115,7 @@ const settings: VariantJSConfiguration = {
       important: {
         classes: {
           label: 'font-semibold',
+          feedback: 'text-gray-800',
         },
       },
     },
@@ -151,7 +152,7 @@ const settings: VariantJSConfiguration = {
   },
   TDropdown: {
     fixedClasses: {
-      button:
+      trigger:
         'flex items-center text-white block px-4 py-2 transition duration-100 ease-in-out border border-transparent rounded shadow-sm focus:border-highlight-500 focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
       wrapper: 'inline-flex flex-col',
       dropdownWrapper: 'relative z-10',
@@ -163,7 +164,7 @@ const settings: VariantJSConfiguration = {
       leaveToClass: 'transform opacity-0 scale-95 duration-75',
     },
     classes: {
-      button: 'bg-primary-500 hover:bg-highlight-600',
+      trigger: 'bg-primary-500 hover:bg-highlight-600',
       dropdown: 'bg-white origin-top-left left-0',
     },
     variants: {
@@ -184,36 +185,14 @@ const settings: VariantJSConfiguration = {
     },
   },
   TSelect: {
-    wrapped: true,
-    fixedClasses: {
-      wrapper: 'relative inline-block text-left',
-      input:
-        'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
-      arrowWrapper:
-        'pointer-events-none absolute inset-y-0 right-0 flex items-center px-2',
-      arrow: 'fill-current h-4 w-4',
-    },
-    classes: {
-      wrapper: '',
-      input:
-        'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 sm:text-sm',
-      arrowWrapper: 'text-gray-700',
-      arrow: '',
-    },
+    fixedClasses: 'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+    classes: 'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 sm:text-sm',
     variants: {
       plain: {
-        classes: {
-          input:
-            'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
-          arrowWrapper: 'text-current',
-        },
+        classes: 'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
       },
       plaincaps: {
-        classes: {
-          input:
-            'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
-          arrowWrapper: 'text-current',
-        },
+        classes: 'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs', 
       },
     },
   },
