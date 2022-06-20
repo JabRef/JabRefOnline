@@ -15,7 +15,7 @@ import {
 const settings: VariantJSConfiguration = {
   TInput: {
     fixedClasses:
-      'transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      'transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-3',
     classes:
       'block w-full text-black sm:text-sm placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500',
     variants: {
