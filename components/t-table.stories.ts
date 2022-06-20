@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/vue3'
-import TTable from '~/components/t-table.vue'
+import TTable from '~/components/TTable.vue'
 
 export default {
   component: TTable,
