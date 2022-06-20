@@ -46,7 +46,7 @@ export function renderToDOM(
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const api = start(renderToDOM, { decorateStory })
 const framework = 'vue3'
-definePageMeta({ layout: false })
+definePageMeta({ layout: false, alias: '/iframe.html' })
 
 export default defineComponent({
   setup: () => {
