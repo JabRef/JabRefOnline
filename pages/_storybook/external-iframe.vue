@@ -19,7 +19,18 @@ import { VueFramework } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
 import { decorateStory } from '@storybook/vue3/dist/esm/client/preview/decorateStory'
 import { mount } from 'mount-vue-component'
-import * as Comp1 from '~/components/t-input.stories'
+import * as JabRefLogoStories from '~/components/JabRefLogo.stories'
+import * as TAlertStories from '~/components/t-alert.stories'
+import * as TButtonStories from '~/components/t-button.stories'
+import * as TCheckboxStories from '~/components/t-checkbox.stories'
+import * as TDropdownStories from '~/components/t-dropdown.stories'
+import * as TInputGroupStories from '~/components/t-input-group.stories'
+import * as TInputStories from '~/components/t-input.stories'
+import * as TNuxtLinkStories from '~/components/t-nuxtlink.stories'
+import * as TSelectStories from '~/components/t-select.stories'
+import * as TTableStories from '~/components/t-table.stories'
+import * as TTagStories from '~/components/t-tag.stories'
+import * as TTextareaStories from '~/components/t-textarea.stories'
 
 export function renderToDOM(
   { title, name, storyFn, showMain, showError }: RenderContext<VueFramework>,
@@ -51,7 +62,24 @@ definePageMeta({ layout: false, alias: '/iframe.html' })
 export default defineComponent({
   setup: () => {
     // @ts-ignore: module is not used
-    api.configure(framework, () => [Comp1], null)
+    api.configure(
+      framework,
+      () => [
+        JabRefLogoStories,
+        TAlertStories,
+        TButtonStories,
+        TCheckboxStories,
+        TDropdownStories,
+        TInputGroupStories,
+        TInputStories,
+        TNuxtLinkStories,
+        TSelectStories,
+        TTableStories,
+        TTagStories,
+        TTextareaStories,
+      ],
+      undefined
+    )
   },
 })
 </script>
