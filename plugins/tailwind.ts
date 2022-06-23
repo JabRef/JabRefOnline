@@ -11,6 +11,7 @@ import {
   variantJS,
   VariantJSConfiguration,
 } from '@variantjs/vue'
+import TTable from '~/components/TTable.vue'
 
 const settings: VariantJSConfiguration = {
   TInput: {
@@ -233,5 +234,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('t-tag', TTag)
   nuxtApp.vueApp.component('t-select', TSelect)
   nuxtApp.vueApp.component('t-textarea', TTextarea)
-  // nuxtApp.vueApp.component('t-table', TTable)
+  nuxtApp.vueApp.component('t-table', TTable)
 })
