@@ -7,8 +7,6 @@ export default defineNuxtConfig({
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
    */
   alias: {
-    // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
-    // tslib: 'tslib/tslib.es6.js',
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
     global: 'global.ts',
@@ -18,6 +16,7 @@ export default defineNuxtConfig({
     // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata'],
     prerender: {
+      // Needed for storybook support
       routes: ['_storybook/external-iframe'],
     },
   },
@@ -85,18 +84,6 @@ export default defineNuxtConfig({
    ** See https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
    */
   runtimeConfig: constructConfig(),
-
-  /*
-   ** Build configuration
-   ** See https://nuxtjs.org/api/configuration-build/
-   */
-  build: {
-    // TODO: Remove these once new versions of the libraries are used that support esm
-    transpile: [
-      // TODO: Remove this as soon as we only use tslib >= 2.0.0 (old version are not compatible with esm)
-      // 'tslib',
-    ],
-  },
 
   /**
    * Add global Graphql server endpoint
