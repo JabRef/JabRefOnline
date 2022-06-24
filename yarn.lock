@@ -8385,10 +8385,10 @@ enhanced-resolve@^4.0.0, enhanced-resolve@^4.1.1, enhanced-resolve@^4.5.0:
     memory-fs "^0.5.0"
     tapable "^1.0.0"
 
-enhanced-resolve@^5.9.2:
-  version "5.9.2"
-  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.9.2.tgz#0224dcd6a43389ebfb2d55efee517e5466772dd9"
-  integrity sha512-GIm3fQfwLJ8YZx2smuHpBKkXC1yOk+OBEmKckVyL0i/ea8mqDEykK3ld5dgH1QYPNyT/lIllxV2LULnxCHaHkA==
+enhanced-resolve@^5.0.0, enhanced-resolve@^5.9.2:
+  version "5.9.3"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.9.3.tgz#44a342c012cbc473254af5cc6ae20ebd0aae5d88"
+  integrity sha512-Bq9VSor+kjvW3f9/MiiR4eE3XYgOl7/rS8lnSxbRbF3kS0B2r+Y9w5krBWxZgDxASVZbdYrn5wT4j/Wb0J9qow==
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
@@ -17770,7 +17770,7 @@ ts-jest@^28.0.5:
     semver "7.x"
     yargs-parser "^21.0.1"
 
-ts-loader@^8.0.14, ts-loader@^8.3.0:
+ts-loader@^8.0.14:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-8.3.0.tgz#83360496d6f8004fab35825279132c93412edf33"
   integrity sha512-MgGly4I6cStsJy27ViE32UoqxPTN9Xly4anxxVyaIWR+9BGxboV4EyJBGfR3RePV7Ksjj3rHmPZJeIt+7o4Vag==
@@ -17778,6 +17778,16 @@ ts-loader@^8.0.14, ts-loader@^8.3.0:
     chalk "^4.1.0"
     enhanced-resolve "^4.0.0"
     loader-utils "^2.0.0"
+    micromatch "^4.0.0"
+    semver "^7.3.4"
+
+ts-loader@^9.3.1:
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-9.3.1.tgz#fe25cca56e3e71c1087fe48dc67f4df8c59b22d4"
+  integrity sha512-OkyShkcZTsTwyS3Kt7a4rsT/t2qvEVQuKCTg4LJmpj9fhFR7ukGdZwV6Qq3tRUkqcXtfGpPR7+hFKHCG/0d3Lw==
+  dependencies:
+    chalk "^4.1.0"
+    enhanced-resolve "^5.0.0"
     micromatch "^4.0.0"
     semver "^7.3.4"
 
