@@ -2,6 +2,7 @@ import { defineNuxtModule, logger } from '@nuxt/kit'
 import chalk from 'chalk'
 import { withoutTrailingSlash } from 'ufo'
 
+// TODO: Finish storybook as module
 export default defineNuxtModule({
   hooks: {},
   setup(_moduleOptions, nuxt) {
