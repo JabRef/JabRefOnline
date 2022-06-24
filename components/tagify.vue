@@ -12,8 +12,7 @@
 <script lang="ts">
 import Tagify from '@yaireo/tagify'
 import '@yaireo/tagify/dist/tagify.css'
-import { defineComponent, PropType } from '@vue/composition-api'
-
+import type { PropType } from 'vue'
 export default defineComponent({
   name: 'TagsInput',
   props: {

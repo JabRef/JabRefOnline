@@ -6,7 +6,7 @@
       <NavBar />
       <div class="relative h-full overflow-hidden">
         <div class="bg-gray-50 grow p-6 h-full">
-          <Nuxt />
+          <slot />
         </div>
         <DetailPane />
       </div>

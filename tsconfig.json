@@ -18,11 +18,9 @@
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "types": [
-      "@nuxt/types",
       "@types/node",
       "@types/jest",
-      "vue-apollo",
-      "@pinia/nuxt",
+      "@pinia/nuxt"
     ]
   },
   "ts-node": {
@@ -33,8 +31,7 @@
   },
   "exclude": [
     "node_modules",
-    ".nuxt",
     ".output",
     "dist"
-  ],
+  ]
 }

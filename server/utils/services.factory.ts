@@ -3,10 +3,10 @@
 import { promisify } from 'util'
 import redis, { RedisClientType } from 'redis'
 import { Environment } from '~/config'
-import config from '#config'
 
 export async function createRedisClient(): Promise<RedisClientType<any, any, any>> {
-  if (config.environment === Environment.LocalDevelopment) {
+  const config = useRuntimeConfig()
+  if (config.public.environment === Environment.LocalDevelopment) {
     const redisMock = (await import('redis-mock')).default
     const mockRedis = redisMock.createClient()
     // Workaround for redis-mock being not compatible with redis@4
@@ -32,11 +32,11 @@ export async function createRedisClient(): Promise<RedisClientType<any, any, any
     }
 
     // Only Azure needs a TLS connection to Redis
-    if (config.environment !== Environment.Production) {
+    if (config.public.environment !== Environment.Production) {
       delete redisConfig.socket.tls
     }
     // Redis on Github Actions does not need a password
-    if (config.environment === Environment.CI) {
+    if (config.public.environment === Environment.CI) {
       delete redisConfig.password
     }
     const client = redis.createClient(redisConfig)

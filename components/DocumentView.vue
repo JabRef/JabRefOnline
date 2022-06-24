@@ -105,13 +105,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  ref,
-  computed,
-  toRefs,
-} from '@vue/composition-api'
+import type { PropType } from 'vue'
 import { gql, DocumentType } from '~/apollo'
 import { useUiStore } from '~/store'
 

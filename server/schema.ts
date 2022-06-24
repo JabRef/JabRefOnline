@@ -9,7 +9,7 @@ import { loadResolvers } from './resolvers'
  * @returns the GraphQL schema
  */
 export function loadSchema(): GraphQLSchema {
-  const typeDefs = loadGraphqlSchemaSync('./api/**/*.graphql', {
+  const typeDefs = loadGraphqlSchemaSync('./server/**/*.graphql', {
     loaders: [new GraphQLFileLoader()],
   })
   const resolvers = loadResolvers()

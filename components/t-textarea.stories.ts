@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/vue'
-import { TTextarea } from 'vue-tailwind/dist/components'
+import { Story, Meta } from '@storybook/vue3'
+import { TTextarea } from '@variantjs/vue'
 
 export default {
   component: TTextarea,

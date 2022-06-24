@@ -1,5 +1,3 @@
-import type { PrivateRuntimeConfig, PublicRuntimeConfig } from '@nuxt/schema'
-
 export enum Environment {
   /**
    * Locally, on the developers machine.
@@ -33,9 +31,23 @@ function getEnvironment(): Environment {
     : Environment.LocalDevelopment
 }
 
-export function constructPrivateConfig(): PrivateRuntimeConfig {
+export interface Config {
+  redis: {
+    port: number
+    host: string
+    password: string
+  }
+  session: {
+    primarySecret: string
+    secondarySecret: string
+  }
+  public: {
+    environment: Environment
+  }
+}
+
+export function constructConfig(): Config {
   return {
-    environment: getEnvironment(),
     redis: {
       port: Number(process.env.REDIS_PORT) || 6380,
       host: process.env.REDIS_HOST || 'localhost',
@@ -45,11 +57,8 @@ export function constructPrivateConfig(): PrivateRuntimeConfig {
       primarySecret: process.env.SESSION_SECRET_PRIMARY || 'session_secret',
       secondarySecret: process.env.SESSION_SECRET_SECONDARY || 'session_secret',
     },
-  }
-}
-
-export function constructPublicConfig(): PublicRuntimeConfig {
-  return {
-    environment: getEnvironment(),
+    public: {
+      environment: getEnvironment(),
+    },
   }
 }

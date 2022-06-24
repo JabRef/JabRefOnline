@@ -1,10 +1,10 @@
 {
-  "schema":"api/**/*.graphql",
+  "schema":"server/**/*.graphql",
   "extensions": {
     "codegen": {
       "overwrite":true,
       "generates":{
-        "api/graphql.ts":{
+        "server/graphql.ts":{
           "config":{
             "mapperTypeSuffix":"Model",
             "contextType":"./context#Context",

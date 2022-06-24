@@ -1,46 +1,45 @@
 <template>
-  <div>
-    <Portal to="header">
+  <NuxtLayout name="bare">
+    <template #header>
       <jabref-logo class="mx-auto h-20 w-auto" />
       <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
         Change Password
       </h2>
-    </Portal>
-    <form @submit.prevent="changePassword()">
-      <div class="space-y-5">
-        <t-input-group
-          label="New Password"
-          variant="important"
-        >
-          <PasswordInput v-model="password" />
-        </t-input-group>
-        <t-input-group
-          label="Confirm Password"
-          variant="important"
-        >
-          <PasswordInput v-model="repeatPassword" />
-        </t-input-group>
-      </div>
-      <div class="py-2">
-        <t-button
-          class="w-full"
-          type="submit"
-          >Change Password</t-button
-        >
-      </div>
-    </form>
-  </div>
+    </template>
+    <div>
+      <form @submit.prevent="changePassword()">
+        <div class="space-y-5">
+          <t-input-group
+            label="New Password"
+            variant="important"
+          >
+            <PasswordInput v-model="password" />
+          </t-input-group>
+          <t-input-group
+            label="Confirm Password"
+            variant="important"
+          >
+            <PasswordInput v-model="repeatPassword" />
+          </t-input-group>
+        </div>
+        <div class="py-2">
+          <t-button
+            class="w-full"
+            type="submit"
+            >Change Password</t-button
+          >
+        </div>
+      </form>
+    </div>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
 import { useMutation } from '@vue/apollo-composable'
-import { useRouter, useRoute } from '#app'
 import { gql } from '~/apollo'
-
+definePageMeta({ layout: false })
 export default defineComponent({
   name: 'ChangePassword',
-  layout: 'bare',
   setup() {
     const password = ref('')
     const repeatPassword = ref('')
@@ -85,9 +84,8 @@ export default defineComponent({
         },
       })
     )
-    const router = useRouter()
     onDone(() => {
-      void router.push({ name: 'user-login' })
+      void navigateTo({ name: 'user-login' })
     })
     return { password, error, changePassword, repeatPassword }
   },

@@ -7,7 +7,7 @@ import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { ResolversTypes } from '../graphql'
 import { inject, injectable } from './../tsyringe'
 
-export { InfoArgument as AuthenticationMessage } from 'graphql-passport'
+export type { InfoArgument as AuthenticationMessage } from 'graphql-passport'
 
 export interface AuthenticateReturn {
   user?: User

@@ -35,17 +35,19 @@ tasks:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
 
 vscode:
+  # Add handy VS Code extensions: https://www.gitpod.io/docs/ides-and-editors/vscode-extensions
   extensions:
+    - johnsoncodehk.volar
     - dbaeumer.vscode-eslint
-    - github.copilot
-    - streetsidesoftware.code-spell-checker
-    - github.vscode-pull-request-github
+    - gitHub.copilot
     - eamodio.gitlens
-    - graphql.vscode-graphql
+    - graphQL.vscode-graphql
     - orta.vscode-jest
     - esbenp.prettier-vscode
     - prisma.prisma
     - bradlc.vscode-tailwindcss
+    - streetsidesoftware.code-spell-checker
+    - github.vscode-pull-request-github
     - Vue.volar
     - antfu.goto-alias
 
@@ -62,4 +64,8 @@ ports:
     onOpen: open-preview
   # Prisma Studio
   - port: 5555
+    onOpen: open-preview
+  # HMR websocket https://github.com/nuxt/framework/issues/1796#issuecomment-1111618663
+  # Still needs to be configured manually :(
+  - port: 24678 
     onOpen: open-preview

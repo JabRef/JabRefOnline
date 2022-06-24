@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server-express'
-import { resolve } from './../api/tsyringe'
-import { loadSchema } from '~/api/schema'
+import { loadSchema } from '~/server/schema'
+import { resolve } from '~/server/tsyringe'
 
 export function createAuthenticatedClient(): ApolloServer {
   return new ApolloServer({

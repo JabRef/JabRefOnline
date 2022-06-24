@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/vue'
-import { TCheckbox } from 'vue-tailwind/dist/components'
+import { Story, Meta } from '@storybook/vue3'
+import { TCheckbox } from '@variantjs/vue'
 
 export default {
   component: TCheckbox,

@@ -1,8 +1,15 @@
 import prisma from '@prisma/client'
 import dotenv from 'dotenv'
-import { instanceCachingFactory, register, resolve } from '~/api/tsyringe'
-import { registerClasses } from '~/api/tsyringe.config'
-import { createRedisClient } from '~/api/utils/services.factory'
+import { constructConfig } from '~/config'
+import { createRedisClient } from '~/server/utils/services.factory'
+import { instanceCachingFactory, register, resolve } from '~/server/tsyringe'
+import { registerClasses } from '~/server/tsyringe.config'
+
+// Load environment variables from .env file
+dotenv.config()
+
+// @ts-ignore: Jest doesn't allow an easy way to add typescript info
+global.useRuntimeConfig = () => constructConfig()
 
 // Register services for all tests
 registerClasses()
@@ -20,6 +27,3 @@ if (global.isIntegrationTest) {
     useFactory: instanceCachingFactory(() => new prisma.PrismaClient()),
   })
 }
-
-// Load environment variables from .env file
-dotenv.config()
