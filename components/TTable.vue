@@ -7,7 +7,7 @@
           v-for="header in headers"
           :key="header"
           :class="headerClass"
-          >
+        >
           {{ header }}
         </th>
       </tr>
@@ -16,12 +16,12 @@
       <tr
         v-for="(row, index) in data"
         :key="index"
-        >
+      >
         <td
           v-for="cell in row"
           :key="cell"
           :class="tdClass"
-          >
+        >
           {{ cell }}
         </td>
       </tr>
