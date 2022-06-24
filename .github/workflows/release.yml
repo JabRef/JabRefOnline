@@ -22,7 +22,7 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
 
     - name: Start deployment (Staging server)
-      uses: bobheadxi/deployments@v1.2.0
+      uses: bobheadxi/deployments@v1.3.0
       id: deployment
       with:
         step: start
@@ -36,7 +36,7 @@ jobs:
           az webapp deployment slot swap --name JabRef --resource-group JabRefOnline --slot staging --target-slot production --action swap
 
     - name: Update deployment status
-      uses: bobheadxi/deployments@v1.2.0
+      uses: bobheadxi/deployments@v1.3.0
       if: always()
       with:
         step: finish
