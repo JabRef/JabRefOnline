@@ -14,7 +14,7 @@
 <script lang="ts">
 // Based on https://github.com/storybookjs/storybook/tree/next/examples/standalone-preview
 // The idea is that we use nuxt to render the stories
-import { RenderContext, start } from '@storybook/core'
+import { RenderContext, start } from '@storybook/core-client'
 import { VueFramework } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
 import { decorateStory } from '@storybook/vue3/dist/esm/client/preview/decorateStory'
