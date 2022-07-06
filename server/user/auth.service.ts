@@ -1,4 +1,5 @@
 import type { PrismaClient, User } from '@prisma/client'
+// eslint-disable-next-line import/default
 import uuid from 'uuid' // TODO: Change to { v4 as generateToken } as soon as uuid is a proper esm module / jest supports it (https://github.com/uuidjs/uuid/issues/451)
 import { RedisClientType } from 'redis'
 import { hash, verifyHash } from '../utils/crypto'
