@@ -43,6 +43,8 @@ module.exports = {
     ],
     // Ensure void operator is not used, except for variable assignment or function return (might be handy for promises)
     'no-void': ['error', { allowAsStatement: true }],
+    // Demote this to warning as long as we are still using cjs modules
+    'import/named': 'warn',
   },
   overrides: [
     {
