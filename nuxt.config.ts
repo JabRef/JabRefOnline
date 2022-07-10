@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     moduleSideEffects: ['reflect-metadata'],
     prerender: {
       // Needed for storybook support
-      routes: ['_storybook/external-iframe'],
+      routes: ['/_storybook/external-iframe'],
     },
   },
 
