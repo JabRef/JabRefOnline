@@ -18,6 +18,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Prepare
+        run:
+          # This is needed correctly deploy the Azure Functions (API)
+          mkdir -p .output/server
+          touch .output/server/.gitkeep
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
