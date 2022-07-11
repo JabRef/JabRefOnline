@@ -1,7 +1,6 @@
-import { loadSchemaSync as loadGraphqlSchemaSync } from '@graphql-tools/load'
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
 import { GraphQLSchema } from 'graphql'
+import { typeDefs } from 'virtualgraphqlSchema'
 import { loadResolvers } from './resolvers'
 
 /**
@@ -9,9 +8,6 @@ import { loadResolvers } from './resolvers'
  * @returns the GraphQL schema
  */
 export function loadSchema(): GraphQLSchema {
-  const typeDefs = loadGraphqlSchemaSync('./server/**/*.graphql', {
-    loaders: [new GraphQLFileLoader()],
-  })
   const resolvers = loadResolvers()
 
   return addResolversToSchema({

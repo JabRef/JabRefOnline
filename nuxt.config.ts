@@ -1,4 +1,6 @@
 import { defineNuxtConfig } from 'nuxt'
+import { loadSchemaSync as loadGraphqlSchemaSync } from '@graphql-tools/load'
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
@@ -96,4 +98,29 @@ export default defineNuxtConfig({
    * See https://storybook.nuxtjs.org/
    */
   storybook: {},
+
+  vite: {
+    plugins: [
+      function graphqlSchema() {
+        const virtualModuleId = 'virtualgraphqlSchema'
+        const resolvedVirtualModuleId = '\0' + virtualModuleId
+      
+        return {
+          name: 'graphqlSchemaLoader',
+          resolveId(id: string) {
+            if (id === virtualModuleId) {
+              return resolvedVirtualModuleId
+            }
+          },
+          load(id: string) {
+            if (id === resolvedVirtualModuleId) {
+              return loadGraphqlSchemaSync('./server/**/*.graphql', {
+                loaders: [new GraphQLFileLoader()],
+              })
+            }
+          }
+        }
+      }
+    ]
+}
 })
