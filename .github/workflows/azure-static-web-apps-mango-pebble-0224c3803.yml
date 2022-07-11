@@ -23,9 +23,6 @@ jobs:
           # This is needed correctly deploy the Azure Functions (API)
           mkdir -p .output/server
           touch .output/server/.gitkeep
-          # And this to generate the correct Azure Static Web App config
-          yarn install
-          NITRO_PRESET=azure yarn build
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
