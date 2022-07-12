@@ -1,6 +1,8 @@
 import { defineNuxtConfig } from 'nuxt'
 import { loadSchemaSync as loadGraphqlSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+import type { NitroConfig } from 'nitropack'
+import { printSchema } from 'graphql'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
@@ -99,28 +101,26 @@ export default defineNuxtConfig({
    */
   storybook: {},
 
-  vite: {
-    plugins: [
-      function graphqlSchema() {
-        const virtualModuleId = 'virtualgraphqlSchema'
-        const resolvedVirtualModuleId = '\0' + virtualModuleId
-      
-        return {
-          name: 'graphqlSchemaLoader',
-          resolveId(id: string) {
-            if (id === virtualModuleId) {
-              return resolvedVirtualModuleId
-            }
-          },
-          load(id: string) {
-            if (id === resolvedVirtualModuleId) {
-              return loadGraphqlSchemaSync('./server/**/*.graphql', {
-                loaders: [new GraphQLFileLoader()],
-              })
-            }
-          }
-        }
+  /**
+   * Register custom (build) event listener
+   * See https://v3.nuxtjs.org/api/configuration/nuxt.config#hooks
+   */
+  hooks: {
+    'nitro:config'(nitroConfig: NitroConfig) {
+      // Register #graphql/schema virtual module
+      nitroConfig.virtual = nitroConfig.virtual || {}
+      nitroConfig.virtual['#graphql/schema'] = () => {
+        const schema = loadGraphqlSchemaSync('./server/**/*.graphql', {
+          loaders: [new GraphQLFileLoader()],
+        })
+        return `
+          import { loadSchemaSync } from '@graphql-tools/load'
+          import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+          export const schema = loadSchemaSync(\`${printSchema(schema)}\`, {
+            loaders: [new GraphQLFileLoader()]
+          })
+        `
       }
-    ]
-}
+    },
+  },
 })
