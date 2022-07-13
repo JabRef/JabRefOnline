@@ -1,5 +1,8 @@
 import { defineNuxtConfig } from 'nuxt'
+import type { NitroConfig } from 'nitropack'
+import { printSchema } from 'graphql'
 import { constructConfig } from './config'
+import { loadSchemaFromFiles } from './server/schema'
 
 export default defineNuxtConfig({
   /*
@@ -96,4 +99,25 @@ export default defineNuxtConfig({
    * See https://storybook.nuxtjs.org/
    */
   storybook: {},
+
+  /**
+   * Register custom (build) event listener
+   * See https://v3.nuxtjs.org/api/configuration/nuxt.config#hooks
+   */
+  hooks: {
+    'nitro:config'(nitroConfig: NitroConfig) {
+      // Register #graphql/schema virtual module
+      nitroConfig.virtual = nitroConfig.virtual || {}
+      nitroConfig.virtual['#graphql/schema'] = async () => {
+        const schema = await loadSchemaFromFiles()
+        return `
+          import { loadSchemaSync } from '@graphql-tools/load'
+          import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+          export const schema = loadSchemaSync(\`${printSchema(schema)}\`, {
+            loaders: [new GraphQLFileLoader()]
+          })
+        `
+      }
+    },
+  },
 })

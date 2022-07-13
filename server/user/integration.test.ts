@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express'
 import { createAuthenticatedClient } from '../../test/apollo.server'
 import * as prisma from '~/server/database/util'
 
-const authenticatedClient = createAuthenticatedClient()
+const authenticatedClient = await createAuthenticatedClient()
 
 describe('Query', () => {
   beforeEach(async () => {

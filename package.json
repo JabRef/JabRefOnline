@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nuxi dev",
+    "dev:azure": "NITRO_PRESET=azure yarn build && NUXT_PUBLIC_ENVIRONMENT=development npx @azure/static-web-apps-cli start .output/public --api-location .output/server",
     "build": "nuxi build --fail-on-error",
     "start": "nuxi preview",
     "generate": "yarn prisma:generate && yarn graphql:generate",

@@ -1,10 +1,10 @@
 import { ApolloServer } from 'apollo-server-express'
-import { loadSchema } from '~/server/schema'
+import { loadSchemaFromFilesWithResolvers } from '~/server/schema'
 import { resolve } from '~/server/tsyringe'
 
-export function createAuthenticatedClient(): ApolloServer {
+export async function createAuthenticatedClient(): Promise<ApolloServer> {
   return new ApolloServer({
-    schema: loadSchema(),
+    schema: await loadSchemaFromFilesWithResolvers(),
     context: () => ({
       getUser: () =>
         resolve('AuthService').getUserById('ckn4oul7100004cv7y3t94n8j'),
