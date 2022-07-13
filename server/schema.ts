@@ -1,10 +1,10 @@
 import { addResolversToSchema } from '@graphql-tools/schema'
 import { GraphQLSchema } from 'graphql'
-import { loadSchemaSync as loadGraphqlSchemaSync } from '@graphql-tools/load'
+import { loadSchema as loadGraphqlSchema } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
-import { loadResolvers } from './resolvers'
 
-function addResolvers(schema: GraphQLSchema) {
+async function addResolvers(schema: GraphQLSchema) {
+  const { loadResolvers } = await import('./resolvers')
   const resolvers = loadResolvers()
 
   return addResolversToSchema({
@@ -21,9 +21,20 @@ function addResolvers(schema: GraphQLSchema) {
  * Loads the schema and the resolvers.
  * @returns the GraphQL schema
  */
-export async function loadSchema(): Promise<GraphQLSchema> {
+export async function loadSchemaWithResolvers(): Promise<GraphQLSchema> {
   const { schema } = await import('#graphql/schema')
-  return addResolvers(schema)
+  return await addResolvers(schema)
+}
+
+/**
+ * Loads the schema from the GraphQL files.
+ * This method should not be used in production, since the graphql files are not deployed.
+ * @returns the GraphQL schema
+ */
+export async function loadSchemaFromFiles(): Promise<GraphQLSchema> {
+  return await loadGraphqlSchema('./server/**/*.graphql', {
+    loaders: [new GraphQLFileLoader()],
+  })
 }
 
 /**
@@ -31,9 +42,6 @@ export async function loadSchema(): Promise<GraphQLSchema> {
  * This method should not be used in production, since the graphql files are not deployed.
  * @returns the GraphQL schema
  */
-export function loadSchemaFromFiles(): GraphQLSchema {
-  const schema = loadGraphqlSchemaSync('./server/**/*.graphql', {
-          loaders: [new GraphQLFileLoader()],
-        })
-  return addResolvers(schema)
+export async function loadSchemaFromFilesWithResolvers(): Promise<GraphQLSchema> {
+  return addResolvers(await loadSchemaFromFiles())
 }

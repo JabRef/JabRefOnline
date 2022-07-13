@@ -9,7 +9,7 @@ import {
 import { Environment } from '../config'
 import { configure as configureTsyringe } from './tsyringe.config'
 import { buildContext } from './context'
-import { loadSchema } from './schema'
+import { loadSchemaWithResolvers } from './schema'
 import { resolve } from './tsyringe'
 
 // Create express instance
@@ -29,7 +29,7 @@ void configureTsyringe()
     passportInitializer.install(app)
 
     const server = new ApolloServer({
-      schema: await loadSchema(),
+      schema: await loadSchemaWithResolvers(),
       context: buildContext,
       introspection: true,
       plugins: [
