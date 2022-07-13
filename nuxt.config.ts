@@ -1,9 +1,8 @@
 import { defineNuxtConfig } from 'nuxt'
-import { loadSchemaSync as loadGraphqlSchemaSync } from '@graphql-tools/load'
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import type { NitroConfig } from 'nitropack'
 import { printSchema } from 'graphql'
 import { constructConfig } from './config'
+import { loadSchemaFromFiles } from './server/schema'
 
 export default defineNuxtConfig({
   /*
@@ -110,9 +109,7 @@ export default defineNuxtConfig({
       // Register #graphql/schema virtual module
       nitroConfig.virtual = nitroConfig.virtual || {}
       nitroConfig.virtual['#graphql/schema'] = () => {
-        const schema = loadGraphqlSchemaSync('./server/**/*.graphql', {
-          loaders: [new GraphQLFileLoader()],
-        })
+        const schema = loadSchemaFromFiles()
         return `
           import { loadSchemaSync } from '@graphql-tools/load'
           import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'

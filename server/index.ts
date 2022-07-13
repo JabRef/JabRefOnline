@@ -23,13 +23,13 @@ const httpServer = http.createServer(app)
 
 // TODO: Replace this with await, once esbuild supports top-level await
 void configureTsyringe()
-  .then(() => {
+  .then(async () => {
     const passportInitializer = resolve('PassportInitializer')
     passportInitializer.initialize()
     passportInitializer.install(app)
 
     const server = new ApolloServer({
-      schema: loadSchema(),
+      schema: await loadSchema(),
       context: buildContext,
       introspection: true,
       plugins: [
