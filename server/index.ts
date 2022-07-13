@@ -6,6 +6,7 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
+import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
 import { Environment } from '../config'
 import { configure as configureTsyringe } from './tsyringe.config'
 import { buildContext } from './context'
@@ -41,6 +42,7 @@ void configureTsyringe()
       // Only reply to requests with a Content-Type header to prevent CSRF and XS-Search attacks
       // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
       csrfPrevention: true,
+      cache: new InMemoryLRUCache(),
     })
 
     async function startServer() {
