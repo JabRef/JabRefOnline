@@ -13,6 +13,37 @@ import { buildContext } from './context'
 import { loadSchemaWithResolvers } from './schema'
 import { resolve } from './tsyringe'
 
+// Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
+// Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_outgoing.js
+http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
+  // @ts-ignore: Is workaround anyway
+  if (this._header) {
+    // CHANGED: Don't throw an error in this case, as workaround for https://github.com/unjs/h3/issues/21
+    // throw new Error('Cannot set headers after they are sent to the client')
+  }
+  // CHANGED: No idea where to find these methods
+  // validateHeaderName(name)
+  // validateHeaderValue(name, value)
+
+  // CHANGED: Extra logic to find kOutHeaders symbol in `this`
+  const kOutHeaders = Object.getOwnPropertySymbols(this).find(
+    (sym) => sym.toString() === 'Symbol(kOutHeaders)'
+  )
+
+  // @ts-ignore: Is workaround anyway
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  let headers = this[kOutHeaders]
+  // CHANGED: === to == to cover undefined case
+  if (headers == null) {
+    // @ts-ignore: Is workaround anyway
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    this[kOutHeaders] = headers = Object.create(null)
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  headers[name.toLowerCase()] = [name, value]
+  return this
+}
+
 // Create express instance
 const app = express()
 if (useRuntimeConfig().public.environment === Environment.Production) {
