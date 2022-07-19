@@ -120,4 +120,22 @@ export default defineNuxtConfig({
       }
     },
   },
+
+  vite: {
+    server: {
+      // Configure vite for HMR with Gitpod
+      // Taken from https://github.com/vitejs/vite/issues/1653#issuecomment-1079322770
+      hmr: process.env.GITPOD_WORKSPACE_URL
+        ? {
+            
+          // Gitpod is served over https, so we need to use wss as well
+            protocol: 'wss',
+            host: `3000-${process.env.GITPOD_WORKSPACE_ID || ''}.${
+              process.env.GITPOD_WORKSPACE_CLUSTER_HOST || ''
+            }`,
+            port: 443,
+          }
+        : true,
+    },
+  },
 })
