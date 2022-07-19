@@ -44,6 +44,7 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
 }
 
 const app = createApp()
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 const httpServer = http.createServer(app)
 
 export default defineLazyEventHandler(async () => {
