@@ -1,5 +1,5 @@
 import connectRedis from 'connect-redis'
-import { Express } from 'express-serve-static-core'
+import { App } from 'h3'
 import session from 'express-session'
 import passport from 'passport'
 import { RedisClientType } from 'redis'
@@ -25,7 +25,7 @@ export default class PassportInitializer {
     )
   }
 
-  install(app: Express): void {
+  install(app: App): void {
     const config = useRuntimeConfig()
 
     // TODO: Use redis store also for development as soon as https://github.com/tj/connect-redis/issues/336 is fixed (and mock-redis is compatible with redis v4)

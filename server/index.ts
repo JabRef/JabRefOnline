@@ -1,17 +1,16 @@
 import http from 'http'
-import express from 'express'
-import { ApolloServer } from 'apollo-server-express'
 import 'reflect-metadata' // Needed for tsyringe
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
-import { Environment } from '../config'
+import { createApp } from 'h3'
 import { configure as configureTsyringe } from './tsyringe.config'
 import { buildContext } from './context'
 import { loadSchemaWithResolvers } from './schema'
 import { resolve } from './tsyringe'
+import { ApolloServer } from '~/apollo/apollo-server'
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_outgoing.js
@@ -44,46 +43,32 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
   return this
 }
 
-// Create express instance
-const app = express()
-if (useRuntimeConfig().public.environment === Environment.Production) {
-  // Azure uses a reverse proxy, which changes some API values (notably express things it is not accessed through a secure https connection)
-  // So we need to adjust for this, see http://expressjs.com/en/guide/behind-proxies.html
-  app.set('trust proxy', 1)
-}
+const app = createApp()
 const httpServer = http.createServer(app)
 
-// TODO: Replace this with await, once esbuild supports top-level await
-void configureTsyringe()
-  .then(async () => {
-    const passportInitializer = resolve('PassportInitializer')
-    passportInitializer.initialize()
-    passportInitializer.install(app)
+export default defineLazyEventHandler(async () => {
+  await configureTsyringe()
 
-    const server = new ApolloServer({
-      schema: await loadSchemaWithResolvers(),
-      context: buildContext,
-      introspection: true,
-      plugins: [
-        // Enable Apollo Studio in development, and also in production (at least for now)
-        ApolloServerPluginLandingPageLocalDefault({ footer: false }),
-        // Gracefully shutdown HTTP server when Apollo server terminates
-        ApolloServerPluginDrainHttpServer({ httpServer }),
-      ],
-      // Only reply to requests with a Content-Type header to prevent CSRF and XS-Search attacks
-      // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
-      csrfPrevention: true,
-      cache: new InMemoryLRUCache(),
-    })
+  const passportInitializer = resolve('PassportInitializer')
+  passportInitializer.initialize()
+  passportInitializer.install(app)
 
-    async function startServer() {
-      await server.start()
-      server.applyMiddleware({ app, path: '/' })
-    }
-    void startServer()
-  })
-  .catch((error) => {
-    console.error('Error while executing configureTsyringe', error)
+  const server = new ApolloServer({
+    schema: await loadSchemaWithResolvers(),
+    context: buildContext,
+    introspection: true,
+    plugins: [
+      // Enable Apollo Studio in development, and also in production (at least for now)
+      ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+      // Gracefully shutdown HTTP server when Apollo server terminates
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+    ],
+    // Only reply to requests with a Content-Type header to prevent CSRF and XS-Search attacks
+    // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
+    csrfPrevention: true,
+    cache: new InMemoryLRUCache(),
   })
 
-export default app
+  await server.start()
+  return server.createHandler()
+})
