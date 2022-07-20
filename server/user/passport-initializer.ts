@@ -1,5 +1,5 @@
 import connectRedis from 'connect-redis'
-import { Express } from 'express-serve-static-core'
+import { App } from 'h3'
 import session from 'express-session'
 import passport from 'passport'
 import { RedisClientType } from 'redis'
@@ -25,7 +25,7 @@ export default class PassportInitializer {
     )
   }
 
-  install(app: Express): void {
+  install(app: App): void {
     const config = useRuntimeConfig()
 
     // TODO: Use redis store also for development as soon as https://github.com/tj/connect-redis/issues/336 is fixed (and mock-redis is compatible with redis v4)
@@ -43,6 +43,7 @@ export default class PassportInitializer {
     // Add middleware that sends and receives the session ID using cookies
     // See https://github.com/expressjs/session#readme
     app.use(
+      // @ts-ignore: https://github.com/unjs/h3/issues/146
       session({
         store,
         // The secret used to sign the session cookie
@@ -64,6 +65,7 @@ export default class PassportInitializer {
       })
     )
     // Add passport as middleware (this more or less only adds the _passport variable to the request)
+    // @ts-ignore: https://github.com/unjs/h3/issues/146
     app.use(passport.initialize())
     // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
     app.use(passport.session())

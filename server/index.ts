@@ -1,17 +1,16 @@
 import http from 'http'
-import express from 'express'
-import { ApolloServer } from 'apollo-server-express'
 import 'reflect-metadata' // Needed for tsyringe
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
-import { Environment } from '../config'
+import { createApp } from 'h3'
 import { configure as configureTsyringe } from './tsyringe.config'
 import { buildContext } from './context'
 import { loadSchemaWithResolvers } from './schema'
 import { resolve } from './tsyringe'
+import { ApolloServer } from '~/apollo/apollo-server'
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_outgoing.js
@@ -44,46 +43,78 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
   return this
 }
 
-// Create express instance
-const app = express()
-if (useRuntimeConfig().public.environment === Environment.Production) {
-  // Azure uses a reverse proxy, which changes some API values (notably express things it is not accessed through a secure https connection)
-  // So we need to adjust for this, see http://expressjs.com/en/guide/behind-proxies.html
-  app.set('trust proxy', 1)
+// Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
+// Original code taken from https://github.com/nodejs/node/blob/main/lib/internal/streams/readable.js
+http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
+  // CHANGED: Add fallback if not existing
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  // @ts-ignore: is workaround anyway
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const state = (this._readableState as any) || { pipes: [] }
+  const unpipeInfo = { hasUnpiped: false }
+
+  // If we're not piping anywhere, then do nothing.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (state.pipes.length === 0) return this
+
+  if (!dest) {
+    // remove all.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    const dests = state.pipes as any[]
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    state.pipes = []
+    this.pause()
+
+    for (let i = 0; i < dests.length; i++)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+      dests[i].emit('unpipe', this, { hasUnpiped: false })
+    return this
+  }
+
+  // Try to find the right one.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  const index = state.pipes.indexOf(dest)
+  if (index === -1) return this
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  state.pipes.splice(index, 1)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (state.pipes.length === 0) this.pause()
+
+  dest.emit('unpipe', this, unpipeInfo)
+
+  return this
 }
+
+const app = createApp()
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 const httpServer = http.createServer(app)
 
-// TODO: Replace this with await, once esbuild supports top-level await
-void configureTsyringe()
-  .then(async () => {
-    const passportInitializer = resolve('PassportInitializer')
-    passportInitializer.initialize()
-    passportInitializer.install(app)
+export default defineLazyEventHandler(async () => {
+  await configureTsyringe()
 
-    const server = new ApolloServer({
-      schema: await loadSchemaWithResolvers(),
-      context: buildContext,
-      introspection: true,
-      plugins: [
-        // Enable Apollo Studio in development, and also in production (at least for now)
-        ApolloServerPluginLandingPageLocalDefault({ footer: false }),
-        // Gracefully shutdown HTTP server when Apollo server terminates
-        ApolloServerPluginDrainHttpServer({ httpServer }),
-      ],
-      // Only reply to requests with a Content-Type header to prevent CSRF and XS-Search attacks
-      // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
-      csrfPrevention: true,
-      cache: new InMemoryLRUCache(),
-    })
+  const passportInitializer = resolve('PassportInitializer')
+  passportInitializer.initialize()
+  passportInitializer.install(app)
 
-    async function startServer() {
-      await server.start()
-      server.applyMiddleware({ app, path: '/' })
-    }
-    void startServer()
-  })
-  .catch((error) => {
-    console.error('Error while executing configureTsyringe', error)
+  const server = new ApolloServer({
+    schema: await loadSchemaWithResolvers(),
+    context: buildContext,
+    introspection: true,
+    plugins: [
+      // Enable Apollo Studio in development, and also in production (at least for now)
+      ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+      // Gracefully shutdown HTTP server when Apollo server terminates
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+    ],
+    // Only reply to requests with a Content-Type header to prevent CSRF and XS-Search attacks
+    // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
+    csrfPrevention: true,
+    cache: new InMemoryLRUCache(),
   })
 
-export default app
+  await server.start()
+  return server.createHandler({
+    path: '/api',
+  })
+})
