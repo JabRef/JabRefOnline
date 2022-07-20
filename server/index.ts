@@ -71,5 +71,7 @@ export default defineLazyEventHandler(async () => {
   })
 
   await server.start()
-  return server.createHandler()
+  return server.createHandler({
+    path: '/api',
+  })
 })
