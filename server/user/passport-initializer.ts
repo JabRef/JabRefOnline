@@ -43,6 +43,7 @@ export default class PassportInitializer {
     // Add middleware that sends and receives the session ID using cookies
     // See https://github.com/expressjs/session#readme
     app.use(
+      // @ts-ignore: https://github.com/unjs/h3/issues/146
       session({
         store,
         // The secret used to sign the session cookie
@@ -64,6 +65,7 @@ export default class PassportInitializer {
       })
     )
     // Add passport as middleware (this more or less only adds the _passport variable to the request)
+    // @ts-ignore: https://github.com/unjs/h3/issues/146
     app.use(passport.initialize())
     // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
     app.use(passport.session())
