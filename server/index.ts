@@ -43,6 +43,49 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
   return this
 }
 
+// Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
+// Original code taken from https://github.com/nodejs/node/blob/main/lib/internal/streams/readable.js
+http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
+  // CHANGED: Add fallback if not existing
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  // @ts-ignore: is workaround anyway
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const state = (this._readableState as any) || { pipes: [] }
+  const unpipeInfo = { hasUnpiped: false }
+
+  // If we're not piping anywhere, then do nothing.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (state.pipes.length === 0) return this
+
+  if (!dest) {
+    // remove all.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    const dests = state.pipes as any[]
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    state.pipes = []
+    this.pause()
+
+    for (let i = 0; i < dests.length; i++)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+      dests[i].emit('unpipe', this, { hasUnpiped: false })
+    return this
+  }
+
+  // Try to find the right one.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  const index = state.pipes.indexOf(dest)
+  if (index === -1) return this
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  state.pipes.splice(index, 1)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (state.pipes.length === 0) this.pause()
+
+  dest.emit('unpipe', this, unpipeInfo)
+
+  return this
+}
+
 const app = createApp()
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 const httpServer = http.createServer(app)
