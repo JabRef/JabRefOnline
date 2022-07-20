@@ -4,7 +4,6 @@ import {
   useQuery,
   IncomingMessage,
   CompatibilityEvent,
-  sendError,
   EventHandler,
 } from 'h3'
 import type { GraphQLOptions } from 'apollo-server-core'
@@ -12,6 +11,7 @@ import {
   ApolloServerBase,
   convertNodeHttpToRequest,
   runHttpQuery,
+  isHttpQueryError,
 } from 'apollo-server-core'
 
 // Originally taken from https://github.com/newbeea/nuxt3-apollo-starter/blob/master/server/graphql/apollo-server.ts
@@ -50,20 +50,16 @@ export class ApolloServer extends ApolloServerBase {
         event.res.statusCode = responseInit.status || 200
         return graphqlResponse
       } catch (error: any) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        if (!isHttpQueryError(error)) {
+          throw error
+        }
+
         if (error.headers) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           for (const [name, value] of Object.entries<string>(error.headers))
             event.res.setHeader(name, value)
         }
-        sendError(
-          event,
-          createError({
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
-            statusCode: error.statusCode || 500,
-            statusMessage: (error as Error).message,
-          })
-        )
+        event.res.statusCode = error.statusCode || 500
+        return error.message
       }
     }
   }
