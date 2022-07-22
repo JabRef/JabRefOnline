@@ -1,12 +1,12 @@
 # JabRefOnline
 
 ## Servers
-- Production server: https://mango-pebble-0224c3803.1.azurestaticapps.net/
+- Production server: https://mango-pebble-0224c3803.1.azurestaticapps.net
   This server runs the last released version with data provided by the production database.
-- Staging server: https://mango-pebble-0224c3803-staging.1.azurestaticapps.net/
-  This server usually runs the latest version of the main branch with data provided by the production database.
+- Staging server: https://mango-pebble-0224c3803-staging.westeurope.1.azurestaticapps.net
+  This server runs the latest version of the main branch with data provided by the production database.
   Usually, you do not want to target this server. Its main purpose is to test the main branch before a release.
-- Test server: https://mango-pebble-0224c3803-dev.1.azurestaticapps.net/
+- Test server: https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net
   This server runs the latest version of the main branch with test data that is usually reset on redeployment.
   The main use of this server is for developers to test the latest version against their application without the fear to delete user data.
   In particular, you can log in using `alice@jabref.de / EBNPXY35TYkYXHs`.
