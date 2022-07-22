@@ -15,10 +15,18 @@ import {
   isHttpQueryError,
 } from 'apollo-server-core'
 
+// Manually specify CORS options as long as h3 doesn't suppor this natively
+// https://github.com/unjs/h3/issues/82
+interface RouteOptionsCors {
+  origin?: string
+  credentials?: boolean
+}
+
 export interface ServerRegistration {
   path?: string
   disableHealthCheck?: boolean
-  onHealthCheck?: (event: CompatibilityEvent) => Promise<any>
+  onHealthCheck?: (event: CompatibilityEvent) => Promise<any>,
+  cors?: boolean | RouteOptionsCors
 }
 
 // Originally taken from https://github.com/newbeea/nuxt3-apollo-starter/blob/master/server/graphql/apollo-server.ts
@@ -35,8 +43,11 @@ export class ApolloServer extends ApolloServerBase {
     path,
     disableHealthCheck,
     onHealthCheck,
+    cors
   }: ServerRegistration = {}): EventHandler {
     this.graphqlPath = path || '/graphql'
+    // Provide false to remove CORS middleware entirely, or true to use your middleware's default configuration.
+    const corsOptions = (cors === true || cors === undefined) ? { origin: 'ignore' } : cors
     const landingPage = this.getLandingPage()
 
     return async (event: CompatibilityEvent) => {
@@ -67,16 +78,28 @@ export class ApolloServer extends ApolloServerBase {
           ))
             event.res.setHeader(name, value)
         }
+        if (corsOptions !== false) {
+          event.res.setHeader('Access-Control-Allow-Origin', corsOptions.origin ?? 'ignore')
+          if (corsOptions.credentials !== undefined) {
+            event.res.setHeader('Access-Control-Allow-Credentials', corsOptions.credentials.toString())
+          }
+        }
+
         event.res.statusCode = responseInit.status || 200
         return graphqlResponse
       } catch (error: any) {
         if (!isHttpQueryError(error)) {
           throw error
         }
-
         if (error.headers) {
           for (const [name, value] of Object.entries<string>(error.headers))
             event.res.setHeader(name, value)
+        }
+        if (corsOptions !== false) {
+          event.res.setHeader('Access-Control-Allow-Origin', corsOptions.origin ?? 'ignore')
+          if (corsOptions.credentials !== undefined) {
+            event.res.setHeader('Access-Control-Allow-Credentials', corsOptions.credentials.toString())
+          }
         }
         event.res.statusCode = error.statusCode || 500
         return error.message

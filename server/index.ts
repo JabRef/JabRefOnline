@@ -116,5 +116,9 @@ export default defineLazyEventHandler(async () => {
   await server.start()
   return server.createHandler({
     path: '/api',
+    cors: {
+      // Allow requests from all domains
+      origin: '*',
+    }
   })
 })
