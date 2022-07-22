@@ -39,12 +39,6 @@ jobs:
       - name: Validate GraphQL operations
         run: yarn validate
 
-      # Check that no schema changes have been done without corresponding migration files have been added
-      - name: Detect database schema drift
-        run: yarn prisma:migrate:diff $DATABASE_URL
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
-
   test:
     name: Build & Test
 
@@ -99,6 +93,10 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
+
+      # Check that no schema changes have been done without corresponding migration files have been added
+      - name: Detect database schema drift
+        run: yarn prisma:migrate:diff $DATABASE_URL
 
       - name: Build
         run: yarn build
