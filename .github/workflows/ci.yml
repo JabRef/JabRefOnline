@@ -1,4 +1,4 @@
-name: Test
+name: CI
 
 on:
   push:
@@ -10,8 +10,37 @@ on:
       - main
 
 jobs:
+  lint:
+    name: Lint
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run linter
+        run: yarn lint
+
+      - name: Check types
+        run: yarn typecheck
+
+      - name: Validate GraphQL operations
+        run: yarn validate
+
   test:
-    name: Test
+    name: Build & Test
 
     runs-on: ${{ matrix.os }}
 
@@ -67,15 +96,6 @@ jobs:
 
       - name: Init database
         run: yarn prisma:push
-
-      - name: Run linter
-        run: yarn lint
-
-      - name: Check types
-        run: yarn typecheck
-
-      - name: Validate GraphQL operations
-        run: yarn validate
 
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
