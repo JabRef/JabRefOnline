@@ -1,139 +1,127 @@
-name: Deploy
+name: CD Azure
 
 on:
-  workflow_run:
-    workflows: ["Test"]
-    branches: [main]
-    types: [completed]
-
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request_target:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
 
 jobs:
-  build:
-    name: Build
+  pr_preview:
+    name: Build & Deploy to PR preview
 
     runs-on: ubuntu-latest
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
-
-    services:
-      redis:
-        image: redis
-        # Set health checks to wait until redis has started
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          # Maps port 6379 on service container to port 6380 on host
-          - 6380:6379
-
+    if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          # Should be kept in sync with version configured in Azure
-          node-version: 14.x
-          cache: 'yarn'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build
-        run: yarn build
-
-      - name: Prepare artifact
+      - name: Prepare
         run: |
-          mkdir artifact
-          cp -r .output ecosystem.config.js artifact
+          # This is needed correctly deploy the Azure Functions (API)
+          mkdir -p .output/server
+          touch .output/server/.gitkeep
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+      - name: Build & Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          name: server-build
-          path: artifact
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/" # App source code path
+          api_location: ".output/server" # Api source code path - optional
+          output_location: ".output/public" # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
 
-  deploy:
+  build_and_deploy:
+    name: Build & Deploy to ${{ matrix.environment }}
+
     runs-on: ubuntu-latest
 
-    needs: build
-
+    if: github.event_name == 'push'
+    
     strategy:
       matrix:
         include:
           - environment: Test
-            url: https://jabref-dev.azurewebsites.net/
+            url: https://mango-pebble-0224c3803-dev.1.azurestaticapps.net/
+            deployment_environment: dev
           - environment: Staging
-            url: https://jabref-staging.azurewebsites.net/
-
-    name: Deploy to ${{ matrix.environment }}
+            url: https://mango-pebble-0224c3803-staging.1.azurestaticapps.net/
+            deployment_environment: staging
+          - production: Production
+            url: https://mango-pebble-0224c3803.1.azurestaticapps.net/
+            deployment_environment: ''
 
     environment:
       name: ${{ matrix.environment }}
       url: ${{ matrix.url }}
 
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: server-build
-
-      - name: Login to Azure
-        uses: Azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
-
-      - name: Deploy to Azure WebApp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: JabRef
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Prepare
+        run: |
+          # This is needed correctly deploy the Azure Functions (API)
+          mkdir -p .output/server
+          touch .output/server/.gitkeep
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16
           cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install
 
-      - name: Reset database on Azure (Test database)
+      - name: Reset Test database on Azure
         if: matrix.environment == 'Test'
         run: yarn prisma:migrate:reset --force
         env:
           DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
-      - name: Update database on Azure (Production database)
+      - name: Update Production database on Azure
         if: matrix.environment == 'Staging'
         run: yarn prisma:migrate:deploy
         env:
           DATABASE_URL: ${{ secrets.AZURE_DATABASE_URL }}
 
-  deploy-prod:
-    name: Deploy to Production
+      - name: Build & Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          deployment_environment: ${{ matrix.deployment_environment }}
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/" # App source code path
+          api_location: ".output/server" # Api source code path - optional
+          output_location: ".output/public" # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
 
+  close_pr_preview:
+    name: Close PR preview
+    
+    if: github.event_name == 'pull_request_target' && github.event.action == 'closed'
+    
     runs-on: ubuntu-latest
 
-    needs: deploy
-
-    environment:
-      name: Production
-      url: https://jabref.azurewebsites.net/
-
     steps:
-      - name: Login to Azure
-        uses: Azure/login@v1
+      - name: Close Pull Request
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
-
-      - name: Swap staging and production deployment slots
-        run: az webapp deployment slot swap -g JabRefOnline -n JabRef --slot staging --target-slot production
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+          action: "close"
 
