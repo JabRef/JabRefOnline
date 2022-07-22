@@ -116,5 +116,11 @@ export default defineLazyEventHandler(async () => {
   await server.start()
   return server.createHandler({
     path: '/api',
+    cors: {
+      // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
+      origin: "https://studio.apollographql.com",
+      credentials: true,
+      methods: "GET POST OPTIONS",
+    }
   })
 })
