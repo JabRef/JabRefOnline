@@ -52,12 +52,12 @@ jobs:
       matrix:
         include:
           - environment: Test
-            url: https://mango-pebble-0224c3803-dev.1.azurestaticapps.net/
+            url: https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net
             deployment_environment: dev
           - environment: Staging
-            url: https://mango-pebble-0224c3803-staging.1.azurestaticapps.net/
+            url: https://mango-pebble-0224c3803-staging.westeurope.1.azurestaticapps.net
             deployment_environment: staging
-          - production: Production
+          - environment: Production
             url: https://mango-pebble-0224c3803.1.azurestaticapps.net/
             deployment_environment: ''
 
