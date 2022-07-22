@@ -33,10 +33,9 @@ export interface ServerRegistration {
 // TODO: Implement health check https://github.com/apollographql/apollo-server/blob/main/docs/source/monitoring/health-checks.md
 export class ApolloServer extends ApolloServerBase {
   async createGraphQLServerOptions(
-    request?: IncomingMessage,
-    reply?: ServerResponse
+    event: CompatibilityEvent
   ): Promise<GraphQLOptions> {
-    return this.graphQLServerOptions({ request, reply })
+    return this.graphQLServerOptions(event)
   }
 
   createHandler({
@@ -51,10 +50,7 @@ export class ApolloServer extends ApolloServerBase {
     const landingPage = this.getLandingPage()
 
     return async (event: CompatibilityEvent) => {
-      const options = await this.createGraphQLServerOptions(
-        event.req,
-        event.res
-      )
+      const options = await this.createGraphQLServerOptions(event)
       try {
         if (landingPage) {
           const landingPageHtml = this.handleLandingPage(event, landingPage)
