@@ -94,6 +94,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Init database
+        run: yarn prisma:push
+
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
         run: yarn prisma:migrate:diff $DATABASE_URL
