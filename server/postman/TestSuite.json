@@ -30,8 +30,8 @@
 									"    pm.response.to.have.status(400);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Content-Type is  json\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+									"pm.test(\"Content-Type is json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
 									"});\r",
 									"\r",
 									"pm.test(\"Contains error message\", function () {\r",
@@ -131,7 +131,7 @@
 		{
 			"id": "6b1f78c0-e109-4edb-9560-cea2a6b40d57",
 			"key": "base_url",
-			"value": ""
+			"value": "http://localhost:3000/api"
 		}
 	]
 }
