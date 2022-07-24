@@ -107,6 +107,12 @@ jobs:
       - name: Run tests
         run: yarn test --ci --coverage
 
+      - name: Start server
+        run: yarn start &
+
+      - name: Run API tests
+        run: yarn test:api --env-var='base_url=http://localhost:3000/api'
+
       - name: Build Storybook
         run: |
           yarn nuxi generate
