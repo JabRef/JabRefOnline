@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "101c18f0-a8c1-463f-baa9-7fa5cdbfbbb4",
+		"name": "Test suite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mutations",
+			"item": [],
+			"id": "46bbd5f2-e227-4309-bcf1-2de038e4a069"
+		},
+		{
+			"name": "queries",
+			"item": [],
+			"id": "ff141148-fed6-4ab6-86b2-ea76463d84b5"
+		},
+		{
+			"name": "general",
+			"item": [
+				{
+					"name": "Invalid query throws error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5a7d3a09-edd6-4aec-b6cc-9bf7f7a9b6c7",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+									"});\r",
+									"\r",
+									"pm.test(\"Contains error message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Cannot query field \\\"name\\\" on type \\\"User\\\".\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b6474b4b-bf17-43de-a763-e5e73ce1fa31",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query user ($id: String) {\n    user (id: $id) {\n        id\n        name\n    }\n}",
+								"variables": "{\n  \"id\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get with no query throws error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "49ae4549-540c-4b87-ac71-897802e1113d",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Response contains error\", function () {\r",
+									"    pm.expect(pm.response.text()).to.eql(\"GET query missing.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "56edaf85-5a66-48e4-b1d9-a25a778c1d4b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1b7dff0d-79de-49c2-8a68-c3dfdf8a38ce"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1e1ce836-d5e4-4c07-98f2-3efae22db8af",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ae73d948-19cb-420e-99f3-00f45f8834f6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6b1f78c0-e109-4edb-9560-cea2a6b40d57",
+			"key": "base_url",
+			"value": "http://localhost:3000/api"
+		}
+	]
+}
