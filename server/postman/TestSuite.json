@@ -22,6 +22,10 @@
                                     "pm.test(\"Returns user id\", function () {\r",
                                     "    var jsonData = pm.response.json();\r",
                                     "    pm.expect(jsonData.data).to.eql({login: {user: {id: \"ckn4oul7100004cv7y3t94n8j\"}}});\r",
+                                    "});\r",
+                                    "\r",
+                                    "pm.test(\"Sets cookie\", function () {\r",
+                                    "   pm.expect(pm.cookies.has('session')).to.be.true;\r",
                                     "});"
                                 ],
                                 "type": "text/javascript"
