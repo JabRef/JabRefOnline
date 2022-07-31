@@ -1,3 +1,4 @@
+import 'reflect-metadata' // Needed for tsyringe
 import http from 'http'
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'

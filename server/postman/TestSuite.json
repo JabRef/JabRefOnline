@@ -21,7 +21,7 @@
                                 "exec": [
                                     "pm.test(\"Returns user id\", function () {\r",
                                     "    var jsonData = pm.response.json();\r",
-                                    "    pm.expect(jsonData).to.eql({user: {id: \"ea\"}});\r",
+                                    "    pm.expect(jsonData.data).to.eql({login: {user: {id: \"ckn4oul7100004cv7y3t94n8j\"}}});\r",
                                     "});"
                                 ],
                                 "type": "text/javascript"
@@ -32,8 +32,13 @@
                         "method": "POST",
                         "header": [],
                         "body": {
-                            "mode": "graphql"
-                        },
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation Mutation($email: EmailAddress!, $password: String!) { login(email: $email, password: $password) {... on UserReturned {user {id}}}}",
+								"variables": "{\n  \"email\": \"alice@jabref.de\",\"password\": \"EBNPXY35TYkYXHs\" \n}"
+                              }
+							
+						},
                         "url": {
                             "raw": "{{base_url}}",
                             "host": [
@@ -79,8 +84,12 @@
                         "method": "POST",
                         "header": [],
                         "body": {
-                            "mode": "graphql"
-                        },
+							"mode": "graphql",
+							"graphql": {
+								"query": "query user ($id: String) {\n    user (id: $id) {\n        id\n        name\n    }\n}",
+								"variables": "{\n  \"id\": \"\"\n}"
+							}
+						},
                         "url": {
                             "raw": "{{base_url}}",
                             "host": [
