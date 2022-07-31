@@ -38,7 +38,7 @@
         {
           "url": "webpack:///ignore/",
           "path": null
-        },
+        }
       ]
     },
     {
@@ -52,26 +52,29 @@
       }
     },
     {
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "name": "Server: nuxt",
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
         "!**/node_modules/**"
       ],
+      "env": {
+        "DATABASE_URL": "postgresql://gitpod@localhost/jabrefonline"
+      },
       "args": [
         "dev"
       ],
       "osx": {
-        "program": "${workspaceFolder}/node_modules/.bin/nuxt"
+        "program": "${workspaceFolder}/node_modules/.bin/nuxi"
       },
       "linux": {
-        "program": "${workspaceFolder}/node_modules/.bin/nuxt"
+        "program": "${workspaceFolder}/node_modules/.bin/nuxi"
       },
       "windows": {
-        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.js"
+        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxi.js"
       }
-    }
+    },
   ],
   "compounds": [
     {
