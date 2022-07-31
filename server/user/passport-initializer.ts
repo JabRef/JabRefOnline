@@ -1,5 +1,5 @@
 import connectRedis from 'connect-redis'
-import { App } from 'h3'
+import { toEventHandler, EventHandler } from 'h3'
 import session from 'express-session'
 import passport from 'passport'
 import { RedisClientType } from 'redis'
@@ -25,11 +25,11 @@ export default class PassportInitializer {
     )
   }
 
-  install(app: App): void {
+  createHandler(): EventHandler {
     const config = useRuntimeConfig()
 
     // TODO: Use redis store also for development as soon as https://github.com/tj/connect-redis/issues/336 is fixed (and mock-redis is compatible with redis v4)
-    let store
+    let store: session.Store
     if (config.public.environment === Environment.Production) {
       const RedisStore = connectRedis(session)
       store = new RedisStore({
@@ -40,10 +40,9 @@ export default class PassportInitializer {
       store = new session.MemoryStore()
     }
 
-    // Add middleware that sends and receives the session ID using cookies
-    // See https://github.com/expressjs/session#readme
-    app.use(
-      // @ts-ignore: https://github.com/unjs/h3/issues/146
+    return toEventHandler((req, res, next) => {
+      // Add middleware that sends and receives the session ID using cookies
+      // See https://github.com/expressjs/session#readme
       session({
         store,
         // The secret used to sign the session cookie
@@ -62,13 +61,30 @@ export default class PassportInitializer {
           // Expires after half a year
           maxAge: 0.5 * 31556952 * 1000,
         },
-      })
-    )
-    // Add passport as middleware (this more or less only adds the _passport variable to the request)
-    // @ts-ignore: https://github.com/unjs/h3/issues/146
-    app.use(passport.initialize())
-    // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
-    app.use(passport.session())
+      })(
+        // @ts-ignore: https://github.com/unjs/h3/issues/146
+        req,
+        res,
+        next
+      )
+
+      // Add passport as middleware (this more or less only adds the _passport variable to the request)
+      // @ts-ignore: https://github.com/unjs/h3/issues/146
+      passport.initialize()(
+        // @ts-ignore: https://github.com/unjs/h3/issues/146
+        req,
+        res,
+        next
+      )
+      // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      passport.session()(
+        // @ts-ignore: https://github.com/unjs/h3/issues/146
+        req,
+        res,
+        next
+      )
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

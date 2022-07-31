@@ -1,15 +1,8 @@
 import http from 'http'
-import 'reflect-metadata' // Needed for tsyringe
-import {
-  ApolloServerPluginDrainHttpServer,
-  ApolloServerPluginLandingPageLocalDefault,
-} from 'apollo-server-core'
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
-import { createApp } from 'h3'
-import { configure as configureTsyringe } from './tsyringe.config'
 import { buildContext } from './context'
 import { loadSchemaWithResolvers } from './schema'
-import { resolve } from './tsyringe'
 import { ApolloServer } from '~/apollo/apollo-server'
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
@@ -86,17 +79,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
   return this
 }
 
-const app = createApp()
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-const httpServer = http.createServer(app)
-
 export default defineLazyEventHandler(async () => {
-  await configureTsyringe()
-
-  const passportInitializer = resolve('PassportInitializer')
-  passportInitializer.initialize()
-  passportInitializer.install(app)
-
   const server = new ApolloServer({
     schema: await loadSchemaWithResolvers(),
     context: buildContext,
@@ -104,8 +87,8 @@ export default defineLazyEventHandler(async () => {
     plugins: [
       // Enable Apollo Studio in development, and also in production (at least for now)
       ApolloServerPluginLandingPageLocalDefault({ footer: false }),
-      // Gracefully shutdown HTTP server when Apollo server terminates
-      ApolloServerPluginDrainHttpServer({ httpServer }),
+      // TODO: Gracefully shutdown HTTP server when Apollo server terminates
+      // ApolloServerPluginDrainHttpServer({ httpServer }),
     ],
     // Only reply to requests with a Content-Type header to prevent CSRF and XS-Search attacks
     // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
@@ -118,9 +101,9 @@ export default defineLazyEventHandler(async () => {
     path: '/api',
     cors: {
       // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
-      origin: "https://studio.apollographql.com",
+      origin: 'https://studio.apollographql.com',
       credentials: true,
-      methods: "GET POST OPTIONS",
-    }
+      methods: 'GET POST OPTIONS',
+    },
   })
 })
