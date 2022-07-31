@@ -3,7 +3,7 @@ import {
   AuthenticateReturn,
   buildContext as passportBuildContext,
 } from 'graphql-passport'
-import { ContextParams } from 'graphql-passport/lib/buildContext'
+import { CompatibilityEvent } from 'h3'
 
 export interface Context {
   isAuthenticated: () => boolean
@@ -17,8 +17,9 @@ export interface Context {
   logout: () => void
 }
 
-export function buildContext({ req, res }: ContextParams): Context {
+export function buildContext(event: CompatibilityEvent): Context {
   return {
-    ...passportBuildContext<User>({ req, res }),
+    // @ts-ignore: h3 doesn't provide correct types https://github.com/unjs/h3/issues/146
+    ...passportBuildContext<User>({ req: event.req, res: event.res }),
   }
 }
