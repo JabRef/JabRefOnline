@@ -1,12 +1,5 @@
-import type { ServerResponse } from 'http'
 import type { LandingPage } from 'apollo-server-plugin-base'
-import {
-  useBody,
-  useQuery,
-  IncomingMessage,
-  CompatibilityEvent,
-  EventHandler,
-} from 'h3'
+import { useBody, useQuery, CompatibilityEvent, EventHandler } from 'h3'
 import type { GraphQLOptions } from 'apollo-server-core'
 import {
   ApolloServerBase,
@@ -19,14 +12,14 @@ import {
 // https://github.com/unjs/h3/issues/82
 interface RouteOptionsCors {
   origin?: string
-  credentials?: boolean,
+  credentials?: boolean
   methods?: string
 }
 
 export interface ServerRegistration {
   path?: string
   disableHealthCheck?: boolean
-  onHealthCheck?: (event: CompatibilityEvent) => Promise<any>,
+  onHealthCheck?: (event: CompatibilityEvent) => Promise<any>
   cors?: boolean | RouteOptionsCors
 }
 
@@ -34,28 +27,25 @@ export interface ServerRegistration {
 // TODO: Implement health check https://github.com/apollographql/apollo-server/blob/main/docs/source/monitoring/health-checks.md
 export class ApolloServer extends ApolloServerBase {
   async createGraphQLServerOptions(
-    request?: IncomingMessage,
-    reply?: ServerResponse
+    event: CompatibilityEvent
   ): Promise<GraphQLOptions> {
-    return this.graphQLServerOptions({ request, reply })
+    return this.graphQLServerOptions(event)
   }
 
   createHandler({
     path,
     disableHealthCheck,
     onHealthCheck,
-    cors
+    cors,
   }: ServerRegistration = {}): EventHandler {
     this.graphqlPath = path || '/graphql'
     // Provide false to remove CORS middleware entirely, or true to use your middleware's default configuration.
-    const corsOptions = (cors === true || cors === undefined) ? { origin: 'ignore' } : cors
+    const corsOptions =
+      cors === true || cors === undefined ? { origin: 'ignore' } : cors
     const landingPage = this.getLandingPage()
 
     return async (event: CompatibilityEvent) => {
-      const options = await this.createGraphQLServerOptions(
-        event.req,
-        event.res
-      )
+      const options = await this.createGraphQLServerOptions(event)
       try {
         if (landingPage) {
           const landingPageHtml = this.handleLandingPage(event, landingPage)
@@ -103,20 +93,29 @@ export class ApolloServer extends ApolloServerBase {
 }
 
 export default ApolloServer
-function setHeaders(event: CompatibilityEvent, headers: Record<string, string> | undefined, corsOptions: false | RouteOptionsCors) {
+function setHeaders(
+  event: CompatibilityEvent,
+  headers: Record<string, string> | undefined,
+  corsOptions: false | RouteOptionsCors
+) {
   if (headers) {
     for (const [name, value] of Object.entries(headers)) {
       event.res.setHeader(name, value)
     }
   }
   if (corsOptions !== false) {
-    event.res.setHeader('Access-Control-Allow-Origin', corsOptions.origin ?? 'ignore')
+    event.res.setHeader(
+      'Access-Control-Allow-Origin',
+      corsOptions.origin ?? 'ignore'
+    )
     if (corsOptions.credentials !== undefined) {
-      event.res.setHeader('Access-Control-Allow-Credentials', corsOptions.credentials.toString())
+      event.res.setHeader(
+        'Access-Control-Allow-Credentials',
+        corsOptions.credentials.toString()
+      )
     }
     if (corsOptions.methods !== undefined) {
       event.res.setHeader('Access-Control-Allow-Methods', corsOptions.methods)
     }
   }
 }
-
