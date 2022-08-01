@@ -4,9 +4,14 @@ import { promisify } from 'util'
 import redis, { RedisClientType } from 'redis'
 import { Environment } from '~/config'
 
-export async function createRedisClient(): Promise<RedisClientType<any, any, any>> {
+export async function createRedisClient(): Promise<
+  RedisClientType<any, any, any>
+> {
   const config = useRuntimeConfig()
-  if (config.public.environment === Environment.LocalDevelopment) {
+  if (
+    config.public.environment === Environment.LocalDevelopment ||
+    config.public.environment === Environment.AzureBuild
+  ) {
     const redisMock = (await import('redis-mock')).default
     const mockRedis = redisMock.createClient()
     // Workaround for redis-mock being not compatible with redis@4

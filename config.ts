@@ -10,6 +10,11 @@ export enum Environment {
   CI = 'ci',
 
   /**
+   * During the build for deployment to Azure.
+   */
+  AzureBuild = 'build',
+
+  /**
    * Pre-production environment, usually from the main branch with production data.
    */
   Staging = 'staging',
@@ -20,15 +25,30 @@ export enum Environment {
   Production = 'production',
 }
 
+/**
+ * Taken from https://stackoverflow.com/a/41548441
+ */
+function enumFromStringValue<T>(
+  enm: { [s: string]: T },
+  value: string
+): T | undefined {
+  return (Object.values(enm) as unknown as string[]).includes(value)
+    ? (value as unknown as T)
+    : undefined
+}
+
 function getEnvironment(): Environment {
   // Github always sets CI variable https://docs.github.com/en/actions/learn-github-actions/environment-variables
   if (process.env.CI) {
     return Environment.CI
   }
 
-  return process.env.NODE_ENV === 'production'
-    ? Environment.Production
-    : Environment.LocalDevelopment
+  if (process.env.NODE_ENV === undefined) return Environment.LocalDevelopment
+
+  return (
+    enumFromStringValue(Environment, process.env.NODE_ENV) ??
+    Environment.LocalDevelopment
+  )
 }
 
 export interface Config {
