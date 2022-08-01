@@ -15,7 +15,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: github.event_name == 'pull_request_target' && github.event.action != 'closed' && (contains(github.event.pull_request.labels.*.name, 'status: safe to test'))
+    if: "github.event_name == 'pull_request_target' && github.event.action != 'closed' && (contains(github.event.pull_request.labels.*.name, 'status: safe to test') || github.event.pull_request_target.user.login == 'tobiasdiez')"
     
     steps:
       - name: Checkout
