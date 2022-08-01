@@ -84,7 +84,7 @@ export default defineNuxtConfig({
 
   /*
    ** Client and server-side configuration
-   ** See https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
+   ** See https://v3.nuxtjs.org/guide/features/runtime-config
    */
   runtimeConfig: constructConfig(),
 
@@ -127,8 +127,7 @@ export default defineNuxtConfig({
       // Taken from https://github.com/vitejs/vite/issues/1653#issuecomment-1079322770
       hmr: process.env.GITPOD_WORKSPACE_URL
         ? {
-            
-          // Gitpod is served over https, so we need to use wss as well
+            // Gitpod is served over https, so we need to use wss as well
             protocol: 'wss',
             host: `3000-${process.env.GITPOD_WORKSPACE_ID || ''}.${
               process.env.GITPOD_WORKSPACE_CLUSTER_HOST || ''
