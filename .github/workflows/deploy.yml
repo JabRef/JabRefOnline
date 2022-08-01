@@ -5,7 +5,7 @@ on:
     branches:
       - main
   pull_request_target:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened, closed, labeled]
     branches:
       - main
 
@@ -15,11 +15,13 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
+    if: "github.event_name == 'pull_request_target' && github.event.action != 'closed' && (contains(github.event.pull_request.labels.*.name, 'status: safe to test') || github.event.pull_request_target.user.login == 'tobiasdiez')"
     
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Prepare
         run: |
@@ -113,6 +115,8 @@ jobs:
           api_location: ".output/server" # Api source code path - optional
           output_location: ".output/public" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          NODE_ENV: "build"
 
       - name: Run API tests
         run: yarn test:api --env-var='base_url=${{ matrix.url }}/api'
