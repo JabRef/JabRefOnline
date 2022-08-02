@@ -43,6 +43,10 @@ function getEnvironment(): Environment {
     return Environment.CI
   }
 
+  if (process.env.INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN) {
+    return Environment.AzureBuild
+  }
+
   if (process.env.NODE_ENV === undefined) return Environment.LocalDevelopment
 
   return (
