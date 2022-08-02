@@ -38,7 +38,6 @@ function enumFromStringValue<T>(
 }
 
 function getEnvironment(): Environment {
-  console.log(process.env)
   if (process.env.INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN) {
     return Environment.AzureBuild
   }
