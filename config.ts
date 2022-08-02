@@ -38,15 +38,14 @@ function enumFromStringValue<T>(
 }
 
 function getEnvironment(): Environment {
+  console.log(process.env)
+  if (process.env.INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN) {
+    return Environment.AzureBuild
+  }
+
   // Github always sets CI variable https://docs.github.com/en/actions/learn-github-actions/environment-variables
   if (process.env.CI) {
     return Environment.CI
-  }
-
-  console.log(process.env)
-
-  if (process.env.INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN) {
-    return Environment.AzureBuild
   }
 
   if (process.env.NODE_ENV === undefined) return Environment.LocalDevelopment
