@@ -43,6 +43,8 @@ function getEnvironment(): Environment {
     return Environment.CI
   }
 
+  console.log(process.env)
+
   if (process.env.INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN) {
     return Environment.AzureBuild
   }

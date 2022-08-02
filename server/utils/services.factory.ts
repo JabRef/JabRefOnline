@@ -8,6 +8,7 @@ export async function createRedisClient(): Promise<
   RedisClientType<any, any, any>
 > {
   const config = useRuntimeConfig()
+  console.log(config)
   if (
     config.public.environment === Environment.LocalDevelopment ||
     config.public.environment === Environment.AzureBuild
