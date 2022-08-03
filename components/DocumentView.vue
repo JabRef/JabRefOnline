@@ -106,7 +106,7 @@
 
 <script lang="ts">
 import type { PropType } from 'vue'
-import { gql, DocumentType } from '~/apollo'
+import { DocumentType, gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
 export const DocumentForView = gql(/* GraphQL */ `
