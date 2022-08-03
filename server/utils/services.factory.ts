@@ -45,7 +45,13 @@ export async function createRedisClient(): Promise<
       delete redisConfig.password
     }
     const client = redis.createClient(redisConfig)
-    await client.connect()
+    try {
+      await client.connect()
+    } catch (exception) {
+      console.error('Error while connection to redis')
+      console.error(redisConfig)
+      throw exception
+    }
     return client
   }
 }
