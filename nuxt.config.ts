@@ -57,12 +57,6 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css',
   ],
 
-  // TODO: Reenable config viewer as soon as https://github.com/nuxt/framework/issues/865 is fixed.
-  tailwindcss: {
-    viewer: false,
-    configPath: '~/tailwind.config.cjs',
-  },
-
   /*
    ** Nuxt.js modules
    */
