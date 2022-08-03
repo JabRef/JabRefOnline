@@ -15,9 +15,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: "github.event_name == 'pull_request_target' && github.event.action != 'closed' && (contains(github.event.pull_request.labels.*.name, 'status: safe to test') || github.event.pull_request_target.user.login == 'tobiasdiez')"
-    
+    if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
+
     steps:
+      # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
+      # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
+      - name: Fail if unsecure
+        if: "!contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.event.pull_request_target.user.login != 'tobiasdiez'"
+        run: exit 1
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -42,6 +48,8 @@ jobs:
           api_location: ".output/server" # Api source code path - optional
           output_location: ".output/public" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
       - name: Run API tests
         run: yarn test:api --env-var='base_url=${{ steps.builddeploy.outputs.static_web_app_url }}/api'
@@ -115,8 +123,6 @@ jobs:
           api_location: ".output/server" # Api source code path - optional
           output_location: ".output/public" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-        env:
-          NODE_ENV: "build"
 
       - name: Run API tests
         run: yarn test:api --env-var='base_url=${{ matrix.url }}/api'

@@ -96,10 +96,11 @@
   </div>
 </template>
 <script lang="ts">
-import { useResult, useQuery } from '@vue/apollo-composable'
 import { BaseTree } from '@he-tree/vue3'
+import { useQuery, useResult } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
+
 import '@he-tree/vue3/dist/he-tree-vue3.css'
 
 export default defineComponent({

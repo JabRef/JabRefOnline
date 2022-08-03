@@ -45,6 +45,8 @@ module.exports = {
     'no-void': ['error', { allowAsStatement: true }],
     // Demote this to warning as long as we are still using cjs modules
     'import/named': 'warn',
+    // Import order is normally handled by prettier, but sometimes there are conflicts: https://github.com/simonhaenisch/prettier-plugin-organize-imports/issues/65
+    'import/order': 'warn',
   },
   overrides: [
     {

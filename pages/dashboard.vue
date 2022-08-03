@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import { useQuery, useResult } from '@vue/apollo-composable'
 import { WatchQueryFetchPolicy } from '@apollo/client/core'
+import { useQuery, useResult } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
