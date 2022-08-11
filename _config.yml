@@ -1,0 +1,48 @@
+port: 4000
+host: localhost
+safe: false
+destination: build
+
+### site serving configuration ###
+exclude: [Gemfile, Gemfile.lock, LICENSE.md, README.md, package-lock.json, vendor, .gitignore, .mailmap, .prettierrc]
+include: ['surveys/', 'surveys/2015/', 'faq/', 'blog/', 'GSoC2019.md', 'node_modules']
+permalink: /:title ## disables post output
+timezone: null
+lsi: false
+
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+
+#pygments is not supported by GitHub. See https://help.github.com/articles/page-build-failed-config-file-error/#fixing-highlighting-errors
+#See also https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+#We have to use rouge
+# Hint by http://milanaryal.com/2015/writing-on-github-pages-and-jekyll-using-markdown/ and http://ajoz.github.io/2014/06/29/i-want-my-github-flavored-markdown/
+#markdown: redcarpet
+#redcarpet:
+#  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
+
+# Set proper base directory for Sass files
+sass:
+  sass_dir: css
+
+### required for main site
+collections:
+  - features
+
+plugins:
+  - jekyll-analytics
+
+### content configuration ###
+url:         "http://www.jabref.org"
+title:       "JabRef"
+source_link: "https://github.com/JabRef/www.jabref.org/"
+favicon:     "img/favicon.ico"
+
+jekyll_analytics:
+  GoogleAnalytics:
+    id: UA-74055103-1
+    anonymizeIp: true

@@ -1,0 +1,73 @@
+---
+title: paypal
+---
+<!DOCTYPE html>
+<html lang="en">
+<!-- This html file is based on http://getbootstrap.com/getting-started/ -->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>JabRef Donations via PayPal</title>
+
+    <!-- Bootstrap -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+        <h1>JabRef Donations via PayPal</h1>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+
+        <p>
+        This page is used for offering reccurring donations for JabRef.
+        For all other kinds of donations, please go to <a href="https://github.com/JabRef/jabref/wiki/Donations/">our donations page on GitHub</a>.
+        For general information about JabRef go to <a href="http://www.jabref.org/">www.jabref.org</a>.
+        </p>
+
+        <p><b>Update</b>The <a href="https://www.paypal.com/cgi-bin/webscr?item_name=JabRef+Bibliography+Manager&cmd=_donations&lc=US&currency_code=EUR&business=donations%40jabref.org">current paypal donations page</a> also allows for monthly donations. It should not be necessary to use this form.</p>
+
+        <h2>Reoccurring donations via PayPal</h2>
+
+        <form method="post" action="https://www.paypal.com/cgi-bin/webscr">
+            <input type="hidden" value="_xclick-subscriptions" name="cmd">
+            <input type="hidden" value="donations@jabref.org" name="business">
+            <input type="hidden" value="https://github.com/JabRef/jabref/wiki/Donations/" name="return">
+            <input type="hidden" value="Recurring Donation" name="item_name">
+            <input type="hidden" value="1" name="no_shipping">
+            <input type="hidden" value="1" name="no_note">
+            <input type="hidden" value="EUR" name="currency_code">
+            <input type="hidden" value="1" name="p3">
+            <input type="hidden" value="1" name="src">
+            <input type="hidden" value="1" name="sra">
+
+
+            <div class="form-group">
+                <label for="donationAmount">Donation Amount (€)</label>
+                <input type="text" class="form-control" id="donationAmount" name="a3" placeholder="amount">
+            </div>
+            <div class="form-group">
+                <label for="t3">How often</label>
+                <select id="t3" name="t3" class="form-control">
+                    <option value="M">Monthly </option>
+                    <option value="Y">Yearly </option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <p>The PayPal site will open in German. Sorry for that.</p>
+    </div>
+
+  </body>
+</html>

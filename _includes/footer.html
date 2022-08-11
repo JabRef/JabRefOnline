@@ -1,0 +1,207 @@
+<footer>
+  <div class="container">
+    <div class="row pt-5 pb-5">
+      <div class="col-md-2 offset-md-1">
+        <img class="img-fluid" src="/img/JabRef-icon-256.png" />
+      </div>
+      <div class="col-md-2 offset-md-1">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <h6>Install</h6>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark"
+              href="https://downloads.jabref.org/"
+            >
+              Desktop apps
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://docs.jabref.org/collect/jabref-browser-extension"
+            >
+              Browser extensions
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://builds.jabref.org/main/">
+              Development build
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
+            >
+              Change Log
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <strong>Links</strong>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://docs.jabref.org/advanced/resources">
+              Resources
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://java.by-comparison.com/">
+              Java by Comparison
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#impressmodal" data-toggle="modal" data-target="#impressmodal">
+              Impressum
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#datenschutzmodal" data-toggle="modal" data-target="#datenschutzmodal">
+              Datenschutzerklärung
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <strong>Contribute</strong>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://github.com/JabRef/jabref/wiki/Donations"
+            >
+              Donation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://docs.jabref.org/faqcontributing/how-to-translate-the-ui"
+            >
+              Translation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/JabRef/jabref">
+              GitHub
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://devdocs.jabref.org/">
+              Developer Docs
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-2">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <strong>Help & Contact</strong>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://docs.jabref.org/">
+              Documentation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://discourse.jabref.org/">Forum</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/JabRef_org">
+              Twitter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/JabRef/jabref/issues">
+              Report an issue
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    id="impressmodal"
+    aria-hidden="true"
+    aria-labelledby="impressumLabel"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="impressumLabel">Impressum</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% capture impressum %} {% include impressum.md %} {% endcapture %} {{ impressum | markdownify }}
+        </div>
+        <div class="modal-footer">
+          <button
+            id="impressclose"
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    id="datenschutzmodal"
+    aria-hidden="true"
+    aria-labelledby="datenschutzLabel"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="datenschutzLabel">Datenschutzerklärung</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% include datenschutz.html %}
+        </div>
+        <div class="modal-footer">
+          <button
+            id="impressclose"
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
+<noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""></noscript>
