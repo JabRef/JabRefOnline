@@ -1,6 +1,6 @@
-import { defineNuxtConfig } from 'nuxt'
-import type { NitroConfig } from 'nitropack'
 import { printSchema } from 'graphql'
+import type { NitroConfig } from 'nitropack'
+import { defineNuxtConfig } from 'nuxt'
 import { constructConfig } from './config'
 import { loadSchemaFromFiles } from './server/schema'
 
@@ -69,6 +69,9 @@ export default defineNuxtConfig({
     './modules/storybook',
     // Add vue runtime compiler as temporary workaround for https://github.com/nuxt/framework/issues/4661
     'nuxt3-runtime-compiler-module',
+    // Add support for writing content in markdown
+    // https://content.nuxtjs.org/
+    '@nuxt/content',
   ],
 
   /*
