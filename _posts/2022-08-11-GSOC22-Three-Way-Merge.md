@@ -40,11 +40,17 @@ We included a button on the side of field cells to open links; as of right now, 
 
 ![](../img/three-way-merge-open-doi-copy.png)
 
+## Future Work
+We've made a lot of progress, but there's still more work to be done. We're going to make separate improvements to each of the dialogs that use the merge UI. This has already begun with the external changes resolver dialog. We'll also update the documentation and write tests before release.
+
+![](../img/external-changes-resolver-dialog.png)
+
 ## Summary
 
-We hope you've enjoyed learning more about some of the new changes in JabRef. The three-way merge changes are now part of the development version. You can try it out right now! https://builds.jabref.org/main/
+We hope you've enjoyed learning about some of the new changes in JabRef. The three-way merge changes are now part of the development version. You can try it out right now! https://builds.jabref.org/main/
 
 DISCLAIMAR: PLEASE USE IT AT YOUR OWN RISK AND BACKUP YOUR DATA BEFORE TRYING IT OUT.
+
 
 ## Submitted PRs
 
