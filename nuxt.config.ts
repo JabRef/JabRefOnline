@@ -1,8 +1,7 @@
-import { defineNuxtConfig } from 'nuxt'
-import type { NitroConfig } from 'nitropack'
 import { printSchema } from 'graphql'
+import type { NitroConfig } from 'nitropack'
+import { defineNuxtConfig } from 'nuxt'
 import { constructConfig } from './config'
-import { loadSchemaFromFiles } from './server/schema'
 
 export default defineNuxtConfig({
   /*
@@ -13,6 +12,7 @@ export default defineNuxtConfig({
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
     global: 'global.ts',
+    tslib: 'tslib/tslib.es6.js',
   },
 
   nitro: {
@@ -94,6 +94,10 @@ export default defineNuxtConfig({
    */
   storybook: {},
 
+  // build: {
+  //  transpile: ['tslib', '@graphql-tools/graphql-file-loader'],
+  // },
+
   /**
    * Register custom (build) event listener
    * See https://v3.nuxtjs.org/api/configuration/nuxt.config#hooks
@@ -103,6 +107,7 @@ export default defineNuxtConfig({
       // Register #graphql/schema virtual module
       nitroConfig.virtual = nitroConfig.virtual || {}
       nitroConfig.virtual['#graphql/schema'] = async () => {
+        const { loadSchemaFromFiles } = await import('./server/schema')
         const schema = await loadSchemaFromFiles()
         return `
           import { loadSchemaSync } from '@graphql-tools/load'
