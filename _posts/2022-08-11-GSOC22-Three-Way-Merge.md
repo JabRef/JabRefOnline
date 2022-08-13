@@ -49,8 +49,7 @@ We've made some progress, but there's still more work to be done. We're going to
 
 We hope you've enjoyed learning about some of the new changes in JabRef. The three-way merge changes are now part of the development version. You can try it out right now! https://builds.jabref.org/main/
 
-DISCLAIMAR: PLEASE USE IT AT YOUR OWN RISK AND BACKUP YOUR DATA BEFORE TRYING IT OUT.
-
+Remember to make backup up of your library before trying out the new version. Don't hesistate to report any issues you encounter to help improving the dialog!
 
 ## Submitted PRs
 
