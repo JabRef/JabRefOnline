@@ -1,3 +1,5 @@
 <template>
   <div class="container"></div>
+  --- layout: default title: Stay on top of your Literature subTitle: The
+  efficient way to collect, organize & discover ---
 </template>
