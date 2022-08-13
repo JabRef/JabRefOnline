@@ -41,7 +41,7 @@ We included a button on the side of field cells to open links; as of right now, 
 ![](../img/three-way-merge-open-doi-copy.png)
 
 ## Future Work
-We've made a lot of progress, but there's still more work to be done. We're going to make separate improvements to each of the dialogs that use the merge UI. This has already begun with the external changes resolver dialog. We'll also update the documentation and write tests before release.
+We've made a some progress, but there's still more work to be done. We're going to make separate improvements to each of the dialogs that use the merge UI. This has already begun with the external changes resolver dialog. We'll also update the documentation and write tests before release.
 
 ![](../img/external-changes-resolver-dialog.png)
 
