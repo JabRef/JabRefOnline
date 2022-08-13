@@ -2,6 +2,8 @@
 title: GSOC22 — Implement a Three Way Merge UI for merging BibTeX entries
 id: GSOC22-Three-Way-Merge
 author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+bg: jabref-font
+color: white 
 ---
 
 Hi there! This is Houssem. I'm the Google Summer of Code *(GSoC)* student for this year. In this article, I'll talk about new features and functionalities that I worked on as part of my GSoC project.
