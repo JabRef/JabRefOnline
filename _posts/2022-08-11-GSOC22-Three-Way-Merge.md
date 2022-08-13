@@ -30,19 +30,21 @@ In the new three way merge UI, we've decided to highlight differences by colorin
 
 ### Select Both Field Values (AKA Merge Fields)
 
-When merging entries, sometimes you want to select both values for a certain field. A common use case for this would be wanting the merged entry to have both the left and right entry groups. Now, you can simply click the side button *[TODO: Add merge button icon]* near the groups label and we'll take care of the rest. We'll merge the left and right entry groups, keeping only one copy of any common group. And this works for more than just groups - you can also merge keywords, comments and files. So go ahead and give it a try - it'll make your life a lot easier.
+When merging entries, sometimes you want to select both values for a certain field. A common use case for this would be wanting the merged entry to have both the left and right entry groups. Now, you can simply click the merge button next to the groups label and we'll take care of the rest. We'll merge the left and right entry groups, keeping only one copy of any common group. And this works for more than just groups - you can also merge keywords, comments and files. So go ahead and give it a try - it'll make your life a lot easier.
 
 ![](../img/three-way-merge-groups-keywords.png)
 
 ### Open DOIs and URLs from The Merge Dialog
 
-We included a button to open links on the side of field cells; as of right now, only URLs and DOIs can be opened. Since the left and right field cells cannot be selected, a copy button was included for convenience. We plan to improve this design and include more actions in the future.
+We included a button on the side of field cells to open links; as of right now, only URLs and DOIs can be opened. Since the left and right field cells cannot be selected, a copy button was included for convenience. We plan to improve this design and include more actions in the future.
 
 ![](../img/three-way-merge-open-doi-copy.png)
 
 ## Summary
 
-Add summary here
+We hope you've enjoyed learning more about some of the new changes in JabRef. The three-way merge changes are now part of the development version. You can try it out right now! https://builds.jabref.org/main/
+
+DISCLAIMAR: PLEASE USE IT AT YOUR OWN RISK AND BACKUP YOUR DATA BEFORE TRYING IT OUT.
 
 ## Submitted PRs
 
