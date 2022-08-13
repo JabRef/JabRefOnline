@@ -1,7 +1,7 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import { printSchema } from 'graphql'
 import type { NitroConfig } from 'nitropack'
-import { loadSchemaFromFiles } from '~/server/schema'
+import { loadSchemaFromFiles } from '../server/schema'
 
 export default defineNuxtModule({
   setup(options, nuxt) {
