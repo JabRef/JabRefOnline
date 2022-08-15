@@ -4,9 +4,11 @@ import { Config } from 'tailwindcss'
 import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
 
+import forms from '@tailwindcss/forms'
 // @ts-ignore: has no type info
 import lineClamp from '@tailwindcss/line-clamp'
-import forms from '@tailwindcss/forms'
+// @ts-ignore: has no type info
+import typography from '@tailwindcss/typography'
 
 // Flip object horizontally or vertically
 // Adapted from https://github.com/tailwindlabs/tailwindcss/discussions/2146
@@ -23,7 +25,7 @@ const flip = plugin(({ addUtilities }) => {
 
 export default <Config>{
   content: [`components/**/*.{vue,js}`, `layouts/**/*.vue`, `pages/**/*.vue`],
-  plugins: [lineClamp, forms, flip],
+  plugins: [lineClamp, forms, flip, typography],
   theme: {
     colors: {
       transparent: 'transparent',

@@ -65,7 +65,7 @@
               </p>
             </div>
           </div>
-          <div class="row justify-content-center pt-6">
+          <div class="row justify-content-center pt-6 pb-16">
             <div class="col-auto">
               <t-button class="mx-auto text-xl">
                 <a href="https://downloads.jabref.org/"> Download JabRef </a>
@@ -74,8 +74,10 @@
           </div>
         </div>
       </header>
-      {% include features.html %} {% include download.html %} {% include
-      getinvolved.html %} {% include support.html %} {% include footer.html %}
+
+      <LandingPageFeatures></LandingPageFeatures>
+      {% include download.html %} {% include getinvolved.html %} {% include
+      support.html %} {% include footer.html %}
     </NuxtLayout>
   </div>
 </template>
