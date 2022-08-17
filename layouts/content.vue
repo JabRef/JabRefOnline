@@ -7,7 +7,7 @@
         </slot>
       </header>
       <main class="relative h-full overflow-hidden">
-        <div class="grow p-6 h-full">
+        <div class="grow py-6 h-full">
           <slot />
         </div>
       </main>
