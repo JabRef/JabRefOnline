@@ -77,7 +77,8 @@
       <LandingPageFeatures></LandingPageFeatures>
       <LandingPageDownload></LandingPageDownload>
       <LandingPageGetInvolved></LandingPageGetInvolved>
-      {% include support.html %} {% include footer.html %}
+      <LandingPageMore></LandingPageMore>
+      {% include footer.html %}
     </NuxtLayout>
   </div>
 </template>

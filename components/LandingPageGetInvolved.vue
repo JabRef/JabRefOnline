@@ -133,7 +133,7 @@
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref">
-              <FontAwesomeIcon icon="fa-laptop-code" size="3x" />
+              <FontAwesomeIcon icon="laptop-code" size="3x" />
               <h4 class="text-2xl mb-3">Develop</h4>
             </a>
           </t-button>
