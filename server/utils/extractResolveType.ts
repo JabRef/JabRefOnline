@@ -1,4 +1,4 @@
-type ResolveFnc<TResolver extends unknown> = TResolver extends {
+type ResolveFnc<TResolver> = TResolver extends {
   __resolveType: infer T
 }
   ? T
@@ -9,6 +9,4 @@ type ReturnType<T> = T extends (...args: any[]) => infer R ? R : unknown
  * Type to extract the resolve type from a resolver for unions / interfaces.
  * Workaround for feature request https://github.com/dotansimha/graphql-code-generator/issues/6443
  */
-export type ResolveType<TResolver extends unknown> = ReturnType<
-  ResolveFnc<TResolver>
->
+export type ResolveType<TResolver> = ReturnType<ResolveFnc<TResolver>>
