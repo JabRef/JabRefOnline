@@ -30,14 +30,14 @@ The analysis of the results is structured in the following order:
 
 ### German and English speakers are the most numerous among the responders
 
-![Mainspokenlanguage](graphs/Mainspokenlanguage.png)
+![Mainspokenlanguage](Mainspokenlanguage.png)
 
 - German were the most numerous responders.
 - English speakers represented (only) 25% of responders.
 
 ### Context of use is mostly professional, but many usages
 
-![IUseJabRefInTheContextOf](graphs/IUseJabRefInTheContextOf.png)
+![IUseJabRefInTheContextOf](IUseJabRefInTheContextOf.png)
 
 (multiple answers allowed)
 
@@ -50,9 +50,9 @@ The analysis of the results is structured in the following order:
 ### A few field of activity dominates
 Same data, 2 graphs.
 
-![FieldOfActivity](graphs/FieldOfActivity.png)
+![FieldOfActivity](FieldOfActivity.png)
 
-![FieldOfActivityCloud](graphs/FieldOfActivityCloud.png)
+![FieldOfActivityCloud](FieldOfActivityCloud.png)
 
 - Natural sciences, formal sciences and professions are the dominant fields of activity of the responders.
 - Humanities and social sciences represent "only" about 15% of usage.
@@ -68,7 +68,7 @@ Same data, 2 graphs.
 
 #### JabRef users are willing to attend.
 
-![MyInterestRegardingJabConIsMainly](graphs/MyInterestRegardingJabConIsMainly.png)
+![MyInterestRegardingJabConIsMainly](MyInterestRegardingJabConIsMainly.png)
 
 Among the 100 responders who detailed their interest into attending JabCon,  85% are users.
 
@@ -76,7 +76,7 @@ Among the 100 responders who detailed their interest into attending JabCon,  85%
 
 #### a webinar will boost the attendance
 
-![IConsiderAttendingJabCon](graphs/IConsiderAttendingJabCon.png)
+![IConsiderAttendingJabCon](IConsiderAttendingJabCon.png)
 
 Among the 360 responders:
 
@@ -89,7 +89,7 @@ Among the 360 responders:
 
 #### Code contribution are to be expected
 
-![IConsiderContributingCodeToJabRef](graphs/IConsiderContributingCodeToJabRef.png)
+![IConsiderContributingCodeToJabRef](IConsiderContributingCodeToJabRef.png)
 
 A third of responders could contribute code (among the 346 responders).
 
@@ -97,7 +97,7 @@ A third of responders could contribute code (among the 346 responders).
 
 #### Money donations are to be expected
 
-![IWouldConsiderMakingADonationToJabRef](graphs/IWouldConsiderMakingADonationToJabRef.png)
+![IWouldConsiderMakingADonationToJabRef](IWouldConsiderMakingADonationToJabRef.png)
 
 Only 20% of responders would not make a finantial contribution to foster JabRef development (among the 337 responders).
 
@@ -109,14 +109,14 @@ Only 20% of responders would not make a finantial contribution to foster JabRef 
 
 ### JabRef is their primary bibliographic software
 
-![Main primary software is](graphs/JabRefIsMyMainBibliographicSoftware.png)
+![Main primary software is](JabRefIsMyMainBibliographicSoftware.png)
 
 - For 80% of the responders, JabRef is the main bibliographic software.
 - For the other 20%, either JabRef is their secondary bibliographic software, or they do not use JabRef.
 
 ### If not using JabRef, Zotero, a plain text editor and Mendeley are the most popular
 
-![Main primary software is](graphs/MyMainBibliographicSoftwareIsNotJabRefItis.png)
+![Main primary software is](MyMainBibliographicSoftwareIsNotJabRefItis.png)
 
 Among the 20% not using JabRef as their primary bibliographic software, numerous alternatives are cited, and the reasons are:
 
@@ -155,13 +155,13 @@ Among the 20% not using JabRef as their primary bibliographic software, numerous
 
 ### TeX-world softwares dominate the use of JabRef
 
-![I Use JabRef Primarily In Connexion With](graphs/IUseJabRefPrimarilyInConnexionWith.png)
+![I Use JabRef Primarily In Connexion With](IUseJabRefPrimarilyInConnexionWith.png)
 
 - The primary software used with JabRef is related to TeX in 80% of the cases.
 - Word processors represent the primary software for about 10% of responders. 
 - 4% of responders declare using JabRef for itself.
 
-![I Use JabRef Secondarily In Connexion With](graphs/IUseJabRefSecondarilyInConnexionWith.png)
+![I Use JabRef Secondarily In Connexion With](IUseJabRefSecondarilyInConnexionWith.png)
 
 - About half of the responders use JabRef in connection with only one software.
 - Bib(La)TeX is the secondary software for about 25% of responders. 
@@ -172,7 +172,7 @@ Among the 20% not using JabRef as their primary bibliographic software, numerous
 
 ### English is the primary language for the user interface
 
-![IuseJabRefwiththeinterfacein](graphs/IuseJabRefwiththeinterfacein.png)
+![IuseJabRefwiththeinterfacein](IuseJabRefwiththeinterfacein.png)
 
 - About 2/3 of responders use the interface in English .
 - 20% in German.
@@ -185,14 +185,14 @@ Among the 20% not using JabRef as their primary bibliographic software, numerous
 
 ### Latest stable version is the most popular
 
-![JabrefVersionInUse](graphs/JabrefVersionInUse.png)
+![JabrefVersionInUse](JabrefVersionInUse.png)
 
 - Two-thirds of the users run the latest stable version.
 - As could be expected, few run a development snapshot.
 
 Among the 10% who answered "Other" (i.e. 32 responders), we get:
 
-![JabrefVersionInUseOther](graphs/JabrefVersionInUseOther.png)
+![JabrefVersionInUseOther](JabrefVersionInUseOther.png)
 
 - An order of stable versions mostly sorted by age.
 - About 15% run the version proposed by their OS (and this is likely underestimated).
@@ -202,7 +202,7 @@ Among the 10% who answered "Other" (i.e. 32 responders), we get:
 
 ### The most popular OS are Windows and Linux, then Mac
 
-![MyOSis](graphs/MyOSis.png)
+![MyOSis](MyOSis.png)
 
 - There is not an overly-dominant OS:
 	- 45% of responders run Windows
@@ -216,7 +216,7 @@ Among the 10% who answered "Other" (i.e. 32 responders), we get:
 
 ### Hand edition of a BibTeX file is not rare 
 
-![IEditMyBibTeXFileByHand](graphs/IEditMyBibTeXFileByHand.png)
+![IEditMyBibTeXFileByHand](IEditMyBibTeXFileByHand.png)
 
 - Most of responders edit, at least sometimes, their BibTeX files by hand.
 
@@ -257,14 +257,14 @@ Additionally:
 
 ### The default key pattern is ok, but the use of another pattern is common 
 
-![WhatKindOfBibTeXKeyPatternDoYouUse](graphs/WhatKindOfBibTeXKeyPatternDoYouUse.png)
+![WhatKindOfBibTeXKeyPatternDoYouUse](WhatKindOfBibTeXKeyPatternDoYouUse.png)
 
 - Half of responders use the default key pattern
 - One third use a different key pattern
 
 Among the alternative key patterns, here are the fields used to build the pattern:
 
-![FieldsUsedToBuildTheKeyPattern](graphs/FieldsUsedToBuildTheKeyPattern.png)
+![FieldsUsedToBuildTheKeyPattern](FieldsUsedToBuildTheKeyPattern.png)
 
 - Author and Year are used in 70% of the cases.
 - The key pattern is based ONLY on Author and Year in 40% of cases.
@@ -275,7 +275,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### Both types of special characters (i.e. ü and \"{u}) are used
 
-![ToStoreSpecialCharactersIMostlyUse](graphs/ToStoreSpecialCharactersIMostlyUse.png)
+![ToStoreSpecialCharactersIMostlyUse](ToStoreSpecialCharactersIMostlyUse.png)
 
 - 52% of responders use direct input
 - 44% prefer the plain LaTeX encoding
@@ -289,7 +289,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### UTF-8 is widely-used for encoding the databases
 
-![MyDataBaseIsSavedUsingTheEncoding](graphs/MyDataBaseIsSavedUsingTheEncoding.png)
+![MyDataBaseIsSavedUsingTheEncoding](MyDataBaseIsSavedUsingTheEncoding.png)
 
 - UTF-8 encoding is mentioned by 81% of the 340 responders who have specified an encoding.
 - Cp1252 and ASCII encodings represent 8% and 3%, respectively.
@@ -300,7 +300,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### All import filters are used, but a few are widely-used
 
-![AmongTheImportFiltersIUse](graphs/AmongTheImportFiltersIUse.png)
+![AmongTheImportFiltersIUse](AmongTheImportFiltersIUse.png)
 
 (among the 364 responders who have not answered "I do not know what you mean". Multiple choice allowed.)
 
@@ -315,7 +315,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### All external export filters are used, but only Mark Schenk's HTML, RIS, and Chicago Manual of Style are used by more than 5% of responders
 
-![AmongTheExternalExportFiltersIUse](graphs/AmongTheExternalExportFiltersIUse.png)
+![AmongTheExternalExportFiltersIUse](AmongTheExternalExportFiltersIUse.png)
 
 (among the 364 responders who have not answered "I do not know what you mean". Multiple choice allowed.)
 
@@ -329,7 +329,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### All external tools are used, but only BibTeX4Word is used by more than 5% of responders
 
-![AmongTheExternalToolsIUse](graphs/AmongTheExternalToolsIUse.png)
+![AmongTheExternalToolsIUse](AmongTheExternalToolsIUse.png)
 
 (among the 363 responders who have not answered "I do not know what you mean". Multiple choice allowed.)
 
@@ -343,7 +343,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### All Plug-ins are used, but only Autocomplete, LocalCopy and RenameFile are used by more than 5% of responders
 
-![AmongThePlugInsIUse](graphs/AmongThePlugInsIUse.png)
+![AmongThePlugInsIUse](AmongThePlugInsIUse.png)
 
 (among the 376 responders who did not answered "I do not know what you mean". Multiple choice allowed.)
 
@@ -357,7 +357,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### All external fetchers are used, but only arXiv-RSS is used by more than 5% of responders
 
-![AmongTheExternalFetchersIUse](graphs/AmongTheExternalFetchersIUse.png)
+![AmongTheExternalFetchersIUse](AmongTheExternalFetchersIUse.png)
 
 (among the 339 responders who have not answered "I do not know what you mean". Multiple choice allowed.)
 
@@ -371,7 +371,7 @@ Among the alternative key patterns, here are the fields used to build the patter
 
 ### All journal abbreviation lists are used, the General, IEEE, ISI WoS, and Life Science abbreviation lists are used by more than 5% of responders
 
-![AmongTheJournalAbbreviationFiltersIUse](graphs/AmongTheJournalAbbreviationFiltersIUse.png)
+![AmongTheJournalAbbreviationFiltersIUse](AmongTheJournalAbbreviationFiltersIUse.png)
 
 (among the 393 responders who have not answered "I do not know what you mean". Multiple choice allowed.)
 
@@ -393,83 +393,83 @@ Below, after listing the raw results for each new feature (in no particular orde
 
 #### An improved support of BibLaTeX format
 
-![FeatureBibLaTeX](graphs/FeatureBibLaTeX.png)
+![FeatureBibLaTeX](FeatureBibLaTeX.png)
 
 #### A more efficient clean up of my references
 
-![FeatureCleanUp](graphs/FeatureCleanUp.png)
+![FeatureCleanUp](FeatureCleanUp.png)
 
 #### An improved and more consistent graphical interface
 
-![FeatureGUI](graphs/FeatureGUI.png)
+![FeatureGUI](FeatureGUI.png)
 
 #### An improved command-line interface
 
-![FeatureCommandLine](graphs/FeatureCommandLine.png)
+![FeatureCommandLine](FeatureCommandLine.png)
 
 #### The capability to integrate images
 
-![FeatureIntegrateImages](graphs/FeatureIntegrateImages.png)
+![FeatureIntegrateImages](FeatureIntegrateImages.png)
 
 #### A more flexible BibTeX key generation
 
-![FeatureKeyGeneration](graphs/FeatureKeyGeneration.png)
+![FeatureKeyGeneration](FeatureKeyGeneration.png)
 
 #### An increased compatibility with my operating system
 
-![FeatureOScompatibility](graphs/FeatureOScompatibility.png)
+![FeatureOScompatibility](FeatureOScompatibility.png)
 
 #### JabRef running in my internet browser (i.e. a web-based interface)
 
-![FeatureWebInterface](graphs/FeatureWebInterface.png)
+![FeatureWebInterface](FeatureWebInterface.png)
 
 #### An improved use with my mobile (tablet or smartphone)
 
-![FeatureMobile](graphs/FeatureMobile.png)
+![FeatureMobile](FeatureMobile.png)
 
 #### A better integration with Microsoft Word
 
-![FeatureMsWord](graphs/FeatureMsWord.png)
+![FeatureMsWord](FeatureMsWord.png)
 
 #### A better integration with Libre/OpenOffice
 
-![FeatureLibreOffice](graphs/FeatureLibreOffice.png)
+![FeatureLibreOffice](FeatureLibreOffice.png)
 
 #### An enhanced export of references
 
-![FeatureRefExport](graphs/FeatureRefExport.png)
+![FeatureRefExport](FeatureRefExport.png)
 
 #### An enhanced import of references
 
-![FeatureRefImport](graphs/FeatureRefImport.png)
+![FeatureRefImport](FeatureRefImport.png)
 
 #### Make sharing of a BibTeX database and collaborative work easier
 
-![FeatureSharing](graphs/FeatureSharing.png)
+![FeatureSharing](FeatureSharing.png)
 
 #### The ability to connect from JabRef to social networks
 
-![FeatureSocial](graphs/FeatureSocial.png)
+![FeatureSocial](FeatureSocial.png)
 
 #### A better analysis and sorting of my references, such as a mind mapping of my references (kind of a new way to group and annotate my references) (http://www.docear.org/software/details/#a_Docear8217s_unique_approach_for_organizing_literature)
 
-![FeatureSortMapping](graphs/FeatureSortMapping.png)
+![FeatureSortMapping](FeatureSortMapping.png)
 
 #### A better analysis and sorting of my references, such as a recommender system: discovering new literature based on your references (http://www.docear.org/software/details/#unique_recommender)
 
-![FeatureSortRecommander](graphs/FeatureSortRecommander.png)
+![FeatureSortRecommander](FeatureSortRecommander.png)
 
 #### Make a more efficient use of my linked files and of my URLs by linking and modifying PDF annotations (example: http://www.docear.org/support/user-manual/#Open_PDFs_Jump-to-page)
 
-![FeatureUseLinkAnnot](graphs/FeatureUseLinkAnnot.png)
+![FeatureUseLinkAnnot](FeatureUseLinkAnnot.png)
 
 #### Make a more efficient use of my linked files and of my URLs by another means
 
-![FeatureUseLinkOther](graphs/FeatureUseLinkOther.png)
+![FeatureUseLinkOther](FeatureUseLinkOther.png)
 
 #### Allow for a broader web search
 
-![FeatureWebSearch](graphs/FeatureWebSearch.png)
+![FeatureWebSearch](FeatureWebSearch.png)
 
 
 ### Comparative grading of the potential new features
@@ -512,7 +512,7 @@ We can note that:
 #### Grading by "At least somehow useful"
 This is the sum of the percentages of all classes except "Not useful at all"; the higher, the more useful.
 
-![FeatureAllAtLeast](graphs/FeatureAllAtLeast.png)
+![FeatureAllAtLeast](FeatureAllAtLeast.png)
 
 - As for the "mode grading", the following features are thought to be the less useful:
 		- Better CLI
@@ -527,7 +527,7 @@ This is the sum of the percentages of all classes except "Not useful at all"; th
 #### Grading by "Quite or extremely usefull"
 Based on adding the 2 top classes; the higher, the more useful.
 
-![FeatureAllQuiteExtreme](graphs/FeatureAllQuiteExtreme.png)
+![FeatureAllQuiteExtreme](FeatureAllQuiteExtreme.png)
 
 - As for the "mode grading", the following features are thought to be the less useful:
 		- Better CLI
@@ -541,7 +541,7 @@ Based on adding the 2 top classes; the higher, the more useful.
 #### Compound grading
 Based on the position of each feature in each previous grading, a mean position was calculated; the smaller, the better.
 
-![FeatureAllCompound](graphs/FeatureAllCompound.png)
+![FeatureAllCompound](FeatureAllCompound.png)
 
 This grading is put forward for the consensus (see below).
 
