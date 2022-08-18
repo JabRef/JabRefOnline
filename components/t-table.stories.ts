@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/vue3'
+import { Meta, Story } from '@storybook/vue3'
 import TTable from '~/components/TTable.vue'
 
 export default {

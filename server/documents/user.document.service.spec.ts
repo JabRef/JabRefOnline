@@ -1,5 +1,5 @@
-import { mockDeep, mockReset } from 'jest-mock-extended'
 import type { PrismaClient } from '@prisma/client'
+import { mockDeep, mockReset } from 'jest-mock-extended'
 import { register, resolve } from '../tsyringe'
 import { UserDocument } from './user.document.service'
 

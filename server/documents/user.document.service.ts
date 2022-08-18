@@ -1,11 +1,11 @@
 import type {
-  PrismaClient,
-  UserDocument as PlainUserDocument,
-  Prisma,
-  User,
-  UserDocumentOtherField,
-  JournalIssue,
   Journal,
+  JournalIssue,
+  Prisma,
+  PrismaClient,
+  User,
+  UserDocument as PlainUserDocument,
+  UserDocumentOtherField,
 } from '@prisma/client'
 import { DocumentFilters, UserDocumentsConnection } from '../graphql'
 import { inject, injectable } from './../tsyringe'

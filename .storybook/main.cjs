@@ -3,6 +3,6 @@ module.exports = {
     // Disable telemetry collection
     disableTelemetry: true,
     // Use vite as builder
-    builder: "@storybook/builder-vite"
+    builder: '@storybook/builder-vite',
   },
-};
+}

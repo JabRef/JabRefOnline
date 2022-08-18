@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/vue3'
+import { Meta, Story } from '@storybook/vue3'
 import { TTextarea } from '@variantjs/vue'
 
 export default {

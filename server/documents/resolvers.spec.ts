@@ -1,9 +1,9 @@
-import mocking from 'jest-mock-extended'
 import { UserDocument } from '@prisma/client'
-import { register, resolve } from '../tsyringe'
-import { UserDocumentService } from './user.document.service'
-import { DocumentResolver } from './resolvers'
+import mocking from 'jest-mock-extended'
 import { createUnauthenticatedContext } from '~/test/context.helper'
+import { register, resolve } from '../tsyringe'
+import { DocumentResolver } from './resolvers'
+import { UserDocumentService } from './user.document.service'
 
 const userDocumentService = mocking.mock<UserDocumentService>()
 register('UserDocumentService', { useValue: userDocumentService })
