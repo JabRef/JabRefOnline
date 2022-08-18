@@ -1,14 +1,15 @@
-import { UserInputError } from 'apollo-server-errors'
-import prisma from '@prisma/client'
 import type { Group, GroupType as GroupTypeT } from '@prisma/client'
+import { UserInputError } from 'apollo-server-errors'
+// eslint-disable-next-line import/default
+import prisma from '@prisma/client'
 import { Context } from '../context'
 import {
-  Resolvers,
-  QueryGroupArgs,
-  MutationUpdateGroupArgs,
   MutationCreateGroupArgs,
+  MutationUpdateGroupArgs,
+  QueryGroupArgs,
+  Resolvers,
 } from '../graphql'
-import { resolve, injectable, inject } from './../tsyringe'
+import { inject, injectable, resolve } from './../tsyringe'
 import { GroupService } from './service'
 const { GroupType, GroupHierarchyType } = prisma
 

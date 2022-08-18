@@ -1,7 +1,7 @@
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+import { loadSchema as loadGraphqlSchema } from '@graphql-tools/load'
 import { defineNuxtModule } from '@nuxt/kit'
 import { printSchema } from 'graphql'
-import { loadSchema as loadGraphqlSchema } from '@graphql-tools/load'
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 
 // WARNING: This is a duplicate of the function with the same name defined in server/schema
 // Due to how nuxt/kit works, we have to define the module as a mjs file instead of ts (otherwise it resolves imports as cjs)
@@ -11,7 +11,7 @@ import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
  * This method should not be used in production, since the graphql files are not deployed.
  * @returns the GraphQL schema
  */
- export async function loadSchemaFromFiles()/*: Promise<GraphQLSchema>*/ {
+export async function loadSchemaFromFiles() /*: Promise<GraphQLSchema>*/ {
   return await loadGraphqlSchema('./server/**/*.graphql', {
     loaders: [new GraphQLFileLoader()],
   })

@@ -1,2 +1,2 @@
-export { resetToSeed } from './truncate'
 export { disconnect } from './disconnect'
+export { resetToSeed } from './truncate'

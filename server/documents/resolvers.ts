@@ -4,20 +4,20 @@ import {
   AddJournalArticleInput,
   AddProceedingsArticleInput,
   AddThesisInput,
-  Resolvers,
+  AddUserDocumentInput,
+  DocumentResolvers,
+  Institution,
+  JournalIssue,
   MutationAddUserDocumentArgs,
   MutationUpdateUserDocumentArgs,
   Person,
   QueryUserDocumentArgs,
-  Institution,
-  DocumentResolvers,
-  JournalIssue,
-  AddUserDocumentInput,
+  Resolvers,
   UpdateUserDocumentInput,
 } from '../graphql'
 import { ResolveType } from '../utils/extractResolveType'
-import { resolve, injectable, inject } from './../tsyringe'
-import { UserDocumentService, UserDocument } from './user.document.service'
+import { inject, injectable, resolve } from './../tsyringe'
+import { UserDocument, UserDocumentService } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
 const specialFields: string[] = [

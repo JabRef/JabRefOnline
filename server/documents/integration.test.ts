@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express'
-import { createAuthenticatedClient } from '../../test/apollo.server'
 import * as prisma from '~/server/database/util'
+import { createAuthenticatedClient } from '../../test/apollo.server'
 
 const authenticatedClient = await createAuthenticatedClient()
 

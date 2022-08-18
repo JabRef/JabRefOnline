@@ -1,12 +1,10 @@
 import { Config } from 'tailwindcss'
 
-// TODO: Renable lint as soon as this file is converted to typescript
+import forms from '@tailwindcss/forms'
 import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
-
 // @ts-ignore: has no type info
 import lineClamp from '@tailwindcss/line-clamp'
-import forms from '@tailwindcss/forms'
 
 // Flip object horizontally or vertically
 // Adapted from https://github.com/tailwindlabs/tailwindcss/discussions/2146

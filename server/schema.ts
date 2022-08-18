@@ -1,7 +1,7 @@
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+import { loadSchema as loadGraphqlSchema } from '@graphql-tools/load'
 import { addResolversToSchema } from '@graphql-tools/schema'
 import { GraphQLSchema } from 'graphql'
-import { loadSchema as loadGraphqlSchema } from '@graphql-tools/load'
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 
 async function addResolvers(schema: GraphQLSchema) {
   const { loadResolvers } = await import('./resolvers')

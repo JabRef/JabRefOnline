@@ -1,12 +1,12 @@
 import connectRedis from 'connect-redis'
-import { toEventHandler, EventHandler } from 'h3'
 import session from 'express-session'
+import { EventHandler, toEventHandler } from 'h3'
 import passport from 'passport'
 import { RedisClientType } from 'redis'
-import { inject, injectable } from './../tsyringe'
-import { AuthService } from './auth.service'
-import EmailStrategy from './auth.email.strategy'
 import { Environment } from '~/config'
+import { inject, injectable } from './../tsyringe'
+import EmailStrategy from './auth.email.strategy'
+import { AuthService } from './auth.service'
 
 @injectable()
 export default class PassportInitializer {
@@ -89,7 +89,7 @@ export default class PassportInitializer {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private serializeUser(user: any, done: (err: unknown, id?: string) => void) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
     done(null, user.id)
   }
 

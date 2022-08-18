@@ -186,14 +186,18 @@ const settings: VariantJSConfiguration = {
     },
   },
   TSelect: {
-    fixedClasses: 'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
-    classes: 'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 sm:text-sm',
+    fixedClasses:
+      'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+    classes:
+      'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 sm:text-sm',
     variants: {
       plain: {
-        classes: 'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
+        classes:
+          'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
       },
       plaincaps: {
-        classes: 'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs', 
+        classes:
+          'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
       },
     },
   },

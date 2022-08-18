@@ -20,38 +20,26 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
-    },
+    }
   },
   "[vue]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
-    },
+    }
   },
   "files.exclude": {
     "coverage": true
   },
   "jest.jestCommandLine": "yarn test",
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "graphql",
-    "vue"
-  ],
-  "eslint.options": {
-    "extentions": [
-      ".js",
-      ".graphql",
-      ".vue",
-    ]
-  },
+  "eslint.validate": ["javascript", "typescript", "graphql", "vue"],
   "search.exclude": {
     "**/node_modules": true,
     "**/bower_components": true,
     "**/*.code-search": true,
     "**/coverage": true,
     "**/.output": true,
-    "**/.nuxt": true,
+    "**/.nuxt": true
   },
   "vscode-graphql.useSchemaFileDefinitions": true,
   "yaml.schemas": {
