@@ -6,11 +6,11 @@ module.exports = {
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
-    // Enable recommended rules for typescript
+    // Enable typescript-specific recommended rules
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
+    // Turns off all rules that are unnecessary or might conflict with Prettier (needs to be last)
+    'prettier',
   ],
   plugins: ['unused-imports'],
   rules: {
@@ -23,8 +23,8 @@ module.exports = {
         'ts-ignore': 'allow-with-description',
       },
     ],
-    // Report unused imports
-    'unused-imports/no-unused-imports': 'error',
+    // Don't report unused imports (this is handled by prettier)
+    'unused-imports/no-unused-imports': 'off',
     // Report unused variables (except the ones prefixed with an underscore)
     'unused-imports/no-unused-vars': [
       'warn',
@@ -33,12 +33,6 @@ module.exports = {
         varsIgnorePattern: '^_',
         args: 'after-used',
         argsIgnorePattern: '^_',
-      },
-    ],
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'lf',
       },
     ],
     // Ensure void operator is not used, except for variable assignment or function return (might be handy for promises)
@@ -75,16 +69,16 @@ module.exports = {
         '@graphql-eslint/no-hashtag-description': 'warn',
         // Requires sname for your GraphQL operations.
         '@graphql-eslint/no-anonymous-operations': 'error',
-        "@graphql-eslint/naming-convention": [
-          "error",
+        '@graphql-eslint/naming-convention': [
+          'error',
           {
-            "OperationDefinition": {
-              "style": "PascalCase",
+            OperationDefinition: {
+              style: 'PascalCase',
               // Make sure to not add the operation type to the name of the operation, e.g. 'user' instead of 'userQuery'.
-              "forbiddenPrefixes": ["Query", "Mutation", "Subscription", "Get"],
-              "forbiddenSuffixes": ["Query", "Mutation", "Subscription"]
-            }
-          }
+              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
+              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
+            },
+          },
         ],
         // Requires all deprecation directives to specify a reason
         '@graphql-eslint/require-deprecation-reason': ['error'],
@@ -92,10 +86,10 @@ module.exports = {
         '@graphql-eslint/require-description': [
           'warn',
           {
-            "types": true,
-            "FieldDefinition": true,
-            "ObjectTypeDefinition": true,
-          }
+            types: true,
+            FieldDefinition: true,
+            ObjectTypeDefinition: true,
+          },
         ],
         // Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.
         '@graphql-eslint/no-duplicate-fields': ['error'],
@@ -109,17 +103,13 @@ module.exports = {
     {
       files: ['*.tsx', '*.ts', '*.jsx', '*.js'],
       processor: '@graphql-eslint/graphql',
-      rules: {
-        // Workaround for for bug in prettier, can be removed after https://github.com/prettier/eslint-plugin-prettier/pull/415
-        'prettier/prettier': 0,
-      },
     },
     {
       files: ['*.ts', '*.vue'],
       // Parser supporting vue files
       parser: 'vue-eslint-parser',
       parserOptions: {
-        // Parser used for non-vue files and for the script tag in vue files
+        // Use ts parser for ts files and for the script tag in vue files
         parser: '@typescript-eslint/parser',
         // Correct root
         tsconfigRootDir: __dirname,
