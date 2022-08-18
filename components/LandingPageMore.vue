@@ -16,7 +16,10 @@
             :href="item.href"
             class="text-primary-500 hover:text-highlight-600"
           >
-            <FontAwesomeIcon :icon="item.icon" size="4x" />
+            <FontAwesomeIcon
+              :icon="item.icon"
+              size="4x"
+            />
             <h3 class="pb-6 pt-3 text-xl">{{ item.text }}</h3>
           </t-nuxtlink>
         </div>

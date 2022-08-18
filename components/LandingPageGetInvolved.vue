@@ -2,13 +2,7 @@
   <section id="getinvolved">
     <div class="container mx-auto sm:px-4 md:py-16">
       <div
-        class="
-          flex flex-wrap flex-col
-          justify-center
-          text-center
-          max-w-prose
-          mx-auto
-        "
+        class="flex flex-wrap flex-col justify-center text-center max-w-prose mx-auto"
       >
         <h1 class="pb-6 text-5xl">Get Involved!</h1>
 
@@ -18,7 +12,10 @@
           scientific research. We value open access to information and believe
           modern science can built on an open institutional structure. This is
           why we develop JabRef as
-          <a class="text-reset" href="https://github.com/JabRef/jabref">
+          <a
+            class="text-reset"
+            href="https://github.com/JabRef/jabref"
+          >
             free open-source software
           </a>
           and save your data in a
@@ -52,15 +49,7 @@
       </div>
       <div class="flex flex-row flex-wrap lg:flex-nowrap pt-6 lg:pt-12">
         <div
-          class="
-            lg:min-w-0
-            mx-auto
-            flex flex-col flex-no-shrink flex-grow
-            break-words
-            text-center
-            p-6
-            max-w-prose
-          "
+          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center p-6 max-w-prose"
         >
           <t-button
             variant="linkplain"
@@ -69,7 +58,10 @@
             <a
               href="https://docs.jabref.org/faq/faqcontributing#i-am-not-a-programmer"
             >
-              <FontAwesomeIcon icon="heart" size="3x" />
+              <FontAwesomeIcon
+                icon="heart"
+                size="3x"
+              />
               <h4 class="text-2xl mb-3">Contribute</h4>
             </a>
           </t-button>
@@ -86,22 +78,17 @@
           </t-nuxtlink>
         </div>
         <div
-          class="
-            lg:min-w-0
-            mx-auto
-            flex flex-col flex-no-shrink flex-grow
-            break-words
-            text-center
-            p-6
-            max-w-prose
-          "
+          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center p-6 max-w-prose"
         >
           <t-button
             variant="linkplain"
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref/wiki/Donations">
-              <FontAwesomeIcon icon="gift" size="3x" />
+              <FontAwesomeIcon
+                icon="gift"
+                size="3x"
+              />
               <h4 class="text-2xl mb-3">Donate</h4>
             </a>
           </t-button>
@@ -118,22 +105,17 @@
           </t-nuxtlink>
         </div>
         <div
-          class="
-            lg:min-w-0
-            mx-auto
-            flex flex-col flex-no-shrink flex-grow
-            break-words
-            text-center
-            p-6
-            max-w-prose
-          "
+          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center p-6 max-w-prose"
         >
           <t-button
             variant="linkplain"
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref">
-              <FontAwesomeIcon icon="laptop-code" size="3x" />
+              <FontAwesomeIcon
+                icon="laptop-code"
+                size="3x"
+              />
               <h4 class="text-2xl mb-3">Develop</h4>
             </a>
           </t-button>

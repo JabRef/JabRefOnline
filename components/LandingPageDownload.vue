@@ -60,7 +60,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import { isWindows, isMac, isLinux, detectOs } from '~/composables/detectOS'
+import { isWindows, isMac, isLinux, detectOs } from '~/composables/detectOs'
 
 const os = detectOs()
 let osSuffix = ''

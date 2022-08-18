@@ -2,7 +2,10 @@
   <div>
     <NuxtLayout name="content">
       <template #header>
-        <NavBar :show-search-bar="false" :show-logo="true">
+        <NavBar
+          :show-search-bar="false"
+          :show-logo="true"
+        >
           <div class="space-x-14">
             <t-nuxtlink
               active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
@@ -25,12 +28,7 @@
               >Support</t-nuxtlink
             >
             <t-nuxtlink
-              class="
-                text-gray-400
-                hover:text-highlight-600
-                text-lg
-                font-semibold
-              "
+              class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
               href="https://blog.jabref.org/"
               >News</t-nuxtlink
             >
@@ -52,7 +50,10 @@
             </div>
           </div>
           <div class="mt-20 shadow-[0_0_25px_#a7a7bd] max-w-screen-xl mx-auto">
-            <img src="~/assets/jabref-mainscreen.png" alt="" />
+            <img
+              src="~/assets/jabref-mainscreen.png"
+              alt=""
+            />
           </div>
           <div class="row mt-5">
             <div class="xl:w-3/4 pr-4 pl-4 mt-16 mx-auto">

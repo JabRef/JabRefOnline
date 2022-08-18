@@ -163,7 +163,7 @@
         </ul>
       </div>
     </div>
-    <Modal
+    <ModalDialog
       v-model="showLegalNotices"
       header="Impressum"
     >
@@ -171,8 +171,8 @@
         :value="legalNotices"
         class="prose overflow-auto max-h-96"
       />
-    </Modal>
-    <Modal
+    </ModalDialog>
+    <ModalDialog
       v-model="showPrivacyPolicy"
       header="Datenschutzerklärung"
     >
@@ -180,16 +180,16 @@
         :value="privacyPolicy"
         class="prose overflow-auto max-h-96"
       />
-    </Modal>
+    </ModalDialog>
   </footer>
 </template>
 <script setup lang="ts">
 import { ParsedContent } from '@nuxt/content/dist/runtime/types';
 
 const showLegalNotices  = ref(false)
-let legalNotices  = ref<ParsedContent | null>(null)
+const legalNotices  = ref<ParsedContent | null>(null)
 const showPrivacyPolicy = ref(false)
-let privacyPolicy = ref<ParsedContent | null>(null)
+const privacyPolicy = ref<ParsedContent | null>(null)
 
 watch(showLegalNotices , async (shouldShowLegalNotices ) => {
   if (shouldShowLegalNotices ) {
