@@ -1,5 +1,8 @@
 <template>
-  <section id="download" class="bg-primary-50">
+  <section
+    id="download"
+    class="bg-primary-50"
+  >
     <div class="container mx-auto sm:px-4 md:py-16">
       <div class="flex flex-wrap flex-col content-center">
         <h1 class="text-center mb-3 text-5xl">Try it now</h1>
@@ -17,7 +20,9 @@
               For Windows
               <br />
               Also available for
-              <a class="text-highlight-500" href="https://downloads.jabref.org/"
+              <a
+                class="text-highlight-500"
+                href="https://downloads.jabref.org/"
                 >mac OS X and Linux</a
               >
               <br />
@@ -26,7 +31,9 @@
               For mac OS X
               <br />
               Also available for
-              <a class="text-highlight-500" href="https://downloads.jabref.org/"
+              <a
+                class="text-highlight-500"
+                href="https://downloads.jabref.org/"
                 >Windows and Linux</a
               >
               <br />
@@ -50,7 +57,9 @@
               Change Log
             </a>
             and
-            <a class="text-highlight-500" href="https://builds.jabref.org/main/"
+            <a
+              class="text-highlight-500"
+              href="https://builds.jabref.org/main/"
               >Development Builds</a
             >
           </small>
@@ -60,7 +69,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import { isWindows, isMac, isLinux, detectOs } from '~/composables/detectOs'
+import { detectOs, isLinux, isMac, isWindows } from '~/composables/detectOs'
 
 const os = detectOs()
 let osSuffix = ''

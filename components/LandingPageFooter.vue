@@ -69,9 +69,9 @@
           <li class="py-1">
             <t-nuxtlink
               class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
-              @click="showLegalNotices  = true"
+              @click="showLegalNotices = true"
             >
-              Legal Notices 
+              Legal Notices
             </t-nuxtlink>
           </li>
           <li class="py-1">
@@ -184,15 +184,15 @@
   </footer>
 </template>
 <script setup lang="ts">
-import { ParsedContent } from '@nuxt/content/dist/runtime/types';
+import { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
-const showLegalNotices  = ref(false)
-const legalNotices  = ref<ParsedContent | null>(null)
+const showLegalNotices = ref(false)
+const legalNotices = ref<ParsedContent | null>(null)
 const showPrivacyPolicy = ref(false)
 const privacyPolicy = ref<ParsedContent | null>(null)
 
-watch(showLegalNotices , async (shouldShowLegalNotices ) => {
-  if (shouldShowLegalNotices ) {
+watch(showLegalNotices, async (shouldShowLegalNotices) => {
+  if (shouldShowLegalNotices) {
     legalNotices.value = await queryContent('/legalnotices').findOne()
   }
 })
@@ -201,5 +201,4 @@ watch(showPrivacyPolicy, async (shouldShowPrivacyPolicy) => {
     privacyPolicy.value = await queryContent('/privacypolicy').findOne()
   }
 })
-
 </script>
