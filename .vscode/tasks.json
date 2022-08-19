@@ -5,7 +5,7 @@
       "label": "Ensure dependencies",
       "type": "shell",
       "command": "yarn docker:redis",
-      "problemMatcher": [],
+      "problemMatcher": []
     },
     {
       "label": "Generate code",
@@ -17,7 +17,7 @@
         "runOn": "folderOpen"
       },
       // Mark as a background task to avoid the spinner animation on the terminal tab
-      "isBackground": true,
+      "isBackground": true
     },
     {
       "label": "Run dev server",
@@ -29,7 +29,7 @@
         "runOn": "folderOpen"
       },
       // Mark as a background task to avoid the spinner animation on the terminal tab
-      "isBackground": true,
+      "isBackground": true
     },
     {
       "label": "Prisma Studio",
@@ -37,7 +37,7 @@
       "command": "yarn prisma:studio",
       "problemMatcher": [],
       // Mark as a background task to avoid the spinner animation on the terminal tab
-      "isBackground": true,
+      "isBackground": true
     }
   ]
 }

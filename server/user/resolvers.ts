@@ -1,22 +1,22 @@
 import { User } from '@prisma/client'
 import { Context } from '../context'
 import {
-  MutationLoginArgs,
-  MutationSignupArgs,
-  MutationChangePasswordArgs,
-  MutationForgotPasswordArgs,
-  QueryUserArgs,
-  Resolvers,
-  UserDocumentsArgs,
-  ForgotPasswordPayload,
-} from '../graphql'
-import { GroupResolved } from '../groups/resolvers'
-import {
   UserDocumentService,
   UserDocumentsResult,
 } from '../documents/user.document.service'
+import {
+  ForgotPasswordPayload,
+  MutationChangePasswordArgs,
+  MutationForgotPasswordArgs,
+  MutationLoginArgs,
+  MutationSignupArgs,
+  QueryUserArgs,
+  Resolvers,
+  UserDocumentsArgs,
+} from '../graphql'
+import { GroupResolved } from '../groups/resolvers'
 import { GroupService } from '../groups/service'
-import { resolve, injectable, inject } from './../tsyringe'
+import { inject, injectable, resolve } from './../tsyringe'
 import {
   AuthService,
   ChangePasswordPayload,

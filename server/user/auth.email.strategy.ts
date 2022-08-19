@@ -1,7 +1,7 @@
-import { GraphQLLocalStrategy } from 'graphql-passport'
-import { Request as ExpressRequest } from 'express'
 import { User } from '@prisma/client'
-import { AuthService, AuthenticationMessage } from './auth.service'
+import { Request as ExpressRequest } from 'express'
+import { GraphQLLocalStrategy } from 'graphql-passport'
+import { AuthenticationMessage, AuthService } from './auth.service'
 
 export default class EmailStrategy extends GraphQLLocalStrategy<
   User,

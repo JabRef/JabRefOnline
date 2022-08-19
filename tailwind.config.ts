@@ -1,10 +1,8 @@
 import { Config } from 'tailwindcss'
 
-// TODO: Renable lint as soon as this file is converted to typescript
+import forms from '@tailwindcss/forms'
 import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
-
-import forms from '@tailwindcss/forms'
 // @ts-ignore: has no type info
 import lineClamp from '@tailwindcss/line-clamp'
 // @ts-ignore: has no type info

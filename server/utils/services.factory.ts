@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */ // TODO: Remove once redis-mock is updated
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
-import { promisify } from 'util'
 import redis, { RedisClientType } from 'redis'
+import { promisify } from 'util'
 import { Environment } from '~/config'
 
 export async function createRedisClient(): Promise<

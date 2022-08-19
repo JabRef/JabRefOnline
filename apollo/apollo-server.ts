@@ -1,12 +1,12 @@
-import type { LandingPage } from 'apollo-server-plugin-base'
-import { useBody, useQuery, CompatibilityEvent, EventHandler } from 'h3'
 import type { GraphQLOptions } from 'apollo-server-core'
 import {
   ApolloServerBase,
   convertNodeHttpToRequest,
-  runHttpQuery,
   isHttpQueryError,
+  runHttpQuery,
 } from 'apollo-server-core'
+import type { LandingPage } from 'apollo-server-plugin-base'
+import { CompatibilityEvent, EventHandler, useBody, useQuery } from 'h3'
 
 // Manually specify CORS options as long as h3 doesn't suppor this natively
 // https://github.com/unjs/h3/issues/82

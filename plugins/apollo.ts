@@ -1,10 +1,10 @@
 import { ApolloClient, HttpLink } from '@apollo/client/core'
-import fetch from 'cross-fetch'
 import { onError } from '@apollo/client/link/error'
-import { logErrorMessages } from '@vue/apollo-util'
 import { DefaultApolloClient } from '@vue/apollo-composable'
-import { cache } from '../apollo/cache'
+import { logErrorMessages } from '@vue/apollo-util'
+import fetch from 'cross-fetch'
 import { Environment } from '~/config'
+import { cache } from '../apollo/cache'
 
 export default defineNuxtPlugin((nuxtApp) => {
   if (!nuxtApp) {

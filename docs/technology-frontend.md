@@ -10,5 +10,6 @@
 - `-` React has better typescript support (but better TS support is coming with Vue 3)
 
 # Considered Alternatives
+
 - [React](https://reactjs.org/)
   - Example: https://github.com/karlhadwen/todoist
