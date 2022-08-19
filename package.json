@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build --fail-on-error",
-    "build:azure": "INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN=test NITRO_PRESET=azure yarn build",
+    "build:azure": "cross-env INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN=test NITRO_PRESET=azure yarn build",
     "start": "nuxi preview",
-    "start:azure": "NUXT_PUBLIC_ENVIRONMENT=development npx @azure/static-web-apps-cli start .output/public --api-location .output/server",
+    "start:azure": "cross-env NUXT_PUBLIC_ENVIRONMENT=development npx @azure/static-web-apps-cli start .output/public --api-location .output/server",
     "generate": "yarn prisma:generate && yarn graphql:generate",
     "generate:watch": "concurrently \"yarn:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
