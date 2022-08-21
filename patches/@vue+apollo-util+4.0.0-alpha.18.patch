@@ -1,0 +1,13 @@
+diff --git a/node_modules/@vue/apollo-util/dist/errorLog.js b/node_modules/@vue/apollo-util/dist/errorLog.js
+index 16bdbf4..a2be52d 100644
+--- a/node_modules/@vue/apollo-util/dist/errorLog.js
++++ b/node_modules/@vue/apollo-util/dist/errorLog.js
+@@ -1,7 +1,7 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.logErrorMessages = exports.getErrorMessages = void 0;
+-const printer_1 = require("graphql/language/printer");
++const printer_1 = require("graphql/language/printer.js");
+ function getErrorMessages(error) {
+     const messages = [];
+     const { graphQLErrors, networkError } = error;

@@ -121,11 +121,9 @@
 
 <script lang="ts">
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
-import { defineComponent, ref, watch } from '@vue/composition-api'
-import { useRouter } from '#app'
 import { gql } from '~/apollo'
-import { useUiStore } from '~/store'
 import { cacheCurrentUser } from '~/apollo/cache'
+import { useUiStore } from '~/store'
 
 export default defineComponent({
   setup() {
@@ -145,12 +143,12 @@ export default defineComponent({
         },
       }
     )
-    const router = useRouter()
+
     onDone(() => {
       // Reset graphql cache
       void resolveClient().clearStore()
 
-      void router.push({ name: 'index' })
+      void navigateTo({ name: 'index' })
     })
 
     const uiStore = useUiStore()

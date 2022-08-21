@@ -10,19 +10,46 @@ tasks:
       yarn prisma:seed
       yarn docker:redis
       gp sync-done setup
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_TELEMETRY_DISABLED: 1
+  - name: Dev Server
+    command: |
+      gp sync-await setup
+      yarn dev
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_TELEMETRY_DISABLED: 1
+  - name: Generate
+    command: |
+      gp sync-await setup
       yarn generate:watch
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
-  - name: Dev Server
-    init: gp sync-await setup
-    command: yarn dev
-    env:
-      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_TELEMETRY_DISABLED: 1
   - name: Prisma Studio
-    init: gp sync-await setup
-    command: yarn prisma:studio
+    command: |
+      gp sync-await setup
+      yarn prisma:studio
     env:
       DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+
+vscode:
+  # Add handy VS Code extensions: https://www.gitpod.io/docs/ides-and-editors/vscode-extensions
+  extensions:
+    - johnsoncodehk.volar
+    - dbaeumer.vscode-eslint
+    - gitHub.copilot
+    - eamodio.gitlens
+    - graphQL.vscode-graphql
+    - orta.vscode-jest
+    - esbenp.prettier-vscode
+    - prisma.prisma
+    - bradlc.vscode-tailwindcss
+    - streetsidesoftware.code-spell-checker
+    - github.vscode-pull-request-github
+    - Vue.volar
+    - antfu.goto-alias
 
 # Expose ports: https://www.gitpod.io/docs/config-ports/
 ports:
@@ -38,3 +65,7 @@ ports:
   # Prisma Studio
   - port: 5555
     onOpen: open-preview
+  # HMR websocket https://github.com/nuxt/framework/issues/1796#issuecomment-1111618663
+  # Still needs to be configured manually :(
+  - port: 24678
+    onOpen: ignore

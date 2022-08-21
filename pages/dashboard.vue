@@ -1,36 +1,37 @@
 <template>
-  <div>
-    <div
-      v-if="documents"
-      class="space-y-4 p-4 h-full"
+  <div
+    v-if="documents"
+    class="space-y-4 p-4 h-full"
+  >
+    <!-- TODO: Use virtual list as soon as it supports Vue3: https://github.com/tangbc/vue-virtual-scroll-list/issues/253
+  
+    <virtual-list
+      class="virtual-list"
+      :page-mode="true"
+      @tobottom="onScrollToBottom"
     >
-      <virtual-list
-        class="virtual-list"
-        :data-key="'id'"
-        :page-mode="true"
-        :data-sources="documents"
-        :data-component="DocumentView"
-        @tobottom="onScrollToBottom"
-      />
-    </div>
+    -->
+    <DocumentView
+      v-for="document of documents"
+      :key="document.id"
+      :source="document"
+    >
+    </DocumentView>
+    <!--
+        </virtual-list>
+      -->
   </div>
 </template>
 
 <script lang="ts">
-import { useQuery, useResult } from '@vue/apollo-composable'
-import { defineComponent } from '@vue/composition-api'
-import virtualList from 'vue-virtual-scroll-list'
 import { WatchQueryFetchPolicy } from '@apollo/client/core'
-import DocumentView from '../components/DocumentView.vue'
+import { useQuery, useResult } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
 const FIRST = 4
 
 export default defineComponent({
-  components: {
-    'virtual-list': virtualList,
-  },
   meta: {
     // TODO: Reactivate login check
     // requiresAuth: true,
@@ -99,7 +100,6 @@ export default defineComponent({
 
     return {
       documents,
-      DocumentView,
       onScrollToBottom,
     }
   },

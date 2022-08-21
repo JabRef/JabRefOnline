@@ -1,7 +1,7 @@
-import 'reflect-metadata'
 import { EnvironmentContext } from '@jest/environment'
-import NodeEnvironment from 'jest-environment-node'
 import { Config } from '@jest/types'
+import NodeEnvironment from 'jest-environment-node'
+import 'reflect-metadata'
 
 export default class CustomEnvironment extends NodeEnvironment {
   readonly isIntegrationTest: boolean

@@ -105,14 +105,8 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  ref,
-  computed,
-  toRefs,
-} from '@vue/composition-api'
-import { gql, DocumentType } from '~/apollo'
+import type { PropType } from 'vue'
+import { DocumentType, gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
 export const DocumentForView = gql(/* GraphQL */ `

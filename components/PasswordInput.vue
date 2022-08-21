@@ -2,8 +2,7 @@
   <div class="relative">
     <t-input
       ref="input"
-      v-model="password"
-      :class="[classes]"
+      v-bind="$attrs"
       :type="showHiddenPassword ? 'password' : 'text'"
       x-model="password"
     />
@@ -20,29 +19,11 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api'
-
 export default defineComponent({
-  props: {
-    value: {
-      type: String,
-      default: '',
-    },
-    classes: {
-      type: [Object, Array, String],
-      default: '',
-    },
-  },
-  setup(props, { emit }) {
+  setup() {
     const showHiddenPassword = ref(true)
 
-    const password = computed({
-      get: () => props.value,
-      set: (value): void => emit('input', value),
-    })
-
     return {
-      password,
       showHiddenPassword,
     }
   },

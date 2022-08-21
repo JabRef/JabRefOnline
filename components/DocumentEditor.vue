@@ -111,10 +111,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
-import { useResult, useQuery } from '@vue/apollo-composable'
-import Tags from './tagify.vue'
+import { useQuery, useResult } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
+import Tags from './tagify.vue'
 
 export const DocumentDetails = gql(/* GraphQL */ `
   fragment DocumentDetails on Document {

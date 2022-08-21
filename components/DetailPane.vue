@@ -21,14 +21,16 @@
           <FontAwesomeIcon icon="times" />
         </t-button>
         <slot>
-          <document-editor :document-id="selectedDocumentId"></document-editor>
+          <document-editor
+            v-if="selectedDocumentId"
+            :document-id="selectedDocumentId"
+          ></document-editor>
         </slot>
       </div>
     </transition>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
 import { useUiStore } from './../store'
 
 export default defineComponent({
