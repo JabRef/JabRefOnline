@@ -1,0 +1,14 @@
+diff --git a/node_modules/@fortawesome/fontawesome-svg-core/styles.css b/node_modules/@fortawesome/fontawesome-svg-core/styles.css
+index b7f4a1d..59a084c 100644
+--- a/node_modules/@fortawesome/fontawesome-svg-core/styles.css
++++ b/node_modules/@fortawesome/fontawesome-svg-core/styles.css
+@@ -197,7 +197,8 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+     position: relative; }
+ 
+ .fa-li {
+-  left: calc(var(--fa-li-width, 2em) * -1);
++  /* CHANGED: Warkaround for https://github.com/FortAwesome/vue-fontawesome/issues/341 */
++  left: calc(-1 * var(--fa-li-width, 2em));
+   position: absolute;
+   text-align: center;
+   width: var(--fa-li-width, 2em);

@@ -1,0 +1,157 @@
+{
+  "info": {
+    "_postman_id": "26eecc85-cfa1-4371-99ce-85514904ed76",
+    "name": "Test suite",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "mutations",
+      "item": []
+    },
+    {
+      "name": "queries",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Returns user id\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.data).to.eql({login: {user: {id: \"ckn4oul7100004cv7y3t94n8j\"}}});\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Sets cookie\", function () {\r",
+                  "   pm.expect(pm.cookies.has('session')).to.be.true;\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation Mutation($email: EmailAddress!, $password: String!) { login(email: $email, password: $password) {... on UserReturned {user {id}}}}",
+                "variables": "{\n  \"email\": \"alice@jabref.de\",\"password\": \"EBNPXY35TYkYXHs\" \n}"
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": ["{{base_url}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "general",
+      "item": [
+        {
+          "name": "Invalid query throws error",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Content-Type is json\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.contain('application/json');",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Contains error message\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.errors[0].message).to.eql(\"Cannot query field \\\"name\\\" on type \\\"User\\\".\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query user ($id: String) {\n    user (id: $id) {\n        id\n        name\n    }\n}",
+                "variables": "{\n  \"id\": \"\"\n}"
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": ["{{base_url}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get with no query throws error",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "pm.test(\"Response contains error\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.eql(\"GET query missing.\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}",
+              "host": ["{{base_url}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api"
+    }
+  ]
+}

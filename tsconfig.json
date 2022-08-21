@@ -4,11 +4,7 @@
     "target": "ES2018",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "lib": [
-      "ESNext",
-      "ESNext.AsyncIterable",
-      "DOM"
-    ],
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
@@ -17,13 +13,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
-    "types": [
-      "@nuxt/types",
-      "@types/node",
-      "@types/jest",
-      "vue-apollo",
-      "@pinia/nuxt",
-    ]
+    "types": ["@types/node", "@types/jest", "@pinia/nuxt"]
   },
   "ts-node": {
     "moduleTypes": {
@@ -31,10 +21,5 @@
       "jest.config.ts": "cjs"
     }
   },
-  "exclude": [
-    "node_modules",
-    ".nuxt",
-    ".output",
-    "dist"
-  ],
+  "exclude": ["node_modules", ".output", "dist"]
 }

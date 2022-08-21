@@ -1,0 +1,13 @@
+diff --git a/node_modules/nitropack/dist/shared/nitro.8d0213e3.mjs b/node_modules/nitropack/dist/shared/nitro.8d0213e3.mjs
+index 1e9ecd7..4f91169 100644
+--- a/node_modules/nitropack/dist/shared/nitro.8d0213e3.mjs
++++ b/node_modules/nitropack/dist/shared/nitro.8d0213e3.mjs
+@@ -1497,7 +1497,7 @@ async function writeRoutes$1(nitro) {
+     if (file.endsWith("index.html")) {
+       return;
+     }
+-    const route = file.slice(prefix, ".html".length);
++    const route = file.slice(prefix, -".html".length);
+     const existingRouteIndex = config.routes.findIndex((_route) => _route.route === route);
+     if (existingRouteIndex > -1) {
+       config.routes.splice(existingRouteIndex, 1);
