@@ -25,7 +25,7 @@ if (global.isIntegrationTest) {
   })
   afterAll(async () => {
     console.log('quite')
-    await redisClient.quit()
+    await redisClient.disconnect()
   })
 
   register('PrismaClient', {
