@@ -19,12 +19,10 @@ registerClasses()
 // @ts-ignore: Jest doesn't allow an easy way to add typescript info
 if (global.isIntegrationTest) {
   const redisClient = await createRedisClient()
-  console.log('start')
   register('RedisClient', {
     useValue: redisClient,
   })
   afterAll(async () => {
-    console.log('quite')
     await redisClient.disconnect()
   })
 

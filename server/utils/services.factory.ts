@@ -52,9 +52,9 @@ export async function createRedisClient(): Promise<
     // The 'error' handler is important, since otherwise errors in the redis connection bring down the whole server/process
     // see https://github.com/redis/node-redis/issues/2032#issuecomment-1116883257
     client.on('error', (err) => console.error('Redis client:', err))
-    client.on('connect', () => console.log('Redis client: connected'))
-    client.on('reconnecting', () => console.log('Redis client: reconnecting'))
-    client.on('ready', () => console.log('Redis client: ready'))
+    client.on('connect', () => console.debug('Redis client: connected'))
+    client.on('reconnecting', () => console.debug('Redis client: reconnecting'))
+    client.on('ready', () => console.debug('Redis client: ready'))
     try {
       await client.connect()
     } catch (exception) {
