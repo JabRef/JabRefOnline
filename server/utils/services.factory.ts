@@ -35,6 +35,7 @@ export async function createRedisClient(): Promise<
         tls: true as true | undefined,
       },
       // Legacy mode is currently needed for connect-redis
+      // see https://github.com/tj/connect-redis/issues/357 and https://github.com/tj/connect-redis/issues/361
       legacyMode: true,
     }
 
@@ -47,6 +48,13 @@ export async function createRedisClient(): Promise<
       delete redisConfig.password
     }
     const client = redis.createClient(redisConfig)
+    // Log errors
+    // The 'error' handler is important, since otherwise errors in the redis connection bring down the whole server/process
+    // see https://github.com/redis/node-redis/issues/2032#issuecomment-1116883257
+    client.on('error', (err) => console.error('Redis client:', err))
+    client.on('connect', () => console.log('Redis client: connected'))
+    client.on('reconnecting', () => console.log('Redis client: reconnecting'))
+    client.on('ready', () => console.log('Redis client: ready'))
     try {
       await client.connect()
     } catch (exception) {
