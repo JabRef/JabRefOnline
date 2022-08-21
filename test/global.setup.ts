@@ -2,7 +2,7 @@
 import prisma from '@prisma/client'
 import dotenv from 'dotenv'
 import { constructConfig } from '~/config'
-import { instanceCachingFactory, register, resolve } from '~/server/tsyringe'
+import { instanceCachingFactory, register } from '~/server/tsyringe'
 import { registerClasses } from '~/server/tsyringe.config'
 import { createRedisClient } from '~/server/utils/services.factory'
 
@@ -25,7 +25,7 @@ if (global.isIntegrationTest) {
   })
   afterAll(async () => {
     console.log('quite')
-    await resolve('RedisClient').quit()
+    await redisClient.quit()
   })
 
   register('PrismaClient', {
