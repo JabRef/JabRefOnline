@@ -54,7 +54,7 @@ export default class PassportInitializer {
         cookie: {
           // Serve secure cookies (requires HTTPS, so only in production)
           secure: config.public.environment === Environment.Production,
-          // Blocks the access cooky from javascript, preventing XSS attacks
+          // Blocks the access cookie from javascript, preventing XSS attacks
           httpOnly: true,
           // Blocks sending a cookie in a cross-origin request, protects somewhat against CORS attacks
           sameSite: true,
@@ -67,6 +67,7 @@ export default class PassportInitializer {
         res,
         next
       )
+      console.log(req)
 
       // Add passport as middleware (this more or less only adds the _passport variable to the request)
       // @ts-ignore: https://github.com/unjs/h3/issues/146
@@ -76,6 +77,8 @@ export default class PassportInitializer {
         res,
         next
       )
+      console.log(req)
+
       // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       passport.session()(
@@ -84,6 +87,7 @@ export default class PassportInitializer {
         res,
         next
       )
+      console.log(req)
     })
   }
 
@@ -98,6 +102,7 @@ export default class PassportInitializer {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     done: (err: unknown, user?: any) => void
   ) {
+    console.log('deserivale', id)
     this.accountService
       .getUserById(id)
       .then((user) => {
