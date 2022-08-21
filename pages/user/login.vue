@@ -127,12 +127,12 @@ export default defineComponent({
           email: email.value,
           password: password.value,
         },
-        update(_cache, { data: login }) {
+        update(cache, { data: login }) {
           if (login?.login?.__typename === 'UserReturned') {
             const { user } = login.login
-            cacheCurrentUser(user)
+            cacheCurrentUser(cache, user)
           } else {
-            cacheCurrentUser(null)
+            cacheCurrentUser(cache, null)
           }
         },
       })

@@ -1,19 +1,14 @@
-import { ApolloClient, gql, NormalizedCache } from '@apollo/client/core'
+import { gql } from '@apollo/client/core'
 
 /**
  * Plugin that adds checks if the user is logged in, and redirects her to the login page if not.
  */
 export default defineNuxtRouteMiddleware(async (to, _from) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- There is no type info for meta
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    // TODO: Special type treatment should no longer be necessary with vue-apollo v4
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const apolloClient = useNuxtApp().apolloProvider
-      ?.defaultClient as ApolloClient<NormalizedCache>
-
+    const { $apolloClient } = useNuxtApp()
     try {
       // TODO: Only call this if we have a session cookie?
-      const response = await apolloClient.query({
+      const response = await $apolloClient.query({
         query: gql(/* GraphQL */ `
           query CheckLoggedIn {
             me {
@@ -37,7 +32,7 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
   }
 })
 
-async function redirectToLogin(): Promise<void> {
+async function redirectToLogin() {
   // TODO: Remember the intended url by appending something like ?redirect=context.route.fullPath
-  await navigateTo({ path: '/user/login' })
+  return navigateTo({ path: '/user/login' })
 }
