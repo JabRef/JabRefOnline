@@ -14,16 +14,20 @@ global.useRuntimeConfig = () => constructConfig()
 
 // Register services for all tests
 registerClasses()
-register('RedisClient', {
-  useValue: await createRedisClient(),
-})
-afterAll(async () => {
-  await resolve('RedisClient').quit()
-})
 
 // Setup services for integration tests
 // @ts-ignore: Jest doesn't allow an easy way to add typescript info
 if (global.isIntegrationTest) {
+  const redisClient = await createRedisClient()
+  console.log('start')
+  register('RedisClient', {
+    useValue: redisClient,
+  })
+  afterAll(async () => {
+    console.log('quite')
+    await resolve('RedisClient').quit()
+  })
+
   register('PrismaClient', {
     useFactory: instanceCachingFactory(() => new prisma.PrismaClient()),
   })
