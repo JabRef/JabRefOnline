@@ -1,0 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json.
+// Based on https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/javascript-node-postgres
+{
+	"name": "Node.js & PostgreSQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"johnsoncodehk.volar",
+				"dbaeumer.vscode-eslint",
+				"gitHub.copilot",
+				"eamodio.gitlens",
+				"graphQL.vscode-graphql",
+				"orta.vscode-jest",
+				"esbenp.prettier-vscode",
+				"prisma.prisma",
+				"bradlc.vscode-tailwindcss",
+				"streetsidesoftware.code-spell-checker",
+				"github.vscode-pull-request-github",
+				"Vue.volar",
+				"antfu.goto-alias"
+			]
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or with the host.
+	// "forwardPorts": [3000, 5432],
+	// Run commands after the container is created.
+	"postCreateCommand": "yarn install && yarn prisma:migrate:dev && yarn prisma:seed",
+	// Run commands after the container is started.
+	"postStartCommand": "yarn dev",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node"
+}
