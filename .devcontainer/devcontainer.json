@@ -1,46 +1,43 @@
 // For format details, see https://aka.ms/devcontainer.json.
 // Based on https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/javascript-node-postgres
 {
-	"name": "Node.js & PostgreSQL",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspace",
-	"remoteEnv": {
-		"DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/postgres"
-	},
-	// Configure tool-specific properties.
-	"customizations": {
-		// Configure properties specific to VS Code.
-		"vscode": {
-			// Add the IDs of extensions you want installed when the container is created.
-			"extensions": [
-				"johnsoncodehk.volar",
-				"dbaeumer.vscode-eslint",
-				"gitHub.copilot",
-				"eamodio.gitlens",
-				"graphQL.vscode-graphql",
-				"orta.vscode-jest",
-				"esbenp.prettier-vscode",
-				"prisma.prisma",
-				"bradlc.vscode-tailwindcss",
-				"streetsidesoftware.code-spell-checker",
-				"github.vscode-pull-request-github",
-				"Vue.volar",
-				"antfu.goto-alias"
-			]
-		}
-	},
-	"portsAttributes": {
-		"3000": {
-			"label": "Dev Server"
-		}
-	},
-	"forwardPorts": [
-		3000,
-		24678
-	],
-	// Finalize container creation.
-	"onCreateCommand": "yarn install && yarn prisma:migrate:dev && yarn prisma:seed",
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "node"
+  "name": "Node.js & PostgreSQL",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "remoteEnv": {
+    "DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/postgres"
+  },
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "johnsoncodehk.volar",
+        "dbaeumer.vscode-eslint",
+        "gitHub.copilot",
+        "eamodio.gitlens",
+        "graphQL.vscode-graphql",
+        "orta.vscode-jest",
+        "esbenp.prettier-vscode",
+        "prisma.prisma",
+        "bradlc.vscode-tailwindcss",
+        "streetsidesoftware.code-spell-checker",
+        "github.vscode-pull-request-github",
+        "Vue.volar",
+        "antfu.goto-alias"
+      ]
+    }
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "Dev Server"
+    }
+  },
+  "forwardPorts": [3000, 24678],
+  // Finalize container creation.
+  "onCreateCommand": "yarn install && yarn prisma:migrate:dev && yarn prisma:seed",
+  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "node"
 }
