@@ -22,16 +22,3 @@ index 738baf1..96305bd 100644
    "sideEffects": false,
    "react-native": {
      "./dist/cache/inmemory/fixPolyfills.js": "./cache/inmemory/fixPolyfills.native.js"
-diff --git a/node_modules/@apollo/client/utilities/globals/globals.cjs b/node_modules/@apollo/client/utilities/globals/globals.cjs
-index 93da0b5..ed3f5d3 100644
---- a/node_modules/@apollo/client/utilities/globals/globals.cjs
-+++ b/node_modules/@apollo/client/utilities/globals/globals.cjs
-@@ -3,7 +3,7 @@
- Object.defineProperty(exports, '__esModule', { value: true });
- 
- var tsInvariant = require('ts-invariant');
--var process$1 = require('ts-invariant/process');
-+var process$1 = require('ts-invariant/process/index.js');
- var graphql = require('graphql');
- 
- function maybe(thunk) {
