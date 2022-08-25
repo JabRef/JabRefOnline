@@ -4,6 +4,17 @@
       class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-gray-300 h-20"
     >
       <div class="flex">
+        <!-- Logo -->
+        <div
+          v-if="showLogo"
+          class="hidden flex-none md:flex flex-row items-center w-full h-20 border-b px-6"
+        >
+          <jabref-logo class="w-10 flex-none" />
+          <span class="ml-3 flex-1 text-gray-900 text-2xl font-semibold"
+            >JabRef</span
+          >
+        </div>
+
         <!-- Hamburger icon for small screens -->
         <div class="flex md:hidden mr-5 items-center">
           <button
@@ -15,7 +26,10 @@
         </div>
 
         <!-- Search bar -->
-        <div class="relative text-gray-600">
+        <div
+          v-if="showSearchBar"
+          class="relative text-gray-600"
+        >
           <t-input
             v-model="searchQuery"
             type="search"
@@ -35,22 +49,24 @@
       </div>
 
       <!-- Main menu -->
-      <div class="space-x-14">
-        <span class="text-primary-600 text-lg font-semibold">Library</span>
-        <span class="text-gray-400 text-lg font-semibold">Browse</span>
-        <div class="inline">
-          <span class="text-gray-400 text-lg font-semibold">
-            Subscriptions
-          </span>
-          <div class="inline-block align-top pl-0.5 -mt-1">
-            <FontAwesomeIcon
-              icon="circle"
-              class="text-primary-600"
-              size="xs"
-            />
+      <slot>
+        <div class="space-x-14">
+          <span class="text-primary-600 text-lg font-semibold">Library</span>
+          <span class="text-gray-400 text-lg font-semibold">Browse</span>
+          <div class="inline">
+            <span class="text-gray-400 text-lg font-semibold">
+              Subscriptions
+            </span>
+            <div class="inline-block align-top pl-0.5 -mt-1">
+              <FontAwesomeIcon
+                icon="circle"
+                class="text-primary-600"
+                size="xs"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </slot>
 
       <!-- User profile -->
       <div class="flex items-center pr-10 space-x-7">
@@ -119,48 +135,53 @@
   </nav>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'
 
-export default defineComponent({
-  setup() {
-    const { resolveClient } = useApolloClient()
-
-    const { mutate: logout, onDone } = useMutation(
-      gql(/* GraphQL */ `
-        mutation Logout {
-          logout {
-            result
-          }
-        }
-      `),
-      {
-        update(_cache, _data) {
-          cacheCurrentUser(null)
-        },
-      }
-    )
-
-    onDone(() => {
-      // Reset graphql cache
-      void resolveClient().clearStore()
-
-      void navigateTo({ name: 'index' })
-    })
-
-    const uiStore = useUiStore()
-    // TODO:Don't update store immediately to avoid unnecessary queries to the server.
-    // For some reason `toRef(uiStore.activeSearchQuery) + useDebounce` or `debouncedWatch` doesn't work here
-    const searchQuery = ref(uiStore.activeSearchQuery ?? '')
-
-    watch(searchQuery, (newQuery) => {
-      uiStore.activeSearchQuery = newQuery
-    })
-
-    return { logout, searchQuery }
+defineProps({
+  showLogo: {
+    type: Boolean,
+    default: false,
   },
+  showSearchBar: {
+    type: Boolean,
+    default: true,
+  },
+})
+
+const { resolveClient } = useApolloClient()
+
+const { mutate: logout, onDone } = useMutation(
+  gql(/* GraphQL */ `
+    mutation Logout {
+      logout {
+        result
+      }
+    }
+  `),
+  {
+    update(_cache, _data) {
+      cacheCurrentUser(null)
+    },
+  }
+)
+
+onDone(() => {
+  // Reset graphql cache
+  void resolveClient().clearStore()
+
+  void navigateTo({ name: 'index' })
+})
+
+const uiStore = useUiStore()
+// TODO:Don't update store immediately to avoid unnecessary queries to the server.
+// For some reason `toRef(uiStore.activeSearchQuery) + useDebounce` or `debouncedWatch` doesn't work here
+const searchQuery = ref(uiStore.activeSearchQuery ?? '')
+
+watch(searchQuery, (newQuery) => {
+  uiStore.activeSearchQuery = newQuery
 })
 </script>

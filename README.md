@@ -1,5 +1,7 @@
 # JabRefOnline
 
+This repository contains the source of the [JabRef homepage](https://www.jabref.org/).
+
 ## Servers
 
 - Production server: https://mango-pebble-0224c3803.1.azurestaticapps.net
