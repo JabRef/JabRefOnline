@@ -32,4 +32,9 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // provideApolloClient(apolloClient)
   nuxtApp.vueApp.provide(DefaultApolloClient, apolloClient)
+  return {
+    provide: {
+      apolloClient,
+    },
+  }
 })

@@ -90,7 +90,6 @@ export default class PassportInitializer {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     done: (err: unknown, user?: any) => void
   ) {
-    console.log('deserivale', id)
     this.accountService
       .getUserById(id)
       .then((user) => {
