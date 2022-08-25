@@ -26,7 +26,9 @@
         "streetsidesoftware.code-spell-checker",
         "github.vscode-pull-request-github",
         "Vue.volar",
-        "antfu.goto-alias"
+        "antfu.goto-alias",
+        "GraphQL.vscode-graphql-syntax",
+        "GraphQL.vscode-graphql"
       ]
     }
   },
@@ -35,7 +37,10 @@
       "label": "Dev Server"
     }
   },
-  "forwardPorts": [3000, 24678],
+  "forwardPorts": [
+    3000,
+    24678
+  ],
   // Finalize container creation.
   "onCreateCommand": "yarn install && yarn prisma:migrate:dev && yarn prisma:seed",
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.

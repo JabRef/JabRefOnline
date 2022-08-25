@@ -107,8 +107,9 @@ export default defineComponent({
           email: email.value,
           password: password.value,
         },
-        update(_context, { data }) {
+        update(cache, { data }) {
           cacheCurrentUser(
+            cache,
             data?.signup?.__typename === 'UserReturned'
               ? data?.signup?.user
               : null

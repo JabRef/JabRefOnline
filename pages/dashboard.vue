@@ -77,8 +77,8 @@ const { result, fetchMore } = useQuery(
   })
 )
 
-const documents = computed(
-  () => result.value?.me?.documents.edges.map((edge) => edge.node) || []
+const documents = computed(() =>
+  result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty)
 )
 
 const onScrollToBottom = () => {
