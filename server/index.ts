@@ -82,7 +82,8 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_server.js
-ServerResponse.prototype._implicitHeader = function _implicitHeader() {
+// @ts-ignore: Is workaround anyway
+http.ServerResponse.prototype._implicitHeader = function _implicitHeader() {
   this.writeHead(this.statusCode);
 };
 
