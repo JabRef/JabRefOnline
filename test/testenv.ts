@@ -1,12 +1,11 @@
-import { EnvironmentContext } from '@jest/environment'
-import { Config } from '@jest/types'
+import { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment'
 import NodeEnvironment from 'jest-environment-node'
 import 'reflect-metadata'
 
 export default class CustomEnvironment extends NodeEnvironment {
   readonly isIntegrationTest: boolean
-  constructor(config: Config.ProjectConfig, context?: EnvironmentContext) {
-    super(config)
+  constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
+    super(config, context)
     this.isIntegrationTest = context?.testPath?.endsWith('test.ts') ?? false
   }
 
