@@ -38,7 +38,7 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
     "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test.ts --runInBand",
     "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest spec.ts",
-    "test:api": "newman run server/postman/TestSuite.json '$@' && newman run server/postman/TestSuiteLoggedIn.json '$@'",
+    "test:api": "newman run server/postman/TestSuite.json $@ && newman run server/postman/TestSuiteLoggedIn.json $@",
     "typecheck": "nuxi typecheck",
     "validate": "yarn graphql:validate"
   },

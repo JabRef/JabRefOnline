@@ -80,6 +80,12 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
   return this
 }
 
+// Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
+// Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_server.js
+ServerResponse.prototype._implicitHeader = function _implicitHeader() {
+  this.writeHead(this.statusCode);
+};
+
 export default defineLazyEventHandler(async () => {
   const server = new ApolloServer({
     schema: await loadSchemaWithResolvers(),
