@@ -1,0 +1,16 @@
+diff --git a/index.js b/index.js
+index 40a442baf2fec2c6bdce79a5fba5086b5b8aac07..321ddabde7361d6ce6b5da450af1be4d6caf3017 100644
+--- a/index.js
++++ b/index.js
+@@ -273,7 +273,10 @@ function session(options) {
+         }
+ 
+         if (!res._header) {
+-          res._implicitHeader()
++          // CHANGED: Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
++          // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_server.js
++          res.writeHead(res.statusCode)
++          // res._implicitHeader()
+         }
+ 
+         if (chunk == null) {
