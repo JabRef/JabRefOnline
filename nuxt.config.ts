@@ -113,6 +113,10 @@ export default defineNuxtConfig({
             port: 443,
           }
         : true,
+
+      cors: {
+        preflightContinue: true,
+      },
     },
   },
 })

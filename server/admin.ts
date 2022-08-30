@@ -16,9 +16,13 @@ export default defineLazyEventHandler(async () => {
     envSecret:
       'a4e47c2af50f0ca42d01b5d5bea6bccddf2f4a1b3f7a3ee56ba17d3c556aabfe', // process.env.FOREST_ENV_SECRET,
     isProduction: config.public.environment === Environment.Production,
+    prefix: '_admin',
   }).addDataSource(createSqlDataSource(process.env.DATABASE_URL))
-  const callback = agent.getConnectCallback(false)
+  const callback = agent.getConnectCallback(true)
   await agent.start()
 
+  /*return defineEventHandler((event) => {
+    console.log(event.req.url)
+  })*/
   return toEventHandler(callback)
 })
