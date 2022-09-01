@@ -45,7 +45,7 @@ jobs:
           node-version: 16.x
 
       - name: Restore cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.0.8
         with:
           path: .yarn/cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
