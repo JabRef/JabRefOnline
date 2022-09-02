@@ -1,12 +1,21 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */ // TODO: Remove once redis-mock is updated
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
-import redis, { RedisClientType } from 'redis'
+import redis, {
+  RedisClientType,
+  RedisDefaultModules,
+  RedisFunctions,
+  RedisScripts,
+} from 'redis'
 import { promisify } from 'util'
 import { Environment } from '~/config'
 
-export async function createRedisClient(): Promise<
-  RedisClientType<any, any, any>
-> {
+export type RedisClient = RedisClientType<
+  RedisDefaultModules,
+  RedisFunctions,
+  RedisScripts
+>
+
+export async function createRedisClient(): Promise<RedisClient> {
   const config = useRuntimeConfig()
   if (
     config.public.environment === Environment.LocalDevelopment ||
@@ -25,7 +34,7 @@ export async function createRedisClient(): Promise<
       setEx: promisify(mockRedis.setEx).bind(mockRedis),
       expire: promisify(mockRedis.expire).bind(mockRedis),
       */
-    } as unknown as RedisClientType<any, any>
+    } as unknown as RedisClient
   } else {
     const redisConfig = {
       password: config.redis.password as string | undefined,

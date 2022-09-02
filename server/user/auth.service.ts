@@ -1,11 +1,11 @@
 import type { PrismaClient, User } from '@prisma/client'
-// eslint-disable-next-line import/default
-import { RedisClientType } from 'redis'
+
 import uuid from 'uuid' // TODO: Change to { v4 as generateToken } as soon as uuid is a proper esm module / jest supports it (https://github.com/uuidjs/uuid/issues/451)
 import { ResolversTypes } from '../graphql'
 import { hash, verifyHash } from '../utils/crypto'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { sendEmail } from '../utils/sendEmail'
+import { RedisClient } from '../utils/services.factory'
 import { inject, injectable } from './../tsyringe'
 
 export type { InfoArgument as AuthenticationMessage } from 'graphql-passport'
@@ -25,7 +25,7 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
-    @inject('RedisClient') private redisClient: RedisClientType
+    @inject('RedisClient') private redisClient: RedisClient
   ) {}
 
   async validateUser(email: string, password: string): Promise<LoginPayload> {
