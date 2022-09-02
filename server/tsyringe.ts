@@ -1,5 +1,4 @@
 import type { PrismaClient } from '@prisma/client'
-import type { RedisClientType } from 'redis'
 import {
   ClassProvider,
   container,
@@ -20,6 +19,7 @@ import type { GroupService } from './groups/service'
 import type { AuthService } from './user/auth.service'
 import type PassportInitializer from './user/passport-initializer'
 import type * as UserResolvers from './user/resolvers'
+import { RedisClient } from './utils/services.factory'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
 
@@ -45,7 +45,7 @@ function injectSymbol<S extends string>(
 export const InjectionSymbols = {
   // Tools
   ...injectSymbol('PrismaClient')<typeof PrismaClient>(),
-  ...injectSymbol('RedisClient')<RedisClientType<any, any, any>>(),
+  ...injectSymbol('RedisClient')<RedisClient>(),
   ...injectSymbol('PassportInitializer')<typeof PassportInitializer>(),
   // Services
   ...injectSymbol('UserDocumentService')<typeof UserDocumentService>(),
