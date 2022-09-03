@@ -6521,7 +6521,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-core@npm:3.2.37, @vue/compiler-core@npm:^3.2.37":
+"@vue/compiler-core@npm:3.2.37":
   version: 3.2.37
   resolution: "@vue/compiler-core@npm:3.2.37"
   dependencies:
@@ -6533,7 +6533,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-dom@npm:3.2.37, @vue/compiler-dom@npm:^3.2.0, @vue/compiler-dom@npm:^3.2.37":
+"@vue/compiler-core@npm:3.2.38, @vue/compiler-core@npm:^3.2.37":
+  version: 3.2.38
+  resolution: "@vue/compiler-core@npm:3.2.38"
+  dependencies:
+    "@babel/parser": ^7.16.4
+    "@vue/shared": 3.2.38
+    estree-walker: ^2.0.2
+    source-map: ^0.6.1
+  checksum: fd1049aa14f93ac167d5cff2c867c12aca3a57b6070ca07b45930549a3643296fd07ad0b2e3799a3cabdbc08609325431b475b6d504b47bfe098ebaca61a120d
+  languageName: node
+  linkType: hard
+
+"@vue/compiler-dom@npm:3.2.37":
   version: 3.2.37
   resolution: "@vue/compiler-dom@npm:3.2.37"
   dependencies:
@@ -6543,7 +6555,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-sfc@npm:3.2.37, @vue/compiler-sfc@npm:^3.2.0, @vue/compiler-sfc@npm:^3.2.37":
+"@vue/compiler-dom@npm:3.2.38, @vue/compiler-dom@npm:^3.2.0, @vue/compiler-dom@npm:^3.2.37":
+  version: 3.2.38
+  resolution: "@vue/compiler-dom@npm:3.2.38"
+  dependencies:
+    "@vue/compiler-core": 3.2.38
+    "@vue/shared": 3.2.38
+  checksum: 21ee60938a9a4e81365be3cb29f336a1b7be8878ad750f8f9735ee04d00d51f3c11b3ce60136491abf3a9c7fb714c1c58561e859bde83dc1e0759d0f3488a50f
+  languageName: node
+  linkType: hard
+
+"@vue/compiler-sfc@npm:3.2.37":
   version: 3.2.37
   resolution: "@vue/compiler-sfc@npm:3.2.37"
   dependencies:
@@ -6561,6 +6583,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/compiler-sfc@npm:^3.2.0, @vue/compiler-sfc@npm:^3.2.37, @vue/compiler-sfc@npm:^3.2.38":
+  version: 3.2.38
+  resolution: "@vue/compiler-sfc@npm:3.2.38"
+  dependencies:
+    "@babel/parser": ^7.16.4
+    "@vue/compiler-core": 3.2.38
+    "@vue/compiler-dom": 3.2.38
+    "@vue/compiler-ssr": 3.2.38
+    "@vue/reactivity-transform": 3.2.38
+    "@vue/shared": 3.2.38
+    estree-walker: ^2.0.2
+    magic-string: ^0.25.7
+    postcss: ^8.1.10
+    source-map: ^0.6.1
+  checksum: 1d72cc4f1c643db455a0034d11ede23c83a3ff4fd4e2ffcfdb85805c99fc7a4227faddc8994b41a41d5abbf3e9edf7b87557378f13c141f920b9b12dd180d285
+  languageName: node
+  linkType: hard
+
 "@vue/compiler-ssr@npm:3.2.37":
   version: 3.2.37
   resolution: "@vue/compiler-ssr@npm:3.2.37"
@@ -6568,6 +6608,16 @@ __metadata:
     "@vue/compiler-dom": 3.2.37
     "@vue/shared": 3.2.37
   checksum: e137462340c220ef7891d0b40f11124e7d5311e760fdb0de1748c046481505aecd5be8ec8f7b25ac6fc26d2393cbcc267f258d2d26742a50cb9abaf828c28839
+  languageName: node
+  linkType: hard
+
+"@vue/compiler-ssr@npm:3.2.38":
+  version: 3.2.38
+  resolution: "@vue/compiler-ssr@npm:3.2.38"
+  dependencies:
+    "@vue/compiler-dom": 3.2.38
+    "@vue/shared": 3.2.38
+  checksum: f457245a43d8290dbdb8f782fd873557041798801be61e8c3e52d88784232a7545dc23532c4552ed3fd74c1dfdfd07531ab83be3e5b5441dda4c4b282055043a
   languageName: node
   linkType: hard
 
@@ -6588,6 +6638,19 @@ __metadata:
     estree-walker: ^2.0.2
     magic-string: ^0.25.7
   checksum: d9e7c353e2bd3a62a9bbb7498ae231f5194428da003672daadb3e7af50c7839e10fb0ac68252852be353138428d1a36f3b8c7815f9c15499d46e7edaf3730c7e
+  languageName: node
+  linkType: hard
+
+"@vue/reactivity-transform@npm:3.2.38":
+  version: 3.2.38
+  resolution: "@vue/reactivity-transform@npm:3.2.38"
+  dependencies:
+    "@babel/parser": ^7.16.4
+    "@vue/compiler-core": 3.2.38
+    "@vue/shared": 3.2.38
+    estree-walker: ^2.0.2
+    magic-string: ^0.25.7
+  checksum: 84b665185ed60b21195992b33b6cc068fe8c6c68ffa526f3aa1334ffdeac94daf07a74fc6dda6ef40230bcb940ec6607aa5ae0ae0309942a71717c7b22639d8a
   languageName: node
   linkType: hard
 
@@ -16076,7 +16139,7 @@ __metadata:
     "@volar/vue-typescript": ^0.40.6
     "@vue/apollo-composable": 4.0.0-alpha.19
     "@vue/apollo-util": ^4.0.0-alpha.18
-    "@vue/compiler-sfc": ^3.2.37
+    "@vue/compiler-sfc": ^3.2.38
     "@vue/runtime-dom": ^3.2.38
     "@vue/test-utils": ^2.0.0
     "@vue/vue3-jest": ^27.0.0
