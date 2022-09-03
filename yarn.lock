@@ -4012,7 +4012,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/eslint-config@npm:10.0.0, @nuxtjs/eslint-config@npm:^10.0.0":
+"@nuxtjs/eslint-config@npm:10.0.0":
   version: 10.0.0
   resolution: "@nuxtjs/eslint-config@npm:10.0.0"
   dependencies:
@@ -4026,6 +4026,23 @@ __metadata:
   peerDependencies:
     eslint: ^8.14.0
   checksum: 4b7bbba8ed9c131037d52fb970242d404c5b6c31640eeff4993270c31a602ea5b341123d8c6d3ef443119d535e278a4dcc1886dcd939fc95e381cd7f653f0019
+  languageName: node
+  linkType: hard
+
+"@nuxtjs/eslint-config@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "@nuxtjs/eslint-config@npm:11.0.0"
+  dependencies:
+    eslint-config-standard: ^17.0.0
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-n: ^15.2.5
+    eslint-plugin-node: ^11.1.0
+    eslint-plugin-promise: ^6.0.1
+    eslint-plugin-unicorn: ^43.0.2
+    eslint-plugin-vue: ^9.4.0
+  peerDependencies:
+    eslint: ^8.23.0
+  checksum: 302632d6cb05d60630a7bd75fac35d23a2b19294a6f23c29ce8cbff20fc78fd6faa4edec37f3626fa4cbf0190130ff62a8efc51407ec192dd6f9323d5018dffe
   languageName: node
   linkType: hard
 
@@ -12102,21 +12119,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:^15.2.0":
-  version: 15.2.4
-  resolution: "eslint-plugin-n@npm:15.2.4"
+"eslint-plugin-n@npm:^15.2.0, eslint-plugin-n@npm:^15.2.5":
+  version: 15.2.5
+  resolution: "eslint-plugin-n@npm:15.2.5"
   dependencies:
     builtins: ^5.0.1
     eslint-plugin-es: ^4.1.0
     eslint-utils: ^3.0.0
     ignore: ^5.1.1
-    is-core-module: ^2.9.0
+    is-core-module: ^2.10.0
     minimatch: ^3.1.2
-    resolve: ^1.10.1
+    resolve: ^1.22.1
     semver: ^7.3.7
   peerDependencies:
     eslint: ">=7.0.0"
-  checksum: dd651651ab76120e45707ee968d846e3ffffb42d1035792fdef6d3b0dcfddf3673bc6a09cb2fac8c5f1d081f14f2a67fc52295d5ed1d2edfb5beead93284eaac
+  checksum: 3be265957b3dda6a049841803335c17689cf98a4b3859eeed3e57b44850b241e7d20640890b2dea7e83816c938fc16274bf78d370f571e211d00d9a3c513f281
   languageName: node
   linkType: hard
 
@@ -12147,12 +12164,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-promise@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "eslint-plugin-promise@npm:6.0.0"
+"eslint-plugin-promise@npm:^6.0.0, eslint-plugin-promise@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "eslint-plugin-promise@npm:6.0.1"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 7e761507c51267b77e4ad710e7c8938aa4f8f69b975886034e57497a1816e9527eda364e25aac03d1b4e0df2e738ba98e49ad075d028824fcfea533a1419751c
+  checksum: c1bb3c2e591787e97133dcaf764f908420a3a1959a3132e199db8f14d70dfa79fc9caf991ca60a4b60ae5f1f9823bc96c2e52304828a4278ef2f3964fe121de9
   languageName: node
   linkType: hard
 
@@ -12177,6 +12194,30 @@ __metadata:
   peerDependencies:
     eslint: ">=8.8.0"
   checksum: 03757cbf417d39691fe04048ac9352585162a4dd68c2f26f5bc0956409625c7c4841487f0fa623e0d6dd5ff9cc3e758b74e4d170e3b0a877bbd0114995310058
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-unicorn@npm:^43.0.2":
+  version: 43.0.2
+  resolution: "eslint-plugin-unicorn@npm:43.0.2"
+  dependencies:
+    "@babel/helper-validator-identifier": ^7.18.6
+    ci-info: ^3.3.2
+    clean-regexp: ^1.0.0
+    eslint-utils: ^3.0.0
+    esquery: ^1.4.0
+    indent-string: ^4.0.0
+    is-builtin-module: ^3.1.0
+    lodash: ^4.17.21
+    pluralize: ^8.0.0
+    read-pkg-up: ^7.0.1
+    regexp-tree: ^0.1.24
+    safe-regex: ^2.1.1
+    semver: ^7.3.7
+    strip-indent: ^3.0.0
+  peerDependencies:
+    eslint: ">=8.18.0"
+  checksum: 1b63eb013cbc0b3c9ef131a1e049b4b53d8e208393675d5f97d3fa83c050ebcb695a7fd210f4de1460f42f89c2ecca261280488834591d5c21e146d297a9ee2e
   languageName: node
   linkType: hard
 
@@ -15242,7 +15283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-core-module@npm:^2.8.1, is-core-module@npm:^2.9.0":
+"is-core-module@npm:^2.10.0, is-core-module@npm:^2.8.1, is-core-module@npm:^2.9.0":
   version: 2.10.0
   resolution: "is-core-module@npm:2.10.0"
   dependencies:
@@ -15934,7 +15975,7 @@ __metadata:
     "@graphql-typed-document-node/core": ^3.1.1
     "@he-tree/vue3": ^1.2.9
     "@nuxt/content": ^2.0.1
-    "@nuxtjs/eslint-config": ^10.0.0
+    "@nuxtjs/eslint-config": ^11.0.0
     "@nuxtjs/eslint-config-typescript": ^10.0.0
     "@nuxtjs/eslint-module": ^3.1.0
     "@nuxtjs/tailwindcss": 5.3.2
