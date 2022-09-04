@@ -21,7 +21,7 @@ jobs:
       # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
       - name: Fail if unsecure
-        if: "!contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.event.pull_request_target.user.login != 'tobiasdiez'"
+        if: "!contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez'"
         run: exit 1
 
       - name: Checkout
