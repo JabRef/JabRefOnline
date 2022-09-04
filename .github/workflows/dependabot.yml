@@ -55,7 +55,7 @@ jobs:
 
       - run: yarn install --mode=skip-build
 
-      - run: yarn dedupe
+      - run: yarn dedupe --mode=update-lockfile
 
       - name: Commit yarn.lock
         run: |
