@@ -8,6 +8,8 @@ import {
 import type { LandingPage } from 'apollo-server-plugin-base'
 import { CompatibilityEvent, EventHandler, useBody, useQuery } from 'h3'
 
+export { gql } from 'apollo-server-core'
+
 // Manually specify CORS options as long as h3 doesn't suppor this natively
 // https://github.com/unjs/h3/issues/82
 interface RouteOptionsCors {
