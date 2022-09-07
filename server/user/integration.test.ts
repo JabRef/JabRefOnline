@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express'
+import { gql } from '~/apollo/apollo-server'
 import * as prisma from '~/server/database/util'
 import { createAuthenticatedClient } from '../../test/apollo.server'
 
