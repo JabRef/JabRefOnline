@@ -150,20 +150,14 @@
     "vue-tsc": "^0.40.1"
   },
   "resolutions": {
-    "@graphql-tools/mock": "^8.4.3",
     "@types/react": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.2.0.tgz",
-    "ts-invariant": "^0.10.0",
-    "ufo": "^0.8.4",
-    "parse-entities": "^4.0.0",
     "unist-builder": "^3.0.0",
     "remark-parse": "^10.0.1",
     "express-session@^1.17.3": "patch:express-session@npm%3A1.17.3#./.yarn/patches/express-session-npm-1.17.3-0819dbe06c.patch"
   },
   "resolutionsComments": {
-    "@graphql-tools/mock": "Can be removed once apollo-server updated its dependencies: https://github.com/apollographql/apollo-server/issues/5901",
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
-    "ts-invariant": "Workaround for https://github.com/apollographql/apollo-client/issues/9535",
-    "ufo": "Workaround for https://github.com/nuxt/framework/issues/4883, should be fixed with next release of @nuxt/tailwindcss"
+    "unist-builder/remark-parse": "Otherwise we run into conflicts with older versions, which are imported mainly from storybook"
   },
   "prisma": {
     "schema": "server/database/schema.prisma",
