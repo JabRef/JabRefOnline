@@ -70,7 +70,7 @@ export class Mutation {
       password,
     })
     if (user) {
-      // Make login persistent by putting it in the express session store
+      // Make login persistent by putting it in the session store
       await context.login(user)
       return { user }
     } else {

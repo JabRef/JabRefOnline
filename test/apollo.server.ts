@@ -1,4 +1,4 @@
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer } from '~/apollo/apollo-server'
 import { loadSchemaFromFilesWithResolvers } from '~/server/schema'
 import { resolve } from '~/server/tsyringe'
 
