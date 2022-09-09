@@ -32,12 +32,22 @@
         </p>
         <p class="text-justify">
           JabRef is developed and maintained by a multidisciplinary
-          <a
-            class="text-reset"
-            href="https://github.com/JabRef/jabref/blob/master/DEVELOPERS"
-          >
-            core team
-          </a>
+          <n-popover trigger="hover">
+            <template #trigger>
+              <n-button text>core team</n-button>
+            </template>
+            <div class="px-4 py-1">
+              <ul
+                v-for="member in maintainers"
+                :key="member"
+                class="list-disc"
+              >
+                <li class="text-sm">
+                  {{ member }}
+                </li>
+              </ul>
+            </div>
+          </n-popover>
           of PhD students, postdocs, and researchers in industry who work on
           JabRef in their free time. Without the support of numerous volunteers,
           none of this would have been possible. We welcome anyone who would
@@ -138,3 +148,16 @@
     </div>
   </section>
 </template>
+<script setup lang="ts">
+import { Ref } from 'vue'
+
+const // @ts-expect-error: https://github.com/nuxt/framework/issues/6910
+  { data: maintainers }: { data: Ref<string[]> } = await useFetch<string>(
+    'https://raw.githubusercontent.com/JabRef/jabref/main/MAINTAINERS',
+    {
+      // @ts-expect-error: https://github.com/nuxt/framework/issues/6910
+      transform: (data) =>
+        data.split('\n').filter((member) => member.length > 0),
+    }
+  )
+</script>
