@@ -67,10 +67,10 @@
         {{ keyword }}
       </t-tag>
       <!-- TODO: Add overflow
-      <t-button variant="linkplain" class="text-sm my-auto">
+      <n-button variant="linkplain" class="text-sm my-auto">
         <span>View More (8+)</span>
         <FontAwesomeIcon icon="chevron-down" size="xs" />
-      </t-button>
+      </n-button>
       -->
     </div>
     <div v-if="'abstract' in source && source.abstract">
@@ -80,8 +80,8 @@
       >
         {{ source.abstract }}
       </span>
-      <t-button
-        variant="linkplain"
+      <n-button
+        text
         class="text-sm my-auto"
         @click="viewFullAbstract = !viewFullAbstract"
       >
@@ -99,7 +99,7 @@
             size="xs"
           />
         </template>
-      </t-button>
+      </n-button>
     </div>
   </div>
 </template>

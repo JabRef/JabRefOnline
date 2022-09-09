@@ -9,10 +9,18 @@
         <h3 class="text-center mb-12 text-3xl">
           JabRef is free and works across all your devices.
         </h3>
-
-        <t-button class="text-xl mx-auto">
-          <a :href="downloadUrl">Download JabRef</a>
-        </t-button>
+        <div class="text-center">
+          <n-button
+            type="primary"
+            size="large"
+          >
+            <a
+              class="text-2xl"
+              :href="downloadUrl"
+              >Download JabRef</a
+            >
+          </n-button>
+        </div>
 
         <p class="text-center pt-2">
           <small>

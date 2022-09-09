@@ -1,6 +1,5 @@
 import {
   TAlert,
-  TButton,
   TCheckbox,
   TDropdown,
   TInput,
@@ -56,32 +55,6 @@ const settings: VariantJSConfiguration = {
       },
       success: {
         classes: 'text-success-500 border-success-300',
-      },
-    },
-  },
-  TButton: {
-    fixedClasses:
-      'block transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none',
-    classes:
-      'px-4 py-2 focus:border-highlight focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-white bg-primary-500 border border-transparent shadow-sm rounded hover:bg-highlight-600',
-    variants: {
-      secondary: {
-        classes:
-          'px-4 py-2 focus:border-highlight focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-gray-800 bg-white border border-gray-300 shadow-sm hover:text-gray-600',
-      },
-      error: {
-        classes:
-          'px-4 py-2 focus:border-highlight-500 focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-white bg-error-500 border border-transparent rounded shadow-sm hover:bg-error-600',
-      },
-      success: {
-        classes:
-          'px-4 py-2 focus:border-highlight-500 focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-white bg-success-500 border border-transparent rounded shadow-sm hover:bg-green-600',
-      },
-      link: {
-        classes: 'text-primary-500 underline hover:text-highlight-600',
-      },
-      linkplain: {
-        classes: 'hover:text-highlight-600',
       },
     },
   },
@@ -231,7 +204,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(variantJS, settings)
   nuxtApp.vueApp.component('t-input', TInput)
   nuxtApp.vueApp.component('t-checkbox', TCheckbox)
-  nuxtApp.vueApp.component('t-button', TButton)
   nuxtApp.vueApp.component('t-input-group', TInputGroup)
   nuxtApp.vueApp.component('t-alert', TAlert)
   nuxtApp.vueApp.component('t-dropdown', TDropdown)
