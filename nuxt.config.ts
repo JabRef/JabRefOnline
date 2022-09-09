@@ -42,6 +42,10 @@ export default defineNuxtConfig({
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+      // This is necessary to fix issues with tailwind/naive-ui: https://www.naiveui.com/en-US/light/docs/style-conflict
+      {
+        name: 'naive-ui-style',
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -60,6 +64,8 @@ export default defineNuxtConfig({
   modules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    // Add support for naive-ui
+    './modules/naive-ui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add storybook support
