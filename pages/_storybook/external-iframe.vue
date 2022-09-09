@@ -20,8 +20,8 @@ import { VueFramework } from '@storybook/vue3'
 import { decorateStory } from '@storybook/vue3/dist/esm/client/preview/decorateStory'
 import { mount } from 'mount-vue-component'
 import * as JabRefLogoStories from '~/components/JabRefLogo.stories'
+import * as NButtonStories from '~/components/n-button.stories'
 import * as TAlertStories from '~/components/t-alert.stories'
-import * as TButtonStories from '~/components/t-button.stories'
 import * as TCheckboxStories from '~/components/t-checkbox.stories'
 import * as TDropdownStories from '~/components/t-dropdown.stories'
 import * as TInputGroupStories from '~/components/t-input-group.stories'
@@ -67,7 +67,7 @@ export default defineComponent({
       () => [
         JabRefLogoStories,
         TAlertStories,
-        TButtonStories,
+        NButtonStories,
         TCheckboxStories,
         TDropdownStories,
         TInputGroupStories,

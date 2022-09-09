@@ -44,11 +44,12 @@
           >
             <PasswordInput v-model="password" />
           </t-input-group>
-          <div class="py-2">
-            <t-button
+          <div class="py-2 text-center">
+            <n-button
               class="w-full"
-              type="submit"
-              >Create your account</t-button
+              type="primary"
+              attr-type="submit"
+              >Create your account</n-button
             >
           </div>
           <div>

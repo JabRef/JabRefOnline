@@ -31,11 +31,12 @@
               v-focus
             />
           </t-input-group>
-          <div class="py-2">
-            <t-button
+          <div class="py-2 text-center">
+            <n-button
               class="w-full"
-              type="submit"
-              >Submit</t-button
+              type="primary"
+              attr-type="submit"
+              >Submit</n-button
             >
           </div>
         </div>

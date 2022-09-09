@@ -67,9 +67,17 @@
           </div>
           <div class="row justify-content-center pt-6 pb-16">
             <div class="col-auto">
-              <t-button class="mx-auto text-xl">
-                <a href="https://downloads.jabref.org/">Download JabRef</a>
-              </t-button>
+              <n-button
+                type="primary"
+                size="large"
+                class="mx-auto"
+              >
+                <a
+                  class="text-2xl"
+                  href="https://downloads.jabref.org/"
+                  >Download JabRef</a
+                >
+              </n-button>
             </div>
           </div>
         </div>

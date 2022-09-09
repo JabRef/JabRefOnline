@@ -59,11 +59,12 @@
             </div>
           </div>
 
-          <div class="py-2">
-            <t-button
+          <div class="py-2 text-center">
+            <n-button
               class="w-full"
-              type="submit"
-              >Sign in</t-button
+              type="primary"
+              attr-type="submit"
+              >Sign in</n-button
             >
           </div>
 

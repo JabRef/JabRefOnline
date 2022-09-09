@@ -22,11 +22,12 @@
             <PasswordInput v-model="repeatPassword" />
           </t-input-group>
         </div>
-        <div class="py-2">
-          <t-button
+        <div class="py-2 text-center">
+          <n-button
             class="w-full"
-            type="submit"
-            >Change Password</t-button
+            type="primary"
+            attr-type="submit"
+            >Change Password</n-button
           >
         </div>
       </form>
