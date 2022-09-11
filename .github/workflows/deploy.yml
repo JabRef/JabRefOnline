@@ -29,12 +29,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Prepare
-        run: |
-          # This is needed correctly deploy the Azure Functions (API)
-          mkdir -p .output/server
-          touch .output/server/.gitkeep
-
       - name: Build & Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -82,12 +76,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Prepare
-        run: |
-          # This is needed correctly deploy the Azure Functions (API)
-          mkdir -p .output/server
-          touch .output/server/.gitkeep
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
