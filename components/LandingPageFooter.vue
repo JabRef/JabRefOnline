@@ -168,6 +168,7 @@
       header="Impressum"
     >
       <ContentRenderer
+        v-if="legalNotices"
         :value="legalNotices"
         class="prose overflow-auto max-h-96"
       />
@@ -177,6 +178,7 @@
       header="Datenschutzerklärung"
     >
       <ContentRenderer
+        v-if="privacyPolicy"
         :value="privacyPolicy"
         class="prose overflow-auto max-h-96"
       />
