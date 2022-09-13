@@ -5,7 +5,6 @@ import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
 // @ts-ignore: has no type info
 import lineClamp from '@tailwindcss/line-clamp'
-// @ts-ignore: has no type info
 import typography from '@tailwindcss/typography'
 
 // Flip object horizontally or vertically
