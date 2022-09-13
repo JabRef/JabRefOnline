@@ -13,6 +13,7 @@
           <n-button
             type="primary"
             size="large"
+            class="h-16"
           >
             <a
               class="text-2xl"

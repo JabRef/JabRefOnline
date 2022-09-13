@@ -7,7 +7,8 @@ type ConfigProviderOptions = {
   themeOverrides?: GlobalThemeOverrides
 }
 
-// Workaround for https://github.com/tusen-ai/naive-ui/issues/3700
+// Naive does (and will) not provide a vue plugin, so we implement a simple one
+// https://github.com/tusen-ai/naive-ui/issues/3700
 const plugin: Plugin = {
   install: (app, options: ConfigProviderOptions) => {
     app.provide('n-config-provider', {
