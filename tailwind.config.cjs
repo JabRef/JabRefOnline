@@ -1,11 +1,13 @@
-import { Config } from 'tailwindcss'
-
-import forms from '@tailwindcss/forms'
-import colors from 'tailwindcss/colors'
-import plugin from 'tailwindcss/plugin'
-// @ts-ignore: has no type info
-import lineClamp from '@tailwindcss/line-clamp'
-import typography from '@tailwindcss/typography'
+// This needs to be a cjs instead of typescript file for now because of
+// https://github.com/tailwindlabs/tailwindcss/pull/7327
+/* eslint-disable @typescript-eslint/no-var-requires */
+// const { Config } = require('tailwindcss')
+const forms = require('@tailwindcss/forms')
+const colors = require('tailwindcss/colors')
+const plugin = require('tailwindcss/plugin')
+// @ts-ignore: has no type info;
+const lineClamp = require('@tailwindcss/line-clamp')
+const typography = require('@tailwindcss/typography')
 
 // Flip object horizontally or vertically
 // Adapted from https://github.com/tailwindlabs/tailwindcss/discussions/2146
@@ -20,7 +22,8 @@ const flip = plugin(({ addUtilities }) => {
   })
 })
 
-export default <Config>{
+// export default <Config>{
+module.exports = {
   content: [`components/**/*.{vue,js}`, `layouts/**/*.vue`, `pages/**/*.vue`],
   plugins: [lineClamp, forms, flip, typography],
   theme: {
