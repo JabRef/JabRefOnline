@@ -5,6 +5,25 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@actions/core@npm:^1.9.1":
+  version: 1.9.1
+  resolution: "@actions/core@npm:1.9.1"
+  dependencies:
+    "@actions/http-client": ^2.0.1
+    uuid: ^8.3.2
+  checksum: 8f9823bed2e172fcabb65a63e136f98bbd0614bf37b5012caff4d3216471de19956e6bc0ed2767c52bccc3d02a7450a3b902a83f56bfa255477858c6341d1e2e
+  languageName: node
+  linkType: hard
+
+"@actions/http-client@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@actions/http-client@npm:2.0.1"
+  dependencies:
+    tunnel: ^0.0.6
+  checksum: 799ec3df91e28a9da91ce6592e94f8b8923ccf6cc21a2f72c7429be5af5273f1625335411adc2a1bb222d56c852d5767214dfa6fa32a6da7e81dba8290e08f17
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -15452,6 +15471,7 @@ __metadata:
     ufo: ^0.8.5
     unplugin-vue-components: ^0.22.7
     vitest: ^0.23.2
+    vitest-github-actions-reporter: ^0.8.3
     vitest-mock-extended: ^0.1.15
     vue-tsc: ^0.40.13
   languageName: unknown
@@ -23673,6 +23693,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tunnel@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "tunnel@npm:0.0.6"
+  checksum: c362948df9ad34b649b5585e54ce2838fa583aa3037091aaed66793c65b423a264e5229f0d7e9a95513a795ac2bd4cb72cda7e89a74313f182c1e9ae0b0994fa
+  languageName: node
+  linkType: hard
+
 "tweetnacl@npm:^0.14.3, tweetnacl@npm:~0.14.0":
   version: 0.14.5
   resolution: "tweetnacl@npm:0.14.5"
@@ -24545,7 +24572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:8.3.2, uuid@npm:^8.0.0, uuid@npm:^8.3.0":
+"uuid@npm:8.3.2, uuid@npm:^8.0.0, uuid@npm:^8.3.0, uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
@@ -24799,6 +24826,17 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 6341aa43579ae45f8a383bdc0c5041dea3dff98f14e0a546d6d884a864134b00082246a28d1de8adff0ce0dd92b468c7ade8f972ffe1ed97258671d63e0f16f7
+  languageName: node
+  linkType: hard
+
+"vitest-github-actions-reporter@npm:^0.8.3":
+  version: 0.8.3
+  resolution: "vitest-github-actions-reporter@npm:0.8.3"
+  dependencies:
+    "@actions/core": ^1.9.1
+  peerDependencies:
+    vitest: ">=0.16.0"
+  checksum: 8110e13088f15f0aa155978d9cf97e0316e21e608cb9c75fb7344c54450b3e1f22bbf353aace65e610b09f67e0b8919b204c0659fb9c7c1e4b23a1f3b60b7be8
   languageName: node
   linkType: hard
 

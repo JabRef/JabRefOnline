@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { resolve } from 'path'
+import GithubActionsReporter from 'vitest-github-actions-reporter'
 import { defineConfig } from 'vitest/config'
 
 // Workaround for determining the aliases
@@ -43,5 +44,10 @@ export default defineConfig({
     coverage: {
       reporter: ['json', 'text'],
     },
+
+    // Create annotations when tests fail in GitHub Actions
+    reporters: process.env.GITHUB_ACTIONS
+      ? new GithubActionsReporter()
+      : 'default',
   },
 })
