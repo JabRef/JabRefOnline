@@ -34,15 +34,14 @@ export default defineConfig({
     // https://vitest.dev/config/#globals
     globals: true,
 
-    // TODO: Configure coverage
-    // collectCoverageFrom: [
-    //   '<rootDir>/components/**/*.vue',
-    //   '<rootDir>/pages/**/*.vue',
-    //   '<rootDir>/server/**/*.ts',
-    // ],
-
     // Run before each test file
     // https://vitest.dev/config/#setupfiles
     setupFiles: ['test/global.setup.ts'],
+
+    // Code coverage
+    // https://vitest.dev/config/#coverage and https://vitest.dev/guide/coverage.html
+    coverage: {
+      reporter: ['json', 'text'],
+    },
   },
 })
