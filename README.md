@@ -43,7 +43,7 @@ Now close and re-open the workspace.
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | yarn install       | Install project dependencies and generate code.                                                                                                                                                                          |
 | yarn dev           | Start Nuxt server in development mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
-| yarn test          | Execute all tests. Pass `-u` to update all Jest snapshots.                                                                                                                                                               |
+| yarn test          | Execute all tests. Pass `-u` to update all  snapshots.                                                                                                                                                               |
 | yarn build         | Build the nuxt.js web application for production.                                                                                                                                                                        |
 | yarn start         | Start the production server built by `yarn build` (for testing purposes).                                                                                                                                                |
 | yarn prisma:studio | Explore data in the database using a visual editor.                                                                                                                                                                      |
@@ -101,7 +101,7 @@ An up-to-date version of all Storybook components can be found [online](https://
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style.
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): Override user/workspace VS Code settings with the provided settings in `.editorconfig`.
 - [Tailwind CSS](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): IntelliSense enhancement to support Tailwind.
-- [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): Add integration of Jest, e.g. easy debugging of tests.
+- [Vitest](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer): Add integration of Vitest, i.e., visual overview of the tests and easy debugging of tests.
 - [GraphQL](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql): Add syntax highlighting and IntelliSense for GraphQL.
 - Debugger for [Firefox](https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug) or [Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome): Allow debugging web applications from within VS Code.
 - Vue.js devtools: Browser integration for debugging and investigation for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)

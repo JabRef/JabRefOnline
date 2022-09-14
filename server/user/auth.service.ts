@@ -1,6 +1,6 @@
 import type { PrismaClient, User } from '@prisma/client'
 
-import uuid from 'uuid' // TODO: Change to { v4 as generateToken } as soon as uuid is a proper esm module / jest supports it (https://github.com/uuidjs/uuid/issues/451)
+import { v4 as generateToken } from 'uuid'
 import { ResolversTypes } from '../graphql'
 import { hash, verifyHash } from '../utils/crypto'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
@@ -61,7 +61,7 @@ export class AuthService {
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + user.id
-    const token = uuid.v4()
+    const token = generateToken()
     const hashedToken = await hash(token)
     await this.redisClient.set(key, hashedToken, { EX: 1000 * 60 * 60 * 24 }) // VALID FOR ONE DAY
     await sendEmail(email, resetPasswordTemplate(user.id, token))
