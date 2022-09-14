@@ -13,13 +13,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
-    "types": ["@types/node", "@types/jest", "@pinia/nuxt", "naive-ui/volar"]
-  },
-  "ts-node": {
-    "moduleTypes": {
-      // Workaround for https://github.com/facebook/jest/issues/11453
-      "jest.config.ts": "cjs"
-    }
+    "types": ["@types/node", "vitest/globals", "@pinia/nuxt", "naive-ui/volar"]
   },
   "exclude": ["node_modules", ".output", "dist"]
 }
