@@ -2,8 +2,6 @@ import { gql } from '~/apollo/apollo-server'
 import * as prisma from '~/server/database/util'
 import { createAuthenticatedClient } from '../../test/apollo.server'
 
-const authenticatedClient = await createAuthenticatedClient()
-
 beforeEach(async () => {
   await prisma.resetToSeed()
 })
@@ -83,44 +81,45 @@ const userDocumentById = gql`
 describe('Query', () => {
   describe('userDocument', () => {
     it('retrieves fields for articles in journals', async () => {
+      const authenticatedClient = await createAuthenticatedClient()
       const result = await authenticatedClient.executeOperation({
         query: userDocumentById,
         variables: { id: 'ckondtcaf000101mh7x9g4gia' },
       })
       expect(result).toMatchInlineSnapshot(`
-        Object {
-          "data": Object {
-            "userDocument": Object {
+        {
+          "data": {
+            "userDocument": {
               "__typename": "JournalArticle",
               "abstract": "Epidemiological data demonstrate that regular dietary intake of plant-derived foods and beverages reduces the risk of coronary heart disease and stroke. Among many ingredients, cocoa might be an important mediator. Indeed, recent research demonstrates a beneficial effect of cocoa on blood pressure, insulin resistance, and vascular and platelet function. Although still debated, a range of potential mechanisms through which cocoa might exert its benefits on cardiovascular health have been proposed, including activation of nitric oxide and antioxidant and antiinflammatory effects. This review summarizes the available data on the cardiovascular effects of cocoa, outlines potential mechanisms involved in the response to cocoa, and highlights the potential clinical implications associated with its consumption. ( Circulation. 2009; 119: 1433-1441.)",
               "added": null,
-              "annotators": Array [],
-              "authors": Array [
-                Object {
+              "annotators": [],
+              "authors": [
+                {
                   "id": "TODOCorti, Roberto",
                   "name": "Corti, Roberto",
                 },
-                Object {
+                {
                   "id": "TODOFlammer, Andreas J.",
                   "name": "Flammer, Andreas J.",
                 },
-                Object {
+                {
                   "id": "TODOHollenberg, Norman K.",
                   "name": "Hollenberg, Norman K.",
                 },
-                Object {
+                {
                   "id": "TODOLuscher, Thomas F.",
                   "name": "Luscher, Thomas F.",
                 },
               ],
-              "citationKeys": Array [],
-              "commentators": Array [],
+              "citationKeys": [],
+              "commentators": [],
               "doi": "10.1161/CIRCULATIONAHA.108.827022",
               "electronicId": null,
               "id": "ckondtcaf000101mh7x9g4gia",
-              "in": Object {
+              "in": {
                 "id": "ckslizms5000109jv3yx80ujf",
-                "journal": Object {
+                "journal": {
                   "id": "ckslj094u000309jvdpng93mk",
                   "issn": null,
                   "name": "Circulation",
@@ -135,13 +134,13 @@ describe('Query', () => {
                 "titleAddon": null,
                 "volume": "119",
               },
-              "keywords": Array [
+              "keywords": [
                 "cocoa",
                 "endothelium",
                 "hypertension",
                 "platelets",
               ],
-              "languages": Array [],
+              "languages": [],
               "lastModified": null,
               "note": null,
               "pageEnd": "1441",
@@ -190,6 +189,7 @@ describe('Roundtrip', () => {
           }
         }
       `
+      const authenticatedClient = await createAuthenticatedClient()
       const addResult = await authenticatedClient.executeOperation({
         query: addUserDocument,
         variables: {
@@ -208,9 +208,9 @@ describe('Roundtrip', () => {
           },
         },
         `
-        Object {
-          "data": Object {
-            "addUserDocument": Object {
+        {
+          "data": {
+            "addUserDocument": {
               "id": Any<String>,
             },
           },
@@ -242,31 +242,31 @@ describe('Roundtrip', () => {
           },
         },
         `
-        Object {
-          "data": Object {
-            "userDocument": Object {
+        {
+          "data": {
+            "userDocument": {
               "__typename": "JournalArticle",
               "abstract": "Some abstract",
               "added": null,
-              "annotators": Array [],
-              "authors": Array [
-                Object {
+              "annotators": [],
+              "authors": [
+                {
                   "id": "TODOTest Author",
                   "name": "Test Author",
                 },
-                Object {
+                {
                   "id": "TODOSecond Test Author",
                   "name": "Second Test Author",
                 },
               ],
-              "citationKeys": Array [],
-              "commentators": Array [],
+              "citationKeys": [],
+              "commentators": [],
               "doi": "doi which does not exist",
               "electronicId": null,
               "id": Any<String>,
-              "in": Object {
+              "in": {
                 "id": Any<String>,
-                "journal": Object {
+                "journal": {
                   "id": Any<String>,
                   "issn": null,
                   "name": "Journal of great things",
@@ -281,11 +281,11 @@ describe('Roundtrip', () => {
                 "titleAddon": null,
                 "volume": "15",
               },
-              "keywords": Array [
+              "keywords": [
                 "keyword1",
                 "keyword2",
               ],
-              "languages": Array [],
+              "languages": [],
               "lastModified": null,
               "note": null,
               "pageEnd": "2811",
@@ -310,6 +310,7 @@ describe('Roundtrip', () => {
           }
         }
       `
+      const authenticatedClient = await createAuthenticatedClient()
       const updateResult = await authenticatedClient.executeOperation({
         query: updateUserDocument,
         variables: {
@@ -320,9 +321,9 @@ describe('Roundtrip', () => {
         },
       })
       expect(updateResult).toMatchInlineSnapshot(`
-        Object {
-          "data": Object {
-            "updateUserDocument": Object {
+        {
+          "data": {
+            "updateUserDocument": {
               "id": "ckondtcaf000101mh7x9g4gia",
             },
           },
@@ -352,31 +353,31 @@ describe('Roundtrip', () => {
           },
         },
         `
-        Object {
-          "data": Object {
-            "userDocument": Object {
+        {
+          "data": {
+            "userDocument": {
               "__typename": "JournalArticle",
               "abstract": "Some abstract",
               "added": null,
-              "annotators": Array [],
-              "authors": Array [
-                Object {
+              "annotators": [],
+              "authors": [
+                {
                   "id": "TODOTest Author",
                   "name": "Test Author",
                 },
-                Object {
+                {
                   "id": "TODOSecond Test Author",
                   "name": "Second Test Author",
                 },
               ],
-              "citationKeys": Array [],
-              "commentators": Array [],
+              "citationKeys": [],
+              "commentators": [],
               "doi": "doi which does not exist",
               "electronicId": null,
               "id": Any<String>,
-              "in": Object {
+              "in": {
                 "id": Any<String>,
-                "journal": Object {
+                "journal": {
                   "id": Any<String>,
                   "issn": null,
                   "name": "Journal of great things",
@@ -391,11 +392,11 @@ describe('Roundtrip', () => {
                 "titleAddon": null,
                 "volume": "15",
               },
-              "keywords": Array [
+              "keywords": [
                 "keyword1",
                 "keyword2",
               ],
-              "languages": Array [],
+              "languages": [],
               "lastModified": null,
               "note": null,
               "pageEnd": "2811",

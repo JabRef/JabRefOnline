@@ -105,7 +105,7 @@ jobs:
         run: yarn build
 
       - name: Run tests
-        run: yarn test --ci --coverage --detectOpenHandles
+        run: yarn test --coverage
 
       - name: Start server
         run: yarn start &
