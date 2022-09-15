@@ -32,7 +32,7 @@
           >
             <img
               class="max-w-full h-auto"
-              :src="`/assets/${feature.img}`"
+              :src="useAsset(feature.img)"
               alt=""
             />
           </div>
@@ -41,3 +41,15 @@
     </ContentList>
   </section>
 </template>
+
+<script lang="ts" setup>
+// Taken from https://github.com/nuxt/framework/issues/7121#issuecomment-1247934787
+function useAsset(path: string): string {
+  const assets = import.meta.glob('~/assets/**/*', {
+    eager: true,
+    import: 'default',
+  })
+  // @ts-expect-error: wrong type info
+  return assets['/assets/' + path]
+}
+</script>
