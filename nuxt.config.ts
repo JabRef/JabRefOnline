@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
@@ -103,6 +102,7 @@ export default defineNuxtConfig({
   storybook: {},
 
   vite: {
+    // @ts-expect-error: probably a bug in nuxt, https://github.com/nuxt/framework/pull/7317#issuecomment-1247920948
     server: {
       // Configure vite for HMR with Gitpod
       // Taken from https://github.com/vitejs/vite/issues/1653#issuecomment-1079322770
