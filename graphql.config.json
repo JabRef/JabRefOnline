@@ -33,6 +33,9 @@
             "./apollo/cache.ts"
           ],
           "preset": "gql-tag-operations-preset",
+          "presetConfig": {
+            "fragmentMasking": true
+          },
           "config": {
             "scalars": {
               "Date": "Date",
