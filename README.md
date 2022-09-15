@@ -129,6 +129,14 @@ An up-to-date version of all Storybook components can be found [online](https://
   │   Resolver.ts
   │   Resolver.spec.ts
   ```
+- Commit messages and pull request titles follow the structure of [Conventional Commits](https://www.conventionalcommits.org).
+  The following prefixes are used:
+  - `feat`: Introduces a new feature or provides an enhancement of an existing feature
+  - `fix`: Patches a bug
+  - `refactor`: A code change that neither fixes a bug nor adds a feature
+  - `test`: Adds missing tests or corrects existing tests
+  - `docs`: Documentation only changes
+  - `chore`: Changes to the build process or auxiliary tools and libraries such as CI or package updates
 
 ## References
 
