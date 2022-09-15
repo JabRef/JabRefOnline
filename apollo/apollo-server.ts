@@ -6,11 +6,18 @@ import {
   runHttpQuery,
 } from 'apollo-server-core'
 import type { LandingPage } from 'apollo-server-plugin-base'
-import { CompatibilityEvent, EventHandler, useBody, useQuery } from 'h3'
+import {
+  CompatibilityEvent,
+  EventHandler,
+  getQuery,
+  readBody,
+  setResponseHeader,
+  setResponseHeaders,
+} from 'h3'
 
 export { gql } from 'apollo-server-core'
 
-// Manually specify CORS options as long as h3 doesn't suppor this natively
+// Manually specify CORS options as long as h3 doesn't support this natively
 // https://github.com/unjs/h3/issues/82
 interface RouteOptionsCors {
   origin?: string
@@ -61,8 +68,8 @@ export class ApolloServer extends ApolloServerBase {
           options,
           query:
             event.req.method === 'POST'
-              ? await useBody(event)
-              : useQuery(event),
+              ? await readBody(event)
+              : getQuery(event),
           request: convertNodeHttpToRequest(event.req),
         })
         setHeaders(event, responseInit.headers, corsOptions)
@@ -101,23 +108,28 @@ function setHeaders(
   corsOptions: false | RouteOptionsCors
 ) {
   if (headers) {
-    for (const [name, value] of Object.entries(headers)) {
-      event.res.setHeader(name, value)
-    }
+    setResponseHeaders(event, headers)
   }
   if (corsOptions !== false) {
-    event.res.setHeader(
+    setResponseHeader(
+      event,
       'Access-Control-Allow-Origin',
       corsOptions.origin ?? 'ignore'
     )
+
     if (corsOptions.credentials !== undefined) {
-      event.res.setHeader(
+      setResponseHeader(
+        event,
         'Access-Control-Allow-Credentials',
         corsOptions.credentials.toString()
       )
     }
     if (corsOptions.methods !== undefined) {
-      event.res.setHeader('Access-Control-Allow-Methods', corsOptions.methods)
+      setResponseHeader(
+        event,
+        'Access-Control-Allow-Methods',
+        corsOptions.methods
+      )
     }
   }
 }
