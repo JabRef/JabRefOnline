@@ -129,7 +129,7 @@ An up-to-date version of all Storybook components can be found [online](https://
   │   Resolver.ts
   │   Resolver.spec.ts
   ```
-- Commit messages follow the structure of [Conventional Commits](https://www.conventionalcommits.org).
+- Commit messages and pull request titles follow the structure of [Conventional Commits](https://www.conventionalcommits.org).
   The following prefixes are used:
   - `feat`: Introduces a new feature or provides an enhancement of an existing feature
   - `fix`: Patches a bug
