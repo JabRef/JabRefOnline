@@ -144,7 +144,7 @@ jobs:
           python3 -m venv .venv
           source .venv/bin/activate 
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
-          python3 .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
+          python3 .github/scripts/deploy.py --env ${{ matrix.deployment_environment }}
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
@@ -168,7 +168,7 @@ jobs:
       - name: Deploy Function App
         run: |
           (cd .output/server; zip -r ../server.zip *)
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output/server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output/server.zip
 
       - name: Run API tests
         run: yarn test:api --env-var='base_url=${{ matrix.url }}/api'
