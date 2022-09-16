@@ -1,9 +1,10 @@
 To test these scripts locally, run
+
 ```bash
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 sudo apt-get install python3 pip python3-venv
 python3 -m venv .venv
-source .venv/bin/activate 
+source .venv/bin/activate
 pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
 az login
 export SUBSCRIPTION_ID=<...>
