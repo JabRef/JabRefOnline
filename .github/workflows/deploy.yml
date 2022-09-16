@@ -29,8 +29,38 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Build & Deploy
-        id: builddeploy
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Build
+        run: |
+          yarn install
+          yarn build:azure
+        env:
+          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create & Link Function App
+        run: |
+          sudo apt-get install python3 pip python3-venv
+          python3 -m venv .venv
+          source .venv/bin/activate 
+          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
+          python3 .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
+        env:
+          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
+
+      - name: Deploy Web App
+        id: deploy_web
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
@@ -38,16 +68,19 @@ jobs:
           action: 'upload'
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: '/' # App source code path
-          api_location: '.output/server' # Api source code path - optional
-          output_location: '.output/public' # Built app content directory - optional
-          app_build_command: 'yarn build:azure'
+          skip_app_build: true # Use output from previous step
+          app_location: '.output/public' # Built app content directory
+          api_location: '' # Api source code path - BYOF: needs to be empty
+          output_location: '' # When reusing built, this needs to be empty
           ###### End of Repository/Build Configurations ######
-        env:
-          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+
+      - name: Deploy Function App
+        run: |
+          (cd .output/server; zip -r ../server.zip *)
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output/server.zip
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=${{ steps.builddeploy.outputs.static_web_app_url }}/api' || true
+        run: yarn test:api --env-var='base_url=${{ steps.deploy_web.outputs.static_web_app_url }}/api'
 
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
@@ -72,6 +105,7 @@ jobs:
     environment:
       name: ${{ matrix.environment }}
       url: ${{ matrix.url }}
+      DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
 
     steps:
       - name: Checkout
@@ -80,7 +114,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3.4.1
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install dependencies
@@ -89,17 +123,32 @@ jobs:
       - name: Reset Test database on Azure
         if: matrix.environment == 'Test'
         run: yarn prisma:migrate:reset --force
-        env:
-          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
       - name: Update Production database on Azure
         if: matrix.environment == 'Staging'
         run: yarn prisma:migrate:deploy
-        env:
-          DATABASE_URL: ${{ secrets.AZURE_DATABASE_URL }}
 
-      - name: Build & Deploy
-        id: builddeploy
+      - name: Build
+        run: yarn build:azure
+
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create & Link Function App
+        run: |
+          sudo apt-get install python3 pip python3-venv
+          python3 -m venv .venv
+          source .venv/bin/activate 
+          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
+          python3 .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
+        env:
+          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
+
+      - name: Deploy Web App
+        id: deploy_web
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
@@ -108,11 +157,16 @@ jobs:
           deployment_environment: ${{ matrix.deployment_environment }}
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: '/' # App source code path
-          api_location: '.output/server' # Api source code path - optional
-          output_location: '.output/public' # Built app content directory - optional
-          app_build_command: 'yarn build:azure'
+          skip_app_build: true # Use output from previous step
+          app_location: '.output/public' # Built app content directory
+          api_location: '' # Api source code path - BYOF: needs to be empty
+          output_location: '' # When reusing built, this needs to be empty
           ###### End of Repository/Build Configurations ######
+
+      - name: Deploy Function App
+        run: |
+          (cd .output/server; zip -r ../server.zip *)
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output/server.zip
 
       - name: Run API tests
         run: yarn test:api --env-var='base_url=${{ matrix.url }}/api'
