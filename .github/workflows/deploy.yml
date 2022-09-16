@@ -17,6 +17,9 @@ jobs:
 
     if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
 
+    env:
+      DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+
     steps:
       # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
@@ -39,8 +42,6 @@ jobs:
         run: |
           yarn install
           yarn build:azure
-        env:
-          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
       - name: Login to Azure
         uses: Azure/login@v1
@@ -56,7 +57,6 @@ jobs:
           python3 .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Web App
@@ -105,6 +105,8 @@ jobs:
     environment:
       name: ${{ matrix.environment }}
       url: ${{ matrix.url }}
+
+    env:
       DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
 
     steps:
