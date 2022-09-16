@@ -48,17 +48,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Create & Link Function App
-        run: |
-          sudo apt-get install python3 pip python3-venv
-          python3 -m venv .venv
-          source .venv/bin/activate 
-          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
-          python3 .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
-        env:
-          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
-
       - name: Deploy Web App
         id: deploy_web
         uses: Azure/static-web-apps-deploy@v1
@@ -73,6 +62,17 @@ jobs:
           api_location: '' # Api source code path - BYOF: needs to be empty
           output_location: '' # When reusing built, this needs to be empty
           ###### End of Repository/Build Configurations ######
+
+      - name: Create & Link Function App
+        run: |
+          sudo apt-get install python3 pip python3-venv
+          python3 -m venv .venv
+          source .venv/bin/activate 
+          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
+          python3 .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
+        env:
+          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Function App
         run: |
@@ -138,17 +138,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Create & Link Function App
-        run: |
-          sudo apt-get install python3 pip python3-venv
-          python3 -m venv .venv
-          source .venv/bin/activate 
-          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
-          python3 .github/scripts/deploy.py --env ${{ matrix.deployment_environment }}
-        env:
-          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
-
       - name: Deploy Web App
         id: deploy_web
         uses: Azure/static-web-apps-deploy@v1
@@ -164,6 +153,17 @@ jobs:
           api_location: '' # Api source code path - BYOF: needs to be empty
           output_location: '' # When reusing built, this needs to be empty
           ###### End of Repository/Build Configurations ######
+
+      - name: Create & Link Function App
+        run: |
+          sudo apt-get install python3 pip python3-venv
+          python3 -m venv .venv
+          source .venv/bin/activate 
+          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
+          python3 .github/scripts/deploy.py --env ${{ matrix.deployment_environment }}
+        env:
+          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Function App
         run: |
