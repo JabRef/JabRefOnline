@@ -144,7 +144,11 @@
                   "    pm.expect(pm.response.headers.get('Access-Control-Allow-Origin')).equals('https://studio.apollographql.com');\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"Successful request\", function () {\r",
+                  "pm.test(\"CORS allowed hearders are correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Headers')).equals('Content-Type');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is okay\", function () {\r",
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
                   "});\r",
                   ""
@@ -178,7 +182,11 @@
                   "    pm.expect(pm.response.headers.get('Access-Control-Allow-Origin')).equals('https://studio.apollographql.com');\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"Successful request\", function () {\r",
+                  "pm.test(\"CORS allowed hearders are correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Headers')).equals('Content-Type');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is okay\", function () {\r",
                   "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
                   "});\r",
                   ""
@@ -191,8 +199,9 @@
             "method": "OPTIONS",
             "header": [],
             "url": {
-              "raw": "{{base_url}}",
-              "host": ["{{base_url}}"]
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
             }
           },
           "response": []

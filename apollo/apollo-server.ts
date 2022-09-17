@@ -23,6 +23,7 @@ interface RouteOptionsCors {
   origin?: string
   credentials?: boolean
   methods?: string
+  allowedHeaders?: string
 }
 
 export interface ServerRegistration {
@@ -137,6 +138,13 @@ function setHeaders(
         event,
         'Access-Control-Allow-Methods',
         corsOptions.methods
+      )
+    }
+    if (corsOptions.allowedHeaders !== undefined) {
+      setResponseHeader(
+        event,
+        'Access-Control-Allow-Headers',
+        corsOptions.allowedHeaders
       )
     }
   }

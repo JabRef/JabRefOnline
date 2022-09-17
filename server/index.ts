@@ -105,6 +105,7 @@ export default defineLazyEventHandler(async () => {
       origin: 'https://studio.apollographql.com',
       credentials: true,
       methods: 'GET,POST,OPTIONS',
+      allowedHeaders: 'Content-Type',
     },
   })
 })
