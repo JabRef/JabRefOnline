@@ -185,8 +185,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Close Pull Request
+      - name: Delete WebApp environment
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
           action: 'close'
+
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Delete Function App
+        run: az functionapp delete --name jabref-function-${{ github.event.pull_request.number }} --resource-group JabRefOnline
