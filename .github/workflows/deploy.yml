@@ -13,7 +13,7 @@ jobs:
   pr_preview:
     name: Build & Deploy to PR preview
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
 
@@ -63,24 +63,26 @@ jobs:
           output_location: '' # When reusing built, this needs to be empty
           ###### End of Repository/Build Configurations ######
 
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
       - name: Create & Link Function App
         run: |
-          sudo apt-get install python3 pip python3-venv
-          python3 -m venv .venv
-          source .venv/bin/activate 
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
-          python3 .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
+          python .github\scripts\deploy.py --env ${{ github.event.pull_request.number }}
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Function App
         run: |
-          (cd .output/server; zip -r ../server.zip *)
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output/server.zip
+          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output\server.zip
 
       - name: Check HTTP status
-        run: sleep 300s
+        run: Start-Sleep -Seconds 300
         # The api returns 400 status code for some reason
         # uses: gerdemann/http-status-code@1.0.0
         # with:
@@ -95,7 +97,7 @@ jobs:
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     if: github.event_name == 'push'
 
@@ -164,24 +166,26 @@ jobs:
           output_location: '' # When reusing built, this needs to be empty
           ###### End of Repository/Build Configurations ######
 
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
       - name: Create & Link Function App
         run: |
-          sudo apt-get install python3 pip python3-venv
-          python3 -m venv .venv
-          source .venv/bin/activate 
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
-          python3 .github/scripts/deploy.py --env ${{ matrix.deployment_environment }}
+          python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }}
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Function App
         run: |
-          (cd .output/server; zip -r ../server.zip *)
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output/server.zip
+          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output\server.zip
 
       - name: Check HTTP status
-        run: sleep 300s
+        run: Start-Sleep -Seconds 300
         # The api returns 400 status code for some reason
         # with:
         #   url: ${{ matrix.url }}/api
