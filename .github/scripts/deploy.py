@@ -94,6 +94,7 @@ def main(environment_name: str, verbose: bool = False):
             location="westeurope",
             kind="functionapp",
             site_config=SiteConfig(
+                use_32_bit_worker_process=False,
                 app_settings=[
                     {"name": "FUNCTIONS_EXTENSION_VERSION", "value": "~4"},
                     {"name": "FUNCTIONS_WORKER_RUNTIME", "value": "node"},
