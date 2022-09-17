@@ -128,6 +128,83 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Preflight",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"CORS allow methods is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).equals('GET,POST,OPTIONS');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allow origin is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Origin')).equals('https://studio.apollographql.com');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allowed hearders are correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Headers')).equals('Content-Type');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is okay\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "OPTIONS",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}",
+              "host": ["{{base_url}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Preflight with slash",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"CORS allow methods is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).equals('GET,POST,OPTIONS');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allow origin is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Origin')).equals('https://studio.apollographql.com');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allowed hearders are correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Headers')).equals('Content-Type');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is okay\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "OPTIONS",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            }
+          },
+          "response": []
         }
       ]
     }
