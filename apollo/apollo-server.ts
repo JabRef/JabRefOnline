@@ -60,7 +60,8 @@ export class ApolloServer extends ApolloServerBase {
         // https://github.com/apollographql/apollo-server/blob/40ed23fbb5dd620902d7c31bcc1e26e098990041/packages/apollo-server-core/src/runHttpQuery.ts#L325-L334
         if (event.req.method === 'OPTIONS') {
           setHeaders(event, undefined, corsOptions)
-          return ''
+          // send 204 response
+          return null
         }
 
         if (landingPage) {
