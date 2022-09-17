@@ -56,6 +56,13 @@ export class ApolloServer extends ApolloServerBase {
     return async (event: CompatibilityEvent) => {
       const options = await this.createGraphQLServerOptions(event)
       try {
+        // Apollo-server doesn't handle OPTIONS calls, so we have to do this on our own
+        // https://github.com/apollographql/apollo-server/blob/40ed23fbb5dd620902d7c31bcc1e26e098990041/packages/apollo-server-core/src/runHttpQuery.ts#L325-L334
+        if (event.req.method === 'OPTIONS') {
+          setHeaders(event, undefined, corsOptions)
+          return ''
+        }
+
         if (landingPage) {
           const landingPageHtml = this.handleLandingPage(event, landingPage)
           if (landingPageHtml) {

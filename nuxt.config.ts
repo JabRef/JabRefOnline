@@ -116,6 +116,11 @@ export default defineNuxtConfig({
             port: 443,
           }
         : true,
+
+      // Without this, vite would handle cors in dev mode, which would lead to different behavior in dev and prod
+      cors: {
+        preflightContinue: true,
+      },
     },
   },
 })
