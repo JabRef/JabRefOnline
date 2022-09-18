@@ -44,65 +44,54 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.graphql'],
-      parser: '@graphql-eslint/eslint-plugin',
-      plugins: ['@graphql-eslint'],
+      files: ['server/**/*.graphql'],
+      extends: ['plugin:@graphql-eslint/schema-recommended'],
       rules: {
-        // TODO: Use recommended rules once we follow most conventions
+        // Having an id for a type makes sense (for caching), but the rule is too strict in some cases
+        '@graphql-eslint/strict-id-in-types': 'warn',
         // Make sure that mutations returns not a scalar type (best practice: have special return type for each mutation)
-        // TODO: Set this to error once we follow this convention
-        '@graphql-eslint/no-scalar-result-type-on-mutation': 'warn',
-        // Make sure to not prefix id names with typename, i.e. 'id' instead of 'userId'.
-        '@graphql-eslint/no-typename-prefix': 'error',
-        // Requires all types to be reachable at some level by root level fields.
-        '@graphql-eslint/no-unreachable-types': 'error',
-        // Enforces that deprecated fields or enum values are not in use by operations.
-        // TODO: Set this to error once we follow this convention
-        '@graphql-eslint/no-deprecated': 'warn',
-        // Enforces unique fragment name.
-        '@graphql-eslint/unique-fragment-name': 'error',
-        // Enforces unique operation names.
-        // TODO: Does not work yet
-        // '@graphql-eslint/unique-operation-name': 'error',
-        // Requires to use """ or " for adding a GraphQL description instead of #.
-        // TODO: Does not work yet, so set to warn
-        '@graphql-eslint/no-hashtag-description': 'warn',
-        // Requires sname for your GraphQL operations.
-        '@graphql-eslint/no-anonymous-operations': 'error',
-        '@graphql-eslint/naming-convention': [
-          'error',
-          {
-            OperationDefinition: {
-              style: 'PascalCase',
-              // Make sure to not add the operation type to the name of the operation, e.g. 'user' instead of 'userQuery'.
-              forbiddenPrefixes: ['Query', 'Mutation', 'Subscription', 'Get'],
-              forbiddenSuffixes: ['Query', 'Mutation', 'Subscription'],
-            },
-          },
-        ],
-        // Requires all deprecation directives to specify a reason
-        '@graphql-eslint/require-deprecation-reason': ['error'],
-        // Enforces descriptions in your type definitions
+        '@graphql-eslint/no-scalar-result-type-on-mutation': 'error',
+        // Enforces descriptions in your type definitions (reduce to warn since there are too many issues right now)
         '@graphql-eslint/require-description': [
           'warn',
           {
             types: true,
             FieldDefinition: true,
             ObjectTypeDefinition: true,
+            DirectiveDefinition: true,
           },
         ],
         // Checks for duplicate fields in selection set, variables in operation definition, or in arguments set of a field.
         '@graphql-eslint/no-duplicate-fields': ['error'],
         // Requires mutation argument to be always called "input" and input type to be called Mutation name + "Input".
-        // TODO: Set this to error once we follow this convention
-        '@graphql-eslint/input-name': ['warn', { checkInputType: true }],
+        '@graphql-eslint/input-name': [
+          'error',
+          {
+            checkInputType: true,
+            // Types name should be pascal case, but mutation names be camel case
+            caseSensitiveInputType: false,
+          },
+        ],
         // Spaced-comment rule only works for JS-style comments using /* or // but not for GraphQL comments using #
         'spaced-comment': 'off',
       },
     },
     {
-      files: ['*.tsx', '*.ts', '*.jsx', '*.js'],
+      // Extend graphql operations defined in code files to separate "virtual" files
+      files: ['*.ts'],
       processor: '@graphql-eslint/graphql',
+    },
+    {
+      // Configure rules for "virtual" operation files
+      files: ['**/*.{ts,vue}/*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      extends: 'plugin:@graphql-eslint/operations-recommended',
+      rules: {
+        // Enforces unique fragment name.
+        '@graphql-eslint/unique-fragment-name': 'error',
+        // Enforces unique operation names.
+        '@graphql-eslint/unique-operation-name': 'error',
+      },
     },
     {
       files: ['*.ts', '*.vue'],

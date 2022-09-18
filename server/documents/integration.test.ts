@@ -11,7 +11,7 @@ afterAll(async () => {
 })
 
 const userDocumentById = gql`
-  fragment EntityFragment on Entity {
+  fragment Entity on Entity {
     ... on Person {
       id
       name
@@ -21,7 +21,7 @@ const userDocumentById = gql`
       name
     }
   }
-  query userDocumentById($id: ID!) {
+  query UserDocumentById($id: ID!) {
     userDocument(id: $id) {
       id
       __typename
@@ -33,7 +33,7 @@ const userDocumentById = gql`
       titleAddon
       abstract
       authors {
-        ...EntityFragment
+        ...Entity
       }
       note
       languages
@@ -63,15 +63,15 @@ const userDocumentById = gql`
         electronicId
         translated {
           translators {
-            ...EntityFragment
+            ...Entity
           }
         }
         published
         annotators {
-          ...EntityFragment
+          ...Entity
         }
         commentators {
-          ...EntityFragment
+          ...Entity
         }
       }
     }
@@ -183,7 +183,7 @@ describe('Roundtrip', () => {
     }
     it('addUserDocument + query', async () => {
       const addUserDocument = gql`
-        mutation addUserDocument($input: AddUserDocumentInput!) {
+        mutation AddUserDocument($input: AddUserDocumentInput!) {
           addUserDocument(input: $input) {
             id
           }
@@ -304,7 +304,7 @@ describe('Roundtrip', () => {
     })
     it('updateUserDocument + query', async () => {
       const updateUserDocument = gql`
-        mutation updateUserDocument($input: UpdateUserDocumentInput!) {
+        mutation UpdateUserDocument($input: UpdateUserDocumentInput!) {
           updateUserDocument(input: $input) {
             id
           }

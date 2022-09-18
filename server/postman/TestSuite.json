@@ -21,7 +21,7 @@
                 "exec": [
                   "pm.test(\"Returns user id\", function () {\r",
                   "    var jsonData = pm.response.json();\r",
-                  "    pm.expect(jsonData.data).to.eql({login: {user: {id: \"ckn4oul7100004cv7y3t94n8j\"}}});\r",
+                  "    pm.expect(jsonData).to.eql({data: {login: {user: {id: \"ckn4oul7100004cv7y3t94n8j\"}}}});\r",
                   "});\r",
                   "\r",
                   "pm.test(\"Sets cookie\", function () {\r",
@@ -38,8 +38,8 @@
             "body": {
               "mode": "graphql",
               "graphql": {
-                "query": "mutation Mutation($email: EmailAddress!, $password: String!) { login(email: $email, password: $password) {... on UserReturned {user {id}}}}",
-                "variables": "{\n  \"email\": \"alice@jabref.de\",\"password\": \"EBNPXY35TYkYXHs\" \n}"
+                "query": "mutation Mutation($input: LoginInput!) { login(input: $input) {... on UserReturned {user {id}}}}",
+                "variables": "{\"input\":{\n  \"email\": \"alice@jabref.de\",\"password\": \"EBNPXY35TYkYXHs\" \n}}"
               }
             },
             "url": {
