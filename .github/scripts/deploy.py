@@ -99,6 +99,9 @@ def main(environment_name: str, verbose: bool = False):
                     {"name": "FUNCTIONS_EXTENSION_VERSION", "value": "~4"},
                     {"name": "FUNCTIONS_WORKER_RUNTIME", "value": "node"},
                     {"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "~18"},
+                    # Better deploy and cold-start performance
+                    # https://docs.microsoft.com/en-us/azure/azure-functions/run-functions-from-deployment-package#integration-with-zip-deployment
+                    {"name": "WEBSITE_RUN_FROM_PACKAGE", "value": "1"},
                     {
                         "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
                         "value": appinsights.instrumentation_key,
