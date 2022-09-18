@@ -5,20 +5,32 @@ scalar Date
 Ways in which to filter a list of documents.
 """
 input DocumentFilters {
-  """Only include documents that belong to the group with this ID."""
+  """
+  Only include documents that belong to the group with this ID.
+  """
   groupId: ID
-  """Only include documents that match the given search string."""
+  """
+  Only include documents that match the given search string.
+  """
   query: String
 }
 
 extend type User {
-  """A list of documents that belong to the user."""
+  """
+  A list of documents that belong to the user.
+  """
   documents(
-    """Filtering options for documents returned."""
+    """
+    Filtering options for documents returned.
+    """
     filterBy: DocumentFilters
-    """Number of documents to be returned"""
+    """
+    Number of documents to be returned
+    """
     first: Int
-    """A cursor for use in pagination."""
+    """
+    A cursor for use in pagination.
+    """
     after: String
   ): UserDocumentsConnection!
 }
@@ -82,7 +94,9 @@ type Organization {
 union Entity = Person | Organization
 input AddEntityInput {
   ### Only one of the following fields can be specified.
-  """The person to add."""
+  """
+  The person to add.
+  """
   person: AddPersonInput
   organization: AddOrganizationInput
 }
@@ -126,7 +140,9 @@ input AddTranslatedInput {
 A university or some other institution.
 """
 type Institution {
-  """The unique identifier of the institution."""
+  """
+  The unique identifier of the institution.
+  """
   id: ID!
   """
   The name of the university or institution.
@@ -323,7 +339,9 @@ interface Document implements Node {
 
   #### JabRef specific fields. ####
 
-  """Keywords or tags used to describe the content."""
+  """
+  Keywords or tags used to describe the content.
+  """
   keywords: [String!]!
 }
 
@@ -510,7 +528,9 @@ Input for creating a new user document.
 """
 input AddUserDocumentInput {
   #### Only one of the following fields should be filled
-  """The journal article to update."""
+  """
+  The journal article to update.
+  """
   journalArticle: AddJournalArticleInput
   proceedingsArticle: AddProceedingsArticleInput
   thesis: AddThesisInput
@@ -520,7 +540,9 @@ input UpdateUserDocumentInput {
   id: ID!
 
   #### Only one of the following fields should be filled
-  """The journal article to update."""
+  """
+  The journal article to update.
+  """
   journalArticle: AddJournalArticleInput
   proceedingsArticle: AddProceedingsArticleInput
   thesis: AddThesisInput

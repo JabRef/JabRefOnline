@@ -47,7 +47,9 @@ type AutomaticKeywordGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """The field to search in."""
+  """
+  The field to search in.
+  """
   field: String!
   keywordDelimiter: String!
   keywordHierarchicalDelimiter: String!
@@ -74,7 +76,9 @@ type AutomaticPersonsGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """The field to search in."""
+  """
+  The field to search in.
+  """
   field: String!
 }
 input AutomaticPersonsGroupDetails {
@@ -97,7 +101,9 @@ type ExplicitGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """The delimiter used to separate keywords."""
+  """
+  The delimiter used to separate keywords.
+  """
   keywordDelimiter: String!
 }
 input ExplicitGroupDetails {
@@ -121,7 +127,9 @@ type LastNameGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """The field to search in."""
+  """
+  The field to search in.
+  """
   field: String!
   authorLastName: String!
 }
@@ -146,7 +154,9 @@ type WordKeywordGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """The field to search in."""
+  """
+  The field to search in.
+  """
   field: String!
   searchExpression: String!
   caseSensitive: Boolean!
@@ -177,7 +187,9 @@ type RegexKeywordGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """The field to search in."""
+  """
+  The field to search in.
+  """
   field: String!
   searchExpression: String!
   caseSensitive: Boolean!
@@ -204,7 +216,9 @@ type SearchGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """The search expression."""
+  """
+  The search expression.
+  """
   searchExpression: String!
   caseSensitive: Boolean!
   isRegEx: Boolean!
@@ -239,7 +253,9 @@ type TexGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
-  """Paths to the TeX files that are part of this group."""
+  """
+  Paths to the TeX files that are part of this group.
+  """
   paths: [TexGroupDevicePathPair!]!
 }
 input TexGroupDetails {
@@ -279,8 +295,10 @@ input CreateGroupInput {
   # https://github.com/graphql/graphql-spec/blob/main/rfcs/InputUnion.md
   # Thus we use "tagged inputs" as a workaround, which is pretty close to the current favorite for the official language extension
   # The user of the API should specify exactly one of the following fields.
-  
-  """Automatic keyword group info"""
+
+  """
+  Automatic keyword group info
+  """
   automaticKeywordGroup: AutomaticKeywordGroupDetails
   automaticPersonsGroup: AutomaticPersonsGroupDetails
   explicitGroup: ExplicitGroupDetails
@@ -306,8 +324,10 @@ input UpdateGroupInput {
   # https://github.com/graphql/graphql-spec/blob/main/rfcs/InputUnion.md
   # Thus we use "tagged inputs" as a workaround, which is pretty close to the current favorite for the official language extension
   # The user of the API should specify exactly one of the following fields.
-  
-  """Automatic keyword group info"""
+
+  """
+  Automatic keyword group info
+  """
   automaticKeywordGroup: AutomaticKeywordGroupDetails
   automaticPersonsGroup: AutomaticPersonsGroupDetails
   explicitGroup: ExplicitGroupDetails
