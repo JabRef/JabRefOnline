@@ -60,6 +60,7 @@ input AddThesisInput {
   keywords: [String!]
   degreeType: String
   # TODO: make this AddInstitutionInput
+  """The university or some other institution where the thesis has been written at."""
   institution: String
   pageTotal: String
 }

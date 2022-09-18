@@ -52,7 +52,7 @@ export class Mutation {
 
   async signup(
     _root: Record<string, never>,
-    { email, password }: MutationSignupArgs,
+    { input: { email, password } }: MutationSignupArgs,
     context: Context
   ): Promise<SignupPayload> {
     const newUserPayload = await this.authService.createAccount(email, password)
@@ -62,7 +62,7 @@ export class Mutation {
 
   async login(
     _root: Record<string, never>,
-    { email, password }: MutationLoginArgs,
+    { input: { email, password } }: MutationLoginArgs,
     context: Context
   ): Promise<LoginPayload> {
     const { user, info } = await context.authenticate('graphql-local', {
@@ -100,7 +100,7 @@ export class Mutation {
 
   async forgotPassword(
     _root: Record<string, never>,
-    { email }: MutationForgotPasswordArgs,
+    { input: { email } }: MutationForgotPasswordArgs,
     _context: Context
   ): Promise<ForgotPasswordPayload> {
     return {
@@ -110,7 +110,7 @@ export class Mutation {
 
   async changePassword(
     _root: Record<string, never>,
-    { token, id, newPassword }: MutationChangePasswordArgs,
+    { input: { token, id, newPassword } }: MutationChangePasswordArgs,
     _context: Context
   ): Promise<ChangePasswordPayload> {
     return await this.authService.updatePassword(token, id, newPassword)

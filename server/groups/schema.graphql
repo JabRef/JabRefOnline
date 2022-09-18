@@ -6,8 +6,8 @@ extend type Query {
 }
 
 extend type Mutation {
-  createGroup(group: GroupInput!): Group
-  updateGroup(group: GroupUpdate!): Group
+  createGroup(input: CreateGroupInput!): Group
+  updateGroup(input: UpdateGroupInput!): Group
 }
 
 interface Group {
@@ -47,6 +47,7 @@ type AutomaticKeywordGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """The field to search in."""
   field: String!
   keywordDelimiter: String!
   keywordHierarchicalDelimiter: String!
@@ -73,6 +74,7 @@ type AutomaticPersonsGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """The field to search in."""
   field: String!
 }
 input AutomaticPersonsGroupDetails {
@@ -95,6 +97,7 @@ type ExplicitGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """The delimiter used to separate keywords."""
   keywordDelimiter: String!
 }
 input ExplicitGroupDetails {
@@ -118,6 +121,7 @@ type LastNameGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """The field to search in."""
   field: String!
   authorLastName: String!
 }
@@ -142,6 +146,7 @@ type WordKeywordGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """The field to search in."""
   field: String!
   searchExpression: String!
   caseSensitive: Boolean!
@@ -172,6 +177,7 @@ type RegexKeywordGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """The field to search in."""
   field: String!
   searchExpression: String!
   caseSensitive: Boolean!
@@ -198,6 +204,7 @@ type SearchGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """The search expression."""
   searchExpression: String!
   caseSensitive: Boolean!
   isRegEx: Boolean!
@@ -232,6 +239,7 @@ type TexGroup implements Group {
   documents: [Document!]!
 
   # Specific fields
+  """Paths to the TeX files that are part of this group."""
   paths: [TexGroupDevicePathPair!]!
 }
 input TexGroupDetails {
@@ -255,10 +263,10 @@ enum GroupHierarchyType {
   UNION
 }
 
-input GroupInput {
+input CreateGroupInput {
   name: String!
   displayName: String
-  children: [GroupInput!]!
+  children: [CreateGroupInput!]!
   parentId: ID
 
   hierarchyType: GroupHierarchyType
@@ -271,6 +279,8 @@ input GroupInput {
   # https://github.com/graphql/graphql-spec/blob/main/rfcs/InputUnion.md
   # Thus we use "tagged inputs" as a workaround, which is pretty close to the current favorite for the official language extension
   # The user of the API should specify exactly one of the following fields.
+  
+  """Automatic keyword group info"""
   automaticKeywordGroup: AutomaticKeywordGroupDetails
   automaticPersonsGroup: AutomaticPersonsGroupDetails
   explicitGroup: ExplicitGroupDetails
@@ -280,11 +290,11 @@ input GroupInput {
   searchGroup: SearchGroupDetails
   texGroup: TexGroupDetails
 }
-input GroupUpdate {
+input UpdateGroupInput {
   id: ID!
   name: String
   displayName: String
-  children: [GroupUpdate!]!
+  children: [UpdateGroupInput!]!
   parentId: ID
 
   hierarchyType: GroupHierarchyType
@@ -296,6 +306,8 @@ input GroupUpdate {
   # https://github.com/graphql/graphql-spec/blob/main/rfcs/InputUnion.md
   # Thus we use "tagged inputs" as a workaround, which is pretty close to the current favorite for the official language extension
   # The user of the API should specify exactly one of the following fields.
+  
+  """Automatic keyword group info"""
   automaticKeywordGroup: AutomaticKeywordGroupDetails
   automaticPersonsGroup: AutomaticPersonsGroupDetails
   explicitGroup: ExplicitGroupDetails
