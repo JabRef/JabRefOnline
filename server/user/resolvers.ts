@@ -71,7 +71,7 @@ export class Mutation {
     })
     if (user) {
       // Make login persistent by putting it in the session store
-      await context.login(user)
+      // await context.login(user)
       return { user }
     } else {
       return {
