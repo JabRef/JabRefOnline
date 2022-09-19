@@ -25,7 +25,7 @@
                   "});\r",
                   "\r",
                   "pm.test(\"Sets cookie\", function () {\r",
-                  "   pm.expect(pm.cookies.has('session')).to.be.true;\r",
+                  "   pm.expect(pm.cookies.reference).to.have.any.keys('session');\r",
                   "});"
                 ],
                 "type": "text/javascript"
