@@ -214,7 +214,10 @@
       "listen": "prerequest",
       "script": {
         "type": "text/javascript",
-        "exec": [""]
+        "exec": [
+          "// Don't truncate objects if assertion fails\r",
+          "require('chai').config.truncateThreshold = 0;"
+        ]
       }
     },
     {
