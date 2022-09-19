@@ -1,4 +1,5 @@
 import { User } from '@prisma/client'
+import expressSession from 'express-session/index.js'
 import {
   AuthenticateReturn,
   buildContext as passportBuildContext,
@@ -41,6 +42,17 @@ export function buildContext(event: CompatibilityEvent): Context {
           if (err) {
             return reject(err)
           }
+          // @ts-expect-error: internal
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          expressSession.setcookie(
+            event.res,
+            'session',
+            // @ts-expect-error: there are no correct types for this
+            event.req.sessionID,
+            'secrets[0]',
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            session.cookie.data
+          )
           resolve()
         })
       })
