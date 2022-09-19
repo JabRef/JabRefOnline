@@ -73,7 +73,7 @@ jobs:
           az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output\server.zip
 
       - name: Check HTTP status
-        run: Start-Sleep -Seconds 300
+        run: Start-Sleep -Seconds 30
         # The api returns 400 status code for some reason
         # uses: gerdemann/http-status-code@1.0.0
         # with:
@@ -166,7 +166,7 @@ jobs:
           az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output\server.zip
 
       - name: Check HTTP status
-        run: Start-Sleep -Seconds 300
+        run: Start-Sleep -Seconds 30
         # The api returns 400 status code for some reason
         # with:
         #   url: ${{ matrix.url }}/api
