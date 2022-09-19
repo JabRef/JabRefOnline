@@ -54,7 +54,7 @@
           "if (!pm.collectionVariables.get('SessionCookie')) {",
           "  pm.sendRequest(",
           "    {",
-          "      url: pm.collectionVariables.get('base_url'),",
+          "      url: pm.variables.get('base_url'),",
           "      method: 'POST',",
           "      header: {",
           "        'content-type': 'application/json',",
