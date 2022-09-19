@@ -107,8 +107,8 @@ export default defineComponent({
       error: graphqlError,
     } = useMutation(
       gql(/* GraphQL */ `
-        mutation Login($email: EmailAddress!, $password: String!) {
-          login(email: $email, password: $password) {
+        mutation Login($input: LoginInput!) {
+          login(input: $input) {
             ... on UserReturned {
               user {
                 id
@@ -125,8 +125,10 @@ export default defineComponent({
       `),
       () => ({
         variables: {
-          email: email.value,
-          password: password.value,
+          input: {
+            email: email.value,
+            password: password.value,
+          },
         },
         update(cache, { data: login }) {
           if (login?.login?.__typename === 'UserReturned') {

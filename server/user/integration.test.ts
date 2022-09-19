@@ -13,7 +13,7 @@ describe('Query', () => {
 
   describe('me', () => {
     const query = gql`
-      query Me {
+      query MeTest {
         me {
           id
           email

@@ -1,5 +1,13 @@
 {
   "schema": "server/**/*.graphql",
+  "documents": [
+    "./pages/**/*.vue",
+    "./components/**/*.vue",
+    "./plugins/**/*.ts",
+    "./apollo/cache.ts",
+    "./middleware/**/*.ts",
+    "./server/**/*.test.ts"
+  ],
   "extensions": {
     "codegen": {
       "overwrite": true,
@@ -26,12 +34,6 @@
           "plugins": ["typescript", "typescript-resolvers"]
         },
         "apollo": {
-          "documents": [
-            "./pages/**/*.vue",
-            "./components/**/*.vue",
-            "./plugins/**/*.ts",
-            "./apollo/cache.ts"
-          ],
           "preset": "gql-tag-operations-preset",
           "presetConfig": {
             "fragmentMasking": true
