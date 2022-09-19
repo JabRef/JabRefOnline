@@ -42,7 +42,7 @@ export default class PassportInitializer {
     // If the store implements the touch function, the express-session middleware
     // essentially makes res.end an asynchronous operation, which is not what h3 expects.
     // Therefore, we disable the touch function.
-    // As a fix we would need https://github.com/expressjs/session/pull/751 and support for callbacks to res.end in h3 
+    // As a fix we would need https://github.com/expressjs/session/pull/751 and support for callbacks to res.end in h3
     // @ts-expect-error: the idea is to replace the function by something else
     store.touch = false
     const sessionMiddleware = session({
