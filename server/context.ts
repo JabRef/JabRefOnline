@@ -42,6 +42,7 @@ export function buildContext(event: CompatibilityEvent): Context {
           if (err) {
             return reject(err)
           }
+          // For some strange reason the session cookie is not set correctly on azure, so do this manually
           // @ts-expect-error: internal
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           expressSession.setcookie(
@@ -49,7 +50,7 @@ export function buildContext(event: CompatibilityEvent): Context {
             'session',
             // @ts-expect-error: there are no correct types for this
             event.req.sessionID,
-            'secrets[0]',
+            useRuntimeConfig().session.primarySecret,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             session.cookie.data
           )
