@@ -53,6 +53,7 @@ const { result, fetchMore } = useQuery(
         ) {
           edges {
             node {
+              id
               ...DocumentForView
             }
           }

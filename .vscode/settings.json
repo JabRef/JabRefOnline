@@ -37,6 +37,10 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[graphql]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "files.exclude": {
     "coverage": true
   },
@@ -54,5 +58,6 @@
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yml"
   },
-  "testing.automaticallyOpenPeekView": "never"
+  "testing.automaticallyOpenPeekView": "never",
+  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs"
 }

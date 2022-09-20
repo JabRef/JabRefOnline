@@ -71,6 +71,7 @@
                 type="primary"
                 size="large"
                 class="mx-auto"
+                style="height: 3.2em"
               >
                 <a
                   class="text-2xl"

@@ -21,11 +21,11 @@
                 "exec": [
                   "pm.test(\"Returns user id\", function () {\r",
                   "    var jsonData = pm.response.json();\r",
-                  "    pm.expect(jsonData.data).to.eql({login: {user: {id: \"ckn4oul7100004cv7y3t94n8j\"}}});\r",
+                  "    pm.expect(jsonData).to.eql({data: {login: {user: {id: \"ckn4oul7100004cv7y3t94n8j\"}}}});\r",
                   "});\r",
                   "\r",
                   "pm.test(\"Sets cookie\", function () {\r",
-                  "   pm.expect(pm.cookies.has('session')).to.be.true;\r",
+                  "   pm.expect(pm.cookies.reference).to.have.any.keys('session');\r",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -38,8 +38,8 @@
             "body": {
               "mode": "graphql",
               "graphql": {
-                "query": "mutation Mutation($email: EmailAddress!, $password: String!) { login(email: $email, password: $password) {... on UserReturned {user {id}}}}",
-                "variables": "{\n  \"email\": \"alice@jabref.de\",\"password\": \"EBNPXY35TYkYXHs\" \n}"
+                "query": "mutation Mutation($input: LoginInput!) { login(input: $input) {... on UserReturned {user {id}}}}",
+                "variables": "{\"input\":{\n  \"email\": \"alice@jabref.de\",\"password\": \"EBNPXY35TYkYXHs\" \n}}"
               }
             },
             "url": {
@@ -128,6 +128,83 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Preflight",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"CORS allow methods is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).equals('GET,POST,OPTIONS');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allow origin is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Origin')).equals('https://studio.apollographql.com');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allowed hearders are correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Headers')).equals('Content-Type');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is okay\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "OPTIONS",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}",
+              "host": ["{{base_url}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Preflight with slash",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"CORS allow methods is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Methods')).equals('GET,POST,OPTIONS');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allow origin is correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Origin')).equals('https://studio.apollographql.com');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CORS allowed hearders are correct\", function () {\r",
+                  "    pm.expect(pm.response.headers.get('Access-Control-Allow-Headers')).equals('Content-Type');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is okay\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "OPTIONS",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            }
+          },
+          "response": []
         }
       ]
     }
@@ -137,7 +214,10 @@
       "listen": "prerequest",
       "script": {
         "type": "text/javascript",
-        "exec": [""]
+        "exec": [
+          "// Don't truncate objects if assertion fails\r",
+          "require('chai').config.truncateThreshold = 0;"
+        ]
       }
     },
     {

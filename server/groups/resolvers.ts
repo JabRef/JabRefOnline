@@ -39,7 +39,7 @@ export class Mutation {
 
   async createGroup(
     _root: Record<string, never>,
-    { group }: MutationCreateGroupArgs,
+    { input: group }: MutationCreateGroupArgs,
     context: Context
   ): Promise<Group | null> {
     let type = null
@@ -141,7 +141,7 @@ export class Mutation {
 
   async updateGroup(
     _root: Record<never, string>,
-    { group }: MutationUpdateGroupArgs,
+    { input: group }: MutationUpdateGroupArgs,
     _context: Context
   ): Promise<Group | null> {
     return await this.groupService.updateGroup({
