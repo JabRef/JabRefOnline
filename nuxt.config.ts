@@ -105,6 +105,11 @@ export default defineNuxtConfig({
    */
   storybook: {},
 
+  tailwindcss: {
+    // Expose config so that we can use it in the vscode extension
+    exposeConfig: true,
+  },
+
   vite: {
     server: {
       // Configure vite for HMR with Gitpod
