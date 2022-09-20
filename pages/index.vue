@@ -69,7 +69,9 @@
             <div class="col-auto">
               <n-button
                 type="primary"
-                class="mx-auto h-16"
+                size="large"
+                class="mx-auto"
+                style="height: 3.2em"
               >
                 <a
                   class="text-2xl"
