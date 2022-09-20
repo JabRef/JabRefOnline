@@ -37,10 +37,14 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[graphql]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "files.exclude": {
     "coverage": true
   },
-  "jest.jestCommandLine": "yarn test",
+  "vitest.commandLine": "yarn test --",
   "eslint.validate": ["javascript", "typescript", "graphql", "vue"],
   "search.exclude": {
     "**/node_modules": true,
@@ -53,5 +57,6 @@
   "vscode-graphql.useSchemaFileDefinitions": true,
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yml"
-  }
+  },
+  "testing.automaticallyOpenPeekView": "never"
 }

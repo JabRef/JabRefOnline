@@ -1,5 +1,5 @@
 diff --git a/index.js b/index.js
-index 40a442baf2fec2c6bdce79a5fba5086b5b8aac07..321ddabde7361d6ce6b5da450af1be4d6caf3017 100644
+index 40a442baf2fec2c6bdce79a5fba5086b5b8aac07..d4ce261b528b4976cceca5e29d629d7c1f812c43 100644
 --- a/index.js
 +++ b/index.js
 @@ -273,7 +273,10 @@ function session(options) {
@@ -14,3 +14,12 @@ index 40a442baf2fec2c6bdce79a5fba5086b5b8aac07..321ddabde7361d6ce6b5da450af1be4d
          }
  
          if (chunk == null) {
+@@ -663,6 +666,8 @@ function setcookie(res, name, val, secret, options) {
+ 
+   res.setHeader('Set-Cookie', header)
+ }
++// CHANGED: Since we need this function for an ugly workaround
++exports.setcookie = setcookie;
+ 
+ /**
+  * Verify and decode the given `val` with `secrets`.

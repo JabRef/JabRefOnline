@@ -6,16 +6,24 @@ import {
   runHttpQuery,
 } from 'apollo-server-core'
 import type { LandingPage } from 'apollo-server-plugin-base'
-import { CompatibilityEvent, EventHandler, useBody, useQuery } from 'h3'
+import {
+  CompatibilityEvent,
+  EventHandler,
+  getQuery,
+  readBody,
+  setResponseHeader,
+  setResponseHeaders,
+} from 'h3'
 
 export { gql } from 'apollo-server-core'
 
-// Manually specify CORS options as long as h3 doesn't suppor this natively
+// Manually specify CORS options as long as h3 doesn't support this natively
 // https://github.com/unjs/h3/issues/82
 interface RouteOptionsCors {
   origin?: string
   credentials?: boolean
   methods?: string
+  allowedHeaders?: string
 }
 
 export interface ServerRegistration {
@@ -49,6 +57,14 @@ export class ApolloServer extends ApolloServerBase {
     return async (event: CompatibilityEvent) => {
       const options = await this.createGraphQLServerOptions(event)
       try {
+        // Apollo-server doesn't handle OPTIONS calls, so we have to do this on our own
+        // https://github.com/apollographql/apollo-server/blob/40ed23fbb5dd620902d7c31bcc1e26e098990041/packages/apollo-server-core/src/runHttpQuery.ts#L325-L334
+        if (event.req.method === 'OPTIONS') {
+          setHeaders(event, undefined, corsOptions)
+          // send 204 response
+          return null
+        }
+
         if (landingPage) {
           const landingPageHtml = this.handleLandingPage(event, landingPage)
           if (landingPageHtml) {
@@ -61,8 +77,8 @@ export class ApolloServer extends ApolloServerBase {
           options,
           query:
             event.req.method === 'POST'
-              ? await useBody(event)
-              : useQuery(event),
+              ? await readBody(event)
+              : getQuery(event),
           request: convertNodeHttpToRequest(event.req),
         })
         setHeaders(event, responseInit.headers, corsOptions)
@@ -101,23 +117,35 @@ function setHeaders(
   corsOptions: false | RouteOptionsCors
 ) {
   if (headers) {
-    for (const [name, value] of Object.entries(headers)) {
-      event.res.setHeader(name, value)
-    }
+    setResponseHeaders(event, headers)
   }
   if (corsOptions !== false) {
-    event.res.setHeader(
+    setResponseHeader(
+      event,
       'Access-Control-Allow-Origin',
       corsOptions.origin ?? 'ignore'
     )
+
     if (corsOptions.credentials !== undefined) {
-      event.res.setHeader(
+      setResponseHeader(
+        event,
         'Access-Control-Allow-Credentials',
         corsOptions.credentials.toString()
       )
     }
     if (corsOptions.methods !== undefined) {
-      event.res.setHeader('Access-Control-Allow-Methods', corsOptions.methods)
+      setResponseHeader(
+        event,
+        'Access-Control-Allow-Methods',
+        corsOptions.methods
+      )
+    }
+    if (corsOptions.allowedHeaders !== undefined) {
+      setResponseHeader(
+        event,
+        'Access-Control-Allow-Headers',
+        corsOptions.allowedHeaders
+      )
     }
   }
 }

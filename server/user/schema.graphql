@@ -12,16 +12,32 @@ extend type Query {
   me: User
 }
 
+input LoginInput {
+  email: EmailAddress!
+  password: String!
+}
+
+input SignupInput {
+  email: EmailAddress!
+  password: String!
+}
+
+input ForgotPasswordInput {
+  email: EmailAddress!
+}
+
+input ChangePasswordInput {
+  token: String!
+  id: ID!
+  newPassword: String!
+}
+
 extend type Mutation {
   logout: LogoutPayload
-  login(email: EmailAddress!, password: String!): LoginPayload
-  signup(email: EmailAddress!, password: String!): SignupPayload
-  forgotPassword(email: EmailAddress!): ForgotPasswordPayload
-  changePassword(
-    token: String!
-    id: ID!
-    newPassword: String!
-  ): ChangePasswordPayload
+  login(input: LoginInput!): LoginPayload
+  signup(input: SignupInput!): SignupPayload
+  forgotPassword(input: ForgotPasswordInput!): ForgotPasswordPayload
+  changePassword(input: ChangePasswordInput!): ChangePasswordPayload
 }
 
 union LoginPayload = UserReturned | InputValidationProblem

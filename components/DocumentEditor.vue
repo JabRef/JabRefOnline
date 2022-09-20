@@ -102,7 +102,7 @@
         class="mt-4 mb-1"
       ></document-editor-header>
       <t-table
-        :data="external"
+        :data="externalLinks"
         variant="plain"
         class="text-sm"
       ></t-table>
@@ -110,12 +110,12 @@
   </div>
 </template>
 
-<script lang="ts">
-import { useQuery, useResult } from '@vue/apollo-composable'
-import { gql } from '~/apollo'
+<script lang="ts" setup>
+import { useQuery } from '@vue/apollo-composable'
+import { gql, useFragment } from '~/apollo'
 import Tags from './tagify.vue'
 
-export const DocumentDetails = gql(/* GraphQL */ `
+const DocumentDetails = gql(/* GraphQL */ `
   fragment DocumentDetails on Document {
     id
     title
@@ -159,141 +159,128 @@ export const DocumentDetails = gql(/* GraphQL */ `
   }
 `)
 
-export default defineComponent({
-  components: {
-    Tags,
+const props = defineProps({
+  documentId: {
+    type: String,
+    required: true,
   },
-  props: {
-    documentId: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const { result } = useQuery(
-      gql(/* GraphQL */ `
-        query GetDocumentDetails($documentId: ID!) {
-          userDocument(id: $documentId) {
-            ...DocumentDetails
-          }
-        }
-      `),
-      () => ({
-        documentId: props.documentId,
-      })
-    )
-    const document = useResult(result)
+})
 
-    const authors = computed({
-      get: () =>
-        document.value?.authors.map((author) => ({
-          value: author.name,
-        })),
-      set: (value) => {
-        // TODO: implement
-      },
-    })
-    const authorSuggestions = [{ value: 'Linus' }]
-
-    const keywords = computed({
-      get: () =>
-        document.value?.keywords.map((keyword) => ({
-          value: keyword,
-        })),
-      set: (value) => {
-        // TODO: implement
-      },
-    })
-    const keywordSuggestions = [{ value: 'Differential Geometry' }]
-
-    const groups = [{ value: 'Chocolate Making' }, { value: 'Consumption' }]
-    const groupSuggestions = [{ value: 'Grinding' }]
-
-    const external = computed(() => [
-      { name: 'DOI', value: document.value?.doi },
-      { name: 'ArXiv', value: '1812.04695' },
-      { name: 'MathSciNet', value: 'MR3997558' },
-    ])
-
-    return {
-      title: computed({
-        get: () => document.value?.title,
-        set: (value) => {
-          // TODO: implement
-        },
-      }),
-      authors,
-      authorSuggestions,
-      published: computed({
-        get: () =>
-          document.value && 'published' in document.value
-            ? document.value.published
-            : null,
-        set: (value) => {
-          // TODO: implement
-        },
-      }),
-      journal: computed({
-        get: () =>
-          document.value &&
-          'in' in document.value &&
-          document.value.in &&
-          'journal' in document.value.in
-            ? document.value.in?.journal?.name
-            : null,
-        set: (value) => {
-          // TODO: implement
-        },
-      }),
-      volume: computed({
-        get: () =>
-          document.value &&
-          'in' in document.value &&
-          document.value.in &&
-          'volume' in document.value.in
-            ? document.value.in?.volume
-            : null,
-        set: (value) => {
-          // TODO: implement
-        },
-      }),
-      issue: computed({
-        get: () =>
-          document.value &&
-          'in' in document.value &&
-          document.value.in &&
-          'number' in document.value.in
-            ? document.value.in?.number
-            : null,
-        set: (value) => {
-          // TODO: implement
-        },
-      }),
-      pages: computed({
-        get: () =>
-          document.value && 'pageStart' in document.value
-            ? (document.value.pageStart ?? '') +
-              (document.value.pageEnd ? '-' + document.value.pageEnd : '')
-            : null,
-        set: (value) => {
-          // TODO: implement
-        },
-      }),
-      abstract: computed({
-        get: () =>
-          document.value && 'abstract' in document.value
-            ? document.value.abstract
-            : null,
-        set: (value) => {
-          // TODO: implement
-        },
-      }),
-      keywords,
-      keywordSuggestions,
-      groups,
-      groupSuggestions,
-      external,
+const { result } = useQuery(
+  gql(/* GraphQL */ `
+    query GetDocumentDetails($documentId: ID!) {
+      userDocument(id: $documentId) {
+        ...DocumentDetails
+      }
     }
+  `),
+  () => ({
+    documentId: props.documentId,
+  })
+)
+const document = computed(() =>
+  useFragment(DocumentDetails, result.value?.userDocument)
+)
+
+const authors = computed({
+  get: () =>
+    document.value?.authors.map((author) => ({
+      value: author.name,
+    })),
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const authorSuggestions = [{ value: 'Linus' }]
+
+const keywords = computed({
+  get: () =>
+    document.value?.keywords.map((keyword) => ({
+      value: keyword,
+    })),
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const keywordSuggestions = [{ value: 'Differential Geometry' }]
+
+const groups = [{ value: 'Chocolate Making' }, { value: 'Consumption' }]
+const groupSuggestions = [{ value: 'Grinding' }]
+
+const externalLinks = computed(() => [
+  { name: 'DOI', value: document.value?.doi },
+  { name: 'ArXiv', value: '1812.04695' },
+  { name: 'MathSciNet', value: 'MR3997558' },
+])
+
+const title = computed({
+  get: () => document.value?.title,
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const published = computed({
+  get: () =>
+    document.value && 'published' in document.value
+      ? document.value.published
+      : null,
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const journal = computed({
+  get: () =>
+    document.value &&
+    'in' in document.value &&
+    document.value.in &&
+    'journal' in document.value.in
+      ? document.value.in?.journal?.name
+      : null,
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const volume = computed({
+  get: () =>
+    document.value &&
+    'in' in document.value &&
+    document.value.in &&
+    'volume' in document.value.in
+      ? document.value.in?.volume
+      : null,
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const issue = computed({
+  get: () =>
+    document.value &&
+    'in' in document.value &&
+    document.value.in &&
+    'number' in document.value.in
+      ? document.value.in?.number
+      : null,
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const pages = computed({
+  get: () =>
+    document.value && 'pageStart' in document.value
+      ? (document.value.pageStart ?? '') +
+        (document.value.pageEnd ? '-' + document.value.pageEnd : '')
+      : null,
+  set: (value) => {
+    // TODO: implement
+  },
+})
+const abstract = computed({
+  get: () =>
+    document.value && 'abstract' in document.value
+      ? document.value.abstract
+      : null,
+  set: (value) => {
+    // TODO: implement
   },
 })
 </script>

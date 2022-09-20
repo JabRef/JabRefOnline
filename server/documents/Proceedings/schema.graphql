@@ -46,6 +46,9 @@ input AddProceedingsArticleInput {
   doi: String
   keywords: [String!]
   # TODO: Make this ProceedingsInput
+  """
+  The proceedings this article has been published in.
+  """
   in: String
   pageStart: String
   pageEnd: String

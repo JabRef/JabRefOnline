@@ -28,6 +28,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     link: errorLink.concat(httpLink),
     // Send cookies along with every request (needed for authentication)
     credentials: 'include',
+    // Identification of client awareness: https://www.apollographql.com/docs/studio/metrics/client-awareness/
+    name: 'web',
   })
 
   // provideApolloClient(apolloClient)

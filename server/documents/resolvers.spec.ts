@@ -1,11 +1,11 @@
 import { UserDocument } from '@prisma/client'
-import mocking from 'jest-mock-extended'
+import { mock, mockReset } from 'vitest-mock-extended'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 import { register, resolve } from '../tsyringe'
 import { DocumentResolver } from './resolvers'
 import { UserDocumentService } from './user.document.service'
 
-const userDocumentService = mocking.mock<UserDocumentService>()
+const userDocumentService = mock<UserDocumentService>()
 register('UserDocumentService', { useValue: userDocumentService })
 const query = resolve('DocumentQuery')
 const mutation = resolve('DocumentMutation')
@@ -13,7 +13,7 @@ const mutation = resolve('DocumentMutation')
 const context = createUnauthenticatedContext()
 
 beforeEach(() => {
-  mocking.mockReset(userDocumentService)
+  mockReset(userDocumentService)
 })
 
 describe('Query', () => {

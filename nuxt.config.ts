@@ -94,7 +94,10 @@ export default defineNuxtConfig({
    * Add global Graphql server endpoint
    * See https://v3.nuxtjs.org/api/configuration/nuxt.config#serverhandlers
    */
-  serverHandlers: [{ route: '/api', handler: '~/server/index.ts' }],
+  serverHandlers: [
+    { route: '/api', handler: '~/server/index.ts' },
+    { route: '/api/', handler: '~/server/index.ts' },
+  ],
 
   /**
    * Storybook integration with Nuxt
@@ -116,6 +119,11 @@ export default defineNuxtConfig({
             port: 443,
           }
         : true,
+
+      // Without this, vite would handle cors in dev mode, which would lead to different behavior in dev and prod
+      cors: {
+        preflightContinue: true,
+      },
     },
   },
 })
