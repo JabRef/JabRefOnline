@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nuxi dev",
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider nuxi dev",
     "build": "nuxi build --fail-on-error",
     "build:azure": "cross-env INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN=test NITRO_PRESET=azure yarn build",
     "start": "nuxi preview",
