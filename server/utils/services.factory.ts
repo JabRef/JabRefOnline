@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */ // TODO: Remove once redis-mock is updated
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
-import redis, {
+import {
+  createClient,
   RedisClientType,
   RedisDefaultModules,
   RedisFunctions,
@@ -56,7 +57,7 @@ export async function createRedisClient(): Promise<RedisClient> {
     if (config.public.environment === Environment.CI) {
       delete redisConfig.password
     }
-    const client = redis.createClient(redisConfig)
+    const client = createClient(redisConfig)
     // Log errors
     // The 'error' handler is important, since otherwise errors in the redis connection bring down the whole server/process
     // see https://github.com/redis/node-redis/issues/2032#issuecomment-1116883257
