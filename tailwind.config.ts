@@ -1,11 +1,10 @@
 import { Config } from 'tailwindcss'
 
 import forms from '@tailwindcss/forms'
-import colors from 'tailwindcss/colors'
-import plugin from 'tailwindcss/plugin'
-// @ts-ignore: has no type info
 import lineClamp from '@tailwindcss/line-clamp'
 import typography from '@tailwindcss/typography'
+import colors from 'tailwindcss/colors'
+import plugin from 'tailwindcss/plugin'
 
 // Flip object horizontally or vertically
 // Adapted from https://github.com/tailwindlabs/tailwindcss/discussions/2146

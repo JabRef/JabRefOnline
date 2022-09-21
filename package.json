@@ -31,7 +31,7 @@
     "graphql:validate": "graphql-inspector validate --apollo '{pages,components}/**/*.vue' 'server/**/*.graphql'",
     "docker:redis": "docker run -d --rm --name JabRefRedis -p 6380:6379 redis --requirepass jabref",
     "lint": "yarn lint:eslint && yarn lint:prettier",
-    "lint:eslint": "eslint --ext .ts,.js,.vue,.graphql --ignore-path .gitignore .",
+    "lint:eslint": "eslint --ext .ts,.js,.vue,.graphql --ignore-path .gitignore --report-unused-disable-directives .",
     "lint:prettier": "prettier --check --ignore-path .gitignore .",
     "postinstall": "patch-package && nuxi prepare && yarn generate",
     "test": "vitest --no-threads",

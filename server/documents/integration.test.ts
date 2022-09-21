@@ -330,7 +330,6 @@ describe('Roundtrip', () => {
         }
       `)
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const result = await authenticatedClient.executeOperation({
         query: userDocumentById,
         variables: { id: 'ckondtcaf000101mh7x9g4gia' },

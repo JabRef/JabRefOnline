@@ -20,7 +20,7 @@ export interface Context {
 
 export function buildContext(event: CompatibilityEvent): Context {
   return {
-    // @ts-ignore: h3 doesn't provide correct types https://github.com/unjs/h3/issues/146
+    // @ts-expect-error: h3 doesn't provide correct types https://github.com/unjs/h3/issues/146
     ...passportBuildContext<User>({ req: event.req, res: event.res }),
     // The login method provided by graphql-passport doesn't work on azure, so we have to override it
     login: async (user, options) => {

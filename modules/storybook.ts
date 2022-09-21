@@ -110,7 +110,6 @@ configure(() => {
     })
     */
     nuxt.hook('listen', async (_, listener) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
       // const fullPath = `${withoutTrailingSlash(listener.url)}${path}`
       // logger.info(`Storybook: ${chalk.underline.yellow(fullPath)}`)
       if (nuxt.options.dev) {

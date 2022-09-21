@@ -9,6 +9,6 @@ config.autoAddCss = false
 library.add(fas)
 
 export default defineNuxtPlugin((nuxtApp) => {
-  // @ts-ignore: Library doesn't seem to provide correct typing infos
+  // @ts-expect-error: Library doesn't seem to provide correct typing infos
   nuxtApp.vueApp.component('FontAwesomeIcon', FontAwesomeIcon)
 })

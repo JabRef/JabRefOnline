@@ -35,9 +35,9 @@ export default defineNuxtPlugin((nuxtApp) => {
   if (process.server) {
     const { collect } = setup(nuxtApp.vueApp)
     const originalRenderMeta = nuxtApp.ssrContext?.renderMeta
-    // @ts-ignore: copy-pasted from https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts
+    // @ts-expect-error: copy-pasted from https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts
     nuxtApp.ssrContext = nuxtApp.ssrContext || {}
-    // @ts-ignore: copy-pasted from https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts
+    // @ts-expect-error: copy-pasted from https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts
     nuxtApp.ssrContext.renderMeta = () => {
       if (!originalRenderMeta) {
         return {

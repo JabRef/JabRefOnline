@@ -196,7 +196,7 @@ export function register<T extends Token>(
 ): DependencyContainer {
   return container.register(
     InjectionSymbols[token].sym,
-    // @ts-ignore: There is a problem with the overloads, don't know why
+    // @ts-expect-error: There is a problem with the overloads, don't know why
     providerOrConstructor,
     options
   )

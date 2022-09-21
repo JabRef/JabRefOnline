@@ -9,7 +9,7 @@ import { loadSchemaWithResolvers } from './schema'
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_outgoing.js
 http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
-  // @ts-ignore: Is workaround anyway
+  // @ts-expect-error: Is workaround anyway
   if (this._header) {
     // CHANGED: Don't throw an error in this case, as workaround for https://github.com/unjs/h3/issues/21
     // throw new Error('Cannot set headers after they are sent to the client')
@@ -23,12 +23,12 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
     (sym) => sym.toString() === 'Symbol(kOutHeaders)'
   )
 
-  // @ts-ignore: Is workaround anyway
+  // @ts-expect-error: Is workaround anyway
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   let headers = this[kOutHeaders]
   // CHANGED: === to == to cover undefined case
   if (headers == null) {
-    // @ts-ignore: Is workaround anyway
+    // @ts-expect-error: Is workaround anyway
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     this[kOutHeaders] = headers = Object.create(null)
   }
@@ -41,8 +41,7 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/internal/streams/readable.js
 http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
   // CHANGED: Add fallback if not existing
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  // @ts-ignore: is workaround anyway
+  // @ts-expect-error: is workaround anyway
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const state = (this._readableState as any) || { pipes: [] }
   const unpipeInfo = { hasUnpiped: false }
@@ -53,7 +52,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
 
   if (!dest) {
     // remove all.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const dests = state.pipes as any[]
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     state.pipes = []
