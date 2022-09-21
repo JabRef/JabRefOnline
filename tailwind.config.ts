@@ -3,7 +3,7 @@ import { Config } from 'tailwindcss'
 import forms from '@tailwindcss/forms'
 import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
-// @ts-ignore: has no type info
+// @ts-expect-error: has no type info
 import lineClamp from '@tailwindcss/line-clamp'
 import typography from '@tailwindcss/typography'
 
