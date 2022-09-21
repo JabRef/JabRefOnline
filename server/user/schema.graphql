@@ -71,7 +71,7 @@ type TokenProblem {
 
 type InputFieldValidationProblem {
   message: String!
-  path: String!
+  path: [String!]!
 }
 
 type User {

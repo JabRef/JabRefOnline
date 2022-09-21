@@ -2375,7 +2375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/plugin-helpers@npm:^2.6.2, @graphql-codegen/plugin-helpers@npm:^2.7.1":
+"@graphql-codegen/plugin-helpers@npm:^2.3.2, @graphql-codegen/plugin-helpers@npm:^2.6.2, @graphql-codegen/plugin-helpers@npm:^2.7.1":
   version: 2.7.1
   resolution: "@graphql-codegen/plugin-helpers@npm:2.7.1"
   dependencies:
@@ -2391,7 +2391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/schema-ast@npm:^2.5.1":
+"@graphql-codegen/schema-ast@npm:^2.4.1, @graphql-codegen/schema-ast@npm:^2.5.1":
   version: 2.5.1
   resolution: "@graphql-codegen/schema-ast@npm:2.5.1"
   dependencies:
@@ -2465,7 +2465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/visitor-plugin-common@npm:2.12.1, @graphql-codegen/visitor-plugin-common@npm:^2.12.1":
+"@graphql-codegen/visitor-plugin-common@npm:2.12.1, @graphql-codegen/visitor-plugin-common@npm:^2.12.1, @graphql-codegen/visitor-plugin-common@npm:^2.5.2":
   version: 2.12.1
   resolution: "@graphql-codegen/visitor-plugin-common@npm:2.12.1"
   dependencies:
@@ -3078,7 +3078,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:8.12.0, @graphql-tools/utils@npm:^8.6.0, @graphql-tools/utils@npm:^8.6.5, @graphql-tools/utils@npm:^8.6.9, @graphql-tools/utils@npm:^8.8.0, @graphql-tools/utils@npm:^8.9.0":
+"@graphql-tools/utils@npm:8.12.0, @graphql-tools/utils@npm:^8.6.0, @graphql-tools/utils@npm:^8.6.1, @graphql-tools/utils@npm:^8.6.5, @graphql-tools/utils@npm:^8.6.9, @graphql-tools/utils@npm:^8.8.0, @graphql-tools/utils@npm:^8.9.0":
   version: 8.12.0
   resolution: "@graphql-tools/utils@npm:8.12.0"
   dependencies:
@@ -13108,6 +13108,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql-codegen-typescript-validation-schema@npm:^0.6.2":
+  version: 0.6.2
+  resolution: "graphql-codegen-typescript-validation-schema@npm:0.6.2"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": ^2.3.2
+    "@graphql-codegen/schema-ast": ^2.4.1
+    "@graphql-codegen/visitor-plugin-common": ^2.5.2
+    "@graphql-tools/utils": ^8.6.1
+    graphql: ^16.2.0
+  peerDependencies:
+    graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: e5bc215d18bfb203114823e69139350aeead1ab35f24c43cc67999e83146f876fdaa812d17f574c1a1eee2e2824fcbd6784a0b985d7d9eeefcb9ddb99fbaf00e
+  languageName: node
+  linkType: hard
+
 "graphql-config@npm:^4.3.0, graphql-config@npm:^4.3.5":
   version: 4.3.5
   resolution: "graphql-config@npm:4.3.5"
@@ -13234,7 +13249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.6.0":
+"graphql@npm:^16.2.0, graphql@npm:^16.6.0":
   version: 16.6.0
   resolution: "graphql@npm:16.6.0"
   checksum: bf1d9e3c1938ce3c1a81e909bd3ead1ae4707c577f91cff1ca2eca474bfbc7873d5d7b942e1e9777ff5a8304421dba57a4b76d7a29eb19de8711cb70e3c2415e
@@ -15146,6 +15161,7 @@ __metadata:
     eslint-plugin-vue: ^9.3.0
     express-session: ^1.17.3
     graphql: ^16.6.0
+    graphql-codegen-typescript-validation-schema: ^0.6.2
     graphql-passport: ^0.6.4
     graphql-scalars: ^1.18.0
     lodash: ^4.17.21
@@ -15175,6 +15191,7 @@ __metadata:
     vitest-github-actions-reporter: ^0.8.3
     vitest-mock-extended: ^0.1.15
     vue-tsc: ^0.40.13
+    zod: ^3.19.1
   languageName: unknown
   linkType: soft
 
@@ -25383,6 +25400,13 @@ __metadata:
     compress-commons: ^4.1.0
     readable-stream: ^3.6.0
   checksum: 4a73da856738b0634700b52f4ab3fe0bf0a532bea6820ad962d0bda0163d2d5525df4859f89a7238e204a378384e12551985049790c1894c3ac191866e85887f
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.19.1":
+  version: 3.19.1
+  resolution: "zod@npm:3.19.1"
+  checksum: 56e420ea5845912324a8fc61833714a2aec84954e418b52660d76502183c6e62fef9447cbfa64349640c5ce190cf2c24267e006bb80f066183e2f3fa9fe11864
   languageName: node
   linkType: hard
 
