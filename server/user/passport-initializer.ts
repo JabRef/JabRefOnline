@@ -78,7 +78,6 @@ export default class PassportInitializer {
       await callHandler(passportMiddleware, event.req, event.res)
 
       // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
-      // @ts-expect-error: https://github.com/unjs/h3/issues/146
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       await callHandler(passportSessionMiddleware, event.req, event.res)
     })

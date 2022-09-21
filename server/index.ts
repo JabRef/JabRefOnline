@@ -41,7 +41,6 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/internal/streams/readable.js
 http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
   // CHANGED: Add fallback if not existing
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   // @ts-expect-error: is workaround anyway
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const state = (this._readableState as any) || { pipes: [] }
@@ -53,7 +52,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
 
   if (!dest) {
     // remove all.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const dests = state.pipes as any[]
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     state.pipes = []

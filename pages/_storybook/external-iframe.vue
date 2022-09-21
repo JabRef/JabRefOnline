@@ -61,7 +61,6 @@ definePageMeta({ layout: false, alias: '/iframe.html' })
 
 export default defineComponent({
   setup: () => {
-    // @ts-expect-error: module is not used
     api.configure(
       framework,
       () => [

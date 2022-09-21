@@ -66,7 +66,6 @@ export default defineComponent({
       if (tagifySettings.classNames) {
         tagifySettings.classNames.tag = 'tagify__tag ' + this.tagClass
       } else {
-        // @ts-expect-error: Typing information seems to be incorrect, don't need to provide a complete classNames object
         tagifySettings.classNames = {
           tag: 'tagify__tag ' + this.tagClass,
         }
