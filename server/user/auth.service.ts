@@ -36,7 +36,9 @@ export class AuthService {
     })
     if (!user) {
       return {
-        problems: [{ path: ['email'], message: 'Wrong email or password' }],
+        problems: [
+          { path: ['email', 'password'], message: 'Wrong email or password' },
+        ],
       }
     } else {
       const correctPassword = await verifyHash(password, user.password)
@@ -44,7 +46,9 @@ export class AuthService {
         return { user }
       } else {
         return {
-          problems: [{ path: ['email'], message: 'Wrong email or password' }],
+          problems: [
+            { path: ['email', 'password'], message: 'Wrong email or password' },
+          ],
         }
       }
     }
