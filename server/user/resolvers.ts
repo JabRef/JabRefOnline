@@ -1,4 +1,5 @@
 import { User } from '@prisma/client'
+import { SignupInputSchema } from '~/apollo/validation'
 import { Context } from '../context'
 import {
   UserDocumentService,
@@ -16,6 +17,7 @@ import {
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
 import { GroupService } from '../groups/service'
+import { validateInput } from '../utils/validation'
 import { inject, injectable, resolve } from './../tsyringe'
 import {
   AuthService,
@@ -50,6 +52,7 @@ export class Query {
 export class Mutation {
   constructor(@inject('AuthService') private authService: AuthService) {}
 
+  @validateInput(SignupInputSchema)
   async signup(
     _root: Record<string, never>,
     { input: { email, password } }: MutationSignupArgs,
@@ -77,7 +80,7 @@ export class Mutation {
       return {
         problems: [
           {
-            path: 'Email or Password',
+            path: ['email'],
             message:
               (typeof info === 'string' ? info : info?.message) ||
               'Unknown error while logging in.',

@@ -37,7 +37,7 @@ export class AuthService {
     if (!user) {
       return {
         problems: [
-          { path: 'Email or Password', message: 'Wrong email or password' },
+          { path: ['email', 'password'], message: 'Wrong email or password' },
         ],
       }
     } else {
@@ -47,7 +47,7 @@ export class AuthService {
       } else {
         return {
           problems: [
-            { path: 'Email or Password', message: 'Wrong email or password' },
+            { path: ['email', 'password'], message: 'Wrong email or password' },
           ],
         }
       }
@@ -95,18 +95,8 @@ export class AuthService {
       return {
         problems: [
           {
-            path: 'Email',
+            path: ['email'],
             message: `User with email '${email}' already exists.`,
-          },
-        ],
-      }
-    }
-    if (password.length < 6) {
-      return {
-        problems: [
-          {
-            path: 'Password',
-            message: 'Use 6 characters or more for your password',
           },
         ],
       }
@@ -131,7 +121,7 @@ export class AuthService {
       return {
         problems: [
           {
-            path: 'Password',
+            path: ['password'],
             message: 'Use 6 characters or more for your password',
           },
         ],

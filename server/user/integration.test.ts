@@ -2,15 +2,15 @@ import { gql } from '~/apollo/apollo-server'
 import * as prisma from '~/server/database/util'
 import { createAuthenticatedClient } from '../../test/apollo.server'
 
+beforeEach(async () => {
+  await prisma.resetToSeed()
+})
+
+afterAll(async () => {
+  await prisma.disconnect()
+})
+
 describe('Query', () => {
-  beforeEach(async () => {
-    await prisma.resetToSeed()
-  })
-
-  afterAll(async () => {
-    await prisma.disconnect()
-  })
-
   describe('me', () => {
     const query = gql`
       query MeTest {
@@ -127,6 +127,57 @@ describe('Query', () => {
                 },
               ],
               "id": "ckn4oul7100004cv7y3t94n8j",
+            },
+          },
+        }
+      `)
+    })
+  })
+})
+
+describe('Mutation', () => {
+  describe('signup', () => {
+    const mutation = gql`
+      mutation SignupTest($input: SignupInput!) {
+        signup(input: $input) {
+          ... on UserReturned {
+            user {
+              id
+            }
+          }
+          ... on InputValidationProblem {
+            problems {
+              path
+              message
+            }
+          }
+        }
+      }
+    `
+
+    it('fails if password is too short', async () => {
+      const authenticatedClient = await createAuthenticatedClient()
+      const result = await authenticatedClient.executeOperation({
+        query: mutation,
+        variables: {
+          input: {
+            email: 'test@test.de',
+            password: '123',
+          },
+        },
+      })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "data": {
+            "signup": {
+              "problems": [
+                {
+                  "message": "The password must be at least 8 characters long",
+                  "path": [
+                    "password",
+                  ],
+                },
+              ],
             },
           },
         }

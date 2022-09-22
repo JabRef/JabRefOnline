@@ -48,6 +48,20 @@
         },
         "apollo/introspection.ts": {
           "plugins": ["fragment-matcher"]
+        },
+        "apollo/validation.internal.ts": {
+          "plugins": [
+            {
+              "add": {
+                "content": "// @ts-nocheck"
+              }
+            },
+            "typescript-validation-schema"
+          ],
+          "config": {
+            "schema": "zod",
+            "importFrom": "~/apollo/graphql"
+          }
         }
       }
     }
