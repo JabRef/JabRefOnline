@@ -130,13 +130,7 @@ const {
       }
     }
   `),
-  () => ({
-    variables: {
-      input: {
-        email: email.value,
-        password: password.value,
-      },
-    },
+  {
     update(cache, { data: login }) {
       if (login?.login?.__typename === 'UserReturned') {
         const { user } = login.login
@@ -145,7 +139,7 @@ const {
         cacheCurrentUser(cache, null)
       }
     },
-  })
+  }
 )
 onDone((result) => {
   if (result.data?.login?.__typename === 'UserReturned') {
