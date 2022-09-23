@@ -35,6 +35,8 @@ module.exports = {
     'import/named': 'warn',
     // Import order is handled by prettier (which is incompatible with this rule: https://github.com/simonhaenisch/prettier-plugin-organize-imports/issues/65)
     'import/order': 'off',
+    // Disable vue2-specific rules (until https://github.com/nuxt/eslint-config/issues/216 is fixed)
+    'vue/no-v-model-argument': 'off',
   },
   overrides: [
     {
