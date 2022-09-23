@@ -1,5 +1,5 @@
 import { User } from '@prisma/client'
-import { SignupInputSchema } from '~/apollo/validation'
+import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
 import { Context } from '../context'
 import {
   UserDocumentService,
@@ -63,6 +63,7 @@ export class Mutation {
     return newUserPayload
   }
 
+  @validateInput(LoginInputSchema)
   async login(
     _root: Record<string, never>,
     { input: { email, password } }: MutationLoginArgs,
