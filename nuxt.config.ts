@@ -65,6 +65,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     // Add support for naive-ui
     './modules/naive-ui',
+    // Add support for redirects
+    './modules/redirects',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add storybook support
@@ -96,6 +98,14 @@ export default defineNuxtConfig({
   serverHandlers: [
     { route: '/api', handler: '~/server/index.ts' },
     { route: '/api/', handler: '~/server/index.ts' },
+  ],
+
+  /**
+   * Add redirects, mostly for backwards compatibility
+   */
+  redirects: [
+    { from: '/faq', to: 'https://docs.jabref.org/faq', external: true },
+    { from: '/faq2', to: 'https://docs.jabref.org/faq', external: true },
   ],
 
   /**
