@@ -105,7 +105,15 @@ export default defineNuxtConfig({
    */
   redirects: [
     { from: '/faq', to: 'https://docs.jabref.org/faq', external: true },
-    { from: '/faq2', to: 'https://docs.jabref.org/faq', external: true },
+    { from: '/paypal', to: '/donations' },
+    {
+      from: '/donations',
+      to: 'https://github.com/JabRef/jabref/wiki/Donations/',
+      external: true,
+    },
+    { from: '/gsoc/**', to: '/codeprojects/gsoc' },
+    { from: '/bluehat2022', to: '/codeprojects/bluehat2022' },
+    { from: '/surveys', to: ' /surveys/2015' },
   ],
 
   /**
