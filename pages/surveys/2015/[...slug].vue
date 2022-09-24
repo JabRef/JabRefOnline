@@ -11,7 +11,7 @@
 definePageMeta({ layout: 'content' })
 
 const route = useRoute()
-let markdownPath = 'surveys/'
+let markdownPath = 'surveys/2015/'
 
 if (typeof route.params.slug === 'string') {
   markdownPath += route.params.slug
