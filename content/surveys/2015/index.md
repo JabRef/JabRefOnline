@@ -10,7 +10,7 @@ layout: survey
 In November 2015, the community was asked to fill a survey about JabRef usages and potential developments
 About 400 responses were collected.
 This page presents an overview of the results.
-A detailed analysis is provided at [Analysis](analysis).
+A detailed analysis is provided at [Analysis](./analysis).
 
 ## Current use of JabRef
 

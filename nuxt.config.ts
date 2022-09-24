@@ -113,7 +113,7 @@ export default defineNuxtConfig({
     },
     { from: '/gsoc/**', to: '/codeprojects/gsoc' },
     { from: '/bluehat2022', to: '/codeprojects/bluehat2022' },
-    { from: '/surveys', to: ' /surveys/2015' },
+    { from: '/surveys/', to: '/surveys/2015' },
   ],
 
   /**
