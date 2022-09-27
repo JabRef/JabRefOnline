@@ -1,4 +1,3 @@
-import colors from 'tailwindcss/colors'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
@@ -134,10 +133,10 @@ export default defineNuxtConfig({
   naiveUI: {
     themeOverrides: {
       common: {
-        primaryColor: colors.indigo[700],
-        primaryColorHover: colors.indigo[500],
-        primaryColorPressed: colors.indigo[900],
-        primaryColorSuppl: colors.indigo[500],
+        primaryColor: '#4f5f8f',
+        primaryColorHover: '#414f76',
+        primaryColorPressed: '#3d496e',
+        primaryColorSuppl: '#414f76',
       },
     },
   },
