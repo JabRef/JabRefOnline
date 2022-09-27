@@ -1,3 +1,4 @@
+import colors from 'tailwindcss/colors'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
@@ -64,7 +65,7 @@ export default defineNuxtConfig({
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // Add support for naive-ui
-    './modules/naive-ui',
+    '@huntersofbook/naive-ui-nuxt',
     // Add support for redirects
     './modules/redirects',
     // Use Pinia for state management
@@ -125,6 +126,20 @@ export default defineNuxtConfig({
   tailwindcss: {
     // Expose config so that we can use it in the vscode extension
     exposeConfig: true,
+  },
+
+  /**
+   * Naive UI configuration
+   */
+  naiveUI: {
+    themeOverrides: {
+      common: {
+        primaryColor: colors.indigo[700],
+        primaryColorHover: colors.indigo[500],
+        primaryColorPressed: colors.indigo[900],
+        primaryColorSuppl: colors.indigo[500],
+      },
+    },
   },
 
   vite: {
