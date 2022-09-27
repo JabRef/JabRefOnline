@@ -8,31 +8,26 @@
         >
           <div class="space-x-14">
             <t-nuxtlink
+              v-for="link in links"
+              :key="link.title"
               active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
-              href="#features"
-              >Features</t-nuxtlink
-            >
-            <t-nuxtlink
-              active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
-              href="#download"
-              >Download</t-nuxtlink
-            >
-            <t-nuxtlink
-              active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
-              href="#getinvolved"
-              >Get Involved</t-nuxtlink
-            >
-            <t-nuxtlink
-              active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
-              href="#support"
-              >Support</t-nuxtlink
-            >
-            <t-nuxtlink
               class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
-              href="https://blog.jabref.org/"
-              >News</t-nuxtlink
+              :to="link.href"
+              >{{ link.title }}</t-nuxtlink
             >
           </div>
+          <template #collapsed>
+            <div class="flex flex-col">
+              <t-nuxtlink
+                v-for="link in links"
+                :key="link.title"
+                active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
+                class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
+                :href="link.href"
+                >{{ link.title }}</t-nuxtlink
+              >
+            </div>
+          </template>
         </NavBar>
       </template>
 
@@ -95,4 +90,27 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: false })
+
+const links = [
+  {
+    title: 'Features',
+    href: '#features',
+  },
+  {
+    title: 'Download',
+    href: '#download',
+  },
+  {
+    title: 'Get Involved',
+    href: '#getinvolved',
+  },
+  {
+    title: 'Support',
+    href: '#support',
+  },
+  {
+    title: 'News',
+    href: 'https://blog.jabref.org/',
+  },
+]
 </script>

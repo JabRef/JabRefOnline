@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap">
+  <div>
     <Head>
       <Meta
         http-equiv="x-ua-compatible"
@@ -147,17 +147,55 @@
         "offers": { "@type": "Offer", "price": "0" } }
       </Script>
     </Head>
-    <div class="min-h-screen w-full flex flex-col">
+
+    <n-layout :position="isSmallDisplay ? 'static' : 'absolute'">
       <header>
-        <slot name="header">
-          <NavBar />
-        </slot>
+        <n-layout-header
+          :position="isSmallDisplay ? 'static' : 'absolute'"
+          class="z-50"
+        >
+          <slot name="header">
+            <NavBar />
+          </slot>
+        </n-layout-header>
       </header>
-      <main class="relative h-full overflow-hidden">
-        <div class="grow py-6 h-full">
-          <slot />
-        </div>
-      </main>
-    </div>
+      <div class="md:mt-20">
+        <slot />
+      </div>
+    </n-layout>
   </div>
 </template>
+<script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+
+const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
+
+// Make sure that the content is scrolled and not the unscrollable window
+// (vue-router for example uses window.scrollTo)
+// Taken from https://github.com/vuejs/vue-router/issues/1187#issuecomment-893964727
+const offset = 80
+const contentElementSelector = '.n-layout-scroll-container'
+Object.defineProperty(window, 'pageXOffset', {
+  get() {
+    return document.querySelector(contentElementSelector)?.scrollLeft ?? 0
+  },
+})
+Object.defineProperty(window, 'pageYOffset', {
+  get() {
+    return document.querySelector(contentElementSelector)?.scrollTop ?? 0
+  },
+})
+const windowScrollTo = window.scrollTo
+Object.defineProperty(window, 'scrollTo', {
+  value: (option: { top: number; left: number }) => {
+    const els = document.querySelectorAll(contentElementSelector)
+    const el = els[els.length - 1]
+    if (el && el.scrollHeight > el.clientHeight) {
+      // element can be scrolled
+      el.scrollTo(option.left, el.scrollTop + option.top - offset)
+    } else {
+      windowScrollTo.call(window, option.left, option.top)
+    }
+  },
+})
+</script>
