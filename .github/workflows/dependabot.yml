@@ -16,7 +16,7 @@ jobs:
   fix-lockfile:
     runs-on: ubuntu-latest
     if: |
-      github.actor == 'dependabot[bot]' &&
+      github.actor == 'dependabot[bot]-false' &&
       contains(github.event.pull_request.head.ref, 'dependabot/npm_and_yarn/')
 
     # IMPORTANT: setting YARN_ENABLE_SCRIPTS=false is critical to ensure that untrusted
