@@ -6181,6 +6181,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/reactivity@npm:3.2.40":
+  version: 3.2.40
+  resolution: "@vue/reactivity@npm:3.2.40"
+  dependencies:
+    "@vue/shared": 3.2.40
+  checksum: 927d22b424b63a14234810a3b8e4e9127b7238a7cb2fbd749180279048a109348a29fc724fd9d636a6e09b5f4c902f71c789f081d3ab9b4473faedc6a03d7865
+  languageName: node
+  linkType: hard
+
 "@vue/runtime-core@npm:3.2.39":
   version: 3.2.39
   resolution: "@vue/runtime-core@npm:3.2.39"
@@ -6191,7 +6200,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/runtime-dom@npm:3.2.39, @vue/runtime-dom@npm:^3.2.38":
+"@vue/runtime-core@npm:3.2.40":
+  version: 3.2.40
+  resolution: "@vue/runtime-core@npm:3.2.40"
+  dependencies:
+    "@vue/reactivity": 3.2.40
+    "@vue/shared": 3.2.40
+  checksum: 47c4918c1294a3dc9b50effac8fb0af4ae34476a9bf443774f66cd18230e44b6b6d1cb49657ea5670f04691fc116a1040356492393dd43523b43fd90be81078a
+  languageName: node
+  linkType: hard
+
+"@vue/runtime-dom@npm:3.2.39":
   version: 3.2.39
   resolution: "@vue/runtime-dom@npm:3.2.39"
   dependencies:
@@ -6199,6 +6218,17 @@ __metadata:
     "@vue/shared": 3.2.39
     csstype: ^2.6.8
   checksum: 0c47f941148a000ac0cb93add51edb08eca5ae16fa7898dd070300f22e4ba77533c85342f0ceca0cab8637b80b1f92cfab10adb2160e4c6dd4be4a5b27ae1ff3
+  languageName: node
+  linkType: hard
+
+"@vue/runtime-dom@npm:^3.2.40":
+  version: 3.2.40
+  resolution: "@vue/runtime-dom@npm:3.2.40"
+  dependencies:
+    "@vue/runtime-core": 3.2.40
+    "@vue/shared": 3.2.40
+    csstype: ^2.6.8
+  checksum: 4615d00cc4e2e19dc3e6e2baf5fa0cbab7d33fbbd7550b42264b6ef2e2ef5b750ef0d0c98591c10fea60d69fc33444ba4824954bce38abfa3473785a58d74c80
   languageName: node
   linkType: hard
 
@@ -6225,6 +6255,13 @@ __metadata:
   version: 3.2.39
   resolution: "@vue/shared@npm:3.2.39"
   checksum: 0bf9f5b4851b634cfae92c08d64173c2db674bd817424473d28fc58af7c17c54a255f9b3e837d3857e1e62f9092ab1d74b4714237e45c94fcd46f92155ef653f
+  languageName: node
+  linkType: hard
+
+"@vue/shared@npm:3.2.40":
+  version: 3.2.40
+  resolution: "@vue/shared@npm:3.2.40"
+  checksum: d91a1e12ffb106a444dcb42c0a54d39f6688f98151dc3b77e8da1e7d3cfd09e1761268d11e7f920f233b43162e727d06f3af4408ef59c53ac2dce9c1d2881511
   languageName: node
   linkType: hard
 
@@ -15184,7 +15221,7 @@ __metadata:
     "@vue/apollo-composable": 4.0.0-alpha.19
     "@vue/apollo-util": ^4.0.0-alpha.18
     "@vue/compiler-sfc": ^3.2.39
-    "@vue/runtime-dom": ^3.2.38
+    "@vue/runtime-dom": ^3.2.40
     "@vue/test-utils": ^2.1.0
     "@vueuse/core": ^9.3.0
     "@yaireo/tagify": ^4.16.4
