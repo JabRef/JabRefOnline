@@ -92,15 +92,6 @@ export default defineNuxtConfig({
   runtimeConfig: constructConfig(),
 
   /**
-   * Add global Graphql server endpoint
-   * See https://v3.nuxtjs.org/api/configuration/nuxt.config#serverhandlers
-   */
-  serverHandlers: [
-    { route: '/api', handler: '~/server/index.ts' },
-    { route: '/api/', handler: '~/server/index.ts' },
-  ],
-
-  /**
    * Add redirects, mostly for backwards compatibility
    */
   redirects: [
