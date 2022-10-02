@@ -5,11 +5,13 @@ import supertestGraphql, {
   Variables,
 } from 'supertest-graphql'
 
+const url = process.env.TEST_URL || 'http://localhost:3000'
+
 export function api(): SuperTestGraphQL<unknown, Variables> {
-  return supertestGraphql('localhost:3000').path('/api')
+  return supertestGraphql(url).path('/api')
 }
 export function root() {
-  return supertestRequest('localhost:3000')
+  return supertestRequest(url)
 }
 
 export async function login(request: SuperTestGraphQL<unknown, Variables>) {

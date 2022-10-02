@@ -83,7 +83,9 @@ jobs:
         #   interval: 30
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net/api'
+        run: yarn test:api
+        env:
+          TEST_URL: https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net
 
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
@@ -175,7 +177,9 @@ jobs:
         #   interval: 30
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=${{ matrix.url }}/api'
+        run: yarn test:api
+        env:
+          TEST_URL: ${{ matrix.url }}
 
   close_pr_preview:
     name: Close PR preview

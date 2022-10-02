@@ -111,7 +111,9 @@ jobs:
         run: yarn start &
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=http://localhost:3000/api'
+        run: yarn test:api
+        env:
+          TEST_URL: http://localhost:3000
 
       - name: Build Storybook
         run: |
