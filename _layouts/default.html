@@ -1,0 +1,46 @@
+---
+---
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  {% include og.html %}
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+	<meta name="keywords" content="{{ site.keywords }}">
+	<meta name="description" content="{{ site.description }}">
+  {% feed_meta %}
+  <link rel="stylesheet" href="/combo.css">
+  <link rel="stylesheet" href="/blog.css">
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  {% if site.favicon %}<link rel="shortcut icon" href="{{ site.favicon }}" type="image/x-icon">{% endif %}
+	{% if site.touch_icon %}<link rel="apple-touch-icon" href="{{ site.touch_icon }}">{% endif %}
+</head>
+<body>
+
+  <div style="position: fixed; left: 10px; top: 10px; z-index: 9999">
+      <a href="/"><i class="fa fa-arrow-up fa-2x" style="color:white"></i></a>
+  </div>
+
+  <div id="main">
+
+    <nav><ul><li style="color:white">{{ page.date | date: '%B %d, %Y' }} &ndash;  {{ page.title }}</li></ul></nav>
+      <div id="{{id}}" class="section p-{{id}}">
+	    {% capture author %}{{ page.author }}{% endcapture %}
+        <div class="container {{ page.style  | default: "left" }}">
+            <h1>{{ page.date | date: '%B %d, %Y' }} &ndash;  {{ page.title }}</h1>
+            <div class="postauthor">{{author | markdownify}}</div>
+            {{ page.content }}
+			<p><em><strong>
+				You like it? Foster JabRef development with
+				<a href="https://contribute.jabref.org/">Knowledge</a>
+				or
+				<a href="https://donations.jabref.org">Money</a>.
+			</strong></em></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
