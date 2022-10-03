@@ -1,9 +1,7 @@
+import { InternalApi } from 'nitropack'
 import { root } from '~/test/api-e2e/supertest'
 
-type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T
-type GetLatestReleaseResponse = Awaited<
-  ReturnType<typeof import('~/server/api/getLatestRelease').default>
->
+type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']
 
 it('Returns a valid version', async () => {
   const response = await root().get('/api/getLatestRelease')
