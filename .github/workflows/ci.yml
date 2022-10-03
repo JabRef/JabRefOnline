@@ -104,14 +104,13 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Run tests
-        run: yarn test --coverage
-
       - name: Start server
         run: yarn start &
 
-      - name: Run API tests
-        run: yarn test:api --env-var='base_url=http://localhost:3000/api'
+      - name: Run tests
+        run: yarn test --coverage
+        env:
+          TEST_URL: http://localhost:3000
 
       - name: Build Storybook
         run: |
