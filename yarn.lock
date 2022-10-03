@@ -592,6 +592,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/generator@npm:^7.18.13":
+  version: 7.19.3
+  resolution: "@babel/generator@npm:7.19.3"
+  dependencies:
+    "@babel/types": ^7.19.3
+    "@jridgewell/gen-mapping": ^0.3.2
+    jsesc: ^2.5.1
+  checksum: b1585e398f6c37f442a2fdac964a326b348fbc8fb99a6aaf4f72bbe993adb0ca792bc0a9c65e59930b2a2e55eb5aa3aab360ceb678d3d40692eb0cda2b7b6aa6
+  languageName: node
+  linkType: hard
+
 "@babel/helper-annotate-as-pure@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/helper-annotate-as-pure@npm:7.18.6"
@@ -841,7 +852,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-validator-identifier@npm:^7.18.6":
+"@babel/helper-validator-identifier@npm:^7.18.6, @babel/helper-validator-identifier@npm:^7.19.1":
   version: 7.19.1
   resolution: "@babel/helper-validator-identifier@npm:7.19.1"
   checksum: 0eca5e86a729162af569b46c6c41a63e18b43dbe09fda1d2a3c8924f7d617116af39cac5e4cd5d431bb760b4dca3c0970e0c444789b1db42bcf1fa41fbad0a3a
@@ -2083,6 +2094,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/types@npm:^7.18.13, @babel/types@npm:^7.19.3":
+  version: 7.19.3
+  resolution: "@babel/types@npm:7.19.3"
+  dependencies:
+    "@babel/helper-string-parser": ^7.18.10
+    "@babel/helper-validator-identifier": ^7.19.1
+    to-fast-properties: ^2.0.0
+  checksum: 34a5b3db3b99a1a80ec2a784c2bb0e48769a38f1526dc377a5753a3ac5e5704663c405a393117ecc7a9df9da07b01625be7c4c3fee43ae46aba23b0c40928d77
+  languageName: node
+  linkType: hard
+
 "@bcoe/v8-coverage@npm:^0.2.3":
   version: 0.2.3
   resolution: "@bcoe/v8-coverage@npm:0.2.3"
@@ -2305,12 +2327,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/cli@npm:^2.12.0":
-  version: 2.12.1
-  resolution: "@graphql-codegen/cli@npm:2.12.1"
+"@graphql-codegen/cli@npm:^2.13.1":
+  version: 2.13.1
+  resolution: "@graphql-codegen/cli@npm:2.13.1"
   dependencies:
+    "@babel/generator": ^7.18.13
+    "@babel/template": ^7.18.10
+    "@babel/types": ^7.18.13
     "@graphql-codegen/core": 2.6.2
-    "@graphql-codegen/plugin-helpers": ^2.7.1
+    "@graphql-codegen/plugin-helpers": ^2.6.2
     "@graphql-tools/apollo-engine-loader": ^7.3.6
     "@graphql-tools/code-file-loader": ^7.3.1
     "@graphql-tools/git-loader": ^7.2.1
@@ -2321,12 +2346,12 @@ __metadata:
     "@graphql-tools/prisma-loader": ^7.2.7
     "@graphql-tools/url-loader": ^7.13.2
     "@graphql-tools/utils": ^8.9.0
-    "@whatwg-node/fetch": ^0.4.0
+    "@whatwg-node/fetch": ^0.3.0
     ansi-escapes: ^4.3.1
     chalk: ^4.1.0
     chokidar: ^3.5.2
     cosmiconfig: ^7.0.0
-    cosmiconfig-typescript-loader: ^4.0.0
+    cosmiconfig-typescript-loader: 4.0.0
     debounce: ^1.2.0
     detect-indent: ^6.0.0
     graphql-config: ^4.3.5
@@ -2348,7 +2373,7 @@ __metadata:
     graphql-code-generator: cjs/bin.js
     graphql-codegen: cjs/bin.js
     graphql-codegen-esm: esm/bin.js
-  checksum: c3e3772f1bd7d6a35ecc42a0fcb96d7e417e184170254ef89286f029a31eba688465179d572897f52197199757edf16e5a7442e4e7fb2612cd79530ea33572a3
+  checksum: 750c2a5f598def903842b8b91bbc4a4493703c1f0a2a2300af88b35cffce21128ccb4896e10a789dcdc9ed8076b89144a463da4772ccecf72d44645fc0ab67fe
   languageName: node
   linkType: hard
 
@@ -2415,7 +2440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/plugin-helpers@npm:^2.3.2, @graphql-codegen/plugin-helpers@npm:^2.6.2, @graphql-codegen/plugin-helpers@npm:^2.7.1":
+"@graphql-codegen/plugin-helpers@npm:^2.3.2, @graphql-codegen/plugin-helpers@npm:^2.6.2":
   version: 2.7.1
   resolution: "@graphql-codegen/plugin-helpers@npm:2.7.1"
   dependencies:
@@ -5418,10 +5443,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:*, @types/lodash@npm:^4.14.167, @types/lodash@npm:^4.14.181, @types/lodash@npm:^4.14.185, @types/lodash@npm:^4.14.92":
+"@types/lodash@npm:*, @types/lodash@npm:^4.14.167, @types/lodash@npm:^4.14.181, @types/lodash@npm:^4.14.92":
   version: 4.14.185
   resolution: "@types/lodash@npm:4.14.185"
   checksum: f81d13da5ecab110ca9c5c7cc2bedc3c9802a6acf668576aecd1b8f4b134ed81d06c15f1e600fb08f05975098280a0d97d30cddfc2cb39ec1c6b56e971ca53b3
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.14.186":
+  version: 4.14.186
+  resolution: "@types/lodash@npm:4.14.186"
+  checksum: ee0c1368a8100bb6efb88335107473a41928fc307ff1ef4ff1278868ccddba9c04c68c36d1ffe3a0392ef4a956e1955f7de3203ec09df4f1655dd1b88485c549
   languageName: node
   linkType: hard
 
@@ -6760,6 +6792,23 @@ __metadata:
     "@webassemblyjs/wast-parser": 1.9.0
     "@xtuc/long": 4.2.2
   checksum: 3d1e1b2e84745a963f69acd1c02425b321dd2e608e11dabc467cae0c9a808962bc769ec9afc46fbcea7188cc1e47d72370da762d258f716fb367cb1a7865c54b
+  languageName: node
+  linkType: hard
+
+"@whatwg-node/fetch@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@whatwg-node/fetch@npm:0.3.2"
+  dependencies:
+    "@peculiar/webcrypto": ^1.4.0
+    abort-controller: ^3.0.0
+    busboy: ^1.6.0
+    event-target-polyfill: ^0.0.3
+    form-data-encoder: ^1.7.1
+    formdata-node: ^4.3.1
+    node-fetch: ^2.6.7
+    undici: ^5.8.0
+    web-streams-polyfill: ^3.2.0
+  checksum: d9cb1b1293694edf0d61889512e5b5a0b8b69db2cf8c4cca4acdbbe652f899742456d10954312ef96a8f7257a898d6275b50df03cc481e5a97740cb301930892
   languageName: node
   linkType: hard
 
@@ -9575,6 +9624,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cosmiconfig-typescript-loader@npm:4.0.0":
+  version: 4.0.0
+  resolution: "cosmiconfig-typescript-loader@npm:4.0.0"
+  peerDependencies:
+    "@types/node": "*"
+    cosmiconfig: ">=7"
+    ts-node: ">=10"
+    typescript: ">=3"
+  checksum: 9151ffe62d0b3b0bac7435add229febf04d72f4db8199390813fef071343865e91e823bd75210f9aabe218dc97a2cc2c776120c0dc886e9164947b80a910c19b
+  languageName: node
+  linkType: hard
+
 "cosmiconfig-typescript-loader@npm:^4.0.0":
   version: 4.1.0
   resolution: "cosmiconfig-typescript-loader@npm:4.1.0"
@@ -11804,6 +11865,13 @@ __metadata:
   version: 1.8.1
   resolution: "etag@npm:1.8.1"
   checksum: 571aeb3dbe0f2bbd4e4fadbdb44f325fc75335cd5f6f6b6a091e6a06a9f25ed5392f0863c5442acb0646787446e816f13cbfc6edce5b07658541dff573cab1ff
+  languageName: node
+  linkType: hard
+
+"event-target-polyfill@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "event-target-polyfill@npm:0.0.3"
+  checksum: 42efefcc46aa4170547b35399337762a579fa27c9fe8b3e791aec470df3126e0bb4cb49b9f17901956eb65a137ef0e35c3a32c9f047b32c64cf56fa9ecc76d06
   languageName: node
   linkType: hard
 
@@ -15081,7 +15149,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/vue-fontawesome": ^3.0.1
     "@graphql-codegen/add": ^3.2.1
-    "@graphql-codegen/cli": ^2.12.0
+    "@graphql-codegen/cli": ^2.13.1
     "@graphql-codegen/fragment-matcher": ^3.3.1
     "@graphql-codegen/gql-tag-operations-preset": ^1.5.5
     "@graphql-codegen/typed-document-node": ^2.3.2
@@ -15113,7 +15181,7 @@ __metadata:
     "@types/bcryptjs": ^2.4.2
     "@types/connect-redis": ^0.0.18
     "@types/express-session": ^1.17.5
-    "@types/lodash": ^4.14.185
+    "@types/lodash": ^4.14.186
     "@types/nodemailer": ^6.4.5
     "@types/passport": ^1.0.10
     "@types/redis-mock": ^0.17.1
