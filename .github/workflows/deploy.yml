@@ -176,7 +176,7 @@ jobs:
         run: |
           Start-Sleep -Seconds 30
           curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }} || true
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url/api }} || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }}/api || true
         # The api returns 400 status code for some reason
         # with:
         #   url: ${{ matrix.url }}/api
