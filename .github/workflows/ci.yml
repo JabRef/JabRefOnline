@@ -111,7 +111,7 @@ jobs:
         run: yarn test --coverage
         env:
           TEST_URL: http://localhost:3000
-          GITHUB_REPO_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
+          GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
       - name: Build Storybook
         run: |
