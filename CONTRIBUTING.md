@@ -2,7 +2,7 @@
 
 You want to write a blog entry? Great!
 
-Just create a file in `_posts`.
+Just create a file in `content/blog`.
 Be sure that 
  * the suffix of the file (e.g., `JabRef3-3`) matches the entry `id` in the header and
  * you quote the values in the header.
