@@ -1,4 +1,3 @@
-/* eslint-disable @graphql-eslint/fields-on-correct-type */
 import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client/core'
 
 const config = useRuntimeConfig()
@@ -20,8 +19,8 @@ const github = new ApolloClient({
 export default defineEventHandler(async () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { data } = await github.query({
-    query: gql(`
-    query LatestRelease { 
+    query: gql`
+      query LatestRelease {
         # eslint-disable-next-line @graphql-eslint/fields-on-correct-type
         repository(owner: "JabRef", name: "jabref") {
           releases(first: 1, orderBy: { field: CREATED_AT, direction: DESC }) {
@@ -31,7 +30,7 @@ export default defineEventHandler(async () => {
           }
         }
       }
-    `),
+    `,
   })
   return {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
