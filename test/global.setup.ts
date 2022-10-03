@@ -26,7 +26,8 @@ registerClasses()
 
 // Setup services for integration tests
 beforeAll(async (context) => {
-  const isIntegrationTest = context.filepath?.endsWith('test.ts') ?? false
+  const isIntegrationTest =
+    context.filepath?.endsWith('integration.test.ts') ?? false
 
   if (isIntegrationTest) {
     const redisClient = await createRedisClient()

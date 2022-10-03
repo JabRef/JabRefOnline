@@ -70,7 +70,7 @@
               >
                 <a
                   class="text-2xl"
-                  href="https://downloads.jabref.org/"
+                  :href="downloadUrl"
                   >Download JabRef</a
                 >
               </n-button>
@@ -113,4 +113,6 @@ const links = [
     href: 'https://blog.jabref.org/',
   },
 ]
+
+const downloadUrl = constructDownloadUrl()
 </script>

@@ -78,17 +78,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import { detectOs, isLinux, isMac, isWindows } from '~/composables/detectOs'
+import { isLinux, isMac, isWindows } from '~/composables/detectOs'
 
-const os = detectOs()
-let osSuffix = ''
-if (os) {
-  osSuffix =
-    {
-      windows: 'win',
-      mac: 'mac',
-      linux: 'linux',
-    }[os] || ''
-}
-const downloadUrl = 'https://downloads.jabref.org/' + osSuffix
+const downloadUrl = constructDownloadUrl()
 </script>

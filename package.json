@@ -161,12 +161,14 @@
     "lru-cache": "^6.0.0",
     "express-session@^1.17.3": "patch:express-session@npm%3A1.17.3#./.yarn/patches/express-session-npm-1.17.3-0819dbe06c.patch",
     "@nuxtjs/tailwindcss@5.3.3": "patch:@nuxtjs/tailwindcss@npm%3A5.3.3#./.yarn/patches/@nuxtjs-tailwindcss-npm-5.3.3-e31175b5f6.patch",
-    "@apollo/client@^3.7.0": "patch:@apollo/client@npm%3A3.7.0#./.yarn/patches/@apollo-client-npm-3.7.0-07cf6b7bb6.patch"
+    "@apollo/client@^3.7.0": "patch:@apollo/client@npm%3A3.7.0#./.yarn/patches/@apollo-client-npm-3.7.0-07cf6b7bb6.patch",
+    "tslib": "^2.4.0"
   },
   "resolutionsComments": {
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "unist-builder/remark-parse": "Otherwise we run into conflicts with older versions, which are imported mainly from storybook",
-    "lru-cache": "Otherwise we run into conflicts with newer versions, which are not compatible with apollo-server v3"
+    "lru-cache": "Otherwise we run into conflicts with newer versions, which are not compatible with apollo-server v3",
+    "tslib": "some libraries still pull-in v1 of tslib, which is incompatible with the other libraries that use tslib v2 features"
   },
   "prisma": {
     "schema": "server/database/schema.prisma",

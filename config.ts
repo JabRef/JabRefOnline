@@ -65,6 +65,7 @@ export interface Config {
     primarySecret: string
     secondarySecret: string
   }
+  githubRepoToken: string
   public: {
     environment: Environment
   }
@@ -81,6 +82,7 @@ export function constructConfig(): Config {
       primarySecret: process.env.SESSION_SECRET_PRIMARY || 'session_secret',
       secondarySecret: process.env.SESSION_SECRET_SECONDARY || 'session_secret',
     },
+    githubRepoToken: process.env.GITHUB_REPO_TOKEN || 'UNDEFINED',
     public: {
       environment: getEnvironment(),
     },
