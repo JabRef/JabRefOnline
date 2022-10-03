@@ -19,6 +19,7 @@ jobs:
 
     env:
       DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
       # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
@@ -86,7 +87,6 @@ jobs:
         run: yarn test:api
         env:
           TEST_URL: https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net
-          GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}

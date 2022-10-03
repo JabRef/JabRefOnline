@@ -36,6 +36,7 @@ def main(environment_name: str, verbose: bool = False):
     REDIS_NAME = "jabref"
     DATABASE_URL = os.environ.get("DATABASE_URL", "<Not specified>")
     SESSION_SECRET = os.environ.get("AZURE_SESSION_SECRET", "<Not specified>")
+    GITHUB_REPO_TOKEN = os.environ.get("GITHUB_REPO_TOKEN", "<Not specified>")
 
     function_app_name = "jabref-function-" + environment_name
 
@@ -125,6 +126,7 @@ def main(environment_name: str, verbose: bool = False):
                         "value": redis_keys.primary_key,
                     },
                     {"name": "SESSION_SECRET_PRIMARY", "value": SESSION_SECRET},
+                    {"name": "GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
                     # {
                     #     "name": "WEBSITE_CONTENTSHARE",
                     #     "value": "[concat(toLower(parameters('name')), 'b215')]",
