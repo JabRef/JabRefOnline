@@ -28,7 +28,7 @@ One of the core features of a three way merge, is being able to edit the merged 
 
 When you're looking at a huge list of items, it can be helpful to see which ones are different from the others. This is especially useful when merging duplicates, as most of the time, duplicates only contain one difference. By having differences highlighted, you can quickly and easily spot the different field, and resolve it.
 
-![](../img/three-way-merge-diff-highlighting.png)
+![](/img/blog/three-way-merge-diff-highlighting.png)
 
 In the new three way merge UI, we've decided to highlight differences by coloring the background behind the different text. This is a more common way of highlighting differences, and we think it will be easier for users to notice. We've also introduced _Split view_ and _Unified view_ to allow users to view differences split between the two entries or in one entry. Finally, we've fixed several bugs and pitfalls in the previous diff highlighting algorithm, such as, [Spaces trimmed in Merge Entry Dialog](https://github.com/koppor/jabref/issues/371).
 
@@ -36,19 +36,19 @@ In the new three way merge UI, we've decided to highlight differences by colorin
 
 When merging entries, sometimes you want to select both values for a certain field. A common use case for this would be wanting the merged entry to have both the left and right entry groups. Now, you can simply click the merge button next to the groups label and we'll take care of the rest. We'll merge the left and right entry groups, keeping only one copy of any common group. And this works for more than just groups - you can also merge keywords, comments and files. So go ahead and give it a try - it'll make your life a lot easier.
 
-![](../img/three-way-merge-groups-keywords.png)
+![](/img/blog/three-way-merge-groups-keywords.png)
 
 ### Open DOIs and URLs from The Merge Dialog
 
 We included a button on the side of field cells to open links; as of right now, only URLs and DOIs can be opened. Since the left and right field cells cannot be selected, a copy button was included for convenience. We plan to improve this design and include more actions in the future.
 
-![](../img/three-way-merge-open-doi-copy.png)
+![](/img/blog/three-way-merge-open-doi-copy.png)
 
 ## Future Work
 
 We've made some progress, but there's still more work to be done. We're going to make separate improvements to each of the dialogs that use the merge UI. This has already begun with the external changes resolver dialog. We'll also update the documentation and write tests before release.
 
-![](../img/external-changes-resolver-dialog.png)
+![](/img/blog/external-changes-resolver-dialog.png)
 
 ## Summary
 
