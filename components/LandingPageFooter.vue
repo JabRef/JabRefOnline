@@ -14,7 +14,7 @@
           <li class="py-1">
             <t-nuxtlink
               class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
-              href="https://downloads.jabref.org/"
+              href="download"
             >
               Desktop apps
             </t-nuxtlink>

@@ -55,7 +55,7 @@ const items = [
     text: 'Report a bug',
   },
   {
-    href: 'https://blog.jabref.org/',
+    href: 'blog',
     icon: 'newspaper',
     text: 'Blog',
   },
