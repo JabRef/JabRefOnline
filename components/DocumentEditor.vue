@@ -93,7 +93,7 @@
         placeholder="Add group"
         :delimiters="undefined"
         :whitelist="groupSuggestions"
-        tag-class="bg-highlight-50 rounded-md"
+        tag-class="bg-primary-50 rounded-md"
       />
     </div>
     <div>

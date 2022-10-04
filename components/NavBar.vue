@@ -85,7 +85,7 @@
     >
       <FontAwesomeIcon
         icon="bell"
-        class="text-gray-400 hover:text-highlight-500"
+        class="text-gray-400 hover:text-primary-500"
         size="lg"
       />
       <div>

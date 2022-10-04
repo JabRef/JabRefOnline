@@ -96,7 +96,7 @@ export default defineComponent({
 .tagify {
   --tags-border-color: transparent;
   --tag-bg: transparent;
-  --tag-hover: #c7d2fe; /* bg-highlight-300 */
+  --tag-hover: #afb8d3; /* bg-primary-200 */
 }
 .tagify__tag {
   margin-left: 0.25rem;

@@ -10,8 +10,8 @@
             <t-nuxtlink
               v-for="link in links"
               :key="link.title"
-              active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
-              class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
+              active-class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
+              class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
               :to="link.href"
               >{{ link.title }}</t-nuxtlink
             >
@@ -21,8 +21,8 @@
               <t-nuxtlink
                 v-for="link in links"
                 :key="link.title"
-                active-class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
-                class="text-gray-400 hover:text-highlight-600 text-lg font-semibold"
+                active-class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
+                class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
                 :href="link.href"
                 >{{ link.title }}</t-nuxtlink
               >
