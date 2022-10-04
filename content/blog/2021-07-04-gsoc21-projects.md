@@ -1,5 +1,5 @@
 ---
-title: "JabRef GSoC’21 Projects"
+title: 'JabRef GSoC’21 Projects'
 id: gsoc'21-projects
 author: JabRef GSoC Mentee
 ---

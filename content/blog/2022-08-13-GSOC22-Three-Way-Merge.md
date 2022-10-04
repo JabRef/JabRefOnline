@@ -1,17 +1,18 @@
 ---
 title: GSOC22 — Implement a Three Way Merge UI for merging BibTeX entries
 id: GSOC22-Three-Way-Merge
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 bg: jabref-font
-color: white 
+color: white
 ---
 
-Hi there! This is Houssem. I'm the Google Summer of Code *(GSoC)* student for this year. In this article, I'll talk about new features and functionalities that I worked on as part of my GSoC project.
+Hi there! This is Houssem. I'm the Google Summer of Code _(GSoC)_ student for this year. In this article, I'll talk about new features and functionalities that I worked on as part of my GSoC project.
+
 <!--more-->
 
 ## Introduction
 
-Merging duplicates and resolving conflicts is a major use case for JabRef users, according to a 2019 research conducted by JabRef developers [^1]. 
+Merging duplicates and resolving conflicts is a major use case for JabRef users, according to a 2019 research conducted by JabRef developers [^1].
 
 JabRef has several dialogs that reuse the merge UI, such as the Entries Merger Dialog, the Duplicate Resolver Dialog, the Entry Importer Dialog, and the External Changes Resolver Dialog.
 
@@ -29,7 +30,7 @@ When you're looking at a huge list of items, it can be helpful to see which ones
 
 ![](../img/three-way-merge-diff-highlighting.png)
 
-In the new three way merge UI, we've decided to highlight differences by coloring the background behind the different text. This is a more common way of highlighting differences, and we think it will be easier for users to notice. We've also introduced *Split view* and *Unified view* to allow users to view differences split between the two entries or in one entry. Finally, we've fixed several bugs and pitfalls in the previous diff highlighting algorithm, such as, [Spaces trimmed in Merge Entry Dialog](https://github.com/koppor/jabref/issues/371).
+In the new three way merge UI, we've decided to highlight differences by coloring the background behind the different text. This is a more common way of highlighting differences, and we think it will be easier for users to notice. We've also introduced _Split view_ and _Unified view_ to allow users to view differences split between the two entries or in one entry. Finally, we've fixed several bugs and pitfalls in the previous diff highlighting algorithm, such as, [Spaces trimmed in Merge Entry Dialog](https://github.com/koppor/jabref/issues/371).
 
 ### Select Both Field Values (AKA Merge Fields)
 
@@ -44,6 +45,7 @@ We included a button on the side of field cells to open links; as of right now, 
 ![](../img/three-way-merge-open-doi-copy.png)
 
 ## Future Work
+
 We've made some progress, but there's still more work to be done. We're going to make separate improvements to each of the dialogs that use the merge UI. This has already begun with the external changes resolver dialog. We'll also update the documentation and write tests before release.
 
 ![](../img/external-changes-resolver-dialog.png)

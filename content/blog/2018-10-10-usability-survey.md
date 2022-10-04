@@ -1,7 +1,7 @@
 ---
-title: "2018 Survey on Feature Usage in JabRef"
+title: '2018 Survey on Feature Usage in JabRef'
 id: survey-usability-2018
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 bg: jabref-font
 color: white
 ---

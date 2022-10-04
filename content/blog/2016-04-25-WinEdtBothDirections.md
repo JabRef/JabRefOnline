@@ -1,9 +1,9 @@
 ---
-title: "JabRef & WinEdt: two-way communications"
+title: 'JabRef & WinEdt: two-way communications'
 id: JabRefWinEdt
 bg: jabref-font
 color: white
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 ---
 
 For a longtime, a single click on a toolbar button has allowed JabRef to insert citations in [WinEdt](http://www.winedt.com).

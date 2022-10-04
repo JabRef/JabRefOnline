@@ -1,13 +1,13 @@
 ---
 title: JabRef Hacktoberfest 2019 Reflection
 id: hacktoberfest2019-reflection
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 ---
 
 # JabRef Hacktoberfest 2019 Reflection
 
 In 2019, we participated at [hacktoberfest](https://hacktoberfest.digitalocean.com/) again; now an own organization - [one out of 29 organizations having special goodies](https://benbarth.github.io/hacktoberfest-swag/).
-This attracted many persons:  We had 37 different contributors from outside the current JabRef main developers, which is really cool.
+This attracted many persons: We had 37 different contributors from outside the current JabRef main developers, which is really cool.
 The most notable feature inside JabRef is the updated [fetcher for the astrophysics data system (ADS)](https://help.jabref.org/en/ADS).
 Outside the desktop application, our [browser integration](https://github.com/JabRef/JabRef-Browser-Extension) finally runs on Google Chrome and on Linux as well.
 We are currently publishing the new extensions on the app stores.

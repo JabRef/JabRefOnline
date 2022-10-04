@@ -1,7 +1,7 @@
 ---
 title: New User Forum
 id: JabRefForum
-author: "[JabRef Developers](https://github.com/orgs/JabRef/teams/developers)"
+author: '[JabRef Developers](https://github.com/orgs/JabRef/teams/developers)'
 bg: jabref-font
 color: white
 ---
@@ -12,7 +12,7 @@ You can find it by now in the top navigation bar on JabRef.org or directly here:
 
 The main reasons for introducing the forum are:
 
-- Foster the communication between the large user base and the developers of JabRef, creation of an active *"JabRef community"*
+- Foster the communication between the large user base and the developers of JabRef, creation of an active _"JabRef community"_
 - Provide an easier to use, searchable, more modern way to give feedback and request help
 - Provide a better place for feature and enhancement discussions by a [dedicated category for such topics](http://discourse.jabref.org/c/features)
 - Reduce the number of created issues at the GitHub tracker - only real bugs and work-in-progress feature requests should be handled there
@@ -30,4 +30,4 @@ Thus, we decided to officially discontinue the support on the mailing list. We'l
 
 For those of you who like to stick with a mailing-list like behavior we provide you [a guide on how to use the discourse forum just like a mailing list](http://discourse.jabref.org/t/quick-start-guide-for-former-mailing-list-users/31).
 
-*Thanks again to [discourse.org](http://www.discourse.org) for the great software and especially for providing us free hosting!*
+_Thanks again to [discourse.org](http://www.discourse.org) for the great software and especially for providing us free hosting!_

@@ -1,7 +1,7 @@
 ---
-title: "Google Summer of Code 2019: User Interface"
+title: 'Google Summer of Code 2019: User Interface'
 id: gsoc-2019-user-interface
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 bg: jabref-font
 color: white
 ---
@@ -24,10 +24,10 @@ This week we have been working on two different issues:
 The goal has been to connect the back-end of the parser with the user interface:
 
 - A first dialog box will ask for a directory for scanning TEX files.
-Then, the user could select specific files.
-After that, the tool parses these files and it shows all bibliographic entries found.
+  Then, the user could select specific files.
+  After that, the tool parses these files and it shows all bibliographic entries found.
 - For displaying these entries, a new dialog box will be opened.
-Instead of the draft view that we published last week, we have finally chosen a view that allows a comfortable reading of the citations found along all documents.
+  Instead of the draft view that we published last week, we have finally chosen a view that allows a comfortable reading of the citations found along all documents.
 
 ![User Interface](https://user-images.githubusercontent.com/12954316/59305727-1b754300-8c9b-11e9-941e-950a4dbf6ae2.gif)
 

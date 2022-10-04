@@ -1,25 +1,25 @@
 ---
 title: Revised Hotkey System
 id: HotkeyRevisionAugust2016
-author: "[JabRef StuPro](https://github.com/orgs/JabRef/teams/stupro)"
+author: '[JabRef StuPro](https://github.com/orgs/JabRef/teams/stupro)'
 ---
 
 In the next release of JabRef a revised hotkey system is introduced. The two goals of this revision is to improve maneuverability through the keyboard and streamlining hotkeys. Sometimes, related hotkeys (like the ones covering the side panes) were scattered across the keyboard, so we grouped them together. You might be wondering what has changed, so have a look at them:
 
-Keys - new | Keys - old | Function
------------|------------|---------
-<kbd>F7</kbd>	| <kbd>alt</kbd> + <kbd>F</kbd> | Automatically set file links
-<kbd>F8</kbd>	| <kbd>ctrl</kbd> +  <kbd>shift</kbd>  + <kbd>F7</kbd>  | Cleanup entries
-<kbd>alt</kbd> + <kbd>1</kbd>	| <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>E</kbd> | Focus entry table
-<kbd>alt</kbd> + <kbd>2</kbd>	| <kbd>ctrl</kbd> + <kbd>F9</kbd> | Toggle entry/preview editor
-<kbd>alt</kbd> + <kbd>3</kbd>	| <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>G</kbd> | Toggle groups
-<kbd>alt</kbd> + <kbd>4</kbd>	| <kbd>F5</kbd>  | web search
-<kbd>alt</kbd> + <kbd>0</kbd>	| - | Open Openoffice/LibreOffice connection
-<kbd>ctrl</kbd> +  <kbd>shift</kbd> + <kbd>F7</kbd> | <kbd>ctrl</kbd> + <kbd>F4</kbd> |	Synchronize file links
-<kbd>ctrl</kbd> +  <kbd>shift</kbd> + <kbd>R</kbd> | - | Technical report
-- | <kbd>alt</kbd> + <kbd>P</kbd> | Print entry preview
-- | <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>T</kbd> | Hide/show toolbar
-- | <kbd>ctrl</kbd> + <kbd>p</kbd> | Edit preamble
+| Keys - new                                         | Keys - old                                         | Function                               |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------- |
+| <kbd>F7</kbd>                                      | <kbd>alt</kbd> + <kbd>F</kbd>                      | Automatically set file links           |
+| <kbd>F8</kbd>                                      | <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>F7</kbd> | Cleanup entries                        |
+| <kbd>alt</kbd> + <kbd>1</kbd>                      | <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>E</kbd>  | Focus entry table                      |
+| <kbd>alt</kbd> + <kbd>2</kbd>                      | <kbd>ctrl</kbd> + <kbd>F9</kbd>                    | Toggle entry/preview editor            |
+| <kbd>alt</kbd> + <kbd>3</kbd>                      | <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>G</kbd>  | Toggle groups                          |
+| <kbd>alt</kbd> + <kbd>4</kbd>                      | <kbd>F5</kbd>                                      | web search                             |
+| <kbd>alt</kbd> + <kbd>0</kbd>                      | -                                                  | Open Openoffice/LibreOffice connection |
+| <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>F7</kbd> | <kbd>ctrl</kbd> + <kbd>F4</kbd>                    | Synchronize file links                 |
+| <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>R</kbd>  | -                                                  | Technical report                       |
+| -                                                  | <kbd>alt</kbd> + <kbd>P</kbd>                      | Print entry preview                    |
+| -                                                  | <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>T</kbd>    | Hide/show toolbar                      |
+| -                                                  | <kbd>ctrl</kbd> + <kbd>p</kbd>                     | Edit preamble                          |
 
 - Improve group pane maneuverability by making groups selectable by arrow keys
 - Improve main table maneuverability by making <kbd>tab</kbd> jump to the next entry instead of the next cell, <kbd>shift</kbd> + <kbd>tab</kbd> selects the previous entry.
@@ -32,4 +32,4 @@ Keys - new | Keys - old | Function
 
 If you would like to try the new system, you can try it out at [https://builds.jabref.org/master/](https://builds.jabref.org/master/).
 
-For questions about the functioning or suggestions for improvements, please use the [discussion forum](http://discourse.jabref.org/). In case you have trouble, report bugs on [GitHub]( https://github.com/JabRef/jabref/issues).
+For questions about the functioning or suggestions for improvements, please use the [discussion forum](http://discourse.jabref.org/). In case you have trouble, report bugs on [GitHub](https://github.com/JabRef/jabref/issues).

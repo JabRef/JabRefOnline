@@ -3,7 +3,7 @@ title: A faster JabRef is coming!
 id: faster-jabref
 bg: jabref-font
 color: white
-author: "[mlep](https://github.com/mlep)"
+author: '[mlep](https://github.com/mlep)'
 ---
 
 Some users reported JabRef was slow on large databases (thank you for the feedback!).
@@ -22,7 +22,7 @@ Preliminary tests have been carried out on a database with 100000 entries (is it
 They show that **JabRef is now 10 times faster at searching**: it takes only one second to search through 60000 entries!
 
 You can [give it a try](http://builds.jabref.org/master/)
-(*This is a development version: Be carefully, and back up your data first!)*.
+(_This is a development version: Be carefully, and back up your data first!)_.
 [Your comments are welcomed](https://github.com/JabRef/jabref/pull/1100)!
 
-*Stay tuned: [work is under way to speed up the opening of large databases](https://github.com/JabRef/jabref/issues/1094).*
+_Stay tuned: [work is under way to speed up the opening of large databases](https://github.com/JabRef/jabref/issues/1094)._

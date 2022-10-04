@@ -1,10 +1,11 @@
 ---
 title: JabCon 2019 & JabRef 5.0 Alpha release
 id: JabCon2019
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 bg: jabref-font
 color: white
 ---
+
 Last weekend the annual [JabCon](https://jabcon.jabref.org/) took place in Stuttgart, Germany, where the majority of the JabRef developers met in person and worked together to improve JabRef and discuss the roadmap for future releases.
 This year's JabCon was special as our Google Sumemr of Code student David also was able to attend. If you regulary [read our blog](http://blog.jabref.org/#august-06-2019-%E2%80%93-google-summer-of-code-2019-latex-citations-tab), you will have already seen some previews of the LaTeX-Citation-Search feature he developed.
 At the JabCon, we were finally able to release an alpha version of the upcoming JabRef 5.0 after more than one year of hard work! ❤️ 🎆

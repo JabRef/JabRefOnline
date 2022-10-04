@@ -1,7 +1,7 @@
 ---
-title: "JabRef Participates in Google Summer of Code 2019"
+title: 'JabRef Participates in Google Summer of Code 2019'
 id: gsoc-2019-student
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 bg: jabref-font
 color: white
 ---

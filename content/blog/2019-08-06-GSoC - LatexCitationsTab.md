@@ -1,7 +1,7 @@
 ---
 title: "Google Summer of Code 2019: 'LaTeX Citations' tab"
 id: gsoc-2019-latex-citations-tab
-author: "[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)"
+author: '[JabRef Maintainers](https://github.com/JabRef/jabref/blob/main/MAINTAINERS)'
 bg: jabref-font
 color: white
 ---
@@ -29,11 +29,13 @@ This is how it works:
 !['LaTeX Citations' tab](https://user-images.githubusercontent.com/12954316/62509787-d68a0a80-b80c-11e9-84f5-f894f965dc9e.gif)
 
 ### An improved back-end
+
 - Optimized parsing performance.
 - Non-existent nested files are skipped.
 - Better exception handling.
 
 ### The new tab
+
 - A _LaTeX Citations_ tab has been added to the entry editor.
 - This tab can be disabled in the _Entry editor_ preferences.
 - A progress indicator appears while parsing.
@@ -43,6 +45,7 @@ This is how it works:
 - A user-friendly error logging and handling has also been implemented.
 
 ### A custom user interface controller for listing citations
+
 - Citations list view is the same for dialog tool and tab.
 - Context of citations, instead of the whole line of text (which is shown as a tooltip).
 - Absolute file path has been changed into a relative one, from the search path.
