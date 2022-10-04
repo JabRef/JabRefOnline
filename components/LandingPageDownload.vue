@@ -30,7 +30,7 @@
               <br />
               Also available for
               <a
-                class="text-highlight-500"
+                class="text-primary-500"
                 href="https://downloads.jabref.org/"
                 >mac OS X and Linux</a
               >
@@ -41,7 +41,7 @@
               <br />
               Also available for
               <a
-                class="text-highlight-500"
+                class="text-primary-500"
                 href="https://downloads.jabref.org/"
                 >Windows and Linux</a
               >
@@ -52,7 +52,7 @@
               <br />
               Also available for
               <a
-                class="text-highlight-500"
+                class="text-primary-500"
                 href="https://downloads.jabref.org/"
               >
                 mac OS X and Windows
@@ -60,14 +60,14 @@
               <br />
             </span>
             <a
-              class="text-highlight-500"
+              class="text-primary-500"
               href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
             >
               Change Log
             </a>
             and
             <a
-              class="text-highlight-500"
+              class="text-primary-500"
               href="https://builds.jabref.org/main/"
               >Development Builds</a
             >

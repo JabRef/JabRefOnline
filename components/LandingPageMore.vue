@@ -14,7 +14,7 @@
         >
           <t-nuxtlink
             :href="item.href"
-            class="text-primary-500 hover:text-highlight-600"
+            class="text-primary-500 hover:text-primary-600"
           >
             <FontAwesomeIcon
               :icon="item.icon"

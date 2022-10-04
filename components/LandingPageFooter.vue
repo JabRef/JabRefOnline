@@ -13,7 +13,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://downloads.jabref.org/"
             >
               Desktop apps
@@ -21,7 +21,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://docs.jabref.org/collect/jabref-browser-extension"
             >
               Browser extensions
@@ -29,7 +29,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://builds.jabref.org/main/"
             >
               Development build
@@ -37,7 +37,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
             >
               Change Log
@@ -52,7 +52,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://docs.jabref.org/advanced/resources"
             >
               Resources
@@ -60,7 +60,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="http://java.by-comparison.com/"
             >
               Java by Comparison
@@ -68,7 +68,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               @click="showLegalNotices = true"
             >
               Legal Notices
@@ -76,7 +76,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               @click="showPrivacyPolicy = true"
             >
               Privacy Policy
@@ -91,7 +91,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://github.com/JabRef/jabref/wiki/Donations"
             >
               Donation
@@ -99,7 +99,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://docs.jabref.org/faqcontributing/how-to-translate-the-ui"
             >
               Translation
@@ -107,7 +107,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://github.com/JabRef/jabref"
             >
               GitHub
@@ -115,7 +115,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://devdocs.jabref.org/"
             >
               Developer Docs
@@ -131,7 +131,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://docs.jabref.org/"
             >
               Documentation
@@ -139,14 +139,14 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="http://discourse.jabref.org/"
               >Forum</t-nuxtlink
             >
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://twitter.com/JabRef_org"
             >
               Twitter
@@ -154,7 +154,7 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="px-4 no-underline text-sm text-gray-800 hover:text-highlight-800"
+              class="px-4 no-underline text-sm text-gray-800 hover:text-primary-800"
               href="https://github.com/JabRef/jabref/issues"
             >
               Report an issue

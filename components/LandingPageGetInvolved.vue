@@ -83,7 +83,7 @@
           </p>
           <t-nuxtlink
             href="https://docs.jabref.org/contributing"
-            class="pt-4 text-primary-500 hover:text-highlight-600"
+            class="pt-4 text-primary-500 hover:text-primary-600"
           >
             Learn how to help
           </t-nuxtlink>
@@ -111,7 +111,7 @@
           </p>
           <t-nuxtlink
             href="https://github.com/JabRef/jabref/wiki/Donations"
-            class="pt-4 text-primary-500 hover:text-highlight-600"
+            class="pt-4 text-primary-500 hover:text-primary-600"
           >
             Donate
           </t-nuxtlink>
@@ -139,7 +139,7 @@
           </p>
           <t-nuxtlink
             href="https://github.com/JabRef/jabref"
-            class="pt-4 text-primary-500 hover:text-highlight-600"
+            class="pt-4 text-primary-500 hover:text-primary-600"
           >
             Develop via GitHub
           </t-nuxtlink>
