@@ -1,6 +1,7 @@
 # JabRefOnline
 
 This repository contains the source of the [JabRef homepage](https://www.jabref.org/).
+It contains also the [JabRef blog](https://blog.jabref.org/). Feel free to send blog entries.
 
 ## Servers
 
