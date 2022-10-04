@@ -29,10 +29,10 @@
               For Windows
               <br />
               Also available for
-              <a
+              <t-nuxtlink
                 class="text-primary-500"
-                href="https://downloads.jabref.org/"
-                >mac OS X and Linux</a
+                href="download"
+                >mac OS X and Linux</t-nuxtlink
               >
               <br />
             </span>
@@ -40,10 +40,10 @@
               For mac OS X
               <br />
               Also available for
-              <a
+              <t-nuxtlink
                 class="text-primary-500"
-                href="https://downloads.jabref.org/"
-                >Windows and Linux</a
+                href="download"
+                >Windows and Linux</t-nuxtlink
               >
               <br />
             </span>
@@ -51,12 +51,12 @@
               For Linux
               <br />
               Also available for
-              <a
+              <t-nuxtlink
                 class="text-primary-500"
-                href="https://downloads.jabref.org/"
+                href="download"
               >
                 mac OS X and Windows
-              </a>
+              </t-nuxtlink>
               <br />
             </span>
             <a
