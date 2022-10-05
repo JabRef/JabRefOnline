@@ -7,14 +7,14 @@
       <div
         v-for="(feature, index) in list"
         :key="feature._path"
-        class="container mx-auto sm:px-4 lg:pb-16 mt-4 max-w-screen-xl"
+        class="container mx-auto px-4 pb-4 lg:pb-16 mt-4 max-w-screen-xl"
       >
         <div class="flex flex-wrap">
           <div
             class="lg:w-3/5 sm:w-1/2"
             :class="{
-              'pl-3 pr-3 md:pr-12': !(index % 2),
-              'pr-4 pl-3 md:pl-12 md:order-last': index % 2,
+              'md:pr-12': !(index % 2),
+              'md:pl-12 md:order-last': index % 2,
             }"
           >
             <hr />
@@ -26,8 +26,8 @@
           <div
             class="lg:w-2/5 sm:w-1/2 pt-3 flex items-center justify-center"
             :class="{
-              'pr-3 pl-4 md:pl-12': !(index % 2),
-              'pr-4 pl-3 md:pr-12': index % 2,
+              'md:pl-12': !(index % 2),
+              'md:pr-12': index % 2,
             }"
           >
             <img

@@ -3,7 +3,7 @@
     id="download"
     class="bg-primary-50"
   >
-    <div class="container mx-auto sm:px-4 md:py-16">
+    <div class="container mx-auto px-4 pt-6 pb-4 md:py-16">
       <div class="flex flex-wrap flex-col content-center">
         <h1 class="text-center mb-3 text-5xl">Try it now</h1>
         <h3 class="text-center mb-12 text-3xl">

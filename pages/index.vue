@@ -33,24 +33,26 @@
 
       <!-- Masthead -->
       <header class="masthead text-center">
-        <div class="container mx-auto">
+        <div class="container mx-auto px-4">
           <div class="flex flex-wrap">
-            <div class="xl:w-3/4 pr-4 pl-4 mt-16 mx-auto">
+            <div class="xl:w-3/4 mt-16 mx-auto">
               <h1 class="text-5xl mb-4">Stay on top of your Literature</h1>
             </div>
-            <div class="xl:w-3/4 pr-4 pl-4 mx-auto">
+            <div class="xl:w-3/4 mx-auto">
               <h2 class="mb-5 text-3xl text-gray-700">
                 The efficient way to collect, organize & discover
               </h2>
             </div>
           </div>
-          <div class="mt-20 shadow-[0_0_25px_#a7a7bd] max-w-screen-xl mx-auto">
+          <div
+            class="mt-4 md:mt-20 shadow-[0_0_25px_#a7a7bd] max-w-screen-xl mx-auto"
+          >
             <img
               src="~/assets/jabref-mainscreen.png"
               alt=""
             />
           </div>
-          <div class="row mt-5">
+          <div class="row md:mt-5">
             <div class="xl:w-3/4 pr-4 pl-4 mt-16 mx-auto">
               <h2 class="text-3xl">
                 JabRef supports you in every step of your research
@@ -60,7 +62,7 @@
               </p>
             </div>
           </div>
-          <div class="row justify-content-center pt-6 pb-16">
+          <div class="row justify-content-center py-6 md:pb-16">
             <div class="col-auto">
               <n-button
                 type="primary"

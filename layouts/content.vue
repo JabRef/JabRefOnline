@@ -159,7 +159,7 @@
           </slot>
         </n-layout-header>
       </header>
-      <div class="md:mt-20">
+      <div class="md:mt-20 md:pb-10">
         <slot />
       </div>
     </n-layout>
