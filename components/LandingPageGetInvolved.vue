@@ -1,6 +1,6 @@
 <template>
   <section id="getinvolved">
-    <div class="container mx-auto sm:px-4 md:py-16">
+    <div class="container mx-auto px-4 pt-6 pb-4 md:py-16">
       <div
         class="flex flex-wrap flex-col justify-center text-center max-w-prose mx-auto"
       >
@@ -59,7 +59,7 @@
       </div>
       <div class="flex flex-row flex-wrap lg:flex-nowrap pt-6 lg:pt-12">
         <div
-          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center p-6 max-w-prose"
+          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center py-6 md:px-6 max-w-prose"
         >
           <n-button
             text
@@ -89,7 +89,7 @@
           </t-nuxtlink>
         </div>
         <div
-          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center p-6 max-w-prose"
+          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center py-6 md:px-6 max-w-prose"
         >
           <n-button
             text
@@ -117,7 +117,7 @@
           </t-nuxtlink>
         </div>
         <div
-          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center p-6 max-w-prose"
+          class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink flex-grow break-words text-center py-6 md:px-6 max-w-prose"
         >
           <n-button
             text
