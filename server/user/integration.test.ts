@@ -28,7 +28,7 @@ describe('Query', () => {
         {
           "data": {
             "me": {
-              "email": "alice@jabref.de",
+              "email": "alice@jabref.org",
               "id": "ckn4oul7100004cv7y3t94n8j",
             },
           },
@@ -108,7 +108,7 @@ describe('Query', () => {
                   },
                 ],
               },
-              "email": "alice@jabref.de",
+              "email": "alice@jabref.org",
               "groups": [
                 {
                   "id": "ckn4h9pl5000101le5bco3b8r",

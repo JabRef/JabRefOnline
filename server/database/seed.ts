@@ -14,7 +14,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
   await prisma.user.create({
     data: {
       id: 'ckn4oul7100004cv7y3t94n8j',
-      email: 'alice@jabref.de',
+      email: 'alice@jabref.org',
       password:
         '19184d8c1c1e9b483d8347f8da0d53ad92170233100d32c3a0d748725948c28d09a060d7f02962b7b93320c72a2cdd94f21b16b08bf8bd1cba0c5f77afeffddbb24df527c4f16f1fca6eb5480159b56df3d818b4b3c74ead04227a78b3d810b8', // EBNPXY35TYkYXHs
       name: 'Alice',

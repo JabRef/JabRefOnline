@@ -19,7 +19,7 @@ describe('Mutation', () => {
           `
         )
         .variables({
-          input: { email: 'alice@jabref.de', password: 'EBNPXY35TYkYXHs' },
+          input: { email: 'alice@jabref.org', password: 'EBNPXY35TYkYXHs' },
         })
         .expectNoErrors()
 
