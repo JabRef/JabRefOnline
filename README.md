@@ -13,7 +13,7 @@ It contains also the [JabRef blog](https://blog.jabref.org/). Feel free to send 
 - Test server: https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net
   This server runs the latest version of the main branch with test data that is usually reset on redeployment.
   The main use of this server is for developers to test the latest version against their application without the fear to delete user data.
-  In particular, you can log in using `alice@jabref.org / EBNPXY35TYkYXHs`.
+  In particular, you can [log in](https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net/user/login) using `alice@jabref.org / EBNPXY35TYkYXHs`.
 - PR previews:
   Every pull request is deployed to a (temporary) server, which uses the same test data as the "Test server".
 
