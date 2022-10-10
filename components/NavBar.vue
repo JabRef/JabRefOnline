@@ -5,11 +5,11 @@
     <!-- Logo -->
     <div
       v-if="showLogo"
-      class="flex flex-row items-center h-20 border-b px-3 md:px-6"
+      class="flex-1 flex flex-row items-center h-20 border-b mx-3 md:mx-6"
     >
       <jabref-logo class="w-10 flex-none" />
       <span
-        class="ml-3 flex-1 text-gray-900 text-2xl font-semibold md:inline-block hidden"
+        class="ml-3 flex-1 text-gray-900 text-2xl font-semibold lg:inline-block hidden"
       >
         JabRef</span
       >
@@ -146,7 +146,10 @@
     </nav>
 
     <!-- Empty stopper for proper alignment -->
-    <div v-if="!isSmallDisplay"></div>
+    <div
+      v-if="!isSmallDisplay"
+      class="flex-1 mx-3 md:mx-6"
+    ></div>
   </nav>
 </template>
 
