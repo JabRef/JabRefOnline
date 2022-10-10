@@ -74,8 +74,10 @@ function convertDocumentInput(
   const convertedDocument: Prisma.UserDocumentCreateInput = {
     type,
     citationKeys: document.citationKeys ?? [],
-    lastModified: document.lastModified ?? null,
-    added: document.added ?? null,
+    lastModified: document.lastModified ?? undefined,
+    added: document.added ?? undefined,
+    revisionNumber: undefined,
+    revisionHash: 'TODO',
     title: document.title,
     subtitle: document.subtitle,
     titleAddon: document.titleAddon,

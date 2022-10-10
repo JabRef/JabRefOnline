@@ -45,8 +45,10 @@ model UserDocument {
   type DocumentType
   citationKeys String[]
 
-  lastModified DateTime?
-  added DateTime?
+  lastModified DateTime @default(now())
+  added DateTime @default(now())
+  revisionNumber Int @default(1)
+  revisionHash String
 
   // Common fields
   title String?
@@ -91,6 +93,8 @@ model UserDocument {
 
   // Other fields that are not often used
   other UserDocumentOtherField[]
+
+  @@unique([id, lastModified], name: "checkpoint")
 }
 
 model JournalIssue {

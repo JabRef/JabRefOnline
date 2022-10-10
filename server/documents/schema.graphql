@@ -15,6 +15,20 @@ input DocumentFilters {
   query: String
 }
 
+"""
+Represents the pagination cursor for the list of (changed) documents.
+"""
+input SyncCheckpoint {
+  """
+  The ID of the last document that was in the sync batch.
+  """
+  id: ID!
+  """
+  The modification date of the last document that was in the sync batch.
+  """
+  modifiedAt: DateTime!
+}
+
 extend type User {
   """
   A list of documents that belong to the user.

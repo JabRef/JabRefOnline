@@ -166,14 +166,19 @@ export class UserResolver {
 
   async documents(
     user: User,
-    { filterBy, first, after }: UserDocumentsArgs
+    { filterBy, first, after, modifiedAfter }: UserDocumentsArgs
   ): Promise<UserDocumentsResult> {
+    if (after && modifiedAfter) {
+      throw new Error(
+        'Cannot use both "after" and "modifiedAfter" at the same time.'
+      )
+    }
     const { documents, hasNextPage } =
       await this.userDocumentService.getDocumentsOf(
         user,
         filterBy,
         first,
-        after,
+        after || modifiedAfter,
         true
       )
 

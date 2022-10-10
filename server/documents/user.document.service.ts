@@ -7,7 +7,11 @@ import type {
   UserDocument as PlainUserDocument,
   UserDocumentOtherField,
 } from '@prisma/client'
-import { DocumentFilters, UserDocumentsConnection } from '../graphql'
+import {
+  DocumentFilters,
+  SyncCheckpoint,
+  UserDocumentsConnection,
+} from '../graphql'
 import { inject, injectable } from './../tsyringe'
 
 export type UserDocument = PlainUserDocument & {
@@ -55,10 +59,15 @@ export class UserDocumentService {
     user: User | string,
     filterBy: DocumentFilters | null = null,
     first: number | null = null,
-    after: string | null = null,
+    after: string | SyncCheckpoint | null = null,
     includeOtherFields = false
   ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
+    const cursor = after
+      ? typeof after === 'string'
+        ? { id: after }
+        : { checkpoint: { id: after.id, lastModified: after.modifiedAt } }
+      : null
     const documents = await this.prisma.userDocument.findMany({
       where: {
         users: {
@@ -78,10 +87,8 @@ export class UserDocumentService {
       ...(first && {
         take: first + 1,
       }),
-      ...(after && {
-        cursor: {
-          id: after,
-        },
+      ...(cursor && {
+        cursor,
         skip: 1,
       }),
       include: {

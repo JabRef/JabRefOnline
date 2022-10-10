@@ -159,6 +159,18 @@ describe('Query', () => {
   })
 })
 
+describe('Resolver', () => {
+  describe('User.documents', () => {
+    it('returns all documents after checkpoint') {
+      const authenticatedClient = await createAuthenticatedClient()
+      const result = await authenticatedClient.executeOperation({
+        query: gql``,
+        variables: { id: 'ckondtcaf000101mh7x9g4gia', lastModified: '2020-01-01:00:00:00' },
+      })
+    }
+  })
+})
+
 describe('Roundtrip', () => {
   describe('journal articles', () => {
     const testArticle = {
