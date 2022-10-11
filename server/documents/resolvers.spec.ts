@@ -108,7 +108,6 @@ describe('Mutation', () => {
         pageStart: null,
         publicationState: undefined,
         publishedAt: null,
-        revisionHash: 'TODO',
         revisionNumber: undefined,
         subtitle: undefined,
         title: undefined,

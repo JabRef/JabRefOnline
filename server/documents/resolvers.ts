@@ -1,4 +1,4 @@
-import { DocumentType, Prisma } from '@prisma/client'
+import { DocumentType } from '@prisma/client'
 import { Context } from '../context'
 import {
   AddJournalArticleInput,
@@ -17,7 +17,11 @@ import {
 } from '../graphql'
 import { ResolveType } from '../utils/extractResolveType'
 import { inject, injectable, resolve } from './../tsyringe'
-import { UserDocument, UserDocumentService } from './user.document.service'
+import {
+  UserDocument,
+  UserDocumentCreateInput,
+  UserDocumentService,
+} from './user.document.service'
 
 // Fields that are stored as separate columns in the database
 const specialFields: string[] = [
@@ -55,7 +59,7 @@ const specialFields: string[] = [
 function convertDocumentInput(
   type: DocumentType,
   document: AddJournalArticleInput | AddProceedingsArticleInput | AddThesisInput
-): Prisma.UserDocumentCreateInput {
+): UserDocumentCreateInput {
   /* TODO: Save those fields as well
   const special = document.fields
     ?.filter((item) => specialFields.includes(item.field))
@@ -71,13 +75,12 @@ function convertDocumentInput(
       }
     })
     */
-  const convertedDocument: Prisma.UserDocumentCreateInput = {
+  const convertedDocument: UserDocumentCreateInput = {
     type,
     citationKeys: document.citationKeys ?? [],
     lastModified: document.lastModified ?? undefined,
     added: document.added ?? undefined,
     revisionNumber: undefined,
-    revisionHash: 'TODO',
     title: document.title,
     subtitle: document.subtitle,
     titleAddon: document.titleAddon,

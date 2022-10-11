@@ -33,12 +33,21 @@ export type UserDocumentsResult = Omit<UserDocumentsConnection, 'edges'> & {
   edges: { node: UserDocument }[]
 }
 
+export type UserDocumentCreateInput = Omit<
+  Prisma.UserDocumentCreateInput,
+  'revisionHash'
+>
+
 @injectable()
 export class UserDocumentService {
   constructor(@inject('PrismaClient') private prisma: PrismaClient) {}
 
-  getRevisionHash(document: UserDocument): string {
-    const { revisionHash, revisionNumber, ...documentWithoutRevision } =
+  getRevisionHash(
+    document:
+      | UserDocument
+      | (UserDocumentCreateInput & { revisionHash?: string })
+  ): string {
+    const { revisionNumber, revisionHash, ...documentWithoutRevision } =
       document
     return unsecureHash(documentWithoutRevision)
   }
@@ -143,6 +152,7 @@ export class UserDocumentService {
           },
         },
       },
+      orderBy: [{ lastModified: 'asc' }, { id: 'asc' }],
       ...(first && {
         take: first + 1,
       }),
@@ -165,10 +175,13 @@ export class UserDocumentService {
   }
 
   async addDocument(
-    document: Prisma.UserDocumentCreateInput
+    document: UserDocumentCreateInput
   ): Promise<UserDocument | null> {
     return await this.prisma.userDocument.create({
-      data: document,
+      data: {
+        ...document,
+        revisionHash: this.getRevisionHash(document),
+      },
       include: {
         journalIssue: {
           include: {

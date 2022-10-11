@@ -55,6 +55,8 @@ const testDocument: UserDocument = {
   urldate: null,
   publisher: null,
   priority: null,
+  revisionNumber: 1,
+  revisionHash: 'test',
   doi: null,
   eprint: null,
   eprintclass: null,

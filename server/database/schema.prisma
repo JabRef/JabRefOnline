@@ -94,7 +94,7 @@ model UserDocument {
   // Other fields that are not often used
   other UserDocumentOtherField[]
 
-  @@unique([id, lastModified], name: "checkpoint")
+  @@unique([lastModified(sort: Asc), id(sort: Asc)], name: "checkpoint")
 }
 
 model JournalIssue {

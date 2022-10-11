@@ -183,14 +183,10 @@ export class UserResolver {
         true
       )
 
-    const endCursor = documents.length
-      ? documents[documents.length - 1].id
-      : null
-
     return {
       edges: documents.map((document) => ({ node: document })),
       pageInfo: {
-        endCursor,
+        endCursor: documents.length ? documents[documents.length - 1].id : null,
         hasNextPage,
       },
     }
@@ -237,12 +233,10 @@ export class UserResolver {
       }
     }
 
-    const endCursor = constructCursor(documents)
-
     return {
       edges: documents.map((document) => ({ node: document })),
       pageInfo: {
-        endCursor,
+        endCursor: constructCursor(documents),
         hasNextPage,
       },
     }
