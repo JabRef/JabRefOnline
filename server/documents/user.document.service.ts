@@ -9,7 +9,7 @@ import type {
 } from '@prisma/client'
 import {
   DocumentFilters,
-  SyncCheckpoint,
+  UserChangesCursorInput,
   UserDocumentsConnection,
 } from '../graphql'
 import { inject, injectable } from './../tsyringe'
@@ -59,15 +59,11 @@ export class UserDocumentService {
     user: User | string,
     filterBy: DocumentFilters | null = null,
     first: number | null = null,
-    after: string | SyncCheckpoint | null = null,
+    after: string | null = null,
     includeOtherFields = false
   ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
-    const cursor = after
-      ? typeof after === 'string'
-        ? { id: after }
-        : { checkpoint: { id: after.id, lastModified: after.modifiedAt } }
-      : null
+    const cursor = after ? { id: after } : null
     const documents = await this.prisma.userDocument.findMany({
       where: {
         users: {
@@ -122,6 +118,42 @@ export class UserDocumentService {
         documents: userDocuments,
         hasNextPage,
       }
+    }
+  }
+
+  async getChangedDocumentsOf(
+    user: User | string,
+    first: number | null = null,
+    after: UserChangesCursorInput | null = null,
+    includeOtherFields = false
+  ): Promise<UserDocumentsAndPageInfo> {
+    const userId = typeof user === 'string' ? user : user.id
+    const documents = await this.prisma.userDocument.findMany({
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      ...(first && {
+        take: first + 1,
+      }),
+      ...(after && { cursor: after }),
+      skip: 1,
+      include: {
+        other: includeOtherFields,
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
+      },
+    })
+
+    return {
+      documents: first ? documents.slice(0, first) : documents,
+      hasNextPage: !!(first && documents.length > first),
     }
   }
 
