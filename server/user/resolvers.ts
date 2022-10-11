@@ -1,4 +1,4 @@
-import { User } from '@prisma/client'
+import { User, UserDocument } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
 import { Context } from '../context'
 import {
@@ -13,6 +13,8 @@ import {
   MutationSignupArgs,
   QueryUserArgs,
   Resolvers,
+  UserChangesArgs,
+  UserChangesConnection,
   UserDocumentsArgs,
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
@@ -26,6 +28,10 @@ import {
   LogoutPayload,
   SignupPayload,
 } from './auth.service'
+
+export type UserChangesResult = Omit<UserChangesConnection, 'edges'> & {
+  edges: { node: UserDocument }[]
+}
 
 @injectable()
 export class Query {
@@ -177,14 +183,10 @@ export class UserResolver {
         true
       )
 
-    const endCursor = documents.length
-      ? documents[documents.length - 1].id
-      : null
-
     return {
       edges: documents.map((document) => ({ node: document })),
       pageInfo: {
-        endCursor,
+        endCursor: documents.length ? documents[documents.length - 1].id : null,
         hasNextPage,
       },
     }
@@ -208,6 +210,36 @@ export class UserResolver {
       }
     })
     return roots
+  }
+
+  async changes(
+    user: User,
+    { first, after }: UserChangesArgs
+  ): Promise<UserChangesResult> {
+    const { documents, hasNextPage } =
+      await this.userDocumentService.getChangedDocumentsOf(
+        user,
+        first,
+        after,
+        true
+      )
+
+    function constructCursor(documents: UserDocument[]) {
+      if (documents.length === 0) return null
+      const lastDoc = documents[documents.length - 1]
+      return {
+        id: lastDoc.id,
+        lastModified: lastDoc.lastModified,
+      }
+    }
+
+    return {
+      edges: documents.map((document) => ({ node: document })),
+      pageInfo: {
+        endCursor: constructCursor(documents),
+        hasNextPage,
+      },
+    }
   }
 }
 

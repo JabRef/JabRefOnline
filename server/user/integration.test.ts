@@ -133,6 +133,73 @@ describe('Query', () => {
       `)
     })
   })
+
+  describe('user.changes', () => {
+    it('without cursor returns all documents', async () => {
+      const authenticatedClient = await createAuthenticatedClient()
+      const result = await authenticatedClient.executeOperation({
+        query: gql`
+          query UserChanges($id: ID!) {
+            user(id: $id) {
+              id
+              changes {
+                edges {
+                  node {
+                    id
+                    lastModified
+                  }
+                }
+              }
+            }
+          }
+        `,
+        variables: { id: 'ckn4oul7100004cv7y3t94n8j' },
+      })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "data": {
+            "user": {
+              "changes": {
+                "edges": [
+                  {
+                    "node": {
+                      "id": "ckondtcaf000101mh7x9g4gia",
+                      "lastModified": 2021-01-01T00:00:00.000Z,
+                    },
+                  },
+                  {
+                    "node": {
+                      "id": "ckr9eq4oc000101mk1ga9bxnt",
+                      "lastModified": 2021-05-28T12:00:00.000Z,
+                    },
+                  },
+                  {
+                    "node": {
+                      "id": "ckr9eqap6000301mk20hycjqb",
+                      "lastModified": 2022-01-01T00:00:00.000Z,
+                    },
+                  },
+                  {
+                    "node": {
+                      "id": "ckondu6bh000501mh2o2tf00u",
+                      "lastModified": 2022-10-11T17:31:24.033Z,
+                    },
+                  },
+                  {
+                    "node": {
+                      "id": "ckondtpcn000301mhg9lvaqlu",
+                      "lastModified": 2022-10-11T17:31:24.083Z,
+                    },
+                  },
+                ],
+              },
+              "id": "ckn4oul7100004cv7y3t94n8j",
+            },
+          },
+        }
+      `)
+    })
+  })
 })
 
 describe('Mutation', () => {
