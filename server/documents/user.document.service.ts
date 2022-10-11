@@ -12,6 +12,7 @@ import {
   UserChangesCursorInput,
   UserDocumentsConnection,
 } from '../graphql'
+import { unsecureHash } from '../utils/crypto'
 import { inject, injectable } from './../tsyringe'
 
 export type UserDocument = PlainUserDocument & {
@@ -35,6 +36,12 @@ export type UserDocumentsResult = Omit<UserDocumentsConnection, 'edges'> & {
 @injectable()
 export class UserDocumentService {
   constructor(@inject('PrismaClient') private prisma: PrismaClient) {}
+
+  getRevisionHash(document: UserDocument): string {
+    const { revisionHash, revisionNumber, ...documentWithoutRevision } =
+      document
+    return unsecureHash(documentWithoutRevision)
+  }
 
   async getDocumentById(
     id: string,
@@ -139,7 +146,7 @@ export class UserDocumentService {
       ...(first && {
         take: first + 1,
       }),
-      ...(after && { cursor: after }),
+      ...(after && { cursor: { checkpoint: after } }),
       skip: 1,
       include: {
         other: includeOtherFields,

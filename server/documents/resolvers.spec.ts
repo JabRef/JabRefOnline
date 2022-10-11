@@ -92,9 +92,9 @@ describe('Mutation', () => {
         context
       )
       expect(userDocumentService.addDocument).toHaveBeenCalledWith({
-        added: null,
+        added: undefined,
         citationKeys: [],
-        lastModified: null,
+        lastModified: undefined,
         type: 'JOURNAL_ARTICLE',
         author: 'JabRef devs',
         abstract: undefined,
@@ -108,6 +108,8 @@ describe('Mutation', () => {
         pageStart: null,
         publicationState: undefined,
         publishedAt: null,
+        revisionHash: 'TODO',
+        revisionNumber: undefined,
         subtitle: undefined,
         title: undefined,
         titleAddon: undefined,

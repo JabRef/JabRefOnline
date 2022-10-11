@@ -25,6 +25,11 @@ export async function hash(token: string, salt?: string): Promise<string> {
   })
 }
 
+export function unsecureHash(token: string | object): string {
+  token = typeof token === 'string' ? token : JSON.stringify(token)
+  return crypto.createHash('md5').update(token).digest('hex')
+}
+
 export async function verifyHash(
   token: string,
   hashedToken: string

@@ -28,6 +28,10 @@ export class AuthService {
     @inject('RedisClient') private redisClient: RedisClient
   ) {}
 
+  async getUsers(): Promise<User[]> {
+    return await this.prisma.user.findMany()
+  }
+
   async validateUser(email: string, password: string): Promise<LoginPayload> {
     const user = await this.prisma.user.findUnique({
       where: {

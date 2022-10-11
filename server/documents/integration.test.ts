@@ -92,7 +92,7 @@ describe('Query', () => {
             "userDocument": {
               "__typename": "JournalArticle",
               "abstract": "Epidemiological data demonstrate that regular dietary intake of plant-derived foods and beverages reduces the risk of coronary heart disease and stroke. Among many ingredients, cocoa might be an important mediator. Indeed, recent research demonstrates a beneficial effect of cocoa on blood pressure, insulin resistance, and vascular and platelet function. Although still debated, a range of potential mechanisms through which cocoa might exert its benefits on cardiovascular health have been proposed, including activation of nitric oxide and antioxidant and antiinflammatory effects. This review summarizes the available data on the cardiovascular effects of cocoa, outlines potential mechanisms involved in the response to cocoa, and highlights the potential clinical implications associated with its consumption. ( Circulation. 2009; 119: 1433-1441.)",
-              "added": null,
+              "added": 2000-01-01T00:00:00.000Z,
               "annotators": [],
               "authors": [
                 {
@@ -141,7 +141,7 @@ describe('Query', () => {
                 "platelets",
               ],
               "languages": [],
-              "lastModified": null,
+              "lastModified": 2021-01-01T00:00:00.000Z,
               "note": null,
               "pageEnd": "1441",
               "pageStart": "1433",
@@ -156,18 +156,6 @@ describe('Query', () => {
         }
       `)
     })
-  })
-})
-
-describe('Resolver', () => {
-  describe('User.documents', () => {
-    it('returns all documents after checkpoint') {
-      const authenticatedClient = await createAuthenticatedClient()
-      const result = await authenticatedClient.executeOperation({
-        query: gql``,
-        variables: { id: 'ckondtcaf000101mh7x9g4gia', lastModified: '2020-01-01:00:00:00' },
-      })
-    }
   })
 })
 
@@ -242,6 +230,10 @@ describe('Roundtrip', () => {
             userDocument: {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               id: expect.any(String),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              added: expect.any(Date),
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              lastModified: expect.any(Date),
               in: {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 id: expect.any(String),
@@ -259,7 +251,7 @@ describe('Roundtrip', () => {
             "userDocument": {
               "__typename": "JournalArticle",
               "abstract": "Some abstract",
-              "added": null,
+              "added": Any<Date>,
               "annotators": [],
               "authors": [
                 {
@@ -298,7 +290,7 @@ describe('Roundtrip', () => {
                 "keyword2",
               ],
               "languages": [],
-              "lastModified": null,
+              "lastModified": Any<Date>,
               "note": null,
               "pageEnd": "2811",
               "pageStart": "2779",
@@ -369,7 +361,7 @@ describe('Roundtrip', () => {
             "userDocument": {
               "__typename": "JournalArticle",
               "abstract": "Some abstract",
-              "added": null,
+              "added": 2000-01-01T00:00:00.000Z,
               "annotators": [],
               "authors": [
                 {
@@ -408,7 +400,7 @@ describe('Roundtrip', () => {
                 "keyword2",
               ],
               "languages": [],
-              "lastModified": null,
+              "lastModified": 2021-01-01T00:00:00.000Z,
               "note": null,
               "pageEnd": "2811",
               "pageStart": "2779",
