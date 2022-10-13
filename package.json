@@ -61,7 +61,6 @@
     "@vue/apollo-util": "^4.0.0-alpha.18",
     "@vueuse/core": "^9.3.0",
     "@yaireo/tagify": "^4.16.4",
-    "apollo-server-core": "^3.10.2",
     "autoprefixer": "^10.4.8",
     "body-scroll-lock": "^4.0.0-beta.0",
     "connect-redis": "^6.1.3",
@@ -85,6 +84,8 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
+    "@apollo/server": "^4.0.0",
+    "@apollo/utils.withrequired": "^1.0.0",
     "@azure/static-web-apps-cli": "^1.0.2",
     "@babel/core": "^7.18.10",
     "@graphql-codegen/add": "^3.2.1",
@@ -158,7 +159,6 @@
     "@types/react": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.2.0.tgz",
     "unist-builder": "^3.0.0",
     "remark-parse": "^10.0.1",
-    "lru-cache": "^6.0.0",
     "express-session@^1.17.3": "patch:express-session@npm%3A1.17.3#./.yarn/patches/express-session-npm-1.17.3-0819dbe06c.patch",
     "@nuxtjs/tailwindcss@5.3.3": "patch:@nuxtjs/tailwindcss@npm%3A5.3.3#./.yarn/patches/@nuxtjs-tailwindcss-npm-5.3.3-e31175b5f6.patch",
     "@apollo/client@^3.7.0": "patch:@apollo/client@npm%3A3.7.0#./.yarn/patches/@apollo-client-npm-3.7.0-07cf6b7bb6.patch",
@@ -167,7 +167,6 @@
   "resolutionsComments": {
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "unist-builder/remark-parse": "Otherwise we run into conflicts with older versions, which are imported mainly from storybook",
-    "lru-cache": "Otherwise we run into conflicts with newer versions, which are not compatible with apollo-server v3",
     "tslib": "some libraries still pull-in v1 of tslib, which is incompatible with the other libraries that use tslib v2 features"
   },
   "prisma": {

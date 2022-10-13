@@ -1,9 +1,10 @@
+import { ApolloServer } from '@apollo/server'
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core'
 import http from 'http'
 import 'reflect-metadata' // Needed for tsyringe
-import { ApolloServer } from '~/apollo/apollo-server'
-import { buildContext } from './context'
+import { startServerAndCreateH3Handler } from '~/apollo/apollo-server'
+import { buildContext, Context } from './context'
 import { loadSchemaWithResolvers } from './schema'
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
@@ -80,9 +81,8 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
 }
 
 export default defineLazyEventHandler(async () => {
-  const server = new ApolloServer({
+  const server = new ApolloServer<Context>({
     schema: await loadSchemaWithResolvers(),
-    context: buildContext,
     introspection: true,
     plugins: [
       // Enable Apollo Studio in development, and also in production (at least for now)
@@ -96,15 +96,18 @@ export default defineLazyEventHandler(async () => {
     cache: new InMemoryLRUCache(),
   })
 
-  await server.start()
-  return server.createHandler({
-    path: '/api',
-    cors: {
-      // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
-      origin: 'https://studio.apollographql.com',
-      credentials: true,
-      methods: 'GET,POST,OPTIONS',
-      allowedHeaders: 'Content-Type',
-    },
-  })
+  /*
+server.createHandler({
+  path: '/api',
+  cors: {
+    // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
+    origin: 'https://studio.apollographql.com',
+    credentials: true,
+    methods: 'GET,POST,OPTIONS',
+    allowedHeaders: 'Content-Type',
+  },
+})
+*/
+
+  return startServerAndCreateH3Handler(server, { context: buildContext })
 })
