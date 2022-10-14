@@ -6153,7 +6153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.36.1, @typescript-eslint/parser@npm:^5.36.2":
+"@typescript-eslint/parser@npm:^5.36.1":
   version: 5.38.0
   resolution: "@typescript-eslint/parser@npm:5.38.0"
   dependencies:
@@ -6167,6 +6167,23 @@ __metadata:
     typescript:
       optional: true
   checksum: d5fb2d8f3a25cd6ff31326c665db4617f2d428247cad690f0404de440abbcfc7261528f54d642d2b121aae34aadecb55a24b72c8ef341cafdc7b2bbcbf7dae8d
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/parser@npm:^5.40.0":
+  version: 5.40.0
+  resolution: "@typescript-eslint/parser@npm:5.40.0"
+  dependencies:
+    "@typescript-eslint/scope-manager": 5.40.0
+    "@typescript-eslint/types": 5.40.0
+    "@typescript-eslint/typescript-estree": 5.40.0
+    debug: ^4.3.4
+  peerDependencies:
+    eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: a8d02950dd12fcb1d19ad5f24cbfd186ca88d8a099160f93f99767896a45198a9f9bfbdd1a57c1ae50d452e6c895ae5b4d7e4623dfc87bca55a45c5ba16491f8
   languageName: node
   linkType: hard
 
@@ -11904,7 +11921,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:^3.5.0":
+"eslint-import-resolver-typescript@npm:^3.5.0, eslint-import-resolver-typescript@npm:^3.5.1":
   version: 3.5.1
   resolution: "eslint-import-resolver-typescript@npm:3.5.1"
   dependencies:
@@ -15757,7 +15774,7 @@ __metadata:
     "@types/uuid": ^8.3.4
     "@types/yaireo__tagify": ^4.16.0
     "@typescript-eslint/eslint-plugin": ^5.40.0
-    "@typescript-eslint/parser": ^5.36.2
+    "@typescript-eslint/parser": ^5.40.0
     "@variantjs/core": ^0.0.90
     "@variantjs/vue": ^0.0.22
     "@vee-validate/zod": ^4.7.0
@@ -15779,6 +15796,7 @@ __metadata:
     cross-fetch: ^3.1.5
     eslint: ^8.25.0
     eslint-config-prettier: ^8.5.0
+    eslint-import-resolver-typescript: ^3.5.1
     eslint-plugin-jest: ^27.1.1
     eslint-plugin-nuxt: ^4.0.0
     eslint-plugin-unused-imports: ^2.0.0
