@@ -231,7 +231,6 @@ describe('Roundtrip', () => {
       if (addResult.body.kind !== 'single') {
         throw new Error('Expected single result')
       }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       // @ts-expect-error --- is not a typed graphql doc
       const id = addResult.body.singleResult.data?.addUserDocument.id as string
       const result = await authenticatedClient.executeOperation({
