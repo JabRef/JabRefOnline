@@ -2,8 +2,8 @@ import { ApolloServerErrorCode } from '@apollo/server/errors'
 import type { Group, GroupType as GroupTypeT } from '@prisma/client'
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
-import { GraphQLError } from 'graphql/error'
-import { Context } from '../context'
+import { GraphQLError } from 'graphql'
+import { Context } from '~/server/context'
 import {
   MutationCreateGroupArgs,
   MutationUpdateGroupArgs,
