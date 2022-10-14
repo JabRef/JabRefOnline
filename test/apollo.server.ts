@@ -1,8 +1,5 @@
 import { ApolloServer, GraphQLRequest, GraphQLResponse } from '@apollo/server'
-import {
-  ExecuteOperationOptions,
-  VariableValues,
-} from '@apollo/server/dist/esm/externalTypes/graphql'
+import { VariableValues } from '@apollo/server/dist/esm/externalTypes/graphql'
 import { DocumentNode, TypedQueryDocumentNode } from 'graphql'
 import { Context } from '~/server/context'
 import { loadSchemaFromFilesWithResolvers } from '~/server/schema'
@@ -15,14 +12,14 @@ export type ApolloClient = {
   >(
     request: Omit<GraphQLRequest<TVariables>, 'query'> & {
       query?: string | DocumentNode | TypedQueryDocumentNode<TData, TVariables>
-    },
-    options?: ExecuteOperationOptions<Context>
+    }
   ): Promise<GraphQLResponse<TData>>
 }
 
 export async function createAuthenticatedClient(): Promise<ApolloClient> {
   const server = new ApolloServer<Context>({
     schema: await loadSchemaFromFilesWithResolvers(),
+    includeStacktraceInErrorResponses: true,
   })
 
   const user = await resolve('AuthService').getUserById(
@@ -34,6 +31,17 @@ export async function createAuthenticatedClient(): Promise<ApolloClient> {
       return await server.executeOperation(operation, {
         contextValue: {
           getUser: () => user,
+          isAuthenticated: () => true,
+          isUnauthenticated: () => false,
+          authenticate: (_strategyName) => {
+            throw new Error('Not implemented')
+          },
+          login: () => {
+            throw new Error('Not implemented')
+          },
+          logout: () => {
+            throw new Error('Not implemented')
+          },
         },
       })
     },

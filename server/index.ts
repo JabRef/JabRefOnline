@@ -1,6 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
+import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
 import http from 'http'
 import 'reflect-metadata' // Needed for tsyringe
 import { startServerAndCreateH3Handler } from '~/apollo/apollo-server'
@@ -94,20 +95,21 @@ export default defineLazyEventHandler(async () => {
     // https://www.apollographql.com/docs/apollo-server/security/cors/#preventing-cross-site-request-forgery-csrf
     csrfPrevention: true,
     cache: new InMemoryLRUCache(),
+    includeStacktraceInErrorResponses: true,
+  })
+  const serverHandler = startServerAndCreateH3Handler(server, {
+    context: buildContext,
+  })
+  const corsHandler = defineCorsEventHandler({
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowHeaders: ['Content-Type'],
+    // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
+    origin: ['https://studio.apollographql.com'],
+    credentials: true,
   })
 
-  /*
-server.createHandler({
-  path: '/api',
-  cors: {
-    // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
-    origin: 'https://studio.apollographql.com',
-    credentials: true,
-    methods: 'GET,POST,OPTIONS',
-    allowedHeaders: 'Content-Type',
-  },
-})
-*/
-
-  return startServerAndCreateH3Handler(server, { context: buildContext })
+  return eventHandler((event) => {
+    corsHandler(event)
+    return serverHandler(event)
+  })
 })
