@@ -4,7 +4,7 @@ import { api, login } from '~/test/api-e2e/supertest'
 describe('Mutation', () => {
   describe('Login', () => {
     it('Sets the cookie', async () => {
-      const { data, response } = await api()
+      const { data, response, errors } = await api()
         .mutate(
           gql`
             mutation LoginE2E($input: LoginInput!) {
@@ -21,8 +21,7 @@ describe('Mutation', () => {
         .variables({
           input: { email: 'alice@jabref.org', password: 'EBNPXY35TYkYXHs' },
         })
-        .expectNoErrors()
-
+      expect(errors).toEqual(undefined)
       // TODO: Check that there is even a session cookie
       expect(response.get('set-cookie')).toBeDefined()
       expect(data).toStrictEqual({
@@ -37,36 +36,32 @@ describe('Query', () => {
     it('Returns the user when logged in', async () => {
       const request = api()
       await login(request)
-      const { data } = await request
-        .query(
-          gql`
-            query MeE2E {
-              me {
-                id
-              }
-            }
-          `
-        )
-        .expectNoErrors()
-
-      expect(data).toStrictEqual({
-        me: { id: 'ckn4oul7100004cv7y3t94n8j' },
-      })
-    })
-  })
-  it('Returns nothing when not logged in', async () => {
-    const { data } = await api()
-      .query(
+      const { data, errors } = await request.query(
         gql`
-          query MeE2ENotLoggedIn {
+          query MeE2E {
             me {
               id
             }
           }
         `
       )
-      .expectNoErrors()
-
+      expect(errors).toEqual(undefined)
+      expect(data).toStrictEqual({
+        me: { id: 'ckn4oul7100004cv7y3t94n8j' },
+      })
+    })
+  })
+  it('Returns nothing when not logged in', async () => {
+    const { data, errors } = await api().query(
+      gql`
+        query MeE2ENotLoggedIn {
+          me {
+            id
+          }
+        }
+      `
+    )
+    expect(errors).toEqual(undefined)
     expect(data).toStrictEqual({
       me: null,
     })

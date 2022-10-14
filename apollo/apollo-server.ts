@@ -1,151 +1,107 @@
-import type { GraphQLOptions } from 'apollo-server-core'
+import type {
+  ApolloServer,
+  BaseContext,
+  ContextFunction,
+  HTTPGraphQLRequest,
+} from '@apollo/server'
+import type { WithRequired } from '@apollo/utils.withrequired'
 import {
-  ApolloServerBase,
-  convertNodeHttpToRequest,
-  isHttpQueryError,
-  runHttpQuery,
-} from 'apollo-server-core'
-import type { LandingPage } from 'apollo-server-plugin-base'
-import {
-  CompatibilityEvent,
+  eventHandler,
   EventHandler,
-  getQuery,
+  getHeaders,
+  H3Event,
+  HTTPMethod,
   readBody,
-  setResponseHeader,
-  setResponseHeaders,
 } from 'h3'
+import type { IncomingHttpHeaders } from 'http'
 
-export { gql } from 'apollo-server-core'
-
-// Manually specify CORS options as long as h3 doesn't support this natively
-// https://github.com/unjs/h3/issues/82
-interface RouteOptionsCors {
-  origin?: string
-  credentials?: boolean
-  methods?: string
-  allowedHeaders?: string
+export interface H3ContextFunctionArgument {
+  event: H3Event
 }
 
-export interface ServerRegistration {
-  path?: string
-  disableHealthCheck?: boolean
-  onHealthCheck?: (event: CompatibilityEvent) => Promise<any>
-  cors?: boolean | RouteOptionsCors
+export interface H3HandlerOptions<TContext extends BaseContext> {
+  context?: ContextFunction<[H3ContextFunctionArgument], TContext>
 }
 
-// Originally taken from https://github.com/newbeea/nuxt3-apollo-starter/blob/master/server/graphql/apollo-server.ts
-// TODO: Implement health check https://github.com/apollographql/apollo-server/blob/main/docs/source/monitoring/health-checks.md
-export class ApolloServer extends ApolloServerBase {
-  async createGraphQLServerOptions(
-    event: CompatibilityEvent
-  ): Promise<GraphQLOptions> {
-    return this.graphQLServerOptions(event)
-  }
+export function startServerAndCreateH3Handler(
+  server: ApolloServer<BaseContext>,
+  options?: H3HandlerOptions<BaseContext>
+): EventHandler
+export function startServerAndCreateH3Handler<TContext extends BaseContext>(
+  server: ApolloServer<TContext>,
+  options: WithRequired<H3HandlerOptions<TContext>, 'context'>
+): EventHandler
+export function startServerAndCreateH3Handler<TContext extends BaseContext>(
+  server: ApolloServer<TContext>,
+  options?: H3HandlerOptions<TContext>
+): EventHandler {
+  server.startInBackgroundHandlingStartupErrorsByLoggingAndFailingAllRequests()
 
-  createHandler({
-    path,
-    disableHealthCheck,
-    onHealthCheck,
-    cors,
-  }: ServerRegistration = {}): EventHandler {
-    this.graphqlPath = path || '/graphql'
-    // Provide false to remove CORS middleware entirely, or true to use your middleware's default configuration.
-    const corsOptions =
-      cors === true || cors === undefined ? { origin: 'ignore' } : cors
-    const landingPage = this.getLandingPage()
+  const defaultContext: ContextFunction<
+    [H3ContextFunctionArgument],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- This `any` is safe because the overload above shows that context can only be left out if you're using BaseContext as your context, and {} is a valid BaseContext.
+    any
+  > = () => Promise.resolve({})
 
-    return async (event: CompatibilityEvent) => {
-      const options = await this.createGraphQLServerOptions(event)
-      try {
-        // Apollo-server doesn't handle OPTIONS calls, so we have to do this on our own
-        // https://github.com/apollographql/apollo-server/blob/40ed23fbb5dd620902d7c31bcc1e26e098990041/packages/apollo-server-core/src/runHttpQuery.ts#L325-L334
-        if (event.req.method === 'OPTIONS') {
-          setHeaders(event, undefined, corsOptions)
-          // send 204 response
-          return null
-        }
+  const contextFunction: ContextFunction<
+    [H3ContextFunctionArgument],
+    TContext
+  > = options?.context ?? defaultContext
 
-        if (landingPage) {
-          const landingPageHtml = this.handleLandingPage(event, landingPage)
-          if (landingPageHtml) {
-            return landingPageHtml
-          }
-        }
-
-        const { graphqlResponse, responseInit } = await runHttpQuery([], {
-          method: event.req.method || 'GET',
-          options,
-          query:
-            event.req.method === 'POST'
-              ? await readBody(event)
-              : getQuery(event),
-          request: convertNodeHttpToRequest(event.req),
-        })
-        setHeaders(event, responseInit.headers, corsOptions)
-        event.res.statusCode = responseInit.status || 200
-        return graphqlResponse
-      } catch (error: any) {
-        if (!isHttpQueryError(error)) {
-          throw error
-        }
-        setHeaders(event, error.headers, corsOptions)
-        event.res.statusCode = error.statusCode || 500
-        return error.message
-      }
+  return eventHandler(async (event) => {
+    // Apollo-server doesn't handle OPTIONS calls, so we have to do this on our own
+    // https://github.com/apollographql/apollo-server/blob/fa82c1d5299c4803f9ef8ae7fa2e367eadd8c0e6/packages/server/src/runHttpQuery.ts#L182-L192
+    if (isMethod(event, 'OPTIONS')) {
+      // send 204 response
+      return null
     }
-  }
 
-  private handleLandingPage(
-    event: CompatibilityEvent,
-    landingPage: LandingPage
-  ): string | undefined {
-    const url = event.req.url?.split('?')[0]
-    if (event.req.method === 'GET' && url === this.graphqlPath) {
-      const prefersHtml = event.req.headers.accept?.includes('text/html')
+    const { body, headers, status } = await server.executeHTTPGraphQLRequest({
+      httpGraphQLRequest: await toGraphqlRequest(event),
+      context: () => contextFunction({ event }),
+    })
 
-      if (prefersHtml) {
-        return landingPage.html
-      }
+    if (body.kind === 'chunked') {
+      throw new Error('Incremental delivery not implemented')
     }
+
+    setHeaders(event, Object.fromEntries(headers))
+    event.res.statusCode = status || 200
+    return body.string
+  })
+}
+
+async function toGraphqlRequest(event: H3Event): Promise<HTTPGraphQLRequest> {
+  return {
+    method: event.req.method || 'POST',
+    headers: normalizeHeaders(getHeaders(event)),
+    search: normalizeQueryString(event.req.url),
+    body: await normalizeBody(event),
   }
 }
 
-export default ApolloServer
-function setHeaders(
-  event: CompatibilityEvent,
-  headers: Record<string, string> | undefined,
-  corsOptions: false | RouteOptionsCors
-) {
-  if (headers) {
-    setResponseHeaders(event, headers)
+function normalizeHeaders(headers: IncomingHttpHeaders): Map<string, string> {
+  const headerMap = new Map<string, string>()
+  for (const [key, value] of Object.entries(headers)) {
+    if (Array.isArray(value)) {
+      headerMap.set(key, value.join(','))
+    } else if (value) {
+      headerMap.set(key, value)
+    }
   }
-  if (corsOptions !== false) {
-    setResponseHeader(
-      event,
-      'Access-Control-Allow-Origin',
-      corsOptions.origin ?? 'ignore'
-    )
+  return headerMap
+}
 
-    if (corsOptions.credentials !== undefined) {
-      setResponseHeader(
-        event,
-        'Access-Control-Allow-Credentials',
-        corsOptions.credentials.toString()
-      )
-    }
-    if (corsOptions.methods !== undefined) {
-      setResponseHeader(
-        event,
-        'Access-Control-Allow-Methods',
-        corsOptions.methods
-      )
-    }
-    if (corsOptions.allowedHeaders !== undefined) {
-      setResponseHeader(
-        event,
-        'Access-Control-Allow-Headers',
-        corsOptions.allowedHeaders
-      )
-    }
+function normalizeQueryString(url: string | undefined): string {
+  if (!url) {
+    return ''
+  }
+  return url.split('?')[1] || ''
+}
+
+async function normalizeBody(event: H3Event): Promise<string | undefined> {
+  const PayloadMethods: HTTPMethod[] = ['PATCH', 'POST', 'PUT', 'DELETE']
+  if (isMethod(event, PayloadMethods)) {
+    return await readBody(event)
   }
 }

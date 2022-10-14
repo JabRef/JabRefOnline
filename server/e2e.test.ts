@@ -30,17 +30,25 @@ describe('Invalid query', () => {
 
 describe('Request without query', () => {
   it('Returns an error', async () => {
-    const response = await root().get('/api')
+    const response = await root()
+      .get('/api')
+      .set('Apollo-Require-Preflight', 'True')
 
     expect(response.statusCode).toBe(400)
-    expect(response.text).toBe('GET query missing.')
+    expect(response.text).toContain(
+      'GraphQL operations must contain a non-empty `query`'
+    )
   })
 })
 
 describe('Preflight', () => {
   it('works', async () => {
-    const response = await root().options('/api')
+    const response = await root()
+      .options('/api')
+      .set('Origin', 'https://studio.apollographql.com')
+      .set('Access-Control-Request-Method', 'POST')
 
+    expect(response.body).toStrictEqual({})
     expect(response.statusCode).toBe(204)
     expect(response.get('access-control-allow-methods')).toBe(
       'GET,POST,OPTIONS'
@@ -52,8 +60,12 @@ describe('Preflight', () => {
   })
 
   it('works on route with slash', async () => {
-    const response = await root().options('/api/')
+    const response = await root()
+      .options('/api/')
+      .set('Origin', 'https://studio.apollographql.com')
+      .set('Access-Control-Request-Method', 'POST')
 
+    expect(response.body).toStrictEqual({})
     expect(response.statusCode).toBe(204)
     expect(response.get('access-control-allow-methods')).toBe(
       'GET,POST,OPTIONS'

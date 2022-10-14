@@ -1,6 +1,6 @@
-import { gql } from '~/apollo/apollo-server'
+import { gql } from 'graphql-tag'
 import * as prisma from '~/server/database/util'
-import { createAuthenticatedClient } from '../../test/apollo.server'
+import { createAuthenticatedClient } from '~/test/apollo.server'
 
 beforeEach(async () => {
   await prisma.resetToSeed()
@@ -24,13 +24,17 @@ describe('Query', () => {
     it('retrieves the currently authenticated user', async () => {
       const authenticatedClient = await createAuthenticatedClient()
       const result = await authenticatedClient.executeOperation({ query })
-      expect(result).toMatchInlineSnapshot(`
+      expect(result.body).toMatchInlineSnapshot(`
         {
-          "data": {
-            "me": {
-              "email": "alice@jabref.org",
-              "id": "ckn4oul7100004cv7y3t94n8j",
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "me": {
+                "email": "alice@jabref.org",
+                "id": "ckn4oul7100004cv7y3t94n8j",
+              },
             },
+            "errors": undefined,
           },
         }
       `)
@@ -64,70 +68,74 @@ describe('Query', () => {
         query,
         variables: { id: 'ckn4oul7100004cv7y3t94n8j' },
       })
-      expect(result).toMatchInlineSnapshot(`
+      expect(result.body).toMatchInlineSnapshot(`
         {
-          "data": {
-            "user": {
-              "documents": {
-                "edges": [
-                  {
-                    "node": {
-                      "id": "ckondtcaf000101mh7x9g4gia",
-                      "title": "Cocoa and Cardiovascular Health",
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "user": {
+                "documents": {
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "ckondtcaf000101mh7x9g4gia",
+                        "title": "Cocoa and Cardiovascular Health",
+                      },
                     },
+                    {
+                      "node": {
+                        "id": "ckr9eq4oc000101mk1ga9bxnt",
+                        "title": "Cocoa and health: a decade of research",
+                      },
+                    },
+                    {
+                      "node": {
+                        "id": "ckr9eqap6000301mk20hycjqb",
+                        "title": "Chocolate and prevention of cardiovascular disease: A systematic review",
+                      },
+                    },
+                    {
+                      "node": {
+                        "id": "ckonduhjk000701mh12wia4nf",
+                        "title": "Cocoa and Chocolate in Human Health and Disease",
+                      },
+                    },
+                    {
+                      "node": {
+                        "id": "ckondu6bh000501mh2o2tf00u",
+                        "title": "Chocolate: food as medicine/medicine as food",
+                      },
+                    },
+                    {
+                      "node": {
+                        "id": "ckondtpcn000301mhg9lvaqlu",
+                        "title": "Functionality of inulin and polydextrose in stevia or thaumatin sweetened dark chocolate",
+                      },
+                    },
+                  ],
+                },
+                "email": "alice@jabref.org",
+                "groups": [
+                  {
+                    "id": "ckn4h9pl5000101le5bco3b8r",
                   },
                   {
-                    "node": {
-                      "id": "ckr9eq4oc000101mk1ga9bxnt",
-                      "title": "Cocoa and health: a decade of research",
-                    },
+                    "id": "ckn4i99oe000101mc4igzgvix",
                   },
                   {
-                    "node": {
-                      "id": "ckr9eqap6000301mk20hycjqb",
-                      "title": "Chocolate and prevention of cardiovascular disease: A systematic review",
-                    },
+                    "id": "ckn4i9u9m000901mcc4mjgdkq",
                   },
                   {
-                    "node": {
-                      "id": "ckonduhjk000701mh12wia4nf",
-                      "title": "Cocoa and Chocolate in Human Health and Disease",
-                    },
+                    "id": "ckn4iaf1t000h01mcaob9ewey",
                   },
                   {
-                    "node": {
-                      "id": "ckondu6bh000501mh2o2tf00u",
-                      "title": "Chocolate: food as medicine/medicine as food",
-                    },
-                  },
-                  {
-                    "node": {
-                      "id": "ckondtpcn000301mhg9lvaqlu",
-                      "title": "Functionality of inulin and polydextrose in stevia or thaumatin sweetened dark chocolate",
-                    },
+                    "id": "ckn4iar8j000n01mc7feq709f",
                   },
                 ],
+                "id": "ckn4oul7100004cv7y3t94n8j",
               },
-              "email": "alice@jabref.org",
-              "groups": [
-                {
-                  "id": "ckn4h9pl5000101le5bco3b8r",
-                },
-                {
-                  "id": "ckn4i99oe000101mc4igzgvix",
-                },
-                {
-                  "id": "ckn4i9u9m000901mcc4mjgdkq",
-                },
-                {
-                  "id": "ckn4iaf1t000h01mcaob9ewey",
-                },
-                {
-                  "id": "ckn4iar8j000n01mc7feq709f",
-                },
-              ],
-              "id": "ckn4oul7100004cv7y3t94n8j",
             },
+            "errors": undefined,
           },
         }
       `)
@@ -155,46 +163,50 @@ describe('Query', () => {
         `,
         variables: { id: 'ckn4oul7100004cv7y3t94n8j' },
       })
-      expect(result).toMatchInlineSnapshot(`
+      expect(result.body).toMatchInlineSnapshot(`
         {
-          "data": {
-            "user": {
-              "changes": {
-                "edges": [
-                  {
-                    "node": {
-                      "id": "ckondtcaf000101mh7x9g4gia",
-                      "lastModified": 2021-01-01T00:00:00.000Z,
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "user": {
+                "changes": {
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "ckondtcaf000101mh7x9g4gia",
+                        "lastModified": 2021-01-01T00:00:00.000Z,
+                      },
                     },
-                  },
-                  {
-                    "node": {
-                      "id": "ckr9eq4oc000101mk1ga9bxnt",
-                      "lastModified": 2021-05-28T12:00:00.000Z,
+                    {
+                      "node": {
+                        "id": "ckr9eq4oc000101mk1ga9bxnt",
+                        "lastModified": 2021-05-28T12:00:00.000Z,
+                      },
                     },
-                  },
-                  {
-                    "node": {
-                      "id": "ckr9eqap6000301mk20hycjqb",
-                      "lastModified": 2022-01-01T00:00:00.000Z,
+                    {
+                      "node": {
+                        "id": "ckr9eqap6000301mk20hycjqb",
+                        "lastModified": 2022-01-01T00:00:00.000Z,
+                      },
                     },
-                  },
-                  {
-                    "node": {
-                      "id": "ckondu6bh000501mh2o2tf00u",
-                      "lastModified": 2022-10-11T17:31:24.033Z,
+                    {
+                      "node": {
+                        "id": "ckondu6bh000501mh2o2tf00u",
+                        "lastModified": 2022-10-11T17:31:24.033Z,
+                      },
                     },
-                  },
-                  {
-                    "node": {
-                      "id": "ckondtpcn000301mhg9lvaqlu",
-                      "lastModified": 2022-10-11T17:31:24.083Z,
+                    {
+                      "node": {
+                        "id": "ckondtpcn000301mhg9lvaqlu",
+                        "lastModified": 2022-10-11T17:31:24.083Z,
+                      },
                     },
-                  },
-                ],
+                  ],
+                },
+                "id": "ckn4oul7100004cv7y3t94n8j",
               },
-              "id": "ckn4oul7100004cv7y3t94n8j",
             },
+            "errors": undefined,
           },
         }
       `)
@@ -233,19 +245,23 @@ describe('Mutation', () => {
           },
         },
       })
-      expect(result).toMatchInlineSnapshot(`
+      expect(result.body).toMatchInlineSnapshot(`
         {
-          "data": {
-            "signup": {
-              "problems": [
-                {
-                  "message": "The password must be at least 8 characters long",
-                  "path": [
-                    "password",
-                  ],
-                },
-              ],
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "signup": {
+                "problems": [
+                  {
+                    "message": "The password must be at least 8 characters long",
+                    "path": [
+                      "password",
+                    ],
+                  },
+                ],
+              },
             },
+            "errors": undefined,
           },
         }
       `)
