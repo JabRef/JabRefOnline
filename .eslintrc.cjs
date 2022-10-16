@@ -118,12 +118,12 @@ module.exports = {
     {
       // Special treatment for test files
       files: ['**/*.test.ts', '**/*.spec.ts'],
-      plugins: ['jest'],
+      plugins: ['vitest'],
       rules: {
-        // Disable typescript rule for unbound methods...
-        '@typescript-eslint/unbound-method': 'off',
-        // ...and enable the jest-specific one
-        'jest/unbound-method': 'error',
+        // Test title must be unique
+        'vitest/no-identical-title': 'error',
+        // Test title must be lowercase
+        'vitest/lower-case-title': 'error',
       },
     },
   ],
