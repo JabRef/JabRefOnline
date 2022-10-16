@@ -120,10 +120,14 @@ module.exports = {
       files: ['**/*.test.ts', '**/*.spec.ts'],
       plugins: ['vitest'],
       rules: {
+        // Disable typescript rule for unbound methods (false positives in spies/mocks)
+        // TODO: Should enable special rule for vitest once this is implemented
+        '@typescript-eslint/unbound-method': 'off',
         // Test title must be unique
         'vitest/no-identical-title': 'error',
         // Test title must be lowercase
-        'vitest/lower-case-title': 'error',
+        // TODO: Activate once https://github.com/veritem/eslint-plugin-vitest/issues/8 is fixed
+        // 'vitest/lower-case-title': 'error',
       },
     },
   ],
