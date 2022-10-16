@@ -1,10 +1,10 @@
+import { H3ContextFunctionArgument } from '@as-integrations/h3'
 import { User } from '@prisma/client'
 import expressSession from 'express-session/index.js'
 import {
   AuthenticateReturn,
   buildContext as passportBuildContext,
 } from 'graphql-passport'
-import { H3ContextFunctionArgument } from '~/apollo/apollo-server'
 
 export interface Context {
   isAuthenticated: () => boolean
