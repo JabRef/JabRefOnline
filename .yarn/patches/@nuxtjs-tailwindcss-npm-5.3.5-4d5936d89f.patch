@@ -1,8 +1,8 @@
 diff --git a/dist/module.mjs b/dist/module.mjs
-index 2f659d49a0b57820aebd865fbe9ec2eafea20bee..193398b51fccc9008ccc5717bbbc58ee92885578 100644
+index c0aa42d5d0a2c231decd1bb8db68377fb6411596..7c159f69ae25806a879fe89777a7d5cd83465203 100644
 --- a/dist/module.mjs
 +++ b/dist/module.mjs
-@@ -143,6 +143,12 @@ const module = defineNuxtModule({
+@@ -146,6 +146,12 @@ const module = defineNuxtModule({
          filename: "tailwind.config.mjs",
          getContents: () => `export default ${JSON.stringify(resolvedConfig, null, 2)}`
        });
