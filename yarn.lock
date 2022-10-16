@@ -6191,7 +6191,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.38.0, @typescript-eslint/utils@npm:^5.10.0":
+"@typescript-eslint/utils@npm:5.38.0":
   version: 5.38.0
   resolution: "@typescript-eslint/utils@npm:5.38.0"
   dependencies:
@@ -6207,7 +6207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.40.0":
+"@typescript-eslint/utils@npm:5.40.0, @typescript-eslint/utils@npm:^5.17.0":
   version: 5.40.0
   resolution: "@typescript-eslint/utils@npm:5.40.0"
   dependencies:
@@ -11977,23 +11977,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:^27.1.1":
-  version: 27.1.1
-  resolution: "eslint-plugin-jest@npm:27.1.1"
-  dependencies:
-    "@typescript-eslint/utils": ^5.10.0
-  peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^5.0.0
-    eslint: ^7.0.0 || ^8.0.0
-  peerDependenciesMeta:
-    "@typescript-eslint/eslint-plugin":
-      optional: true
-    jest:
-      optional: true
-  checksum: 215a60d0c9ca641f3c1c7c5e4ff78093ad80c5f0ee22f44c50b9c8625ec0624ec4f47bf281684157f6231a4c480a4ca40bafad4ac6438a2105bb8527920e341f
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-n@npm:^15.2.5":
   version: 15.2.5
   resolution: "eslint-plugin-n@npm:15.2.5"
@@ -12084,6 +12067,17 @@ __metadata:
     "@typescript-eslint/eslint-plugin":
       optional: true
   checksum: 8aa1e03e75da2a62a354065e0cb8fe370118c6f8d9720a32fe8c1da937de6adb81a4fed7d0d391d115ac9453b49029fb19f970d180a2cf3dba451fd4c20f0dc4
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-vitest@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "eslint-plugin-vitest@npm:0.0.11"
+  dependencies:
+    "@typescript-eslint/utils": ^5.17.0
+  peerDependencies:
+    eslint: ">=8.0.0"
+  checksum: e5fba918fae8a4331253f15912704760d95ab0f08d461cf61e272efee1b0cbb184f4032a71c6173e6f1810e0bf17a1ab7127f7229e06762a42077f5a68728589
   languageName: node
   linkType: hard
 
@@ -15775,9 +15769,9 @@ __metadata:
     eslint: ^8.25.0
     eslint-config-prettier: ^8.5.0
     eslint-import-resolver-typescript: ^3.5.1
-    eslint-plugin-jest: ^27.1.1
     eslint-plugin-nuxt: ^4.0.0
     eslint-plugin-unused-imports: ^2.0.0
+    eslint-plugin-vitest: ^0.0.11
     eslint-plugin-vue: ^9.6.0
     express-session: ^1.17.3
     graphql: ^16.6.0
