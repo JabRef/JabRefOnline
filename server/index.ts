@@ -1,10 +1,10 @@
 import { ApolloServer } from '@apollo/server'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
+import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
 import http from 'http'
 import 'reflect-metadata' // Needed for tsyringe
-import { startServerAndCreateH3Handler } from '~/apollo/apollo-server'
 import { buildContext, Context } from './context'
 import { loadSchemaWithResolvers } from './schema'
 
