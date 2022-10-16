@@ -73,26 +73,11 @@ module.exports = {
       },
     },
     {
-      // Extend graphql operations defined in code files to separate "virtual" files
-      files: ['*.ts'],
-      processor: '@graphql-eslint/graphql',
-    },
-    {
-      // Configure rules for "virtual" operation files
-      files: ['**/*.{ts,vue}/*.graphql'],
-      parser: '@graphql-eslint/eslint-plugin',
-      extends: 'plugin:@graphql-eslint/operations-recommended',
-      rules: {
-        // Enforces unique fragment name.
-        '@graphql-eslint/unique-fragment-name': 'error',
-        // Enforces unique operation names.
-        '@graphql-eslint/unique-operation-name': 'error',
-      },
-    },
-    {
       files: ['*.ts', '*.vue'],
       // Parser supporting vue files
       parser: 'vue-eslint-parser',
+      // Extract graphql tags
+      processor: '@graphql-eslint/graphql',
       parserOptions: {
         // Use ts parser for ts files and for the script tag in vue files
         parser: '@typescript-eslint/parser',
@@ -107,12 +92,29 @@ module.exports = {
         // Enable recommended rules for typescript that use typing information (may be CPU intensive)
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
+      rules: {
+        // The graphql processor disables the vue processor, so some rules need to be disenabled
+        // TODO: Remove this once https://github.com/eslint/eslint/issues/14745 is fixed and we can use multiple processors
+        'vue/comment-directive': 'off',
+      },
     },
     {
       files: ['layouts/**/*.vue', 'pages/**/*.vue'],
       rules: {
         // Layouts and pages cannot be confused with HTML components as they are used differently, so no need to worry about single-word names
         'vue/multi-word-component-names': 'off',
+      },
+    },
+    {
+      // Configure rules for "virtual" operation files
+      files: ['**/*.{ts,vue}/*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      extends: 'plugin:@graphql-eslint/operations-recommended',
+      rules: {
+        // Enforces unique fragment name.
+        '@graphql-eslint/unique-fragment-name': 'error',
+        // Enforces unique operation names.
+        '@graphql-eslint/unique-operation-name': 'error',
       },
     },
     {

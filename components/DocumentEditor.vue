@@ -134,6 +134,7 @@ const DocumentDetails = gql(/* GraphQL */ `
     }
     ... on JournalArticle {
       in {
+        id
         volume
         number
         journal {
@@ -168,7 +169,7 @@ const props = defineProps({
 
 const { result } = useQuery(
   gql(/* GraphQL */ `
-    query GetDocumentDetails($documentId: ID!) {
+    query DocumentDetails($documentId: ID!) {
       userDocument(id: $documentId) {
         ...DocumentDetails
       }
