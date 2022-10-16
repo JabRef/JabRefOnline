@@ -127,6 +127,7 @@ const DocumentForView = gql(/* GraphQL */ `
     }
     ... on JournalArticle {
       in {
+        id
         journal {
           id
           name
@@ -135,6 +136,7 @@ const DocumentForView = gql(/* GraphQL */ `
     }
     ... on ProceedingsArticle {
       in {
+        id
         title
       }
     }
