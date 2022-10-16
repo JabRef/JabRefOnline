@@ -148,6 +148,7 @@ const DocumentDetails = gql(/* GraphQL */ `
     }
     ... on ProceedingsArticle {
       in {
+        id
         title
       }
     }
