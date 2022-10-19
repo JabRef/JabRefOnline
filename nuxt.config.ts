@@ -65,8 +65,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     // Add support for naive-ui
     '@huntersofbook/naive-ui-nuxt',
-    // Add support for redirects
-    './modules/redirects',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add storybook support
@@ -94,18 +92,16 @@ export default defineNuxtConfig({
   /**
    * Add redirects, mostly for backwards compatibility
    */
-  redirects: [
-    { from: '/faq', to: 'https://docs.jabref.org/faq', external: true },
-    { from: '/paypal', to: '/donations' },
-    {
-      from: '/donations',
-      to: 'https://github.com/JabRef/jabref/wiki/Donations/',
-      external: true,
+  routeRules: {
+    '/faq': { redirect: 'https://docs.jabref.org/faq' },
+    '/paypal': { redirect: '/donations' },
+    '/donations': {
+      redirect: 'https://github.com/JabRef/jabref/wiki/Donations/',
     },
-    { from: '/gsoc/**', to: '/codeprojects/gsoc' },
-    { from: '/bluehat2022', to: '/codeprojects/bluehat2022' },
-    { from: '/surveys/', to: '/surveys/2015' },
-  ],
+    '/gsoc/**': { redirect: '/codeprojects/gsoc' },
+    '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
+    '/surveys/': { redirect: '/surveys/2015' },
+  },
 
   /**
    * Storybook integration with Nuxt
