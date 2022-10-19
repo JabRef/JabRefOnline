@@ -14,7 +14,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
   await prisma.user.create({
     data: {
       id: 'ckn4oul7100004cv7y3t94n8j',
-      email: 'alice@jabref.de',
+      email: 'alice@jabref.org',
       password:
         '19184d8c1c1e9b483d8347f8da0d53ad92170233100d32c3a0d748725948c28d09a060d7f02962b7b93320c72a2cdd94f21b16b08bf8bd1cba0c5f77afeffddbb24df527c4f16f1fca6eb5480159b56df3d818b4b3c74ead04227a78b3d810b8', // EBNPXY35TYkYXHs
       name: 'Alice',
@@ -48,6 +48,9 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       pageStart: '1433',
       pageEnd: '1441',
       publishedAt: '2009',
+      revisionHash: '82f0a64bf677dfb78a0c8ba5a8397181',
+      lastModified: '2021-01-01T00:00:00.000Z',
+      added: '2000-01-01T00:00:00.000Z',
     },
   })
   await prisma.userDocument.create({
@@ -77,6 +80,9 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       pageStart: '1',
       pageEnd: '11',
       publishedAt: '2008',
+      revisionHash: '65dfe2f77d4008587a11d5da2e6c3c3f',
+      lastModified: '2021-05-28T12:00:00.000Z',
+      added: '2000-01-01T00:00:00.000Z',
     },
   })
   await prisma.userDocument.create({
@@ -108,6 +114,9 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
         },
       },
       publishedAt: '2006',
+      revisionHash: 'd9d4b03759a95cd77edba7806c51eaaf',
+      lastModified: '2022-01-01T00:00:00.000Z',
+      added: '2000-01-01T00:00:00.000Z',
     },
   })
   await prisma.userDocument.create({
@@ -136,6 +145,9 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       pageStart: '2779',
       pageEnd: '2811',
       publishedAt: '2011',
+      revisionHash: '53261d1935fc311cade30d86c3c93bb5',
+      lastModified: '2020-12-01T00:00:00.000Z',
+      added: '2000-01-01T00:00:00.000Z',
     },
   })
   await prisma.userDocument.create({
@@ -157,6 +169,9 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       booktitle:
         'Ross Products Research Conference on Medical Issues, Synergy in Medical and Nutrition Therapy',
       publishedAt: '2001',
+      revisionHash: '6b66384d38a6f836ade8b1ac807627a1',
+      lastModified: '2022-10-11T17:31:24.033Z',
+      added: '2000-01-01T00:00:00.000Z',
     },
   })
   await prisma.userDocument.create({
@@ -178,6 +193,9 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
           },
         ],
       },
+      revisionHash: '6e14ab68be79301ed413460694740d91',
+      lastModified: '2022-10-11T17:31:24.083Z',
+      added: '2000-01-01T00:00:00.000Z',
     },
   })
   await prisma.group.create({

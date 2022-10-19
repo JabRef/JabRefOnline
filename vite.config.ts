@@ -47,7 +47,7 @@ export default defineConfig({
 
     // Create annotations when tests fail in GitHub Actions
     reporters: process.env.GITHUB_ACTIONS
-      ? new GithubActionsReporter()
+      ? ['default', new GithubActionsReporter()]
       : 'default',
   },
 })

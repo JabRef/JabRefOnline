@@ -7,7 +7,12 @@ import type {
   UserDocument as PlainUserDocument,
   UserDocumentOtherField,
 } from '@prisma/client'
-import { DocumentFilters, UserDocumentsConnection } from '../graphql'
+import {
+  DocumentFilters,
+  UserChangesCursorInput,
+  UserDocumentsConnection,
+} from '../graphql'
+import { unsecureHash } from '../utils/crypto'
 import { inject, injectable } from './../tsyringe'
 
 export type UserDocument = PlainUserDocument & {
@@ -28,9 +33,24 @@ export type UserDocumentsResult = Omit<UserDocumentsConnection, 'edges'> & {
   edges: { node: UserDocument }[]
 }
 
+export type UserDocumentCreateInput = Omit<
+  Prisma.UserDocumentCreateInput,
+  'revisionHash'
+>
+
 @injectable()
 export class UserDocumentService {
   constructor(@inject('PrismaClient') private prisma: PrismaClient) {}
+
+  getRevisionHash(
+    document:
+      | UserDocument
+      | (UserDocumentCreateInput & { revisionHash?: string })
+  ): string {
+    const { revisionNumber, revisionHash, ...documentWithoutRevision } =
+      document
+    return unsecureHash(documentWithoutRevision)
+  }
 
   async getDocumentById(
     id: string,
@@ -59,6 +79,7 @@ export class UserDocumentService {
     includeOtherFields = false
   ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
+    const cursor = after ? { id: after } : null
     const documents = await this.prisma.userDocument.findMany({
       where: {
         users: {
@@ -78,10 +99,8 @@ export class UserDocumentService {
       ...(first && {
         take: first + 1,
       }),
-      ...(after && {
-        cursor: {
-          id: after,
-        },
+      ...(cursor && {
+        cursor,
         skip: 1,
       }),
       include: {
@@ -118,11 +137,51 @@ export class UserDocumentService {
     }
   }
 
+  async getChangedDocumentsOf(
+    user: User | string,
+    first: number | null = null,
+    after: UserChangesCursorInput | null = null,
+    includeOtherFields = false
+  ): Promise<UserDocumentsAndPageInfo> {
+    const userId = typeof user === 'string' ? user : user.id
+    const documents = await this.prisma.userDocument.findMany({
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      orderBy: [{ lastModified: 'asc' }, { id: 'asc' }],
+      ...(first && {
+        take: first + 1,
+      }),
+      ...(after && { cursor: { checkpoint: after } }),
+      skip: 1,
+      include: {
+        other: includeOtherFields,
+        journalIssue: {
+          include: {
+            journal: true,
+          },
+        },
+      },
+    })
+
+    return {
+      documents: first ? documents.slice(0, first) : documents,
+      hasNextPage: !!(first && documents.length > first),
+    }
+  }
+
   async addDocument(
-    document: Prisma.UserDocumentCreateInput
+    document: UserDocumentCreateInput
   ): Promise<UserDocument | null> {
     return await this.prisma.userDocument.create({
-      data: document,
+      data: {
+        ...document,
+        revisionHash: this.getRevisionHash(document),
+      },
       include: {
         journalIssue: {
           include: {

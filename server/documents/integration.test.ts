@@ -1,6 +1,6 @@
-import { gql } from '~/apollo/apollo-server'
+import { gql } from 'graphql-tag'
 import * as prisma from '~/server/database/util'
-import { createAuthenticatedClient } from '../../test/apollo.server'
+import { createAuthenticatedClient } from '~/test/apollo.server'
 
 beforeEach(async () => {
   await prisma.resetToSeed()
@@ -86,72 +86,76 @@ describe('Query', () => {
         query: userDocumentById,
         variables: { id: 'ckondtcaf000101mh7x9g4gia' },
       })
-      expect(result).toMatchInlineSnapshot(`
+      expect(result.body).toMatchInlineSnapshot(`
         {
-          "data": {
-            "userDocument": {
-              "__typename": "JournalArticle",
-              "abstract": "Epidemiological data demonstrate that regular dietary intake of plant-derived foods and beverages reduces the risk of coronary heart disease and stroke. Among many ingredients, cocoa might be an important mediator. Indeed, recent research demonstrates a beneficial effect of cocoa on blood pressure, insulin resistance, and vascular and platelet function. Although still debated, a range of potential mechanisms through which cocoa might exert its benefits on cardiovascular health have been proposed, including activation of nitric oxide and antioxidant and antiinflammatory effects. This review summarizes the available data on the cardiovascular effects of cocoa, outlines potential mechanisms involved in the response to cocoa, and highlights the potential clinical implications associated with its consumption. ( Circulation. 2009; 119: 1433-1441.)",
-              "added": null,
-              "annotators": [],
-              "authors": [
-                {
-                  "id": "TODOCorti, Roberto",
-                  "name": "Corti, Roberto",
-                },
-                {
-                  "id": "TODOFlammer, Andreas J.",
-                  "name": "Flammer, Andreas J.",
-                },
-                {
-                  "id": "TODOHollenberg, Norman K.",
-                  "name": "Hollenberg, Norman K.",
-                },
-                {
-                  "id": "TODOLuscher, Thomas F.",
-                  "name": "Luscher, Thomas F.",
-                },
-              ],
-              "citationKeys": [],
-              "commentators": [],
-              "doi": "10.1161/CIRCULATIONAHA.108.827022",
-              "electronicId": null,
-              "id": "ckondtcaf000101mh7x9g4gia",
-              "in": {
-                "id": "ckslizms5000109jv3yx80ujf",
-                "journal": {
-                  "id": "ckslj094u000309jvdpng93mk",
-                  "issn": null,
-                  "name": "Circulation",
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "userDocument": {
+                "__typename": "JournalArticle",
+                "abstract": "Epidemiological data demonstrate that regular dietary intake of plant-derived foods and beverages reduces the risk of coronary heart disease and stroke. Among many ingredients, cocoa might be an important mediator. Indeed, recent research demonstrates a beneficial effect of cocoa on blood pressure, insulin resistance, and vascular and platelet function. Although still debated, a range of potential mechanisms through which cocoa might exert its benefits on cardiovascular health have been proposed, including activation of nitric oxide and antioxidant and antiinflammatory effects. This review summarizes the available data on the cardiovascular effects of cocoa, outlines potential mechanisms involved in the response to cocoa, and highlights the potential clinical implications associated with its consumption. ( Circulation. 2009; 119: 1433-1441.)",
+                "added": 2000-01-01T00:00:00.000Z,
+                "annotators": [],
+                "authors": [
+                  {
+                    "id": "TODOCorti, Roberto",
+                    "name": "Corti, Roberto",
+                  },
+                  {
+                    "id": "TODOFlammer, Andreas J.",
+                    "name": "Flammer, Andreas J.",
+                  },
+                  {
+                    "id": "TODOHollenberg, Norman K.",
+                    "name": "Hollenberg, Norman K.",
+                  },
+                  {
+                    "id": "TODOLuscher, Thomas F.",
+                    "name": "Luscher, Thomas F.",
+                  },
+                ],
+                "citationKeys": [],
+                "commentators": [],
+                "doi": "10.1161/CIRCULATIONAHA.108.827022",
+                "electronicId": null,
+                "id": "ckondtcaf000101mh7x9g4gia",
+                "in": {
+                  "id": "ckslizms5000109jv3yx80ujf",
+                  "journal": {
+                    "id": "ckslj094u000309jvdpng93mk",
+                    "issn": null,
+                    "name": "Circulation",
+                    "subtitle": null,
+                    "titleAddon": null,
+                  },
+                  "name": null,
+                  "number": "10",
+                  "series": null,
                   "subtitle": null,
+                  "title": null,
                   "titleAddon": null,
+                  "volume": "119",
                 },
-                "name": null,
-                "number": "10",
-                "series": null,
+                "keywords": [
+                  "cocoa",
+                  "endothelium",
+                  "hypertension",
+                  "platelets",
+                ],
+                "languages": [],
+                "lastModified": 2021-01-01T00:00:00.000Z,
+                "note": null,
+                "pageEnd": "1441",
+                "pageStart": "1433",
+                "publicationState": null,
+                "published": "2009",
                 "subtitle": null,
-                "title": null,
+                "title": "Cocoa and Cardiovascular Health",
                 "titleAddon": null,
-                "volume": "119",
+                "translated": null,
               },
-              "keywords": [
-                "cocoa",
-                "endothelium",
-                "hypertension",
-                "platelets",
-              ],
-              "languages": [],
-              "lastModified": null,
-              "note": null,
-              "pageEnd": "1441",
-              "pageStart": "1433",
-              "publicationState": null,
-              "published": "2009",
-              "subtitle": null,
-              "title": "Cocoa and Cardiovascular Health",
-              "titleAddon": null,
-              "translated": null,
             },
+            "errors": undefined,
           },
         }
       `)
@@ -198,44 +202,59 @@ describe('Roundtrip', () => {
           },
         },
       })
-      expect(addResult).toMatchInlineSnapshot(
+      expect(addResult.body).toMatchInlineSnapshot(
         {
-          data: {
-            addUserDocument: {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(String),
+          singleResult: {
+            data: {
+              addUserDocument: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                id: expect.any(String),
+              },
             },
           },
         },
         `
         {
-          "data": {
-            "addUserDocument": {
-              "id": Any<String>,
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "addUserDocument": {
+                "id": Any<String>,
+              },
             },
+            "errors": undefined,
           },
         }
       `
       )
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      const id = addResult.data?.addUserDocument.id as string
+      if (addResult.body.kind !== 'single') {
+        throw new Error('Expected single result')
+      }
+      // @ts-expect-error --- is not a typed graphql doc
+      const id = addResult.body.singleResult.data?.addUserDocument.id as string
       const result = await authenticatedClient.executeOperation({
         query: userDocumentById,
         variables: { id },
       })
-      expect(result).toMatchInlineSnapshot(
+      expect(result.body).toMatchInlineSnapshot(
         {
-          data: {
-            userDocument: {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(String),
-              in: {
+          singleResult: {
+            data: {
+              userDocument: {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 id: expect.any(String),
-                journal: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                added: expect.any(Date),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                lastModified: expect.any(Date),
+                in: {
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                   id: expect.any(String),
+                  journal: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(String),
+                  },
                 },
               },
             },
@@ -243,60 +262,64 @@ describe('Roundtrip', () => {
         },
         `
         {
-          "data": {
-            "userDocument": {
-              "__typename": "JournalArticle",
-              "abstract": "Some abstract",
-              "added": null,
-              "annotators": [],
-              "authors": [
-                {
-                  "id": "TODOTest Author",
-                  "name": "Test Author",
-                },
-                {
-                  "id": "TODOSecond Test Author",
-                  "name": "Second Test Author",
-                },
-              ],
-              "citationKeys": [],
-              "commentators": [],
-              "doi": "doi which does not exist",
-              "electronicId": null,
-              "id": Any<String>,
-              "in": {
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "userDocument": {
+                "__typename": "JournalArticle",
+                "abstract": "Some abstract",
+                "added": Any<Date>,
+                "annotators": [],
+                "authors": [
+                  {
+                    "id": "TODOTest Author",
+                    "name": "Test Author",
+                  },
+                  {
+                    "id": "TODOSecond Test Author",
+                    "name": "Second Test Author",
+                  },
+                ],
+                "citationKeys": [],
+                "commentators": [],
+                "doi": "doi which does not exist",
+                "electronicId": null,
                 "id": Any<String>,
-                "journal": {
+                "in": {
                   "id": Any<String>,
-                  "issn": null,
-                  "name": "Journal of great things",
+                  "journal": {
+                    "id": Any<String>,
+                    "issn": null,
+                    "name": "Journal of great things",
+                    "subtitle": null,
+                    "titleAddon": null,
+                  },
+                  "name": null,
+                  "number": "10",
+                  "series": null,
                   "subtitle": null,
+                  "title": null,
                   "titleAddon": null,
+                  "volume": "15",
                 },
-                "name": null,
-                "number": "10",
-                "series": null,
+                "keywords": [
+                  "keyword1",
+                  "keyword2",
+                ],
+                "languages": [],
+                "lastModified": Any<Date>,
+                "note": null,
+                "pageEnd": "2811",
+                "pageStart": "2779",
+                "publicationState": null,
+                "published": "2011",
                 "subtitle": null,
-                "title": null,
+                "title": "Test Title",
                 "titleAddon": null,
-                "volume": "15",
+                "translated": null,
               },
-              "keywords": [
-                "keyword1",
-                "keyword2",
-              ],
-              "languages": [],
-              "lastModified": null,
-              "note": null,
-              "pageEnd": "2811",
-              "pageStart": "2779",
-              "publicationState": null,
-              "published": "2011",
-              "subtitle": null,
-              "title": "Test Title",
-              "titleAddon": null,
-              "translated": null,
             },
+            "errors": undefined,
           },
         }
       `
@@ -320,12 +343,16 @@ describe('Roundtrip', () => {
           },
         },
       })
-      expect(updateResult).toMatchInlineSnapshot(`
+      expect(updateResult.body).toMatchInlineSnapshot(`
         {
-          "data": {
-            "updateUserDocument": {
-              "id": "ckondtcaf000101mh7x9g4gia",
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "updateUserDocument": {
+                "id": "ckondtcaf000101mh7x9g4gia",
+              },
             },
+            "errors": undefined,
           },
         }
       `)
@@ -334,18 +361,20 @@ describe('Roundtrip', () => {
         query: userDocumentById,
         variables: { id: 'ckondtcaf000101mh7x9g4gia' },
       })
-      expect(result).toMatchInlineSnapshot(
+      expect(result.body).toMatchInlineSnapshot(
         {
-          data: {
-            userDocument: {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              id: expect.any(String),
-              in: {
+          singleResult: {
+            data: {
+              userDocument: {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 id: expect.any(String),
-                journal: {
+                in: {
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                   id: expect.any(String),
+                  journal: {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    id: expect.any(String),
+                  },
                 },
               },
             },
@@ -353,60 +382,64 @@ describe('Roundtrip', () => {
         },
         `
         {
-          "data": {
-            "userDocument": {
-              "__typename": "JournalArticle",
-              "abstract": "Some abstract",
-              "added": null,
-              "annotators": [],
-              "authors": [
-                {
-                  "id": "TODOTest Author",
-                  "name": "Test Author",
-                },
-                {
-                  "id": "TODOSecond Test Author",
-                  "name": "Second Test Author",
-                },
-              ],
-              "citationKeys": [],
-              "commentators": [],
-              "doi": "doi which does not exist",
-              "electronicId": null,
-              "id": Any<String>,
-              "in": {
+          "kind": "single",
+          "singleResult": {
+            "data": {
+              "userDocument": {
+                "__typename": "JournalArticle",
+                "abstract": "Some abstract",
+                "added": 2000-01-01T00:00:00.000Z,
+                "annotators": [],
+                "authors": [
+                  {
+                    "id": "TODOTest Author",
+                    "name": "Test Author",
+                  },
+                  {
+                    "id": "TODOSecond Test Author",
+                    "name": "Second Test Author",
+                  },
+                ],
+                "citationKeys": [],
+                "commentators": [],
+                "doi": "doi which does not exist",
+                "electronicId": null,
                 "id": Any<String>,
-                "journal": {
+                "in": {
                   "id": Any<String>,
-                  "issn": null,
-                  "name": "Journal of great things",
+                  "journal": {
+                    "id": Any<String>,
+                    "issn": null,
+                    "name": "Journal of great things",
+                    "subtitle": null,
+                    "titleAddon": null,
+                  },
+                  "name": null,
+                  "number": "10",
+                  "series": null,
                   "subtitle": null,
+                  "title": null,
                   "titleAddon": null,
+                  "volume": "15",
                 },
-                "name": null,
-                "number": "10",
-                "series": null,
+                "keywords": [
+                  "keyword1",
+                  "keyword2",
+                ],
+                "languages": [],
+                "lastModified": 2021-01-01T00:00:00.000Z,
+                "note": null,
+                "pageEnd": "2811",
+                "pageStart": "2779",
+                "publicationState": null,
+                "published": "2011",
                 "subtitle": null,
-                "title": null,
+                "title": "Test Title",
                 "titleAddon": null,
-                "volume": "15",
+                "translated": null,
               },
-              "keywords": [
-                "keyword1",
-                "keyword2",
-              ],
-              "languages": [],
-              "lastModified": null,
-              "note": null,
-              "pageEnd": "2811",
-              "pageStart": "2779",
-              "publicationState": null,
-              "published": "2011",
-              "subtitle": null,
-              "title": "Test Title",
-              "titleAddon": null,
-              "translated": null,
             },
+            "errors": undefined,
           },
         }
       `

@@ -19,6 +19,7 @@ jobs:
 
     env:
       DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
       # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
@@ -73,7 +74,10 @@ jobs:
           az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output\server.zip
 
       - name: Check HTTP status
-        run: Start-Sleep -Seconds 30
+        run: |
+          Start-Sleep -Seconds 30
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net/api || true
         # The api returns 400 status code for some reason
         # uses: gerdemann/http-status-code@1.0.0
         # with:
@@ -83,7 +87,9 @@ jobs:
         #   interval: 30
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net/api'
+        run: yarn test:api
+        env:
+          TEST_URL: https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net
 
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
@@ -111,6 +117,7 @@ jobs:
 
     env:
       DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
+      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
       - name: Checkout
@@ -166,7 +173,10 @@ jobs:
           az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output\server.zip
 
       - name: Check HTTP status
-        run: Start-Sleep -Seconds 30
+        run: |
+          Start-Sleep -Seconds 30
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }} || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }}/api || true
         # The api returns 400 status code for some reason
         # with:
         #   url: ${{ matrix.url }}/api
@@ -175,7 +185,9 @@ jobs:
         #   interval: 30
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=${{ matrix.url }}/api'
+        run: yarn test:api
+        env:
+          TEST_URL: ${{ matrix.url }}
 
   close_pr_preview:
     name: Close PR preview

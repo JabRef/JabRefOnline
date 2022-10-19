@@ -71,15 +71,15 @@ export default class PassportInitializer {
     return defineEventHandler(async (event) => {
       // Add middleware that sends and receives the session ID using cookies
       // @ts-expect-error: https://github.com/unjs/h3/issues/146
-      await callHandler(sessionMiddleware, event.req, event.res)
+      await fromNodeMiddleware(sessionMiddleware)(event)
 
       // Add passport as middleware (this more or less only adds the _passport variable to the request)
       // @ts-expect-error: https://github.com/unjs/h3/issues/146
-      await callHandler(passportMiddleware, event.req, event.res)
+      await fromNodeMiddleware(passportMiddleware)(event)
 
       // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      await callHandler(passportSessionMiddleware, event.req, event.res)
+      await fromNodeMiddleware(passportSessionMiddleware)(event)
     })
   }
 

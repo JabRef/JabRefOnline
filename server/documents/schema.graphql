@@ -25,7 +25,7 @@ extend type User {
     """
     filterBy: DocumentFilters
     """
-    Number of documents to be returned
+    Number of documents to be returned.
     """
     first: Int
     """
@@ -68,7 +68,7 @@ type PageInfo {
   """
   endCursor: String
   """
-  When paginating forwards, are there more items?.
+  When paginating forwards, are there more items?
   """
   hasNextPage: Boolean!
 }

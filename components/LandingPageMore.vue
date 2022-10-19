@@ -1,20 +1,20 @@
 <template>
   <section id="support">
-    <div class="container mx-auto sm:px-4">
+    <div class="container mx-auto px-4">
       <div class="flex flex-col text-center">
         <h1 class="pb-10 text-5xl">Want to learn more?</h1>
       </div>
       <div
-        class="grid grid-flow-col grid-rows-3 md:grid-rows-2 max-w-5xl mx-auto"
+        class="grid md:grid-flow-col grid-cols-2 md:grid-cols-none md:grid-rows-2 max-w-5xl mx-auto gap-4"
       >
         <div
           v-for="item in items"
           :key="item.href"
-          class="pr-4 pl-4 text-center pt-3"
+          class="text-center"
         >
           <t-nuxtlink
             :href="item.href"
-            class="text-primary-500 hover:text-highlight-600"
+            class="text-primary-500 hover:text-primary-600"
           >
             <FontAwesomeIcon
               :icon="item.icon"
@@ -35,14 +35,14 @@ const items = [
     text: 'Getting started',
   },
   {
-    href: 'https://docs.jabref.org/',
-    icon: 'book',
-    text: 'User Documentation',
-  },
-  {
     href: 'http://discourse.jabref.org',
     icon: 'comments',
     text: 'Forum',
+  },
+  {
+    href: 'https://docs.jabref.org/',
+    icon: 'book',
+    text: 'User Documentation',
   },
   {
     href: 'https://discourse.jabref.org/c/features/',
@@ -55,7 +55,7 @@ const items = [
     text: 'Report a bug',
   },
   {
-    href: 'https://blog.jabref.org/',
+    href: 'blog',
     icon: 'newspaper',
     text: 'Blog',
   },

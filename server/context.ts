@@ -4,7 +4,7 @@ import {
   AuthenticateReturn,
   buildContext as passportBuildContext,
 } from 'graphql-passport'
-import { CompatibilityEvent } from 'h3'
+import { H3ContextFunctionArgument } from '~/apollo/apollo-server'
 
 export interface Context {
   isAuthenticated: () => boolean
@@ -18,8 +18,10 @@ export interface Context {
   logout: () => void
 }
 
-export function buildContext(event: CompatibilityEvent): Context {
-  return {
+export function buildContext({
+  event,
+}: H3ContextFunctionArgument): Promise<Context> {
+  return Promise.resolve({
     // @ts-expect-error: h3 doesn't provide correct types https://github.com/unjs/h3/issues/146
     ...passportBuildContext<User>({ req: event.req, res: event.res }),
     // The login method provided by graphql-passport doesn't work on azure, so we have to override it
@@ -58,5 +60,5 @@ export function buildContext(event: CompatibilityEvent): Context {
         })
       })
     },
-  }
+  })
 }

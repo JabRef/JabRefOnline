@@ -38,12 +38,7 @@ const ui = useUiStore()
 
 const { result, fetchMore } = useQuery(
   gql(/* GraphQL */ `
-    query GetDocuments(
-      $groupId: ID
-      $query: String
-      $first: Int
-      $after: String
-    ) {
+    query Documents($groupId: ID, $query: String, $first: Int, $after: String) {
       me {
         id
         documents(

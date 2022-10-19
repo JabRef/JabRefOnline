@@ -1,8 +1,9 @@
+import { ApolloServerErrorCode } from '@apollo/server/errors'
 import type { Group, GroupType as GroupTypeT } from '@prisma/client'
-import { UserInputError } from 'apollo-server-errors'
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
-import { Context } from '../context'
+import { GraphQLError } from 'graphql'
+import { Context } from '~/server/context'
 import {
   MutationCreateGroupArgs,
   MutationUpdateGroupArgs,
@@ -95,8 +96,13 @@ export class Mutation {
     }
 
     if (type === null) {
-      throw new UserInputError(
-        'Need to specify at least one of the type-specific details.'
+      throw new GraphQLError(
+        'Need to specify at least one of the type-specific details.',
+        {
+          extensions: {
+            code: ApolloServerErrorCode.BAD_USER_INPUT,
+          },
+        }
       )
     }
 
