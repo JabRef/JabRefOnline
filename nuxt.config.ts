@@ -123,6 +123,13 @@ export default defineNuxtConfig({
     exposeConfig: true,
   },
 
+  content: {
+    markdown: {
+      // Don't automatically print h2-h4 headings as links
+      anchorLinks: false,
+    },
+  },
+
   /**
    * Naive UI configuration
    */
