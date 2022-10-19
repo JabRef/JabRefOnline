@@ -3886,6 +3886,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nuxt/kit@npm:^3.0.0-rc.12":
+  version: 3.0.0-rc.12
+  resolution: "@nuxt/kit@npm:3.0.0-rc.12"
+  dependencies:
+    "@nuxt/schema": 3.0.0-rc.12
+    c12: ^0.2.13
+    consola: ^2.15.3
+    defu: ^6.1.0
+    globby: ^13.1.2
+    hash-sum: ^2.0.0
+    ignore: ^5.2.0
+    jiti: ^1.16.0
+    knitwork: ^0.1.2
+    lodash.template: ^4.5.0
+    mlly: ^0.5.16
+    pathe: ^0.3.9
+    pkg-types: ^0.3.5
+    scule: ^0.3.2
+    semver: ^7.3.8
+    unctx: ^2.0.2
+    unimport: ^0.6.8
+    untyped: ^0.5.0
+  checksum: f3053cb4198b645c9b4b9e83ad1177205481141396fa57563bc71e9d4853ec3ab55e7d949cb7316975c90dc8f50bac1c6efae22ad5127ddc21e496599cf6b575
+  languageName: node
+  linkType: hard
+
 "@nuxt/postcss8@npm:^1.1.3":
   version: 1.1.3
   resolution: "@nuxt/postcss8@npm:1.1.3"
@@ -3918,6 +3944,26 @@ __metadata:
     ufo: ^0.8.5
     unimport: ^0.6.7
   checksum: f31d42c629fb923ff4f9479114d5e10b95c434d018cb888f6ab941b5cc7db5ca5179ebe53529794a43b10000d616b130915413c416e919301482d45fd5b5f36e
+  languageName: node
+  linkType: hard
+
+"@nuxt/schema@npm:3.0.0-rc.12":
+  version: 3.0.0-rc.12
+  resolution: "@nuxt/schema@npm:3.0.0-rc.12"
+  dependencies:
+    c12: ^0.2.13
+    create-require: ^1.1.1
+    defu: ^6.1.0
+    jiti: ^1.16.0
+    pathe: ^0.3.9
+    pkg-types: ^0.3.5
+    postcss-import-resolver: ^2.0.0
+    scule: ^0.3.2
+    std-env: ^3.3.0
+    ufo: ^0.8.6
+    unimport: ^0.6.8
+    untyped: ^0.5.0
+  checksum: d6ec542fa4b4a1ef3cead85cdbc200282b3140a399988c28839c677ac2049927e41b6aa151f40e543f0ba4c8ce24cfefd2893bfb99d1730b261c099c6ffb989f
   languageName: node
   linkType: hard
 
@@ -4046,45 +4092,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/tailwindcss@npm:5.3.5":
-  version: 5.3.5
-  resolution: "@nuxtjs/tailwindcss@npm:5.3.5"
+"@nuxtjs/tailwindcss@npm:6.0.0":
+  version: 6.0.0
+  resolution: "@nuxtjs/tailwindcss@npm:6.0.0"
   dependencies:
-    "@nuxt/kit": ^3.0.0-rc.9
+    "@nuxt/kit": ^3.0.0-rc.12
     "@nuxt/postcss8": ^1.1.3
     autoprefixer: ^10.4.8
     chalk: ^5.0.1
     clear-module: ^4.1.2
     consola: ^2.15.3
     defu: ^6.1.0
+    h3: ^0.8.1
     postcss: ^8.4.16
     postcss-custom-properties: ^12.1.8
     postcss-nesting: ^10.1.10
     tailwind-config-viewer: ^1.7.2
     tailwindcss: ^3.1.8
     ufo: ^0.8.5
-  checksum: e47927f9f1c782f3a08d70025ea764a3d0de74edfe187e32e59db4b835d859464a9c3d9e694e4dc04de8e04c09720d9765b340326768980f4766a33f3c9618c8
-  languageName: node
-  linkType: hard
-
-"@nuxtjs/tailwindcss@patch:@nuxtjs/tailwindcss@npm%3A5.3.5#./.yarn/patches/@nuxtjs-tailwindcss-npm-5.3.5-4d5936d89f.patch::locator=jabref-online%40workspace%3A.":
-  version: 5.3.5
-  resolution: "@nuxtjs/tailwindcss@patch:@nuxtjs/tailwindcss@npm%3A5.3.5#./.yarn/patches/@nuxtjs-tailwindcss-npm-5.3.5-4d5936d89f.patch::version=5.3.5&hash=9c9764&locator=jabref-online%40workspace%3A."
-  dependencies:
-    "@nuxt/kit": ^3.0.0-rc.9
-    "@nuxt/postcss8": ^1.1.3
-    autoprefixer: ^10.4.8
-    chalk: ^5.0.1
-    clear-module: ^4.1.2
-    consola: ^2.15.3
-    defu: ^6.1.0
-    postcss: ^8.4.16
-    postcss-custom-properties: ^12.1.8
-    postcss-nesting: ^10.1.10
-    tailwind-config-viewer: ^1.7.2
-    tailwindcss: ^3.1.8
-    ufo: ^0.8.5
-  checksum: 1ff76f918ac08c5d588a072222601736190955f929a2d66a9600b42b7be66ea8cfbf052550611ed6803465ea9228f09a3cb4dd1c8eaf097171bca03a0b70748a
+  checksum: a0bd4ab7faca1d3d9642a7551cca329189b827de485e7fa0764541d6e71b7257ae5cd18fe881383e79eca4e30bf55146d1484114c5b4e084af423ee90d9fc57b
   languageName: node
   linkType: hard
 
@@ -13965,6 +13991,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"h3@npm:^0.8.1":
+  version: 0.8.4
+  resolution: "h3@npm:0.8.4"
+  dependencies:
+    cookie-es: ^0.5.0
+    destr: ^1.1.1
+    radix3: ^0.2.1
+    ufo: ^0.8.6
+  checksum: 3d27df96a6cfb2d1f878aaa135c53eef6e573c144768110c53d4db11d872d6e5a540c4fb63699d2d42ec70f042abb02591361bfdc909e61e7c50386b006dd8e6
+  languageName: node
+  linkType: hard
+
 "handlebars@npm:^4.7.7":
   version: 4.7.7
   resolution: "handlebars@npm:4.7.7"
@@ -15747,7 +15785,7 @@ __metadata:
     "@nuxtjs/eslint-config": ^11.0.0
     "@nuxtjs/eslint-config-typescript": ^11.0.0
     "@nuxtjs/eslint-module": ^3.1.0
-    "@nuxtjs/tailwindcss": 5.3.5
+    "@nuxtjs/tailwindcss": 6.0.0
     "@pinia/nuxt": ^0.4.3
     "@popperjs/core": ^2.11.6
     "@prisma/client": ^4.4.0
@@ -16881,7 +16919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.26.5":
+"magic-string@npm:^0.26.4, magic-string@npm:^0.26.5":
   version: 0.26.7
   resolution: "magic-string@npm:0.26.7"
   dependencies:
@@ -19446,6 +19484,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pathe@npm:^0.3.9":
+  version: 0.3.9
+  resolution: "pathe@npm:0.3.9"
+  checksum: 9afcbaa79c5f8ec603b6b0a20b9accfcec8de57e26738f4a844de4625cfb07cc733b7234387ef42c7ab23a49b91846b6b51cb247584793842a3179539af463df
+  languageName: node
+  linkType: hard
+
 "pathval@npm:^1.1.1":
   version: 1.1.1
   resolution: "pathval@npm:1.1.1"
@@ -20762,6 +20807,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"radix3@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "radix3@npm:0.2.1"
+  checksum: 4d7b7360000efb96bf542a7327aafe6f23a21b25add40f173ade2fb1a757be5f3dc4fd2caf6fab746b68d1b0f176d56fc9f529e8493307d69cc3cb4ca4fcb57e
+  languageName: node
+  linkType: hard
+
 "ramda@npm:^0.28.0":
   version: 0.28.0
   resolution: "ramda@npm:0.28.0"
@@ -21985,6 +22037,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"semver@npm:^7.3.8":
+  version: 7.3.8
+  resolution: "semver@npm:7.3.8"
+  dependencies:
+    lru-cache: ^6.0.0
+  bin:
+    semver: bin/semver.js
+  checksum: ba9c7cbbf2b7884696523450a61fee1a09930d888b7a8d7579025ad93d459b2d1949ee5bbfeb188b2be5f4ac163544c5e98491ad6152df34154feebc2cc337c1
+  languageName: node
+  linkType: hard
+
 "send@npm:0.18.0":
   version: 0.18.0
   resolution: "send@npm:0.18.0"
@@ -22582,6 +22645,13 @@ __metadata:
   version: 3.2.1
   resolution: "std-env@npm:3.2.1"
   checksum: c046af2573ba6e02c9ffcfd5a2c3f94f160404915941be177b93d6d1695078e487293fed6ab4fa95680e75a331eccf0f6dbe0b86babda15056c594e600a99dc4
+  languageName: node
+  linkType: hard
+
+"std-env@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "std-env@npm:3.3.0"
+  checksum: 093f26c9e079ee5b1f99b08816f7cf5d72abccf75731901a2645a4b6e0cc1f039f9c44f0399f2acb80043d29a1977885738309e332a2746ee2178c2a57b9bd3a
   languageName: node
   linkType: hard
 
@@ -23884,6 +23954,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ufo@npm:^0.8.6":
+  version: 0.8.6
+  resolution: "ufo@npm:0.8.6"
+  checksum: 5d483576230c7bfa2c9c9e5d864995e18d6c08ee3955c2237cc1a0d4b35a52991a0f5d26fe8cbf11952109a925a88dc14d973e0d14159b5b96b0fe7393a52899
+  languageName: node
+  linkType: hard
+
 "uglify-js@npm:^3.1.4":
   version: 3.17.1
   resolution: "uglify-js@npm:3.17.1"
@@ -24034,6 +24111,24 @@ __metadata:
     strip-literal: ^0.4.0
     unplugin: ^0.9.0
   checksum: 2a46aa1cc72b97b69cd4d5c144020457066c3e6f44903e4782669bc0413b8507bf990481a0d6f5e0534c7e39a07405afbd9f2ebb416dcd1c00f98c90a5867a3b
+  languageName: node
+  linkType: hard
+
+"unimport@npm:^0.6.8":
+  version: 0.6.8
+  resolution: "unimport@npm:0.6.8"
+  dependencies:
+    "@rollup/pluginutils": ^4.2.1
+    escape-string-regexp: ^5.0.0
+    fast-glob: ^3.2.12
+    local-pkg: ^0.4.2
+    magic-string: ^0.26.4
+    mlly: ^0.5.16
+    pathe: ^0.3.8
+    scule: ^0.3.2
+    strip-literal: ^0.4.2
+    unplugin: ^0.9.6
+  checksum: ad493cd731508021b9b8871b416c256c786a17a0036ad47591e5eb9dd780829a260759ce50e222a8ebeb21a13972941a4e27d22378f1e340da853ed58e7cba93
   languageName: node
   linkType: hard
 
