@@ -109,7 +109,7 @@ export default defineComponent({
   setup() {
     const { result } = useQuery(
       gql(/* GraphQL */ `
-        query GetGroups {
+        query Groups {
           me {
             id
             groups {

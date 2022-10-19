@@ -9,5 +9,6 @@ config.autoAddCss = false
 library.add(fas)
 
 export default defineNuxtPlugin((nuxtApp) => {
+  // @ts-expect-error: vue-fontawesome does not provide good types: https://github.com/FortAwesome/vue-fontawesome/issues/400
   nuxtApp.vueApp.component('FontAwesomeIcon', FontAwesomeIcon)
 })
