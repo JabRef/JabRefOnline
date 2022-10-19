@@ -128,8 +128,10 @@ export default defineNuxtConfig({
   },
 
   content: {
-    // Don't automatically print h2-h4 headings as links
-    anchorLinks: false,
+    markdown: {
+      // Don't automatically print h2-h4 headings as links
+      anchorLinks: false,
+    },
   },
 
   /**
