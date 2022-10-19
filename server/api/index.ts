@@ -5,8 +5,8 @@ import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
 import http from 'http'
 import 'reflect-metadata' // Needed for tsyringe
-import { buildContext, Context } from './context'
-import { loadSchemaWithResolvers } from './schema'
+import { buildContext, Context } from '../context'
+import { loadSchemaWithResolvers } from '../schema'
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_outgoing.js

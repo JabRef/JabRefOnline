@@ -90,15 +90,6 @@ export default defineNuxtConfig({
   runtimeConfig: constructConfig(),
 
   /**
-   * Add global Graphql server endpoint
-   * See https://v3.nuxtjs.org/api/configuration/nuxt.config#serverhandlers
-   */
-  serverHandlers: [
-    { route: '/api', handler: '~/server/index.ts' },
-    { route: '/api/', handler: '~/server/index.ts' },
-  ],
-
-  /**
    * Add redirects, mostly for backwards compatibility
    */
   routeRules: {
@@ -121,6 +112,13 @@ export default defineNuxtConfig({
   tailwindcss: {
     // Expose config so that we can use it in the vscode extension
     exposeConfig: true,
+  },
+
+  content: {
+    markdown: {
+      // Don't automatically print h2-h4 headings as links
+      anchorLinks: false,
+    },
   },
 
   /**
