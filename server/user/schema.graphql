@@ -96,6 +96,19 @@ type UserChangesEdge {
   A node containing the change.
   """
   node: Document
+
+  """
+  Information about the change.
+  """
+  revision: RevisionInfo
+}
+
+"""
+Information about the revision of a node.
+"""
+type RevisionInfo {
+  generation: Int!
+  hash: String!
 }
 
 """
