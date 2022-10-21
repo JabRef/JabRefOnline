@@ -15,6 +15,7 @@ import {
   Resolvers,
   UserChangesArgs,
   UserChangesConnection,
+  UserChangesEdge,
   UserDocumentsArgs,
 } from '../graphql'
 import { GroupResolved } from '../groups/resolvers'
@@ -29,8 +30,12 @@ import {
   SignupPayload,
 } from './auth.service'
 
+export type UserChangesEdgeUseDoc = Omit<UserChangesEdge, 'node'> & {
+  node: UserDocument
+}
+
 export type UserChangesResult = Omit<UserChangesConnection, 'edges'> & {
-  edges: { node: UserDocument }[]
+  edges: UserChangesEdgeUseDoc[]
 }
 
 @injectable()
@@ -234,7 +239,13 @@ export class UserResolver {
     }
 
     return {
-      edges: documents.map((document) => ({ node: document })),
+      edges: documents.map((document) => ({
+        node: document,
+        revision: {
+          generation: document.revisionNumber,
+          hash: document.revisionHash,
+        },
+      })),
       pageInfo: {
         endCursor: constructCursor(documents),
         hasNextPage,
