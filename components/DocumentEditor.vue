@@ -125,7 +125,11 @@ const DocumentDetails = gql(/* GraphQL */ `
     authors {
       ... on Person {
         id
-        name
+        family
+        given
+        suffix
+        nonDroppingParticle
+        droppingParticle
       }
       ... on Organization {
         id
@@ -187,7 +191,12 @@ const document = computed(() =>
 const authors = computed({
   get: () =>
     document.value?.authors.map((author) => ({
-      value: author.name,
+      value:
+        author.__typename === 'Organization'
+          ? author.name
+          : author.__typename === 'Person'
+          ? `${author.nonDroppingParticle} ${author.family}, ${author.given}, ${author.droppingParticle}`
+          : '',
     })),
   set: (value) => {
     // TODO: implement

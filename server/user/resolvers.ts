@@ -1,7 +1,8 @@
-import { User, UserDocument } from '@prisma/client'
+import { User } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
 import { Context } from '../context'
 import {
+  UserDocument,
   UserDocumentService,
   UserDocumentsResult,
 } from '../documents/user.document.service'

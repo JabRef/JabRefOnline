@@ -1,4 +1,8 @@
-import type {
+import {
+  ContributorRole,
+  DocumentContributor,
+  Entity,
+  EntityType,
   Journal,
   JournalIssue,
   Prisma,
@@ -8,6 +12,7 @@ import type {
   UserDocumentOtherField,
 } from '@prisma/client'
 import {
+  AddPersonInput,
   DocumentFilters,
   UserChangesCursorInput,
   UserDocumentsConnection,
@@ -22,6 +27,9 @@ export type UserDocument = PlainUserDocument & {
         journal: Journal | null
       })
     | null
+  contributors: (DocumentContributor & {
+    entity: Entity
+  })[]
 }
 
 type UserDocumentsAndPageInfo = {
@@ -35,8 +43,21 @@ export type UserDocumentsResult = Omit<UserDocumentsConnection, 'edges'> & {
 
 export type UserDocumentCreateInput = Omit<
   Prisma.UserDocumentCreateInput,
-  'revisionHash'
->
+  'revisionHash' | 'contributors'
+> & {
+  authors?: AddPersonInput[]
+  editors?: AddPersonInput[]
+  translators?: AddPersonInput[]
+}
+
+export type UserDocumentUpdateInput = Omit<
+  Prisma.UserDocumentUpdateInput,
+  'contributors'
+> & {
+  authors?: AddPersonInput[]
+  editors?: AddPersonInput[]
+  translators?: AddPersonInput[]
+}
 
 @injectable()
 export class UserDocumentService {
@@ -56,19 +77,13 @@ export class UserDocumentService {
     id: string,
     includeOtherFields = false
   ): Promise<UserDocument | null> {
-    return await this.prisma.userDocument.findUnique({
+    const document = await this.prisma.userDocument.findUnique({
       where: {
         id,
       },
-      include: {
-        other: includeOtherFields,
-        journalIssue: {
-          include: {
-            journal: true,
-          },
-        },
-      },
+      include: createInclude(includeOtherFields),
     })
+    return document
   }
 
   async getDocumentsOf(
@@ -103,18 +118,10 @@ export class UserDocumentService {
         cursor,
         skip: 1,
       }),
-      include: {
-        other: includeOtherFields,
-        journalIssue: {
-          include: {
-            journal: true,
-          },
-        },
-      },
+      include: createInclude(includeOtherFields),
     })
 
     const hasNextPage = !!(first && documents.length > first)
-    const userDocuments = first ? documents.slice(0, first) : documents
 
     if (filterBy?.query) {
       // Filtering documents by hand until Prisma.findMany supports full text search
@@ -122,7 +129,12 @@ export class UserDocumentService {
       const query = new RegExp(filterBy.query, 'i')
       const searchResult = documents.filter((document) => {
         return (
-          query.test(document.title ?? '') || query.test(document.author ?? '')
+          query.test(document.title ?? '') ||
+          document.contributors.some((contributor) =>
+            query.test(
+              contributor.entity.name ?? contributor.entity.family ?? ''
+            )
+          )
         )
       })
       return {
@@ -130,6 +142,7 @@ export class UserDocumentService {
         hasNextPage,
       }
     } else {
+      const userDocuments = first ? documents.slice(0, first) : documents
       return {
         documents: userDocuments,
         hasNextPage,
@@ -158,14 +171,7 @@ export class UserDocumentService {
       }),
       ...(after && { cursor: { checkpoint: after } }),
       skip: 1,
-      include: {
-        other: includeOtherFields,
-        journalIssue: {
-          include: {
-            journal: true,
-          },
-        },
-      },
+      include: createInclude(includeOtherFields),
     })
 
     return {
@@ -177,37 +183,84 @@ export class UserDocumentService {
   async addDocument(
     document: UserDocumentCreateInput
   ): Promise<UserDocument | null> {
-    return await this.prisma.userDocument.create({
-      data: {
-        ...document,
-        revisionHash: this.getRevisionHash(document),
-      },
-      include: {
-        journalIssue: {
-          include: {
-            journal: true,
+    const data = {
+      ...document,
+      revisionHash: this.getRevisionHash(document),
+      contributors: {
+        create: document.authors?.map((author, index) => ({
+          entity: {
+            create: {
+              ...author,
+              type: EntityType.PERSON,
+            },
           },
-        },
+          position: index,
+          role: ContributorRole.AUTHOR,
+        })),
       },
+    }
+    delete data.authors
+    delete data.editors
+    delete data.translators
+    return await this.prisma.userDocument.create({
+      data,
+      include: createInclude(false),
     })
   }
 
   async updateDocument(
     id: string,
-    document: Prisma.UserDocumentUpdateInput
+    document: UserDocumentUpdateInput
   ): Promise<UserDocument | null> {
+    await this.prisma.documentContributor.deleteMany({
+      where: {
+        documentId: id,
+      },
+    })
+    const data = {
+      ...document,
+      contributors: {
+        create: document.authors?.map((author, index) => ({
+          entity: {
+            create: {
+              ...author,
+              type: EntityType.PERSON,
+            },
+          },
+          position: index,
+          role: ContributorRole.AUTHOR,
+        })),
+      },
+    }
+    delete data.authors
+    delete data.editors
+    delete data.translators
     return await this.prisma.userDocument.update({
       where: {
         id,
       },
-      data: document,
-      include: {
-        journalIssue: {
-          include: {
-            journal: true,
-          },
-        },
-      },
+      data,
+      include: createInclude(false),
     })
+  }
+}
+
+function createInclude(includeOtherFields: boolean): {
+  contributors: { include: { entity: true } }
+  other: boolean
+  journalIssue: { include: { journal: true } }
+} {
+  return {
+    contributors: {
+      include: {
+        entity: true,
+      },
+    },
+    other: includeOtherFields,
+    journalIssue: {
+      include: {
+        journal: true,
+      },
+    },
   }
 }
