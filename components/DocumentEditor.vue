@@ -113,7 +113,19 @@
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
 import { gql, useFragment } from '~/apollo'
+import { PersonFullDetailsFragment } from '~/apollo/graphql'
 import Tags from './tagify.vue'
+
+const PersonFullDetails = gql(/* GraphQL */ `
+  fragment PersonFullDetails on Person {
+    id
+    family
+    given
+    suffix
+    nonDroppingParticle
+    droppingParticle
+  }
+`)
 
 const DocumentDetails = gql(/* GraphQL */ `
   fragment DocumentDetails on Document {
@@ -124,8 +136,7 @@ const DocumentDetails = gql(/* GraphQL */ `
     doi
     authors {
       ... on Person {
-        id
-        name
+        ...PersonFullDetails
       }
       ... on Organization {
         id
@@ -184,10 +195,29 @@ const document = computed(() =>
   useFragment(DocumentDetails, result.value?.userDocument)
 )
 
+function formatAuthor(author: PersonFullDetailsFragment) {
+  let result = ''
+  if (author.nonDroppingParticle) {
+    result += author.nonDroppingParticle + ' '
+  }
+  result += author.family
+  if (author.suffix) {
+    result += ' ' + author.suffix
+  }
+  if (author.given) {
+    result += ', ' + author.given
+  }
+  return result
+}
 const authors = computed({
   get: () =>
     document.value?.authors.map((author) => ({
-      value: author.name,
+      value:
+        author.__typename === 'Organization'
+          ? author.name
+          : author.__typename === 'Person'
+          ? formatAuthor(useFragment(PersonFullDetails, author))
+          : '',
     })),
   set: (value) => {
     // TODO: implement

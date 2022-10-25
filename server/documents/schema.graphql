@@ -73,13 +73,72 @@ type PageInfo {
   hasNextPage: Boolean!
 }
 
+"""
+A person who created or edited a document.
+
+We follow the convention of CSL (https://docs.citationstyles.org/en/stable/specification.html#names, https://docs.citationstyles.org/en/stable/specification.html?highlight=particle#name-particles).
+"""
 type Person {
+  """
+  The ID of the person.
+  """
   id: ID!
-  name: String!
+
+  """
+  The family name of the person, minus any particles and suffixes.
+
+  Example: "Smith" in "John Smith Jr."
+  Biblatex: family
+  Bibtex: last
+  """
+  family: String
+
+  """
+  The given name of the person, either full or initialized.
+
+  Example: "John Edward" or "J. E"  in "John Edward Smith".
+  Biblatex: given
+  Bibtex: first
+  """
+  given: String
+
+  """
+  The name suffix.
+
+  Example: "Jr." in "John Smith Jr.".
+  Biblatex: suffix
+  Bibtex: jr
+  """
+  suffix: String
+
+  """
+  Name particles that are not dropped when only the surname is shown, but which may be treated separately from the family name, e.g. for sorting.
+
+  Example: "de" in the Dutch surname "de Koning".
+  Biblatex: prefix
+  Bibtex: van
+  """
+  nonDroppingParticle: String
+
+  """
+  Name particles that are dropped when only the surname is shown.
+
+  Example: "van" in "Ludwig van Beethoven".
+  Biblatex: prefix
+  Bibtex: van
+  """
+  droppingParticle: String
 }
 
+"""
+A person who created or edited a document.
+"""
 input AddPersonInput {
-  name: String!
+  family: String
+  given: String
+  suffix: String
+  nonDroppingParticle: String
+  droppingParticle: String
 }
 
 input AddOrganizationInput {

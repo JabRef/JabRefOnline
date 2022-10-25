@@ -29,7 +29,13 @@
       <span
         v-for="author in document.authors"
         :key="author.id"
-        >{{ author.name }}</span
+        >{{
+          author.__typename === 'Organization'
+            ? author.name
+            : author.__typename === 'Person'
+            ? author.family
+            : ''
+        }}</span
       >
     </div>
     <div class="space-x-1 text-sm">
@@ -118,7 +124,7 @@ const DocumentForView = gql(/* GraphQL */ `
     authors {
       ... on Person {
         id
-        name
+        family
       }
       ... on Organization {
         id

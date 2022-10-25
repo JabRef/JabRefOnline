@@ -13,12 +13,28 @@ const testDocument: UserDocument = {
   citationKeys: ['testArticle'],
   lastModified: new Date(),
   added: new Date(),
-  editor: null,
   title: 'This is a test document',
   subtitle: null,
   titleAddon: null,
   abstract: null,
-  author: 'JabRef team',
+  contributors: [
+    {
+      entity: {
+        id: 'random',
+        family: 'Test',
+        given: 'Test',
+        type: 'PERSON',
+        suffix: null,
+        droppingParticle: null,
+        nonDroppingParticle: null,
+        name: null,
+      },
+      entityId: 'random',
+      role: 'AUTHOR',
+      documentId: 'test',
+      position: 0,
+    },
+  ],
   note: null,
   languages: [],
   publicationState: 'published',
@@ -46,7 +62,6 @@ const testDocument: UserDocument = {
   pageEnd: null,
   electronicId: null,
   originalLanguages: [],
-  translators: [],
   booktitle: null,
   publishedAt: '2021',
   edition: null,
@@ -82,6 +97,11 @@ describe('getDocumentById', () => {
       },
       include: {
         other: false,
+        contributors: {
+          include: {
+            entity: true,
+          },
+        },
         journalIssue: {
           include: {
             journal: true,

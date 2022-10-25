@@ -28,7 +28,6 @@ enum DocumentType {
 }
 
 // Articles, books etc added by users
-// We do not know what users put in their fields, thus we assume everything is a string
 // TODO: Parallel to the GraphQL api, we would like to have JournalArticle, ProceedingsArticle, etc as derived types.
 //       However, this is not possible with the current version of Prisma, see:
 //          https://github.com/prisma/prisma/issues/2505
@@ -55,7 +54,7 @@ model UserDocument {
   subtitle String?
   titleAddon String?
   abstract String?
-  author String?
+  contributors DocumentContributor[]
   note String?
   languages String[]
   publicationState String?
@@ -68,11 +67,9 @@ model UserDocument {
   pageEnd String?
   electronicId String?
   originalLanguages String[]
-  translators String[]
   publishedAt String? // format: YYYY(-MM-DD) TODO: Should use Date format once https://github.com/prisma/prisma/issues/4355 is resolved
 
   // TODO: Check if they are really needed (in this form)
-  editor String?
   booktitle String?
   edition String?
   pagetotal String?
@@ -127,6 +124,45 @@ model UserDocumentOtherField {
   value String
 
   @@id([documentId, field])
+}
+
+enum EntityType {
+  PERSON
+  ORGANIZATION
+}
+
+// TODO: Split this in two tables Person and Organization once https://github.com/prisma/prisma/issues/2505 is fixed
+model Entity {
+  id String @id @default(cuid())
+  type EntityType
+  contributorTo DocumentContributor[]
+
+  // Organization-specific
+  name String?
+
+  // Person-specific
+  family String?
+  given String?
+  suffix String?
+  nonDroppingParticle String?
+  droppingParticle String?
+}
+
+enum ContributorRole {
+  AUTHOR
+  EDITOR
+  TRANSLATOR
+}
+
+model DocumentContributor {
+  document UserDocument @relation(fields: [documentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  documentId String
+  entity Entity @relation(fields: [entityId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  entityId String @map("authorId")
+  position Int
+  role ContributorRole
+
+  @@id([documentId, entityId])
 }
 
 enum GroupHierarchyType {

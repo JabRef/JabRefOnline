@@ -1,9 +1,8 @@
-import { UserDocument } from '@prisma/client'
 import { mock, mockReset } from 'vitest-mock-extended'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 import { register, resolve } from '../tsyringe'
 import { DocumentResolver } from './resolvers'
-import { UserDocumentService } from './user.document.service'
+import { UserDocument, UserDocumentService } from './user.document.service'
 
 const userDocumentService = mock<UserDocumentService>()
 register('UserDocumentService', { useValue: userDocumentService })
@@ -82,7 +81,8 @@ describe('Mutation', () => {
               authors: [
                 {
                   person: {
-                    name: 'JabRef devs',
+                    family: 'Doe',
+                    given: 'John',
                   },
                 },
               ],
@@ -96,7 +96,12 @@ describe('Mutation', () => {
         citationKeys: [],
         lastModified: undefined,
         type: 'JOURNAL_ARTICLE',
-        author: 'JabRef devs',
+        authors: [
+          {
+            family: 'Doe',
+            given: 'John',
+          },
+        ],
         abstract: undefined,
         doi: undefined,
         electronicId: null,

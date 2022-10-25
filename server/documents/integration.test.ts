@@ -1,6 +1,7 @@
 import { gql } from 'graphql-tag'
 import * as prisma from '~/server/database/util'
 import { createAuthenticatedClient } from '~/test/apollo.server'
+import { removeIds } from '~/test/util'
 
 beforeEach(async () => {
   await prisma.resetToSeed()
@@ -14,7 +15,11 @@ const userDocumentById = gql`
   fragment Entity on Entity {
     ... on Person {
       id
-      name
+      family
+      given
+      suffix
+      nonDroppingParticle
+      droppingParticle
     }
     ... on Organization {
       id
@@ -98,20 +103,36 @@ describe('Query', () => {
                 "annotators": [],
                 "authors": [
                   {
-                    "id": "TODOCorti, Roberto",
-                    "name": "Corti, Roberto",
+                    "droppingParticle": null,
+                    "family": "Corti",
+                    "given": "Roberto",
+                    "id": "cl9n6ya8a00fokmtk3e3h9qsh",
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                   {
-                    "id": "TODOFlammer, Andreas J.",
-                    "name": "Flammer, Andreas J.",
+                    "droppingParticle": null,
+                    "family": "Flammer",
+                    "given": "Andreas J.",
+                    "id": "cl9n6ya8a00fqkmtk5b0t52mu",
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                   {
-                    "id": "TODOHollenberg, Norman K.",
-                    "name": "Hollenberg, Norman K.",
+                    "droppingParticle": null,
+                    "family": "Hollenberg",
+                    "given": "Norman K.",
+                    "id": "cl9n6ya8a00fskmtkytfgznx0",
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                   {
-                    "id": "TODOLuscher, Thomas F.",
-                    "name": "Luscher, Thomas F.",
+                    "droppingParticle": null,
+                    "family": "Luscher",
+                    "given": "Thomas F.",
+                    "id": "cl9n6ycni00jjkmtksyuppbsm",
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                 ],
                 "citationKeys": [],
@@ -168,8 +189,8 @@ describe('Roundtrip', () => {
     const testArticle = {
       title: 'Test Title',
       authors: [
-        { person: { name: 'Test Author' } },
-        { person: { name: 'Second Test Author' } },
+        { person: { family: 'Test Author' } },
+        { person: { family: 'Second Test Author' } },
       ],
       abstract: 'Some abstract',
       keywords: ['keyword1', 'keyword2'],
@@ -237,25 +258,15 @@ describe('Roundtrip', () => {
         query: userDocumentById,
         variables: { id },
       })
-      expect(result.body).toMatchInlineSnapshot(
+      expect(removeIds(result.body)).toMatchInlineSnapshot(
         {
           singleResult: {
             data: {
               userDocument: {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(String),
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 added: expect.any(Date),
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 lastModified: expect.any(Date),
-                in: {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                  id: expect.any(String),
-                  journal: {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    id: expect.any(String),
-                  },
-                },
               },
             },
           },
@@ -272,23 +283,26 @@ describe('Roundtrip', () => {
                 "annotators": [],
                 "authors": [
                   {
-                    "id": "TODOTest Author",
-                    "name": "Test Author",
+                    "droppingParticle": null,
+                    "family": "Test Author",
+                    "given": null,
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                   {
-                    "id": "TODOSecond Test Author",
-                    "name": "Second Test Author",
+                    "droppingParticle": null,
+                    "family": "Second Test Author",
+                    "given": null,
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                 ],
                 "citationKeys": [],
                 "commentators": [],
                 "doi": "doi which does not exist",
                 "electronicId": null,
-                "id": Any<String>,
                 "in": {
-                  "id": Any<String>,
                   "journal": {
-                    "id": Any<String>,
                     "issn": null,
                     "name": "Journal of great things",
                     "subtitle": null,
@@ -361,25 +375,7 @@ describe('Roundtrip', () => {
         query: userDocumentById,
         variables: { id: 'ckondtcaf000101mh7x9g4gia' },
       })
-      expect(result.body).toMatchInlineSnapshot(
-        {
-          singleResult: {
-            data: {
-              userDocument: {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                id: expect.any(String),
-                in: {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                  id: expect.any(String),
-                  journal: {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    id: expect.any(String),
-                  },
-                },
-              },
-            },
-          },
-        },
+      expect(removeIds(result.body)).toMatchInlineSnapshot(
         `
         {
           "kind": "single",
@@ -392,23 +388,26 @@ describe('Roundtrip', () => {
                 "annotators": [],
                 "authors": [
                   {
-                    "id": "TODOTest Author",
-                    "name": "Test Author",
+                    "droppingParticle": null,
+                    "family": "Test Author",
+                    "given": null,
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                   {
-                    "id": "TODOSecond Test Author",
-                    "name": "Second Test Author",
+                    "droppingParticle": null,
+                    "family": "Second Test Author",
+                    "given": null,
+                    "nonDroppingParticle": null,
+                    "suffix": null,
                   },
                 ],
                 "citationKeys": [],
                 "commentators": [],
                 "doi": "doi which does not exist",
                 "electronicId": null,
-                "id": Any<String>,
                 "in": {
-                  "id": Any<String>,
                   "journal": {
-                    "id": Any<String>,
                     "issn": null,
                     "name": "Journal of great things",
                     "subtitle": null,
