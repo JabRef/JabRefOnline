@@ -4018,25 +4018,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/tailwindcss@npm:6.0.0":
-  version: 6.0.0
-  resolution: "@nuxtjs/tailwindcss@npm:6.0.0"
+"@nuxtjs/tailwindcss@npm:6.1.3":
+  version: 6.1.3
+  resolution: "@nuxtjs/tailwindcss@npm:6.1.3"
   dependencies:
     "@nuxt/kit": ^3.0.0-rc.12
     "@nuxt/postcss8": ^1.1.3
-    autoprefixer: ^10.4.8
-    chalk: ^5.0.1
+    autoprefixer: ^10.4.12
+    chalk: ^5.1.2
     clear-module: ^4.1.2
     consola: ^2.15.3
     defu: ^6.1.0
-    h3: ^0.8.1
-    postcss: ^8.4.16
-    postcss-custom-properties: ^12.1.8
-    postcss-nesting: ^10.1.10
+    h3: ^0.8.5
+    postcss: ^8.4.18
+    postcss-custom-properties: ^12.1.9
+    postcss-nesting: ^10.2.0
     tailwind-config-viewer: ^1.7.2
-    tailwindcss: ^3.1.8
-    ufo: ^0.8.5
-  checksum: a0bd4ab7faca1d3d9642a7551cca329189b827de485e7fa0764541d6e71b7257ae5cd18fe881383e79eca4e30bf55146d1484114c5b4e084af423ee90d9fc57b
+    tailwindcss: ^3.2.0
+    ufo: ^0.8.6
+  checksum: 110669c27eb10ffbb20f1f419824ddd384a8943ec56d0b0fb75d31517d3f2e463c577af850336a083b4dae9e557cf08e653c6fc1b8a4993ec8fda370a7194a26
   languageName: node
   linkType: hard
 
@@ -7763,7 +7763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.2.5, autoprefixer@npm:^10.4.12, autoprefixer@npm:^10.4.8":
+"autoprefixer@npm:^10.2.5, autoprefixer@npm:^10.4.12":
   version: 10.4.12
   resolution: "autoprefixer@npm:10.4.12"
   dependencies:
@@ -8772,7 +8772,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.0.0, chalk@npm:^5.0.1, chalk@npm:^5.1.0, chalk@npm:^5.1.2":
+"chalk@npm:^5.0.0, chalk@npm:^5.1.0, chalk@npm:^5.1.2":
   version: 5.1.2
   resolution: "chalk@npm:5.1.2"
   checksum: 804d7485e33531abe45b14e91026ceb5615974a8c04259ab0806f214a7666f6ea03e39ab124f7d5a0c78a83fda89005f236db3c5f10c2abe9ae875f7aa56bcb5
@@ -13395,6 +13395,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"h3@npm:^0.8.5":
+  version: 0.8.6
+  resolution: "h3@npm:0.8.6"
+  dependencies:
+    cookie-es: ^0.5.0
+    destr: ^1.2.0
+    radix3: ^0.2.1
+    ufo: ^0.8.6
+  checksum: 44fc7cd736e40b1377a0fa8052130850062edecadb2212e34ed0e68347a230d804d5678244cbaf90b61a1d378b8720fbb4a496d19bde6e97d85c34ee4f751eb0
+  languageName: node
+  linkType: hard
+
 "handlebars@npm:^4.7.7":
   version: 4.7.7
   resolution: "handlebars@npm:4.7.7"
@@ -15177,7 +15189,7 @@ __metadata:
     "@nuxtjs/eslint-config": ^11.0.0
     "@nuxtjs/eslint-config-typescript": ^11.0.0
     "@nuxtjs/eslint-module": ^3.1.0
-    "@nuxtjs/tailwindcss": 6.0.0
+    "@nuxtjs/tailwindcss": 6.1.3
     "@pinia/nuxt": ^0.4.3
     "@popperjs/core": ^2.11.6
     "@prisma/client": ^4.4.0
@@ -19082,14 +19094,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-custom-properties@npm:^12.1.8":
-  version: 12.1.9
-  resolution: "postcss-custom-properties@npm:12.1.9"
+"postcss-custom-properties@npm:^12.1.9":
+  version: 12.1.10
+  resolution: "postcss-custom-properties@npm:12.1.10"
   dependencies:
     postcss-value-parser: ^4.2.0
   peerDependencies:
     postcss: ^8.2
-  checksum: db4194665bc104fd05608dd282caa6298870ffe5ca9a6733a9b48f4191fcc1225c8ce08e4c883a0e5eaa7a68daa18f3d7d71690ab74854b37bf0305976256cdf
+  checksum: 8460d52a493ae7806f30d821f13ae56024e30169f6cb625197752fdde5bce39fb54870733a63b250996b9063214c9ef4dfa01e56de34123a0614069ee71ebcba
   languageName: node
   linkType: hard
 
@@ -19401,7 +19413,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-nesting@npm:^10.1.10":
+"postcss-nesting@npm:^10.2.0":
   version: 10.2.0
   resolution: "postcss-nesting@npm:10.2.0"
   dependencies:
@@ -22521,9 +22533,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.1.8":
-  version: 3.2.0
-  resolution: "tailwindcss@npm:3.2.0"
+"tailwindcss@npm:^3.2.0":
+  version: 3.2.1
+  resolution: "tailwindcss@npm:3.2.1"
   dependencies:
     arg: ^5.0.2
     chokidar: ^3.5.3
@@ -22535,6 +22547,7 @@ __metadata:
     glob-parent: ^6.0.2
     is-glob: ^4.0.3
     lilconfig: ^2.0.6
+    micromatch: ^4.0.5
     normalize-path: ^3.0.0
     object-hash: ^3.0.0
     picocolors: ^1.0.0
@@ -22552,7 +22565,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: a5b48bba217bbc0bf3e8e644cbb4c0f91b9da048234f0b5a7bc1d9a296bc8ece7c70f7108ab9689c31539fdd716e20a39a05c5aaf11529298750ac2f1708bfe1
+  checksum: 8479f6e469b3ac3146fec5bf4b5ec411f24f481087d9db9a9e16bd5169cfe5f6af082b8fe656bbb8829faa8805765104843f549b08b4ba34e972d0743d0c7e94
   languageName: node
   linkType: hard
 
