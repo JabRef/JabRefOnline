@@ -34,10 +34,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@antfu/utils@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "@antfu/utils@npm:0.5.2"
-  checksum: 9b91446b2dbb823abeeba1cc33d6ebf701a462923408ad4751fbe162da46ae0669c774c2b5435fc77691dc207ce5de5945e693d5163e07d6ef42e376b04c7af4
+"@antfu/utils@npm:^0.6.0":
+  version: 0.6.2
+  resolution: "@antfu/utils@npm:0.6.2"
+  checksum: 36aac3b66d17e6b6f81b982cd594354e19696b5cc72e97e1e0dc8a9c400d572d81acae5e3cabda9e16b01a14784e36c4d5bb848baaaf32af645ac730999fc098
   languageName: node
   linkType: hard
 
@@ -4394,6 +4394,22 @@ __metadata:
     rollup:
       optional: true
   checksum: c96c8041436842d6a13dfb5ef066625185546b93da2b0a1b135c19b2722d073a5075a842240531a12befb0d05d1856a270f00a655014bd54cfe19c8279ed5322
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "@rollup/pluginutils@npm:5.0.2"
+  dependencies:
+    "@types/estree": ^1.0.0
+    estree-walker: ^2.0.2
+    picomatch: ^2.3.1
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0||^3.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: edea15e543bebc7dcac3b0ac8bc7b8e8e6dbd46e2864dbe5dd28072de1fbd5b0e10d545a610c0edaa178e8a7ac432e2a2a52e547ece1308471412caba47db8ce
   languageName: node
   linkType: hard
 
@@ -15258,7 +15274,7 @@ __metadata:
     tsyringe: ^4.7.0
     typescript: ^4.8.4
     ufo: ^0.8.6
-    unplugin-vue-components: ^0.22.8
+    unplugin-vue-components: ^0.22.9
     vee-validate: ^4.7.1
     vitest: ^0.24.5
     vitest-github-actions-reporter: ^0.9.0
@@ -16293,7 +16309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.26.1, magic-string@npm:^0.26.2, magic-string@npm:^0.26.4, magic-string@npm:^0.26.5, magic-string@npm:^0.26.7":
+"magic-string@npm:^0.26.1, magic-string@npm:^0.26.2, magic-string@npm:^0.26.4, magic-string@npm:^0.26.7":
   version: 0.26.7
   resolution: "magic-string@npm:0.26.7"
   dependencies:
@@ -23671,27 +23687,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-components@npm:^0.22.8":
-  version: 0.22.8
-  resolution: "unplugin-vue-components@npm:0.22.8"
+"unplugin-vue-components@npm:^0.22.9":
+  version: 0.22.9
+  resolution: "unplugin-vue-components@npm:0.22.9"
   dependencies:
-    "@antfu/utils": ^0.5.2
-    "@rollup/pluginutils": ^4.2.1
+    "@antfu/utils": ^0.6.0
+    "@rollup/pluginutils": ^5.0.2
     chokidar: ^3.5.3
     debug: ^4.3.4
     fast-glob: ^3.2.12
     local-pkg: ^0.4.2
-    magic-string: ^0.26.5
+    magic-string: ^0.26.7
     minimatch: ^5.1.0
     resolve: ^1.22.1
-    unplugin: ^0.9.6
+    unplugin: ^0.10.1
   peerDependencies:
     "@babel/parser": ^7.15.8
     vue: 2 || 3
   peerDependenciesMeta:
     "@babel/parser":
       optional: true
-  checksum: c32902d7244bea2fab5cf814f7cd99f62584e0f48d9c1fee804495b436a797723a2f780a724bcf36735900848a61631f3f49cb8cd5063f58b7d4b98355bbfc50
+  checksum: 278681a318d3ed633169e01e0586834bea726cb72f4436439b5e2eb38ee7e7bfc048106faa600cac66f1dbb6b5853b187b80ea4ea2d13a95d845990ccdff9d74
   languageName: node
   linkType: hard
 
@@ -23704,6 +23720,18 @@ __metadata:
     webpack-sources: ^3.2.3
     webpack-virtual-modules: ^0.4.5
   checksum: 1eceaf81e77dad3740a6c1cee581b1021fff3c019e5e35e0366edfd3a64d9f2ee89939df7204e254a39ad969deebeb50d2f30ccacf888bdd6dd3c36e6e51dec3
+  languageName: node
+  linkType: hard
+
+"unplugin@npm:^0.10.1":
+  version: 0.10.2
+  resolution: "unplugin@npm:0.10.2"
+  dependencies:
+    acorn: ^8.8.0
+    chokidar: ^3.5.3
+    webpack-sources: ^3.2.3
+    webpack-virtual-modules: ^0.4.5
+  checksum: 984199a8ecbceb7d7b37d14d5bea88dc6ae3e1fa6f1ec5b4a9263160424ee5b5ecf809ce667ff2ff819731650fc9bd42fcc7b2b33dd888a1eb047349eba63960
   languageName: node
   linkType: hard
 
