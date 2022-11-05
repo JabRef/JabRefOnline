@@ -110,9 +110,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/server-gateway-interface@npm:^1.0.3":
-  version: 1.0.4
-  resolution: "@apollo/server-gateway-interface@npm:1.0.4"
+"@apollo/server-gateway-interface@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@apollo/server-gateway-interface@npm:1.0.5"
   dependencies:
     "@apollo/usage-reporting-protobuf": ^4.0.0
     "@apollo/utils.fetcher": ^1.0.0
@@ -120,16 +120,16 @@ __metadata:
     "@apollo/utils.logger": ^1.0.0
   peerDependencies:
     graphql: 14.x || 15.x || 16.x
-  checksum: 1931a038d5ad4331d9794143d91d579bdb136604b4df8feeac8e9b1653cc935c1674b803120fcacff3748bdd2f2e5dbfd99ec46fc4329507fecff99379ba283c
+  checksum: e906955dc3daca3421cef29bc70295bcbcfdc042c902ee1f3b5aac375a20a5844e1e917b16f34ba5a3937c107e60ad35d00a3757822a7ad2ad66e02c815174ad
   languageName: node
   linkType: hard
 
-"@apollo/server@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@apollo/server@npm:4.0.1"
+"@apollo/server@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@apollo/server@npm:4.1.1"
   dependencies:
     "@apollo/cache-control-types": ^1.0.2
-    "@apollo/server-gateway-interface": ^1.0.3
+    "@apollo/server-gateway-interface": ^1.0.5
     "@apollo/usage-reporting-protobuf": ^4.0.0
     "@apollo/utils.createhash": ^1.1.0
     "@apollo/utils.fetcher": ^1.0.0
@@ -150,12 +150,13 @@ __metadata:
     loglevel: ^1.6.8
     lru-cache: ^7.10.1
     negotiator: ^0.6.3
+    node-abort-controller: ^3.0.1
     node-fetch: ^2.6.7
     uuid: ^9.0.0
     whatwg-mimetype: ^3.0.0
   peerDependencies:
     graphql: ^16.6.0
-  checksum: 2818c64731ab9e8221fdb633c013e641d5bdbf8f03664fae5f6085a9c7b385c869a46257d29bcfd7a34bf30f7fae10a19d6144f47f40088280f43d0fdcc385a9
+  checksum: 983a5b9cdf3400d9df67da8ccdf8add9cfc09a99b56941c20c5fd80a0ee34de52dccb0061cd6f5222513021e3a1793b7d21b43fb14c39b5af8f464f5ab7de1de
   languageName: node
   linkType: hard
 
@@ -15162,7 +15163,7 @@ __metadata:
   resolution: "jabref-online@workspace:."
   dependencies:
     "@apollo/client": ^3.7.1
-    "@apollo/server": ^4.0.1
+    "@apollo/server": ^4.1.1
     "@as-integrations/h3": ^1.0.0
     "@azure/static-web-apps-cli": ^1.0.3
     "@fortawesome/fontawesome-svg-core": ^6.2.0
@@ -17699,6 +17700,13 @@ __metadata:
   dependencies:
     semver: ^7.3.5
   checksum: ed8db5e58fc9e1400a3f74d8815b6981208a4fca2031e2c5f5986f58f7e3a1f4161dae82c655f9114892b3f46c21c02feec10fbac0f8ffcfd26a3d57447093d1
+  languageName: node
+  linkType: hard
+
+"node-abort-controller@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "node-abort-controller@npm:3.0.1"
+  checksum: 2b3d75c65249fea99e8ba22da3a8bc553f034f44dd12f5f4b38b520f718b01c88718c978f0c24c2a460fc01de9a80b567028f547b94440cb47adeacfeb82c2ee
   languageName: node
   linkType: hard
 
