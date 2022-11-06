@@ -29,24 +29,24 @@ export default defineNuxtConfig({
 
   /*
    ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
+   ** See https://v3.nuxtjs.org/getting-started/seo-meta
    */
-  meta: {
-    title: process.env.npm_package_name || '',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || '',
-      },
-      // This is necessary to fix issues with tailwind/naive-ui: https://www.naiveui.com/en-US/light/docs/style-conflict
-      {
-        name: 'naive-ui-style',
-      },
-    ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  app: {
+    head: {
+      title: process.env.npm_package_name || '',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: process.env.npm_package_description || '',
+        },
+        // This is necessary to fix issues with tailwind/naive-ui: https://www.naiveui.com/en-US/light/docs/style-conflict
+        {
+          name: 'naive-ui-style',
+        },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    },
   },
 
   /*
@@ -80,8 +80,9 @@ export default defineNuxtConfig({
 
   /*
    ** Restarts the server when dependencies change.
+   * TODO: Remove this once we use modules that support HMR updates to graphql files
    */
-  watch: ['server/**/*.graphql'],
+  // watch: ['server/**/*.graphql'],
 
   /*
    ** Client and server-side configuration
@@ -106,8 +107,9 @@ export default defineNuxtConfig({
   /**
    * Storybook integration with Nuxt
    * See https://storybook.nuxtjs.org/
+   * TODO: See if we need this, maybe remove
    */
-  storybook: {},
+  // storybook: {},
 
   tailwindcss: {
     // Expose config so that we can use it in the vscode extension
