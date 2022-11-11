@@ -1,11 +1,3 @@
-import { User } from '@prisma/client'
-import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
-import { Context } from '../context'
-import {
-  UserDocument,
-  UserDocumentService,
-  UserDocumentsResult,
-} from '../documents/user.document.service'
 import {
   ForgotPasswordPayload,
   MutationChangePasswordArgs,
@@ -18,7 +10,15 @@ import {
   UserChangesConnection,
   UserChangesEdge,
   UserDocumentsArgs,
-} from '../graphql'
+} from '#graphql/resolver'
+import { User } from '@prisma/client'
+import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
+import { Context } from '../context'
+import {
+  UserDocument,
+  UserDocumentService,
+  UserDocumentsResult,
+} from '../documents/user.document.service'
 import { GroupResolved } from '../groups/resolvers'
 import { GroupService } from '../groups/service'
 import { validateInput } from '../utils/validation'
