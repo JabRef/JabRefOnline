@@ -2424,6 +2424,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/core@npm:^2.6.5":
+  version: 2.6.5
+  resolution: "@graphql-codegen/core@npm:2.6.5"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": ^2.7.2
+    "@graphql-tools/schema": ^9.0.0
+    "@graphql-tools/utils": 9.0.0
+    tslib: ~2.4.0
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 22a30285af6adf5acd8ed2f45363c77b718a1789f024094a4fcc62fc164440f0fed595b5eecfa216e3568a81ba07dd8f2e6111cb49f2ce46160b14167a330c41
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/fragment-matcher@npm:^3.3.1":
   version: 3.3.1
   resolution: "@graphql-codegen/fragment-matcher@npm:3.3.1"
@@ -3012,6 +3026,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/graphql-file-loader@npm:^7.5.10":
+  version: 7.5.10
+  resolution: "@graphql-tools/graphql-file-loader@npm:7.5.10"
+  dependencies:
+    "@graphql-tools/import": 6.7.11
+    "@graphql-tools/utils": 9.1.0
+    globby: ^11.0.3
+    tslib: ^2.4.0
+    unixify: ^1.0.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 8997d3889667b68d88901cfd32e7055b1ea8605df1c40f0117e8007cc15feb2ddfebcaed81011f8bea005c892f1ebc7a41e53bf27ca869b4bddc1d7847de7c6f
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/graphql-file-loader@npm:^7.5.9":
   version: 7.5.9
   resolution: "@graphql-tools/graphql-file-loader@npm:7.5.9"
@@ -3052,6 +3081,19 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 5f11470b3f73f61979559e655a94e86007484a7cee2fa93cd14b328a36e9a4f52f2786071f88d782e5a274c8b608ceb62ed8ea2bf37566a692b59b1938d5fb8c
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/import@npm:6.7.11":
+  version: 6.7.11
+  resolution: "@graphql-tools/import@npm:6.7.11"
+  dependencies:
+    "@graphql-tools/utils": 9.1.0
+    resolve-from: 5.0.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: a77590add6a31e83f45fc60eea87688cb5774396d98181d2eb645137e8d1d78b7a6ba39b0b62641453997ed80861dfdb21debf04d0a83a386e99a20c897a4efe
   languageName: node
   linkType: hard
 
@@ -3110,6 +3152,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/load@npm:^7.8.5":
+  version: 7.8.5
+  resolution: "@graphql-tools/load@npm:7.8.5"
+  dependencies:
+    "@graphql-tools/schema": 9.0.9
+    "@graphql-tools/utils": 9.1.0
+    p-limit: 3.1.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: fc2107f792d66ebc7bbdf8e267326367b60065c1721db7b61b476d1e1bd3ad86dd8f89c8afd54e8918cca7a4bc8e9c37229293b0dd3dc6112afebd45e6824478
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/merge@npm:8.3.1":
   version: 8.3.1
   resolution: "@graphql-tools/merge@npm:8.3.1"
@@ -3131,6 +3187,18 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: dbe2c6faee8034339c5708a43157b185b8523c131dde1b37bb511d96ac527da51f5be9501d9ffe0a8c424e419d64bb8415ec96e8443d3d0a5a6582a37b0aafa2
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/merge@npm:8.3.11":
+  version: 8.3.11
+  resolution: "@graphql-tools/merge@npm:8.3.11"
+  dependencies:
+    "@graphql-tools/utils": 9.1.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 3cd16577f1ea1bcc389d232fa620adc0fefc91a6b42b48e7bb5e7bb67b67d206d409a9a8d60cac4d8cd5f0f1c5353369f7c5eb4054b44ce2277545e1fd1de17f
   languageName: node
   linkType: hard
 
@@ -3227,6 +3295,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/schema@npm:9.0.9":
+  version: 9.0.9
+  resolution: "@graphql-tools/schema@npm:9.0.9"
+  dependencies:
+    "@graphql-tools/merge": 8.3.11
+    "@graphql-tools/utils": 9.1.0
+    tslib: ^2.4.0
+    value-or-promise: 1.0.11
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 23620a993eff57723302315100d947b81664d6a1e00010ff293b3649f51ab423946d73920cce0ce822b7f7f42b99ea23240902ff47df3d252639613c0df7b971
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/schema@npm:^8.3.1":
   version: 8.5.1
   resolution: "@graphql-tools/schema@npm:8.5.1"
@@ -3287,6 +3369,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/utils@npm:9.0.0":
+  version: 9.0.0
+  resolution: "@graphql-tools/utils@npm:9.0.0"
+  dependencies:
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 8da22b13e0cfceac20f2ee08c45f360d0bd1390fa0edd8496ea75a0ca7d10ab3bbafca6b4b0dbc3f233a05cd53096e3063b9208f727c72db00e461751164afbd
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/utils@npm:9.0.1":
   version: 9.0.1
   resolution: "@graphql-tools/utils@npm:9.0.1"
@@ -3295,6 +3388,17 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: a41221d8568bfaafa76526eaa89550d67965c43e0cd1ff94979f61c117d0caf880938799b351c4b637ce26309ba5d2ef8c4a657298f5d46702f43759b89bfa05
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/utils@npm:9.1.0":
+  version: 9.1.0
+  resolution: "@graphql-tools/utils@npm:9.1.0"
+  dependencies:
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: dcf08df3bd1715e25e3b80bf2dd332376239ebcd2a9b93f4d6b72a7bd3feffe2207b9683bb8fcaed9d0d1286f701d0686fe99ac803b91c0df54509b869c0554d
   languageName: node
   linkType: hard
 
@@ -3834,6 +3938,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nuxt/kit@npm:^3.0.0-rc.13":
+  version: 3.0.0-rc.13
+  resolution: "@nuxt/kit@npm:3.0.0-rc.13"
+  dependencies:
+    "@nuxt/schema": 3.0.0-rc.13
+    c12: ^0.2.13
+    consola: ^2.15.3
+    defu: ^6.1.0
+    globby: ^13.1.2
+    hash-sum: ^2.0.0
+    ignore: ^5.2.0
+    jiti: ^1.16.0
+    knitwork: ^0.1.2
+    lodash.template: ^4.5.0
+    mlly: ^0.5.16
+    pathe: ^0.3.9
+    pkg-types: ^0.3.6
+    scule: ^0.3.2
+    semver: ^7.3.8
+    unctx: ^2.0.2
+    unimport: ^0.7.0
+    untyped: ^0.5.0
+  checksum: fb11140bdd9c60447aec6232bb8d0adac0fd6bdc31c7fe0a24efa8443d627dd131ad5216b94e8c7ed9b2c887c5cb26e9c0168929e67315853d6894933020e7ca
+  languageName: node
+  linkType: hard
+
 "@nuxt/postcss8@npm:^1.1.3":
   version: 1.1.3
   resolution: "@nuxt/postcss8@npm:1.1.3"
@@ -3867,6 +3997,26 @@ __metadata:
     unimport: ^0.6.8
     untyped: ^0.5.0
   checksum: d6ec542fa4b4a1ef3cead85cdbc200282b3140a399988c28839c677ac2049927e41b6aa151f40e543f0ba4c8ce24cfefd2893bfb99d1730b261c099c6ffb989f
+  languageName: node
+  linkType: hard
+
+"@nuxt/schema@npm:3.0.0-rc.13":
+  version: 3.0.0-rc.13
+  resolution: "@nuxt/schema@npm:3.0.0-rc.13"
+  dependencies:
+    c12: ^0.2.13
+    create-require: ^1.1.1
+    defu: ^6.1.0
+    jiti: ^1.16.0
+    pathe: ^0.3.9
+    pkg-types: ^0.3.6
+    postcss-import-resolver: ^2.0.0
+    scule: ^0.3.2
+    std-env: ^3.3.0
+    ufo: ^0.8.6
+    unimport: ^0.7.0
+    untyped: ^0.5.0
+  checksum: 7b34fc7f312f541dff53edd7578282e2d3fea2b33248b4f09e9bb8245e6febbed7c60cbbb059fd5d23133da51062121a7e15a24fce2ce4e1ae8d53ed3ea6a5eb
   languageName: node
   linkType: hard
 
@@ -5869,6 +6019,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/minimatch@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@types/minimatch@npm:3.0.5"
+  checksum: c41d136f67231c3131cf1d4ca0b06687f4a322918a3a5adddc87ce90ed9dbd175a3610adee36b106ae68c0b92c637c35e02b58c8a56c424f71d30993ea220b92
+  languageName: node
+  linkType: hard
+
 "@types/mkdirp@npm:^0.5.2":
   version: 0.5.2
   resolution: "@types/mkdirp@npm:0.5.2"
@@ -7788,6 +7945,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"array-differ@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "array-differ@npm:4.0.0"
+  checksum: 1de99a06bc3219f96b062a561a4c19af7a68bfaf2c1e0ccedd1d82ce1fbc7757f939e03cf0d3ad76b71f855a8ad2b2a16bf53df331bf5f0c90002774f04fb0b5
+  languageName: node
+  linkType: hard
+
 "array-find-index@npm:^1.0.1":
   version: 1.0.2
   resolution: "array-find-index@npm:1.0.2"
@@ -7828,6 +7992,13 @@ __metadata:
   version: 2.1.0
   resolution: "array-union@npm:2.1.0"
   checksum: 5bee12395cba82da674931df6d0fea23c4aa4660cb3b338ced9f828782a65caa232573e6bf3968f23e0c5eb301764a382cef2f128b170a9dc59de0e36c39f98d
+  languageName: node
+  linkType: hard
+
+"array-union@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "array-union@npm:3.0.1"
+  checksum: 47b29f88258e8f37ffb93ddaa327d4308edd950b52943c172b73558afdd3fa74cfd68816ba5aa4b894242cf281fa3c6d0362ae057e4a18bddbaedbe46ebe7112
   languageName: node
   linkType: hard
 
@@ -15553,9 +15724,7 @@ __metadata:
     "@graphql-codegen/fragment-matcher": ^3.3.1
     "@graphql-codegen/gql-tag-operations-preset": ^1.7.0
     "@graphql-codegen/typed-document-node": ^2.3.6
-    "@graphql-codegen/typescript": ^2.8.1
     "@graphql-codegen/typescript-operations": ^2.5.6
-    "@graphql-codegen/typescript-resolvers": ^2.7.6
     "@graphql-eslint/eslint-plugin": ^3.13.0
     "@graphql-inspector/cli": ^3.4.0
     "@graphql-tools/graphql-file-loader": ^7.5.9
@@ -15627,6 +15796,7 @@ __metadata:
     naive-ui: ^2.33.5
     nodemailer: ^6.8.0
     nuxt: rc
+    nuxt-graphql-server: 1.1.3
     nuxt3-runtime-compiler-module: ^1.0.4
     passport: ^0.6.0
     patch-package: ^6.5.0
@@ -17872,6 +18042,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"multimatch@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "multimatch@npm:6.0.0"
+  dependencies:
+    "@types/minimatch": ^3.0.5
+    array-differ: ^4.0.0
+    array-union: ^3.0.1
+    minimatch: ^3.0.4
+  checksum: c04233765f664f556af12309cdad1a11c137655f756674b853a981f287984a49f3916955b57d306ed36bba3d2d6d5b6fbba4b48f483f11bd24e3c124a09e05b5
+  languageName: node
+  linkType: hard
+
 "mute-stream@npm:0.0.8":
   version: 0.0.8
   resolution: "mute-stream@npm:0.0.8"
@@ -18390,6 +18572,24 @@ __metadata:
   bin:
     nuxi: bin/nuxi.mjs
   checksum: d89fbdd87492e21a7177b52dd47ae6b9ace1568a09ae0d69db674295ace5493e9d395acad64995001ce2f38654bdf635d216d94cccfaa0e3b0d163a5a38f0002
+  languageName: node
+  linkType: hard
+
+"nuxt-graphql-server@npm:1.1.3":
+  version: 1.1.3
+  resolution: "nuxt-graphql-server@npm:1.1.3"
+  dependencies:
+    "@graphql-codegen/core": ^2.6.5
+    "@graphql-codegen/plugin-helpers": ^2.7.2
+    "@graphql-codegen/typescript": ^2.8.1
+    "@graphql-codegen/typescript-resolvers": ^2.7.6
+    "@graphql-tools/graphql-file-loader": ^7.5.10
+    "@graphql-tools/load": ^7.8.5
+    "@nuxt/kit": ^3.0.0-rc.13
+    multimatch: ^6.0.0
+  peerDependencies:
+    graphql: ^16.6.0
+  checksum: 2fb086f9fbd7b76f41afabfc4db312e9755b99d0a819c7d7090e69eb8fcacfac5c64f5356b710b8cc21d9ef7b488c791949d13b7b61a602e5a3cd7fd1e1d87f4
   languageName: node
   linkType: hard
 
@@ -19415,6 +19615,17 @@ __metadata:
     mlly: ^0.5.14
     pathe: ^0.3.7
   checksum: a0e7bb732333e138597302ced39b93d3d76147e275774fe0f5aad3db0c8191e03af126850d23af639e62791baba393593d0b22e2621c10b9cf432b604f5c9047
+  languageName: node
+  linkType: hard
+
+"pkg-types@npm:^0.3.6":
+  version: 0.3.6
+  resolution: "pkg-types@npm:0.3.6"
+  dependencies:
+    jsonc-parser: ^3.2.0
+    mlly: ^0.5.16
+    pathe: ^0.3.9
+  checksum: 7cdb939826b9f30ca8ea7cfba266e2c91bcbb40622a0b2864c7deac6896bac0b16c5e14525f2f095ee1f46c1f74e1a770cc41265b475991ce9b76dd6f1cfc505
   languageName: node
   linkType: hard
 
@@ -23873,6 +24084,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unimport@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "unimport@npm:0.7.0"
+  dependencies:
+    "@rollup/pluginutils": ^5.0.2
+    escape-string-regexp: ^5.0.0
+    fast-glob: ^3.2.12
+    local-pkg: ^0.4.2
+    magic-string: ^0.26.7
+    mlly: ^0.5.16
+    pathe: ^0.3.9
+    pkg-types: ^0.3.5
+    scule: ^0.3.2
+    strip-literal: ^0.4.2
+    unplugin: ^0.10.2
+  checksum: f93fac325aeae495735185208e41f2051d281d8bf9c436112bd98c5c507c5637816dec5b9430668d71a87c3471e010cce968a43de54aa846c326a501a611b16b
+  languageName: node
+  linkType: hard
+
 "union-value@npm:^1.0.0":
   version: 1.0.1
   resolution: "union-value@npm:1.0.1"
@@ -24129,7 +24359,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin@npm:^0.10.1":
+"unplugin@npm:^0.10.1, unplugin@npm:^0.10.2":
   version: 0.10.2
   resolution: "unplugin@npm:0.10.2"
   dependencies:

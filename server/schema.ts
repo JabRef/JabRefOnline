@@ -1,14 +1,15 @@
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { loadSchema as loadGraphqlSchema } from '@graphql-tools/load'
-import { addResolversToSchema } from '@graphql-tools/schema'
+import { makeExecutableSchema } from '@graphql-tools/schema'
+import { TypeSource } from '@graphql-tools/utils'
 import { GraphQLSchema } from 'graphql'
 
-async function addResolvers(schema: GraphQLSchema) {
+async function addResolvers(schema: TypeSource) {
   const { loadResolvers } = await import('./resolvers')
   const resolvers = loadResolvers()
 
-  return addResolversToSchema({
-    schema,
+  return makeExecutableSchema({
+    typeDefs: schema,
     resolvers,
     resolverValidationOptions: {
       // Ignore additional methods in our resolver classes (e.g. private fields)

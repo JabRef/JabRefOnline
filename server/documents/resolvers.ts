@@ -1,6 +1,3 @@
-import { DocumentType } from '@prisma/client'
-import { notEmpty } from '~/composables/util'
-import { Context } from '../context'
 import {
   AddJournalArticleInput,
   AddProceedingsArticleInput,
@@ -16,7 +13,10 @@ import {
   QueryUserDocumentArgs,
   Resolvers,
   UpdateUserDocumentInput,
-} from '../graphql'
+} from '#graphql/resolver'
+import { DocumentType } from '@prisma/client'
+import { notEmpty } from '~/composables/util'
+import { Context } from '../context'
 import { ResolveType } from '../utils/extractResolveType'
 import { inject, injectable, resolve } from './../tsyringe'
 import {
