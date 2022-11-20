@@ -2359,22 +2359,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/cli@npm:^2.13.7":
-  version: 2.13.7
-  resolution: "@graphql-codegen/cli@npm:2.13.7"
+"@graphql-codegen/cli@npm:^2.13.12":
+  version: 2.13.12
+  resolution: "@graphql-codegen/cli@npm:2.13.12"
   dependencies:
     "@babel/generator": ^7.18.13
     "@babel/template": ^7.18.10
     "@babel/types": ^7.18.13
-    "@graphql-codegen/core": 2.6.2
-    "@graphql-codegen/plugin-helpers": ^2.6.2
+    "@graphql-codegen/core": 2.6.6
+    "@graphql-codegen/plugin-helpers": ^2.7.2
     "@graphql-tools/apollo-engine-loader": ^7.3.6
     "@graphql-tools/code-file-loader": ^7.3.1
     "@graphql-tools/git-loader": ^7.2.1
     "@graphql-tools/github-loader": ^7.3.6
     "@graphql-tools/graphql-file-loader": ^7.5.0
     "@graphql-tools/json-file-loader": ^7.4.1
-    "@graphql-tools/load": ^7.7.1
+    "@graphql-tools/load": 7.8.0
     "@graphql-tools/prisma-loader": ^7.2.7
     "@graphql-tools/url-loader": ^7.13.2
     "@graphql-tools/utils": ^8.9.0
@@ -2406,21 +2406,21 @@ __metadata:
     graphql-code-generator: cjs/bin.js
     graphql-codegen: cjs/bin.js
     graphql-codegen-esm: esm/bin.js
-  checksum: c025e311c072c1d992451f27625c863eef1236e5f01e2aeb6f00e67a60e99c7812a13481481a8fc6ea2967fffd77433d582f10365244d677608fdc7aa13bbe29
+  checksum: 367d4687e1d4bf44f0a7f3cb4e71656774f006512883a51ceae905495b2e76819e6b49dfe63e3effe59abb990a4c17bb985878a4592bf2ff959dc822723c1370
   languageName: node
   linkType: hard
 
-"@graphql-codegen/core@npm:2.6.2":
-  version: 2.6.2
-  resolution: "@graphql-codegen/core@npm:2.6.2"
+"@graphql-codegen/core@npm:2.6.6":
+  version: 2.6.6
+  resolution: "@graphql-codegen/core@npm:2.6.6"
   dependencies:
-    "@graphql-codegen/plugin-helpers": ^2.6.2
+    "@graphql-codegen/plugin-helpers": ^2.7.2
     "@graphql-tools/schema": ^9.0.0
-    "@graphql-tools/utils": ^8.8.0
+    "@graphql-tools/utils": ^9.1.1
     tslib: ~2.4.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 3d078e9caa11baf7ceaa4d67b29a6be32f50a183c1fa6f228a3ade62902b9b91cdea2c94d99adbadf10ec38a7f2df9f16cd366dc7b4febf95336e3b4a7eb9160
+  checksum: 4a506dfb7dad577510b0358444ad5c5080459c00e1740099212d28c08fc4f02824014602172b95a61c6092cc97b3838fafd02b3e2eadf99dd9b6fa390464935a
   languageName: node
   linkType: hard
 
@@ -3174,7 +3174,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/load@npm:^7.4.1, @graphql-tools/load@npm:^7.5.5, @graphql-tools/load@npm:^7.7.1":
+"@graphql-tools/load@npm:7.8.0":
+  version: 7.8.0
+  resolution: "@graphql-tools/load@npm:7.8.0"
+  dependencies:
+    "@graphql-tools/schema": 9.0.4
+    "@graphql-tools/utils": 8.12.0
+    p-limit: 3.1.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 24ade442e13429d087ceac905cef4e6a14d0961e2b231adf91180a4d674de08ac6de66e6103c3e118b6ccf24065492bb69f5c99cb336e71a579ab382c8574791
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/load@npm:^7.4.1, @graphql-tools/load@npm:^7.5.5":
   version: 7.7.7
   resolution: "@graphql-tools/load@npm:7.7.7"
   dependencies:
@@ -3452,7 +3466,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:9.1.1":
+"@graphql-tools/utils@npm:9.1.1, @graphql-tools/utils@npm:^9.1.1":
   version: 9.1.1
   resolution: "@graphql-tools/utils@npm:9.1.1"
   dependencies:
@@ -15864,7 +15878,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/vue-fontawesome": ^3.0.1
     "@graphql-codegen/add": ^3.2.1
-    "@graphql-codegen/cli": ^2.13.7
+    "@graphql-codegen/cli": ^2.13.12
     "@graphql-codegen/fragment-matcher": ^3.3.1
     "@graphql-codegen/gql-tag-operations-preset": ^1.7.0
     "@graphql-codegen/typed-document-node": ^2.3.6
