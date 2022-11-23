@@ -27,11 +27,11 @@ export default defineNuxtConfig({
    */
   ssr: false,
 
-    /*
+  /*
    ** Headers of the page
    ** See https://v3.nuxtjs.org/getting-started/seo-meta
    */
-   app: {
+  app: {
     head: {
       title: process.env.npm_package_name || '',
       meta: [
@@ -39,10 +39,6 @@ export default defineNuxtConfig({
           hid: 'description',
           name: 'description',
           content: process.env.npm_package_description || '',
-        },
-        // This is necessary to fix issues with tailwind/naive-ui: https://www.naiveui.com/en-US/light/docs/style-conflict
-        {
-          name: 'naive-ui-style',
         },
       ],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
