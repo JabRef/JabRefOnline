@@ -72,7 +72,7 @@ export default defineNuxtConfig({
     // Add server-side graphql support
     'nuxt-graphql-server',
     // Add vue runtime compiler as temporary workaround for https://github.com/nuxt/framework/issues/4661
-    'nuxt3-runtime-compiler-module',
+    'nuxt-runtime-compiler',
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
