@@ -1,10 +1,6 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  experimental: {
-    payloadExtraction: false
-  },
-
   /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
