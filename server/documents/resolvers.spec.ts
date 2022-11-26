@@ -15,8 +15,8 @@ beforeEach(() => {
   mockReset(userDocumentService)
 })
 
-describe('Query', () => {
-  describe('userDocument', () => {
+describe('query', () => {
+  describe('user document', () => {
     it('gets the correct document', async () => {
       userDocumentService.getDocumentById
         .calledWith('uniqueId')
@@ -33,8 +33,8 @@ describe('Query', () => {
   })
 })
 
-describe('Mutation', () => {
-  describe('addUserDocument', () => {
+describe('mutation', () => {
+  describe('add user document', () => {
     /* TODO: Handle other fields
     it('converts other unknown fields correctly', async () => {
       await mutation.addUserDocument(
@@ -123,10 +123,10 @@ describe('Mutation', () => {
   })
 })
 
-describe('DocumentResolver', () => {
+describe('document resolver', () => {
   const documentResolver = new DocumentResolver()
-  describe('resolveType', () => {
-    it('returns JournalArticle for articles', () => {
+  describe('resolve type', () => {
+    it('returns  journal article for articles', () => {
       const article = {
         type: 'JOURNAL_ARTICLE',
       } as UserDocument
