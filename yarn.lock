@@ -34,10 +34,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@antfu/utils@npm:^0.6.0":
-  version: 0.6.2
-  resolution: "@antfu/utils@npm:0.6.2"
-  checksum: 36aac3b66d17e6b6f81b982cd594354e19696b5cc72e97e1e0dc8a9c400d572d81acae5e3cabda9e16b01a14784e36c4d5bb848baaaf32af645ac730999fc098
+"@antfu/utils@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@antfu/utils@npm:0.7.0"
+  checksum: df99af43c84e87704d6469b9406eb1c1230bfe0eb74184cf1fb606634541bc0f78b0f6283ca39126e0e0497d28639a4e7590b70c4e990694e8e8fc6ee2aff452
   languageName: node
   linkType: hard
 
@@ -7772,6 +7772,15 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 7270ca82b242eafe5687a11fea6e088c960af712683756abf0791b68855ea9cace3057bd5e998ffcef50c944810c1e0ca1da526d02b32110e13c722aa959afdc
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.8.1":
+  version: 8.8.1
+  resolution: "acorn@npm:8.8.1"
+  bin:
+    acorn: bin/acorn
+  checksum: 4079b67283b94935157698831967642f24a075c52ce3feaaaafe095776dfbe15d86a1b33b1e53860fc0d062ed6c83f4284a5c87c85b9ad51853a01173da6097f
   languageName: node
   linkType: hard
 
@@ -16135,7 +16144,7 @@ __metadata:
     tsyringe: ^4.7.0
     typescript: ^4.9.3
     ufo: ^0.8.6
-    unplugin-vue-components: ^0.22.9
+    unplugin-vue-components: ^0.22.11
     vee-validate: ^4.7.3
     vitest: ^0.25.2
     vitest-github-actions-reporter: ^0.9.0
@@ -24747,11 +24756,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-components@npm:^0.22.9":
-  version: 0.22.9
-  resolution: "unplugin-vue-components@npm:0.22.9"
+"unplugin-vue-components@npm:^0.22.11":
+  version: 0.22.11
+  resolution: "unplugin-vue-components@npm:0.22.11"
   dependencies:
-    "@antfu/utils": ^0.6.0
+    "@antfu/utils": ^0.7.0
     "@rollup/pluginutils": ^5.0.2
     chokidar: ^3.5.3
     debug: ^4.3.4
@@ -24760,14 +24769,14 @@ __metadata:
     magic-string: ^0.26.7
     minimatch: ^5.1.0
     resolve: ^1.22.1
-    unplugin: ^0.10.1
+    unplugin: ^1.0.0
   peerDependencies:
     "@babel/parser": ^7.15.8
     vue: 2 || 3
   peerDependenciesMeta:
     "@babel/parser":
       optional: true
-  checksum: 278681a318d3ed633169e01e0586834bea726cb72f4436439b5e2eb38ee7e7bfc048106faa600cac66f1dbb6b5853b187b80ea4ea2d13a95d845990ccdff9d74
+  checksum: 2820b8df44640d4450c002697d9be89a9c131d0e761c1a212d074e75e276594109bd5991edc0049230b162a006614bc4170a666981c995e6771abf3aceb21c34
   languageName: node
   linkType: hard
 
@@ -24783,7 +24792,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin@npm:^0.10.1, unplugin@npm:^0.10.2":
+"unplugin@npm:^0.10.2":
   version: 0.10.2
   resolution: "unplugin@npm:0.10.2"
   dependencies:
@@ -24804,6 +24813,18 @@ __metadata:
     webpack-sources: ^3.2.3
     webpack-virtual-modules: ^0.4.5
   checksum: 6f544f7c53511e0b9064112353562159efd6fc0f38a78ff7e9ac5d3c09b298b59ea565165bbfab0eec08b016d50c5e453673581712bfcf875924d06e04bd77cd
+  languageName: node
+  linkType: hard
+
+"unplugin@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "unplugin@npm:1.0.0"
+  dependencies:
+    acorn: ^8.8.1
+    chokidar: ^3.5.3
+    webpack-sources: ^3.2.3
+    webpack-virtual-modules: ^0.4.6
+  checksum: eaaaf738d8707f2965702eb4a196731516e115ea5bee8fcc75f7a4538266eb0e5e727379db3cb55e4b0fd7d4bdbc4fc957b79bc3b757f2607bf1e84f1fd3bacd
   languageName: node
   linkType: hard
 
@@ -25822,6 +25843,13 @@ __metadata:
   version: 0.4.5
   resolution: "webpack-virtual-modules@npm:0.4.5"
   checksum: 0ae9a8b50d0cb1e43da5ff8acaa7b99c34a42f0d6cc83a82908fb6e131e574a949d19948df4fdd3de0dbfdbadb2b93ceb4a740c55727a4236eb3b2bbc8f785a6
+  languageName: node
+  linkType: hard
+
+"webpack-virtual-modules@npm:^0.4.6":
+  version: 0.4.6
+  resolution: "webpack-virtual-modules@npm:0.4.6"
+  checksum: cb056ba8c50b35436ae43149554b051b80065b0cf79f2d528ca692ddf344a422ac71c415adb9da83dc3acc6e7e58f518388cc1cd11cb4fa29dc04f2c4494afe3
   languageName: node
   linkType: hard
 
