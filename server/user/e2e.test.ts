@@ -1,9 +1,9 @@
 import { gql } from 'graphql-tag'
 import { api, login } from '~/test/api-e2e/supertest'
 
-describe('Mutation', () => {
-  describe('Login', () => {
-    it('Sets the cookie', async () => {
+describe('mutation', () => {
+  describe('login', () => {
+    it('sets the cookie', async () => {
       const { data, response, errors } = await api()
         .mutate(
           gql`
@@ -31,9 +31,9 @@ describe('Mutation', () => {
   })
 })
 
-describe('Query', () => {
-  describe('Me', () => {
-    it('Returns the user when logged in', async () => {
+describe('query', () => {
+  describe('me', () => {
+    it('returns the user when logged in', async () => {
       const request = api()
       await login(request)
       const { data, errors } = await request.query(
@@ -51,7 +51,7 @@ describe('Query', () => {
       })
     })
   })
-  it('Returns nothing when not logged in', async () => {
+  it('returns nothing when not logged in', async () => {
     const { data, errors } = await api().query(
       gql`
         query MeE2ENotLoggedIn {

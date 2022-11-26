@@ -10,7 +10,7 @@ describe('hash', () => {
   })
 })
 
-describe('verifyHash', () => {
+describe('verify hash', () => {
   it('returns true for same password', async () => {
     const password = 'password'
     const hashedPassword = await hash(password)
