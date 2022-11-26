@@ -6730,7 +6730,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.40.1, @typescript-eslint/utils@npm:^5.17.0":
+"@typescript-eslint/utils@npm:5.40.1":
   version: 5.40.1
   resolution: "@typescript-eslint/utils@npm:5.40.1"
   dependencies:
@@ -6763,6 +6763,24 @@ __metadata:
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
   checksum: 4c6b383b51506b57230f2624f883ae21e5d8411d138587c04fe3145f915bf8c289cc2a9f7b0b3faba98345ba230504e5014922bcc578aa0badd594d9eaa8f9ef
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/utils@npm:^5.42.1":
+  version: 5.44.0
+  resolution: "@typescript-eslint/utils@npm:5.44.0"
+  dependencies:
+    "@types/json-schema": ^7.0.9
+    "@types/semver": ^7.3.12
+    "@typescript-eslint/scope-manager": 5.44.0
+    "@typescript-eslint/types": 5.44.0
+    "@typescript-eslint/typescript-estree": 5.44.0
+    eslint-scope: ^5.1.1
+    eslint-utils: ^3.0.0
+    semver: ^7.3.7
+  peerDependencies:
+    eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
+  checksum: bc5bb28e41898464d35b8eb47cc452103852541e3b6be56252c15a5a81c45e10aad3db4c749eb92d752b0c358df8074e23ec6f9e65f8089baadeda7f395c7e31
   languageName: node
   linkType: hard
 
@@ -12441,14 +12459,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vitest@npm:^0.0.11":
-  version: 0.0.11
-  resolution: "eslint-plugin-vitest@npm:0.0.11"
+"eslint-plugin-vitest@npm:^0.0.20":
+  version: 0.0.20
+  resolution: "eslint-plugin-vitest@npm:0.0.20"
   dependencies:
-    "@typescript-eslint/utils": ^5.17.0
+    "@typescript-eslint/utils": ^5.42.1
   peerDependencies:
     eslint: ">=8.0.0"
-  checksum: e5fba918fae8a4331253f15912704760d95ab0f08d461cf61e272efee1b0cbb184f4032a71c6173e6f1810e0bf17a1ab7127f7229e06762a42077f5a68728589
+  checksum: 751259fc54aec2c042a0c723a176600888712cc090461d641155a59d9164c2bf83cd86e2ba3b1564861a3efa04ca84f054b246ea3a178fe9557b8118d13ee960
   languageName: node
   linkType: hard
 
@@ -16173,7 +16191,7 @@ __metadata:
     eslint-import-resolver-typescript: ^3.5.2
     eslint-plugin-nuxt: ^4.0.0
     eslint-plugin-unused-imports: ^2.0.0
-    eslint-plugin-vitest: ^0.0.11
+    eslint-plugin-vitest: ^0.0.20
     eslint-plugin-vue: ^9.7.0
     express-session: ^1.17.3
     graphql: ^16.6.0
