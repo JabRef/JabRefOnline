@@ -13,7 +13,7 @@ beforeEach(() => {
   mockReset(authService)
 })
 
-describe('Mutation', () => {
+describe('mutation', () => {
   describe('signup', () => {
     it('fails if password is too short', async () => {
       const result = await mutation.signup(
