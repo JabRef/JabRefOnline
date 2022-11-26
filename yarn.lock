@@ -7093,6 +7093,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/reactivity@npm:3.2.45":
+  version: 3.2.45
+  resolution: "@vue/reactivity@npm:3.2.45"
+  dependencies:
+    "@vue/shared": 3.2.45
+  checksum: 4ba609744a6b4d6235e81afc3f455ae9349c04f54be11c15770139f58ff687b105b06ca78649218fab907fb76048c3dcf34144c677718192ce8b9927eb335f03
+  languageName: node
+  linkType: hard
+
 "@vue/runtime-core@npm:3.2.41":
   version: 3.2.41
   resolution: "@vue/runtime-core@npm:3.2.41"
@@ -7103,7 +7112,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/runtime-dom@npm:3.2.41, @vue/runtime-dom@npm:^3.2.41":
+"@vue/runtime-core@npm:3.2.45":
+  version: 3.2.45
+  resolution: "@vue/runtime-core@npm:3.2.45"
+  dependencies:
+    "@vue/reactivity": 3.2.45
+    "@vue/shared": 3.2.45
+  checksum: 0ac376a7602663d51a37b460c1184e2e035649090e53e972c18d24b30f3c47e5d61b921baf2492203f041d9edd864b3e9024a3ecef243b840637b62e9c0169a1
+  languageName: node
+  linkType: hard
+
+"@vue/runtime-dom@npm:3.2.41":
   version: 3.2.41
   resolution: "@vue/runtime-dom@npm:3.2.41"
   dependencies:
@@ -7111,6 +7130,17 @@ __metadata:
     "@vue/shared": 3.2.41
     csstype: ^2.6.8
   checksum: 3bb4c586f592924d34b21548589436ee97e7b89df61f0b55f28bd04c6d1cb855f79cdd3d29ca8897773e9b4e6cad2f39f5c94f93cb8908220eb70c3398bb72a5
+  languageName: node
+  linkType: hard
+
+"@vue/runtime-dom@npm:^3.2.45":
+  version: 3.2.45
+  resolution: "@vue/runtime-dom@npm:3.2.45"
+  dependencies:
+    "@vue/runtime-core": 3.2.45
+    "@vue/shared": 3.2.45
+    csstype: ^2.6.8
+  checksum: c66c71a2fc3921b57a930999b1fb0ea64f1a9d1bc7019984b06f2dbdd93f51b5a328cc60ec5904d1754b9dc1c85653b536db9017ef86616fa4a35f53836a2f9d
   languageName: node
   linkType: hard
 
@@ -16058,7 +16088,7 @@ __metadata:
     "@vue/apollo-composable": 4.0.0-beta.1
     "@vue/apollo-util": ^4.0.0-alpha.18
     "@vue/compiler-sfc": ^3.2.45
-    "@vue/runtime-dom": ^3.2.41
+    "@vue/runtime-dom": ^3.2.45
     "@vue/test-utils": ^2.2.4
     "@vueuse/core": ^9.5.0
     "@yaireo/tagify": ^4.16.4
