@@ -69,19 +69,14 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     // Add storybook support
     './modules/storybook',
-    // Add graphql support
-    './modules/graphql',
+    // Add server-side graphql support
+    'nuxt-graphql-server',
     // Add vue runtime compiler as temporary workaround for https://github.com/nuxt/framework/issues/4661
     'nuxt3-runtime-compiler-module',
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
   ],
-
-  /*
-   ** Restarts the server when dependencies change.
-   */
-  watch: ['server/**/*.graphql'],
 
   /*
    ** Client and server-side configuration
@@ -112,6 +107,31 @@ export default defineNuxtConfig({
   tailwindcss: {
     // Expose config so that we can use it in the vscode extension
     exposeConfig: true,
+  },
+
+  /**
+   * GraphQL server config
+   * See https://github.com/tobiasdiez/nuxt-graphql-server
+   */
+  graphqlServer: {
+    codegen: {
+      mapperTypeSuffix: 'Model',
+      contextType: './context#Context',
+      mappers: {
+        User: '@prisma/client/index.d#User',
+        Document: './documents/user.document.service#UserDocument',
+        JournalArticle: './documents/user.document.service#UserDocument',
+        ProceedingsArticle: './documents/user.document.service#UserDocument',
+        Thesis: './documents/user.document.service#UserDocument',
+        Other: './documents/user.document.service#UserDocument',
+        Group: './groups/resolvers#GroupMaybeResolved',
+      },
+      scalars: {
+        Date: 'string',
+        DateTime: 'Date',
+        EmailAddress: 'string',
+      },
+    },
   },
 
   content: {

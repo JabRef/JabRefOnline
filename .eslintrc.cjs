@@ -35,8 +35,6 @@ module.exports = {
     'import/named': 'warn',
     // Import order is handled by prettier (which is incompatible with this rule: https://github.com/simonhaenisch/prettier-plugin-organize-imports/issues/65)
     'import/order': 'off',
-    // Disable vue2-specific rules (until https://github.com/nuxt/eslint-config/issues/216 is fixed)
-    'vue/no-v-model-argument': 'off',
   },
   overrides: [
     {
@@ -124,12 +122,12 @@ module.exports = {
       rules: {
         // Disable typescript rule for unbound methods (false positives in spies/mocks)
         // TODO: Should enable special rule for vitest once this is implemented
+        // https://github.com/veritem/eslint-plugin-vitest/issues/2
         '@typescript-eslint/unbound-method': 'off',
         // Test title must be unique
         'vitest/no-identical-title': 'error',
         // Test title must be lowercase
-        // TODO: Activate once https://github.com/veritem/eslint-plugin-vitest/issues/8 is fixed
-        // 'vitest/lower-case-title': 'error',
+        'vitest/lower-case-title': 'error',
       },
     },
   ],

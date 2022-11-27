@@ -83,7 +83,7 @@ beforeEach(() => {
   mockReset(prisma)
 })
 
-describe('getDocumentById', () => {
+describe('get document by id', () => {
   it('get the correct document', async () => {
     prisma.userDocument.findUnique.mockResolvedValue(testDocument)
 

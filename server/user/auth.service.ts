@@ -1,7 +1,7 @@
 import type { PrismaClient, User } from '@prisma/client'
 
+import { ResolversTypes } from '#graphql/resolver'
 import { v4 as generateToken } from 'uuid'
-import { ResolversTypes } from '../graphql'
 import { hash, verifyHash } from '../utils/crypto'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { sendEmail } from '../utils/sendEmail'
