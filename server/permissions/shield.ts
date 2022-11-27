@@ -1,113 +1,12 @@
 import { GraphQLResolveInfo } from 'graphql'
 import { IRuleResult, ShieldRule } from 'graphql-shield/typings/types'
 
-import { deny } from 'graphql-shield'
-import { Context } from '../context'
-
-class TestShield {
-  @shield<boolean, Record<string, never>, Context, { id: string }>({
-    before: deny,
-    after: () => true,
-  })
-  resolverComplete(
-    _root: Record<string, never>,
-    _args: { id: string },
-    _context: Context,
-    _info: GraphQLResolveInfo
-  ): boolean {
-    return true
-  }
-
-  @shield({
-    before: deny,
-    after: (result, parent, args, context, info) => true,
-  })
-  resolverComplete3(
-    _root: Record<string, never>,
-    _args: { id: string },
-    _context: Context,
-    _info: GraphQLResolveInfo
-  ): boolean {
-    return true
-  }
-
-  @shield({
-    before: deny,
-    after: (
-      _result: boolean,
-      _root: Record<string, never>,
-      _args: { id: string },
-      _context: Context,
-      _info: GraphQLResolveInfo
-    ) => true,
-  })
-  resolverComplete2(
-    _root: Record<string, never>,
-    _args: { id: string; other: string },
-    _context: Context,
-    _info: GraphQLResolveInfo
-  ): boolean {
-    return true
-  }
-
-  @shield({
-    before: deny,
-    after: (
-      _result: { id: string },
-      _root: Record<string, never>,
-      _args: { id: string },
-      _context: Context,
-      _info: GraphQLResolveInfo
-    ) => true,
-  })
-  resolverCompleteReturn(
-    _root: Record<string, never>,
-    _args: { id: string; other: string },
-    _context: Context,
-    _info: GraphQLResolveInfo
-  ): Promise<{ id: string; context: string }> {
-    return true
-  }
-}
-
-type test = (
-  _root: Record<string, never>,
-  _args: { id: string },
-  _context: Context,
-  _info: GraphQLResolveInfo
-) => boolean
-
-const obj = {} as test
-
-function testf<TResult, TParent, TContext, TArgs>(
-  arg: ResolverFn<unknown, unknown, unknown, unknown>
-) {
-  return null
-}
-
-testf(obj)
-
-type Promisable<T> = T extends Promise<infer U> ? T : Promise<T> | T
-
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
   info: GraphQLResolveInfo
 ) => TResult
-
-type ResultFromResolver<R> = R extends ResolverFn<any, any, any, any>
-  ? ReturnType<R>
-  : never
-type ParentFromResolver<R> = R extends ResolverFn<any, infer T, any, any>
-  ? T
-  : never
-type ContextFromResolver<R> = R extends ResolverFn<any, any, infer T, any>
-  ? T
-  : never
-type ArgsFromResolver<R> = R extends ResolverFn<any, any, any, infer T>
-  ? T
-  : never
 
 // GraphQL Shield doesn't support output rules yet, https://github.com/dimatill/graphql-shield/issues/1210
 type AfterRule<TResult, TParent, TContext, TArgs> = (
@@ -122,8 +21,9 @@ export function shield<TResult, TParent, TContext, TArgs>({
   before,
   after,
 }: {
-  before: ShieldRule
-  after: AfterRule<TResult, TParent, TContext, TArgs>
+  before?: ShieldRule
+  // TODO: Bind the return type of the resolver to the type of the rule
+  after?: AfterRule<any, TParent, TContext, TArgs>
 }): <
   Result extends TResult,
   Parent extends TParent,
@@ -144,10 +44,15 @@ export function shield<TResult, TParent, TContext, TArgs>({
     descriptor.value = async function (parent, args, context, info) {
       // @ts-expect-error: Graphql-shield does not provide proper types for rules.
       // https://github.com/dimatill/graphql-shield/issues/1479
-      const result = await before.resolve(parent, args, context, info, {})
+      const result = before
+        ? await before.resolve(parent, args, context, info, {})
+        : true
       if (result === true) {
-        const value = await original.apply(this, [parent, args, context, info])
-        const resultAfter = await after(value, parent, args, context, info)
+        let value = original.apply(this, [parent, args, context, info])
+        value = value instanceof Promise ? await value : value
+        const resultAfter = after
+          ? await after(value, parent, args, context, info)
+          : true
         if (resultAfter === true) {
           return value
         } else {
