@@ -17,6 +17,23 @@ type AfterRule<TResult, TParent, TContext, TArgs> = (
   info: GraphQLResolveInfo
 ) => Promise<IRuleResult> | IRuleResult
 
+function then<T, V>(
+  value: PromiseOrValue<T>,
+  onValue: (t: T, sync?: true) => PromiseOrValue<V>,
+  onError: (error: any) => PromiseOrValue<V> = (e) => {
+    throw e
+  }
+): PromiseOrValue<V> {
+  if (value instanceof Promise) {
+    return value.then(onValue).catch(onError)
+  }
+  try {
+    return onValue(value, true)
+  } catch (e) {
+    return onError(e)
+  }
+}
+
 export function shield<TResult, TParent, TContext, TArgs>({
   before,
   after,
@@ -41,26 +58,35 @@ export function shield<TResult, TParent, TContext, TArgs>({
     }
 
     // @ts-expect-error: We don't really change the type of the function, we just wrap it.
-    descriptor.value = async function (parent, args, context, info) {
-      // @ts-expect-error: Graphql-shield does not provide proper types for rules.
-      // https://github.com/dimatill/graphql-shield/issues/1479
-      const result = before
-        ? await before.resolve(parent, args, context, info, {})
-        : true
-      if (result === true) {
-        let value = original.apply(this, [parent, args, context, info])
-        value = value instanceof Promise ? await value : value
-        const resultAfter = after
-          ? await after(value, parent, args, context, info)
-          : true
-        if (resultAfter === true) {
-          return value
-        } else {
-          return resultAfter
+    descriptor.value = function (parent, args, context, info) {
+      return then(
+        before
+          ? // @ts-expect-error: Graphql-shield does not provide proper types for rules.
+            // https://github.com/dimatill/graphql-shield/issues/1479
+            before.resolve(parent, args, context, info, {})
+          : true,
+        (result) => {
+          if (result === true) {
+            return then(
+              original.apply(this, [parent, args, context, info]),
+              (value) => {
+                return then(
+                  after ? after(value, parent, args, context, info) : true,
+                  (resultAfter) => {
+                    if (resultAfter === true) {
+                      return value
+                    } else {
+                      return resultAfter
+                    }
+                  }
+                )
+              }
+            )
+          } else {
+            return result
+          }
         }
-      } else {
-        return result
-      }
+      )
     }
   }
 }
