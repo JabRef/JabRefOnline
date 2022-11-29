@@ -83,8 +83,8 @@ const userDocumentById = gql`
   }
 `
 
-describe('Query', () => {
-  describe('userDocument', () => {
+describe('query', () => {
+  describe('user document', () => {
     it('retrieves fields for articles in journals', async () => {
       const authenticatedClient = await createAuthenticatedClient()
       const result = await authenticatedClient.executeOperation({
@@ -184,7 +184,7 @@ describe('Query', () => {
   })
 })
 
-describe('Roundtrip', () => {
+describe('roundtrip', () => {
   describe('journal articles', () => {
     const testArticle = {
       title: 'Test Title',
@@ -206,7 +206,7 @@ describe('Roundtrip', () => {
       pageEnd: '2811',
       published: '2011',
     }
-    it('addUserDocument + query', async () => {
+    it('add user document + query', async () => {
       const addUserDocument = gql`
         mutation AddUserDocument($input: AddUserDocumentInput!) {
           addUserDocument(input: $input) {
@@ -339,7 +339,7 @@ describe('Roundtrip', () => {
       `
       )
     })
-    it('updateUserDocument + query', async () => {
+    it('update user document + query', async () => {
       const updateUserDocument = gql`
         mutation UpdateUserDocument($input: UpdateUserDocumentInput!) {
           updateUserDocument(input: $input) {

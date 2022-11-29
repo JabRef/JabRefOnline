@@ -1,8 +1,8 @@
 import { gql as gqlNotVerified } from 'graphql-tag'
 import { api, root } from '~/test/api-e2e/supertest'
 
-describe('Invalid query', () => {
-  it('Returns an error', async () => {
+describe('invalid query', () => {
+  it('returns an error', async () => {
     const { errors, response } = await api()
       .query(
         gqlNotVerified`
@@ -28,8 +28,8 @@ describe('Invalid query', () => {
   })
 })
 
-describe('Request without query', () => {
-  it('Returns an error', async () => {
+describe('request without query', () => {
+  it('returns an error', async () => {
     const response = await root()
       .get('/api')
       .set('Apollo-Require-Preflight', 'True')
@@ -41,7 +41,7 @@ describe('Request without query', () => {
   })
 })
 
-describe('Preflight', () => {
+describe('preflight', () => {
   it('works', async () => {
     const response = await root()
       .options('/api')

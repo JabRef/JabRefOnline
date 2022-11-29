@@ -10,7 +10,7 @@ afterAll(async () => {
   await prisma.disconnect()
 })
 
-describe('Query', () => {
+describe('query', () => {
   describe('me', () => {
     const query = gql`
       query MeTest {
@@ -214,7 +214,7 @@ describe('Query', () => {
   })
 })
 
-describe('Mutation', () => {
+describe('mutation', () => {
   describe('signup', () => {
     const mutation = gql`
       mutation SignupTest($input: SignupInput!) {
