@@ -127,6 +127,7 @@ jobs:
           # Don't wait until Chroma verified the build (for this we have the Github check)
           exitOnceUploaded: true
           storybookBuildDir: storybook-static
+          debug: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.1

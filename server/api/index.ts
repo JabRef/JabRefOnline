@@ -108,8 +108,8 @@ export default defineLazyEventHandler(async () => {
     credentials: true,
   })
 
-  return eventHandler((event) => {
-    corsHandler(event)
+  return eventHandler(async (event) => {
+    await corsHandler(event)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return serverHandler(event)
   })
