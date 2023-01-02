@@ -15814,7 +15814,7 @@ __metadata:
     nuxt-runtime-compiler: ^1.1.0
     passport: ^0.6.0
     patch-package: ^6.5.0
-    pinia: ^2.0.23
+    pinia: ^2.0.28
     postinstall-postinstall: ^2.1.0
     prettier: ^2.8.0
     prettier-plugin-organize-imports: ^3.2.1
@@ -19594,7 +19594,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinia@npm:>=2.0.25, pinia@npm:^2.0.23":
+"pinia@npm:>=2.0.25":
   version: 2.0.26
   resolution: "pinia@npm:2.0.26"
   dependencies:
@@ -19610,6 +19610,25 @@ __metadata:
     typescript:
       optional: true
   checksum: 0d38cc0efc6572436c439491491df0e989182bad342fc3828d8865a42db6c6580c8f86663fcc47955bfeca5baf6e7f95e61b9b3f795ba161c19ef86fdc9b2841
+  languageName: node
+  linkType: hard
+
+"pinia@npm:^2.0.28":
+  version: 2.0.28
+  resolution: "pinia@npm:2.0.28"
+  dependencies:
+    "@vue/devtools-api": ^6.4.5
+    vue-demi: "*"
+  peerDependencies:
+    "@vue/composition-api": ^1.4.0
+    typescript: ">=4.4.4"
+    vue: ^2.6.14 || ^3.2.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+    typescript:
+      optional: true
+  checksum: d515cd6220262560f1864855ab117bd16e4bf4ab3d6d279459281aa16960b5e84b6ddd4de3f1d863040a81539378451c1a14fddd32e7571b51e5d1c95911154d
   languageName: node
   linkType: hard
 
