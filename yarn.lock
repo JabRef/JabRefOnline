@@ -34,10 +34,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@antfu/utils@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@antfu/utils@npm:0.7.0"
-  checksum: df99af43c84e87704d6469b9406eb1c1230bfe0eb74184cf1fb606634541bc0f78b0f6283ca39126e0e0497d28639a4e7590b70c4e990694e8e8fc6ee2aff452
+"@antfu/utils@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "@antfu/utils@npm:0.7.2"
+  checksum: ada98dde0a06bc10129ad7bc9d0007c1cf7e36eeb9e8ca93ea5173bc1e1d351afee8511c9e8e182b3105b787ce0ce813afc4ab283b511374f1e56a085f60a2c6
   languageName: node
   linkType: hard
 
@@ -3889,7 +3889,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/sourcemap-codec@npm:1.4.14, @jridgewell/sourcemap-codec@npm:^1.4.10":
+"@jridgewell/sourcemap-codec@npm:1.4.14, @jridgewell/sourcemap-codec@npm:^1.4.10, @jridgewell/sourcemap-codec@npm:^1.4.13":
   version: 1.4.14
   resolution: "@jridgewell/sourcemap-codec@npm:1.4.14"
   checksum: 61100637b6d173d3ba786a5dff019e1a74b1f394f323c1fee337ff390239f053b87266c7a948777f4b1ee68c01a8ad0ab61e5ff4abb5a012a0b091bec391ab97
@@ -15829,7 +15829,7 @@ __metadata:
     tsyringe: ^4.7.0
     typescript: ^4.9.3
     ufo: ^1.0.1
-    unplugin-vue-components: ^0.22.11
+    unplugin-vue-components: ^0.22.12
     vee-validate: ^4.7.3
     vitest: ^0.25.3
     vitest-github-actions-reporter: ^0.9.0
@@ -16882,6 +16882,15 @@ __metadata:
   dependencies:
     sourcemap-codec: ^1.4.8
   checksum: 89b0d60cbb32bbf3d1e23c46ea93db082d18a8230b972027aecb10a40bba51be519ecce0674f995571e3affe917b76b09f59d8dbc9a1b2c9c4102a2b6e8a2b01
+  languageName: node
+  linkType: hard
+
+"magic-string@npm:^0.27.0":
+  version: 0.27.0
+  resolution: "magic-string@npm:0.27.0"
+  dependencies:
+    "@jridgewell/sourcemap-codec": ^1.4.13
+  checksum: 273faaa50baadb7a2df6e442eac34ad611304fc08fe16e24fe2e472fd944bfcb73ffb50d2dc972dc04e92784222002af46868cb9698b1be181c81830fd95a13e
   languageName: node
   linkType: hard
 
@@ -24365,27 +24374,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-components@npm:^0.22.11":
-  version: 0.22.11
-  resolution: "unplugin-vue-components@npm:0.22.11"
+"unplugin-vue-components@npm:^0.22.12":
+  version: 0.22.12
+  resolution: "unplugin-vue-components@npm:0.22.12"
   dependencies:
-    "@antfu/utils": ^0.7.0
+    "@antfu/utils": ^0.7.2
     "@rollup/pluginutils": ^5.0.2
     chokidar: ^3.5.3
     debug: ^4.3.4
     fast-glob: ^3.2.12
     local-pkg: ^0.4.2
-    magic-string: ^0.26.7
-    minimatch: ^5.1.0
+    magic-string: ^0.27.0
+    minimatch: ^5.1.1
     resolve: ^1.22.1
-    unplugin: ^1.0.0
+    unplugin: ^1.0.1
   peerDependencies:
     "@babel/parser": ^7.15.8
     vue: 2 || 3
   peerDependenciesMeta:
     "@babel/parser":
       optional: true
-  checksum: 2820b8df44640d4450c002697d9be89a9c131d0e761c1a212d074e75e276594109bd5991edc0049230b162a006614bc4170a666981c995e6771abf3aceb21c34
+  checksum: 5602ea966e085f3f4a5e18104747a318a79c99a377f060f42159c261b6e16c0328f1c660e0182e907b34ff1682f1244f1ae2e676edbc2efd8711ab76e5d64a79
   languageName: node
   linkType: hard
 
@@ -24398,6 +24407,18 @@ __metadata:
     webpack-sources: ^3.2.3
     webpack-virtual-modules: ^0.4.6
   checksum: eaaaf738d8707f2965702eb4a196731516e115ea5bee8fcc75f7a4538266eb0e5e727379db3cb55e4b0fd7d4bdbc4fc957b79bc3b757f2607bf1e84f1fd3bacd
+  languageName: node
+  linkType: hard
+
+"unplugin@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "unplugin@npm:1.0.1"
+  dependencies:
+    acorn: ^8.8.1
+    chokidar: ^3.5.3
+    webpack-sources: ^3.2.3
+    webpack-virtual-modules: ^0.5.0
+  checksum: b6bf00dcc79e71cd55d2b4dd39ec7c8ec40b071dc10c14e29095df5dccb13ad0ca1cf14e5da38bb16b8704f8eface750b7a3be9ee7ca2574ce31096ee966b356
   languageName: node
   linkType: hard
 
@@ -25405,6 +25426,13 @@ __metadata:
   version: 0.4.6
   resolution: "webpack-virtual-modules@npm:0.4.6"
   checksum: cb056ba8c50b35436ae43149554b051b80065b0cf79f2d528ca692ddf344a422ac71c415adb9da83dc3acc6e7e58f518388cc1cd11cb4fa29dc04f2c4494afe3
+  languageName: node
+  linkType: hard
+
+"webpack-virtual-modules@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "webpack-virtual-modules@npm:0.5.0"
+  checksum: 22b59257b55c89d11ae295b588b683ee9fdf3aeb591bc7b6f88ac1d69cb63f4fcb507666ea986866dfae161a1fa534ad6fb4e2ea91bbcd0a6d454368d7d4c64b
   languageName: node
   linkType: hard
 
