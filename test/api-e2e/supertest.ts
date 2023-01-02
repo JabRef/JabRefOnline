@@ -8,7 +8,7 @@ import supertestGraphql, {
 const url = process.env.TEST_URL || 'http://localhost:3000'
 
 export function api(): SuperTestGraphQL<unknown, Variables> {
-  return supertestGraphql(url).path('/api')
+  return supertestGraphql.default(url).path('/api')
 }
 export function root() {
   return supertestRequest(url)
