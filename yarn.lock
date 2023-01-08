@@ -109,31 +109,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/server-gateway-interface@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@apollo/server-gateway-interface@npm:1.0.6"
+"@apollo/server-gateway-interface@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@apollo/server-gateway-interface@npm:1.0.7"
   dependencies:
     "@apollo/usage-reporting-protobuf": ^4.0.0
     "@apollo/utils.fetcher": ^2.0.0
-    "@apollo/utils.keyvaluecache": ^2.0.0
+    "@apollo/utils.keyvaluecache": ^2.0.1
     "@apollo/utils.logger": ^2.0.0
   peerDependencies:
     graphql: 14.x || 15.x || 16.x
-  checksum: d2a3076247de4a0a5554af172732bce107c2a5e4bd9636c6083b8e54a670b19e9ad5d15a5e4af5f6b2e161a403d40dd31cda60458b93eef22ee11d54836c91eb
+  checksum: 081d398a7c3d1138679f05706ceb9ef1a444597de01912ce3b5e73c532d52da8ae94c3fd9fb00bd44946dce8b82d903faa0887896628994a80433995a3a2526d
   languageName: node
   linkType: hard
 
-"@apollo/server@npm:^4.1.1":
-  version: 4.2.0
-  resolution: "@apollo/server@npm:4.2.0"
+"@apollo/server@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "@apollo/server@npm:4.3.0"
   dependencies:
     "@apollo/cache-control-types": ^1.0.2
-    "@apollo/server-gateway-interface": ^1.0.6
+    "@apollo/server-gateway-interface": ^1.0.7
     "@apollo/usage-reporting-protobuf": ^4.0.0
     "@apollo/utils.createhash": ^2.0.0
     "@apollo/utils.fetcher": ^2.0.0
     "@apollo/utils.isnodelike": ^2.0.0
-    "@apollo/utils.keyvaluecache": ^2.0.0
+    "@apollo/utils.keyvaluecache": ^2.1.0
     "@apollo/utils.logger": ^2.0.0
     "@apollo/utils.usagereporting": ^2.0.0
     "@apollo/utils.withrequired": ^2.0.0
@@ -155,7 +155,7 @@ __metadata:
     whatwg-mimetype: ^3.0.0
   peerDependencies:
     graphql: ^16.6.0
-  checksum: 07a897301b248662d51b61f8d0893fd39c74f473aeac194ddeddb61e0b8eee738b325f03f4039aac20349984795a28df1c57490139f294f66777ce74d77311b5
+  checksum: e14717adcc755a9eea7b340663eadb764ba57f32b6f04b29efd37db8d8c057910f1d656aacee4fe01bb0805bb36a93ded37dcc3ca0fedaefe37b7d697c265493
   languageName: node
   linkType: hard
 
@@ -201,13 +201,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/utils.keyvaluecache@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "@apollo/utils.keyvaluecache@npm:2.0.1"
+"@apollo/utils.keyvaluecache@npm:^2.0.1, @apollo/utils.keyvaluecache@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@apollo/utils.keyvaluecache@npm:2.1.0"
   dependencies:
     "@apollo/utils.logger": ^2.0.0
     lru-cache: ^7.14.1
-  checksum: e093ba3843e898d4f9fa7fdaba33815273ae2723df2203b9ead4dbd45b1f51fd2fb52e175b526efe2c3fdedc94f4c5938012540d64acaeb7aa4dbf7f699abcba
+  checksum: 1e1c9cdea98384c01864250bd8e39cffaa822adbd60f9387ecf5c6565f69c2fd23b3ebdc499990b39535d4df0e3991fe73ec2d59a2798631ede04d8834d8c384
   languageName: node
   linkType: hard
 
@@ -15802,7 +15802,7 @@ __metadata:
   resolution: "jabref-online@workspace:."
   dependencies:
     "@apollo/client": ^3.7.3
-    "@apollo/server": ^4.1.1
+    "@apollo/server": ^4.3.0
     "@as-integrations/h3": ^1.1.4
     "@azure/static-web-apps-cli": ^1.0.3
     "@fortawesome/fontawesome-svg-core": ^6.2.1
