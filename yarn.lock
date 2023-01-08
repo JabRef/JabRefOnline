@@ -2714,9 +2714,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-eslint/eslint-plugin@npm:^3.13.1":
-  version: 3.13.1
-  resolution: "@graphql-eslint/eslint-plugin@npm:3.13.1"
+"@graphql-eslint/eslint-plugin@npm:^3.14.3":
+  version: 3.14.3
+  resolution: "@graphql-eslint/eslint-plugin@npm:3.14.3"
   dependencies:
     "@babel/code-frame": ^7.18.6
     "@graphql-tools/code-file-loader": ^7.3.6
@@ -2725,12 +2725,13 @@ __metadata:
     chalk: ^4.1.2
     debug: ^4.3.4
     fast-glob: ^3.2.12
-    graphql-config: ^4.3.6
+    graphql-config: ^4.4.0
     graphql-depth-limit: ^1.1.0
     lodash.lowercase: ^4.3.0
+    tslib: ^2.4.1
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 851e84dc158b4dcac31a84c4b9cbc0069d1f8141d88e6ca190688c1ba6e3e7df498dfedba2eea1db5fe8814284c29ec64db461cc1978d43e0aaf812ff6689099
+  checksum: e9e55fa673eeaaf80af06702b467462b3c1b23a1df12440a1a550fe326067f364fb4b01561f1ec4e960738d6376194eb816ab38312965e03dd76602355fa8911
   languageName: node
   linkType: hard
 
@@ -10317,6 +10318,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cosmiconfig@npm:8.0.0":
+  version: 8.0.0
+  resolution: "cosmiconfig@npm:8.0.0"
+  dependencies:
+    import-fresh: ^3.2.1
+    js-yaml: ^4.1.0
+    parse-json: ^5.0.0
+    path-type: ^4.0.0
+  checksum: ff4cdf89ac1ae52e7520816622c21a9e04380d04b82d653f5139ec581aa4f7f29e096d46770bc76c4a63c225367e88a1dfa233ea791669a35101f5f9b972c7d1
+  languageName: node
+  linkType: hard
+
 "cosmiconfig@npm:^6.0.0":
   version: 6.0.0
   resolution: "cosmiconfig@npm:6.0.0"
@@ -13916,7 +13929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-config@npm:4.3.6, graphql-config@npm:^4.3.6":
+"graphql-config@npm:4.3.6":
   version: 4.3.6
   resolution: "graphql-config@npm:4.3.6"
   dependencies:
@@ -13936,6 +13949,28 @@ __metadata:
   peerDependencies:
     graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 528f69c2c3620b51fe3d609e65d13861bdc11ccfdfcb75d476f758dc6e3047c78117a260f69b5e7efa5f0b66da1980c352a8b4053532ffb3018377f784331e21
+  languageName: node
+  linkType: hard
+
+"graphql-config@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "graphql-config@npm:4.4.0"
+  dependencies:
+    "@graphql-tools/graphql-file-loader": ^7.3.7
+    "@graphql-tools/json-file-loader": ^7.3.7
+    "@graphql-tools/load": ^7.5.5
+    "@graphql-tools/merge": ^8.2.6
+    "@graphql-tools/url-loader": ^7.9.7
+    "@graphql-tools/utils": ^9.0.0
+    cosmiconfig: 8.0.0
+    minimatch: 4.2.1
+    string-env-interpolation: 1.0.1
+    tslib: ^2.4.0
+  peerDependencies:
+    cosmiconfig-toml-loader: ^1.0.0
+    cosmiconfig-typescript-loader: ^4.0.0
+    graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 2f8cbb4710a7c0a411074eb843317bc66e5602fdab7eefa9765812d986d4b04fc2d285d3c0811ed0efaef12ea58351676561d704e79880f5848ed970badab500
   languageName: node
   linkType: hard
 
@@ -15836,7 +15871,7 @@ __metadata:
     "@graphql-codegen/gql-tag-operations-preset": ^1.7.0
     "@graphql-codegen/typed-document-node": ^2.3.7
     "@graphql-codegen/typescript-operations": ^2.5.12
-    "@graphql-eslint/eslint-plugin": ^3.13.1
+    "@graphql-eslint/eslint-plugin": ^3.14.3
     "@graphql-inspector/cli": ^3.4.0
     "@graphql-tools/graphql-file-loader": ^7.5.13
     "@graphql-tools/load": ^7.8.8
