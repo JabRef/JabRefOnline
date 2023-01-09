@@ -84,21 +84,22 @@ describe('validated resolver', () => {
   it('returns issues if args are invalid', () => {
     expect(testResolver.hello({}, { input: { name: 'test', age: 17 } }, {}))
       .toMatchInlineSnapshot(`
-      {
-        "problems": [
-          {
-            "code": "too_small",
-            "inclusive": true,
-            "message": "Number must be greater than or equal to 18",
-            "minimum": 18,
-            "path": [
-              "age",
-            ],
-            "type": "number",
-          },
-        ],
-      }
-    `)
+        {
+          "problems": [
+            {
+              "code": "too_small",
+              "exact": false,
+              "inclusive": true,
+              "message": "Number must be greater than or equal to 18",
+              "minimum": 18,
+              "path": [
+                "age",
+              ],
+              "type": "number",
+            },
+          ],
+        }
+      `)
   })
 })
 
