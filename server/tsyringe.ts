@@ -107,7 +107,7 @@ export function inject(
 type TypeOfSymbol<T> = T extends InjectionSymbol<infer X> ? X : never
 type InstanceTypeOrPlain<T> = T extends constructor<any> ? InstanceType<T> : T
 type ValueOfSymbol<T> = InstanceTypeOrPlain<TypeOfSymbol<T>>
-type ValueOfToken<T extends Token> = ValueOfSymbol<typeof InjectionSymbols[T]>
+type ValueOfToken<T extends Token> = ValueOfSymbol<(typeof InjectionSymbols)[T]>
 
 const injectionSymbolToConstructor = new Map<symbol, constructor<any>>()
 /**
@@ -118,7 +118,7 @@ const injectionSymbolToConstructor = new Map<symbol, constructor<any>>()
  */
 export function resolve<T extends Token>(
   token: T
-): ValueOfSymbol<typeof InjectionSymbols[T]> {
+): ValueOfSymbol<(typeof InjectionSymbols)[T]> {
   const symb = InjectionSymbols[token].sym
   // If explicitly registered, use that
   if (container.isRegistered(symb)) {
@@ -138,14 +138,16 @@ type FilterByType<T, V> = {
   [P in keyof T as T[P] extends V ? P : never]: T[P]
 }
 type InjectionSymbolsWithValue = {
-  [K in keyof typeof InjectionSymbols]: TypeOfSymbol<typeof InjectionSymbols[K]>
+  [K in keyof typeof InjectionSymbols]: TypeOfSymbol<
+    (typeof InjectionSymbols)[K]
+  >
 }
 
 type ConstructableSymbols = {
   [P in keyof FilterByType<
     InjectionSymbolsWithValue,
     constructor<any>
-  >]: typeof InjectionSymbols[P]
+  >]: (typeof InjectionSymbols)[P]
 }
 
 /**
