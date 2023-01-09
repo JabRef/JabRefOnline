@@ -8,7 +8,9 @@ import supertestGraphql, {
 const url = process.env.TEST_URL || 'http://localhost:3000'
 
 export function api(): SuperTestGraphQL<unknown, Variables> {
-  return supertestGraphql(url).path('/api')
+  // @ts-expect-error: Vitest has currently problems with commonjs imports: https://github.com/vitest-dev/vitest/issues/2258 and https://github.com/vitest-dev/vitest/issues/2120
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+  return supertestGraphql.default(url).path('/api')
 }
 export function root() {
   return supertestRequest(url)
