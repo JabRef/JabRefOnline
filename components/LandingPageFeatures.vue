@@ -18,8 +18,8 @@
             }"
           >
             <hr />
-            <h2 class="text-3xl mt-5">{{ feature.title }}</h2>
-            <div class="prose text-xl font-light">
+            <h2 class="text-4xl mt-5 font-semibold">{{ feature.title }}</h2>
+            <div class="prose text-2xl font-light">
               <ContentRenderer :value="feature"></ContentRenderer>
             </div>
           </div>
@@ -31,7 +31,7 @@
             }"
           >
             <img
-              class="max-w-full h-auto"
+              class="max-w-full h-auto shadow-[0_0_12px_#a7a7bd] rounded"
               :src="useAsset(feature.img)"
               alt=""
             />

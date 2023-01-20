@@ -73,7 +73,7 @@
                 icon="heart"
                 size="3x"
               />
-              <h4 class="text-2xl mb-3">Contribute</h4>
+              <h4 class="text-2xl mb-3 font-semibold">Contribute</h4>
             </a>
           </n-button>
           <h5 class="pb-2 text-xl">Help us build JabRef</h5>
@@ -101,7 +101,7 @@
                 icon="gift"
                 size="3x"
               />
-              <h4 class="text-2xl mb-3">Donate</h4>
+              <h4 class="text-2xl mb-3 font-semibold">Donate</h4>
             </a>
           </n-button>
           <h5 class="pb-2 text-xl">Support the development</h5>
@@ -129,7 +129,7 @@
                 icon="laptop-code"
                 size="3x"
               />
-              <h4 class="text-2xl mb-3">Develop</h4>
+              <h4 class="text-2xl mb-3 font-semibold">Develop</h4>
             </a>
           </n-button>
           <h5 class="pb-2 text-xl">Make JabRef even better</h5>

@@ -49,5 +49,15 @@ export default <Config>{
       warning: colors.amber,
       error: colors.red,
     },
+    extend: {
+      typography: (theme: (path: string) => any) => ({
+        DEFAULT: {
+          css: {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            '--tw-prose-bullets': theme('colors.black'),
+          },
+        },
+      }),
+    },
   },
 }
