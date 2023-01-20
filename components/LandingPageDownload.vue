@@ -1,7 +1,7 @@
 <template>
   <section
     id="download"
-    class="bg-primary-50"
+    class="bg-primary-50 bg-opacity-50"
   >
     <div class="container mx-auto px-4 pt-6 pb-4 md:py-16">
       <div class="flex flex-wrap flex-col content-center">
@@ -23,56 +23,54 @@
           </n-button>
         </div>
 
-        <p class="text-center pt-2">
-          <small>
-            <span v-if="isWindows()">
-              For Windows
-              <br />
-              Also available for
-              <t-nuxtlink
-                class="text-primary-500"
-                href="download"
-                >mac OS X and Linux</t-nuxtlink
-              >
-              <br />
-            </span>
-            <span v-if="isMac()">
-              For mac OS X
-              <br />
-              Also available for
-              <t-nuxtlink
-                class="text-primary-500"
-                href="download"
-                >Windows and Linux</t-nuxtlink
-              >
-              <br />
-            </span>
-            <span v-if="isLinux()">
-              For Linux
-              <br />
-              Also available for
-              <t-nuxtlink
-                class="text-primary-500"
-                href="download"
-              >
-                mac OS X and Windows
-              </t-nuxtlink>
-              <br />
-            </span>
-            <a
+        <div class="text-center pt-8 text-sm">
+          <span v-if="isWindows()">
+            For Windows
+            <br />
+            Also available for
+            <t-nuxtlink
               class="text-primary-500"
-              href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
+              href="download"
+              >mac OS X and Linux</t-nuxtlink
             >
-              Change Log
-            </a>
-            and
-            <a
+            <br />
+          </span>
+          <span v-if="isMac()">
+            For mac OS X
+            <br />
+            Also available for
+            <t-nuxtlink
               class="text-primary-500"
-              href="https://builds.jabref.org/main/"
-              >Development Builds</a
+              href="download"
+              >Windows and Linux</t-nuxtlink
             >
-          </small>
-        </p>
+            <br />
+          </span>
+          <span v-if="isLinux()">
+            For Linux
+            <br />
+            Also available for
+            <t-nuxtlink
+              class="text-primary-500"
+              href="download"
+            >
+              mac OS X and Windows
+            </t-nuxtlink>
+            <br />
+          </span>
+          <a
+            class="text-primary-500"
+            href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
+          >
+            Change Log
+          </a>
+          and
+          <a
+            class="text-primary-500"
+            href="https://builds.jabref.org/main/"
+            >Development Builds</a
+          >
+        </div>
       </div>
     </div>
   </section>

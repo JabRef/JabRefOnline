@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-base">
     <NuxtLayout name="content">
       <template #header>
         <NavBar
@@ -35,8 +35,10 @@
       <header class="masthead text-center">
         <div class="container mx-auto px-4">
           <div class="flex flex-wrap">
-            <div class="xl:w-3/4 mt-16 mx-auto">
-              <h1 class="text-5xl mb-4">Stay on top of your Literature</h1>
+            <div class="xl:w-3/4 mt-16 md:mt-24 mx-auto">
+              <h1 class="text-5xl mb-4 font-semibold">
+                Stay on top of your Literature
+              </h1>
             </div>
             <div class="xl:w-3/4 mx-auto">
               <h2 class="mb-5 text-3xl text-gray-700">
@@ -44,11 +46,10 @@
               </h2>
             </div>
           </div>
-          <div
-            class="mt-4 md:mt-20 shadow-[0_0_25px_#a7a7bd] max-w-screen-xl mx-auto"
-          >
+          <div class="mt-4 md:mt-20 max-w-screen-xl mx-auto">
             <img
               src="~/assets/jabref-mainscreen.png"
+              class="shadow-[0_0_25px_#a7a7bd] rounded-xl"
               alt=""
             />
           </div>
