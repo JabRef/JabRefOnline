@@ -1,5 +1,3 @@
-import { DocumentType, Prisma } from '@prisma/client'
-import { Context } from '../context'
 import {
   AddJournalArticleInput,
   AddProceedingsArticleInput,
@@ -10,14 +8,22 @@ import {
   JournalIssue,
   MutationAddUserDocumentArgs,
   MutationUpdateUserDocumentArgs,
+  Organization,
   Person,
   QueryUserDocumentArgs,
   Resolvers,
   UpdateUserDocumentInput,
-} from '../graphql'
+} from '#graphql/resolver'
+import { DocumentType } from '@prisma/client'
+import { notEmpty } from '~/composables/util'
+import { Context } from '../context'
 import { ResolveType } from '../utils/extractResolveType'
 import { inject, injectable, resolve } from './../tsyringe'
-import { UserDocument, UserDocumentService } from './user.document.service'
+import {
+  UserDocument,
+  UserDocumentCreateInput,
+  UserDocumentService,
+} from './user.document.service'
 
 // Fields that are stored as separate columns in the database
 const specialFields: string[] = [
@@ -55,7 +61,7 @@ const specialFields: string[] = [
 function convertDocumentInput(
   type: DocumentType,
   document: AddJournalArticleInput | AddProceedingsArticleInput | AddThesisInput
-): Prisma.UserDocumentCreateInput {
+): UserDocumentCreateInput {
   /* TODO: Save those fields as well
   const special = document.fields
     ?.filter((item) => specialFields.includes(item.field))
@@ -71,23 +77,23 @@ function convertDocumentInput(
       }
     })
     */
-  const convertedDocument: Prisma.UserDocumentCreateInput = {
+  const convertedDocument: UserDocumentCreateInput = {
     type,
     citationKeys: document.citationKeys ?? [],
-    lastModified: document.lastModified ?? null,
-    added: document.added ?? null,
+    lastModified: document.lastModified ?? undefined,
+    added: document.added ?? undefined,
+    revisionNumber: undefined,
     title: document.title,
     subtitle: document.subtitle,
     titleAddon: document.titleAddon,
     abstract: document.abstract,
-    author: document.authors
-      ?.map((author) => author.person?.name)
-      .join(' and '),
+    authors: document.authors?.map((author) => author.person).filter(notEmpty),
     note: document.note,
     languages: document.languages ?? [],
     publicationState: document.publicationState,
     doi: document.doi,
     keywords: document.keywords ?? [],
+    // TODO: editors: document.editors?.map((editor) => editor.person).filter(notEmpty),
     pageStart: 'pageStart' in document ? document.pageStart : null,
     pageEnd: 'pageEnd' in document ? document.pageEnd : null,
     electronicId: 'electronicId' in document ? document.electronicId : null,
@@ -97,9 +103,9 @@ function convertDocumentInput(
         : [],
     translators:
       'translated' in document
-        ? document.translated?.translators?.map(
-            (entity) => entity.person?.name ?? ''
-          ) ?? []
+        ? document.translated?.translators
+            ?.map((entity) => entity.person)
+            .filter(notEmpty)
         : [],
     publishedAt: 'published' in document ? document.published : null,
     /*
@@ -244,16 +250,24 @@ export class DocumentResolver {
     }
   }
 
-  authors(document: UserDocument): Person[] {
-    if (document.author) {
+  authors(document: UserDocument): (Person | Organization)[] {
+    if (document.contributors) {
       // TODO: Already store authors separately on save?
-      return document.author.split(' and ').map((name) => {
-        return {
-          id: 'TODO' + name,
-          name,
-          __typename: 'Person',
-        }
-      })
+      return document.contributors
+        .filter((contributor) => contributor.role === 'AUTHOR')
+        .sort((a, b) => a.position - b.position)
+        .map((contributor) => {
+          return contributor.entity.type === 'PERSON'
+            ? {
+                ...contributor.entity,
+                __typename: 'Person',
+              }
+            : {
+                id: contributor.entity.id,
+                name: contributor.entity.name ?? '',
+                __typename: 'Organization',
+              }
+        })
     } else {
       return []
     }

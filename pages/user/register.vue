@@ -44,11 +44,12 @@
           >
             <PasswordInput v-model="password" />
           </t-input-group>
-          <div class="py-2">
-            <t-button
+          <div class="py-2 text-center">
+            <n-button
               class="w-full"
-              type="submit"
-              >Create your account</t-button
+              type="primary"
+              attr-type="submit"
+              >Create your account</n-button
             >
           </div>
           <div>
@@ -86,8 +87,8 @@ export default defineComponent({
       error,
     } = useMutation(
       gql(/* GraphQL */ `
-        mutation Signup($email: EmailAddress!, $password: String!) {
-          signup(email: $email, password: $password) {
+        mutation Signup($input: SignupInput!) {
+          signup(input: $input) {
             ... on UserReturned {
               user {
                 id
@@ -104,8 +105,10 @@ export default defineComponent({
       `),
       () => ({
         variables: {
-          email: email.value,
-          password: password.value,
+          input: {
+            email: email.value,
+            password: password.value,
+          },
         },
         update(cache, { data }) {
           cacheCurrentUser(

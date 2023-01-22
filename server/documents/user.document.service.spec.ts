@@ -1,5 +1,5 @@
 import type { PrismaClient } from '@prisma/client'
-import { mockDeep, mockReset } from 'jest-mock-extended'
+import { mockDeep, mockReset } from 'vitest-mock-extended'
 import { register, resolve } from '../tsyringe'
 import { UserDocument } from './user.document.service'
 
@@ -11,14 +11,30 @@ const testDocument: UserDocument = {
   id: 'test',
   type: 'JOURNAL_ARTICLE',
   citationKeys: ['testArticle'],
-  lastModified: null,
-  added: null,
-  editor: null,
+  lastModified: new Date(),
+  added: new Date(),
   title: 'This is a test document',
   subtitle: null,
   titleAddon: null,
   abstract: null,
-  author: 'JabRef team',
+  contributors: [
+    {
+      entity: {
+        id: 'random',
+        family: 'Test',
+        given: 'Test',
+        type: 'PERSON',
+        suffix: null,
+        droppingParticle: null,
+        nonDroppingParticle: null,
+        name: null,
+      },
+      entityId: 'random',
+      role: 'AUTHOR',
+      documentId: 'test',
+      position: 0,
+    },
+  ],
   note: null,
   languages: [],
   publicationState: 'published',
@@ -46,7 +62,6 @@ const testDocument: UserDocument = {
   pageEnd: null,
   electronicId: null,
   originalLanguages: [],
-  translators: [],
   booktitle: null,
   publishedAt: '2021',
   edition: null,
@@ -55,6 +70,8 @@ const testDocument: UserDocument = {
   urldate: null,
   publisher: null,
   priority: null,
+  revisionNumber: 1,
+  revisionHash: 'test',
   doi: null,
   eprint: null,
   eprintclass: null,
@@ -66,7 +83,7 @@ beforeEach(() => {
   mockReset(prisma)
 })
 
-describe('getDocumentById', () => {
+describe('get document by id', () => {
   it('get the correct document', async () => {
     prisma.userDocument.findUnique.mockResolvedValue(testDocument)
 
@@ -80,6 +97,11 @@ describe('getDocumentById', () => {
       },
       include: {
         other: false,
+        contributors: {
+          include: {
+            entity: true,
+          },
+        },
         journalIssue: {
           include: {
             journal: true,

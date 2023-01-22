@@ -11,7 +11,7 @@
           class="mr-1"
           :title="typeDescription"
         ></FontAwesomeIcon>
-        <span>{{ source.title }}</span>
+        <span>{{ document.title }}</span>
       </button>
       <!-- TOOD: Add citation display
       <a
@@ -23,42 +23,48 @@
       -->
     </div>
     <div
-      v-if="'authors' in source && source.authors"
+      v-if="'authors' in document && document.authors"
       class="space-x-3"
     >
       <span
-        v-for="author in source.authors"
+        v-for="author in document.authors"
         :key="author.id"
-        >{{ author.name }}</span
+        >{{
+          author.__typename === 'Organization'
+            ? author.name
+            : author.__typename === 'Person'
+            ? author.family
+            : ''
+        }}</span
       >
     </div>
     <div class="space-x-1 text-sm">
       <span class="font-semibold">2019</span>
       <a
         v-if="
-          'in' in source &&
-          source.in &&
-          'journal' in source.in &&
-          source.in.journal
+          'in' in document &&
+          document.in &&
+          'journal' in document.in &&
+          document.in.journal
         "
-        :href="'journal/' + source.in.journal.id"
-        >{{ source.in.journal.name }}</a
+        :href="'journal/' + document.in.journal.id"
+        >{{ document.in.journal.name }}</a
       >
       <a
-        v-if="'institution' in source && source.institution"
-        :href="'institution/' + source.institution.id"
-        >{{ source.institution.name }}</a
+        v-if="'institution' in document && document.institution"
+        :href="'institution/' + document.institution.id"
+        >{{ document.institution.name }}</a
       >
-      <span v-if="'in' in source && source.in && 'title' in source.in">
-        {{ source.in.title }}
+      <span v-if="'in' in document && document.in && 'title' in document.in">
+        {{ document.in.title }}
       </span>
     </div>
     <div
-      v-if="source.keywords.length > 0"
+      v-if="document.keywords.length > 0"
       class="flex flex-row space-x-2 text-sm"
     >
       <t-tag
-        v-for="keyword in source.keywords"
+        v-for="keyword in document.keywords"
         :key="keyword"
         variant="badge"
         class="border border-gray-400"
@@ -67,21 +73,21 @@
         {{ keyword }}
       </t-tag>
       <!-- TODO: Add overflow
-      <t-button variant="linkplain" class="text-sm my-auto">
+      <n-button variant="linkplain" class="text-sm my-auto">
         <span>View More (8+)</span>
         <FontAwesomeIcon icon="chevron-down" size="xs" />
-      </t-button>
+      </n-button>
       -->
     </div>
-    <div v-if="'abstract' in source && source.abstract">
+    <div v-if="'abstract' in document && document.abstract">
       <span
         class="grow"
         :class="{ 'line-clamp-2': !viewFullAbstract }"
       >
-        {{ source.abstract }}
+        {{ document.abstract }}
       </span>
-      <t-button
-        variant="linkplain"
+      <n-button
+        text
         class="text-sm my-auto"
         @click="viewFullAbstract = !viewFullAbstract"
       >
@@ -99,17 +105,17 @@
             size="xs"
           />
         </template>
-      </t-button>
+      </n-button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { PropType } from 'vue'
-import { DocumentType, gql } from '~/apollo'
+import { FragmentType, gql, useFragment } from '~/apollo'
 import { useUiStore } from '~/store'
 
-export const DocumentForView = gql(/* GraphQL */ `
+const DocumentForView = gql(/* GraphQL */ `
   fragment DocumentForView on Document {
     id
     title
@@ -118,7 +124,7 @@ export const DocumentForView = gql(/* GraphQL */ `
     authors {
       ... on Person {
         id
-        name
+        family
       }
       ... on Organization {
         id
@@ -127,6 +133,7 @@ export const DocumentForView = gql(/* GraphQL */ `
     }
     ... on JournalArticle {
       in {
+        id
         journal {
           id
           name
@@ -135,6 +142,7 @@ export const DocumentForView = gql(/* GraphQL */ `
     }
     ... on ProceedingsArticle {
       in {
+        id
         title
       }
     }
@@ -147,54 +155,44 @@ export const DocumentForView = gql(/* GraphQL */ `
   }
 `)
 
-export default defineComponent({
-  props: {
-    source: {
-      type: Object as PropType<DocumentType<typeof DocumentForView>>,
-      required: true,
-    },
-  },
-  setup(props) {
-    const { source: document } = toRefs(props)
-    const viewFullAbstract = ref(false)
-
-    const typeIcon = computed(() => {
-      switch (document.value.__typename) {
-        case 'JournalArticle':
-          return 'newspaper'
-        case 'ProceedingsArticle':
-          return 'chalkboard-teacher'
-        case 'Thesis':
-          return 'graduation-cap'
-        default:
-          return 'file-alt'
-      }
-    })
-
-    const typeDescription = computed(() => {
-      switch (document.value.__typename) {
-        case 'JournalArticle':
-          return 'Journal Paper'
-        case 'ProceedingsArticle':
-          return 'Conference Paper'
-        case 'Thesis':
-          return 'PhD Thesis'
-        default:
-          return document.value.__typename
-      }
-    })
-
-    const ui = useUiStore()
-    function displayDocumentDetails() {
-      ui.displayDocumentDetails(document.value.id)
-    }
-
-    return {
-      typeIcon,
-      typeDescription,
-      viewFullAbstract,
-      displayDocumentDetails,
-    }
+const props = defineProps({
+  source: {
+    type: Object as PropType<FragmentType<typeof DocumentForView>>,
+    required: true,
   },
 })
+
+const document = computed(() => useFragment(DocumentForView, props.source))
+const viewFullAbstract = ref(false)
+
+const typeIcon = computed(() => {
+  switch (document.value.__typename) {
+    case 'JournalArticle':
+      return 'newspaper'
+    case 'ProceedingsArticle':
+      return 'chalkboard-teacher'
+    case 'Thesis':
+      return 'graduation-cap'
+    default:
+      return 'file-alt'
+  }
+})
+
+const typeDescription = computed(() => {
+  switch (document.value.__typename) {
+    case 'JournalArticle':
+      return 'Journal Paper'
+    case 'ProceedingsArticle':
+      return 'Conference Paper'
+    case 'Thesis':
+      return 'PhD Thesis'
+    default:
+      return document.value.__typename
+  }
+})
+
+const ui = useUiStore()
+function displayDocumentDetails() {
+  ui.displayDocumentDetails(document.value.id)
+}
 </script>

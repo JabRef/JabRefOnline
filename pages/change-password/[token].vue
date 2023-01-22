@@ -22,11 +22,12 @@
             <PasswordInput v-model="repeatPassword" />
           </t-input-group>
         </div>
-        <div class="py-2">
-          <t-button
+        <div class="py-2 text-center">
+          <n-button
             class="w-full"
-            type="submit"
-            >Change Password</t-button
+            type="primary"
+            attr-type="submit"
+            >Change Password</n-button
           >
         </div>
       </form>
@@ -53,12 +54,8 @@ export default defineComponent({
       error,
     } = useMutation(
       gql(/* GraphQL */ `
-        mutation ChangePassword(
-          $token: String!
-          $id: ID!
-          $newPassword: String!
-        ) {
-          changePassword(token: $token, id: $id, newPassword: $newPassword) {
+        mutation ChangePassword($input: ChangePasswordInput!) {
+          changePassword(input: $input) {
             ... on UserReturned {
               user {
                 id
@@ -78,9 +75,11 @@ export default defineComponent({
       `),
       () => ({
         variables: {
-          token,
-          id,
-          newPassword: password.value,
+          input: {
+            token,
+            id,
+            newPassword: password.value,
+          },
         },
       })
     )

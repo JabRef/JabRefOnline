@@ -1,38 +1,22 @@
 {
   "schema": "server/**/*.graphql",
+  "documents": [
+    "./pages/**/*.vue",
+    "./components/**/*.vue",
+    "./plugins/**/*.ts",
+    "./apollo/cache.ts",
+    "./middleware/**/*.ts",
+    "./server/**/*.test.ts"
+  ],
   "extensions": {
     "codegen": {
       "overwrite": true,
       "generates": {
-        "server/graphql.ts": {
-          "config": {
-            "mapperTypeSuffix": "Model",
-            "contextType": "./context#Context",
-            "mappers": {
-              "User": "@prisma/client/index.d#User",
-              "Document": "./documents/user.document.service#UserDocument",
-              "JournalArticle": "./documents/user.document.service#UserDocument",
-              "ProceedingsArticle": "./documents/user.document.service#UserDocument",
-              "Thesis": "./documents/user.document.service#UserDocument",
-              "Other": "./documents/user.document.service#UserDocument",
-              "Group": "./groups/resolvers#GroupMaybeResolved"
-            },
-            "scalars": {
-              "Date": "string",
-              "DateTime": "Date",
-              "EmailAddress": "string"
-            }
-          },
-          "plugins": ["typescript", "typescript-resolvers"]
-        },
         "apollo": {
-          "documents": [
-            "./pages/**/*.vue",
-            "./components/**/*.vue",
-            "./plugins/**/*.ts",
-            "./apollo/cache.ts"
-          ],
           "preset": "gql-tag-operations-preset",
+          "presetConfig": {
+            "fragmentMasking": true
+          },
           "config": {
             "scalars": {
               "Date": "Date",
@@ -43,6 +27,25 @@
         },
         "apollo/introspection.ts": {
           "plugins": ["fragment-matcher"]
+        },
+        "apollo/validation.internal.ts": {
+          "plugins": [
+            {
+              "add": {
+                "content": "// @ts-nocheck"
+              }
+            },
+            "typescript-validation-schema"
+          ],
+          "config": {
+            "schema": "zod",
+            "scalarSchemas": {
+              "Date": "z.date()",
+              "DateTime": "z.date()",
+              "EmailAddress": "z.string().email()"
+            },
+            "importFrom": "~/apollo/graphql"
+          }
         }
       }
     }

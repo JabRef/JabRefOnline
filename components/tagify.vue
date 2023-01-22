@@ -66,7 +66,6 @@ export default defineComponent({
       if (tagifySettings.classNames) {
         tagifySettings.classNames.tag = 'tagify__tag ' + this.tagClass
       } else {
-        // @ts-ignore: Typing information seems to be incorrect, don't need to provide a complete classNames object
         tagifySettings.classNames = {
           tag: 'tagify__tag ' + this.tagClass,
         }
@@ -97,7 +96,7 @@ export default defineComponent({
 .tagify {
   --tags-border-color: transparent;
   --tag-bg: transparent;
-  --tag-hover: #c7d2fe; /* bg-highlight-300 */
+  --tag-hover: #afb8d3; /* bg-primary-200 */
 }
 .tagify__tag {
   margin-left: 0.25rem;

@@ -36,7 +36,7 @@
             <div
               class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
             >
-              <t-button @click="showModal = false"> Close </t-button>
+              <n-button @click="showModal = false"> Close </n-button>
             </div>
           </slot>
         </div>

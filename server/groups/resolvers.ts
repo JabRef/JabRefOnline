@@ -1,14 +1,15 @@
-import type { Group, GroupType as GroupTypeT } from '@prisma/client'
-import { UserInputError } from 'apollo-server-errors'
-// eslint-disable-next-line import/default
-import prisma from '@prisma/client'
-import { Context } from '../context'
 import {
   MutationCreateGroupArgs,
   MutationUpdateGroupArgs,
   QueryGroupArgs,
   Resolvers,
-} from '../graphql'
+} from '#graphql/resolver'
+import { ApolloServerErrorCode } from '@apollo/server/errors'
+import type { Group, GroupType as GroupTypeT } from '@prisma/client'
+// eslint-disable-next-line import/default
+import prisma from '@prisma/client'
+import { GraphQLError } from 'graphql'
+import { Context } from '~/server/context'
 import { inject, injectable, resolve } from './../tsyringe'
 import { GroupService } from './service'
 const { GroupType, GroupHierarchyType } = prisma
@@ -39,7 +40,7 @@ export class Mutation {
 
   async createGroup(
     _root: Record<string, never>,
-    { group }: MutationCreateGroupArgs,
+    { input: group }: MutationCreateGroupArgs,
     context: Context
   ): Promise<Group | null> {
     let type = null
@@ -95,8 +96,13 @@ export class Mutation {
     }
 
     if (type === null) {
-      throw new UserInputError(
-        'Need to specify at least one of the type-specific details.'
+      throw new GraphQLError(
+        'Need to specify at least one of the type-specific details.',
+        {
+          extensions: {
+            code: ApolloServerErrorCode.BAD_USER_INPUT,
+          },
+        }
       )
     }
 
@@ -141,7 +147,7 @@ export class Mutation {
 
   async updateGroup(
     _root: Record<never, string>,
-    { group }: MutationUpdateGroupArgs,
+    { input: group }: MutationUpdateGroupArgs,
     _context: Context
   ): Promise<Group | null> {
     return await this.groupService.updateGroup({

@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
@@ -30,20 +29,20 @@ export default defineNuxtConfig({
 
   /*
    ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
+   ** See https://v3.nuxtjs.org/getting-started/seo-meta
    */
-  meta: {
-    title: process.env.npm_package_name || '',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || '',
-      },
-    ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  app: {
+    head: {
+      title: process.env.npm_package_name || '',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: process.env.npm_package_description || '',
+        },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    },
   },
 
   /*
@@ -60,23 +59,20 @@ export default defineNuxtConfig({
   modules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    // Add support for naive-ui
+    '@huntersofbook/naive-ui-nuxt',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add storybook support
     './modules/storybook',
-    // Add graphql support
-    './modules/graphql',
+    // Add server-side graphql support
+    'nuxt-graphql-server',
     // Add vue runtime compiler as temporary workaround for https://github.com/nuxt/framework/issues/4661
-    'nuxt3-runtime-compiler-module',
+    'nuxt-runtime-compiler',
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
   ],
-
-  /*
-   ** Restarts the server when dependencies change.
-   */
-  watch: ['server/**/*.graphql'],
 
   /*
    ** Client and server-side configuration
@@ -85,19 +81,76 @@ export default defineNuxtConfig({
   runtimeConfig: constructConfig(),
 
   /**
-   * Add global Graphql server endpoint
-   * See https://v3.nuxtjs.org/api/configuration/nuxt.config#serverhandlers
+   * Add redirects, mostly for backwards compatibility
    */
-  serverHandlers: [
-    { route: '/api', handler: '~/server/index.ts' },
-    { route: '/_admin/**', handler: '~/server/admin.ts' },
-  ],
+  routeRules: {
+    '/faq': { redirect: 'https://docs.jabref.org/faq' },
+    '/paypal': { redirect: '/donations' },
+    '/donations': {
+      redirect: 'https://github.com/JabRef/jabref/wiki/Donations/',
+    },
+    '/gsoc/**': { redirect: '/codeprojects/gsoc' },
+    '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
+    '/surveys/': { redirect: '/surveys/2015' },
+  },
 
   /**
    * Storybook integration with Nuxt
    * See https://storybook.nuxtjs.org/
+   * TODO: See if we need this, maybe remove
    */
-  storybook: {},
+  // storybook: {},
+
+  tailwindcss: {
+    // Expose config so that we can use it in the vscode extension
+    exposeConfig: true,
+  },
+
+  /**
+   * GraphQL server config
+   * See https://github.com/tobiasdiez/nuxt-graphql-server
+   */
+  graphqlServer: {
+    codegen: {
+      mapperTypeSuffix: 'Model',
+      contextType: './context#Context',
+      mappers: {
+        User: '@prisma/client/index.d#User',
+        Document: './documents/user.document.service#UserDocument',
+        JournalArticle: './documents/user.document.service#UserDocument',
+        ProceedingsArticle: './documents/user.document.service#UserDocument',
+        Thesis: './documents/user.document.service#UserDocument',
+        Other: './documents/user.document.service#UserDocument',
+        Group: './groups/resolvers#GroupMaybeResolved',
+      },
+      scalars: {
+        Date: 'string',
+        DateTime: 'Date',
+        EmailAddress: 'string',
+      },
+    },
+  },
+
+  content: {
+    markdown: {
+      // Don't automatically print h2-h4 headings as links
+      anchorLinks: false,
+    },
+  },
+
+  /**
+   * Naive UI configuration
+   */
+  naiveUI: {
+    themeOverrides: {
+      common: {
+        primaryColor: '#6072A7',
+        primaryColorHover: '#4F5F8F',
+        primaryColorPressed: '#3B476B',
+        primaryColorSuppl: '#4F5F8F',
+      },
+    },
+  },
 
   vite: {
     server: {
@@ -114,6 +167,7 @@ export default defineNuxtConfig({
           }
         : true,
 
+      // Without this, vite would handle cors in dev mode, which would lead to different behavior in dev and prod
       cors: {
         preflightContinue: true,
       },

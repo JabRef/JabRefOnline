@@ -2,8 +2,8 @@ import connectRedis from 'connect-redis'
 import session from 'express-session'
 import { EventHandler } from 'h3'
 import passport from 'passport'
-import { RedisClientType } from 'redis'
 import { Environment } from '~/config'
+import { RedisClient } from '../utils/services.factory'
 import { inject, injectable } from './../tsyringe'
 import EmailStrategy from './auth.email.strategy'
 import { AuthService } from './auth.service'
@@ -12,7 +12,7 @@ import { AuthService } from './auth.service'
 export default class PassportInitializer {
   constructor(
     @inject('AuthService') private accountService: AuthService,
-    @inject('RedisClient') private redisClient: RedisClientType
+    @inject('RedisClient') private redisClient: RedisClient
   ) {}
 
   initialize(): void {
@@ -39,7 +39,12 @@ export default class PassportInitializer {
     } else {
       store = new session.MemoryStore()
     }
-
+    // If the store implements the touch function, the express-session middleware
+    // essentially makes res.end an asynchronous operation, which is not what h3 expects.
+    // Therefore, we disable the touch function.
+    // As a fix we would need https://github.com/expressjs/session/pull/751 and support for callbacks to res.end in h3
+    // @ts-expect-error: the idea is to replace the function by something else
+    store.touch = false
     const sessionMiddleware = session({
       store,
       // The secret used to sign the session cookie
@@ -65,17 +70,16 @@ export default class PassportInitializer {
 
     return defineEventHandler(async (event) => {
       // Add middleware that sends and receives the session ID using cookies
-      // @ts-ignore: https://github.com/unjs/h3/issues/146
-      await callHandler(sessionMiddleware, event.req, event.res)
+      // @ts-expect-error: https://github.com/unjs/h3/issues/146
+      await fromNodeMiddleware(sessionMiddleware)(event)
 
       // Add passport as middleware (this more or less only adds the _passport variable to the request)
-      // @ts-ignore: https://github.com/unjs/h3/issues/146
-      await callHandler(passportMiddleware, event.req, event.res)
+      // @ts-expect-error: https://github.com/unjs/h3/issues/146
+      await fromNodeMiddleware(passportMiddleware)(event)
 
       // Add middleware that authenticates request based on the current session state (i.e. we alter the request to contain the hydrated user object instead of only the session ID)
-      // @ts-ignore: https://github.com/unjs/h3/issues/146
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      await callHandler(passportSessionMiddleware, event.req, event.res)
+      await fromNodeMiddleware(passportSessionMiddleware)(event)
     })
   }
 

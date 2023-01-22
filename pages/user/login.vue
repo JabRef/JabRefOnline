@@ -15,41 +15,46 @@
         Don't have an account?
         <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
       </p>
-      <t-alert
+      <n-alert
         v-if="error"
-        variant="error"
-        class="mt-8"
-        :dismissible="false"
-        show
+        type="error"
+        class="mb-4"
       >
         {{ error }}
-      </t-alert>
-      <form @submit.prevent="loginUser()">
-        <div class="space-y-5">
-          <t-input-group
+      </n-alert>
+      <n-form
+        size="large"
+        @submit="onSubmit"
+      >
+        <div class="space-y-2">
+          <n-form-item
             label="Email address"
-            variant="important"
+            label-style="font-weight: 600"
+            :feedback="errors.email"
+            :validation-status="errors.email ? 'error' : undefined"
           >
-            <t-input
-              v-model="email"
+            <n-input
+              v-model:value="email"
               v-focus
             />
-          </t-input-group>
-          <t-input-group
+          </n-form-item>
+          <n-form-item
             label="Password"
-            variant="important"
+            label-style="font-weight: 600"
+            :feedback="errors.password"
+            :validation-status="errors.password ? 'error' : undefined"
           >
-            <PasswordInput v-model="password" />
-          </t-input-group>
+            <n-input
+              v-model:value="password"
+              type="password"
+              show-password-on="mousedown"
+            />
+          </n-form-item>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <t-checkbox id="remember_me" />
-              <label
-                for="remember_me"
-                class="ml-2 block text-sm text-gray-900"
-              >
+              <n-checkbox v-model:checked="rememberLogin">
                 Keep me logged in
-              </label>
+              </n-checkbox>
             </div>
 
             <div class="text-sm">
@@ -59,11 +64,12 @@
             </div>
           </div>
 
-          <div class="py-2">
-            <t-button
+          <div class="py-2 text-center">
+            <n-button
               class="w-full"
-              type="submit"
-              >Sign in</t-button
+              type="primary"
+              attr-type="submit"
+              >Sign in</n-button
             >
           </div>
 
@@ -79,78 +85,79 @@
             />
           </div>
         </div>
-      </form>
+      </n-form>
     </div>
   </NuxtLayout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
+import { LoginInputSchema } from '~/apollo/validation'
+
 definePageMeta({ layout: false })
-export default defineComponent({
-  name: 'UserLogin',
 
-  // TODO: Automatically go to home if already loggin in
-  // middleware: 'guest',
+// TODO: Automatically go to home if already logged in
+// middleware: 'guest',
 
-  setup() {
-    const email = ref('')
-    const password = ref('')
-    const otherError = ref('')
+const { handleSubmit, errors, useField } = useZodForm(LoginInputSchema())
 
-    const {
-      mutate: loginUser,
-      onDone,
-      error: graphqlError,
-    } = useMutation(
-      gql(/* GraphQL */ `
-        mutation Login($email: EmailAddress!, $password: String!) {
-          login(email: $email, password: $password) {
-            ... on UserReturned {
-              user {
-                id
-              }
-            }
-            ... on InputValidationProblem {
-              problems {
-                path
-                message
-              }
-            }
+const { value: email } = useField('email')
+const { value: password } = useField('password')
+
+const otherError = ref('')
+
+const {
+  mutate: loginUser,
+  onDone,
+  error: graphqlError,
+} = useMutation(
+  gql(/* GraphQL */ `
+    mutation Login($input: LoginInput!) {
+      login(input: $input) {
+        ... on UserReturned {
+          user {
+            id
           }
         }
-      `),
-      () => ({
-        variables: {
-          email: email.value,
-          password: password.value,
-        },
-        update(cache, { data: login }) {
-          if (login?.login?.__typename === 'UserReturned') {
-            const { user } = login.login
-            cacheCurrentUser(cache, user)
-          } else {
-            cacheCurrentUser(cache, null)
+        ... on InputValidationProblem {
+          problems {
+            path
+            message
           }
-        },
-      })
-    )
-    onDone((result) => {
-      if (result.data?.login?.__typename === 'UserReturned') {
-        void navigateTo({ name: 'dashboard' })
-      } else {
-        otherError.value =
-          result.data?.login?.__typename === 'InputValidationProblem' &&
-          result.data.login.problems[0]
-            ? result.data.login.problems[0].message
-            : 'Unknown error'
+        }
       }
-    })
-    const error = computed(() => graphqlError.value || otherError.value)
+    }
+  `),
+  {
+    update(cache, { data: login }) {
+      if (login?.login?.__typename === 'UserReturned') {
+        const { user } = login.login
+        cacheCurrentUser(cache, user)
+      } else {
+        cacheCurrentUser(cache, null)
+      }
+    },
+  }
+)
+onDone((result) => {
+  if (result.data?.login?.__typename === 'UserReturned') {
+    void navigateTo({ name: 'dashboard' })
+  } else {
+    otherError.value =
+      result.data?.login?.__typename === 'InputValidationProblem' &&
+      result.data.login.problems[0]
+        ? result.data.login.problems[0].message
+        : 'Unknown error'
+  }
+})
+const error = computed(() => graphqlError.value || otherError.value)
 
-    return { email, password, error, loginUser }
-  },
+// TODO: Implement remember login
+const rememberLogin = ref(false)
+
+const onSubmit = handleSubmit(async (values) => {
+  await loginUser({ input: values })
 })
 </script>

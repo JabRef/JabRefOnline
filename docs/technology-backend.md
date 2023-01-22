@@ -1,4 +1,4 @@
-# NodeJS with Express.js
+# NodeJS via Nuxt backend
 
 - `+` Full js stack: common language makes it easier to work on, code reuse, most-used programming language
 - `-` Harder to integrate with ML models (although there is https://blog.tensorflow.org/2020/01/run-tensorflow-savedmodel-in-nodejs-directly-without-conversion.html and https://gist.github.com/zcaceres/4cc1afb1d3b7550aeffec898967bd56c)

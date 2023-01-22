@@ -1,25 +1,10 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
-    "esModuleInterop": true,
-    "allowJs": true,
-    "sourceMap": true,
     "strict": true,
-    "noEmit": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": ".",
-    "types": ["@types/node", "@types/jest", "@pinia/nuxt"]
-  },
-  "ts-node": {
-    "moduleTypes": {
-      // Workaround for https://github.com/facebook/jest/issues/11453
-      "jest.config.ts": "cjs"
-    }
+    "types": ["@types/node", "vitest/globals", "@pinia/nuxt", "naive-ui/volar"]
   },
   "exclude": ["node_modules", ".output", "dist"]
 }

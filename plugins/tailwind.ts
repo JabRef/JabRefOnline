@@ -1,6 +1,5 @@
 import {
   TAlert,
-  TButton,
   TCheckbox,
   TDropdown,
   TInput,
@@ -16,9 +15,9 @@ import TTable from '~/components/TTable.vue'
 const settings: VariantJSConfiguration = {
   TInput: {
     fixedClasses:
-      'transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-3',
+      'transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-3',
     classes:
-      'block w-full text-black sm:text-sm placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500',
+      'block w-full text-black sm:text-sm placeholder-gray-400 bg-white border-gray-300 focus:border-primary-500',
     variants: {
       error: {
         classes:
@@ -30,25 +29,25 @@ const settings: VariantJSConfiguration = {
       },
       plain: {
         classes:
-          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
+          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-primary-500 hover:bg-gray-50 hover:border-gray-300',
       },
     },
   },
   TTextarea: {
     fixedClasses:
-      'block w-full px-3 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      'block w-full px-3 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
     classes:
-      'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 ',
+      'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-primary-500 ',
     variants: {
       plain: {
         classes:
-          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300',
+          'shadow-none placeholder-gray-400 bg-transparent border-transparent focus:bg-white focus:border-primary-500 hover:bg-gray-50 hover:border-gray-300',
       },
     },
   },
   TCheckbox: {
     fixedClasses:
-      'transition duration-100 ease-in-out rounded shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed',
+      'transition duration-100 ease-in-out rounded shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed',
     classes: 'text-primary-500 border-gray-300 ',
     variants: {
       error: {
@@ -56,32 +55,6 @@ const settings: VariantJSConfiguration = {
       },
       success: {
         classes: 'text-success-500 border-success-300',
-      },
-    },
-  },
-  TButton: {
-    fixedClasses:
-      'block transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none',
-    classes:
-      'px-4 py-2 focus:border-highlight focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-white bg-primary-500 border border-transparent shadow-sm rounded hover:bg-highlight-600',
-    variants: {
-      secondary: {
-        classes:
-          'px-4 py-2 focus:border-highlight focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-gray-800 bg-white border border-gray-300 shadow-sm hover:text-gray-600',
-      },
-      error: {
-        classes:
-          'px-4 py-2 focus:border-highlight-500 focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-white bg-error-500 border border-transparent rounded shadow-sm hover:bg-error-600',
-      },
-      success: {
-        classes:
-          'px-4 py-2 focus:border-highlight-500 focus:ring-2 focus:ring-highlight-500 focus:ring-opacity-50 text-white bg-success-500 border border-transparent rounded shadow-sm hover:bg-green-600',
-      },
-      link: {
-        classes: 'text-primary-500 underline hover:text-highlight-600',
-      },
-      linkplain: {
-        classes: 'hover:text-highlight-600',
       },
     },
   },
@@ -126,13 +99,13 @@ const settings: VariantJSConfiguration = {
       wrapper: 'relative flex items-center p-4 border-l-4  rounded shadow-sm',
       body: 'grow',
       close:
-        'absolute relative flex items-center justify-center ml-4 shrink-0 w-6 h-6 transition duration-100 ease-in-out rounded focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50',
+        'absolute relative flex items-center justify-center ml-4 shrink-0 w-6 h-6 transition duration-100 ease-in-out rounded focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50',
       closeIcon: 'fill-current h-4 w-4',
     },
     classes: {
       wrapper: 'bg-primary-50 border-primary-500',
       body: 'text-primary-700',
-      close: 'text-primary-500 hover:bg-highlight-200',
+      close: 'text-primary-500 hover:bg-primary-200',
     },
     variants: {
       error: {
@@ -154,7 +127,7 @@ const settings: VariantJSConfiguration = {
   TDropdown: {
     fixedClasses: {
       trigger:
-        'flex items-center text-white block px-4 py-2 transition duration-100 ease-in-out border border-transparent rounded shadow-sm focus:border-highlight-500 focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+        'flex items-center text-white block px-4 py-2 transition duration-100 ease-in-out border border-transparent rounded shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
       wrapper: 'inline-flex flex-col',
       dropdownWrapper: 'relative z-10',
       dropdown: 'absolute rounded shadow mt-1',
@@ -165,7 +138,7 @@ const settings: VariantJSConfiguration = {
       leaveToClass: 'transform opacity-0 scale-95 duration-75',
     },
     classes: {
-      trigger: 'bg-primary-500 hover:bg-highlight-600',
+      trigger: 'bg-primary-500 hover:bg-primary-600',
       dropdown: 'bg-white origin-top-left left-0',
     },
     variants: {
@@ -187,17 +160,17 @@ const settings: VariantJSConfiguration = {
   },
   TSelect: {
     fixedClasses:
-      'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-highlight-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
     classes:
-      'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-highlight-500 sm:text-sm',
+      'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-primary-500 sm:text-sm',
     variants: {
       plain: {
         classes:
-          'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
+          'shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-primary-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer sm:text-sm',
       },
       plaincaps: {
         classes:
-          'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-highlight-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
+          'text-current shadow-none placeholder-gray-400 bg-white border-transparent focus:bg-white focus:border-primary-500 hover:bg-gray-50 hover:border-gray-300 cursor-pointer uppercase text-gray-600 tracking-wider focus-within:text-black sm:text-xs',
       },
     },
   },
@@ -231,7 +204,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(variantJS, settings)
   nuxtApp.vueApp.component('t-input', TInput)
   nuxtApp.vueApp.component('t-checkbox', TCheckbox)
-  nuxtApp.vueApp.component('t-button', TButton)
   nuxtApp.vueApp.component('t-input-group', TInputGroup)
   nuxtApp.vueApp.component('t-alert', TAlert)
   nuxtApp.vueApp.component('t-dropdown', TDropdown)

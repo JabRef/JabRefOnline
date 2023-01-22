@@ -17,12 +17,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.2.0
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3.5.1
         with:
           node-version: 16
           cache: 'yarn'
@@ -78,15 +78,16 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
+      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.2.0
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3.5.1
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
@@ -104,14 +105,13 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Run tests
-        run: yarn test --ci --coverage --detectOpenHandles
-
       - name: Start server
         run: yarn start &
 
-      - name: Run API tests
-        run: yarn test:api --env-var='base_url=http://localhost:3000/api'
+      - name: Run tests
+        run: yarn test --coverage
+        env:
+          TEST_URL: http://localhost:3000
 
       - name: Build Storybook
         run: |
@@ -127,8 +127,9 @@ jobs:
           # Don't wait until Chroma verified the build (for this we have the Github check)
           exitOnceUploaded: true
           storybookBuildDir: storybook-static
+          debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@v3.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

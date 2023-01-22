@@ -1,11 +1,11 @@
 import type { PrismaClient, User } from '@prisma/client'
-// eslint-disable-next-line import/default
-import { RedisClientType } from 'redis'
-import uuid from 'uuid' // TODO: Change to { v4 as generateToken } as soon as uuid is a proper esm module / jest supports it (https://github.com/uuidjs/uuid/issues/451)
-import { ResolversTypes } from '../graphql'
+
+import { ResolversTypes } from '#graphql/resolver'
+import { v4 as generateToken } from 'uuid'
 import { hash, verifyHash } from '../utils/crypto'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { sendEmail } from '../utils/sendEmail'
+import { RedisClient } from '../utils/services.factory'
 import { inject, injectable } from './../tsyringe'
 
 export type { InfoArgument as AuthenticationMessage } from 'graphql-passport'
@@ -25,8 +25,12 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
-    @inject('RedisClient') private redisClient: RedisClientType
+    @inject('RedisClient') private redisClient: RedisClient
   ) {}
+
+  async getUsers(): Promise<User[]> {
+    return await this.prisma.user.findMany()
+  }
 
   async validateUser(email: string, password: string): Promise<LoginPayload> {
     const user = await this.prisma.user.findUnique({
@@ -37,7 +41,7 @@ export class AuthService {
     if (!user) {
       return {
         problems: [
-          { path: 'Email or Password', message: 'Wrong email or password' },
+          { path: ['email', 'password'], message: 'Wrong email or password' },
         ],
       }
     } else {
@@ -47,7 +51,7 @@ export class AuthService {
       } else {
         return {
           problems: [
-            { path: 'Email or Password', message: 'Wrong email or password' },
+            { path: ['email', 'password'], message: 'Wrong email or password' },
           ],
         }
       }
@@ -61,7 +65,7 @@ export class AuthService {
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
     const key = PREFIX + user.id
-    const token = uuid.v4()
+    const token = generateToken()
     const hashedToken = await hash(token)
     await this.redisClient.set(key, hashedToken, { EX: 1000 * 60 * 60 * 24 }) // VALID FOR ONE DAY
     await sendEmail(email, resetPasswordTemplate(user.id, token))
@@ -95,18 +99,8 @@ export class AuthService {
       return {
         problems: [
           {
-            path: 'Email',
+            path: ['email'],
             message: `User with email '${email}' already exists.`,
-          },
-        ],
-      }
-    }
-    if (password.length < 6) {
-      return {
-        problems: [
-          {
-            path: 'Password',
-            message: 'Use 6 characters or more for your password',
           },
         ],
       }
@@ -131,7 +125,7 @@ export class AuthService {
       return {
         problems: [
           {
-            path: 'Password',
+            path: ['password'],
             message: 'Use 6 characters or more for your password',
           },
         ],

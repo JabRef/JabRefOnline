@@ -12,16 +12,32 @@ extend type Query {
   me: User
 }
 
+input LoginInput {
+  email: EmailAddress!
+  password: String!
+}
+
+input SignupInput {
+  email: EmailAddress!
+  password: String!
+}
+
+input ForgotPasswordInput {
+  email: EmailAddress!
+}
+
+input ChangePasswordInput {
+  token: String!
+  id: ID!
+  newPassword: String!
+}
+
 extend type Mutation {
   logout: LogoutPayload
-  login(email: EmailAddress!, password: String!): LoginPayload
-  signup(email: EmailAddress!, password: String!): SignupPayload
-  forgotPassword(email: EmailAddress!): ForgotPasswordPayload
-  changePassword(
-    token: String!
-    id: ID!
-    newPassword: String!
-  ): ChangePasswordPayload
+  login(input: LoginInput!): LoginPayload
+  signup(input: SignupInput!): SignupPayload
+  forgotPassword(input: ForgotPasswordInput!): ForgotPasswordPayload
+  changePassword(input: ChangePasswordInput!): ChangePasswordPayload
 }
 
 union LoginPayload = UserReturned | InputValidationProblem
@@ -55,7 +71,86 @@ type TokenProblem {
 
 type InputFieldValidationProblem {
   message: String!
-  path: String!
+  path: [String!]!
+}
+
+"""
+A connection model between user and changed nodes.
+"""
+type UserChangesConnection {
+  """
+  A list of edges.
+  """
+  edges: [UserChangesEdge!]!
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: UserChangesPageInfo!
+}
+
+"""
+An edge connecting the user to a changed node.
+"""
+type UserChangesEdge {
+  """
+  A node containing the change.
+  """
+  node: Document
+
+  """
+  Information about the change.
+  """
+  revision: RevisionInfo
+}
+
+"""
+Information about the revision of a node.
+"""
+type RevisionInfo {
+  generation: Int!
+  hash: String!
+}
+
+"""
+Information about the next page and end cursor for pagination.
+"""
+type UserChangesPageInfo {
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: UserChangesCursor
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+}
+
+"""
+A cursor for pagination the changed nodes.
+"""
+type UserChangesCursor {
+  """
+  The id of the last node on the page.
+  """
+  id: ID!
+  """
+  The latest modification date of any node on the page.
+  """
+  lastModified: DateTime!
+}
+
+"""
+A cursor for pagination the changed nodes.
+"""
+input UserChangesCursorInput {
+  """
+  The id of the last node on the page.
+  """
+  id: ID!
+  """
+  The latest modification date of any node on the page.
+  """
+  lastModified: DateTime!
 }
 
 type User {
@@ -63,4 +158,18 @@ type User {
   email: EmailAddress!
 
   groups: [Group!]!
+
+  """
+  A list of nodes belonging to the user that changed since the given moment.
+  """
+  changes(
+    """
+    Number of nodes to be returned.
+    """
+    first: Int
+    """
+    A cursor for use in pagination.
+    """
+    after: UserChangesCursorInput
+  ): UserChangesConnection!
 }

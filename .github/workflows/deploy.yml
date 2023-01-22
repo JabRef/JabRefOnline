@@ -13,52 +13,88 @@ jobs:
   pr_preview:
     name: Build & Deploy to PR preview
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
+
+    env:
+      DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
       # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
       - name: Fail if unsecure
-        if: "!contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.event.pull_request_target.user.login != 'tobiasdiez'"
+        if: "!contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez'"
         run: exit 1
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.2.0
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Prepare
-        run: |
-          # This is needed correctly deploy the Azure Functions (API)
-          mkdir -p .output/server
-          touch .output/server/.gitkeep
-
-      - name: Build & Deploy
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: 'upload'
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: '/' # App source code path
-          api_location: '.output/server' # Api source code path - optional
-          output_location: '.output/public' # Built app content directory - optional
-          app_build_command: 'yarn build:azure'
-          ###### End of Repository/Build Configurations ######
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Build
+        run: |
+          yarn install
+          yarn build:azure
+
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Web App
+        run: |
+          npx --yes @azure/static-web-apps-cli deploy .output\public --env ${{ github.event.pull_request.number }}
         env:
-          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+          SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Create & Link Function App
+        run: |
+          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
+          python .github\scripts\deploy.py --env ${{ github.event.pull_request.number }}
+        env:
+          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
+
+      - name: Deploy Function App
+        run: |
+          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output\server.zip
+
+      - name: Check HTTP status
+        run: |
+          Start-Sleep -Seconds 30
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net/api || true
+        # The api returns 400 status code for some reason
+        # uses: gerdemann/http-status-code@1.0.0
+        # with:
+        #   url: ${{ steps.deploy_web.outputs.static_web_app_url }}/api
+        #   code: 200
+        #   timeout: 300 # initial warm up can take quite some time
+        #   interval: 30
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=${{ steps.builddeploy.outputs.static_web_app_url }}/api' || true
+        run: yarn test:api
+        env:
+          TEST_URL: https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net
 
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     if: github.event_name == 'push'
 
@@ -73,26 +109,24 @@ jobs:
             deployment_environment: staging
           - environment: Production
             url: https://mango-pebble-0224c3803.1.azurestaticapps.net/
-            deployment_environment: ''
+            deployment_environment: 'prod'
 
     environment:
       name: ${{ matrix.environment }}
       url: ${{ matrix.url }}
 
+    env:
+      DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
+      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Prepare
-        run: |
-          # This is needed correctly deploy the Azure Functions (API)
-          mkdir -p .output/server
-          touch .output/server/.gitkeep
+        uses: actions/checkout@v3.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3.5.1
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install dependencies
@@ -101,33 +135,59 @@ jobs:
       - name: Reset Test database on Azure
         if: matrix.environment == 'Test'
         run: yarn prisma:migrate:reset --force
-        env:
-          DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
 
       - name: Update Production database on Azure
         if: matrix.environment == 'Staging'
         run: yarn prisma:migrate:deploy
-        env:
-          DATABASE_URL: ${{ secrets.AZURE_DATABASE_URL }}
 
-      - name: Build & Deploy
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@v1
+      - name: Build
+        run: yarn build:azure
+
+      - name: Login to Azure
+        uses: Azure/login@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: 'upload'
-          deployment_environment: ${{ matrix.deployment_environment }}
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: '/' # App source code path
-          api_location: '.output/server' # Api source code path - optional
-          output_location: '.output/public' # Built app content directory - optional
-          app_build_command: 'yarn build:azure'
-          ###### End of Repository/Build Configurations ######
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Web App
+        run: |
+          npx --yes @azure/static-web-apps-cli deploy .output\public --env ${{ matrix.deployment_environment }}
+        env:
+          SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Create & Link Function App
+        run: |
+          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis
+          python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }}
+        env:
+          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
+
+      - name: Deploy Function App
+        run: |
+          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output\server.zip
+
+      - name: Check HTTP status
+        run: |
+          Start-Sleep -Seconds 30
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }} || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }}/api || true
+        # The api returns 400 status code for some reason
+        # with:
+        #   url: ${{ matrix.url }}/api
+        #   code: 200
+        #   timeout: 300 # initial warm up can take quite some time
+        #   interval: 30
 
       - name: Run API tests
-        run: yarn test:api --env-var='base_url=${{ matrix.url }}/api'
+        run: yarn test:api
+        env:
+          TEST_URL: ${{ matrix.url }}
 
   close_pr_preview:
     name: Close PR preview
@@ -137,8 +197,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Close Pull Request
+      - name: Delete WebApp environment
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
           action: 'close'
+
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Delete Function App
+        run: az functionapp delete --name jabref-function-${{ github.event.pull_request.number }} --resource-group JabRefOnline

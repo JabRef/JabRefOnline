@@ -1,11 +1,10 @@
-import { UserDocument } from '@prisma/client'
-import mocking from 'jest-mock-extended'
+import { mock, mockReset } from 'vitest-mock-extended'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 import { register, resolve } from '../tsyringe'
 import { DocumentResolver } from './resolvers'
-import { UserDocumentService } from './user.document.service'
+import { UserDocument, UserDocumentService } from './user.document.service'
 
-const userDocumentService = mocking.mock<UserDocumentService>()
+const userDocumentService = mock<UserDocumentService>()
 register('UserDocumentService', { useValue: userDocumentService })
 const query = resolve('DocumentQuery')
 const mutation = resolve('DocumentMutation')
@@ -13,11 +12,11 @@ const mutation = resolve('DocumentMutation')
 const context = createUnauthenticatedContext()
 
 beforeEach(() => {
-  mocking.mockReset(userDocumentService)
+  mockReset(userDocumentService)
 })
 
-describe('Query', () => {
-  describe('userDocument', () => {
+describe('query', () => {
+  describe('user document', () => {
     it('gets the correct document', async () => {
       userDocumentService.getDocumentById
         .calledWith('uniqueId')
@@ -34,8 +33,8 @@ describe('Query', () => {
   })
 })
 
-describe('Mutation', () => {
-  describe('addUserDocument', () => {
+describe('mutation', () => {
+  describe('add user document', () => {
     /* TODO: Handle other fields
     it('converts other unknown fields correctly', async () => {
       await mutation.addUserDocument(
@@ -82,7 +81,8 @@ describe('Mutation', () => {
               authors: [
                 {
                   person: {
-                    name: 'JabRef devs',
+                    family: 'Doe',
+                    given: 'John',
                   },
                 },
               ],
@@ -92,11 +92,16 @@ describe('Mutation', () => {
         context
       )
       expect(userDocumentService.addDocument).toHaveBeenCalledWith({
-        added: null,
+        added: undefined,
         citationKeys: [],
-        lastModified: null,
+        lastModified: undefined,
         type: 'JOURNAL_ARTICLE',
-        author: 'JabRef devs',
+        authors: [
+          {
+            family: 'Doe',
+            given: 'John',
+          },
+        ],
         abstract: undefined,
         doi: undefined,
         electronicId: null,
@@ -108,6 +113,7 @@ describe('Mutation', () => {
         pageStart: null,
         publicationState: undefined,
         publishedAt: null,
+        revisionNumber: undefined,
         subtitle: undefined,
         title: undefined,
         titleAddon: undefined,
@@ -117,10 +123,10 @@ describe('Mutation', () => {
   })
 })
 
-describe('DocumentResolver', () => {
+describe('document resolver', () => {
   const documentResolver = new DocumentResolver()
-  describe('resolveType', () => {
-    it('returns JournalArticle for articles', () => {
+  describe('resolve type', () => {
+    it('returns  journal article for articles', () => {
       const article = {
         type: 'JOURNAL_ARTICLE',
       } as UserDocument

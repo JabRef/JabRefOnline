@@ -1,9 +1,3 @@
-import { User } from '@prisma/client'
-import { Context } from '../context'
-import {
-  UserDocumentService,
-  UserDocumentsResult,
-} from '../documents/user.document.service'
 import {
   ForgotPasswordPayload,
   MutationChangePasswordArgs,
@@ -12,10 +6,22 @@ import {
   MutationSignupArgs,
   QueryUserArgs,
   Resolvers,
+  UserChangesArgs,
+  UserChangesConnection,
+  UserChangesEdge,
   UserDocumentsArgs,
-} from '../graphql'
+} from '#graphql/resolver'
+import { User } from '@prisma/client'
+import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
+import { Context } from '../context'
+import {
+  UserDocument,
+  UserDocumentService,
+  UserDocumentsResult,
+} from '../documents/user.document.service'
 import { GroupResolved } from '../groups/resolvers'
 import { GroupService } from '../groups/service'
+import { validateInput } from '../utils/validation'
 import { inject, injectable, resolve } from './../tsyringe'
 import {
   AuthService,
@@ -24,6 +30,14 @@ import {
   LogoutPayload,
   SignupPayload,
 } from './auth.service'
+
+export type UserChangesEdgeUseDoc = Omit<UserChangesEdge, 'node'> & {
+  node: UserDocument
+}
+
+export type UserChangesResult = Omit<UserChangesConnection, 'edges'> & {
+  edges: UserChangesEdgeUseDoc[]
+}
 
 @injectable()
 export class Query {
@@ -50,9 +64,10 @@ export class Query {
 export class Mutation {
   constructor(@inject('AuthService') private authService: AuthService) {}
 
+  @validateInput(SignupInputSchema)
   async signup(
     _root: Record<string, never>,
-    { email, password }: MutationSignupArgs,
+    { input: { email, password } }: MutationSignupArgs,
     context: Context
   ): Promise<SignupPayload> {
     const newUserPayload = await this.authService.createAccount(email, password)
@@ -60,9 +75,10 @@ export class Mutation {
     return newUserPayload
   }
 
+  @validateInput(LoginInputSchema)
   async login(
     _root: Record<string, never>,
-    { email, password }: MutationLoginArgs,
+    { input: { email, password } }: MutationLoginArgs,
     context: Context
   ): Promise<LoginPayload> {
     const { user, info } = await context.authenticate('graphql-local', {
@@ -70,14 +86,14 @@ export class Mutation {
       password,
     })
     if (user) {
-      // Make login persistent by putting it in the express session store
+      // Make login persistent by putting it in the session store
       await context.login(user)
       return { user }
     } else {
       return {
         problems: [
           {
-            path: 'Email or Password',
+            path: ['email'],
             message:
               (typeof info === 'string' ? info : info?.message) ||
               'Unknown error while logging in.',
@@ -100,7 +116,7 @@ export class Mutation {
 
   async forgotPassword(
     _root: Record<string, never>,
-    { email }: MutationForgotPasswordArgs,
+    { input: { email } }: MutationForgotPasswordArgs,
     _context: Context
   ): Promise<ForgotPasswordPayload> {
     return {
@@ -110,7 +126,7 @@ export class Mutation {
 
   async changePassword(
     _root: Record<string, never>,
-    { token, id, newPassword }: MutationChangePasswordArgs,
+    { input: { token, id, newPassword } }: MutationChangePasswordArgs,
     _context: Context
   ): Promise<ChangePasswordPayload> {
     return await this.authService.updatePassword(token, id, newPassword)
@@ -173,14 +189,10 @@ export class UserResolver {
         true
       )
 
-    const endCursor = documents.length
-      ? documents[documents.length - 1].id
-      : null
-
     return {
       edges: documents.map((document) => ({ node: document })),
       pageInfo: {
-        endCursor,
+        endCursor: documents.length ? documents[documents.length - 1].id : null,
         hasNextPage,
       },
     }
@@ -204,6 +216,42 @@ export class UserResolver {
       }
     })
     return roots
+  }
+
+  async changes(
+    user: User,
+    { first, after }: UserChangesArgs
+  ): Promise<UserChangesResult> {
+    const { documents, hasNextPage } =
+      await this.userDocumentService.getChangedDocumentsOf(
+        user,
+        first,
+        after,
+        true
+      )
+
+    function constructCursor(documents: UserDocument[]) {
+      if (documents.length === 0) return null
+      const lastDoc = documents[documents.length - 1]
+      return {
+        id: lastDoc.id,
+        lastModified: lastDoc.lastModified,
+      }
+    }
+
+    return {
+      edges: documents.map((document) => ({
+        node: document,
+        revision: {
+          generation: document.revisionNumber,
+          hash: document.revisionHash,
+        },
+      })),
+      pageInfo: {
+        endCursor: constructCursor(documents),
+        hasNextPage,
+      },
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 # JabRefOnline
 
 This repository contains the source of the [JabRef homepage](https://www.jabref.org/).
+It contains also the [JabRef blog](https://blog.jabref.org/). Feel free to send blog entries.
 
 ## Servers
 
@@ -12,7 +13,7 @@ This repository contains the source of the [JabRef homepage](https://www.jabref.
 - Test server: https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net
   This server runs the latest version of the main branch with test data that is usually reset on redeployment.
   The main use of this server is for developers to test the latest version against their application without the fear to delete user data.
-  In particular, you can log in using `alice@jabref.de / EBNPXY35TYkYXHs`.
+  In particular, you can [log in](https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net/user/login) using `alice@jabref.org / EBNPXY35TYkYXHs`.
 - PR previews:
   Every pull request is deployed to a (temporary) server, which uses the same test data as the "Test server".
 
@@ -39,15 +40,15 @@ Now close and re-open the workspace.
 
 ## Commands
 
-| Command            | Description                                                                                                                                                                                                                                       |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| yarn install       | Install project dependencies and generate code.                                                                                                                                                                                                   |
-| yarn dev           | Start ExpressJS server in development with Nuxt.js in dev mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
-| yarn test          | Execute all tests. Pass `-u` to update all Jest snapshots.                                                                                                                                                                                        |
-| yarn build         | Build the nuxt.js web application for production.                                                                                                                                                                                                 |
-| yarn start         | Start ExpressJS server (for testing purposes).                                                                                                                                                                                                    |
-| yarn prisma:studio | Explore data in the database using a visual editor.                                                                                                                                                                                               |
-| yarn storybook     | Start [Storybook](#ui-workflow-storybook) in your browser.                                                                                                                                                                                        |
+| Command            | Description                                                                                                                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| yarn install       | Install project dependencies and generate code.                                                                                                                                                                          |
+| yarn dev           | Start Nuxt server in development mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
+| yarn test          | Execute all tests. Pass `-u` to update all snapshots.                                                                                                                                                                    |
+| yarn build         | Build the nuxt.js web application for production.                                                                                                                                                                        |
+| yarn start         | Start the production server built by `yarn build` (for testing purposes).                                                                                                                                                |
+| yarn prisma:studio | Explore data in the database using a visual editor.                                                                                                                                                                      |
+| yarn storybook     | Start [Storybook](#ui-workflow-storybook) in your browser.                                                                                                                                                               |
 
 ### Workflow for editing the database schema
 
@@ -101,7 +102,7 @@ An up-to-date version of all Storybook components can be found [online](https://
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format code and enforces consistent style.
 - [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): Override user/workspace VS Code settings with the provided settings in `.editorconfig`.
 - [Tailwind CSS](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): IntelliSense enhancement to support Tailwind.
-- [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): Add integration of Jest, e.g. easy debugging of tests.
+- [Vitest](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer): Add integration of Vitest, i.e., visual overview of the tests and easy debugging of tests.
 - [GraphQL](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql): Add syntax highlighting and IntelliSense for GraphQL.
 - Debugger for [Firefox](https://marketplace.visualstudio.com/items?itemName=firefox-devtools.vscode-firefox-debug) or [Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome): Allow debugging web applications from within VS Code.
 - Vue.js devtools: Browser integration for debugging and investigation for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
@@ -129,6 +130,14 @@ An up-to-date version of all Storybook components can be found [online](https://
   │   Resolver.ts
   │   Resolver.spec.ts
   ```
+- Commit messages and pull request titles follow the structure of [Conventional Commits](https://www.conventionalcommits.org).
+  The following prefixes are used:
+  - `feat`: Introduces a new feature or provides an enhancement of an existing feature
+  - `fix`: Patches a bug
+  - `refactor`: A code change that neither fixes a bug nor adds a feature
+  - `test`: Adds missing tests or corrects existing tests
+  - `docs`: Documentation only changes
+  - `chore`: Changes to the build process or auxiliary tools and libraries such as CI or package updates
 
 ## References
 

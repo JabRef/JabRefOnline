@@ -1,8 +1,8 @@
-import nodemailer from 'nodemailer'
+import { createTestAccount, createTransport } from 'nodemailer'
 
 export async function sendEmail(to: string, html: string): Promise<void> {
-  const testAccount = await nodemailer.createTestAccount()
-  const transporter = nodemailer.createTransport({
+  const testAccount = await createTestAccount()
+  const transporter = createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     secure: false, // true for 465, false for other ports

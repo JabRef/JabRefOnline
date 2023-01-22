@@ -31,11 +31,12 @@
               v-focus
             />
           </t-input-group>
-          <div class="py-2">
-            <t-button
+          <div class="py-2 text-center">
+            <n-button
               class="w-full"
-              type="submit"
-              >Submit</t-button
+              type="primary"
+              attr-type="submit"
+              >Submit</n-button
             >
           </div>
         </div>
@@ -57,15 +58,17 @@ export default defineComponent({
       error,
     } = useMutation(
       gql(/* GraphQL */ `
-        mutation ForgotPassword($email: EmailAddress!) {
-          forgotPassword(email: $email) {
+        mutation ForgotPassword($input: ForgotPasswordInput!) {
+          forgotPassword(input: $input) {
             result
           }
         }
       `),
       () => ({
         variables: {
-          email: email.value,
+          input: {
+            email: email.value,
+          },
         },
       })
     )
