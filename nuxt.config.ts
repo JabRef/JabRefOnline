@@ -92,6 +92,8 @@ export default defineNuxtConfig({
     '/gsoc/**': { redirect: '/codeprojects/gsoc' },
     '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
     '/surveys/': { redirect: '/surveys/2015' },
+    '/blog/**': { swr: true },
+    '/': { swr: true },
   },
 
   /**
