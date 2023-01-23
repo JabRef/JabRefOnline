@@ -15,8 +15,8 @@ export default defineNuxtConfig({
     // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata'],
     prerender: {
-      // Needed for storybook support
-      // routes: ['/_storybook/external-iframe'],
+      // Needed for storybook support (otherwise the file is not created during nuxi generate)
+      routes: ['/_storybook/external-iframe'],
     },
   },
 
