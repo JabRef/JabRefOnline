@@ -1,8 +1,8 @@
 diff --git a/package.json b/package.json
-index 67fa7352008b4d34940467ae0d621ca7a9270c0c..7e290a61bc140a00adf3bff5774db6ce74b18adc 100644
+index 0d58f0a7a6bd5186e33ffe0ba86f5a68b6e92477..e6b1970f47d944cfc9cc90df6ba577ee7c6c3821 100644
 --- a/package.json
 +++ b/package.json
-@@ -16,6 +16,19 @@
+@@ -16,6 +16,26 @@
    "main": "./main.cjs",
    "module": "./index.js",
    "types": "./index.d.ts",
@@ -11,11 +11,18 @@ index 67fa7352008b4d34940467ae0d621ca7a9270c0c..7e290a61bc140a00adf3bff5774db6ce
 +      "import": "./core/index.js",
 +      "require": "./core/core.cjs"
 +    },
++    "./core/index.js": {
++      "import": "./core/index.js",
++      "require": "./core/core.cjs"
++    },
 +    "./link/error": {
 +      "import": "./link/error/index.js",
 +      "require": "./link/error/error.cjs"
 +    },
 +    "./utilities/policies/pagination": {
++      "import": "./utilities/policies/pagination.js"
++    },
++    "./utilities/policies/pagination.js": {
 +      "import": "./utilities/policies/pagination.js"
 +    }
 +  },
