@@ -2501,62 +2501,89 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@forestadmin/agent@npm:beta":
-  version: 1.0.0-beta.47
-  resolution: "@forestadmin/agent@npm:1.0.0-beta.47"
+"@forestadmin/agent@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "@forestadmin/agent@npm:1.6.4"
   dependencies:
     "@fast-csv/format": ^4.3.5
     "@fastify/express": ^1.1.0
-    "@forestadmin/datasource-toolkit": 1.0.0-beta.27
-    "@koa/cors": ^3.3.0
-    "@koa/router": ^10.1.1
+    "@forestadmin/datasource-customizer": 1.5.10
+    "@forestadmin/datasource-toolkit": 1.3.0
+    "@forestadmin/forestadmin-client": 1.1.7
+    "@koa/cors": ^4.0.0
+    "@koa/router": ^12.0.0
     forest-ip-utils: ^1.0.1
     json-api-serializer: ^2.6.6
     json-stringify-pretty-compact: ^3.0.0
-    jsonwebtoken: ^8.5.1
-    koa: ^2.13.4
+    jsonwebtoken: ^9.0.0
+    koa: ^2.14.1
     koa-bodyparser: ^4.3.0
-    koa-jwt: ^4.0.3
-    lru-cache: ^7.3.1
-    luxon: ^2.3.0
+    koa-jwt: ^4.0.4
+    luxon: ^3.2.1
     object-hash: ^3.0.0
-    openid-client: 5.1.3
-    superagent: ^7.0.1
-    uuid: ^8.3.2
-  checksum: 8fab2e741a117a90a0940319a76a16550842be42eeaa64b1f497064cf111607effb767770ad5e601874f991b35512e5388d47adf30b613ab364dde0105afda2e
+    superagent: ^8.0.6
+    uuid: ^9.0.0
+  checksum: ba99cc93d9a201d693f6083a5184188efe02595f4cedd0710adb553fcda09e68bf080fea4f2044c89df2e6d31220816832a91c8e7e22f4169538c916d6268290
   languageName: node
   linkType: hard
 
-"@forestadmin/datasource-sequelize@npm:1.0.0-beta.36":
-  version: 1.0.0-beta.36
-  resolution: "@forestadmin/datasource-sequelize@npm:1.0.0-beta.36"
+"@forestadmin/datasource-customizer@npm:1.5.10":
+  version: 1.5.10
+  resolution: "@forestadmin/datasource-customizer@npm:1.5.10"
   dependencies:
-    "@forestadmin/datasource-toolkit": 1.0.0-beta.27
+    "@forestadmin/datasource-toolkit": 1.3.0
+    luxon: ^3.2.1
+    object-hash: ^3.0.0
+    uuid: ^9.0.0
+  checksum: 6bff99fe19b47e9b3457c39e29fcc5ff678ce3c0ff649a94611ce3a3d336c64e06d348845f4bdd24637f8448a0e7049809dc099e6bd5328a1c48ed9af91c9ce9
+  languageName: node
+  linkType: hard
+
+"@forestadmin/datasource-sequelize@npm:1.2.9":
+  version: 1.2.9
+  resolution: "@forestadmin/datasource-sequelize@npm:1.2.9"
+  dependencies:
+    "@forestadmin/datasource-toolkit": 1.3.0
   peerDependencies:
     sequelize: ">= 6.12.0 < 7"
-  checksum: 1c3fc105749ea33c70052e03d8aeb372a093417585e879a5fbea46960d6e2c2f494de3aa911ded60908c824e5a91bc5afcb7864c59391eae1d8bfd1d56a8aceb
+  checksum: 2d0b5097a5bb07607340149237aa49c4ba22164723ecde99194a10c28940324b475956a9ec4b867fab505e8d97d53d1e8ab7c0d56af507ff3b6f5814337cff46
   languageName: node
   linkType: hard
 
-"@forestadmin/datasource-sql@npm:beta":
-  version: 1.0.0-beta.42
-  resolution: "@forestadmin/datasource-sql@npm:1.0.0-beta.42"
+"@forestadmin/datasource-sql@npm:^1.1.13":
+  version: 1.1.13
+  resolution: "@forestadmin/datasource-sql@npm:1.1.13"
   dependencies:
-    "@forestadmin/datasource-sequelize": 1.0.0-beta.36
-    "@forestadmin/datasource-toolkit": 1.0.0-beta.27
-    sequelize: 6.21.3
-  checksum: 8fc73f7e864400493d9f0fbc030f91e34d920afd01e21f72cdde9892c0f542a73354c83edd28a8bb86cda3e01b990aab1764ebd4e86ae7d2025af76be7ee59d5
+    "@forestadmin/datasource-sequelize": 1.2.9
+    "@forestadmin/datasource-toolkit": 1.3.0
+    pluralize: ^8.0.0
+    sequelize: ^6.28.0
+  checksum: 59beb883c194a047176b33abea851e099e8299271beedafba2f06d95510bc491680247f7ba2b08efa11dbdac6096fe80a1c62e8c02e38b270b8c60e97503bc47
   languageName: node
   linkType: hard
 
-"@forestadmin/datasource-toolkit@npm:1.0.0-beta.27":
-  version: 1.0.0-beta.27
-  resolution: "@forestadmin/datasource-toolkit@npm:1.0.0-beta.27"
+"@forestadmin/datasource-toolkit@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@forestadmin/datasource-toolkit@npm:1.3.0"
   dependencies:
-    luxon: ^2.3.0
+    luxon: ^3.2.1
     object-hash: ^3.0.0
-    uuid: ^8.3.2
-  checksum: 58c99605279a017de58727fbb6f99d3767350bbf399e96e576e76f828e5fe09cbd393d28a3db438b49663163b9476ee20129ce18cfb890dde6f5096a7c71497a
+    uuid: ^9.0.0
+  checksum: 152b933e2e98516dd2629c1461c469a3ef0ab3e1fc27ceebeff16a7bc72cfab62d3ba382fe0e07334c861599d1300e460544c01eb68cae92f0fd5156e5dfa3a2
+  languageName: node
+  linkType: hard
+
+"@forestadmin/forestadmin-client@npm:1.1.7":
+  version: 1.1.7
+  resolution: "@forestadmin/forestadmin-client@npm:1.1.7"
+  dependencies:
+    json-api-serializer: ^2.6.6
+    jsonwebtoken: ^9.0.0
+    lru-cache: ^7.14.1
+    object-hash: ^3.0.0
+    openid-client: ^5.3.1
+    superagent: ^8.0.6
+  checksum: 8bf5dc753fad5280afe4d82e16f07e8ec7783000cf87d5cad12225ae884d0b84a76fcc59995205e91bc10650eb0bd0bfe31f1d2caafc30451e100401342dde4d
   languageName: node
   linkType: hard
 
@@ -4169,25 +4196,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@koa/cors@npm:^3.3.0":
-  version: 3.4.1
-  resolution: "@koa/cors@npm:3.4.1"
+"@koa/cors@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@koa/cors@npm:4.0.0"
   dependencies:
     vary: ^1.1.2
-  checksum: 8359f19e156f36016ae3f174ef374bd377eee271b29b9106d595f53fb8c80b63d6b8db7471a466fdc68f62f06286722c5351b5463ed2d46fe88256a568045af6
+  checksum: e0760544823532f2d71d792e3076858e38bab9b1c090abea175f1319fd91ea58a1da384a2fe7f5108f1c681e3830b01f62a1cafe271d6406751976af443187aa
   languageName: node
   linkType: hard
 
-"@koa/router@npm:^10.1.1":
-  version: 10.1.1
-  resolution: "@koa/router@npm:10.1.1"
+"@koa/router@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@koa/router@npm:12.0.0"
   dependencies:
-    debug: ^4.1.1
-    http-errors: ^1.7.3
+    http-errors: ^2.0.0
     koa-compose: ^4.1.0
     methods: ^1.1.2
-    path-to-regexp: ^6.1.0
-  checksum: 3475f4235576d24eaa218d55e845fb81946288d65b87aa8aeda1a23b11b5556a02b9a8ff1ea520bb988ec7201523c41cff5abce9285fd12b9e839d7590cd2ce1
+    path-to-regexp: ^6.2.1
+  checksum: 5529629f7517dba20319cf70b66c5a6111673019f6d196cd500a7b90e6663c99848c188f1bce17415d46c7b20b06566d432299a53affe0a15d05b9213917b9f6
   languageName: node
   linkType: hard
 
@@ -9499,6 +9525,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"buffer-writer@npm:2.0.0":
+  version: 2.0.0
+  resolution: "buffer-writer@npm:2.0.0"
+  checksum: 11736b48bb75106c52ca8ec9f025e7c1b3b25ce31875f469d7210eabd5c576c329e34f6b805d4a8d605ff3f0db1e16342328802c4c963e9c826b0e43a4e631c2
+  languageName: node
+  linkType: hard
+
 "buffer-xor@npm:^1.0.3":
   version: 1.0.3
   resolution: "buffer-xor@npm:1.0.3"
@@ -10789,6 +10822,13 @@ __metadata:
   version: 2.1.3
   resolution: "cookiejar@npm:2.1.3"
   checksum: 88259983ebc52ceb23cdacfa48762b6a518a57872eff1c7ed01d214fff5cf492e2660d7d5c04700a28f1787a76811df39e8639f8e17670b3cf94ecd86e161f07
+  languageName: node
+  linkType: hard
+
+"cookiejar@npm:^2.1.4":
+  version: 2.1.4
+  resolution: "cookiejar@npm:2.1.4"
+  checksum: c4442111963077dc0e5672359956d6556a195d31cbb35b528356ce5f184922b99ac48245ac05ed86cf993f7df157c56da10ab3efdadfed79778a0d9b1b092d5b
   languageName: node
   linkType: hard
 
@@ -13974,7 +14014,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"formidable@npm:^2.1.1":
+"formidable@npm:^2.1.1, formidable@npm:^2.1.2":
   version: 2.1.2
   resolution: "formidable@npm:2.1.2"
   dependencies:
@@ -15408,7 +15448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-errors@npm:2.0.0":
+"http-errors@npm:2.0.0, http-errors@npm:^2.0.0":
   version: 2.0.0
   resolution: "http-errors@npm:2.0.0"
   dependencies:
@@ -16661,8 +16701,8 @@ __metadata:
     "@apollo/server": ^4.3.0
     "@as-integrations/h3": ^1.1.4
     "@azure/static-web-apps-cli": ^1.0.3
-    "@forestadmin/agent": beta
-    "@forestadmin/datasource-sql": beta
+    "@forestadmin/agent": ^1.6.4
+    "@forestadmin/datasource-sql": ^1.1.13
     "@fortawesome/fontawesome-svg-core": ^6.2.1
     "@fortawesome/free-solid-svg-icons": ^6.2.1
     "@fortawesome/vue-fontawesome": ^3.0.2
@@ -16746,6 +16786,7 @@ __metadata:
     nuxt-runtime-compiler: ^1.1.2
     passport: ^0.6.0
     patch-package: ^6.5.0
+    pg: ^8.8.0
     pinia: ^2.0.28
     postinstall-postinstall: ^2.1.0
     prettier: ^2.8.2
@@ -16815,10 +16856,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.1.4":
-  version: 4.9.1
-  resolution: "jose@npm:4.9.1"
-  checksum: ebd9a4c9610d7fb93e9385f042554f0f3a83b16f3932a0aa42a7b78499c2ffae0607bce6b50a256521b3bf700d65140fdfb8de73988f1f29100491f3312a3707
+"jose@npm:^4.10.0":
+  version: 4.11.2
+  resolution: "jose@npm:4.11.2"
+  checksum: bc9b2271c31683603857b2fd2903afa29f826fffd4bcefc0845355ed86995def87eaadf502033207996109d76698c912e5a986e279326d9629321a50504fe466
   languageName: node
   linkType: hard
 
@@ -17315,14 +17356,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"koa-jwt@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "koa-jwt@npm:4.0.3"
+"koa-jwt@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "koa-jwt@npm:4.0.4"
   dependencies:
-    jsonwebtoken: ^8.5.1
+    jsonwebtoken: ^9.0.0
     koa-unless: ^1.0.7
     p-any: ^2.1.0
-  checksum: 79ed50e7e110ad4e8c6fcd4b458035a7cb69d60fab0913fe6e12ee07021638c0ed100310ad7888879cf826610f3fa17e362f112682c8f1787bf79d4bee78693e
+  checksum: 7edcc063d80d4fdf78ac5315c5046e3f34c76c81df35dae6970197bfd4e08f7130104691d62e19f250a22880e46bc7cba8dd33eae39426e23f6baecef00bbb7e
   languageName: node
   linkType: hard
 
@@ -17354,7 +17395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"koa@npm:^2.12.0, koa@npm:^2.13.4":
+"koa@npm:^2.12.0":
   version: 2.13.4
   resolution: "koa@npm:2.13.4"
   dependencies:
@@ -17382,6 +17423,37 @@ __metadata:
     type-is: ^1.6.16
     vary: ^1.1.2
   checksum: c9a6f9c803433b2d143a0788308048c1432a71c5febcfea2af7f2e8bd732b9bfd75c2c220d553752ee9ab9a3f52490f006cfd521db97cd01d8461d67cc1ccc1f
+  languageName: node
+  linkType: hard
+
+"koa@npm:^2.14.1":
+  version: 2.14.1
+  resolution: "koa@npm:2.14.1"
+  dependencies:
+    accepts: ^1.3.5
+    cache-content-type: ^1.0.0
+    content-disposition: ~0.5.2
+    content-type: ^1.0.4
+    cookies: ~0.8.0
+    debug: ^4.3.2
+    delegates: ^1.0.0
+    depd: ^2.0.0
+    destroy: ^1.0.4
+    encodeurl: ^1.0.2
+    escape-html: ^1.0.3
+    fresh: ~0.5.2
+    http-assert: ^1.3.0
+    http-errors: ^1.6.3
+    is-generator-function: ^1.0.7
+    koa-compose: ^4.1.0
+    koa-convert: ^2.0.0
+    on-finished: ^2.3.0
+    only: ~0.0.2
+    parseurl: ^1.3.2
+    statuses: ^1.5.0
+    type-is: ^1.6.16
+    vary: ^1.1.2
+  checksum: 84cfce48d72cf434831bd9f4f06beb3815da030325a7e89b13ee684f5afd158221e16c2d450ca637b221aa0c4a0ab235edd129e4efea656dc5d8384801d3e90f
   languageName: node
   linkType: hard
 
@@ -18047,7 +18119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^7.10.1, lru-cache@npm:^7.3.1, lru-cache@npm:^7.7.1":
+"lru-cache@npm:^7.10.1, lru-cache@npm:^7.7.1":
   version: 7.14.0
   resolution: "lru-cache@npm:7.14.0"
   checksum: efdd329f2c1bb790b71d497c6c59272e6bc2d7dd060ba55fc136becd3dd31fc8346edb446275504d94cb60d3c8385dbf5267b79b23789e409b2bdf302d13f0d7
@@ -18061,10 +18133,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:^2.3.0":
-  version: 2.5.0
-  resolution: "luxon@npm:2.5.0"
-  checksum: 2fccce6bbdfc8f13c5a8c148ff045ab3b10f4f80cac28dd92575588fffce9b2d7197096d7fedcc61a6245b59f4233507797f530e63f22b9ae4c425dff2909ae3
+"luxon@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "luxon@npm:3.2.1"
+  checksum: 3fa3def2c5f5d3032b4c46220c4da8aeb467ac979888fc9d2557adcd22195f93516b4ad5909a75862bec8dc6ddc0953b0f38e6d2f4a8ab8450ddc531a83cf20d
   languageName: node
   linkType: hard
 
@@ -18922,7 +18994,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime@npm:2.6.0, mime@npm:^2.4.4, mime@npm:^2.5.0":
+"mime@npm:2.6.0, mime@npm:^2.4.4":
   version: 2.6.0
   resolution: "mime@npm:2.6.0"
   bin:
@@ -20212,15 +20284,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openid-client@npm:5.1.3":
-  version: 5.1.3
-  resolution: "openid-client@npm:5.1.3"
+"openid-client@npm:^5.3.1":
+  version: 5.3.2
+  resolution: "openid-client@npm:5.3.2"
   dependencies:
-    jose: ^4.1.4
+    jose: ^4.10.0
     lru-cache: ^6.0.0
     object-hash: ^2.0.1
     oidc-token-hash: ^5.0.1
-  checksum: 3566c9917c7081e058af9fe45bd1f516f23bc52b4f6f995919859b07b68361d5af5b38703b4af1db3758afd0e95e79b6b267c59c86472093a5e6b1e36efdefa0
+  checksum: 59dc58d5b5cb795f3500f2d9d7ce604f6fb4c00623b16660fdf635d2789c3b2bb32e328ff10c918f9fa4e7fb269c768658d00769761d301be2d96d6150e07051
   languageName: node
   linkType: hard
 
@@ -20474,6 +20546,13 @@ __metadata:
   version: 1.0.0
   resolution: "packageurl-js@npm:1.0.0"
   checksum: 4ef95ffbc835b5c35a728f326e9b508a87a7d017c4b4832e896082893e03ad80d9d22133df1333d41d371597a8dcc0a11b1453b7a7de7d5757acb7e83886d0ba
+  languageName: node
+  linkType: hard
+
+"packet-reader@npm:1.0.0":
+  version: 1.0.0
+  resolution: "packet-reader@npm:1.0.0"
+  checksum: 0b7516f0cbf3e322aad591bed29ba544220088c53943145c0d9121a6f59182ad811f7fd6785a8979a34356aca69d97653689029964c5998dc02645633d88ffd7
   languageName: node
   linkType: hard
 
@@ -20793,7 +20872,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:^6.1.0":
+"path-to-regexp@npm:^6.1.0, path-to-regexp@npm:^6.2.1":
   version: 6.2.1
   resolution: "path-to-regexp@npm:6.2.1"
   checksum: f0227af8284ea13300f4293ba111e3635142f976d4197f14d5ad1f124aebd9118783dd2e5f1fe16f7273743cc3dbeddfb7493f237bb27c10fdae07020cc9b698
@@ -20898,6 +20977,71 @@ __metadata:
   version: 2.5.0
   resolution: "pg-connection-string@npm:2.5.0"
   checksum: a6f3a068f7c9416a5b33a326811caf0dfaaee045c225b7c628b4c9b4e9a2b25bdd12a21e4c48940e1000ea223a4e608ca122d2ff3dd08c8b1db0fc9f5705133a
+  languageName: node
+  linkType: hard
+
+"pg-int8@npm:1.0.1":
+  version: 1.0.1
+  resolution: "pg-int8@npm:1.0.1"
+  checksum: a1e3a05a69005ddb73e5f324b6b4e689868a447c5fa280b44cd4d04e6916a344ac289e0b8d2695d66e8e89a7fba023affb9e0e94778770ada5df43f003d664c9
+  languageName: node
+  linkType: hard
+
+"pg-pool@npm:^3.5.2":
+  version: 3.5.2
+  resolution: "pg-pool@npm:3.5.2"
+  peerDependencies:
+    pg: ">=8.0"
+  checksum: a5d029200257671f0c17ca54b9ab6213e2060e64e5cc792b78edd50ab471a26cd364890d05d546d9296949e079e943821cf2ceb4d488f4e6a6789fb781a628bf
+  languageName: node
+  linkType: hard
+
+"pg-protocol@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "pg-protocol@npm:1.5.0"
+  checksum: b839d12cafe942ef9cbc5b13c174eb2356804fb4fe8ead8279f46a36be90722d19a91409955beb8a3d5301639c44854e49749de4aef02dc361fee3e2a61fb1e4
+  languageName: node
+  linkType: hard
+
+"pg-types@npm:^2.1.0":
+  version: 2.2.0
+  resolution: "pg-types@npm:2.2.0"
+  dependencies:
+    pg-int8: 1.0.1
+    postgres-array: ~2.0.0
+    postgres-bytea: ~1.0.0
+    postgres-date: ~1.0.4
+    postgres-interval: ^1.1.0
+  checksum: bf4ec3f594743442857fb3a8dfe5d2478a04c98f96a0a47365014557cbc0b4b0cee01462c79adca863b93befbf88f876299b75b72c665b5fb84a2c94fbd10316
+  languageName: node
+  linkType: hard
+
+"pg@npm:^8.8.0":
+  version: 8.8.0
+  resolution: "pg@npm:8.8.0"
+  dependencies:
+    buffer-writer: 2.0.0
+    packet-reader: 1.0.0
+    pg-connection-string: ^2.5.0
+    pg-pool: ^3.5.2
+    pg-protocol: ^1.5.0
+    pg-types: ^2.1.0
+    pgpass: 1.x
+  peerDependencies:
+    pg-native: ">=3.0.1"
+  peerDependenciesMeta:
+    pg-native:
+      optional: true
+  checksum: fa30a85814dd7238b582c3bc6c0b9e2b0ae38dd0a6bb485ef480e64bb5ce589de6cb873ce4d3cd10c37a3e0a1e1281ba75dc7d80b1a68bae91999cd5b70d398b
+  languageName: node
+  linkType: hard
+
+"pgpass@npm:1.x":
+  version: 1.0.5
+  resolution: "pgpass@npm:1.0.5"
+  dependencies:
+    split2: ^4.1.0
+  checksum: 947ac096c031eebdf08d989de2e9f6f156b8133d6858c7c2c06c041e1e71dda6f5f3bad3c0ec1e96a09497bbc6ef89e762eefe703b5ef9cb2804392ec52ec400
   languageName: node
   linkType: hard
 
@@ -21663,6 +21807,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postgres-array@npm:~2.0.0":
+  version: 2.0.0
+  resolution: "postgres-array@npm:2.0.0"
+  checksum: 0e1e659888147c5de579d229a2d95c0d83ebdbffc2b9396d890a123557708c3b758a0a97ed305ce7f58edfa961fa9f0bbcd1ea9f08b6e5df73322e683883c464
+  languageName: node
+  linkType: hard
+
+"postgres-bytea@npm:~1.0.0":
+  version: 1.0.0
+  resolution: "postgres-bytea@npm:1.0.0"
+  checksum: d844ae4ca7a941b70e45cac1261a73ee8ed39d72d3d74ab1d645248185a1b7f0ac91a3c63d6159441020f4e1f7fe64689ac56536a307b31cef361e5187335090
+  languageName: node
+  linkType: hard
+
+"postgres-date@npm:~1.0.4":
+  version: 1.0.7
+  resolution: "postgres-date@npm:1.0.7"
+  checksum: 5745001d47e51cd767e46bcb1710649cd705d91a24d42fa661c454b6dcbb7353c066a5047983c90a626cd3bbfea9e626cc6fa84a35ec57e5bbb28b49f78e13ed
+  languageName: node
+  linkType: hard
+
+"postgres-interval@npm:^1.1.0":
+  version: 1.2.0
+  resolution: "postgres-interval@npm:1.2.0"
+  dependencies:
+    xtend: ^4.0.0
+  checksum: 746b71f93805ae33b03528e429dc624706d1f9b20ee81bf743263efb6a0cd79ae02a642a8a480dbc0f09547b4315ab7df6ce5ec0be77ed700bac42730f5c76b2
+  languageName: node
+  linkType: hard
+
 "postinstall-postinstall@npm:^2.1.0":
   version: 2.1.0
   resolution: "postinstall-postinstall@npm:2.1.0"
@@ -22161,7 +22335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.11.0, qs@npm:^6.10.0, qs@npm:^6.10.3, qs@npm:^6.11.0, qs@npm:^6.5.2":
+"qs@npm:6.11.0, qs@npm:^6.10.0, qs@npm:^6.11.0, qs@npm:^6.5.2":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
@@ -23097,10 +23271,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"retry-as-promised@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "retry-as-promised@npm:5.0.0"
-  checksum: 4d17e0597f967db0516714f0f2b085e2d1e8ea592450b013a1e0cd41dad74a9c3d1eb3c45351887de4bca1c3ac5f74dd07ef9942a3fb0e4db996a83bb28cb46e
+"retry-as-promised@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "retry-as-promised@npm:7.0.3"
+  checksum: 0dd0ed5f255be26266a2b862d5aad52800513cc06a21003684023fd5f604b1edc6486a488672b90d37b258a58efedaa9393f479f7a047958b1e73f6c6799fca3
   languageName: node
   linkType: hard
 
@@ -23505,9 +23679,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sequelize@npm:6.21.3":
-  version: 6.21.3
-  resolution: "sequelize@npm:6.21.3"
+"sequelize@npm:^6.28.0":
+  version: 6.28.0
+  resolution: "sequelize@npm:6.28.0"
   dependencies:
     "@types/debug": ^4.1.7
     "@types/validator": ^13.7.1
@@ -23518,7 +23692,7 @@ __metadata:
     moment: ^2.29.1
     moment-timezone: ^0.5.34
     pg-connection-string: ^2.5.0
-    retry-as-promised: ^5.0.0
+    retry-as-promised: ^7.0.3
     semver: ^7.3.5
     sequelize-pool: ^7.1.0
     toposort-class: ^1.0.1
@@ -23532,6 +23706,8 @@ __metadata:
       optional: true
     mysql2:
       optional: true
+    oracledb:
+      optional: true
     pg:
       optional: true
     pg-hstore:
@@ -23542,7 +23718,7 @@ __metadata:
       optional: true
     tedious:
       optional: true
-  checksum: 85a57cdde00edc5e1634585aacda874eeab9cc0d6d296e5ae90be3d861cba682bacde427009600d331fec82396520621a16a27d1958c689dd197d9d88051cf7e
+  checksum: 7e10ba4ebabab1ed54d6769fa73cac86dd3df88415ee32dd82f01ade6e1ebd9f6672288b601bd12507eae9eb2480ba905f74c93b1e380eb335430bf43ed757e9
   languageName: node
   linkType: hard
 
@@ -24082,6 +24258,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"split2@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "split2@npm:4.1.0"
+  checksum: ec581597cb74c13cdfb5e2047543dd40cb1e8e9803c7b1e0c29ede05f2b4f049b2d6e7f2788a225d544549375719658b8f38e9366364dec35dc7a12edfda5ee5
+  languageName: node
+  linkType: hard
+
 "sponge-case@npm:^1.0.1":
   version: 1.0.1
   resolution: "sponge-case@npm:1.0.1"
@@ -24539,25 +24722,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"superagent@npm:^7.0.1":
-  version: 7.1.5
-  resolution: "superagent@npm:7.1.5"
-  dependencies:
-    component-emitter: ^1.3.0
-    cookiejar: ^2.1.3
-    debug: ^4.3.4
-    fast-safe-stringify: ^2.1.1
-    form-data: ^4.0.0
-    formidable: ^2.0.1
-    methods: ^1.1.2
-    mime: ^2.5.0
-    qs: ^6.10.3
-    readable-stream: ^3.6.0
-    semver: ^7.3.7
-  checksum: 4782ca099b18a0933705f93ac4678290bcfcd5e57ca1286dd4f733c7fbb554ca0c7cc1c97261254dc29623ac258aa64fc40aaa18da960cbe759085efa3e4b8f6
-  languageName: node
-  linkType: hard
-
 "superagent@npm:^8.0.3":
   version: 8.0.3
   resolution: "superagent@npm:8.0.3"
@@ -24591,6 +24755,24 @@ __metadata:
     qs: ^6.11.0
     semver: ^7.3.8
   checksum: 2dfe44b74acd37da34cb44617919927ebf689570f46f89234be3a0b8e89cae5afca8e28adae6b6be77a3cd06661f47cf5c4c872e9d98ba184e8f12fcb041a29d
+  languageName: node
+  linkType: hard
+
+"superagent@npm:^8.0.6":
+  version: 8.0.8
+  resolution: "superagent@npm:8.0.8"
+  dependencies:
+    component-emitter: ^1.3.0
+    cookiejar: ^2.1.4
+    debug: ^4.3.4
+    fast-safe-stringify: ^2.1.1
+    form-data: ^4.0.0
+    formidable: ^2.1.2
+    methods: ^1.1.2
+    mime: 2.6.0
+    qs: ^6.11.0
+    semver: ^7.3.8
+  checksum: fe33da683fcc599de90f617099d48ce160c858baaf985c8366a4a71fd11fefaf58ad07a9bc646d80c53154605afd5be37645c6239ac4ad45201ff9f38583e553
   languageName: node
   linkType: hard
 
