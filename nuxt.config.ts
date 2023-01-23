@@ -21,13 +21,6 @@ export default defineNuxtConfig({
   },
 
   /*
-   ** Disable server-side rendering for now
-   ** See https://v3.nuxtjs.org/api/configuration/nuxt.config#ssr
-   ** and https://v3.nuxtjs.org/guide/concepts/rendering for a big-picture overview.
-   */
-  ssr: false,
-
-  /*
    ** Headers of the page
    ** See https://v3.nuxtjs.org/getting-started/seo-meta
    */
@@ -92,8 +85,8 @@ export default defineNuxtConfig({
     '/gsoc/**': { redirect: '/codeprojects/gsoc' },
     '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
     '/surveys/': { redirect: '/surveys/2015' },
-    '/blog/**': { swr: true },
-    '/': { swr: true },
+    '/blog/**': { static: true },
+    '/': { static: true },
   },
 
   /**
