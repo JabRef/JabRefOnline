@@ -109,7 +109,7 @@ jobs:
             deployment_environment: staging
           - environment: Production
             url: https://mango-pebble-0224c3803.1.azurestaticapps.net/
-            deployment_environment: 'prod'
+            deployment_environment: default
 
     environment:
       name: ${{ matrix.environment }}
