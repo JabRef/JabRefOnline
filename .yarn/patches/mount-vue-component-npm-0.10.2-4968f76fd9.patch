@@ -1,0 +1,15 @@
+diff --git a/package.json b/package.json
+index 57735c88e8e3ab5e6b9503872b5c39752a8d4c63..a440df371c1e390da3168ab0035b965e2e561b15 100644
+--- a/package.json
++++ b/package.json
+@@ -6,6 +6,10 @@
+   "main": "dist/index.cjs.js",
+   "module": "dist/index.esm.js",
+   "types": "./index.d.ts",
++  "exports": {
++    "import": "./dist/index.esm.js",
++    "require": "./dist/index.cjs.js"
++  },
+   "scripts": {
+     "build": "rollup -c",
+     "preversion": "npm run test && npm run build",
