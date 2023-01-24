@@ -6,6 +6,10 @@ module.exports = {
   },
   framework: {
     name: '@storybook/vue3-vite',
-    options: {},
+    options: {
+      builder: {
+        viteConfigPath: '.storybook/viteConfig.js',
+      },
+    },
   },
 }
