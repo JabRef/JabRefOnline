@@ -153,6 +153,10 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    // Workaround for https://github.com/browserify/node-util/pull/62
+    define: {
+      'process.env': {},
+    },
     server: {
       // Configure vite for HMR with Gitpod
       // Taken from https://github.com/vitejs/vite/issues/1653#issuecomment-1079322770

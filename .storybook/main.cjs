@@ -1,8 +1,9 @@
 module.exports = {
   core: {
-    // Disable telemetry collection
-    disableTelemetry: true,
-    // Use vite as builder
-    builder: '@storybook/builder-vite',
+    disableTelemetry: true
   },
-}
+  framework: {
+    name: "@storybook/vue3-vite",
+    options: {}
+  }
+};

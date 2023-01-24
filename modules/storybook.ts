@@ -1,15 +1,16 @@
 import { defineNuxtModule, logger } from '@nuxt/kit'
 import { Nuxt } from '@nuxt/schema'
-import type { StorybookConfig } from '@storybook/core-common'
-import { loadAllPresets } from '@storybook/core-common'
+import {
+  loadAllPresets,
+  resolveAddonName,
+  StorybookConfig,
+} from '@storybook/core-common'
 // @ts-expect-error: internal
-import { storybookDevServer } from '@storybook/core-server/dist/esm/dev-server'
-// @ts-expect-error: internal
-import { getManagerBuilder } from '@storybook/core-server/dist/esm/utils/get-manager-builder'
-// @ts-expect-error: internal
-import { getPreviewBuilder } from '@storybook/core-server/dist/esm/utils/get-preview-builder'
-// @ts-expect-error: internal
-import vueStorybook from '@storybook/vue3/dist/cjs/server/options'
+import * as managerBuilder from '@storybook/builder-manager'
+import * as previewBuilder from '@storybook/builder-vite'
+import { storybookDevServer } from '@storybook/core-server'
+// import * as vueRenderer from '@storybook/vue3'
+// import vueStorybook from '@storybook/vue3/dist/cjs/server/options'
 import chalk from 'chalk'
 import { LogLevel } from 'consola'
 import { withoutTrailingSlash } from 'ufo'
@@ -20,24 +21,31 @@ const path = '/_storybook/'
 async function startStorybookServer(nuxt: Nuxt, nuxtUrl: string) {
   /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument */
   const options = {
-    ...vueStorybook,
+    // ...vueStorybook,
     configDir: nuxt.options.rootDir + '/.storybook',
     managerCache: false,
     configType: 'DEVELOPMENT',
     ignorePreview: true,
     previewUrl: withoutTrailingSlash(nuxtUrl) + path + 'external-iframe',
     port: 3001,
+    stories: ['**/*.stories.*'],
+    packageJson: {
+      name: 'nuxt-storybook',
+    },
+    features: {
+      storyStoreV7: false,
+    },
   }
 
-  const previewBuilder = await getPreviewBuilder(options.configDir)
-  const managerBuilder = await getManagerBuilder(options.configDir)
-  const presets = loadAllPresets({
+  const presets = await loadAllPresets({
     corePresets: [
-      '@storybook/core-server/dist/cjs/presets/common-preset',
-      // require.resolve('./presets/common-preset'),
+      '@storybook/core-server/dist/presets/common-preset',
       ...managerBuilder.corePresets,
-      ...previewBuilder.corePresets,
-      // require.resolve('./presets/babel-cache-preset'),
+      ...(previewBuilder.corePresets || []),
+      resolveAddonName(options.configDir, '@storybook/vue3', options),
+      // ...corePresets,
+      '@storybook/vue3-vite/preset',
+      // require.resolve('@storybook/core-server/dist/presets/babel-cache-preset'),
     ],
     overridePresets: previewBuilder.overridePresets,
     ...options,
@@ -46,9 +54,12 @@ async function startStorybookServer(nuxt: Nuxt, nuxtUrl: string) {
   const features = await presets.apply<StorybookConfig['features']>('features')
   // global.FEATURES = features
   const fullOptions = {
-    presets,
-    features,
     ...options,
+    presets,
+    features: {
+      ...features,
+      storyStoreV7: false,
+    },
   }
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return await storybookDevServer(fullOptions)

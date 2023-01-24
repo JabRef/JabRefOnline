@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div id="root"></div>
-    <div id="docs-root"></div>
+    <div id="storybook-root"></div>
+    <div id="storybook-docs"></div>
     <div class="sb-errordisplay sb-wrapper">
       <div
         id="error-message"
@@ -17,7 +17,7 @@
 import { RenderContext, start } from '@storybook/core-client'
 import { VueFramework } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
-import { decorateStory } from '@storybook/vue3/dist/esm/client/preview/decorateStory'
+import { applyDecorators } from '@storybook/vue3/preview'
 import { mount } from 'mount-vue-component'
 import * as JabRefLogoStories from '~/components/JabRefLogo.stories'
 import * as NButtonStories from '~/components/n-button.stories'
@@ -55,7 +55,7 @@ export function renderToDOM(
 }
 // @ts-expect-error: storybook typing is inconsistent
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const api = start(renderToDOM, { decorateStory })
+const api = start(renderToDOM, { applyDecorators })
 const framework = 'vue3'
 definePageMeta({ layout: false, alias: '/iframe.html' })
 
@@ -77,7 +77,8 @@ export default defineComponent({
         TTagStories,
         TTextareaStories,
       ],
-      undefined
+      undefined,
+      false
     )
   },
 })
