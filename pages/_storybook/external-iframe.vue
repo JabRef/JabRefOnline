@@ -1,4 +1,5 @@
 <template>
+  <!-- Based on https://github.com/storybookjs/storybook/blob/next/code/lib/builder-vite/input/iframe.html -->
   <div>
     <div id="storybook-root"></div>
     <div id="storybook-docs"></div>
