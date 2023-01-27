@@ -20,6 +20,7 @@ definePageMeta({ layout: false })
 
 const route = useRoute()
 
+// @ts-expect-error: https://github.com/nuxt/nuxt/issues/18570
 const { version: latestRelease } = await $fetch('/api/getLatestRelease')
 
 let downloadUrl = 'https://www.fosshub.com/JabRef.html'
