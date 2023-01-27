@@ -1,0 +1,66 @@
+diff --git a/dist/runtime/components/Prose/ProseH1.vue b/dist/runtime/components/Prose/ProseH1.vue
+index d0e74eea8ae54c6958520e13196c734aba7971b4..308ed524b460c5501fc04b758ef7d35aaf6cf45c 100644
+--- a/dist/runtime/components/Prose/ProseH1.vue
++++ b/dist/runtime/components/Prose/ProseH1.vue
+@@ -12,5 +12,6 @@ import { useRuntimeConfig } from '#imports'
+ defineProps<{ id: string }>()
+ const heading = 1
+ const { anchorLinks } = useRuntimeConfig().public.content
++// @ts-expect-error: https://github.com/nuxt/content/issues/1856
+ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes(heading)
+ </script>
+diff --git a/dist/runtime/components/Prose/ProseH2.vue b/dist/runtime/components/Prose/ProseH2.vue
+index 195a8ed7fb2043a64b7d1c8ed6565918ee9e3439..a21811b592ded71049ab2491135506b36c60b33f 100644
+--- a/dist/runtime/components/Prose/ProseH2.vue
++++ b/dist/runtime/components/Prose/ProseH2.vue
+@@ -12,5 +12,6 @@ import { useRuntimeConfig } from '#imports'
+ defineProps<{ id: string }>()
+ const heading = 2
+ const { anchorLinks } = useRuntimeConfig().public.content
++// @ts-expect-error: https://github.com/nuxt/content/issues/1856
+ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes(heading)
+ </script>
+diff --git a/dist/runtime/components/Prose/ProseH3.vue b/dist/runtime/components/Prose/ProseH3.vue
+index dc3a78e19c51eb87d6015ab7ba2beee3958d153f..068c7df52d2d5eb3bf6de1d333f877275d618989 100644
+--- a/dist/runtime/components/Prose/ProseH3.vue
++++ b/dist/runtime/components/Prose/ProseH3.vue
+@@ -12,5 +12,6 @@ import { useRuntimeConfig } from '#imports'
+ defineProps<{ id: string }>()
+ const heading = 3
+ const { anchorLinks } = useRuntimeConfig().public.content
++// @ts-expect-error: https://github.com/nuxt/content/issues/1856
+ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes(heading)
+ </script>
+diff --git a/dist/runtime/components/Prose/ProseH4.vue b/dist/runtime/components/Prose/ProseH4.vue
+index 29f4360926ca14e9c394e39130447e2ca7ea1b42..5f51f66d8b9d75ffb231eddb8db23ce8e2d7413a 100644
+--- a/dist/runtime/components/Prose/ProseH4.vue
++++ b/dist/runtime/components/Prose/ProseH4.vue
+@@ -12,5 +12,6 @@ import { useRuntimeConfig } from '#imports'
+ defineProps<{ id: string }>()
+ const heading = 4
+ const { anchorLinks } = useRuntimeConfig().public.content
++// @ts-expect-error: https://github.com/nuxt/content/issues/1856
+ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes(heading)
+ </script>
+diff --git a/dist/runtime/components/Prose/ProseH5.vue b/dist/runtime/components/Prose/ProseH5.vue
+index f30a3b752a03564a4873f779dfe4a75a2dd2447a..cd8cf480ae39494ef6a7f839feef291875a9a446 100644
+--- a/dist/runtime/components/Prose/ProseH5.vue
++++ b/dist/runtime/components/Prose/ProseH5.vue
+@@ -12,5 +12,6 @@ import { useRuntimeConfig } from '#imports'
+ defineProps<{ id: string }>()
+ const heading = 5
+ const { anchorLinks } = useRuntimeConfig().public.content
++// @ts-expect-error: https://github.com/nuxt/content/issues/1856
+ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes(heading)
+ </script>
+diff --git a/dist/runtime/components/Prose/ProseH6.vue b/dist/runtime/components/Prose/ProseH6.vue
+index 37289648794acd2651a59814539f877159c2e4f4..e7fce9e375d9d88c98b887d4e358bfa7e960b0e6 100644
+--- a/dist/runtime/components/Prose/ProseH6.vue
++++ b/dist/runtime/components/Prose/ProseH6.vue
+@@ -12,5 +12,6 @@ import { useRuntimeConfig } from '#imports'
+ defineProps<{ id: string }>()
+ const heading = 6
+ const { anchorLinks } = useRuntimeConfig().public.content
++// @ts-expect-error: https://github.com/nuxt/content/issues/1856
+ const generate = anchorLinks?.depth >= heading && !anchorLinks?.exclude.includes(heading)
+ </script>
