@@ -164,13 +164,13 @@
     "@apollo/client@^3.7.0": "patch:@apollo/client@npm%3A3.7.0#./.yarn/patches/@apollo-client-npm-3.7.0-07cf6b7bb6.patch",
     "tslib": "^2.4.0",
     "@nuxt/content@^2.3.0": "patch:@nuxt/content@npm%3A2.4.2#./.yarn/patches/@nuxt-content-npm-2.4.2-36a92b2a56.patch",
-    "@nuxt/kit@^3.0.0": "patch:@nuxt/kit@npm%3A3.1.1#./.yarn/patches/@nuxt-kit-npm-3.1.1-fb76d27b97.patch",
     "@nuxt/kit@3.1.1": "patch:@nuxt/kit@npm%3A3.1.1#./.yarn/patches/@nuxt-kit-npm-3.1.1-fb76d27b97.patch"
   },
   "resolutionsComments": {
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "unist-builder/remark-parse": "Otherwise we run into conflicts with older versions, which are imported mainly from storybook",
-    "tslib": "some libraries still pull-in v1 of tslib, which is incompatible with the other libraries that use tslib v2 features"
+    "tslib": "some libraries still pull-in v1 of tslib, which is incompatible with the other libraries that use tslib v2 features",
+    "@nuxt/kit": "https://github.com/nuxt/nuxt/pull/18589"
   },
   "prisma": {
     "schema": "server/database/schema.prisma",

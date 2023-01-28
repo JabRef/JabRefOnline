@@ -7,20 +7,16 @@ const config: StorybookConfig = {
   stories: ['../components/*.stories.ts'],
   core: {
     disableTelemetry: true,
-    //renderer: '@storybook/html',
   },
   framework: {
     name: '@storybook/vue3-vite',
-    //name: 'storybook-nuxt',
-    options: {
-      builder: {
-        viteConfigPath: '.storybook/viteConfig.js',
-      },
-    },
+    options: {},
   },
   async viteFinal(config) {
     const nuxtViteConfig = (await startNuxtAndGetViteConfig()).viteConfig
     // Need to remove the vue plugin as it conflicts with the one configured by nuxt
+    // it would be better to provide nuxt's config as the initial config to storybook,
+    // but this is not yet possible https://github.com/storybookjs/storybook/issues/20817
     config.plugins = config.plugins.filter((plugin) => {
       if (
         plugin !== null &&
@@ -47,7 +43,6 @@ const config: StorybookConfig = {
 // https://github.com/nuxt/nuxt/issues/14534
 // From: https://github.com/danielroe/nuxt-vitest/blob/main/packages/nuxt-vitest/src/config.ts
 async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
-  // TODO: Need better handling if Nuxt is already running
   let nuxt = tryUseNuxt()
   let nuxtAlreadyRunnnig = true
   if (!nuxt) {
@@ -74,6 +69,9 @@ async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
       }
     })
 
+    // TODO: Need better handling if Nuxt is already running
+    // we don't really want to build nuxt again,
+    // or at least shutdown the second build after vite:extendConfig is called
     buildNuxt(nuxt).catch((err) => {
       if (!err.toString().includes('_stop_')) {
         reject(err)
