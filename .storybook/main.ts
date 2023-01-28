@@ -48,9 +48,11 @@ const config: StorybookConfig = {
 // From: https://github.com/danielroe/nuxt-vitest/blob/main/packages/nuxt-vitest/src/config.ts
 async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
   // TODO: Need better handling if Nuxt is already running
-  const nuxt =
-    tryUseNuxt() ||
-    (await loadNuxt({
+  let nuxt = tryUseNuxt()
+  let nuxtAlreadyRunnnig = true
+  if (!nuxt) {
+    nuxtAlreadyRunnnig = false
+    nuxt = await loadNuxt({
       cwd: rootDir,
       dev: false,
       overrides: {
@@ -59,13 +61,16 @@ async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
           rootId: 'nuxt-test',
         },
       },
-    }))
+    })
+  }
 
   const promise = new Promise<{ nuxt; viteConfig }>((resolve, reject) => {
     nuxt.hook('vite:extendConfig', (viteConfig, { isClient }) => {
       if (isClient) {
         resolve({ nuxt, viteConfig })
-        //throw new Error('_stop_')
+        if (!nuxtAlreadyRunnnig) {
+          throw new Error('_stop_')
+        }
       }
     })
 
@@ -74,7 +79,11 @@ async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
         reject(err)
       }
     })
-  }) //.finally(() => nuxt.close())
+  }).finally(() => {
+    if (!nuxtAlreadyRunnnig) {
+      nuxt.close()
+    }
+  })
 
   return promise
 }
