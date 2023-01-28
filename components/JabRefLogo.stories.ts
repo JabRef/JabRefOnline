@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/vue3'
-import JabRefLogo from './JabrefLogo.vue'
+import JabRefLogo from './JabrefLogo.island.vue'
 
 export default {
   title: 'JabRef Logo',

@@ -1,0 +1,76 @@
+{
+  "name": "storybook-nuxt",
+  "version": "7.0.0-beta.35",
+  "description": "Storybook for HTML and Vite: Develop HTML in isolation with Hot Reloading.",
+  "keywords": [
+    "storybook"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook/tree/main/frameworks/html-vite",
+  "bugs": {
+    "url": "https://github.com/storybookjs/storybook/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "directory": "frameworks/html-vite"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/storybook"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "node": "./dist/index.cjs",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./preset": {
+      "require": "./dist/preset.cjs",
+      "import": "./dist/preset.mjs",
+      "types": "./dist/preset.d.ts"
+    },
+    "./html": {
+      "require": "./dist/renderer.cjs",
+      "import": "./dist/renderer.mjs",
+      "types": "./dist/preset.d.ts"
+    },
+    "./html/preview": {
+      "require": "./dist/renderer.cjs",
+      "import": "./dist/renderer.mjs",
+      "types": "./dist/preset.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "template/**/*",
+    "README.md",
+    "*.js",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "check": "tsc --noEmit",
+    "prep": "../../../scripts/prepare/bundle.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": "^14.18 || >=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "entries": [
+      "./src/index.ts",
+      "./src/preset.ts"
+    ],
+    "platform": "node"
+  },
+  "gitHead": "e6d5c50c88bc67468a815efc1048b36ebc2d4bdd"
+}

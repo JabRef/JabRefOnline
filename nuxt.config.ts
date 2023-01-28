@@ -11,6 +11,10 @@ export default defineNuxtConfig({
     global: 'global.ts',
   },
 
+  experimental: {
+    componentIslands: true,
+  },
+
   nitro: {
     // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata'],
@@ -25,7 +29,7 @@ export default defineNuxtConfig({
    ** See https://v3.nuxtjs.org/api/configuration/nuxt.config#ssr
    ** and https://v3.nuxtjs.org/guide/concepts/rendering for a big-picture overview.
    */
-  ssr: false,
+  // ssr: false,
 
   /*
    ** Headers of the page
