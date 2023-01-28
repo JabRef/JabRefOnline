@@ -1,5 +1,6 @@
 import { buildNuxt, loadNuxt, tryUseNuxt } from '@nuxt/kit'
 import type { StorybookConfig } from '@storybook/vue3-vite'
+import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
   // Need to specify stories as workaround for https://github.com/storybookjs/storybook/issues/20761
@@ -18,8 +19,28 @@ const config: StorybookConfig = {
     },
   },
   async viteFinal(config) {
-    return (await startNuxtAndGetViteConfig()).viteConfig
-    //return mergeConfig(, config)
+    const nuxtViteConfig = (await startNuxtAndGetViteConfig()).viteConfig
+    // Need to remove the vue plugin as it conflicts with the one configured by nuxt
+    config.plugins = config.plugins.filter((plugin) => {
+      if (
+        plugin !== null &&
+        typeof plugin === 'object' &&
+        'name' in plugin &&
+        plugin.name === 'vite:vue'
+      ) {
+        return false
+      }
+      return true
+    })
+    return mergeConfig(
+      {
+        resolve: nuxtViteConfig.resolve,
+        optimizeDeps: nuxtViteConfig.optimizeDeps,
+        plugins: nuxtViteConfig.plugins,
+        define: nuxtViteConfig.define,
+      },
+      config
+    )
   },
 }
 
