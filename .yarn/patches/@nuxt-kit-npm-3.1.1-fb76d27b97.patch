@@ -1,0 +1,20 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index d03c2d3b06dbdceffdaede775c84bec514b145ca..1c2c759f6feefe3aad273b558f8f42103c3a4d1a 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1,5 +1,5 @@
+ import { promises, existsSync, readFileSync } from 'node:fs';
+-import defu, { defu as defu$1 } from 'defu';
++import { defu as defu$1 } from 'defu';
+ import { applyDefaults } from 'untyped';
+ import { dirname, join, normalize, relative, isAbsolute, resolve, basename, parse } from 'pathe';
+ import consola from 'consola';
+@@ -133,7 +133,7 @@ function defineNuxtModule(definition) {
+   async function getOptions(inlineOptions, nuxt = useNuxt()) {
+     const configKey = definition.meta.configKey || definition.meta.name;
+     const _defaults = definition.defaults instanceof Function ? definition.defaults(nuxt) : definition.defaults;
+-    let _options = defu(inlineOptions, nuxt.options[configKey], _defaults);
++    let _options = defu$1(inlineOptions, nuxt.options[configKey], _defaults);
+     if (definition.schema) {
+       _options = await applyDefaults(definition.schema, _options);
+     }
