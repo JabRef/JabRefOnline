@@ -72,6 +72,9 @@ export default defineNuxtConfig({
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
+    // Add support for native vue stories
+    // https://github.com/tobiasdiez/storybook-vue-addon
+    'storybook-vue-addon/nuxt',
   ],
 
   /*
