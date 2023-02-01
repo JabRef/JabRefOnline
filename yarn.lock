@@ -2951,13 +2951,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-inspector/cli@npm:^3.4.0":
-  version: 3.4.1
-  resolution: "@graphql-inspector/cli@npm:3.4.1"
+"@graphql-inspector/cli@npm:^3.4.2":
+  version: 3.4.2
+  resolution: "@graphql-inspector/cli@npm:3.4.2"
   dependencies:
     "@graphql-inspector/audit-command": 3.4.1
     "@graphql-inspector/code-loader": 3.4.0
     "@graphql-inspector/commands": 3.4.0
+    "@graphql-inspector/config": 3.4.0
     "@graphql-inspector/coverage-command": 3.4.1
     "@graphql-inspector/diff-command": 3.4.1
     "@graphql-inspector/docs-command": 3.4.0
@@ -2977,7 +2978,7 @@ __metadata:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
   bin:
     graphql-inspector: index.js
-  checksum: 2603dd16de75b50d360cbbddac6f126328b8bbb4301fbd26c6a5650a5741ddb683408d628a454feb15ea946129bcd344885ced0d4bc259248d077d1f37453296
+  checksum: 161dea412c5a28941af9d83de38fb1201e1d187fd8c34fcaf0e8214d34512b36cd4c67ac6fd6aea5b64beee4eaf205b96610c896983a28aa935a3a71483a9b08
   languageName: node
   linkType: hard
 
@@ -3004,6 +3005,15 @@ __metadata:
     graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     yargs: 17.2.1
   checksum: 7a0942e97d413388a01a347ccc7cd34f037c6b63f14502215964c9ee5602cf1b7b7d391278d9aa3dadab4ee07f0a17662d8ec362c8712fa93c2f5cd3714e70a3
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/config@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/config@npm:3.4.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: ce4f367e8436b226c4987f8ad5d938ef04b1b58b2266386965b8ca6750c7e0e2742ca9b47bbb6fafb35bacd594fde811f8848207bbabc0d07ead3f6ba87e6af3
   languageName: node
   linkType: hard
 
@@ -15839,7 +15849,7 @@ __metadata:
     "@graphql-codegen/typed-document-node": ^2.3.12
     "@graphql-codegen/typescript-operations": ^2.5.12
     "@graphql-eslint/eslint-plugin": ^3.14.3
-    "@graphql-inspector/cli": ^3.4.0
+    "@graphql-inspector/cli": ^3.4.2
     "@graphql-tools/graphql-file-loader": ^7.5.13
     "@graphql-tools/load": ^7.8.8
     "@graphql-tools/merge": ^8.3.14
