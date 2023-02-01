@@ -3834,19 +3834,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@joshwooding/vite-plugin-react-docgen-typescript@npm:0.0.5":
-  version: 0.0.5
-  resolution: "@joshwooding/vite-plugin-react-docgen-typescript@npm:0.0.5"
+"@joshwooding/vite-plugin-react-docgen-typescript@npm:0.2.1":
+  version: 0.2.1
+  resolution: "@joshwooding/vite-plugin-react-docgen-typescript@npm:0.2.1"
   dependencies:
-    "@rollup/pluginutils": ^4.2.1
     glob: ^7.2.0
     glob-promise: ^4.2.0
-    magic-string: ^0.26.1
-    react-docgen-typescript: ^2.1.1
+    magic-string: ^0.27.0
+    react-docgen-typescript: ^2.2.2
   peerDependencies:
     typescript: ">= 4.3.x"
-    vite: ">2.0.0-0"
-  checksum: e722b472413bf67e879bdd3969a43223e161b2d2b634848b7a88c89ddb507ad331959808ff7e17b6513527e797aae4aad973dda0bd3c7ab3348ebc691ab76b83
+    vite: ^3.0.0 || ^4.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 91401505b379396cb48c74e99ebafb8a3f85bb0c38783d4b17df42d5420782bf733f049f9a97659feb4423b4e4db9ba35fd8230add5fd32e615d5633d37cdcfd
   languageName: node
   linkType: hard
 
@@ -4754,7 +4756,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^4.0.0, @rollup/pluginutils@npm:^4.2.1":
+"@rollup/pluginutils@npm:^4.0.0":
   version: 4.2.1
   resolution: "@rollup/pluginutils@npm:4.2.1"
   dependencies:
@@ -4924,11 +4926,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:^0.2.6":
-  version: 0.2.7
-  resolution: "@storybook/builder-vite@npm:0.2.7"
+"@storybook/builder-vite@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@storybook/builder-vite@npm:0.3.0"
   dependencies:
-    "@joshwooding/vite-plugin-react-docgen-typescript": 0.0.5
+    "@joshwooding/vite-plugin-react-docgen-typescript": 0.2.1
     "@storybook/core-common": ^6.4.3
     "@storybook/mdx1-csf": ^0.0.4
     "@storybook/node-logger": ^6.4.3
@@ -4945,9 +4947,9 @@ __metadata:
     sveltedoc-parser: ^4.2.1
   peerDependencies:
     "@storybook/mdx2-csf": ^0.0.3
-    "@sveltejs/vite-plugin-svelte": ^1.0.0
-    "@vitejs/plugin-vue": ^3.0.0
-    vite: ">= 3.0.0"
+    "@sveltejs/vite-plugin-svelte": ^2.0.0
+    "@vitejs/plugin-vue": ^4.0.0
+    vite: ">= 4.0.0"
     vue-docgen-api: ^4.40.0
   peerDependenciesMeta:
     "@storybook/mdx2-csf":
@@ -4958,7 +4960,7 @@ __metadata:
       optional: true
     vue-docgen-api:
       optional: true
-  checksum: 4e676545623c03cf98f355a0adda55d0404c6118426cc2a746ccf85443576e31234863513c14c23d51b07ef2df4acf1b6c5fc136ae133071de8b04f1bde4a473
+  checksum: f7bdf2722a3ff5e26ae65c2b57881c4e57c89dc91552030d550e93ea8373bb2ff80a1a7d7707fb07208b7b033fa9b352d861e10f1e98affe8b1b075ac43d7aa9
   languageName: node
   linkType: hard
 
@@ -15865,7 +15867,7 @@ __metadata:
     "@pinia/nuxt": ^0.4.6
     "@popperjs/core": ^2.11.6
     "@prisma/client": ^4.8.0
-    "@storybook/builder-vite": ^0.2.6
+    "@storybook/builder-vite": ^0.3.0
     "@storybook/vue3": ^6.5.15
     "@tailwindcss/forms": ^0.5.3
     "@tailwindcss/line-clamp": ^0.4.2
@@ -21222,7 +21224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-docgen-typescript@npm:^2.1.1":
+"react-docgen-typescript@npm:^2.2.2":
   version: 2.2.2
   resolution: "react-docgen-typescript@npm:2.2.2"
   peerDependencies:
