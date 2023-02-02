@@ -1,10 +1,11 @@
 import { buildNuxt, loadNuxt, tryUseNuxt } from '@nuxt/kit'
 import type { StorybookConfig } from '@storybook/vue3-vite'
+import VueStories from 'storybook-vue-addon/vite'
 import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
   // Need to specify stories as workaround for https://github.com/storybookjs/storybook/issues/20761
-  stories: ['../components/*.stories.@(vue|ts)'],  
+  stories: ['../components/*.stories.@(vue|ts)'],
   core: {
     disableTelemetry: true,
   },
@@ -29,6 +30,7 @@ const config: StorybookConfig = {
       }
       return true
     })
+    config.plugins?.unshift(VueStories())
     return mergeConfig(
       {
         resolve: nuxtViteConfig.resolve,
