@@ -2872,19 +2872,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-resolvers@npm:^2.7.12":
-  version: 2.7.12
-  resolution: "@graphql-codegen/typescript-resolvers@npm:2.7.12"
+"@graphql-codegen/typescript-resolvers@npm:^2.7.13":
+  version: 2.7.13
+  resolution: "@graphql-codegen/typescript-resolvers@npm:2.7.13"
   dependencies:
     "@graphql-codegen/plugin-helpers": ^3.1.2
-    "@graphql-codegen/typescript": ^2.8.7
-    "@graphql-codegen/visitor-plugin-common": 2.13.7
+    "@graphql-codegen/typescript": ^2.8.8
+    "@graphql-codegen/visitor-plugin-common": 2.13.8
     "@graphql-tools/utils": ^9.0.0
     auto-bind: ~4.0.0
     tslib: ~2.4.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: f8f60d972720f42f7407d91febfa4ae91f4e6cc2bd990babe85f8d1c77a3fa8dcc4ac85d8267ce24942703fc28ff6f38f4d8215e098f34fe1b35063aa08ef5a0
+  checksum: 9ddfeb295e55055d450f30942c476edbc05722943d5265e9eaea9f89cef9eecb749be1ece9ce9247d53bdcc7688ca305100327d28096f5fe6aee387cf3f275f5
   languageName: node
   linkType: hard
 
@@ -3429,6 +3429,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/graphql-file-loader@npm:^7.5.14":
+  version: 7.5.15
+  resolution: "@graphql-tools/graphql-file-loader@npm:7.5.15"
+  dependencies:
+    "@graphql-tools/import": 6.7.16
+    "@graphql-tools/utils": 9.2.0
+    globby: ^11.0.3
+    tslib: ^2.4.0
+    unixify: ^1.0.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: d1b88d768db8854c34c83c3958c3c1d9d508f71ebdc224ab4d8f7a97789fa5c30874094eec58c82fb84d0c8343036339bd5485a195be0b29a68257d360aa14e4
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/graphql-tag-pluck@npm:7.4.3, @graphql-tools/graphql-tag-pluck@npm:^7.3.6":
   version: 7.4.3
   resolution: "@graphql-tools/graphql-tag-pluck@npm:7.4.3"
@@ -3455,6 +3470,19 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 22e47d09a333b98b90ab3391510a0b74b7ca0fbd7e7dd62b624f336243f7a28150f187a39c428da0b7c62e24e7d9fb73ceae4a4ce3663f360c7b6ca5418eaf96
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/import@npm:6.7.16":
+  version: 6.7.16
+  resolution: "@graphql-tools/import@npm:6.7.16"
+  dependencies:
+    "@graphql-tools/utils": 9.2.0
+    resolve-from: 5.0.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 5985cc292ca877c2cab8ded8d1e38247738f38ec282c6eb68c3a032def4bec51466b8518348e7e7c242eaa061d9cf4714c8cb33baf3384c7ec50f9a9277214e5
   languageName: node
   linkType: hard
 
@@ -3486,7 +3514,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/load@npm:^7.8.0":
+"@graphql-tools/load@npm:^7.8.0, @graphql-tools/load@npm:^7.8.10":
   version: 7.8.11
   resolution: "@graphql-tools/load@npm:7.8.11"
   dependencies:
@@ -16127,7 +16155,7 @@ __metadata:
     naive-ui: ^2.34.3
     nodemailer: ^6.8.0
     nuxt: ^3.1.1
-    nuxt-graphql-server: 1.1.5
+    nuxt-graphql-server: 1.1.6
     nuxt-runtime-compiler: ^1.1.2
     passport: ^0.6.0
     patch-package: ^6.5.0
@@ -19077,21 +19105,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-graphql-server@npm:1.1.5":
-  version: 1.1.5
-  resolution: "nuxt-graphql-server@npm:1.1.5"
+"nuxt-graphql-server@npm:1.1.6":
+  version: 1.1.6
+  resolution: "nuxt-graphql-server@npm:1.1.6"
   dependencies:
     "@graphql-codegen/core": ^2.6.8
     "@graphql-codegen/plugin-helpers": ^3.1.2
-    "@graphql-codegen/typescript": ^2.8.7
-    "@graphql-codegen/typescript-resolvers": ^2.7.12
-    "@graphql-tools/graphql-file-loader": ^7.5.13
-    "@graphql-tools/load": ^7.8.8
-    "@nuxt/kit": ^3.0.0
+    "@graphql-codegen/typescript": ^2.8.8
+    "@graphql-codegen/typescript-resolvers": ^2.7.13
+    "@graphql-tools/graphql-file-loader": ^7.5.14
+    "@graphql-tools/load": ^7.8.10
+    "@nuxt/kit": ^3.1.1
     multimatch: ^6.0.0
   peerDependencies:
     graphql: ^16.6.0
-  checksum: 816dbfb296a5259b8d9a772206b9e7934b4f5e6dc8b1a19e07dae8a6d54b5bdd8eac2a8848215f62859e158b75762c3c60f1db500a1c3312847d18257f6f9d84
+  checksum: 90dd971fc4894bd38c58d15bd000c67dcbf8464117811660ba655454ba5789ca64d69df5577de02e72de414e71d8627bd48302f9a219ce03a76074ac1fdbc7d6
   languageName: node
   linkType: hard
 
