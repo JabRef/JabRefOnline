@@ -4,7 +4,7 @@ import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
   // Need to specify stories as workaround for https://github.com/storybookjs/storybook/issues/20761
-  stories: ['../components/*.stories.ts'],
+  stories: ['../components/*.stories.@(vue|ts)'],  
   core: {
     disableTelemetry: true,
   },
@@ -12,6 +12,7 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: {},
   },
+  addons: ['storybook-vue-addon'],
   async viteFinal(config) {
     const nuxtViteConfig = (await startNuxtAndGetViteConfig()).viteConfig
     // Need to remove the vue plugin as it conflicts with the one configured by nuxt
