@@ -3429,6 +3429,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/graphql-file-loader@npm:^7.5.15":
+  version: 7.5.15
+  resolution: "@graphql-tools/graphql-file-loader@npm:7.5.15"
+  dependencies:
+    "@graphql-tools/import": 6.7.16
+    "@graphql-tools/utils": 9.2.0
+    globby: ^11.0.3
+    tslib: ^2.4.0
+    unixify: ^1.0.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: d1b88d768db8854c34c83c3958c3c1d9d508f71ebdc224ab4d8f7a97789fa5c30874094eec58c82fb84d0c8343036339bd5485a195be0b29a68257d360aa14e4
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/graphql-tag-pluck@npm:7.4.3, @graphql-tools/graphql-tag-pluck@npm:^7.3.6":
   version: 7.4.3
   resolution: "@graphql-tools/graphql-tag-pluck@npm:7.4.3"
@@ -3455,6 +3470,19 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 22e47d09a333b98b90ab3391510a0b74b7ca0fbd7e7dd62b624f336243f7a28150f187a39c428da0b7c62e24e7d9fb73ceae4a4ce3663f360c7b6ca5418eaf96
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/import@npm:6.7.16":
+  version: 6.7.16
+  resolution: "@graphql-tools/import@npm:6.7.16"
+  dependencies:
+    "@graphql-tools/utils": 9.2.0
+    resolve-from: 5.0.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 5985cc292ca877c2cab8ded8d1e38247738f38ec282c6eb68c3a032def4bec51466b8518348e7e7c242eaa061d9cf4714c8cb33baf3384c7ec50f9a9277214e5
   languageName: node
   linkType: hard
 
@@ -16162,7 +16190,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": ^2.5.13
     "@graphql-eslint/eslint-plugin": ^3.14.3
     "@graphql-inspector/cli": ^3.4.2
-    "@graphql-tools/graphql-file-loader": ^7.5.13
+    "@graphql-tools/graphql-file-loader": ^7.5.15
     "@graphql-tools/load": ^7.8.8
     "@graphql-tools/merge": ^8.3.14
     "@graphql-tools/schema": ^9.0.12
