@@ -7061,7 +7061,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-dom@npm:3.2.47":
+"@vue/compiler-dom@npm:3.2.47, @vue/compiler-dom@npm:^3.0.1":
   version: 3.2.47
   resolution: "@vue/compiler-dom@npm:3.2.47"
   dependencies:
@@ -7246,15 +7246,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/test-utils@npm:^2.2.7":
-  version: 2.2.8
-  resolution: "@vue/test-utils@npm:2.2.8"
+"@vue/test-utils@npm:^2.2.10":
+  version: 2.2.10
+  resolution: "@vue/test-utils@npm:2.2.10"
   dependencies:
+    "@vue/compiler-dom": ^3.0.1
     js-beautify: 1.14.6
   peerDependencies:
     "@vue/compiler-dom": ^3.0.1
     vue: ^3.0.1
-  checksum: 7b014872ef44ec0d7c3b6236b5daf8cd3c813d94c4a196b6bff865b456438786cd1b1da2265a1c53d626600a9d2388d2f17e2c143305f6d94d8816c2f8ceb253
+  dependenciesMeta:
+    "@vue/compiler-dom":
+      optional: true
+  checksum: f16a912765c44655063ee6eee19a85b22410d2668dc3df3c560ce6a9344b96e03b3a2eb4daa70c2745c395e654d5a790902f20f5600b42c56fbc6927f4ec71d5
   languageName: node
   linkType: hard
 
@@ -16199,7 +16203,7 @@ __metadata:
     "@vue/apollo-util": ^4.0.0-alpha.18
     "@vue/compiler-sfc": ^3.2.47
     "@vue/runtime-dom": ^3.2.47
-    "@vue/test-utils": ^2.2.7
+    "@vue/test-utils": ^2.2.10
     "@vueuse/core": ^9.12.0
     "@yaireo/tagify": ^4.17.6
     autoprefixer: ^10.4.13
