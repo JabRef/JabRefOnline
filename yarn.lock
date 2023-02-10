@@ -3465,6 +3465,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/graphql-file-loader@npm:^7.5.16":
+  version: 7.5.16
+  resolution: "@graphql-tools/graphql-file-loader@npm:7.5.16"
+  dependencies:
+    "@graphql-tools/import": 6.7.17
+    "@graphql-tools/utils": 9.2.1
+    globby: ^11.0.3
+    tslib: ^2.4.0
+    unixify: ^1.0.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 5f9af56511a2f791677ad2601e745053d3f28b3afdf5542261e4bbf9924b9872244dcb0c9f6c7ca7fe91b658c12f4d91529efd9638653e112ad75bf79c915d78
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/graphql-tag-pluck@npm:7.4.3, @graphql-tools/graphql-tag-pluck@npm:^7.3.6":
   version: 7.4.3
   resolution: "@graphql-tools/graphql-tag-pluck@npm:7.4.3"
@@ -3491,6 +3506,19 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 22e47d09a333b98b90ab3391510a0b74b7ca0fbd7e7dd62b624f336243f7a28150f187a39c428da0b7c62e24e7d9fb73ceae4a4ce3663f360c7b6ca5418eaf96
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/import@npm:6.7.17":
+  version: 6.7.17
+  resolution: "@graphql-tools/import@npm:6.7.17"
+  dependencies:
+    "@graphql-tools/utils": 9.2.1
+    resolve-from: 5.0.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 232debc4abed340f9ab04a9474e6f1af0f50d5b6b66dc6f7b7307872a27bd00745bc4fad1d7d00bf3503686766d2e26c9c42c4f1e2409111799ad80119a8303a
   languageName: node
   linkType: hard
 
@@ -3721,6 +3749,18 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 9754f8c6d52490df395626cef224542f37ca040ced6688c8ad80b1e0498006186529a50ac21979465123debba093db33dbfe8f1f7a9101f969dec0f31dc9a45b
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/utils@npm:9.2.1":
+  version: 9.2.1
+  resolution: "@graphql-tools/utils@npm:9.2.1"
+  dependencies:
+    "@graphql-typed-document-node/core": ^3.1.1
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 94ed12df5f49e5c338322ffd931236a687a3d5c443bf499f9baab5d4fcd9792234111142be8aa506a01ca2e82732996c4e1d8f6159ff9cc7fdc5c97f63e55226
   languageName: node
   linkType: hard
 
@@ -16243,7 +16283,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": ^2.5.13
     "@graphql-eslint/eslint-plugin": ^3.14.3
     "@graphql-inspector/cli": ^3.4.2
-    "@graphql-tools/graphql-file-loader": ^7.5.13
+    "@graphql-tools/graphql-file-loader": ^7.5.16
     "@graphql-tools/load": ^7.8.8
     "@graphql-tools/merge": ^8.3.14
     "@graphql-tools/schema": ^9.0.12
