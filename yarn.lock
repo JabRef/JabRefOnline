@@ -3548,7 +3548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:8.3.16, @graphql-tools/merge@npm:^8.2.6, @graphql-tools/merge@npm:^8.3.14":
+"@graphql-tools/merge@npm:8.3.16, @graphql-tools/merge@npm:^8.2.6":
   version: 8.3.16
   resolution: "@graphql-tools/merge@npm:8.3.16"
   dependencies:
@@ -3569,6 +3569,18 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 943e1ad64575ab9ae6726d434cf7b08e80099442f9d25c1ac9f11fdac7bd0e8e73109f0e2469b47650ad0a0731ac850ede844b5ff8a7eab352027a42c1e78c79
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/merge@npm:^8.3.18":
+  version: 8.3.18
+  resolution: "@graphql-tools/merge@npm:8.3.18"
+  dependencies:
+    "@graphql-tools/utils": 9.2.1
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 0834fcf13dec5ee92e39f2e1b27a098654e2db20bf6ef6f43d7efce56b7d750caa59dd16aacb211b8f5a198d29c19d36471401762f5a34e0bc22657285dcae92
   languageName: node
   linkType: hard
 
@@ -3721,6 +3733,18 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 9754f8c6d52490df395626cef224542f37ca040ced6688c8ad80b1e0498006186529a50ac21979465123debba093db33dbfe8f1f7a9101f969dec0f31dc9a45b
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/utils@npm:9.2.1":
+  version: 9.2.1
+  resolution: "@graphql-tools/utils@npm:9.2.1"
+  dependencies:
+    "@graphql-typed-document-node/core": ^3.1.1
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 94ed12df5f49e5c338322ffd931236a687a3d5c443bf499f9baab5d4fcd9792234111142be8aa506a01ca2e82732996c4e1d8f6159ff9cc7fdc5c97f63e55226
   languageName: node
   linkType: hard
 
@@ -16245,7 +16269,7 @@ __metadata:
     "@graphql-inspector/cli": ^3.4.2
     "@graphql-tools/graphql-file-loader": ^7.5.13
     "@graphql-tools/load": ^7.8.8
-    "@graphql-tools/merge": ^8.3.14
+    "@graphql-tools/merge": ^8.3.18
     "@graphql-tools/schema": ^9.0.12
     "@graphql-typed-document-node/core": ^3.1.1
     "@he-tree/vue3": ^1.2.9
