@@ -6022,15 +6022,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/connect-redis@npm:^0.0.19":
-  version: 0.0.19
-  resolution: "@types/connect-redis@npm:0.0.19"
+"@types/connect-redis@npm:^0.0.20":
+  version: 0.0.20
+  resolution: "@types/connect-redis@npm:0.0.20"
   dependencies:
     "@types/express": "*"
     "@types/express-session": "*"
-    "@types/ioredis": ^4.28.10
     "@types/redis": ^2.8.0
-  checksum: 2973749213ae815d6477021f28a17207e313e2926220acfc3bd6ebccff8d4372df41663010111b4ead41dd211728cc7ecb27adabfdd8aac75b4f1b0d39be44bb
+    ioredis: ^5.3.0
+  checksum: 11e22b06b2338ab651e819902467292765bd24a11a0b0fd251b8226c0e0962c048106e715d2f71ebef53f161709c81df1e7b153c81388e51a9a8ca60b78d8886
   languageName: node
   linkType: hard
 
@@ -6205,15 +6205,6 @@ __metadata:
   version: 4.0.1
   resolution: "@types/http-cache-semantics@npm:4.0.1"
   checksum: 1048aacf627829f0d5f00184e16548205cd9f964bf0841c29b36bc504509230c40bc57c39778703a1c965a6f5b416ae2cbf4c1d4589c889d2838dd9dbfccf6e9
-  languageName: node
-  linkType: hard
-
-"@types/ioredis@npm:^4.28.10":
-  version: 4.28.10
-  resolution: "@types/ioredis@npm:4.28.10"
-  dependencies:
-    "@types/node": "*"
-  checksum: 0f2788cf25f490d3b345db8c5f8b8ce3f6c92cc99abcf744c8f974f02b9b3875233b3d22098614c462a0d6c41c523bd655509418ea88eb6249db6652290ce7cf
   languageName: node
   linkType: hard
 
@@ -15713,6 +15704,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ioredis@npm:^5.3.0":
+  version: 5.3.1
+  resolution: "ioredis@npm:5.3.1"
+  dependencies:
+    "@ioredis/commands": ^1.1.1
+    cluster-key-slot: ^1.1.0
+    debug: ^4.3.4
+    denque: ^2.1.0
+    lodash.defaults: ^4.2.0
+    lodash.isarguments: ^3.1.0
+    redis-errors: ^1.2.0
+    redis-parser: ^3.0.0
+    standard-as-callback: ^2.1.0
+  checksum: 6c98cb8f8772ad4bb2b6b7a0a224e4a63f4759f9a28e84205f18788552f08221d51f391c10892dca01a1b10b2804d0a7e6082b0b7decd65538a5fb6b0f4f1f82
+  languageName: node
+  linkType: hard
+
 "ip-regex@npm:^4.0.0":
   version: 4.3.0
   resolution: "ip-regex@npm:4.3.0"
@@ -16610,7 +16618,7 @@ __metadata:
     "@tailwindcss/line-clamp": ^0.4.2
     "@tailwindcss/typography": ^0.5.8
     "@types/bcryptjs": ^2.4.2
-    "@types/connect-redis": ^0.0.19
+    "@types/connect-redis": ^0.0.20
     "@types/express-session": ^1.17.6
     "@types/lodash": ^4.14.191
     "@types/nodemailer": ^6.4.7
