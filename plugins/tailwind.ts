@@ -61,14 +61,14 @@ const settings: VariantJSConfiguration = {
   TInputGroup: {
     fixedClasses: {
       wrapper: '',
-      label: 'block text-sm text-gray-700',
+      label: 'block text-sm',
       body: 'mt-1',
       feedback: ' text-sm text-sm mt-1',
-      description: 'text-gray-400 text-sm',
+      description: 'text-sm',
     },
     classes: {
       wrapper: '',
-      label: '',
+      label: 'text-gray-700',
       body: '',
       feedback: 'text-gray-400',
       description: 'text-gray-400',
