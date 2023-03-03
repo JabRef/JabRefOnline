@@ -1,4 +1,5 @@
 import RedisStore from 'connect-redis'
+import session from 'express-session'
 import { EventHandler } from 'h3'
 import passport from 'passport'
 import { Environment } from '~/config'
