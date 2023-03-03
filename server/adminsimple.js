@@ -1,10 +1,11 @@
 /* export default defineEventHandler((event) => {
     console.log(event.req.url)
   }) */
-
 import { createAgent } from '@forestadmin/agent'
 import { createSqlDataSource } from '@forestadmin/datasource-sql'
+import * as dotenv from 'dotenv'
 
+dotenv.config()
 // Create your Forest Admin agent
 const agent = createAgent({
   // These process.env variables should be provided in the onboarding

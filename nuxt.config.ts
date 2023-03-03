@@ -64,7 +64,8 @@ export default defineNuxtConfig({
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add storybook support
-    './modules/storybook',
+    // Add forest admin interface
+    './modules/forestadmin',
     // Add server-side graphql support
     'nuxt-graphql-server',
     // Add vue runtime compiler as temporary workaround for https://github.com/nuxt/framework/issues/4661

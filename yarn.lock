@@ -2625,9 +2625,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@forestadmin/agent@npm:^1.6.4":
-  version: 1.6.4
-  resolution: "@forestadmin/agent@npm:1.6.4"
+"@forestadmin/agent@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "@forestadmin/agent@npm:1.7.1"
   dependencies:
     "@fast-csv/format": ^4.3.5
     "@fastify/express": ^1.1.0
@@ -2647,7 +2647,7 @@ __metadata:
     object-hash: ^3.0.0
     superagent: ^8.0.6
     uuid: ^9.0.0
-  checksum: ba99cc93d9a201d693f6083a5184188efe02595f4cedd0710adb553fcda09e68bf080fea4f2044c89df2e6d31220816832a91c8e7e22f4169538c916d6268290
+  checksum: 20ba94ae34a1c8fea3b90023e0324e034d95757f732cf78a08ab549f23a7c1d7165665a38efcffab9d1b841d0ed39fab911cb9889f5a98b0242f73094acba3f6
   languageName: node
   linkType: hard
 
@@ -2674,15 +2674,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@forestadmin/datasource-sql@npm:^1.1.13":
-  version: 1.1.13
-  resolution: "@forestadmin/datasource-sql@npm:1.1.13"
+"@forestadmin/datasource-sql@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@forestadmin/datasource-sql@npm:1.2.0"
   dependencies:
     "@forestadmin/datasource-sequelize": 1.2.9
     "@forestadmin/datasource-toolkit": 1.3.0
     pluralize: ^8.0.0
     sequelize: ^6.28.0
-  checksum: 59beb883c194a047176b33abea851e099e8299271beedafba2f06d95510bc491680247f7ba2b08efa11dbdac6096fe80a1c62e8c02e38b270b8c60e97503bc47
+  checksum: 36de084e793d055c012025905e674d3d1d9ec6eb089f0ef8fdfdf467cce356455eaf6b1857f74278a646e51964f5f6a9b5bfb1f9793593e471fcc17504a0092a
   languageName: node
   linkType: hard
 
@@ -5925,6 +5925,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/accepts@npm:*":
+  version: 1.3.5
+  resolution: "@types/accepts@npm:1.3.5"
+  dependencies:
+    "@types/node": "*"
+  checksum: 590b7580570534a640510c071e09074cf63b5958b237a728f94322567350aea4d239f8a9d897a12b15c856b992ee4d7907e9812bb079886af2c00714e7fb3f60
+  languageName: node
+  linkType: hard
+
 "@types/bcryptjs@npm:^2.4.2":
   version: 2.4.2
   resolution: "@types/bcryptjs@npm:2.4.2"
@@ -5998,10 +6007,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/content-disposition@npm:*":
+  version: 0.5.5
+  resolution: "@types/content-disposition@npm:0.5.5"
+  checksum: fdf7379db1d509990bcf9a21d85f05aad878596f28b1418f9179f6436cb22513262c670ce88c6055054a7f5804a9303eeacb70aa59a5e11ffdc1434559db9692
+  languageName: node
+  linkType: hard
+
 "@types/cookiejar@npm:*":
   version: 2.1.2
   resolution: "@types/cookiejar@npm:2.1.2"
   checksum: f6e1903454007f86edd6c3520cbb4d553e1d4e17eaf1f77f6f75e3270f48cc828d74397a113a36942f5fe52f9fa71067bcfa738f53ad468fcca0bc52cb1cbd28
+  languageName: node
+  linkType: hard
+
+"@types/cookies@npm:*":
+  version: 0.7.7
+  resolution: "@types/cookies@npm:0.7.7"
+  dependencies:
+    "@types/connect": "*"
+    "@types/express": "*"
+    "@types/keygrip": "*"
+    "@types/node": "*"
+  checksum: d3759efc1182cb0651808570ae13638677b67b0ea724eef7b174e58ffe6ea044b62c7c2715e532f76f88fce4dd8101ed32ac6fbb73226db654017924e8a2a1e6
   languageName: node
   linkType: hard
 
@@ -6147,10 +6175,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/http-assert@npm:*":
+  version: 1.5.3
+  resolution: "@types/http-assert@npm:1.5.3"
+  checksum: 9553e5a0b8bcfdac4b51d3fa3b89a91b5450171861a667a5b4c47204e0f4a1ca865d97396e6ceaf220e87b64d06b7a8bad7bfba15ef97acb41a87507c9940dbc
+  languageName: node
+  linkType: hard
+
 "@types/http-cache-semantics@npm:*":
   version: 4.0.1
   resolution: "@types/http-cache-semantics@npm:4.0.1"
   checksum: 1048aacf627829f0d5f00184e16548205cd9f964bf0841c29b36bc504509230c40bc57c39778703a1c965a6f5b416ae2cbf4c1d4589c889d2838dd9dbfccf6e9
+  languageName: node
+  linkType: hard
+
+"@types/http-errors@npm:*":
+  version: 2.0.1
+  resolution: "@types/http-errors@npm:2.0.1"
+  checksum: 3bb0c50b0a652e679a84c30cd0340d696c32ef6558518268c238840346c077f899315daaf1c26c09c57ddd5dc80510f2a7f46acd52bf949e339e35ed3ee9654f
   languageName: node
   linkType: hard
 
@@ -6221,12 +6263,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/keygrip@npm:*":
+  version: 1.0.2
+  resolution: "@types/keygrip@npm:1.0.2"
+  checksum: 60bc2738a4f107070ee3d96f44709cb38f3a96c7ccabab09f56c1b2b4d85f869fd8fb9f1f2937e863d0e9e781f005c2223b823bf32b859185b4f52370c352669
+  languageName: node
+  linkType: hard
+
 "@types/keyv@npm:^3.1.1, @types/keyv@npm:^3.1.4":
   version: 3.1.4
   resolution: "@types/keyv@npm:3.1.4"
   dependencies:
     "@types/node": "*"
   checksum: e009a2bfb50e90ca9b7c6e8f648f8464067271fd99116f881073fa6fa76dc8d0133181dd65e6614d5fb1220d671d67b0124aef7d97dc02d7e342ab143a47779d
+  languageName: node
+  linkType: hard
+
+"@types/koa-compose@npm:*":
+  version: 3.2.5
+  resolution: "@types/koa-compose@npm:3.2.5"
+  dependencies:
+    "@types/koa": "*"
+  checksum: 5d1147c4b057eb158195f442f0384f06503f3e69dba99fb517b30a05261a9f92928945c12bb1cfc17a5b7d60db003f38b455a3a9b125f12e4fc81fffa396b3cf
+  languageName: node
+  linkType: hard
+
+"@types/koa@npm:*, @types/koa@npm:^2.13.5":
+  version: 2.13.5
+  resolution: "@types/koa@npm:2.13.5"
+  dependencies:
+    "@types/accepts": "*"
+    "@types/content-disposition": "*"
+    "@types/cookies": "*"
+    "@types/http-assert": "*"
+    "@types/http-errors": "*"
+    "@types/keygrip": "*"
+    "@types/koa-compose": "*"
+    "@types/node": "*"
+  checksum: e3b634d934b79ce8f394bf4130511596081f9c073dbfb4309aa32e4c421c47049a002b65111f8d9687eabec55d5a27b1b9ae0699afa83894cb7032c3536bfa17
+  languageName: node
+  linkType: hard
+
+"@types/koa__router@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@types/koa__router@npm:12.0.0"
+  dependencies:
+    "@types/koa": "*"
+  checksum: ebfee772f7a9c5ff5e296a24443eb2c288fa2e5b8c60afbb460b41f0bd0d68c8a722fff5984eef7b7d90d057fe6f556171695ea83e2cdbeef3e2462f73c362b7
   languageName: node
   linkType: hard
 
@@ -16386,8 +16469,8 @@ __metadata:
     "@apollo/server": ^4.3.0
     "@as-integrations/h3": ^1.1.5
     "@azure/static-web-apps-cli": ^1.0.3
-    "@forestadmin/agent": ^1.6.4
-    "@forestadmin/datasource-sql": ^1.1.13
+    "@forestadmin/agent": ^1.7.1
+    "@forestadmin/datasource-sql": ^1.2.0
     "@fortawesome/fontawesome-svg-core": ^6.2.1
     "@fortawesome/free-solid-svg-icons": ^6.2.1
     "@fortawesome/vue-fontawesome": ^3.0.2
@@ -16421,6 +16504,8 @@ __metadata:
     "@types/bcryptjs": ^2.4.2
     "@types/connect-redis": ^0.0.19
     "@types/express-session": ^1.17.5
+    "@types/koa": ^2.13.5
+    "@types/koa__router": ^12.0.0
     "@types/lodash": ^4.14.191
     "@types/nodemailer": ^6.4.7
     "@types/passport": ^1.0.10

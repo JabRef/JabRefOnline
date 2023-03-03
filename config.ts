@@ -65,7 +65,12 @@ export interface Config {
     primarySecret: string
     secondarySecret: string
   }
+  databaseUrl: string
   githubRepoToken: string
+  forestAdmin: {
+    authSecret: string
+    envSecret: string
+  }
   public: {
     environment: Environment
   }
@@ -82,7 +87,12 @@ export function constructConfig(): Config {
       primarySecret: process.env.SESSION_SECRET_PRIMARY || 'session_secret',
       secondarySecret: process.env.SESSION_SECRET_SECONDARY || 'session_secret',
     },
+    databaseUrl: process.env.DATABASE_URL || 'UNDEFINED',
     githubRepoToken: process.env.GITHUB_REPO_TOKEN || 'UNDEFINED',
+    forestAdmin: {
+      authSecret: process.env.FOREST_ADMIN_AUTH || 'UNDEFINED',
+      envSecret: process.env.FOREST_ADMIN_ENV || 'UNDEFINED',
+    },
     public: {
       environment: getEnvironment(),
     },
