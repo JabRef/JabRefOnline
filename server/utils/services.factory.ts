@@ -44,9 +44,6 @@ export async function createRedisClient(): Promise<RedisClient> {
         host: config.redis.host,
         tls: true as true | undefined,
       },
-      // Legacy mode is currently needed for connect-redis
-      // see https://github.com/tj/connect-redis/issues/357 and https://github.com/tj/connect-redis/issues/361
-      legacyMode: true,
     }
 
     // Only Azure needs a TLS connection to Redis
