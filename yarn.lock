@@ -123,13 +123,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/server@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "@apollo/server@npm:4.4.0"
+"@apollo/server@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "@apollo/server@npm:4.4.1"
   dependencies:
     "@apollo/cache-control-types": ^1.0.2
     "@apollo/server-gateway-interface": ^1.1.0
-    "@apollo/usage-reporting-protobuf": ^4.0.0
+    "@apollo/usage-reporting-protobuf": ^4.1.0
     "@apollo/utils.createhash": ^2.0.0
     "@apollo/utils.fetcher": ^2.0.0
     "@apollo/utils.isnodelike": ^2.0.0
@@ -155,7 +155,7 @@ __metadata:
     whatwg-mimetype: ^3.0.0
   peerDependencies:
     graphql: ^16.6.0
-  checksum: fbe1d2f7f62c217033ec0e06f01da3fe83a7ec4f8b97c61c2b5ae161d203ed43ef49fecb51a63a7febf74b2b773323b1c4327b4df212237cba84c2cd8cdc334f
+  checksum: f8df93b114f2633a8a6ed8877bb8dfca3a9dcd5651c3187d10143e0d07694aab8b0abcd07ad9cc3b75690d77f5dee85d2a851795933272180c99f3bf7a46000f
   languageName: node
   linkType: hard
 
@@ -165,6 +165,15 @@ __metadata:
   dependencies:
     "@apollo/protobufjs": 1.2.7
   checksum: 1c5d6db42f05b4f9f2254eab2283287083a7d8575a7e17e291683768733e29bf4a0c2810a341aedfd639c4ae6fb23253e2a505c628c5cf4f3e12b9770263264c
+  languageName: node
+  linkType: hard
+
+"@apollo/usage-reporting-protobuf@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@apollo/usage-reporting-protobuf@npm:4.1.0"
+  dependencies:
+    "@apollo/protobufjs": 1.2.7
+  checksum: 442532d7077a728a499de6c2c2340d106b26f14695446361f947a14d3092e4109239a86cfb99e4bb795d913523c1f61a05bb799b45fc72615560693bbd62e645
   languageName: node
   linkType: hard
 
@@ -16528,7 +16537,7 @@ __metadata:
   resolution: "jabref-online@workspace:."
   dependencies:
     "@apollo/client": ^3.7.9
-    "@apollo/server": ^4.4.0
+    "@apollo/server": ^4.4.1
     "@as-integrations/h3": ^1.1.5
     "@azure/static-web-apps-cli": ^1.0.3
     "@fortawesome/fontawesome-svg-core": ^6.3.0
