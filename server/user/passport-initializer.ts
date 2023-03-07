@@ -1,4 +1,4 @@
-import connectRedis from 'connect-redis'
+import RedisStore from 'connect-redis'
 import session from 'express-session'
 import { EventHandler } from 'h3'
 import passport from 'passport'
@@ -28,10 +28,9 @@ export default class PassportInitializer {
   createHandler(): EventHandler {
     const config = useRuntimeConfig()
 
-    // TODO: Use redis store also for development as soon as https://github.com/tj/connect-redis/issues/336 is fixed (and mock-redis is compatible with redis v4)
+    // TODO: Use redis store also for development as soon as mock-redis is compatible with redis v4
     let store: session.Store
     if (config.public.environment === Environment.Production) {
-      const RedisStore = connectRedis(session)
       store = new RedisStore({
         client: this.redisClient,
         disableTouch: true,
