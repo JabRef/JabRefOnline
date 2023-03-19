@@ -1,6 +1,5 @@
 import { buildNuxt, loadNuxt, tryUseNuxt } from '@nuxt/kit'
 import type { StorybookConfig } from '@storybook/vue3-vite'
-import VueStories from 'storybook-vue-addon/vite'
 import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
@@ -30,7 +29,6 @@ const config: StorybookConfig = {
       }
       return true
     })
-    config.plugins?.unshift(VueStories())
     return mergeConfig(
       {
         resolve: nuxtViteConfig.resolve,
