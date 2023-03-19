@@ -16753,7 +16753,7 @@ __metadata:
     tsyringe: ^4.7.0
     typescript: ^4.9.5
     ufo: ^1.1.1
-    unplugin-vue-components: ^0.24.0
+    unplugin-vue-components: ^0.24.1
     vee-validate: ^4.7.4
     vitest: ^0.29.2
     vitest-github-actions-reporter: ^0.10.0
@@ -17938,12 +17938,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.29.0":
-  version: 0.29.0
-  resolution: "magic-string@npm:0.29.0"
+"magic-string@npm:^0.30.0":
+  version: 0.30.0
+  resolution: "magic-string@npm:0.30.0"
   dependencies:
     "@jridgewell/sourcemap-codec": ^1.4.13
-  checksum: 19e5398fcfc44804917127c72ad622c68a19a0a10cbdb8d4f9f9417584a087fe9e117140bfb2463d86743cf1ed9cf4182ae0b0ad1a7536f7fdda257ee4449ffb
+  checksum: 7bdf22e27334d8a393858a16f5f840af63a7c05848c000fd714da5aa5eefa09a1bc01d8469362f25cc5c4a14ec01b46557b7fff8751365522acddf21e57c488d
   languageName: node
   linkType: hard
 
@@ -18902,12 +18902,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^6.1.6, minimatch@npm:^6.2.0":
+"minimatch@npm:^6.1.6":
   version: 6.2.0
   resolution: "minimatch@npm:6.2.0"
   dependencies:
     brace-expansion: ^2.0.1
   checksum: 0ffb77d05bd483fcc344ba3e64a501d569e658fa6c592d94e9716ffc7925de7a8c2ac294cafa822b160bd8b2cbf7e01012917e06ffb9a85cfa9604629b3f2c04
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:^7.4.2":
+  version: 7.4.2
+  resolution: "minimatch@npm:7.4.2"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: 9e341b04e69d5ab03e4206dcb61c8a158e3b8709628bf5e1a4eaa9f3b72c0ba925e24ad959b1f6ce6835caa5a927131d5087fae6836b69e7d99d7d5e63ef0bd8
   languageName: node
   linkType: hard
 
@@ -25686,28 +25695,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-components@npm:^0.24.0":
-  version: 0.24.0
-  resolution: "unplugin-vue-components@npm:0.24.0"
+"unplugin-vue-components@npm:^0.24.1":
+  version: 0.24.1
+  resolution: "unplugin-vue-components@npm:0.24.1"
   dependencies:
     "@antfu/utils": ^0.7.2
-    "@nuxt/kit": ^3.2.0
     "@rollup/pluginutils": ^5.0.2
     chokidar: ^3.5.3
     debug: ^4.3.4
     fast-glob: ^3.2.12
     local-pkg: ^0.4.3
-    magic-string: ^0.29.0
-    minimatch: ^6.2.0
+    magic-string: ^0.30.0
+    minimatch: ^7.4.2
     resolve: ^1.22.1
     unplugin: ^1.1.0
   peerDependencies:
     "@babel/parser": ^7.15.8
+    "@nuxt/kit": ^3.2.2
     vue: 2 || 3
   peerDependenciesMeta:
     "@babel/parser":
       optional: true
-  checksum: c645237cf5f56f6b6bddab20df291c17204208516ed1a6ddfc3b7edab77c3ca9f205f779bc06f2315354c37833afdf45ea59c913ce77970ea6059c542fefc890
+    "@nuxt/kit":
+      optional: true
+  checksum: 9efe6c9cda94c2ecb1a15e832cf5a569a09d0cf17b766567ec5f261d96db203f1b727c90fd406ea7ecc4d3c3210ee8064ec4917552ce563ebadcb95de187216c
   languageName: node
   linkType: hard
 
