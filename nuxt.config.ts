@@ -74,7 +74,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     // Add support for native vue stories
     // https://github.com/tobiasdiez/storybook-vue-addon
-    'storybook-vue-addon/nuxt',
+    // 'storybook-vue-addon/nuxt',
   ],
 
   /*
