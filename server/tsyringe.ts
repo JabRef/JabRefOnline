@@ -100,7 +100,12 @@ type Token = keyof typeof InjectionSymbols
  */
 export function inject(
   token: Token
-): (target: any, propertyKey: string | symbol, parameterIndex: number) => void {
+): (
+  target: any,
+  propertyKey: string | symbol | undefined,
+  parameterIndex: number
+) => void {
+  // @ts-expect-error: https://github.com/microsoft/tsyringe/issues/221
   return tsyringeInject(InjectionSymbols[token].sym)
 }
 
