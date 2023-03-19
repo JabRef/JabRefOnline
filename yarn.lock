@@ -3713,6 +3713,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/merge@npm:8.4.0":
+  version: 8.4.0
+  resolution: "@graphql-tools/merge@npm:8.4.0"
+  dependencies:
+    "@graphql-tools/utils": 9.2.1
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 32265749833615ac2cb3d958318f5c46b7bd5ec858acfbad7136d379594ec3c98ba67ba5f04f4061187e5dfd52bb277155cd98fdeb2b4c5535c16bdb4f117ae0
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/optimize@npm:^1.3.0":
   version: 1.3.1
   resolution: "@graphql-tools/optimize@npm:1.3.1"
@@ -3766,7 +3778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/schema@npm:9.0.14, @graphql-tools/schema@npm:^9.0.0, @graphql-tools/schema@npm:^9.0.12":
+"@graphql-tools/schema@npm:9.0.14, @graphql-tools/schema@npm:^9.0.0":
   version: 9.0.14
   resolution: "@graphql-tools/schema@npm:9.0.14"
   dependencies:
@@ -3819,6 +3831,20 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 91363cd4371e347af40ef66f7d903b5d4f5998bfaec9214768e6a795136ef6372f9f225e05e18daacd929e23695811f15e791c6cbe082bf5b5d03b16b1f874f8
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/schema@npm:^9.0.17":
+  version: 9.0.17
+  resolution: "@graphql-tools/schema@npm:9.0.17"
+  dependencies:
+    "@graphql-tools/merge": 8.4.0
+    "@graphql-tools/utils": 9.2.1
+    tslib: ^2.4.0
+    value-or-promise: 1.0.12
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 1c6513dd88b47d07702d01a48941ee164c4090c69b2475b1dde48a3d8866ed48fd39a33d15510682f6d8c18d19ceb72b77104eb4edbb194f96a129cc03909e89
   languageName: node
   linkType: hard
 
@@ -16853,7 +16879,7 @@ __metadata:
     "@graphql-tools/graphql-file-loader": ^7.5.13
     "@graphql-tools/load": ^7.8.8
     "@graphql-tools/merge": ^8.3.14
-    "@graphql-tools/schema": ^9.0.12
+    "@graphql-tools/schema": ^9.0.17
     "@graphql-typed-document-node/core": ^3.1.2
     "@he-tree/vue": ^2.2.7
     "@huntersofbook/naive-ui-nuxt": ^0.6.0
