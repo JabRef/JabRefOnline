@@ -11,10 +11,10 @@ import {
   EntityType,
   Journal,
   JournalIssue,
+  UserDocument as PlainUserDocument,
   Prisma,
   PrismaClient,
   User,
-  UserDocument as PlainUserDocument,
   UserDocumentOtherField,
 } from '@prisma/client'
 import { unsecureHash } from '../utils/crypto'
