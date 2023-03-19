@@ -10966,10 +10966,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"connect-redis@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "connect-redis@npm:7.0.0"
-  checksum: 7752039b16500fc181786f5bb6b5ab50fa1cd9305251b996da7a5e4d71bc69e16904c1ceea4bbb3d524c046d5d7ed6b36740c6dbb54477f6e807d38577ca1ee5
+"connect-redis@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "connect-redis@npm:7.0.1"
+  peerDependencies:
+    express-session: ">=1"
+  checksum: 99047f38e9992552f44717920af7047c4e6ad1ae1b78a50ceab50564200144da5a3174ffcd9f7bafa8f4a42aa7b8a83df06d269ad6d7a41a41c31ea907bbb68d
   languageName: node
   linkType: hard
 
@@ -16844,7 +16846,7 @@ __metadata:
     body-scroll-lock: ^4.0.0-beta.0
     chromatic: ^6.17.1
     concurrently: ^7.6.0
-    connect-redis: ^7.0.0
+    connect-redis: ^7.0.1
     cross-env: ^7.0.3
     cross-fetch: ^3.1.5
     eslint: ^8.36.0
