@@ -33,11 +33,9 @@ export function useZodForm<
   Schema extends zod.ZodObject<any>,
   Values extends zod.infer<Schema>
 >(schema: Schema, options: Omit<FormOptions<Values>, 'validationSchema'> = {}) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const validationSchema = toFormValidator(schema)
   const form = useForm<Values>({
     ...options,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     validationSchema,
   })
   return {
