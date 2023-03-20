@@ -33,11 +33,9 @@ export function useZodForm<
   Schema extends zod.ZodObject<any>,
   Values extends zod.infer<Schema>
 >(schema: Schema, options: Omit<FormOptions<Values>, 'validationSchema'> = {}) {
-   
   const validationSchema = toFormValidator(schema)
   const form = useForm<Values>({
     ...options,
-     
     validationSchema,
   })
   return {
