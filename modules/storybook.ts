@@ -1,7 +1,7 @@
-import { defineNuxtModule, logger } from '@nuxt/kit'
 import { Nuxt } from '@nuxt/schema'
 import type { StorybookConfig } from '@storybook/core-common'
 import { loadAllPresets } from '@storybook/core-common'
+import { defineNuxtModule, logger } from 'nuxt/kit'
 // @ts-expect-error: internal
 import { storybookDevServer } from '@storybook/core-server/dist/esm/dev-server'
 // @ts-expect-error: internal
