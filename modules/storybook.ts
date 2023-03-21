@@ -1,57 +1,26 @@
 import { Nuxt } from '@nuxt/schema'
-import type { StorybookConfig } from '@storybook/core-common'
-import { loadAllPresets } from '@storybook/core-common'
-import { defineNuxtModule, logger } from 'nuxt/kit'
-// @ts-expect-error: internal
-import { storybookDevServer } from '@storybook/core-server/dist/esm/dev-server'
-// @ts-expect-error: internal
-import { getManagerBuilder } from '@storybook/core-server/dist/esm/utils/get-manager-builder'
-// @ts-expect-error: internal
-import { getPreviewBuilder } from '@storybook/core-server/dist/esm/utils/get-preview-builder'
-// @ts-expect-error: internal
-import vueStorybook from '@storybook/vue3/dist/cjs/server/options'
+import { buildDevStandalone } from '@storybook/core-server'
+import { PackageJson } from '@storybook/types'
 import chalk from 'chalk'
 import { LogLevel } from 'consola'
+import { defineNuxtModule, logger } from 'nuxt/kit'
 import { withoutTrailingSlash } from 'ufo'
 
 const path = '/_storybook/'
-
-// This function is mostly taken from @storybook/core-server/build-dev
 async function startStorybookServer(nuxt: Nuxt, nuxtUrl: string) {
-  /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument */
+  // Load package.json
+  const packageJson = (await import(
+    nuxt.options.rootDir + '/package.json'
+  )) as PackageJson
+
   const options = {
-    ...vueStorybook,
     configDir: nuxt.options.rootDir + '/.storybook',
-    managerCache: false,
-    configType: 'DEVELOPMENT',
+    port: 3001,
     ignorePreview: true,
     previewUrl: withoutTrailingSlash(nuxtUrl) + path + 'external-iframe',
-    port: 3001,
+    packageJson,
   }
-
-  const previewBuilder = await getPreviewBuilder(options.configDir)
-  const managerBuilder = await getManagerBuilder(options.configDir)
-  const presets = loadAllPresets({
-    corePresets: [
-      '@storybook/core-server/dist/cjs/presets/common-preset',
-      // require.resolve('./presets/common-preset'),
-      ...managerBuilder.corePresets,
-      ...previewBuilder.corePresets,
-      // require.resolve('./presets/babel-cache-preset'),
-    ],
-    overridePresets: previewBuilder.overridePresets,
-    ...options,
-  })
-
-  const features = await presets.apply<StorybookConfig['features']>('features')
-  // global.FEATURES = features
-  const fullOptions = {
-    presets,
-    features,
-    ...options,
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return await storybookDevServer(fullOptions)
+  return await buildDevStandalone(options)
 }
 
 // TODO: Finish storybook as module
@@ -109,7 +78,7 @@ configure(() => {
       },
     })
     */
-    nuxt.hook('listen', async (_, listener) => {
+    nuxt.hook('listen', async (_, listener: { url: string }) => {
       // const fullPath = `${withoutTrailingSlash(listener.url)}${path}`
       // logger.info(`Storybook: ${chalk.underline.yellow(fullPath)}`)
       if (nuxt.options.dev) {

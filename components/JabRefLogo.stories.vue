@@ -7,7 +7,7 @@ import JabRefLogo from './JabrefLogo.vue'
     title="JabRef Logo"
     :component="JabRefLogo"
   >
-    <Story title="Default">
+    <Story title="Standard">
       <JabRefLogo />
     </Story>
   </Stories>

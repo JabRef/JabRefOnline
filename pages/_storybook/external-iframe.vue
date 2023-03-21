@@ -1,7 +1,8 @@
 <template>
+  <!-- Based on https://github.com/storybookjs/storybook/blob/next/code/lib/builder-vite/input/iframe.html -->
   <div>
-    <div id="root"></div>
-    <div id="docs-root"></div>
+    <div id="storybook-root"></div>
+    <div id="storybook-docs"></div>
     <div class="sb-errordisplay sb-wrapper">
       <div
         id="error-message"
@@ -14,10 +15,11 @@
 <script lang="ts">
 // Based on https://github.com/storybookjs/storybook/tree/next/examples/standalone-preview
 // The idea is that we use nuxt to render the stories
-import { RenderContext, start } from '@storybook/core-client'
-import { VueFramework } from '@storybook/vue3'
+import { start } from '@storybook/core-client'
+import type { RenderContext } from '@storybook/types'
+import { VueRenderer } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
-import { decorateStory } from '@storybook/vue3/dist/esm/client/preview/decorateStory'
+import { applyDecorators } from '@storybook/vue3/preview'
 import { mount } from 'mount-vue-component'
 import * as JabRefLogoStories from '~/components/JabRefLogo.stories.vue'
 import * as NButtonStories from '~/components/n-button.stories.vue'
@@ -32,8 +34,8 @@ import * as TTableStories from '~/components/t-table.stories'
 import * as TTagStories from '~/components/t-tag.stories'
 import * as TTextareaStories from '~/components/t-textarea.stories'
 
-export function renderToDOM(
-  { title, name, storyFn, showMain, showError }: RenderContext<VueFramework>,
+export function renderToCanvas(
+  { title, name, storyFn, showMain, showError }: RenderContext<VueRenderer>,
   domElement: HTMLElement
 ): void {
   const element = storyFn()
@@ -55,12 +57,13 @@ export function renderToDOM(
 }
 // @ts-expect-error: storybook typing is inconsistent
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const api = start(renderToDOM, { decorateStory })
+const api = start(renderToCanvas, { applyDecorators })
 const framework = 'vue3'
 definePageMeta({ layout: false, alias: '/iframe.html' })
 
 export default defineComponent({
   setup: () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     api.configure(
       framework,
       () => [
@@ -77,7 +80,8 @@ export default defineComponent({
         TTagStories,
         TTextareaStories,
       ],
-      undefined
+      undefined,
+      false
     )
   },
 })

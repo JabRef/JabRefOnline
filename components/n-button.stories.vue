@@ -6,7 +6,7 @@ import { NButton } from 'naive-ui'
     title="n-button"
     :component="NButton"
   >
-    <Story title="Default">
+    <Story title="Standard">
       <n-button>Button</n-button>
     </Story>
     <Story title="Error">
