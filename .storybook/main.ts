@@ -18,12 +18,14 @@ const config: StorybookConfig = {
     // Need to remove the vue plugin as it conflicts with the one configured by nuxt
     // it would be better to provide nuxt's config as the initial config to storybook,
     // but this is not yet possible https://github.com/storybookjs/storybook/issues/20817
+    // Also need to remove storybook-vue-addon since it will be inserted by the storybook-vue-addon plugin
+    // TODO: Would be better if we would check there that the plugin is not already added
     config.plugins = config.plugins.filter((plugin) => {
       if (
         plugin !== null &&
         typeof plugin === 'object' &&
         'name' in plugin &&
-        plugin.name === 'vite:vue'
+        (plugin.name === 'vite:vue' || plugin.name === 'storybook-vue-addon')
       ) {
         return false
       }
