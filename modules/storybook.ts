@@ -1,9 +1,9 @@
-import { defineNuxtModule, logger } from '@nuxt/kit'
 import { Nuxt } from '@nuxt/schema'
 import { buildDevStandalone } from '@storybook/core-server'
 import { PackageJson } from '@storybook/types'
 import chalk from 'chalk'
 import { LogLevel } from 'consola'
+import { defineNuxtModule, logger } from 'nuxt/kit'
 import { withoutTrailingSlash } from 'ufo'
 
 const path = '/_storybook/'
