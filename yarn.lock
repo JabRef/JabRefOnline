@@ -5534,16 +5534,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-client@npm:7.0.0-rc.8":
-  version: 7.0.0-rc.8
-  resolution: "@storybook/core-client@npm:7.0.0-rc.8"
-  dependencies:
-    "@storybook/client-logger": 7.0.0-rc.8
-    "@storybook/preview-api": 7.0.0-rc.8
-  checksum: 881595efca0a5f366cb86059fcebfa6fcce96742d2a07fcad631f4df3f6617500d0a19ceca2c8fe810120092b750de82778fab122ed607fe89b37025e72f1cc4
-  languageName: node
-  linkType: hard
-
 "@storybook/core-common@npm:7.0.0":
   version: 7.0.0
   resolution: "@storybook/core-common@npm:7.0.0"
@@ -5789,21 +5779,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/docs-tools@npm:7.0.0-rc.8":
-  version: 7.0.0-rc.8
-  resolution: "@storybook/docs-tools@npm:7.0.0-rc.8"
-  dependencies:
-    "@babel/core": ^7.12.10
-    "@storybook/core-common": 7.0.0-rc.8
-    "@storybook/preview-api": 7.0.0-rc.8
-    "@storybook/types": 7.0.0-rc.8
-    "@types/doctrine": ^0.0.3
-    doctrine: ^3.0.0
-    lodash: ^4.17.21
-  checksum: cc92c75df36d9c90071303f70c7f78c2377adb943f5c2895caf4bca3c951c73026aebe53bb828638c378d8c722d443808493b14d3576620f050dcd305997e2c0
-  languageName: node
-  linkType: hard
-
 "@storybook/global@npm:^5.0.0":
   version: 5.0.0
   resolution: "@storybook/global@npm:5.0.0"
@@ -5986,7 +5961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/vue3@npm:7.0.0":
+"@storybook/vue3@npm:7.0.0, @storybook/vue3@npm:^7.0.0":
   version: 7.0.0
   resolution: "@storybook/vue3@npm:7.0.0"
   dependencies:
@@ -6000,23 +5975,6 @@ __metadata:
   peerDependencies:
     vue: ^3.0.0
   checksum: d45a068d908adc91dc858a5ae00e177c6ea94561905cf54857cadbf0f0e52577c4ec05ae04c1fa97cd9315c112c7477ee61633609a4fe3abc2852e068c0089fe
-  languageName: node
-  linkType: hard
-
-"@storybook/vue3@npm:^7.0.0-rc.8":
-  version: 7.0.0-rc.8
-  resolution: "@storybook/vue3@npm:7.0.0-rc.8"
-  dependencies:
-    "@storybook/core-client": 7.0.0-rc.8
-    "@storybook/docs-tools": 7.0.0-rc.8
-    "@storybook/global": ^5.0.0
-    "@storybook/preview-api": 7.0.0-rc.8
-    "@storybook/types": 7.0.0-rc.8
-    ts-dedent: ^2.0.0
-    type-fest: 2.19.0
-  peerDependencies:
-    vue: ^3.0.0
-  checksum: 77bd5b7ce366905cd9c7b3ecc50128aafd1ef0c69c4c8175e27019393923af9032041c4a10eeae816b90930d72972c8031d9c6327b582356c98f6bf3c98c0721
   languageName: node
   linkType: hard
 
@@ -14843,7 +14801,7 @@ __metadata:
     "@popperjs/core": ^2.11.7
     "@prisma/client": ^4.11.0
     "@storybook/core-server": ^7.0.0-rc.8
-    "@storybook/vue3": ^7.0.0-rc.8
+    "@storybook/vue3": ^7.0.0
     "@storybook/vue3-vite": 7.0.0
     "@tailwindcss/forms": ^0.5.3
     "@tailwindcss/line-clamp": ^0.4.4
