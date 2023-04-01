@@ -34,16 +34,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@antfu/install-pkg@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@antfu/install-pkg@npm:0.1.1"
-  dependencies:
-    execa: ^5.1.1
-    find-up: ^5.0.0
-  checksum: a463af6a0df3cf0769fd88ec94d135ca54e4f7329422fa3815bf1e71fb4ca510ec02bb39935bec65a15a8d8df5e76bf8e6a7df0c7c6cc512aefa3bec85ad903f
-  languageName: node
-  linkType: hard
-
 "@antfu/utils@npm:^0.7.2":
   version: 0.7.2
   resolution: "@antfu/utils@npm:0.7.2"
@@ -4398,32 +4388,49 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/devtools@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "@nuxt/devtools@npm:0.2.5"
+"@nuxt/devtools-kit@npm:0.3.1":
+  version: 0.3.1
+  resolution: "@nuxt/devtools-kit@npm:0.3.1"
   dependencies:
-    "@antfu/install-pkg": ^0.1.1
-    "@nuxt/kit": ^3.2.3
-    birpc: ^0.2.5
+    "@nuxt/kit": ^3.3.1
+    "@nuxt/schema": ^3.3.1
+    execa: ^7.1.1
+  peerDependencies:
+    nuxt: ^3.3.1
+    vite: "*"
+  checksum: b3c7d9ee4dbe249261c61105f6674cb563a7fcec510162031e44764e08a0473a7b3c71ed4d30ed70b319180422f4ee7f3ac1cbbefdd2011a1af039180935d699
+  languageName: node
+  linkType: hard
+
+"@nuxt/devtools@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@nuxt/devtools@npm:0.3.1"
+  dependencies:
+    "@nuxt/devtools-kit": 0.3.1
+    "@nuxt/kit": ^3.3.1
+    birpc: ^0.2.10
     consola: ^2.15.3
-    execa: ^7.0.0
-    h3: ^1.5.0
-    hookable: ^5.4.2
+    execa: ^7.1.1
+    fast-glob: ^3.2.12
+    h3: ^1.6.2
+    hookable: ^5.5.1
+    image-meta: ^0.1.1
     is-installed-globally: ^0.4.0
     launch-editor: ^2.6.0
+    local-pkg: ^0.4.3
     pacote: ^15.1.1
     pathe: ^1.1.0
     pkg-types: ^1.0.2
     rc9: ^2.0.1
-    unimport: ^2.2.4
-    vite-plugin-inspect: ^0.7.15
-    vite-plugin-vue-inspector: ^3.3.2
+    unimport: ^3.0.3
+    vite-plugin-inspect: ^0.7.18
+    vite-plugin-vue-inspector: ^3.4.0
   peerDependencies:
-    nuxt: ^3.2.2
+    nuxt: ^3.3.1
     vite: "*"
   bin:
     devtools: cli.mjs
-  checksum: ae813e8658dc6d04b38bebbfbb6281e7f8752844323be36c92e5ff3386be901ed8a0eb55a7d9037df6ea59cf924f228d49e0e7c09f887a7473118dae76530b47
+  checksum: 4fd0cda57b69161011132781ae570d478b99c21105afea506259f392de2af20a470224035523657591c7b194f194518b02ac62f704d397a0f2dd0f9a482f5971
   languageName: node
   linkType: hard
 
@@ -4610,7 +4617,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/schema@npm:3.3.2":
+"@nuxt/schema@npm:3.3.2, @nuxt/schema@npm:^3.3.1":
   version: 3.3.2
   resolution: "@nuxt/schema@npm:3.3.2"
   dependencies:
@@ -8451,7 +8458,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"birpc@npm:^0.2.5":
+"birpc@npm:^0.2.10":
   version: 0.2.10
   resolution: "birpc@npm:0.2.10"
   checksum: cdbc6c856a076655ed6a3c4f92183fdc87d1e0954b28c939af04547ec66ab8b7ee8cc53fea922e65707d4f56a79f33b288e3d04e5934dfc6fc8f485a4ad627e5
@@ -11838,7 +11845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^7.0.0":
+"execa@npm:^7.1.1":
   version: 7.1.1
   resolution: "execa@npm:7.1.1"
   dependencies:
@@ -13619,6 +13626,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"image-meta@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "image-meta@npm:0.1.1"
+  checksum: fe38611c2b7f2b327e4bf66bd73a24d5b2fa6aecbe0bc69565dd882c930e9d123e181ccadcdf8f66055d21405eeefaa69863f8ed5e0edcb08a6ee3956560d385
+  languageName: node
+  linkType: hard
+
 "immutable@npm:~3.7.6":
   version: 3.7.6
   resolution: "immutable@npm:3.7.6"
@@ -14534,7 +14548,7 @@ __metadata:
     "@huntersofbook/naive-ui-nuxt": ^0.6.0
     "@nozomuikuta/h3-cors": ^0.2.2
     "@nuxt/content": ^2.5.2
-    "@nuxt/devtools": ^0.2.5
+    "@nuxt/devtools": ^0.3.1
     "@nuxtjs/eslint-config": ^12.0.0
     "@nuxtjs/eslint-config-typescript": ^12.0.0
     "@nuxtjs/tailwindcss": 6.6.4
@@ -22852,7 +22866,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-inspect@npm:^0.7.15":
+"vite-plugin-inspect@npm:^0.7.18":
   version: 0.7.18
   resolution: "vite-plugin-inspect@npm:0.7.18"
   dependencies:
@@ -22869,7 +22883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-vue-inspector@npm:^3.3.2":
+"vite-plugin-vue-inspector@npm:^3.4.0":
   version: 3.4.0
   resolution: "vite-plugin-vue-inspector@npm:3.4.0"
   dependencies:
