@@ -1,14 +1,14 @@
-# Contributing to JabRef's blog
+# Contributing to JabRef Online
 
-You want to write a blog entry? Great!
+We very much welcome contributions to JabRef!
 
-Just create a file in `content/blog`.
-Be sure that
+## Getting Started
 
-- the suffix of the file (e.g., `JabRef3-3`) matches the entry `id` in the header and
-- you quote the values in the header.
-  Then, create a pull request.
+1. Fork the JabRef Online repository on GitHub.
+2. Clone your fork to your local machine.
+3. Create a branch for your changes.
+4. Make your changes and commit them to your branch.
+5. Push your changes to your fork on GitHub.
+6. Create a pull request from your fork to the JabRef Online repository.
 
-All your contribution is licensed as <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="CC-BY-4.0" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>.
-
-For more information, see the [CONTRIBUTING.md of our help page](https://github.com/JabRef/help.jabref.org/blob/gh-pages/CONTRIBUTING.md#contributing-to-the-jabref-help).
+See also the Readme and the [contribution guidelines for the main JabRef application](https://devdocs.jabref.org/contributing) for more details.

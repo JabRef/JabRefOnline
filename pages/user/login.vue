@@ -34,7 +34,7 @@
             :validation-status="errors.email ? 'error' : undefined"
           >
             <n-input
-              v-model:value="email"
+              v-model:value="values.email"
               v-focus
             />
           </n-form-item>
@@ -45,7 +45,7 @@
             :validation-status="errors.password ? 'error' : undefined"
           >
             <n-input
-              v-model:value="password"
+              v-model:value="values.password"
               type="password"
               show-password-on="mousedown"
             />
@@ -91,7 +91,9 @@
 </template>
 
 <script lang="ts" setup>
+import { toTypedSchema } from '@vee-validate/zod'
 import { useMutation } from '@vue/apollo-composable'
+import { useForm } from 'vee-validate'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { LoginInputSchema } from '~/apollo/validation'
@@ -101,10 +103,9 @@ definePageMeta({ layout: false })
 // TODO: Automatically go to home if already logged in
 // middleware: 'guest',
 
-const { handleSubmit, errors, useField } = useZodForm(LoginInputSchema())
-
-const { value: email } = useField('email')
-const { value: password } = useField('password')
+const { handleSubmit, errors, values } = useForm({
+  validationSchema: toTypedSchema(LoginInputSchema()),
+})
 
 const otherError = ref('')
 

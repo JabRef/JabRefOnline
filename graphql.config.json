@@ -29,14 +29,7 @@
           "plugins": ["fragment-matcher"]
         },
         "apollo/validation.internal.ts": {
-          "plugins": [
-            {
-              "add": {
-                "content": "// @ts-nocheck"
-              }
-            },
-            "typescript-validation-schema"
-          ],
+          "plugins": ["typescript-validation-schema"],
           "config": {
             "schema": "zod",
             "scalarSchemas": {

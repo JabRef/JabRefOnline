@@ -113,7 +113,7 @@ const links = [
   },
   {
     title: 'News',
-    href: 'blog',
+    href: 'https://blog.jabref.org/',
   },
 ]
 

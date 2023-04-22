@@ -65,6 +65,12 @@ export default defineNuxtConfig({
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
+    // Add support for native vue stories
+    // https://github.com/tobiasdiez/storybook-vue-addon
+    'storybook-vue-addon/nuxt',
+    // Devtools support
+    // https://github.com/nuxt/devtools
+    '@nuxt/devtools',
   ],
 
   /*
@@ -148,6 +154,10 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    // Workaround for https://github.com/browserify/node-util/pull/62
+    define: {
+      'process.env': {},
+    },
     server: {
       // Configure vite for HMR with Gitpod
       // Taken from https://github.com/vitejs/vite/issues/1653#issuecomment-1079322770
