@@ -4923,13 +4923,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pinia/nuxt@npm:^0.4.7":
-  version: 0.4.7
-  resolution: "@pinia/nuxt@npm:0.4.7"
+"@pinia/nuxt@npm:^0.4.9":
+  version: 0.4.9
+  resolution: "@pinia/nuxt@npm:0.4.9"
   dependencies:
     "@nuxt/kit": ^3.0.0
-    pinia: ">=2.0.31"
-  checksum: 6ff568fad66406898003ecc1703a0120d70f5413f71efedd69a0d45421df4092b9ccddbe77455ee2d57c543097163c83826259d7744825fc9063b703df136c60
+    pinia: ">=2.0.35"
+  checksum: 05e9618db43776176669ad4dff765fe61f5f29d75fa80e95507d00ccbca851603dda17f06c6c5b453c3e8180ea690852e6dd4eadec3e75647f2fe5620770b106
   languageName: node
   linkType: hard
 
@@ -14909,7 +14909,7 @@ __metadata:
     "@nuxtjs/eslint-config": ^12.0.0
     "@nuxtjs/eslint-config-typescript": ^12.0.0
     "@nuxtjs/tailwindcss": 6.6.5
-    "@pinia/nuxt": ^0.4.7
+    "@pinia/nuxt": ^0.4.9
     "@popperjs/core": ^2.11.7
     "@prisma/client": ^4.11.0
     "@storybook/core-server": ^7.0.0-rc.8
@@ -18645,7 +18645,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinia@npm:>=2.0.31, pinia@npm:^2.0.33":
+"pinia@npm:>=2.0.35":
+  version: 2.0.35
+  resolution: "pinia@npm:2.0.35"
+  dependencies:
+    "@vue/devtools-api": ^6.5.0
+    vue-demi: "*"
+  peerDependencies:
+    "@vue/composition-api": ^1.4.0
+    typescript: ">=4.4.4"
+    vue: ^2.6.14 || ^3.2.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+    typescript:
+      optional: true
+  checksum: cecb1e1e97ed77f69166dc3815dfd05f712ac725763eb74059f5e4804b5902976c278a3d14ab5227892459e8d0b6d9645104e1d049e733228b696be98de450f0
+  languageName: node
+  linkType: hard
+
+"pinia@npm:^2.0.33":
   version: 2.0.33
   resolution: "pinia@npm:2.0.33"
   dependencies:
