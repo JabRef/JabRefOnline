@@ -170,32 +170,35 @@ import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
 
-// Make sure that the content is scrolled and not the unscrollable window
-// (vue-router for example uses window.scrollTo)
-// Taken from https://github.com/vuejs/vue-router/issues/1187#issuecomment-893964727
-const offset = 80
-const contentElementSelector = '.n-layout-scroll-container'
-Object.defineProperty(window, 'pageXOffset', {
-  get() {
-    return document.querySelector(contentElementSelector)?.scrollLeft ?? 0
-  },
-})
-Object.defineProperty(window, 'pageYOffset', {
-  get() {
-    return document.querySelector(contentElementSelector)?.scrollTop ?? 0
-  },
-})
-const windowScrollTo = window.scrollTo
-Object.defineProperty(window, 'scrollTo', {
-  value: (option: { top: number; left: number }) => {
-    const els = document.querySelectorAll(contentElementSelector)
-    const el = els[els.length - 1]
-    if (el && el.scrollHeight > el.clientHeight) {
-      // element can be scrolled
-      el.scrollTo(option.left, el.scrollTop + option.top - offset)
-    } else {
-      windowScrollTo.call(window, option.left, option.top)
-    }
-  },
-})
+// Only on client-side
+if (process.client) {
+  // Make sure that the content is scrolled and not the unscrollable window
+  // (vue-router for example uses window.scrollTo)
+  // Taken from https://github.com/vuejs/vue-router/issues/1187#issuecomment-893964727
+  const offset = 80
+  const contentElementSelector = '.n-layout-scroll-container'
+  Object.defineProperty(window, 'pageXOffset', {
+    get() {
+      return document.querySelector(contentElementSelector)?.scrollLeft ?? 0
+    },
+  })
+  Object.defineProperty(window, 'pageYOffset', {
+    get() {
+      return document.querySelector(contentElementSelector)?.scrollTop ?? 0
+    },
+  })
+  const windowScrollTo = window.scrollTo
+  Object.defineProperty(window, 'scrollTo', {
+    value: (option: { top: number; left: number }) => {
+      const els = document.querySelectorAll(contentElementSelector)
+      const el = els[els.length - 1]
+      if (el && el.scrollHeight > el.clientHeight) {
+        // element can be scrolled
+        el.scrollTo(option.left, el.scrollTop + option.top - offset)
+      } else {
+        windowScrollTo.call(window, option.left, option.top)
+      }
+    },
+  })
+}
 </script>
