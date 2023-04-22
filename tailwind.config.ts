@@ -1,7 +1,6 @@
 import { Config } from 'tailwindcss'
 
 import forms from '@tailwindcss/forms'
-import lineClamp from '@tailwindcss/line-clamp'
 import typography from '@tailwindcss/typography'
 import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
@@ -21,7 +20,7 @@ const flip = plugin(({ addUtilities }) => {
 
 export default <Config>{
   content: [`components/**/*.{vue,js}`, `layouts/**/*.vue`, `pages/**/*.vue`],
-  plugins: [lineClamp, forms, flip, typography],
+  plugins: [forms, flip, typography],
   theme: {
     colors: {
       transparent: 'transparent',
