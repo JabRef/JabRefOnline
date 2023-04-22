@@ -9,9 +9,8 @@
         variant="plaincaps"
       >
         <template #arrow="{ className }">
-          <FontAwesomeIcon
-            icon="chevron-down"
-            size="xs"
+          <Icon
+            name="ri:arrow-drop-down-line"
             :class="className"
           />
         </template>

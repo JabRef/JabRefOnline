@@ -46,14 +46,6 @@ export default defineNuxtConfig({
   },
 
   /*
-   ** Global CSS
-   */
-  css: [
-    // FontAwesome support
-    '@fortawesome/fontawesome-svg-core/styles.css',
-  ],
-
-  /*
    ** Nuxt.js modules
    */
   modules: [
@@ -78,6 +70,8 @@ export default defineNuxtConfig({
     // Devtools support
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
+    // Add support for different icons from iconify
+    'nuxt-icon',
   ],
 
   /*

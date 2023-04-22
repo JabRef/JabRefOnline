@@ -21,7 +21,7 @@
             circle
             @click="closePane"
           >
-            <FontAwesomeIcon icon="times" />
+            <Icon name="ri:close-fill" />
           </n-button>
         </div>
         <slot>
