@@ -15,17 +15,10 @@ export default defineNuxtConfig({
     // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata'],
     prerender: {
-      // Needed for storybook support
+      // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],
     },
   },
-
-  /*
-   ** Disable server-side rendering for now
-   ** See https://v3.nuxtjs.org/api/configuration/nuxt.config#ssr
-   ** and https://v3.nuxtjs.org/guide/concepts/rendering for a big-picture overview.
-   */
-  ssr: false,
 
   /*
    ** Headers of the page
@@ -92,6 +85,7 @@ export default defineNuxtConfig({
     '/gsoc/**': { redirect: '/codeprojects/gsoc' },
     '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
     '/surveys/': { redirect: '/surveys/2015' },
+    '/': { static: true },
   },
 
   /**

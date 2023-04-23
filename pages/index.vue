@@ -71,11 +71,13 @@
                 class="mx-auto"
                 style="height: 3.2em"
               >
-                <a
-                  class="text-2xl"
-                  :href="downloadUrl"
-                  >Download JabRef</a
-                >
+                <ClientOnly>
+                  <a
+                    class="text-2xl"
+                    :href="constructDownloadUrl()"
+                    >Download JabRef</a
+                  >
+                </ClientOnly>
               </n-button>
             </div>
           </div>
@@ -116,6 +118,4 @@ const links = [
     href: 'https://blog.jabref.org/',
   },
 ]
-
-const downloadUrl = constructDownloadUrl()
 </script>

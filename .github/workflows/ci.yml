@@ -118,6 +118,8 @@ jobs:
           yarn nuxi generate
           yarn storybook:build
           cp .output/public/_storybook/external-iframe/index.html storybook-static/iframe.html
+          mkdir -p storybook-static/_storybook/external-iframe
+          cp .output/public/_storybook/external-iframe/_payload.js storybook-static/_storybook/external-iframe/_payload.js
           cp -r .output/public/_nuxt storybook-static
 
       - name: Publish and test Storybook
