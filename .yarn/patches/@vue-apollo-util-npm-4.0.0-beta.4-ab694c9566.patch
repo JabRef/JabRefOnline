@@ -1,0 +1,10 @@
+diff --git a/dist/esm/errorLog.js b/dist/esm/errorLog.js
+index 5965a6704c3e18ef54e4c21564153f0e7a7b1923..002685d42effc1d2ad0ed6612239956b01d47e58 100644
+--- a/dist/esm/errorLog.js
++++ b/dist/esm/errorLog.js
+@@ -1,4 +1,4 @@
+-import { print } from 'graphql/language/printer';
++import { print } from 'graphql/language/printer.mjs';
+ export function getErrorMessages(error) {
+     const messages = [];
+     const { graphQLErrors, networkError } = error;
