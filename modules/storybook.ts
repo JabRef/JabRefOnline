@@ -2,7 +2,6 @@ import { Nuxt } from '@nuxt/schema'
 import { buildDevStandalone } from '@storybook/core-server'
 import { PackageJson } from '@storybook/types'
 import chalk from 'chalk'
-import { LogLevel } from 'consola'
 import { defineNuxtModule, logger } from 'nuxt/kit'
 import { withoutTrailingSlash } from 'ufo'
 
@@ -82,7 +81,7 @@ configure(() => {
       // const fullPath = `${withoutTrailingSlash(listener.url)}${path}`
       // logger.info(`Storybook: ${chalk.underline.yellow(fullPath)}`)
       if (nuxt.options.dev) {
-        const wrap = logger.create({ level: LogLevel.Fatal })
+        const wrap = logger.create({ level: 0 })
         try {
           // Hide all output from storybook
           wrap.wrapAll()
