@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Markdown
+    <ContentSlot
       :use="$slots.default"
       unwrap="p"
     />

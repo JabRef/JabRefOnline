@@ -4,6 +4,7 @@ import prisma from '@prisma/client'
 const { PrismaClient, GroupType, GroupHierarchyType } = prisma
 
 async function seedInternal(prisma: PrismaClientT): Promise<void> {
+  await prisma.entity.deleteMany({})
   await prisma.user.deleteMany({})
   await prisma.userDocument.deleteMany({})
   await prisma.userDocumentOtherField.deleteMany({})
