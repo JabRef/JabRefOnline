@@ -30,8 +30,8 @@
         type="submit"
         class="absolute left-0 top-0 bottom-0 ml-2"
       >
-        <FontAwesomeIcon
-          icon="search"
+        <Icon
+          name="ri:search-line"
           class="text-gray-400"
         />
       </button>
@@ -45,11 +45,8 @@
     >
       <template #trigger>
         <div class="flex mr-5 items-center">
-          <button class="text-right text-gray-700">
-            <FontAwesomeIcon
-              icon="list-ul"
-              size="lg"
-            />
+          <button class="text-right text-gray-700 text-xl">
+            <Icon name="ri:menu-fill" />
           </button>
         </div>
       </template>
@@ -68,10 +65,9 @@
             Subscriptions
           </span>
           <div class="inline-block align-top pl-0.5 -mt-1">
-            <FontAwesomeIcon
-              icon="circle"
-              class="text-primary-600"
-              size="xs"
+            <Icon
+              name="ri:checkbox-blank-circle-fill"
+              class="text-primary-600 text-xs"
             />
           </div>
         </div>
@@ -83,10 +79,9 @@
       v-if="showUserProfile"
       class="flex items-center pr-10 space-x-7"
     >
-      <FontAwesomeIcon
-        icon="bell"
-        class="text-gray-400 hover:text-primary-500"
-        size="lg"
+      <Icon
+        name="ri:notification-3-fill"
+        class="text-gray-400 hover:text-primary-500 text-lg"
       />
       <div>
         <!-- User profile dropdown -->

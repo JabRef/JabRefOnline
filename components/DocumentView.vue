@@ -5,12 +5,12 @@
         class="font-semibold text-lg text-primary-800"
         @click="displayDocumentDetails"
       >
-        <FontAwesomeIcon
+        <Icon
           v-if="typeIcon"
-          :icon="typeIcon"
+          :name="typeIcon"
           class="mr-1"
           :title="typeDescription"
-        ></FontAwesomeIcon>
+        ></Icon>
         <span>{{ document.title }}</span>
       </button>
       <!-- TOOD: Add citation display
@@ -69,13 +69,13 @@
         variant="badge"
         class="border border-gray-400"
       >
-        <!-- TODO: Add icon of group <FontAwesomeIcon icon="dragon" size="xs" class="mr-2" /> -->
+        <!-- TODO: Add icon of group <Icon name="dragon" class="mr-2" /> -->
         {{ keyword }}
       </t-tag>
       <!-- TODO: Add overflow
       <n-button variant="linkplain" class="text-sm my-auto">
         <span>View More (8+)</span>
-        <FontAwesomeIcon icon="chevron-down" size="xs" />
+        <Icon name="ri:arrow-down-s-line" />
       </n-button>
       -->
     </div>
@@ -93,17 +93,11 @@
       >
         <template v-if="viewFullAbstract">
           <span>View less</span>
-          <FontAwesomeIcon
-            icon="chevron-up"
-            size="xs"
-          />
+          <Icon name="ri:arrow-up-s-line" />
         </template>
         <template v-else>
           <span>View full abstract</span>
-          <FontAwesomeIcon
-            icon="chevron-down"
-            size="xs"
-          />
+          <Icon name="ri:arrow-down-s-line" />
         </template>
       </n-button>
     </div>
@@ -168,13 +162,13 @@ const viewFullAbstract = ref(false)
 const typeIcon = computed(() => {
   switch (document.value.__typename) {
     case 'JournalArticle':
-      return 'newspaper'
+      return 'ri:newspaper-line'
     case 'ProceedingsArticle':
-      return 'chalkboard-teacher'
+      return 'ri:presentation-line'
     case 'Thesis':
-      return 'graduation-cap'
+      return 'ri:graduation-cap-line'
     default:
-      return 'file-alt'
+      return 'ri:file-list-2-line'
   }
 })
 
