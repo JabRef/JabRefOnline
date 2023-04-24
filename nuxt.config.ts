@@ -20,6 +20,11 @@ export default defineNuxtConfig({
     },
   },
 
+  experimental: {
+    // Add support for vue runtime compiler (needed to render stories in storybook)
+    runtimeVueCompiler: true,
+  },
+
   /*
    ** Headers of the page
    ** See https://v3.nuxtjs.org/getting-started/seo-meta
@@ -52,8 +57,6 @@ export default defineNuxtConfig({
     './modules/storybook',
     // Add server-side graphql support
     'nuxt-graphql-server',
-    // Add vue runtime compiler as temporary workaround for https://github.com/nuxt/framework/issues/4661
-    'nuxt-runtime-compiler',
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
