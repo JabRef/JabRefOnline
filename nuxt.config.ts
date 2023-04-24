@@ -68,6 +68,8 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     // Add support for different icons from iconify
     'nuxt-icon',
+    // Add some auto-imports for vee-validate
+    '@vee-validate/nuxt',
   ],
 
   /*

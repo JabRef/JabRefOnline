@@ -91,9 +91,7 @@
 </template>
 
 <script lang="ts" setup>
-import { toTypedSchema } from '@vee-validate/zod'
 import { useMutation } from '@vue/apollo-composable'
-import { useForm } from 'vee-validate'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { LoginInputSchema } from '~/apollo/validation'
