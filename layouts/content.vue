@@ -147,7 +147,7 @@
         "offers": { "@type": "Offer", "price": "0" } }
       </Script>
     </Head>
-
+    <SeoKit />
     <n-layout :position="isSmallDisplay ? 'static' : 'absolute'">
       <header>
         <n-layout-header

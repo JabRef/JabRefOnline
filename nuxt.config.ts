@@ -1,6 +1,12 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
+  extends: [
+    // Preset for configuring SEO
+    // https://github.com/harlan-zw/nuxt-seo-kit
+    'nuxt-seo-kit',
+  ],
+
   /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
@@ -149,6 +155,15 @@ export default defineNuxtConfig({
         primaryColorSuppl: '#4F5F8F',
       },
     },
+  },
+
+  /**
+   * SEO configuration
+   * https://github.com/harlan-zw/nuxt-seo-kit
+   */
+  site: {
+    // Hide information message during startup
+    splash: false,
   },
 
   vite: {
