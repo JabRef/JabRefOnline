@@ -39,12 +39,14 @@
 
     <!-- Hamburger menu for small screens -->
     <n-popover
-      v-if="isSmallDisplay"
       placement="bottom-end"
       trigger="click"
     >
       <template #trigger>
-        <div class="flex mr-5 items-center">
+        <div
+          v-show="isSmallDisplay"
+          class="flex mr-5 items-center"
+        >
           <button class="text-right text-gray-700 text-xl">
             <Icon name="ri:menu-fill" />
           </button>
@@ -56,23 +58,25 @@
     </n-popover>
 
     <!-- Main menu -->
-    <slot v-if="!isSmallDisplay">
-      <div class="space-x-14">
-        <span class="text-primary-600 text-lg font-semibold">Library</span>
-        <span class="text-gray-400 text-lg font-semibold">Browse</span>
-        <div class="inline">
-          <span class="text-gray-400 text-lg font-semibold">
-            Subscriptions
-          </span>
-          <div class="inline-block align-top pl-0.5 -mt-1">
-            <Icon
-              name="ri:checkbox-blank-circle-fill"
-              class="text-primary-600 text-xs"
-            />
+    <div v-show="!isSmallDisplay">
+      <slot>
+        <div class="space-x-14">
+          <span class="text-primary-600 text-lg font-semibold">Library</span>
+          <span class="text-gray-400 text-lg font-semibold">Browse</span>
+          <div class="inline">
+            <span class="text-gray-400 text-lg font-semibold">
+              Subscriptions
+            </span>
+            <div class="inline-block align-top pl-0.5 -mt-1">
+              <Icon
+                name="ri:checkbox-blank-circle-fill"
+                class="text-primary-600 text-xs"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </slot>
+      </slot>
+    </div>
 
     <!-- User profile -->
     <nav
@@ -142,7 +146,7 @@
 
     <!-- Empty stopper for proper alignment -->
     <div
-      v-if="!isSmallDisplay"
+      v-show="!isSmallDisplay"
       class="flex-1 mx-3 md:mx-6"
     ></div>
   </nav>
