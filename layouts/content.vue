@@ -148,10 +148,10 @@
       </Script>
     </Head>
     <SeoKit />
-    <n-layout :position="isSmallDisplay ? 'static' : 'absolute'">
+    <n-layout :position="position">
       <header>
         <n-layout-header
-          :position="isSmallDisplay ? 'static' : 'absolute'"
+          :position="position"
           class="z-50"
         >
           <slot name="header">
@@ -166,10 +166,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-
-const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
-
+let position = ref<'static' | 'absolute'>('static')
+onMounted(() => {
+  // TODO: This doesn't seem to work all the time (on initial load the static class is still applied), is SSR in layouts broken?
+  position = computed(() => (isSmallDisplay.value ? 'static' : 'absolute'))
+})
 // Only on client-side
 if (process.client) {
   // Make sure that the content is scrolled and not the unscrollable window
