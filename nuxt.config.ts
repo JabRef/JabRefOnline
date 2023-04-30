@@ -37,15 +37,58 @@ export default defineNuxtConfig({
    */
   app: {
     head: {
-      title: process.env.npm_package_name || '',
-      meta: [
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'shortcut icon', href: '/favicon.ico' },
         {
-          hid: 'description',
-          name: 'description',
-          content: process.env.npm_package_description || '',
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-16.png',
+          sizes: '16x16',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-20.png',
+          sizes: '20x20',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-32.png',
+          sizes: '32x32',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-40.png',
+          sizes: '40x40',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-48.png',
+          sizes: '48x48',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-64.png',
+          sizes: '64x64',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-128.png',
+          sizes: '128x128',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/img/JabRef-icon-256.png',
+          sizes: '256x256',
         },
       ],
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },
 
@@ -164,6 +207,10 @@ export default defineNuxtConfig({
   site: {
     // Hide information message during startup
     splash: false,
+    siteUrl: 'https://www.jabref.org/',
+    siteName: 'JabRef',
+    siteDescription:
+      'A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way.',
   },
 
   vite: {
