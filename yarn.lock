@@ -8930,7 +8930,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.4.0, ci-info@npm:^3.8.0":
+"ci-info@npm:^3.4.0, ci-info@npm:^3.7.0, ci-info@npm:^3.8.0":
   version: 3.8.0
   resolution: "ci-info@npm:3.8.0"
   checksum: d0a4d3160497cae54294974a7246202244fff031b0a6ea20dd57b10ec510aa17399c41a1b0982142c105f3255aff2173e5c0dd7302ee1b2f28ba3debda375098
@@ -14262,7 +14262,7 @@ __metadata:
     nuxt-icon: ^0.3.3
     nuxt-seo-kit: ^1.3.8
     passport: ^0.6.0
-    patch-package: ^6.5.0
+    patch-package: ^7.0.0
     pinia: ^2.0.35
     postinstall-postinstall: ^2.1.0
     prettier: ^2.8.7
@@ -17944,16 +17944,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"patch-package@npm:^6.5.0":
-  version: 6.5.1
-  resolution: "patch-package@npm:6.5.1"
+"patch-package@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "patch-package@npm:7.0.0"
   dependencies:
     "@yarnpkg/lockfile": ^1.1.0
     chalk: ^4.1.2
-    cross-spawn: ^6.0.5
+    ci-info: ^3.7.0
+    cross-spawn: ^7.0.3
     find-yarn-workspace-root: ^2.0.0
     fs-extra: ^9.0.0
-    is-ci: ^2.0.0
     klaw-sync: ^6.0.0
     minimist: ^1.2.6
     open: ^7.4.2
@@ -17961,10 +17961,10 @@ __metadata:
     semver: ^5.6.0
     slash: ^2.0.0
     tmp: ^0.0.33
-    yaml: ^1.10.2
+    yaml: ^2.2.2
   bin:
     patch-package: index.js
-  checksum: 8530ffa30f11136b527c6eddf6da48fa12856ee510a47edb1f9cdf8a025636adb82968f5fae778b5e04ce8c87915ebdf5911422b54add59a5a42e372a8f30eb2
+  checksum: 63f6589320f8953ac06b5c0c1549c82ef051aea81db91173157ab270a8f4910deb895e0b4d49ee1626a4a0a02d74f134bdbeb76052b639a2239e2df83c4a7ce6
   languageName: node
   linkType: hard
 
@@ -23769,6 +23769,13 @@ __metadata:
   version: 2.2.1
   resolution: "yaml@npm:2.2.1"
   checksum: 84f68cbe462d5da4e7ded4a8bded949ffa912bc264472e5a684c3d45b22d8f73a3019963a32164023bdf3d83cfb6f5b58ff7b2b10ef5b717c630f40bd6369a23
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "yaml@npm:2.2.2"
+  checksum: d90c235e099e30094dcff61ba3350437aef53325db4a6bcd04ca96e1bfe7e348b191f6a7a52b5211e2dbc4eeedb22a00b291527da030de7c189728ef3f2b4eb3
   languageName: node
   linkType: hard
 
