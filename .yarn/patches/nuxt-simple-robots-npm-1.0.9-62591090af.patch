@@ -1,20 +1,18 @@
 diff --git a/dist/runtime/server/robots-middleware.mjs b/dist/runtime/server/robots-middleware.mjs
-index a95ac80f5664251144603d23c85fd2985d340a17..1d41483adaa5f0cfcd3bba1738adfbff920c697f 100644
+index a95ac80f5664251144603d23c85fd2985d340a17..d56f8102f032de527f18e05394186834aa47e9a7 100644
 --- a/dist/runtime/server/robots-middleware.mjs
 +++ b/dist/runtime/server/robots-middleware.mjs
-@@ -1,12 +1,9 @@
+@@ -1,5 +1,5 @@
  import { defineEventHandler, setHeader } from "h3";
 -import { indexable, robotsDisabledValue } from "#nuxt-simple-robots/config";
 +import { indexable, robotsDisabledValue, robotsEnabledValue } from "#nuxt-simple-robots/config";
  import { getRouteRules } from "#internal/nitro";
  export default defineEventHandler((event) => {
    if (event.path === "/robots.txt")
-     return;
--  const routeRules = getRouteRules(event);
--  if (typeof routeRules.robots === "string")
--    setHeader(event, "X-Robots-Tag", routeRules.robots);
--  else if (routeRules.index === false || indexable === false)
--    setHeader(event, "X-Robots-Tag", robotsDisabledValue);
-+  // CHANGED: Otherwise x-robots-tag is set to none
-+  setHeader(event, "X-Robots-Tag", robotsEnabledValue);
+@@ -9,4 +9,6 @@ export default defineEventHandler((event) => {
+     setHeader(event, "X-Robots-Tag", routeRules.robots);
+   else if (routeRules.index === false || indexable === false)
+     setHeader(event, "X-Robots-Tag", robotsDisabledValue);
++  else
++    setHeader(event, "X-Robots-Tag", robotsEnabledValue);
  });
