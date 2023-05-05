@@ -39,20 +39,54 @@
 
     <!-- Hamburger menu for small screens -->
     <n-popover
-      placement="bottom-end"
+      ref="hamburgerMenu"
+      placement="top-end"
+      :overlap="true"
       trigger="click"
+      :duration="0"
+      :show-arrow="false"
+      style="
+        border-radius: 0.5rem;
+        padding: 0;
+        width: 20rem;
+        margin-right: -10px;
+      "
+      @update:show="isHamburgerShown = $event"
     >
       <template #trigger>
         <div
           v-show="isSmallDisplay"
-          class="flex mr-5 items-center"
+          class="flex mr-5 items-center relative"
         >
-          <button class="text-right text-gray-700 text-xl">
-            <Icon name="ri:menu-fill" />
+          <div
+            v-if="isHamburgerShown"
+            class="fixed z-50 inset-0 w-full h-full"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div
+              class="backdrop-blur-sm bg-gray-400/20 w-full h-full"
+              aria-hidden="true"
+            ></div>
+          </div>
+          <button
+            class="text-right text-gray-700 text-xl relative z-60"
+            @click="isHamburgerShown = !isHamburgerShown"
+          >
+            <Icon :name="isHamburgerShown ? 'ri:close-fill' : 'ri:menu-fill'" />
           </button>
         </div>
       </template>
-      <div>
+      <div class="px-6 py-5 text-base max-w-xs w-full">
+        <button
+          class="text-right text-gray-700 text-xl absolute top-3 right-5"
+          @click=";[hamburgerMenu?.setShow(false), (isHamburgerShown = false)]"
+        >
+          <Icon
+            v-if="isHamburgerShown"
+            name="ri:close-fill"
+          />
+        </button>
         <slot name="collapsed" />
       </div>
     </n-popover>
@@ -155,9 +189,13 @@
 <script lang="ts" setup>
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { NPopover } from 'naive-ui'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'
+
+const isHamburgerShown = ref(false)
+const hamburgerMenu = ref<typeof NPopover | null>(null)
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
 
