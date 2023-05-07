@@ -408,6 +408,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@azure/communication-common@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@azure/communication-common@npm:2.2.0"
+  dependencies:
+    "@azure/abort-controller": ^1.0.0
+    "@azure/core-auth": ^1.3.0
+    "@azure/core-rest-pipeline": ^1.3.2
+    "@azure/core-tracing": ^1.0.0
+    "@azure/core-util": ^1.0.0
+    events: ^3.0.0
+    jwt-decode: ^3.1.2
+    tslib: ^2.2.0
+  checksum: e208030ca117562e76fb41b367c7445f3ff3c1c52834cfcecf15018db321dfaad8bc9efb7d5563eda73466645b8c2e824557981018dc5341cc23fdd3fe66d3a6
+  languageName: node
+  linkType: hard
+
+"@azure/communication-email@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@azure/communication-email@npm:1.0.0"
+  dependencies:
+    "@azure/communication-common": ^2.2.0
+    "@azure/core-auth": ^1.3.0
+    "@azure/core-client": ^1.3.2
+    "@azure/core-lro": ^2.5.0
+    "@azure/core-rest-pipeline": ^1.8.0
+    "@azure/logger": ^1.0.0
+    tslib: ^1.9.3
+    uuid: ^8.3.2
+  checksum: d939c729b303bc1bf7272b7f54850114f3cc90760cc0f796bbc8e01cd2834d0b28b33bd27b9ce590db691df94fbc23b10e39fa3c5d82e4b000a523616b5f12ef
+  languageName: node
+  linkType: hard
+
 "@azure/core-auth@npm:^1.3.0, @azure/core-auth@npm:^1.4.0":
   version: 1.4.0
   resolution: "@azure/core-auth@npm:1.4.0"
@@ -418,7 +450,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@azure/core-client@npm:^1.0.0, @azure/core-client@npm:^1.4.0, @azure/core-client@npm:^1.6.1":
+"@azure/core-client@npm:^1.0.0, @azure/core-client@npm:^1.3.2, @azure/core-client@npm:^1.4.0, @azure/core-client@npm:^1.6.1":
   version: 1.7.2
   resolution: "@azure/core-client@npm:1.7.2"
   dependencies:
@@ -441,6 +473,18 @@ __metadata:
     "@azure/logger": ^1.0.0
     tslib: ^2.2.0
   checksum: 33a47694b539dfe0b97601972b7e1f1cd0c0248ffa2109f69d425cb7e9397ebcfb9221e65a183b4e5890e49721a526e2b39b529e7c372bc455598d800811023b
+  languageName: node
+  linkType: hard
+
+"@azure/core-lro@npm:^2.5.0":
+  version: 2.5.3
+  resolution: "@azure/core-lro@npm:2.5.3"
+  dependencies:
+    "@azure/abort-controller": ^1.0.0
+    "@azure/core-util": ^1.2.0
+    "@azure/logger": ^1.0.0
+    tslib: ^2.2.0
+  checksum: 443ae1884a6bc9edfeee1e62463b218a020f1be987ef755c13d5afe39803bbceb8ca9174bd516e1db9bc3f3762f71168167ea0ee9873c66e3d86a6667d5a0457
   languageName: node
   linkType: hard
 
@@ -471,6 +515,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@azure/core-rest-pipeline@npm:^1.3.2":
+  version: 1.10.3
+  resolution: "@azure/core-rest-pipeline@npm:1.10.3"
+  dependencies:
+    "@azure/abort-controller": ^1.0.0
+    "@azure/core-auth": ^1.4.0
+    "@azure/core-tracing": ^1.0.1
+    "@azure/core-util": ^1.3.0
+    "@azure/logger": ^1.0.0
+    form-data: ^4.0.0
+    http-proxy-agent: ^5.0.0
+    https-proxy-agent: ^5.0.0
+    tslib: ^2.2.0
+  checksum: 6704101a2d6ca651ffc09e4d9fa77bc9718ed0d9b96b93d23a845dbac50a71bb089486808230ebaf59c9cb2557661ee5b020222ad5ad6d49d09b47c6ed11fce4
+  languageName: node
+  linkType: hard
+
 "@azure/core-tracing@npm:^1.0.0, @azure/core-tracing@npm:^1.0.1":
   version: 1.0.1
   resolution: "@azure/core-tracing@npm:1.0.1"
@@ -487,6 +548,16 @@ __metadata:
     "@azure/abort-controller": ^1.0.0
     tslib: ^2.2.0
   checksum: 58c7e3c9e9fda27242c1ab1dbfcf11eab52cc3e6459a2509fa5572a3faebf3f24c6bf9d92883cd80974119fc1e2c16c7bd2c71f20cfbe670405515c73fdb4093
+  languageName: node
+  linkType: hard
+
+"@azure/core-util@npm:^1.2.0, @azure/core-util@npm:^1.3.0":
+  version: 1.3.1
+  resolution: "@azure/core-util@npm:1.3.1"
+  dependencies:
+    "@azure/abort-controller": ^1.0.0
+    tslib: ^2.2.0
+  checksum: 861d9bd1a9db863bfc71b95447d548f100bec975670efb658ddc9b7c0d676d03a21a48042aa9ec853ad6b1bd38da2cf3069cd7e872196bea1598bf4357430d8f
   languageName: node
   linkType: hard
 
@@ -14810,6 +14881,7 @@ __metadata:
     "@apollo/client": ^3.7.12
     "@apollo/server": ^4.7.0
     "@as-integrations/h3": ^1.1.5
+    "@azure/communication-email": ^1.0.0
     "@azure/static-web-apps-cli": ^1.1.1
     "@graphql-codegen/cli": ^3.3.1
     "@graphql-codegen/fragment-matcher": ^4.0.1
@@ -14887,7 +14959,6 @@ __metadata:
     lodash: ^4.17.21
     mount-vue-component: ^0.10.2
     naive-ui: ^2.34.3
-    nodemailer: ^6.8.0
     nuxt: ^3.4.3
     nuxt-graphql-server: 1.2.2
     nuxt-icon: ^0.3.3
@@ -15327,6 +15398,13 @@ __metadata:
     jwa: ^2.0.0
     safe-buffer: ^5.0.1
   checksum: d68d07aa6d1b8cb35c363a9bd2b48f15064d342a5d9dc18a250dbbce8dc06bd7e4792516c50baa16b8d14f61167c19e851fd7f66b59ecc68b7f6a013759765f7
+  languageName: node
+  linkType: hard
+
+"jwt-decode@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "jwt-decode@npm:3.1.2"
+  checksum: 20a4b072d44ce3479f42d0d2c8d3dabeb353081ba4982e40b83a779f2459a70be26441be6c160bfc8c3c6eadf9f6380a036fbb06ac5406b5674e35d8c4205eeb
   languageName: node
   linkType: hard
 
@@ -17663,13 +17741,6 @@ __metadata:
     has: ^1.0.3
     is: ^3.2.1
   checksum: 1fe3a1ca7fc35392f169c8a46d889d07deb201bba3a20d17df23efab509698c9639737b0c235c9be772a34035e749bae5d477f74c9e26a1b67c78bd7d6dce8e4
-  languageName: node
-  linkType: hard
-
-"nodemailer@npm:^6.8.0":
-  version: 6.9.1
-  resolution: "nodemailer@npm:6.9.1"
-  checksum: b1b9670afc170b4454665abae3fc9acd7e781adb9f579d1c2cd991bf75c647ebe345593f8a057e48d7bf9e4c9a9218869f87db8fb7171c614f557000ab654572
   languageName: node
   linkType: hard
 

@@ -3,8 +3,8 @@ import type { PrismaClient, User } from '@prisma/client'
 import { ResolversTypes } from '#graphql/resolver'
 import { v4 as generateToken } from 'uuid'
 import { hash, verifyHash } from '../utils/crypto'
+import { EmailService } from '../utils/email.service'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
-import { sendEmail } from '../utils/sendEmail'
 import { RedisClient } from '../utils/services.factory'
 import { inject, injectable } from './../tsyringe'
 
@@ -25,7 +25,8 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
-    @inject('RedisClient') private redisClient: RedisClient
+    @inject('RedisClient') private redisClient: RedisClient,
+    @inject('EmailService') private emailService: EmailService
   ) {}
 
   async getUsers(): Promise<User[]> {
@@ -68,7 +69,11 @@ export class AuthService {
     const token = generateToken()
     const hashedToken = await hash(token)
     await this.redisClient.set(key, hashedToken, { EX: 1000 * 60 * 60 * 24 }) // VALID FOR ONE DAY
-    await sendEmail(email, resetPasswordTemplate(user.id, token))
+    await this.emailService.sendEmail(
+      { address: email },
+      'Reset your password',
+      resetPasswordTemplate(user.id, token)
+    )
     return true
   }
 
