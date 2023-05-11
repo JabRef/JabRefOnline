@@ -16,7 +16,7 @@
       download-url="https://downloads.jabref.org/"
       feature-list="https://www.jabref.org/#features"
       screenshot="https://www.jabref.org/assets/jabref-mainscreen.png"
-      :offers="{ price: '0' }"
+      :offers="{ price: '0', priceCurrency: 'EUR' }"
     />
     <SchemaOrgProduct
       name="JabRef"
@@ -28,7 +28,7 @@
       download-url="https://downloads.jabref.org/"
       feature-list="https://www.jabref.org/#features"
       screenshot="https://www.jabref.org/assets/jabref-mainscreen.png"
-      :offers="{ price: '0' }"
+      :offers="{ price: '0', priceCurrency: 'EUR' }"
     />
     <n-layout :position="position">
       <header>
