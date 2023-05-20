@@ -61,7 +61,7 @@ jobs:
           $match = $output | Select-String -Pattern 'Project deployed to (?<url>.*) '
           if ($match -eq $null) { exit 1 }
           $url = $match.Matches[0].Groups['url'].Value
-          echo "url=$url" >> $GITHUB_OUTPUT
+          echo "url=$url" >> $env:GITHUB_OUTPUT
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
