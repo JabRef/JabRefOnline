@@ -56,10 +56,12 @@ jobs:
         id: deploy_web
         run: |
           # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
-          $match = yarn swa deploy .output\public --env ${{ github.event.pull_request.number }} --verbose=silly 2>&1 | Out-String | Select-String -Pattern 'Project deployed to (?<url>.*) '
+          $output = yarn swa deploy .output\public --env ${{ github.event.pull_request.number }} --verbose=silly 2>&1 | Out-String
+          Write-Host $output
+          $match = $output | Select-String -Pattern 'Project deployed to (?<url>.*) '
           if ($match -eq $null) { exit 1 }
           $url = $match.Matches[0].Groups['url'].Value
-          echo "STATIC_WEB_APP_URL=$url" >> "$GITHUB_OUTPUT"
+          echo "url=$url" >> $GITHUB_OUTPUT
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
@@ -84,12 +86,12 @@ jobs:
       - name: Check HTTP status
         run: |
           Start-Sleep -Seconds 30
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.static_web_app_url }} || true
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.static_web_app_url }}/api || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.url }} || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.url }}/api || true
         # The api returns 400 status code for some reason
         # uses: gerdemann/http-status-code@1.0.0
         # with:
-        #   url: ${{ steps.deploy_web.outputs.static_web_app_url }}/api
+        #   url: ${{ steps.deploy_web.outputs.url }}/api
         #   code: 200
         #   timeout: 300 # initial warm up can take quite some time
         #   interval: 30
@@ -98,12 +100,12 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
-            Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.static_web_app_url }}
+            Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.url }}
 
       - name: Run API tests
         run: yarn test:api
         env:
-          TEST_URL: ${{ steps.deploy_web.outputs.static_web_app_url }}
+          TEST_URL: ${{ steps.deploy_web.outputs.url }}
 
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
