@@ -9,6 +9,9 @@ on:
     branches:
       - main
 
+permissions:
+  pull-requests: write
+
 jobs:
   pr_preview:
     name: Build & Deploy to PR preview
@@ -50,8 +53,13 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy Web App
+        id: deploy_web
         run: |
-          yarn swa deploy .output\public --env ${{ github.event.pull_request.number }}
+          # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
+          $match = yarn swa deploy .output\public --env ${{ github.event.pull_request.number }} --verbose=silly | Select-String -Pattern 'Project deployed to (?<url>.*) '
+          if ($match -eq $null) { exit 1 }
+          $url = $match.Matches.Groups['url'].Value
+          echo "STATIC_WEB_APP_URL=$url" >> "$GITHUB_OUTPUT"
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
@@ -76,8 +84,8 @@ jobs:
       - name: Check HTTP status
         run: |
           Start-Sleep -Seconds 30
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net || true
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net/api || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.static_web_app_url }} || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.static_web_app_url }}/api || true
         # The api returns 400 status code for some reason
         # uses: gerdemann/http-status-code@1.0.0
         # with:
@@ -86,10 +94,16 @@ jobs:
         #   timeout: 300 # initial warm up can take quite some time
         #   interval: 30
 
+      - name: Report URL as PR comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.static_web_app_url }}
+
       - name: Run API tests
         run: yarn test:api
         env:
-          TEST_URL: https://mango-pebble-0224c3803-${{ github.event.pull_request.number }}.westeurope.1.azurestaticapps.net
+          TEST_URL: ${{ steps.deploy_web.outputs.static_web_app_url }}
 
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
