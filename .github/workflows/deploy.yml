@@ -56,9 +56,9 @@ jobs:
         id: deploy_web
         run: |
           # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
-          $match = yarn swa deploy .output\public --env ${{ github.event.pull_request.number }} --verbose=silly | Select-String -Pattern 'Project deployed to (?<url>.*) '
+          $match = yarn swa deploy .output\public --env ${{ github.event.pull_request.number }} --verbose=silly 2>&1 | Out-String | Select-String -Pattern 'Project deployed to (?<url>.*) '
           if ($match -eq $null) { exit 1 }
-          $url = $match.Matches.Groups['url'].Value
+          $url = $match.Matches[0].Groups['url'].Value
           echo "STATIC_WEB_APP_URL=$url" >> "$GITHUB_OUTPUT"
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
