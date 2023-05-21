@@ -27,8 +27,13 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    // Full typed routing
+    typedPages: true,
+  },
+
+  vue: {
     // Add support for vue runtime compiler (needed to render stories in storybook)
-    runtimeVueCompiler: true,
+    runtimeCompiler: true,
   },
 
   /*
@@ -102,8 +107,6 @@ export default defineNuxtConfig({
     '@huntersofbook/naive-ui-nuxt',
     // Use Pinia for state management
     '@pinia/nuxt',
-    // Add storybook support
-    './modules/storybook',
     // Add server-side graphql support
     'nuxt-graphql-server',
     // Add support for writing content in markdown

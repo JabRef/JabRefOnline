@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute('codeprojects-slug')
 let markdownPath = 'codeprojects/'
-if (typeof route.params.slug === 'string') {
+if (route.params.slug == null || typeof route.params.slug === 'string') {
   markdownPath += route.params.slug
 } else {
   markdownPath += route.params.slug
