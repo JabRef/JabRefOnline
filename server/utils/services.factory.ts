@@ -8,7 +8,7 @@ import {
   RedisScripts,
 } from 'redis'
 import { promisify } from 'util'
-import { Environment } from '~/config'
+import { Config, Environment } from '~/config'
 
 export type RedisClient = RedisClientType<
   RedisDefaultModules,
@@ -16,8 +16,7 @@ export type RedisClient = RedisClientType<
   RedisScripts
 >
 
-export async function createRedisClient(): Promise<RedisClient> {
-  const config = useRuntimeConfig()
+export async function createRedisClient(config: Config): Promise<RedisClient> {
   if (
     config.public.environment === Environment.LocalDevelopment ||
     config.public.environment === Environment.AzureBuild
