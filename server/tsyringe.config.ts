@@ -13,12 +13,13 @@ import { createRedisClient } from './utils/services.factory'
 const { PrismaClient } = prisma
 
 export async function configure(): Promise<void> {
+  const config = useRuntimeConfig()
   // Tools
   register('PrismaClient', {
     useFactory: instanceCachingFactory(() => new PrismaClient()),
   })
   register('RedisClient', {
-    useValue: await createRedisClient(),
+    useValue: await createRedisClient(config),
   })
   registerClasses()
 }
