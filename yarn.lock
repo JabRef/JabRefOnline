@@ -3636,15 +3636,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@huntersofbook/naive-ui-nuxt@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@huntersofbook/naive-ui-nuxt@npm:0.6.0"
+"@huntersofbook/naive-ui-nuxt@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@huntersofbook/naive-ui-nuxt@npm:1.0.0"
   dependencies:
     "@css-render/vue3-ssr": ^0.15.12
-    "@nuxt/kit": ^3.1.1
+    "@nuxt/kit": ^3.5.1
     defu: ^6.1.2
     naive-ui: ^2.34.3
-  checksum: 9ae6443b553b949ae077e7f6f005b8b1e897995cb16b717ef42dcbad8c103dd2d3e35a9fee15842917bb5609eb0273ca3ca4a9627e0668c01b982552dcc4f64d
+  peerDependencies:
+    vue: "*"
+  checksum: bb725def817efca9ab174724868585dde575e8b3c4e6fcd0121a037ee04192edea532cd2953fe97aab76ac4ae6cff7425980758d0832f78dc6cc282a464c4d0b
   languageName: node
   linkType: hard
 
@@ -4209,7 +4211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:3.5.0, @nuxt/kit@npm:^3.1.1, @nuxt/kit@npm:^3.2.0, @nuxt/kit@npm:^3.3.3, @nuxt/kit@npm:^3.4.2, @nuxt/kit@npm:^3.4.3, @nuxt/kit@npm:^3.5.0":
+"@nuxt/kit@npm:3.5.0, @nuxt/kit@npm:^3.2.0, @nuxt/kit@npm:^3.3.3, @nuxt/kit@npm:^3.4.2, @nuxt/kit@npm:^3.4.3, @nuxt/kit@npm:^3.5.0":
   version: 3.5.0
   resolution: "@nuxt/kit@npm:3.5.0"
   dependencies:
@@ -4232,6 +4234,32 @@ __metadata:
     unimport: ^3.0.6
     untyped: ^1.3.2
   checksum: 77baea10b72ebda658fd14519270e4dfac46cc8e8f1aaad17058d23a847fd369f4b74b4c0d907146991cbca950e728e2304fa3e471d878ebcd2cba5e4776ccdf
+  languageName: node
+  linkType: hard
+
+"@nuxt/kit@npm:^3.5.1":
+  version: 3.5.2
+  resolution: "@nuxt/kit@npm:3.5.2"
+  dependencies:
+    "@nuxt/schema": 3.5.2
+    c12: ^1.4.1
+    consola: ^3.1.0
+    defu: ^6.1.2
+    globby: ^13.1.4
+    hash-sum: ^2.0.0
+    ignore: ^5.2.4
+    jiti: ^1.18.2
+    knitwork: ^1.0.0
+    lodash.template: ^4.5.0
+    mlly: ^1.3.0
+    pathe: ^1.1.0
+    pkg-types: ^1.0.3
+    scule: ^1.0.0
+    semver: ^7.5.1
+    unctx: ^2.3.1
+    unimport: ^3.0.7
+    untyped: ^1.3.2
+  checksum: 114a75b6edf0d2911b20d44a4e17c0dc9cd8340b1920038d836941f7b7b4044be9674b87c039b37cd3d1f4f961351c5188a7b45ca89ba00976cb141a03d05660
   languageName: node
   linkType: hard
 
@@ -4324,6 +4352,23 @@ __metadata:
     unimport: ^3.0.6
     untyped: ^1.3.2
   checksum: 50aee2aebd77e043036ff00d73cbb4b48795ad2d52033fec85900d183320b4633854f85a13e22038e6b536fb0ec373c396ea040a9e7a71afe845f2d1cef6e1f6
+  languageName: node
+  linkType: hard
+
+"@nuxt/schema@npm:3.5.2":
+  version: 3.5.2
+  resolution: "@nuxt/schema@npm:3.5.2"
+  dependencies:
+    defu: ^6.1.2
+    hookable: ^5.5.3
+    pathe: ^1.1.0
+    pkg-types: ^1.0.3
+    postcss-import-resolver: ^2.0.0
+    std-env: ^3.3.3
+    ufo: ^1.1.2
+    unimport: ^3.0.7
+    untyped: ^1.3.2
+  checksum: 3ee7481b1ed9000ff9eb88bf3f0b8443b038a5bf6caf29c3e70e081b90a5d352184b900ef3db3f962f3ae5759b134350505d62ccf252e93dcd5ca9ddd7ff7a47
   languageName: node
   linkType: hard
 
@@ -14480,7 +14525,7 @@ __metadata:
     "@graphql-tools/schema": ^9.0.12
     "@graphql-typed-document-node/core": ^3.2.0
     "@he-tree/vue": ^2.4.0
-    "@huntersofbook/naive-ui-nuxt": ^0.6.0
+    "@huntersofbook/naive-ui-nuxt": ^1.0.0
     "@nozomuikuta/h3-cors": ^0.2.2
     "@nuxt/content": ^2.6.0
     "@nuxt/devtools": ^0.4.5
@@ -16798,6 +16843,18 @@ __metadata:
     pkg-types: ^1.0.3
     ufo: ^1.1.2
   checksum: 82939436ec0e1c53e400d86fd571bd005090383b3fa49d5d8b9df4b388b24bae2b7b2f0369ef0c905d29fb35377cd4724d2bf5e5cd130d922849f74948bb81f0
+  languageName: node
+  linkType: hard
+
+"mlly@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "mlly@npm:1.3.0"
+  dependencies:
+    acorn: ^8.8.2
+    pathe: ^1.1.0
+    pkg-types: ^1.0.3
+    ufo: ^1.1.2
+  checksum: aea2a99131b1a1f02a733219317b6466156e150473e0a2f490802eaf2dc66940a21bb68e0ddd5c003360263e674e7dd0bd02da6520c740e6d16fa0edf5efa46e
   languageName: node
   linkType: hard
 
@@ -22509,6 +22566,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unctx@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "unctx@npm:2.3.1"
+  dependencies:
+    acorn: ^8.8.2
+    estree-walker: ^3.0.3
+    magic-string: ^0.30.0
+    unplugin: ^1.3.1
+  checksum: 96876a01b2d7dc70b44dce0e863aa654d066b04f57cdc4739ce884c13aadbfddad10df4e52de3648dae24ccd7aca454b6927b372d4912b9471c7671376f82b27
+  languageName: node
+  linkType: hard
+
 "undici@npm:^5.22.0":
   version: 5.22.1
   resolution: "undici@npm:5.22.1"
@@ -22624,7 +22693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unimport@npm:^3.0.6":
+"unimport@npm:^3.0.6, unimport@npm:^3.0.7":
   version: 3.0.7
   resolution: "unimport@npm:3.0.7"
   dependencies:
