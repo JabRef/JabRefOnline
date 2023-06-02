@@ -48,6 +48,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@antfu/utils@npm:^0.7.3":
+  version: 0.7.4
+  resolution: "@antfu/utils@npm:0.7.4"
+  checksum: f5c1107c9aec0bda43a7021f3a9adb4bed113467a40590a9cecd3998408a5c04b0fb68be53438f56487153eaf6278fa128dbe4e0be88b7af65212fe0497e4fdd
+  languageName: node
+  linkType: hard
+
 "@apollo/cache-control-types@npm:^1.0.2":
   version: 1.0.2
   resolution: "@apollo/cache-control-types@npm:1.0.2"
@@ -14224,7 +14231,7 @@ __metadata:
     tsyringe: ^4.7.0
     typescript: ^5.0.2
     ufo: ^1.1.1
-    unplugin-vue-components: ^0.24.1
+    unplugin-vue-components: ^0.25.0
     vee-validate: ^4.9.4
     vitest: ^0.31.1
     vitest-github-actions-reporter: ^0.10.0
@@ -16281,15 +16288,6 @@ __metadata:
   dependencies:
     brace-expansion: ^2.0.1
   checksum: 7564208ef81d7065a370f788d337cd80a689e981042cb9a1d0e6580b6c6a8c9279eba80010516e258835a988363f99f54a6f711a315089b8b42694f5da9d0d77
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^7.4.2":
-  version: 7.4.6
-  resolution: "minimatch@npm:7.4.6"
-  dependencies:
-    brace-expansion: ^2.0.1
-  checksum: 1a6c8d22618df9d2a88aabeef1de5622eb7b558e9f8010be791cb6b0fa6e102d39b11c28d75b855a1e377b12edc7db8ff12a99c20353441caa6a05e78deb5da9
   languageName: node
   linkType: hard
 
@@ -22489,20 +22487,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-components@npm:^0.24.1":
-  version: 0.24.1
-  resolution: "unplugin-vue-components@npm:0.24.1"
+"unplugin-vue-components@npm:^0.25.0":
+  version: 0.25.0
+  resolution: "unplugin-vue-components@npm:0.25.0"
   dependencies:
-    "@antfu/utils": ^0.7.2
+    "@antfu/utils": ^0.7.3
     "@rollup/pluginutils": ^5.0.2
     chokidar: ^3.5.3
     debug: ^4.3.4
     fast-glob: ^3.2.12
     local-pkg: ^0.4.3
     magic-string: ^0.30.0
-    minimatch: ^7.4.2
-    resolve: ^1.22.1
-    unplugin: ^1.1.0
+    minimatch: ^9.0.1
+    resolve: ^1.22.2
+    unplugin: ^1.3.1
   peerDependencies:
     "@babel/parser": ^7.15.8
     "@nuxt/kit": ^3.2.2
@@ -22512,7 +22510,7 @@ __metadata:
       optional: true
     "@nuxt/kit":
       optional: true
-  checksum: 9efe6c9cda94c2ecb1a15e832cf5a569a09d0cf17b766567ec5f261d96db203f1b727c90fd406ea7ecc4d3c3210ee8064ec4917552ce563ebadcb95de187216c
+  checksum: 2ec409193ffb3af1bd033e31ef77fd93ca190b0080e18c46b7df9c6b9523c2e1942fd67016f47bb04a5617076d69b2fbdef5167a79cb72b8d46b313d87dc5232
   languageName: node
   linkType: hard
 
@@ -22554,7 +22552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin@npm:^1.0.1, unplugin@npm:^1.1.0, unplugin@npm:^1.3.1":
+"unplugin@npm:^1.0.1, unplugin@npm:^1.3.1":
   version: 1.3.1
   resolution: "unplugin@npm:1.3.1"
   dependencies:
