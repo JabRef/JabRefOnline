@@ -964,6 +964,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/parser@npm:^7.22.4":
+  version: 7.22.4
+  resolution: "@babel/parser@npm:7.22.4"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 0ca6d3a2d9aae2504ba1bc494704b64a83140884f7379f609de69bd39b60adb58a4f8ec692fe53fef8657dd82705d01b7e6efb65e18296326bdd66f71d52d9a9
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@npm:7.18.6"
@@ -2021,6 +2030,17 @@ __metadata:
     "@babel/helper-validator-identifier": ^7.19.1
     to-fast-properties: ^2.0.0
   checksum: 43242a99c612d13285ee4af46cc0f1066bcb6ffd38307daef7a76e8c70f36cfc3255eb9e75c8e768b40e761176c313aec4d5c0b9d97a21e494d49d5fd123a9f7
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.22.4":
+  version: 7.22.4
+  resolution: "@babel/types@npm:7.22.4"
+  dependencies:
+    "@babel/helper-string-parser": ^7.21.5
+    "@babel/helper-validator-identifier": ^7.19.1
+    to-fast-properties: ^2.0.0
+  checksum: ffe36bb4f4a99ad13c426a98c3b508d70736036cae4e471d9c862e3a579847ed4f480686af0fce2633f6f7c0f0d3bf02da73da36e7edd3fde0b2061951dcba9a
   languageName: node
   linkType: hard
 
@@ -4264,82 +4284,83 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/devtools-kit@npm:0.4.6":
-  version: 0.4.6
-  resolution: "@nuxt/devtools-kit@npm:0.4.6"
+"@nuxt/devtools-kit@npm:0.5.5":
+  version: 0.5.5
+  resolution: "@nuxt/devtools-kit@npm:0.5.5"
   dependencies:
-    "@nuxt/kit": ^3.4.3
-    "@nuxt/schema": ^3.4.3
+    "@nuxt/kit": ^3.5.1
+    "@nuxt/schema": ^3.5.1
     execa: ^7.1.1
   peerDependencies:
-    nuxt: ^3.4.2
+    nuxt: ^3.5.1
     vite: "*"
-  checksum: 49406aa34b7e5a4d4feb8cfa79571f34c143dd5887e331d4cddab45f6132205718c3bffdbfc97ab30abf24846ee5c548d44564dea68d94c687efa4ef09d645e8
+  checksum: f289909b07879f2a8c0683a996c6745ddd304bbf3f1ea0d6975e27c265893bf01ec39aedd89bc13ba206a3ec9405cc3a6f95c45175c8a6c3f63c2dae4f1c2087
   languageName: node
   linkType: hard
 
-"@nuxt/devtools-wizard@npm:0.4.6":
-  version: 0.4.6
-  resolution: "@nuxt/devtools-wizard@npm:0.4.6"
+"@nuxt/devtools-wizard@npm:0.5.5":
+  version: 0.5.5
+  resolution: "@nuxt/devtools-wizard@npm:0.5.5"
   dependencies:
     consola: ^3.1.0
     diff: ^5.1.0
     execa: ^7.1.1
     global-dirs: ^3.0.1
-    magicast: ^0.2.5
+    magicast: ^0.2.8
     pathe: ^1.1.0
     picocolors: ^1.0.0
     pkg-types: ^1.0.3
     prompts: ^2.4.2
     rc9: ^2.1.0
-    semver: ^7.5.0
+    semver: ^7.5.1
   bin:
     devtools-wizard: cli.mjs
-  checksum: 15eb1198bcbf0722c9ce8bdf62a1c6003b6aeb7310c2e98a16c7411cb5b87a65dbee1b0b4bd9c38e5f8b36107ee4b119d8e0cff37263b939f8c381a1418a15de
+  checksum: 1a3a9e1a04aeee9e99f304b11bc6e9a4cb0174c641485bf5ea7da2d9eedfd29c8887d73e25f7b6ea21150981611391bd2dd0834811dfb2a0dec8f3d62bec3dc6
   languageName: node
   linkType: hard
 
-"@nuxt/devtools@npm:^0.4.5":
-  version: 0.4.6
-  resolution: "@nuxt/devtools@npm:0.4.6"
+"@nuxt/devtools@npm:^0.5.5":
+  version: 0.5.5
+  resolution: "@nuxt/devtools@npm:0.5.5"
   dependencies:
-    "@nuxt/devtools-kit": 0.4.6
-    "@nuxt/devtools-wizard": 0.4.6
-    "@nuxt/kit": ^3.4.3
+    "@nuxt/devtools-kit": 0.5.5
+    "@nuxt/devtools-wizard": 0.5.5
+    "@nuxt/kit": ^3.5.1
     birpc: ^0.2.11
     consola: ^3.1.0
     execa: ^7.1.1
+    fast-folder-size: ^1.7.1
     fast-glob: ^3.2.12
     get-port-please: ^3.0.1
     global-dirs: ^3.0.1
-    h3: ^1.6.5
+    h3: ^1.6.6
     hookable: ^5.5.3
     image-meta: ^0.1.1
     is-installed-globally: ^0.4.0
     launch-editor: ^2.6.0
     local-pkg: ^0.4.3
+    magicast: ^0.2.8
     nypm: ^0.2.0
-    pacote: ^15.1.3
+    pacote: ^15.2.0
     pathe: ^1.1.0
     perfect-debounce: ^1.0.0
     picocolors: ^1.0.0
     pkg-types: ^1.0.3
     rc9: ^2.1.0
-    semver: ^7.5.0
+    semver: ^7.5.1
     sirv: ^2.0.3
-    tinyws: ^0.1.0
-    unimport: ^3.0.6
-    vite-plugin-inspect: ^0.7.25
-    vite-plugin-vue-inspector: ^3.4.1
+    unimport: ^3.0.7
+    vite-plugin-inspect: ^0.7.28
+    vite-plugin-vue-inspector: ^3.4.2
     wait-on: ^7.0.1
     which: ^3.0.1
     ws: ^8.13.0
   peerDependencies:
-    nuxt: ^3.4.2
+    nuxt: ^3.5.1
     vite: "*"
   bin:
     devtools: cli.mjs
-  checksum: d7ba41fab2238755fdd8a0ab017d669a1f19c4a807c608ce6cdfda2916294c65c334c2e6af8128f3ee67049ffb61c76ff8157567ab253f14fa775cfdd9d7c078
+  checksum: db52260d75e45b8c92dde7e71d80375a985703d1b8bc2e52f825448fde5c223d52d801ebb4881a6a9b6e67d770f1da7416c6b5654b9e9afcf269e1dfb5fecae9
   languageName: node
   linkType: hard
 
@@ -4548,7 +4569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/schema@npm:3.5.0, @nuxt/schema@npm:^3.4.3":
+"@nuxt/schema@npm:3.5.0":
   version: 3.5.0
   resolution: "@nuxt/schema@npm:3.5.0"
   dependencies:
@@ -4565,7 +4586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/schema@npm:3.5.2":
+"@nuxt/schema@npm:3.5.2, @nuxt/schema@npm:^3.5.1":
   version: 3.5.2
   resolution: "@nuxt/schema@npm:3.5.2"
   dependencies:
@@ -12121,6 +12142,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-folder-size@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "fast-folder-size@npm:1.7.1"
+  dependencies:
+    unzipper: ^0.10.11
+  bin:
+    fast-folder-size: cli.js
+  checksum: 01183234fdf3b4e7927ee8ff2a51a585253365edba592b7680fb92fd1f1bad380ce802954c8d96439872e7f2d5544f3605317fb65949a5c1c4f9aa7d480bfac5
+  languageName: node
+  linkType: hard
+
 "fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9":
   version: 3.2.12
   resolution: "fast-glob@npm:3.2.12"
@@ -14784,7 +14816,7 @@ __metadata:
     "@huntersofbook/naive-ui-nuxt": ^1.0.0
     "@nozomuikuta/h3-cors": ^0.2.2
     "@nuxt/content": ^2.6.0
-    "@nuxt/devtools": ^0.4.5
+    "@nuxt/devtools": ^0.5.5
     "@nuxtjs/eslint-config": ^12.0.0
     "@nuxtjs/eslint-config-typescript": ^12.0.0
     "@nuxtjs/tailwindcss": 6.6.7
@@ -16057,14 +16089,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magicast@npm:^0.2.5":
-  version: 0.2.7
-  resolution: "magicast@npm:0.2.7"
+"magicast@npm:^0.2.8":
+  version: 0.2.9
+  resolution: "magicast@npm:0.2.9"
   dependencies:
-    "@babel/parser": ^7.21.8
-    "@babel/types": ^7.21.5
+    "@babel/parser": ^7.22.4
+    "@babel/types": ^7.22.4
     recast: ^0.23.2
-  checksum: 4831f219d125aebf0d4f2f90ab9602adc3e09f515cbf0fd0ab0a57b97b87a01a1a10e06fdb2d67c69879035feb652f9dafd4e31443937ba6706531e54bf477d6
+  checksum: f87a012707261f4d0bcba0c4efdb971385d6d1cb9cb81c9da5da3a70397adfb790f5eff4bef598c294563776937b01498956bd46b5c4419d09a3f34076367818
   languageName: node
   linkType: hard
 
@@ -18409,7 +18441,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pacote@npm:^15.1.3":
+"pacote@npm:^15.2.0":
   version: 15.2.0
   resolution: "pacote@npm:15.2.0"
   dependencies:
@@ -23647,23 +23679,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-inspect@npm:^0.7.25":
-  version: 0.7.26
-  resolution: "vite-plugin-inspect@npm:0.7.26"
+"vite-plugin-inspect@npm:^0.7.28":
+  version: 0.7.28
+  resolution: "vite-plugin-inspect@npm:0.7.28"
   dependencies:
     "@antfu/utils": ^0.7.2
     "@rollup/pluginutils": ^5.0.2
     debug: ^4.3.4
     fs-extra: ^11.1.1
+    open: ^9.1.0
     picocolors: ^1.0.0
     sirv: ^2.0.3
   peerDependencies:
     vite: ^3.1.0 || ^4.0.0
-  checksum: 6bcf6e814bd9014a391f3d56c050621c9f25e28ad25de9a1d2c6e89a871127dfa09b8f06467bd82d0b42ba2d689b0f4537a577d562adbfb7358d1cabf4d4f395
+  checksum: ba43a8aab65a75429503df9aa18fe817057d9f8af4818002ee7b6c99bea728eaffe7e41f51008aab01777b9fb09ffc8807040bb58259f8c64c0f91f4122abe7d
   languageName: node
   linkType: hard
 
-"vite-plugin-vue-inspector@npm:^3.4.1":
+"vite-plugin-vue-inspector@npm:^3.4.2":
   version: 3.4.2
   resolution: "vite-plugin-vue-inspector@npm:3.4.2"
   dependencies:
