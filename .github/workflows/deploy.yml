@@ -81,7 +81,7 @@ jobs:
           # For some reason the public schema is not created automatically, so we need to do it manually
           # We also need to manually install an old version of rdbms due to https://github.com/Azure/azure-cli/issues/25067
           az extension add --name rdbms-connect --version 1.0.3 --debug
-          az postgres flexible-server execute --name jabrefdb -u "Alle Benutzer" -p "$pwd" --database-name $name -q "create schema public;" --output table
+          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "create schema public;" --output table
           yarn prisma:migrate:reset --force
 
       - name: Create & Link Function App
