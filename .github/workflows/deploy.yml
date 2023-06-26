@@ -75,13 +75,13 @@ jobs:
 
       - name: Create test database on Azure
         run: |
-          $name = "postgres-test-${{ github.event.pull_request.number }}"
+          $name = "postgres_test_${{ github.event.pull_request.number }}"
           az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
           $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
           # For some reason the public schema is not created automatically, so we need to do it manually
           # We also need to manually install an old version of rdbms due to https://github.com/Azure/azure-cli/issues/25067
           az extension add --name rdbms-connect --version 1.0.3 --debug
-          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "create schema public;" --output table
+          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "GRANT CREATE ON DATABASE $name TO azure_pg_admin; create schema public;" --output table
           yarn prisma:migrate:reset --force
 
       - name: Create & Link Function App
@@ -246,4 +246,4 @@ jobs:
         run: az functionapp delete --name jabref-function-${{ github.event.pull_request.number }} --resource-group JabRefOnline
 
       - name: Delete test database
-        run: az postgres flexible-server db delete --server-name jabrefdb --resource-group JabRefOnline --database-name postgres-test-${{ github.event.pull_request.number }} -y
+        run: az postgres flexible-server db delete --server-name jabrefdb --resource-group JabRefOnline --database-name postgres_test_${{ github.event.pull_request.number }} -y
