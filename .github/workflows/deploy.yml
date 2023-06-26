@@ -22,7 +22,7 @@ jobs:
     if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
 
     env:
-      DATABASE_URL: ${{ secrets.AZURE_TEST_DATABASE_URL }}
+      DATABASE_URL: ${{ format(secrets.AZURE_PR_DATABASE_URL, github.event.pull_request.number) }}
       GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
@@ -72,6 +72,15 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+
+      - name: Create test database on Azure
+        run: |
+          $name = "postgres-test-${{ github.event.pull_request.number }}"
+          az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
+          $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
+          # For some reason the public schema is not created automatically, so we need to do it manually
+          az postgres flexible-server execute --server-name jabrefdb -u "Alle Benutzer" -p "$pwd" --database-name $name -q "create schema public;" --output table
+          yarn prisma:migrate:reset --force
 
       - name: Create & Link Function App
         run: |
@@ -233,3 +242,6 @@ jobs:
 
       - name: Delete Function App
         run: az functionapp delete --name jabref-function-${{ github.event.pull_request.number }} --resource-group JabRefOnline
+
+      - name: Delete test database
+        run: az postgres flexible-server db delete --server-name jabrefdb --resource-group JabRefOnline --database-name postgres-test-${{ github.event.pull_request.number }} -y
