@@ -144,7 +144,7 @@ describe('query', () => {
                   "id": "ckslizms5000109jv3yx80ujf",
                   "journal": {
                     "id": "ckslj094u000309jvdpng93mk",
-                    "issn": null,
+                    "issn": [],
                     "name": "Circulation",
                     "subtitle": null,
                     "titleAddon": null,
@@ -303,7 +303,7 @@ describe('roundtrip', () => {
                 "electronicId": null,
                 "in": {
                   "journal": {
-                    "issn": null,
+                    "issn": [],
                     "name": "Journal of great things",
                     "subtitle": null,
                     "titleAddon": null,
@@ -408,7 +408,7 @@ describe('roundtrip', () => {
                 "electronicId": null,
                 "in": {
                   "journal": {
-                    "issn": null,
+                    "issn": [],
                     "name": "Journal of great things",
                     "subtitle": null,
                     "titleAddon": null,

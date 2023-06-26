@@ -3,6 +3,7 @@ import { mergeResolvers } from '@graphql-tools/merge'
 import { DateTimeResolver, EmailAddressResolver } from 'graphql-scalars'
 import { resolvers as documentResolvers } from './documents/resolvers'
 import { resolvers as groupResolvers } from './groups/resolvers'
+import { resolvers as journalResolvers } from './journals/resolvers'
 import { resolvers as userResolvers } from './user/resolvers'
 
 export function loadResolvers(): Resolvers {
@@ -10,6 +11,7 @@ export function loadResolvers(): Resolvers {
     userResolvers(),
     documentResolvers(),
     groupResolvers(),
+    journalResolvers(),
     {
       // Custom scalar types
       DateTime: DateTimeResolver,

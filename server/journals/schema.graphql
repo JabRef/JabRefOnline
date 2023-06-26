@@ -1,0 +1,220 @@
+type Journal {
+  id: ID!
+
+  """
+  The name of the journal.
+
+  Biblatex: journaltitle
+  """
+  name: String!
+
+  """
+  The subtitle of a journal.
+
+  Biblatex: journalsubtitle
+  """
+  subtitle: String
+
+  """
+  An annex to the name of the journal.
+  This may be useful in case a journal has been renamed or if the journal name isn't unique.
+
+  Biblatex: journaltitleaddon
+  """
+  titleAddon: String
+
+  """
+  The International Standard Serial Numbers of a journal.
+
+  Biblatex: issn
+  """
+  issn: [Int!]
+
+  """
+  Specifies whether the information about this journal is user-defined or imported from an external source (like scimagojr)
+
+  Biblatex: no equivalent
+  """
+  isCustom: Boolean!
+
+  """
+  The Scimago Journal Rank (SJR) ID of the journal
+
+  Biblatex: no equivalent
+  """
+  scimagoId: Int
+
+  """
+  The country of the journal
+
+  Biblatex: no equivalent
+  """
+  country: String
+
+  """
+  The publisher of the journal
+
+  Biblatex: no equivalent (?)
+  """
+  publisher: String
+
+  """
+  The research areas covered by the journal
+
+  Biblatex: no equivalent
+  """
+  areas: [String!]
+
+  """
+  The categories of the journal
+
+  Biblatex: no equivalent
+  """
+  categories: [String!]
+
+  """
+  The yearly citation information of the journal
+
+  Biblatex: no equivalent
+  """
+  citationInfo: [JournalCitationInfoYearly!]
+
+  """
+  The h-index of the journal
+
+  Biblatex: no equivalent
+  """
+  hIndex: Int
+}
+
+type JournalCitationInfoYearly {
+  """
+  The year for which the citation information is provided
+  """
+  year: Int!
+
+  """
+  The total number of documents published in the selected year
+  """
+  docsThisYear: Int!
+
+  """
+  The total number of documents published in the three previous years (selected year documents are excluded)
+  """
+  docsPrevious3Years: Int!
+
+  """
+  The number of citable documents published by a journal in the three previous years (selected year documents are excluded)
+  """
+  citableDocsPrevious3Years: Int!
+
+  """
+  The total number of references to other documents in the selected year
+  """
+  citesOutgoing: Int!
+
+  """
+  Average number of references to other documents per document in the selected year
+  """
+  citesOutgoingPerDoc: Float!
+
+  """
+  The total number of citations received in the selected year by documents published in the three previous years
+  """
+  citesIncomingByRecentlyPublished: Int!
+
+  """
+  The average number of citations received in the selected year per document that was published in the three previous years
+  """
+  citesIncomingPerDocByRecentlyPublished: Float!
+
+  """
+  The SCImago Journal Rank (SJR) indicator, which expresses the average number of weighted citations received in the selected year of the documents published in the selected journal in the three previous years
+  """
+  sjrIndex: Float!
+}
+
+input AddJournalInput {
+  name: String!
+  subtitle: String
+  titleAddon: String
+  issn: [Int!]
+}
+
+"""
+An issue of a journal.
+"""
+type JournalIssue implements Node {
+  id: ID!
+
+  """
+  The journal in which the article has been published.
+  """
+  journal: Journal
+
+  """
+  The title of a specific issue of a journal.
+
+  Biblatex: issuetitle
+  """
+  title: String
+
+  """
+  The subtitle of a specific issue of a journal.
+
+  Biblatex: issuesubtitle
+  """
+  subtitle: String
+
+  """
+  An annex to the title of the specific issue of a journal.
+  This may be useful when a special issue of a journal has a title that doesn't make it clear that it is a special issue and one wants to emphasize that.
+
+  Biblatex: issuetitleaddon
+  """
+  titleAddon: String
+
+  """
+  The number of the issue.
+
+  Normally this field will be an integer or an integer range, but it may also be a short designator that is not entirely numeric such as “S1”, “Suppl. 2”, “3es”.
+  Usually, the number is displayed close to the volume, e.g. 10.2 (volume: 10, number: 2).
+
+  Biblatex: number
+  """
+  number: String
+
+  """
+  This field is intended for journals whose individual issues are identified by a designation such as Lent, Michaelmas, Summer or Spring rather than the month or a number.
+  Usually the issue name is displayed in front of the year and not the volume.
+
+  Biblatex: issue
+  """
+  name: String
+
+  """
+  The name or number of a journal series.
+  Usually, after the journal has restarted publication with a new numbering.
+
+  Biblatex: series
+  """
+  series: String
+
+  """
+  The volume of the journal this issue is part of.
+
+  Biblatex: volume
+  """
+  volume: String
+}
+
+input AddJournalIssueInput {
+  journal: AddJournalInput!
+  title: String
+  subtitle: String
+  titleAddon: String
+  number: String
+  name: String
+  series: String
+  volume: String
+}
