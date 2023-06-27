@@ -15,12 +15,12 @@ export class JournalService {
     )
   }
 
-  async getJournalByIssn(issn: number) {
+  async getJournalByIssn(issn: string) {
     return (
       (await this.prisma.journal.findFirst({
         where: {
           issn: {
-            has: issn,
+            has: issn.replaceAll('-', '').toLowerCase(),
           },
           isCustom: false,
         },

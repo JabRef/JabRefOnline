@@ -9,7 +9,7 @@ const journalService = resolve('JournalService')
 const testJournal: Journal = {
   id: 'test',
   name: 'Test Journal',
-  issn: [12345678],
+  issn: ['12345678'],
   subtitle: null,
   titleAddon: null,
   isCustom: true,
@@ -42,7 +42,7 @@ describe('userDocumentService', () => {
 
     it('should return null if no journal with the given ISSN is found', async () => {
       prisma.journal.findFirst.mockResolvedValue(null)
-      const issn = 0
+      const issn = '00000000'
       const journal = await journalService.getJournalByIssn(issn)
       expect(journal).toBeNull()
       expect(prisma.journal.findFirst).toBeCalledWith({

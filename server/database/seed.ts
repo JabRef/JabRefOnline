@@ -331,7 +331,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
               id: 'ckslj3f10000f09jvc1xifgi9',
               name: 'Antioxidants & Redox Signaling',
               isCustom: false,
-              issn: [15230864, 15577716],
+              issn: ['15230864', '15577716'],
               scimagoId: 27514,
               country: 'United States',
               publisher: 'Mary Ann Liebert Inc.',

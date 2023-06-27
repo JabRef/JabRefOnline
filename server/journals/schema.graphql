@@ -28,7 +28,7 @@ type Journal {
 
   Biblatex: issn
   """
-  issn: [Int!]
+  issn: [String!]
 
   """
   Specifies whether the information about this journal is user-defined or imported from an external source (like scimagojr)
@@ -138,7 +138,7 @@ input AddJournalInput {
   name: String!
   subtitle: String
   titleAddon: String
-  issn: [Int!]
+  issn: [String!]
 }
 
 """

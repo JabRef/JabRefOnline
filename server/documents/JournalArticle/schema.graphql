@@ -86,5 +86,5 @@ extend type Query {
   """
   Retrieve a journal by its ID, ISSN or name
   """
-  journal(id: ID, issn: Int, name: String): Journal
+  journal(id: ID, issn: String, name: String): Journal
 }
