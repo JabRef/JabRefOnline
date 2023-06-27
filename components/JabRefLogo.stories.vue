@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import JabRefLogo from './JabrefLogo.vue'
+import JabRefLogo from './JabrefLogo.island.vue'
 </script>
 
 <template>
