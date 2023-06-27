@@ -19,9 +19,6 @@ dotenv.config()
 // Expose reflect-metadata
 globalThis.Reflect = Reflect
 
-// @ts-expect-error: Vitest doesn't allow an easy way to add typescript info for globalThis
-globalThis.useRuntimeConfig = () => constructConfig()
-
 // Register services for all tests
 registerClasses()
 
@@ -33,7 +30,8 @@ beforeAll(async (context) => {
     context.filepath?.endsWith('integration.test.ts') ?? false
 
   if (isIntegrationTest) {
-    const redisClient = await createRedisClient()
+    const config = constructConfig()
+    const redisClient = await createRedisClient(config)
     register('RedisClient', {
       useValue: redisClient,
     })

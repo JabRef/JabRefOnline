@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
+import { Config } from '~/config'
 import * as DocumentResolvers from './documents/resolvers'
 import { UserDocumentService } from './documents/user.document.service'
 import * as GroupResolvers from './groups/resolvers'
@@ -14,12 +15,13 @@ import { createRedisClient } from './utils/services.factory'
 const { PrismaClient } = prisma
 
 export async function configure(): Promise<void> {
+  const config = useRuntimeConfig() as Config
   // Tools
   register('PrismaClient', {
     useFactory: instanceCachingFactory(() => new PrismaClient()),
   })
   register('RedisClient', {
-    useValue: await createRedisClient(),
+    useValue: await createRedisClient(config),
   })
   register('EmailService', { useValue: createEmailService() })
   registerClasses()
