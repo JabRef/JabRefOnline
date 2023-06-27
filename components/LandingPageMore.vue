@@ -16,9 +16,9 @@
             :href="item.href"
             class="text-primary-500 hover:text-primary-600"
           >
-            <FontAwesomeIcon
-              :icon="item.icon"
-              size="4x"
+            <Icon
+              :name="item.icon"
+              class="text-6xl"
             />
             <h3 class="pb-6 pt-3 text-xl">{{ item.text }}</h3>
           </t-nuxtlink>
@@ -31,32 +31,32 @@
 const items = [
   {
     href: 'https://docs.jabref.org/getting-started',
-    icon: 'walking',
+    icon: 'ri:walk-fill',
     text: 'Getting started',
   },
   {
     href: 'http://discourse.jabref.org',
-    icon: 'comments',
+    icon: 'ri:chat-3-fill',
     text: 'Forum',
   },
   {
     href: 'https://docs.jabref.org/',
-    icon: 'book',
+    icon: 'ri:book-2-fill',
     text: 'User Documentation',
   },
   {
     href: 'https://discourse.jabref.org/c/features/',
-    icon: 'lightbulb',
+    icon: 'ri:lightbulb-flash-fill',
     text: 'Propose a new feature',
   },
   {
     href: 'https://github.com/JabRef/jabref/issues',
-    icon: 'bug',
+    icon: 'ri:bug-fill',
     text: 'Report a bug',
   },
   {
-    href: 'blog',
-    icon: 'newspaper',
+    href: 'https://blog.jabref.org/',
+    icon: 'ri:file-edit-fill',
     text: 'Blog',
   },
 ]

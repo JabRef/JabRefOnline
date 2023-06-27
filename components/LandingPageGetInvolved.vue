@@ -69,9 +69,9 @@
             <a
               href="https://docs.jabref.org/faq/faqcontributing#i-am-not-a-programmer"
             >
-              <FontAwesomeIcon
-                icon="heart"
-                size="3x"
+              <Icon
+                name="ri:hearts-fill"
+                class="text-6xl"
               />
               <h4 class="text-2xl mb-3 font-semibold">Contribute</h4>
             </a>
@@ -97,9 +97,9 @@
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref/wiki/Donations">
-              <FontAwesomeIcon
-                icon="gift"
-                size="3x"
+              <Icon
+                name="ri:gift-fill"
+                class="text-6xl"
               />
               <h4 class="text-2xl mb-3 font-semibold">Donate</h4>
             </a>
@@ -125,9 +125,9 @@
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref">
-              <FontAwesomeIcon
-                icon="laptop-code"
-                size="3x"
+              <Icon
+                name="ri:code-s-slash-fill"
+                class="text-6xl"
               />
               <h4 class="text-2xl mb-3 font-semibold">Develop</h4>
             </a>

@@ -1,61 +1,22 @@
-import { defineNuxtModule, logger } from '@nuxt/kit'
 import { Nuxt } from '@nuxt/schema'
-// @ts-expect-error: internal
 import { buildDevStandalone } from '@storybook/core-server'
-// import * as vueRenderer from '@storybook/vue3'
-// import vueStorybook from '@storybook/vue3/dist/cjs/server/options'
+import { PackageJson } from '@storybook/types'
 import chalk from 'chalk'
-import { LogLevel } from 'consola'
+import { defineNuxtModule, logger } from 'nuxt/kit'
+import { withoutTrailingSlash } from 'ufo'
 
 const path = '/_storybook/'
-
-// This function is mostly taken from @storybook/core-server/build-dev
-// async function startStorybookServer(nuxt: Nuxt, nuxtUrl: string) {
-//   /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument */
-//   const options = {
-//     // ...vueStorybook,
-//     configDir: nuxt.options.rootDir + '/.storybook',
-//     managerCache: false,
-//     configType: 'DEVELOPMENT',
-//     ignorePreview: true,
-//     previewUrl: withoutTrailingSlash(nuxtUrl) + path + 'external-iframe',
-//     port: 3001,
-//     stories: ['**/*.stories.*'],
-//     packageJson: {
-//       name: 'nuxt-storybook',
-//     },
-//   }
-
-//   const presets = await loadAllPresets({
-//     corePresets: [
-//       '@storybook/core-server/dist/presets/common-preset',
-//       ...managerBuilder.corePresets,
-//       ...(previewBuilder.corePresets || []),
-//       resolveAddonName(options.configDir, '@storybook/vue3', options),
-//       // ...corePresets,
-//       '@storybook/vue3-vite/preset',
-//       // require.resolve('@storybook/core-server/dist/presets/babel-cache-preset'),
-//     ],
-//     overridePresets: previewBuilder.overridePresets,
-//     ...options,
-//   })
-
-//   const features = await presets.apply<StorybookConfig['features']>('features')
-//   // global.FEATURES = features
-//   const fullOptions = {
-//     ...options,
-//     presets,
-//     features,
-//   }
-//   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-//   return await storybookDevServer(fullOptions)
-// }
 async function startStorybookServer(nuxt: Nuxt, nuxtUrl: string) {
   // Load package.json
-  const packageJson = require(nuxt.options.rootDir + '/package.json')
+  const packageJson = (await import(
+    nuxt.options.rootDir + '/package.json'
+  )) as PackageJson
 
   const options = {
     configDir: nuxt.options.rootDir + '/.storybook',
+    port: 3001,
+    ignorePreview: true,
+    previewUrl: withoutTrailingSlash(nuxtUrl) + path + 'external-iframe',
     packageJson,
   }
   return await buildDevStandalone(options)
@@ -116,11 +77,11 @@ configure(() => {
       },
     })
     */
-    nuxt.hook('listen', async (_, listener) => {
+    nuxt.hook('listen', async (_, listener: { url: string }) => {
       // const fullPath = `${withoutTrailingSlash(listener.url)}${path}`
       // logger.info(`Storybook: ${chalk.underline.yellow(fullPath)}`)
       if (nuxt.options.dev) {
-        const wrap = logger.create({ level: LogLevel.Fatal })
+        const wrap = logger.create({ level: 0 })
         try {
           // Hide all output from storybook
           wrap.wrapAll()

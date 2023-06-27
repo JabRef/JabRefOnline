@@ -30,8 +30,8 @@
         type="submit"
         class="absolute left-0 top-0 bottom-0 ml-2"
       >
-        <FontAwesomeIcon
-          icon="search"
+        <Icon
+          name="ri:search-line"
           class="text-gray-400"
         />
       </button>
@@ -39,54 +39,87 @@
 
     <!-- Hamburger menu for small screens -->
     <n-popover
-      v-if="isSmallDisplay"
-      placement="bottom-end"
+      ref="hamburgerMenu"
+      placement="top-end"
+      :overlap="true"
       trigger="click"
+      :duration="0"
+      :show-arrow="false"
+      style="
+        border-radius: 0.5rem;
+        padding: 0;
+        width: 20rem;
+        margin-right: -10px;
+      "
+      @update:show="isHamburgerShown = $event"
     >
       <template #trigger>
-        <div class="flex mr-5 items-center">
-          <button class="text-right text-gray-700">
-            <FontAwesomeIcon
-              icon="list-ul"
-              size="lg"
-            />
+        <div
+          v-show="isSmallDisplay"
+          class="flex mr-5 items-center relative"
+        >
+          <div
+            v-if="isHamburgerShown"
+            class="fixed z-50 inset-0 w-full h-full"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div
+              class="backdrop-blur-sm bg-gray-400/20 w-full h-full"
+              aria-hidden="true"
+            ></div>
+          </div>
+          <button
+            class="text-right text-gray-700 text-xl relative z-60"
+            @click="isHamburgerShown = !isHamburgerShown"
+          >
+            <Icon :name="isHamburgerShown ? 'ri:close-fill' : 'ri:menu-fill'" />
           </button>
         </div>
       </template>
-      <div>
+      <div class="px-6 py-5 text-base max-w-xs w-full">
+        <button
+          class="text-right text-gray-700 text-xl absolute top-3 right-5"
+          @click=";[hamburgerMenu?.setShow(false), (isHamburgerShown = false)]"
+        >
+          <Icon
+            v-if="isHamburgerShown"
+            name="ri:close-fill"
+          />
+        </button>
         <slot name="collapsed" />
       </div>
     </n-popover>
 
     <!-- Main menu -->
-    <slot v-if="!isSmallDisplay">
-      <div class="space-x-14">
-        <span class="text-primary-600 text-lg font-semibold">Library</span>
-        <span class="text-gray-400 text-lg font-semibold">Browse</span>
-        <div class="inline">
-          <span class="text-gray-400 text-lg font-semibold">
-            Subscriptions
-          </span>
-          <div class="inline-block align-top pl-0.5 -mt-1">
-            <FontAwesomeIcon
-              icon="circle"
-              class="text-primary-600"
-              size="xs"
-            />
+    <div v-show="!isSmallDisplay">
+      <slot>
+        <div class="space-x-14">
+          <span class="text-primary-600 text-lg font-semibold">Library</span>
+          <span class="text-gray-400 text-lg font-semibold">Browse</span>
+          <div class="inline">
+            <span class="text-gray-400 text-lg font-semibold">
+              Subscriptions
+            </span>
+            <div class="inline-block align-top pl-0.5 -mt-1">
+              <Icon
+                name="ri:checkbox-blank-circle-fill"
+                class="text-primary-600 text-xs"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </slot>
+      </slot>
+    </div>
 
     <!-- User profile -->
     <nav
       v-if="showUserProfile"
       class="flex items-center pr-10 space-x-7"
     >
-      <FontAwesomeIcon
-        icon="bell"
-        class="text-gray-400 hover:text-primary-500"
-        size="lg"
+      <Icon
+        name="ri:notification-3-fill"
+        class="text-gray-400 hover:text-primary-500 text-lg"
       />
       <div>
         <!-- User profile dropdown -->
@@ -147,7 +180,7 @@
 
     <!-- Empty stopper for proper alignment -->
     <div
-      v-if="!isSmallDisplay"
+      v-show="!isSmallDisplay"
       class="flex-1 mx-3 md:mx-6"
     ></div>
   </nav>
@@ -156,9 +189,13 @@
 <script lang="ts" setup>
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { NPopover } from 'naive-ui'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'
+
+const isHamburgerShown = ref(false)
+const hamburgerMenu = ref<typeof NPopover | null>(null)
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
 

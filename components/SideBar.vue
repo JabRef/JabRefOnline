@@ -20,11 +20,9 @@
         href="#"
         class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
       >
-        <FontAwesomeIcon
-          icon="list"
-          size="sm"
+        <Icon
+          name="ri:list-check"
           class="mr-2 pb-0.5"
-          fixed-width
         />
         All entries
       </a>
@@ -33,11 +31,9 @@
         href="#"
         class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
       >
-        <FontAwesomeIcon
-          icon="exchange-alt"
-          size="xs"
+        <Icon
+          name="ri:arrow-left-right-fill"
           class="mr-2"
-          fixed-width
         />
         Recently modified
       </a>
@@ -45,62 +41,55 @@
       <p class="uppercase text-xs text-gray-600 mb-2 mt-4 tracking-wider">
         Groups
       </p>
-
       <BaseTree
         v-if="groups"
-        :tree-data="
-          groups as any
-        "
+        v-model="groups"
         children-key="children"
         :gap="7"
         class="groupsTree"
       >
-        <template #default="{ node, tree }">
+        <template #default="{ node, stat }">
           <span
-            v-if="node.$children.length > 0"
+            v-if="node.children && node.children.length > 0"
             class="-ml-8 mr-4 w-4 text-gray-400 inline-block"
-            @click="tree.toggleFold(node)"
+            @click="stat.open = !stat.open"
           >
-            <FontAwesomeIcon
-              v-if="node.$folded"
-              icon="angle-down"
-              size="sm"
-              fixed-width
+            <Icon
+              v-if="!stat.open"
+              name="ri:arrow-down-s-line"
             />
-            <FontAwesomeIcon
+            <Icon
               v-else
-              icon="angle-up"
-              size="sm"
-              class=""
-              fixed-width
+              name="ri:arrow-up-s-line"
             />
           </span>
           <button
             class="hover:bg-gray-200 pl-1 pr-1"
             @click="onGroupClicked(node)"
           >
-            <FontAwesomeIcon
-              :icon="node.icon"
-              size="sm"
+            <Icon
+              :name="node.icon"
               class="mr-2 pb-0.5"
-              fixed-width
             />
             <span class="capitalize font-medium text-sm hover:text-teal-600">
               {{ node.name }}
             </span>
           </button>
         </template>
+        <template #placeholder>
+          <span class="text-gray-400">No groups</span>
+        </template>
       </BaseTree>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { BaseTree } from '@he-tree/vue3'
+import { BaseTree } from '@he-tree/vue'
 import { useQuery, useResult } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
-import '@he-tree/vue3/dist/he-tree-vue3.css'
+import '@he-tree/vue/style/default.css'
 
 export default defineComponent({
   components: {
@@ -126,7 +115,11 @@ export default defineComponent({
         }
       `)
     )
-    const groups = useResult(result, null, (data) => data?.me?.groups)
+    const groups = useResult(
+      result,
+      null,
+      (data) => data?.me?.groups
+    ) as unknown as any[]
 
     const uiStore = useUiStore()
     function onGroupClicked(group: { id: string }) {
@@ -142,7 +135,8 @@ export default defineComponent({
 })
 </script>
 <style>
-.groupsTree .vl-items {
+.groupsTree .vtlist-inner {
   overflow: visible;
+  gap: 0.4em;
 }
 </style>

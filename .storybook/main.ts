@@ -4,29 +4,25 @@ import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
   // Need to specify stories as workaround for https://github.com/storybookjs/storybook/issues/20761
-  stories: ['../components/*.stories.ts'],
+  stories: ['../components/*.stories.@(vue|ts)'],
   core: {
     disableTelemetry: true,
-    //renderer: '@storybook/html',
   },
   framework: {
     name: '@storybook/vue3-vite',
-    //name: 'storybook-nuxt',
-    options: {
-      builder: {
-        viteConfigPath: '.storybook/viteConfig.js',
-      },
-    },
+    options: {},
   },
+  addons: ['storybook-vue-addon'],
   async viteFinal(config) {
     const nuxtViteConfig = (await startNuxtAndGetViteConfig()).viteConfig
-    // Need to remove the vue plugin as it conflicts with the one configured by nuxt
+    // Need to remove storybook-vue-addon since it will be inserted by the storybook-vue-addon plugin
+    // TODO: Would be better if we would check there that the plugin is not already added
     config.plugins = config.plugins.filter((plugin) => {
       if (
         plugin !== null &&
         typeof plugin === 'object' &&
         'name' in plugin &&
-        plugin.name === 'vite:vue'
+        plugin.name === 'storybook-vue-addon'
       ) {
         return false
       }
@@ -47,10 +43,11 @@ const config: StorybookConfig = {
 // https://github.com/nuxt/nuxt/issues/14534
 // From: https://github.com/danielroe/nuxt-vitest/blob/main/packages/nuxt-vitest/src/config.ts
 async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
-  // TODO: Need better handling if Nuxt is already running
-  const nuxt =
-    tryUseNuxt() ||
-    (await loadNuxt({
+  let nuxt = tryUseNuxt()
+  let nuxtAlreadyRunnnig = true
+  if (!nuxt) {
+    nuxtAlreadyRunnnig = false
+    nuxt = await loadNuxt({
       cwd: rootDir,
       dev: false,
       overrides: {
@@ -59,22 +56,32 @@ async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
           rootId: 'nuxt-test',
         },
       },
-    }))
+    })
+  }
 
   const promise = new Promise<{ nuxt; viteConfig }>((resolve, reject) => {
     nuxt.hook('vite:extendConfig', (viteConfig, { isClient }) => {
       if (isClient) {
         resolve({ nuxt, viteConfig })
-        //throw new Error('_stop_')
+        if (!nuxtAlreadyRunnnig) {
+          throw new Error('_stop_')
+        }
       }
     })
 
+    // TODO: Need better handling if Nuxt is already running
+    // we don't really want to build nuxt again,
+    // or at least shutdown the second build after vite:extendConfig is called
     buildNuxt(nuxt).catch((err) => {
       if (!err.toString().includes('_stop_')) {
         reject(err)
       }
     })
-  }) //.finally(() => nuxt.close())
+  }).finally(() => {
+    if (!nuxtAlreadyRunnnig) {
+      nuxt.close()
+    }
+  })
 
   return promise
 }

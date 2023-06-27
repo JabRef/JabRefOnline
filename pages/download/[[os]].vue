@@ -18,19 +18,20 @@
 <script lang="ts" setup>
 definePageMeta({ layout: false })
 
-const route = useRoute()
+const route = useRoute('download-os')
 
-// @ts-expect-error: https://github.com/nuxt/nuxt/issues/18570
 const { version: latestRelease } = await $fetch('/api/getLatestRelease')
 
 let downloadUrl = 'https://www.fosshub.com/JabRef.html'
-const os = route.params.os as string
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const os = route.params.os
 if (os) {
   downloadUrl +=
     {
       win: `?dwl=JabRef-${latestRelease}.msi`,
       mac: `?dwl=JabRef-${latestRelease}.pkg`,
       linux: `?dwl=jabref_${latestRelease}_amd64.deb`,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     }[os] || ''
 }
 

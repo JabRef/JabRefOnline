@@ -3,7 +3,7 @@
     <SideBar />
 
     <div class="min-h-screen w-full pl-64 flex flex-col">
-      <NavBar />
+      <NavBar :show-user-profile="true" />
       <div class="relative h-full overflow-hidden">
         <div class="bg-gray-50 grow p-6 h-full">
           <slot />

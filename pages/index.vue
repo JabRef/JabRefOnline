@@ -17,16 +17,19 @@
             >
           </div>
           <template #collapsed>
-            <div class="flex flex-col">
-              <t-nuxtlink
+            <ul class="space-y-4">
+              <li
                 v-for="link in links"
                 :key="link.title"
-                active-class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
-                class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
-                :href="link.href"
-                >{{ link.title }}</t-nuxtlink
               >
-            </div>
+                <t-nuxtlink
+                  active-class="hover:text-primary-600 font-semibold"
+                  class="hover:text-primary-600 font-semibold"
+                  :href="link.href"
+                  >{{ link.title }}</t-nuxtlink
+                >
+              </li>
+            </ul>
           </template>
         </NavBar>
       </template>
@@ -71,11 +74,13 @@
                 class="mx-auto"
                 style="height: 3.2em"
               >
-                <a
-                  class="text-2xl"
-                  :href="downloadUrl"
-                  >Download JabRef</a
-                >
+                <ClientOnly>
+                  <a
+                    class="text-2xl"
+                    :href="constructDownloadUrl()"
+                    >Download JabRef</a
+                  >
+                </ClientOnly>
               </n-button>
             </div>
           </div>
@@ -113,9 +118,7 @@ const links = [
   },
   {
     title: 'News',
-    href: 'blog',
+    href: 'https://blog.jabref.org/',
   },
 ]
-
-const downloadUrl = constructDownloadUrl()
 </script>

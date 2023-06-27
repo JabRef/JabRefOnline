@@ -2,7 +2,7 @@ import { ApolloServer, GraphQLRequest, GraphQLResponse } from '@apollo/server'
 import { VariableValues } from '@apollo/server/dist/esm/externalTypes/graphql'
 import { DocumentNode, TypedQueryDocumentNode } from 'graphql'
 import { Context } from '~/server/context'
-import { loadSchemaFromFilesWithResolvers } from '~/server/schema'
+import { loadSchemaWithResolvers } from '~/server/schema'
 import { resolve } from '~/server/tsyringe'
 
 export type ApolloClient = {
@@ -18,7 +18,7 @@ export type ApolloClient = {
 
 export async function createAuthenticatedClient(): Promise<ApolloClient> {
   const server = new ApolloServer<Context>({
-    schema: await loadSchemaFromFilesWithResolvers(),
+    schema: await loadSchemaWithResolvers(),
     includeStacktraceInErrorResponses: true,
   })
 

@@ -127,7 +127,7 @@ module.exports = {
         // Test title must be unique
         'vitest/no-identical-title': 'error',
         // Test title must be lowercase
-        'vitest/lower-case-title': 'error',
+        'vitest/prefer-lowercase-title': 'error',
       },
     },
   ],

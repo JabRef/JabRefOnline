@@ -15,13 +15,14 @@
 <script lang="ts">
 // Based on https://github.com/storybookjs/storybook/tree/next/examples/standalone-preview
 // The idea is that we use nuxt to render the stories
-import { RenderContext, start } from '@storybook/core-client'
-import { VueFramework } from '@storybook/vue3'
+import { start } from '@storybook/core-client'
+import type { RenderContext } from '@storybook/types'
+import { VueRenderer } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
 import { applyDecorators } from '@storybook/vue3/preview'
 import { mount } from 'mount-vue-component'
-import * as JabRefLogoStories from '~/components/JabRefLogo.stories'
-import * as NButtonStories from '~/components/n-button.stories'
+import * as JabRefLogoStories from '~/components/JabRefLogo.stories.vue'
+import * as NButtonStories from '~/components/n-button.stories.vue'
 import * as TAlertStories from '~/components/t-alert.stories'
 import * as TCheckboxStories from '~/components/t-checkbox.stories'
 import * as TDropdownStories from '~/components/t-dropdown.stories'
@@ -33,8 +34,8 @@ import * as TTableStories from '~/components/t-table.stories'
 import * as TTagStories from '~/components/t-tag.stories'
 import * as TTextareaStories from '~/components/t-textarea.stories'
 
-export function renderToDOM(
-  { title, name, storyFn, showMain, showError }: RenderContext<VueFramework>,
+export function renderToCanvas(
+  { title, name, storyFn, showMain, showError }: RenderContext<VueRenderer>,
   domElement: HTMLElement
 ): void {
   const element = storyFn()
@@ -54,14 +55,16 @@ export function renderToDOM(
 
   mount(element, { element: domElement, app: useNuxtApp().vueApp })
 }
-// @ts-expect-error: storybook typing is inconsistent
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const api = start(renderToDOM, { applyDecorators })
-const framework = 'vue3'
 definePageMeta({ layout: false, alias: '/iframe.html' })
 
 export default defineComponent({
   setup: () => {
+    if (!process.client) return
+    // @ts-expect-error: storybook typing is inconsistent
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const api = start(renderToCanvas, { applyDecorators })
+    const framework = 'vue3'
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     api.configure(
       framework,
       () => [
