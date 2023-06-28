@@ -35,6 +35,10 @@ export class AzureEmailService implements EmailService {
     body: string
   ): Promise<void> {
     const config = useRuntimeConfig()
+    if (!config.emailClient) {
+      throw new Error('Email client not configured')
+    }
+
     const client = new EmailClient(config.emailClient, {
       additionalPolicies: [
         {
