@@ -44,7 +44,7 @@ export class AzureEmailService implements EmailService {
       ],
     })
     const poller = await client.beginSend({
-      senderAddress: 'noreply@jabref.com',
+      senderAddress: 'no-reply@app.jabref.org',
       content: {
         subject,
         html: body,

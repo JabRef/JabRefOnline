@@ -4,7 +4,10 @@ import { ResolversTypes } from '#graphql/resolver'
 import { v4 as generateToken } from 'uuid'
 import { hash, verifyHash } from '../utils/crypto'
 import { EmailService } from '../utils/email.service'
-import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
+import {
+  resetPasswordTemplate,
+  resetPasswordUserNotFoundTemplate,
+} from '../utils/resetPasswordTemplate'
 import { RedisClient } from '../utils/services.factory'
 import { inject, injectable } from './../tsyringe'
 
@@ -62,6 +65,11 @@ export class AuthService {
   async resetPassword(email: string): Promise<boolean> {
     const user = await this.getUserByEmail(email)
     if (!user) {
+      await this.emailService.sendEmail(
+        { address: email },
+        'Password reset on JabRef',
+        resetPasswordUserNotFoundTemplate()
+      )
       return true
     }
     const PREFIX = process.env.PREFIX || 'forgot-password'
@@ -71,7 +79,7 @@ export class AuthService {
     await this.redisClient.set(key, hashedToken, { EX: 1000 * 60 * 60 * 24 }) // VALID FOR ONE DAY
     await this.emailService.sendEmail(
       { address: email },
-      'Reset your password',
+      'Password reset on JabRef',
       resetPasswordTemplate(user.id, token)
     )
     return true
