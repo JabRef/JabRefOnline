@@ -6,6 +6,7 @@ import { beforeAll } from 'vitest'
 import { constructConfig } from '~/config'
 import { register } from '~/server/tsyringe'
 import { registerClasses } from '~/server/tsyringe.config'
+import { EmailServiceMock } from '~/server/utils/email.service'
 import { createRedisClient } from '~/server/utils/services.factory'
 import { GraphqlSerializer } from './snapshot.graphql'
 
@@ -21,8 +22,10 @@ globalThis.Reflect = Reflect
 // Register services for all tests
 registerClasses()
 
-// Setup services for integration tests
+// Setup services for tests
 beforeAll(async (context) => {
+  register('EmailService', { useValue: new EmailServiceMock() })
+
   const isIntegrationTest =
     context.filepath?.endsWith('integration.test.ts') ?? false
 

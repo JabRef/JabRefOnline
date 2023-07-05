@@ -65,3 +65,29 @@ export function resetPasswordTemplate(id: string, token: string): string {
 
   </html>`
 }
+
+export function resetPasswordUserNotFoundTemplate(): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Password Reset Request - Email Address Not Found</title>
+    </head>
+    <body>
+      <h2>Password Reset Request - Email Address Not Found</h2>
+      <p>Dear user,</p>
+      <p>We received your password reset request; however, we couldn't locate an account associated with the provided email address. Here are a few suggestions:</p>
+      <ol>
+        <li>Double-check the email: Please ensure that you entered the correct email address when requesting the password reset.</li>
+        <li>Create a new account: If you don't have an account with us yet, we invite you to <a href="https://www.jabref.org/user/register">create one</a> on our registration page.</li>
+        <li>Contact support: For further assistance or if you suspect an issue, please reach out to our support team, who will be happy to help.</li>
+      </ol>
+      <p>We apologize for any inconvenience caused. To protect user privacy, we can't disclose whether an email address is registered in our system.</p>
+      <p>If you didn't initiate the password reset request or have concerns, please contact us immediately. We'll investigate promptly and take necessary actions to ensure account security.</p>
+      <p>Best regards,</p>
+      <p>JabRef Team</p>
+    </body>
+    </html>    
+    `
+}
