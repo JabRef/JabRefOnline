@@ -24,6 +24,16 @@ export default defineNuxtConfig({
       // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],
     },
+    esbuild: {
+      options: {
+        tsconfigRaw: {
+          compilerOptions: {
+            // Enable decorators, workaround for https://github.com/unjs/nitro/issues/1380
+            experimentalDecorators: true,
+          },
+        },
+      },
+    },
   },
 
   experimental: {
@@ -129,7 +139,7 @@ export default defineNuxtConfig({
 
   /*
    ** Client and server-side configuration
-   ** See https://v3.nuxtjs.org/guide/features/runtime-config
+   ** See https://nuxt.com/docs/guide/going-further/runtime-config
    */
   runtimeConfig: constructConfig(),
 
@@ -146,6 +156,8 @@ export default defineNuxtConfig({
     '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
     '/surveys/': { redirect: '/surveys/2015' },
     '/': { prerender: true },
+    // TODO: Workaround for https://github.com/unjs/nitro/issues/1402
+    '/download': { prerender: false },
   },
 
   /**
