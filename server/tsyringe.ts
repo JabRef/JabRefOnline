@@ -19,7 +19,6 @@ import type { GroupService } from './groups/service'
 import type { AuthService } from './user/auth.service'
 import type PassportInitializer from './user/passport-initializer'
 import type * as UserResolvers from './user/resolvers'
-import { EmailService } from './utils/email.service'
 import { RedisClient } from './utils/services.factory'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
@@ -48,7 +47,6 @@ export const InjectionSymbols = {
   ...injectSymbol('PrismaClient')<typeof PrismaClient>(),
   ...injectSymbol('RedisClient')<RedisClient>(),
   ...injectSymbol('PassportInitializer')<typeof PassportInitializer>(),
-  ...injectSymbol('EmailService')<EmailService>(),
   // Services
   ...injectSymbol('UserDocumentService')<typeof UserDocumentService>(),
   ...injectSymbol('AuthService')<typeof AuthService>(),

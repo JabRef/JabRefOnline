@@ -9,7 +9,6 @@ import { instanceCachingFactory, register } from './tsyringe'
 import { AuthService } from './user/auth.service'
 import PassportInitializer from './user/passport-initializer'
 import * as UserResolvers from './user/resolvers'
-import { createEmailService } from './utils/email.service'
 import { createRedisClient } from './utils/services.factory'
 
 const { PrismaClient } = prisma
@@ -23,7 +22,6 @@ export async function configure(): Promise<void> {
   register('RedisClient', {
     useValue: await createRedisClient(config),
   })
-  register('EmailService', { useValue: createEmailService() })
   registerClasses()
 }
 

@@ -61,7 +61,6 @@ export interface Config {
     host: string
     password: string
   }
-  emailClient?: string
   session: {
     primarySecret: string
     secondarySecret: string
@@ -79,7 +78,6 @@ export function constructConfig(): Config {
       host: process.env.REDIS_HOST || 'localhost',
       password: process.env.REDIS_PASSWORD || 'jabref',
     },
-    emailClient: process.env.EMAIL_CLIENT,
     session: {
       primarySecret: process.env.SESSION_SECRET_PRIMARY || 'session_secret',
       secondarySecret: process.env.SESSION_SECRET_SECONDARY || 'session_secret',

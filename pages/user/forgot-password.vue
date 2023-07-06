@@ -10,13 +10,13 @@
       <h2 class="mb-7 text-center text-5xl font-extrabold text-gray-900">
         Reset Password
       </h2>
-      <p
-        v-if="called"
-        class="text-base"
-      >
-        An email with instructions on how to reset your password has been sent
-        to {{ email }}.
-      </p>
+      <div v-if="called">
+        <h2>Email Sent</h2>
+        <p>
+          An email with instructions on how to reset your password has been sent
+          to {{ email }}.
+        </p>
+      </div>
       <form
         v-else
         @submit.prevent="forgotPassword()"
