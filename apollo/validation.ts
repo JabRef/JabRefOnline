@@ -13,16 +13,14 @@ const passwordSchema = z
   .string()
   .min(8, { message: 'The password must be at least 8 characters long' })
 
-export function SignupInputSchema(): z.ZodObject<Properties<SignupInput>> {
-  return InternalSignupInputSchema().extend({
+export const SignupInputSchema: z.ZodObject<Properties<SignupInput>> =
+  InternalSignupInputSchema.extend({
     email: z.string().email(),
     password: passwordSchema,
   })
-}
 
-export function LoginInputSchema(): z.ZodObject<Properties<LoginInput>> {
-  return InternalLoginInputSchema().extend({
+export const LoginInputSchema: z.ZodObject<Properties<LoginInput>> =
+  InternalLoginInputSchema.extend({
     email: z.string().email(),
     password: passwordSchema,
   })
-}
