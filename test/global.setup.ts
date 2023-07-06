@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
-import dotenv from 'dotenv'
+import 'dotenv/config'
 import 'reflect-metadata'
 import { beforeAll } from 'vitest'
 import { constructConfig } from '~/config'
@@ -12,9 +12,6 @@ import { GraphqlSerializer } from './snapshot.graphql'
 
 // Register custom graphql serializer
 expect.addSnapshotSerializer(GraphqlSerializer)
-
-// Load environment variables from .env file
-dotenv.config()
 
 // Expose reflect-metadata
 globalThis.Reflect = Reflect
