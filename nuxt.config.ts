@@ -24,6 +24,16 @@ export default defineNuxtConfig({
       // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],
     },
+    esbuild: {
+      options: {
+        tsconfigRaw: {
+          compilerOptions: {
+            // Enable decorators, workaround for https://github.com/unjs/nitro/issues/1380
+            experimentalDecorators: true,
+          },
+        },
+      },
+    },
   },
 
   experimental: {
