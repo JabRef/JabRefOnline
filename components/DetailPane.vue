@@ -3,9 +3,9 @@
     <transition
       enter-active-class="transform transition ease-out duration-300"
       leave-active-class="transform transition ease-in duration-300"
-      enter-class="translate-x-full"
+      enter-from-class="translate-x-full"
       enter-to-class="translate-x-0"
-      leave-class="translate-x-0"
+      leave-from-class="translate-x-0"
       leave-to-class="translate-x-full"
     >
       <div
