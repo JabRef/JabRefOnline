@@ -105,7 +105,6 @@ export function inject(
   propertyKey: string | symbol | undefined,
   parameterIndex: number
 ) => void {
-  // @ts-expect-error: https://github.com/microsoft/tsyringe/issues/221
   return tsyringeInject(InjectionSymbols[token].sym)
 }
 
