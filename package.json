@@ -42,10 +42,10 @@
     "validate": "yarn graphql:validate"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.15",
-    "@apollo/server": "^4.7.0",
+    "@apollo/client": "^3.7.16",
+    "@apollo/server": "^4.7.5",
     "@as-integrations/h3": "^1.1.5",
-    "@graphql-tools/schema": "^9.0.12",
+    "@graphql-tools/schema": "^10.0.0",
     "@he-tree/vue": "^2.4.0",
     "@nozomuikuta/h3-cors": "^0.2.2",
     "@pinia/nuxt": "^0.4.11",
@@ -81,13 +81,14 @@
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.1.1",
+    "@graphql-codegen/add": "^5.0.0",
     "@graphql-codegen/cli": "^4.0.1",
     "@graphql-codegen/fragment-matcher": "^5.0.0",
     "@graphql-codegen/gql-tag-operations-preset": "^2.1.0",
-    "@graphql-codegen/typed-document-node": "^5.0.0",
-    "@graphql-codegen/typescript-operations": "^3.0.4",
-    "@graphql-eslint/eslint-plugin": "^3.18.0",
-    "@graphql-inspector/cli": "^3.4.19",
+    "@graphql-codegen/typed-document-node": "^5.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-eslint/eslint-plugin": "^3.20.0",
+    "@graphql-inspector/cli": "^4.0.1",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@huntersofbook/naive-ui-nuxt": "^1.0.0",
     "@nuxt/content": "^2.7.0",
@@ -130,7 +131,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "eslint-plugin-vitest": "^0.2.6",
     "eslint-plugin-vue": "^9.15.1",
-    "graphql-codegen-typescript-validation-schema": "^0.10.0",
+    "graphql-codegen-typescript-validation-schema": "^0.11.1",
     "mount-vue-component": "^0.10.2",
     "naive-ui": "^2.34.4",
     "nuxt": "^3.6.2",
@@ -166,6 +167,7 @@
     "uuid@^8.3.2": "^9.0.0",
     "node-fetch-native": "^1.2.0",
     "destr": "^2.0.0",
+    "@graphql-tools/schema": "^10.0.0",
     "eslint-scope@^7.1.1": "patch:eslint-scope@npm%3A7.1.1#./.yarn/patches/eslint-scope-npm-7.1.1-23935eb377.patch",
     "eslint-scope@^5.1.1": "patch:eslint-scope@npm%3A7.1.1#./.yarn/patches/eslint-scope-npm-7.1.1-23935eb377.patch",
     "@vue/apollo-util@^4.0.0-beta.4": "patch:@vue/apollo-util@npm%3A4.0.0-beta.4#./.yarn/patches/@vue-apollo-util-npm-4.0.0-beta.4-ab694c9566.patch",
@@ -175,7 +177,7 @@
   "resolutionsComments": {
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "tslib": "some libraries still pull-in v1 of tslib, which is incompatible with the other libraries that use tslib v2 features",
-    "uuid/node-fetch-native/destr": "nitro still has problems when multiple versions of packages are used"
+    "uuid/node-fetch-native/destr/schema": "nitro still has problems when multiple versions of packages are used"
   },
   "prisma": {
     "schema": "server/database/schema.prisma",

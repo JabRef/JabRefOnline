@@ -102,7 +102,7 @@ definePageMeta({ layout: false })
 // middleware: 'guest',
 
 const { handleSubmit, errors, values } = useForm({
-  validationSchema: toTypedSchema(LoginInputSchema()),
+  validationSchema: toTypedSchema(LoginInputSchema),
 })
 
 const otherError = ref('')
