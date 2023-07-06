@@ -2,6 +2,7 @@ import { defineVitestConfig } from 'nuxt-vitest/config'
 import GithubActionsReporter from 'vitest-github-actions-reporter'
 
 export default defineVitestConfig({
+  // @ts-expect-error: for some reason 'test' is not defined in the type definition
   test: {
     // Provide global API
     // https://vitest.dev/config/#globals

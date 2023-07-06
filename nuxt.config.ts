@@ -129,7 +129,7 @@ export default defineNuxtConfig({
 
   /*
    ** Client and server-side configuration
-   ** See https://v3.nuxtjs.org/guide/features/runtime-config
+   ** See https://nuxt.com/docs/guide/going-further/runtime-config
    */
   runtimeConfig: constructConfig(),
 
