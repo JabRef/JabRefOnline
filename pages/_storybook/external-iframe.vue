@@ -36,7 +36,7 @@ import * as TTextareaStories from '~/components/t-textarea.stories'
 
 export function renderToCanvas(
   { title, name, storyFn, showMain, showError }: RenderContext<VueRenderer>,
-  domElement: HTMLElement
+  domElement: HTMLElement,
 ): void {
   const element = storyFn()
 
@@ -83,7 +83,7 @@ export default defineComponent({
         TTextareaStories,
       ],
       undefined,
-      false
+      false,
     )
   },
 })
@@ -140,9 +140,17 @@ export default defineComponent({
   left: 0;
   right: 0;
   padding: 20px;
-  font-family: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
-    'San Francisco', BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica,
-    Arial, sans-serif;
+  font-family:
+    'Nunito Sans',
+    -apple-system,
+    '.SFNSText-Regular',
+    'San Francisco',
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow: auto;
 }
@@ -334,7 +342,9 @@ export default defineComponent({
 
 .sb-argstableBlock-body {
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 1px, rgba(0, 0, 0, 0.065) 0 0 0 1px;
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0 1px 3px 1px,
+    rgba(0, 0, 0, 0.065) 0 0 0 1px;
 }
 .sb-argstableBlock-body tr {
   background: transparent;

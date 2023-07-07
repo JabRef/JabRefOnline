@@ -30,7 +30,7 @@ export enum Environment {
  */
 function enumFromStringValue<T>(
   enm: { [s: string]: T },
-  value: string
+  value: string,
 ): T | undefined {
   return (Object.values(enm) as unknown as string[]).includes(value)
     ? (value as unknown as T)

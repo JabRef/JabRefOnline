@@ -228,7 +228,7 @@ const { mutate: logout, onDone } = useMutation(
     update(cache, _data) {
       cacheCurrentUser(cache, null)
     },
-  }
+  },
 )
 
 onDone(() => {

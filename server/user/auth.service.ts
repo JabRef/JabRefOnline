@@ -25,7 +25,7 @@ export type LoginPayload = ResolversTypes['LoginPayload']
 export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
-    @inject('RedisClient') private redisClient: RedisClient
+    @inject('RedisClient') private redisClient: RedisClient,
   ) {}
 
   async getUsers(): Promise<User[]> {
@@ -119,7 +119,7 @@ export class AuthService {
   async updatePassword(
     token: string,
     id: string,
-    newPassword: string
+    newPassword: string,
   ): Promise<ChangePasswordPayload> {
     if (newPassword.length < 6) {
       return {

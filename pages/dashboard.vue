@@ -70,11 +70,12 @@ const { result, fetchMore } = useQuery(
     fetchPolicy: ui.activeSearchQuery
       ? ('no-cache' as WatchQueryFetchPolicy)
       : ('cache-first' as WatchQueryFetchPolicy),
-  })
+  }),
 )
 
-const documents = computed(() =>
-  result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty)
+const documents = computed(
+  () =>
+    result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty),
 )
 
 const onScrollToBottom = () => {

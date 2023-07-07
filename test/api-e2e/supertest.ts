@@ -17,19 +17,17 @@ export function root() {
 export async function login(request: SuperTestGraphQL<unknown, Variables>) {
   // Supertest automatically saves the cookie in the "request"/agent
   await request
-    .mutate(
-      gql`
-        mutation LoginForTests($input: LoginInput!) {
-          login(input: $input) {
-            ... on UserReturned {
-              user {
-                id
-              }
+    .mutate(gql`
+      mutation LoginForTests($input: LoginInput!) {
+        login(input: $input) {
+          ... on UserReturned {
+            user {
+              id
             }
           }
         }
-      `
-    )
+      }
+    `)
     .variables({
       input: { email: 'alice@jabref.org', password: 'EBNPXY35TYkYXHs' },
     })
