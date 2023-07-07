@@ -17,19 +17,19 @@ export async function truncate(): Promise<void> {
 
   try {
     for (const { tablename } of (await prisma.$queryRawUnsafe(
-      `SELECT tablename FROM pg_tables WHERE schemaname='${dbSchemaName}';`
+      `SELECT tablename FROM pg_tables WHERE schemaname='${dbSchemaName}';`,
     )) as any) {
       await prisma.$queryRawUnsafe(
-        `TRUNCATE TABLE "${dbSchemaName}"."${tablename as string}" CASCADE;`
+        `TRUNCATE TABLE "${dbSchemaName}"."${tablename as string}" CASCADE;`,
       )
     }
     for (const { relname } of (await prisma.$queryRawUnsafe(
-      `SELECT c.relname FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${dbSchemaName}';`
+      `SELECT c.relname FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${dbSchemaName}';`,
     )) as any) {
       await prisma.$queryRawUnsafe(
         `ALTER SEQUENCE "${dbSchemaName}"."${
           relname as string
-        }" RESTART WITH 1;`
+        }" RESTART WITH 1;`,
       )
     }
   } finally {

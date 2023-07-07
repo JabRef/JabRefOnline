@@ -89,7 +89,7 @@ describe('mutation', () => {
             },
           },
         },
-        context
+        context,
       )
       expect(userDocumentService.addDocument).toHaveBeenCalledWith({
         added: undefined,

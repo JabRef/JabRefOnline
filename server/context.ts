@@ -12,7 +12,7 @@ export interface Context {
   getUser: () => User | null
   authenticate: (
     strategyName: string,
-    options?: Record<string, unknown>
+    options?: Record<string, unknown>,
   ) => Promise<AuthenticateReturn<User>>
   login: (user: User, options?: Record<string, unknown>) => Promise<void>
   logout: () => void
@@ -31,7 +31,7 @@ export function buildContext({
       const session = event.req.session
       if (!session) {
         throw new Error(
-          'Login sessions require session support. Did you forget to use `express-session` middleware?'
+          'Login sessions require session support. Did you forget to use `express-session` middleware?',
         )
       }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
@@ -54,7 +54,7 @@ export function buildContext({
             event.req.sessionID,
             useRuntimeConfig().session.primarySecret,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            session.cookie.data
+            session.cookie.data,
           )
           resolve()
         })

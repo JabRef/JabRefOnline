@@ -35,7 +35,7 @@ export default defineEventHandler(async () => {
   return {
     version: response?.data?.repository?.releases?.nodes[0].tagName.replace(
       'v',
-      ''
+      '',
     ), // something like 5.7
   }
 })
