@@ -11,7 +11,7 @@ export const GraphqlSerializer = {
     indentation: any,
     depth: any,
     refs: any,
-    printer: any
+    printer: any,
   ) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { data, errors } = value
@@ -30,7 +30,7 @@ export const GraphqlSerializer = {
       config,
       indentation,
       depth,
-      refs
+      refs,
     )
   },
 }

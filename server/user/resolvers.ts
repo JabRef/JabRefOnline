@@ -46,7 +46,7 @@ export class Query {
   async user(
     _root: Record<string, never>,
     { id }: QueryUserArgs,
-    _context: Context
+    _context: Context,
   ): Promise<User | null> {
     return await this.authService.getUserById(id)
   }
@@ -54,7 +54,7 @@ export class Query {
   me(
     _root: Record<string, never>,
     _args: Record<string, never>,
-    context: Context
+    context: Context,
   ): User | null {
     return context.getUser()
   }
@@ -68,7 +68,7 @@ export class Mutation {
   async signup(
     _root: Record<string, never>,
     { input: { email, password } }: MutationSignupArgs,
-    context: Context
+    context: Context,
   ): Promise<SignupPayload> {
     const newUserPayload = await this.authService.createAccount(email, password)
     if ('user' in newUserPayload) void context.login(await newUserPayload.user)
@@ -79,7 +79,7 @@ export class Mutation {
   async login(
     _root: Record<string, never>,
     { input: { email, password } }: MutationLoginArgs,
-    context: Context
+    context: Context,
   ): Promise<LoginPayload> {
     const { user, info } = await context.authenticate('graphql-local', {
       email,
@@ -106,7 +106,7 @@ export class Mutation {
   logout(
     _root: Record<string, never>,
     _args: Record<string, never>,
-    context: Context
+    context: Context,
   ): LogoutPayload {
     context.logout()
     return {
@@ -117,7 +117,7 @@ export class Mutation {
   async forgotPassword(
     _root: Record<string, never>,
     { input: { email } }: MutationForgotPasswordArgs,
-    _context: Context
+    _context: Context,
   ): Promise<ForgotPasswordPayload> {
     return {
       result: await this.authService.resetPassword(email),
@@ -127,7 +127,7 @@ export class Mutation {
   async changePassword(
     _root: Record<string, never>,
     { input: { token, id, newPassword } }: MutationChangePasswordArgs,
-    _context: Context
+    _context: Context,
   ): Promise<ChangePasswordPayload> {
     return await this.authService.updatePassword(token, id, newPassword)
   }
@@ -136,7 +136,7 @@ export class Mutation {
 @injectable()
 export class SignupPayloadResolver {
   __resolveType(
-    signup: SignupPayload
+    signup: SignupPayload,
   ): 'UserReturned' | 'InputValidationProblem' {
     if ('user' in signup) {
       return 'UserReturned'
@@ -148,7 +148,7 @@ export class SignupPayloadResolver {
 @injectable()
 export class ChangePasswordPayloadResolver {
   __resolveType(
-    changePassword: ChangePasswordPayload
+    changePassword: ChangePasswordPayload,
   ): 'UserReturned' | 'TokenProblem' | 'InputValidationProblem' {
     if ('user' in changePassword) return 'UserReturned'
     else if ('problems' in changePassword) return 'InputValidationProblem'
@@ -159,7 +159,7 @@ export class ChangePasswordPayloadResolver {
 @injectable()
 export class LoginPayloadResolver {
   __resolveType(
-    login: LoginPayload
+    login: LoginPayload,
   ): 'UserReturned' | 'InputValidationProblem' {
     if ('user' in login) {
       return 'UserReturned'
@@ -173,12 +173,12 @@ export class UserResolver {
   constructor(
     @inject('UserDocumentService')
     private userDocumentService: UserDocumentService,
-    @inject('GroupService') private groupService: GroupService
+    @inject('GroupService') private groupService: GroupService,
   ) {}
 
   async documents(
     user: User,
-    { filterBy, first, after }: UserDocumentsArgs
+    { filterBy, first, after }: UserDocumentsArgs,
   ): Promise<UserDocumentsResult> {
     const { documents, hasNextPage } =
       await this.userDocumentService.getDocumentsOf(
@@ -186,7 +186,7 @@ export class UserResolver {
         filterBy,
         first,
         after,
-        true
+        true,
       )
 
     return {
@@ -202,7 +202,7 @@ export class UserResolver {
     const groups = await this.groupService.getGroupsOf(user)
     const groupsById = new Map<string, GroupResolved>()
     groups.forEach((group) =>
-      groupsById.set(group.id, { ...group, parent: null, children: [] })
+      groupsById.set(group.id, { ...group, parent: null, children: [] }),
     )
     const roots: GroupResolved[] = []
 
@@ -220,14 +220,14 @@ export class UserResolver {
 
   async changes(
     user: User,
-    { first, after }: UserChangesArgs
+    { first, after }: UserChangesArgs,
   ): Promise<UserChangesResult> {
     const { documents, hasNextPage } =
       await this.userDocumentService.getChangedDocumentsOf(
         user,
         first,
         after,
-        true
+        true,
       )
 
     function constructCursor(documents: UserDocument[]) {

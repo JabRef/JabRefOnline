@@ -35,7 +35,7 @@ const config: StorybookConfig = {
         plugins: nuxtViteConfig.plugins,
         define: nuxtViteConfig.define,
       },
-      config
+      config,
     )
   },
 }

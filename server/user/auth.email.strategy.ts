@@ -15,13 +15,13 @@ export default class EmailStrategy extends GraphQLLocalStrategy<
         done: (
           error: Error | null,
           user?: User | null,
-          message?: AuthenticationMessage
-        ) => void
+          message?: AuthenticationMessage,
+        ) => void,
       ) => {
         try {
           const user = await this.authService.validateUser(
             email as string,
-            password as string
+            password as string,
           )
           if ('user' in user) {
             // Authentication succeeded
@@ -36,7 +36,7 @@ export default class EmailStrategy extends GraphQLLocalStrategy<
         } catch (err) {
           done(err as Error)
         }
-      }
+      },
     )
   }
 }

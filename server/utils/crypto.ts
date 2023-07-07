@@ -12,7 +12,7 @@ const lengthSaltString = lengthSaltBytes * 2 // lengthSaltBytes is in bytes, but
 export async function hash(token: string, salt?: string): Promise<string> {
   if (salt && salt.length !== lengthSaltString) {
     throw new Error(
-      `Invalid salt length: ${salt.length} but needs to be ${lengthSaltString}`
+      `Invalid salt length: ${salt.length} but needs to be ${lengthSaltString}`,
     )
   }
 
@@ -32,7 +32,7 @@ export function unsecureHash(token: string | object): string {
 
 export async function verifyHash(
   token: string,
-  hashedToken: string
+  hashedToken: string,
 ): Promise<boolean> {
   return new Promise((resolve, reject) => {
     const salt = hashedToken.substring(0, 2 * lengthSaltString)

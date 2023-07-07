@@ -8,11 +8,11 @@ import { resolve } from '~/server/tsyringe'
 export type ApolloClient = {
   executeOperation<
     TData = Record<string, unknown>,
-    TVariables extends VariableValues = VariableValues
+    TVariables extends VariableValues = VariableValues,
   >(
     request: Omit<GraphQLRequest<TVariables>, 'query'> & {
       query?: string | DocumentNode | TypedQueryDocumentNode<TData, TVariables>
-    }
+    },
   ): Promise<GraphQLResponse<TData>>
 }
 
@@ -23,7 +23,7 @@ export async function createAuthenticatedClient(): Promise<ApolloClient> {
   })
 
   const user = await resolve('AuthService').getUserById(
-    'ckn4oul7100004cv7y3t94n8j'
+    'ckn4oul7100004cv7y3t94n8j',
   )
 
   return {

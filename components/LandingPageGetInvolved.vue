@@ -158,6 +158,6 @@ const // @ts-expect-error: https://github.com/nuxt/framework/issues/6910
       // @ts-expect-error: https://github.com/nuxt/framework/issues/6910
       transform: (data) =>
         data.split('\n').filter((member) => member.length > 0),
-    }
+    },
   )
 </script>

@@ -74,7 +74,7 @@ export default defineComponent({
 
     this.tagify = new Tagify(
       this.$el as HTMLTextAreaElement | HTMLInputElement,
-      tagifySettings
+      tagifySettings,
     )
   },
   unmounted() {
@@ -85,7 +85,7 @@ export default defineComponent({
       // Update value prop
       this.$emit(
         'input',
-        (event.target as HTMLInputElement | null)?.value || []
+        (event.target as HTMLInputElement | null)?.value || [],
       )
     },
   },

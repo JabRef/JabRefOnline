@@ -18,7 +18,7 @@ export const cache = new InMemoryCache({
 
 export function cacheCurrentUser(
   cache: ApolloCache<any>,
-  user: MeQuery['me'] | null
+  user: MeQuery['me'] | null,
 ): void {
   cache.writeQuery({
     query: gql(/* GraphQL */ `
