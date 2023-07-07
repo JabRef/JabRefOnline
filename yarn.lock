@@ -2665,20 +2665,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/core@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@graphql-codegen/core@npm:3.1.0"
-  dependencies:
-    "@graphql-codegen/plugin-helpers": ^4.1.0
-    "@graphql-tools/schema": ^9.0.0
-    "@graphql-tools/utils": ^9.1.1
-    tslib: ~2.5.0
-  peerDependencies:
-    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 7ace2b185242d00575b877b0bbb884c66915d246ba17a98c0ab82c2ee3a93ff2c9ae9d7d75a1d346de02ca8f12eb02801ffe2da4846da6e164b43176cd02dd8c
-  languageName: node
-  linkType: hard
-
 "@graphql-codegen/core@npm:^4.0.0":
   version: 4.0.0
   resolution: "@graphql-codegen/core@npm:4.0.0"
@@ -2859,19 +2845,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-resolvers@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "@graphql-codegen/typescript-resolvers@npm:3.2.1"
+"@graphql-codegen/typescript-resolvers@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "@graphql-codegen/typescript-resolvers@npm:4.0.1"
   dependencies:
-    "@graphql-codegen/plugin-helpers": ^4.2.0
-    "@graphql-codegen/typescript": ^3.0.4
-    "@graphql-codegen/visitor-plugin-common": 3.1.1
-    "@graphql-tools/utils": ^9.0.0
+    "@graphql-codegen/plugin-helpers": ^5.0.0
+    "@graphql-codegen/typescript": ^4.0.1
+    "@graphql-codegen/visitor-plugin-common": 4.0.1
+    "@graphql-tools/utils": ^10.0.0
     auto-bind: ~4.0.0
     tslib: ~2.5.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: a84f8fc68fe778beabbf537f1312699a220a3a605d972403075d8307fb7fe9aec73ae2eb5b42dea9f3a7c91deabfe6e1271d607e1b2c84b346686107f39354fb
+  checksum: ad9340b070c765b3ea068c38108e4ce0f6c2c7e02dfc9bc69e8f5ca604356e50bccc79e7812a6fe4ae87c2eb59f683b42110efce8050f7059e9b656e35def150
   languageName: node
   linkType: hard
 
@@ -3872,7 +3858,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:^9.0.0, @graphql-tools/utils@npm:^9.1.1, @graphql-tools/utils@npm:^9.2.1":
+"@graphql-tools/utils@npm:^9.0.0, @graphql-tools/utils@npm:^9.2.1":
   version: 9.2.1
   resolution: "@graphql-tools/utils@npm:9.2.1"
   dependencies:
@@ -4598,7 +4584,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:3.6.2, @nuxt/kit@npm:^3.2.0, @nuxt/kit@npm:^3.4.3, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.1, @nuxt/kit@npm:^3.5.3, @nuxt/kit@npm:^3.6.1":
+"@nuxt/kit@npm:3.6.2, @nuxt/kit@npm:^3.2.0, @nuxt/kit@npm:^3.4.3, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.1, @nuxt/kit@npm:^3.5.3, @nuxt/kit@npm:^3.6.1, @nuxt/kit@npm:^3.6.2":
   version: 3.6.2
   resolution: "@nuxt/kit@npm:3.6.2"
   dependencies:
@@ -14564,7 +14550,7 @@ __metadata:
     naive-ui: ^2.34.4
     nodemailer: ^6.8.0
     nuxt: ^3.6.2
-    nuxt-graphql-server: 2.0.0
+    nuxt-graphql-server: 2.0.1
     nuxt-icon: ^0.4.2
     nuxt-seo-kit: ^1.3.9
     nuxt-vitest: ^0.9.0
@@ -17388,21 +17374,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-graphql-server@npm:2.0.0":
-  version: 2.0.0
-  resolution: "nuxt-graphql-server@npm:2.0.0"
+"nuxt-graphql-server@npm:2.0.1":
+  version: 2.0.1
+  resolution: "nuxt-graphql-server@npm:2.0.1"
   dependencies:
-    "@graphql-codegen/core": ^3.1.0
-    "@graphql-codegen/plugin-helpers": ^4.2.0
-    "@graphql-codegen/typescript": ^3.0.4
-    "@graphql-codegen/typescript-resolvers": ^3.2.1
+    "@graphql-codegen/core": ^4.0.0
+    "@graphql-codegen/plugin-helpers": ^5.0.0
+    "@graphql-codegen/typescript": ^4.0.1
+    "@graphql-codegen/typescript-resolvers": ^4.0.1
     "@graphql-tools/graphql-file-loader": ^8.0.0
     "@graphql-tools/load": ^8.0.0
-    "@nuxt/kit": ^3.5.0
+    "@nuxt/kit": ^3.6.2
     multimatch: ^6.0.0
   peerDependencies:
-    graphql: ^16.6.0
-  checksum: 267c634a46ef2b32c5a90d5b7b825e50bd4e12b8909ad13528e6215766e1d4e8123f7d27210e46f1e8ebb4e0baf6033b3fc1cc5a10b81900d50bdcfd556c668f
+    graphql: ^16.7.1
+  checksum: 2b8d261b80e56031787b577bb6a9f80e926aac601d9792a42ab4a8e32a0fdeed106dc9b1e955a6cfd4c2fd3eb4f612e3d7c1bd4e6412bbb033689288b69ae878
   languageName: node
   linkType: hard
 
