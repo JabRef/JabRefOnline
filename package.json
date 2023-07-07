@@ -168,6 +168,7 @@
     "node-fetch-native": "^1.2.0",
     "destr": "^2.0.0",
     "@graphql-tools/schema": "^10.0.0",
+    "graphql": "^16.7.1",
     "eslint-scope@^7.1.1": "patch:eslint-scope@npm%3A7.1.1#./.yarn/patches/eslint-scope-npm-7.1.1-23935eb377.patch",
     "eslint-scope@^5.1.1": "patch:eslint-scope@npm%3A7.1.1#./.yarn/patches/eslint-scope-npm-7.1.1-23935eb377.patch",
     "@vue/apollo-util@^4.0.0-beta.4": "patch:@vue/apollo-util@npm%3A4.0.0-beta.4#./.yarn/patches/@vue-apollo-util-npm-4.0.0-beta.4-ab694c9566.patch",
@@ -177,7 +178,7 @@
   "resolutionsComments": {
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "tslib": "some libraries still pull-in v1 of tslib, which is incompatible with the other libraries that use tslib v2 features",
-    "uuid/node-fetch-native/destr/schema": "nitro still has problems when multiple versions of packages are used"
+    "uuid/node-fetch-native/destr/schema/graphql": "nitro still has problems when multiple versions of packages are used"
   },
   "prisma": {
     "schema": "server/database/schema.prisma",
