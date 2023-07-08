@@ -7099,10 +7099,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/apollo-util@npm:^4.0.0-beta.6":
+"@vue/apollo-util@npm:4.0.0-beta.6":
   version: 4.0.0-beta.6
   resolution: "@vue/apollo-util@npm:4.0.0-beta.6"
   checksum: f5849b8aefc3744a89d221dcf5e210249eaedce2a0699e002da781c4c342e2c00578a231b9cb93d45aba7596d345d1cd0bce05edd5e1f24f2b681bb50d534d97
+  languageName: node
+  linkType: hard
+
+"@vue/apollo-util@patch:@vue/apollo-util@npm%3A4.0.0-beta.6#./.yarn/patches/@vue-apollo-util-npm-4.0.0-beta.6-7e26e14eb7.patch::locator=jabref-online%40workspace%3A.":
+  version: 4.0.0-beta.6
+  resolution: "@vue/apollo-util@patch:@vue/apollo-util@npm%3A4.0.0-beta.6#./.yarn/patches/@vue-apollo-util-npm-4.0.0-beta.6-7e26e14eb7.patch::version=4.0.0-beta.6&hash=ad66eb&locator=jabref-online%40workspace%3A."
+  checksum: db06d17d2678ddbe010699c81a28a91aef6c601a37d2ee2a8530c89e3f142776df7ef06abfab8ddd051d825cdd06dd3bbcdaee8aa11c3456b85308d7655624cd
   languageName: node
   linkType: hard
 
@@ -7439,16 +7446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wry/trie@npm:^0.3.0":
-  version: 0.3.2
-  resolution: "@wry/trie@npm:0.3.2"
-  dependencies:
-    tslib: ^2.3.0
-  checksum: 151d06b519e1ff1c3acf6ee6846161b1d7d50bbecd4c48e5cd1b05f9e37c30602aff02e88f20105f6e6c54ae4123f9c4eb7715044d7fd927d4ba4ec3e755cd36
-  languageName: node
-  linkType: hard
-
-"@wry/trie@npm:^0.4.0":
+"@wry/trie@npm:^0.4.3":
   version: 0.4.3
   resolution: "@wry/trie@npm:0.4.3"
   dependencies:
@@ -11440,16 +11438,6 @@ __metadata:
     esrecurse: ^4.3.0
     estraverse: ^5.2.0
   checksum: 9f6e974ab2db641ca8ab13508c405b7b859e72afe9f254e8131ff154d2f40c99ad4545ce326fd9fde3212ff29707102562a4834f1c48617b35d98c71a97fbf3e
-  languageName: node
-  linkType: hard
-
-"eslint-scope@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "eslint-scope@npm:7.2.0"
-  dependencies:
-    esrecurse: ^4.3.0
-    estraverse: ^5.2.0
-  checksum: 64591a2d8b244ade9c690b59ef238a11d5c721a98bcee9e9f445454f442d03d3e04eda88e95a4daec558220a99fa384309d9faae3d459bd40e7a81b4063980ae
   languageName: node
   linkType: hard
 
@@ -18378,26 +18366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinia@npm:>=2.1.0":
-  version: 2.1.3
-  resolution: "pinia@npm:2.1.3"
-  dependencies:
-    "@vue/devtools-api": ^6.5.0
-    vue-demi: ">=0.14.5"
-  peerDependencies:
-    "@vue/composition-api": ^1.4.0
-    typescript: ">=4.4.4"
-    vue: ^2.6.14 || ^3.3.0
-  peerDependenciesMeta:
-    "@vue/composition-api":
-      optional: true
-    typescript:
-      optional: true
-  checksum: 2872000a2e75e210e1ae7bf6227fbc8a51ecdfd7a4db34da0029ed74f1040aa74ddc64efc30b883a14af972ed910a5021e84ed31ee9f62daf329df12c29f59bf
-  languageName: node
-  linkType: hard
-
-"pinia@npm:^2.1.4":
+"pinia@npm:>=2.1.0, pinia@npm:^2.1.4":
   version: 2.1.4
   resolution: "pinia@npm:2.1.4"
   dependencies:
@@ -23433,7 +23402,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-demi@npm:>=0.14.5, vue-demi@npm:latest":
+"vue-demi@npm:^0.14.5":
   version: 0.14.5
   resolution: "vue-demi@npm:0.14.5"
   peerDependencies:
@@ -23446,22 +23415,6 @@ __metadata:
     vue-demi-fix: bin/vue-demi-fix.js
     vue-demi-switch: bin/vue-demi-switch.js
   checksum: ff44b9372b8224590514252a2f73363cced6062205f9628a6b130dccb80e2023d55cd9d1da94aeb68d5539b7ea9eedcecf88ab281a3a9ff48b8db4c5366b9643
-  languageName: node
-  linkType: hard
-
-"vue-demi@npm:^0.13.1":
-  version: 0.13.11
-  resolution: "vue-demi@npm:0.13.11"
-  peerDependencies:
-    "@vue/composition-api": ^1.0.0-rc.1
-    vue: ^3.0.0-0 || ^2.6.0
-  peerDependenciesMeta:
-    "@vue/composition-api":
-      optional: true
-  bin:
-    vue-demi-fix: bin/vue-demi-fix.js
-    vue-demi-switch: bin/vue-demi-switch.js
-  checksum: 0fbe9bf8ab7fe498ffa2bbd0cfc8f6f43a6bbaa5eda3e20ef1b70dca7c8b0ddb216a7ff2f632b694fe0735805638975abb441c621ec0bd2e6d4656353f316c15
   languageName: node
   linkType: hard
 
