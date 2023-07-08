@@ -23,7 +23,7 @@ export interface EmailService {
   sendEmail(
     to: EmailAddress[] | EmailAddress,
     subject: string,
-    body: string
+    body: string,
   ): Promise<void>
 }
 
@@ -32,7 +32,7 @@ export class AzureEmailService implements EmailService {
   async sendEmail(
     to: EmailAddress[] | EmailAddress,
     subject: string,
-    body: string
+    body: string,
   ): Promise<void> {
     const config = useRuntimeConfig()
     if (!config.emailClient) {
@@ -69,13 +69,13 @@ export class EmailServiceMock implements EmailService {
   sendEmail(
     to: EmailAddress[] | EmailAddress,
     subject: string,
-    body: string
+    body: string,
   ): Promise<void> {
     // eslint-disable-next-line no-console
     console.log(
       `Sending email to ${JSON.stringify(
-        to
-      )} with subject ${subject} and body ${body}`
+        to,
+      )} with subject ${subject} and body ${body}`,
     )
     return Promise.resolve()
   }
