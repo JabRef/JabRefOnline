@@ -6,3 +6,13 @@ describe('index page', () => {
     expect(response.statusCode).toBe(200)
   })
 })
+
+describe('download', () => {
+  it('redirects to fosshub', async () => {
+    const response = await root().get('/download')
+    expect(response.statusCode).toBe(302)
+    expect(response.headers.location).toBe(
+      'https://www.fosshub.com/JabRef.html',
+    )
+  })
+})
