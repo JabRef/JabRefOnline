@@ -42,7 +42,7 @@ export function registerClasses(): void {
   register('JournalArticleResolver', DocumentResolvers.JournalArticleResolver)
   register(
     'ProceedingsArticleResolver',
-    DocumentResolvers.ProceedingsArticleResolver
+    DocumentResolvers.ProceedingsArticleResolver,
   )
   register('ThesisResolver', DocumentResolvers.ThesisResolver)
   register('OtherResolver', DocumentResolvers.OtherResolver)
@@ -58,6 +58,6 @@ export function registerClasses(): void {
   register('SignupPayloadResolver', UserResolvers.SignupPayloadResolver)
   register(
     'ChangePasswordPayloadResolver',
-    UserResolvers.ChangePasswordPayloadResolver
+    UserResolvers.ChangePasswordPayloadResolver,
   )
 }

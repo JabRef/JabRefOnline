@@ -28,7 +28,7 @@ export class Query {
   async group(
     _root: Record<string, never>,
     { id }: QueryGroupArgs,
-    _context: Context
+    _context: Context,
   ): Promise<Group | null> {
     return await this.groupService.getGroupById(id)
   }
@@ -41,7 +41,7 @@ export class Mutation {
   async createGroup(
     _root: Record<string, never>,
     { input: group }: MutationCreateGroupArgs,
-    context: Context
+    context: Context,
   ): Promise<Group | null> {
     let type = null
     let field = null
@@ -102,7 +102,7 @@ export class Mutation {
           extensions: {
             code: ApolloServerErrorCode.BAD_USER_INPUT,
           },
-        }
+        },
       )
     }
 
@@ -148,7 +148,7 @@ export class Mutation {
   async updateGroup(
     _root: Record<never, string>,
     { input: group }: MutationUpdateGroupArgs,
-    _context: Context
+    _context: Context,
   ): Promise<Group | null> {
     return await this.groupService.updateGroup({
       id: group.id,

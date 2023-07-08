@@ -70,7 +70,7 @@ export default defineComponent({
             email: email.value,
           },
         },
-      })
+      }),
     )
     return { email, error, called, forgotPassword }
   },

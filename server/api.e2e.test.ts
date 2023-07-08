@@ -13,7 +13,7 @@ describe('invalid query', () => {
               name
             }
           }
-        `
+        `,
       )
       .variables({ id: '' })
 
@@ -36,7 +36,7 @@ describe('request without query', () => {
 
     expect(response.statusCode).toBe(400)
     expect(response.text).toContain(
-      'GraphQL operations must contain a non-empty `query`'
+      'GraphQL operations must contain a non-empty `query`',
     )
   })
 })
@@ -51,10 +51,10 @@ describe('preflight', () => {
     expect(response.body).toStrictEqual({})
     expect(response.statusCode).toBe(204)
     expect(response.get('access-control-allow-methods')).toBe(
-      'GET,POST,OPTIONS'
+      'GET,POST,OPTIONS',
     )
     expect(response.get('access-control-allow-origin')).toBe(
-      'https://studio.apollographql.com'
+      'https://studio.apollographql.com',
     )
     expect(response.get('access-control-allow-headers')).toBe('Content-Type')
   })
@@ -68,10 +68,10 @@ describe('preflight', () => {
     expect(response.body).toStrictEqual({})
     expect(response.statusCode).toBe(204)
     expect(response.get('access-control-allow-methods')).toBe(
-      'GET,POST,OPTIONS'
+      'GET,POST,OPTIONS',
     )
     expect(response.get('access-control-allow-origin')).toBe(
-      'https://studio.apollographql.com'
+      'https://studio.apollographql.com',
     )
     expect(response.get('access-control-allow-headers')).toBe('Content-Type')
   })

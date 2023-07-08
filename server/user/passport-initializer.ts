@@ -12,16 +12,16 @@ import { AuthService } from './auth.service'
 export default class PassportInitializer {
   constructor(
     @inject('AuthService') private accountService: AuthService,
-    @inject('RedisClient') private redisClient: RedisClient
+    @inject('RedisClient') private redisClient: RedisClient,
   ) {}
 
   initialize(): void {
     passport.use(new EmailStrategy(this.accountService))
     passport.serializeUser<string>((user, done) =>
-      this.serializeUser(user, done)
+      this.serializeUser(user, done),
     )
     passport.deserializeUser<string>((id, done) =>
-      this.deserializeUser(id, done)
+      this.deserializeUser(id, done),
     )
   }
 
@@ -91,7 +91,7 @@ export default class PassportInitializer {
   private deserializeUser(
     id: string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    done: (err: unknown, user?: any) => void
+    done: (err: unknown, user?: any) => void,
   ) {
     this.accountService
       .getUserById(id)

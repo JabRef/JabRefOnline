@@ -188,10 +188,10 @@ const { result } = useQuery(
   `),
   () => ({
     documentId: props.documentId,
-  })
+  }),
 )
 const document = computed(() =>
-  useFragment(DocumentDetails, result.value?.userDocument)
+  useFragment(DocumentDetails, result.value?.userDocument),
 )
 
 function formatAuthor(author: PersonFullDetailsFragment) {

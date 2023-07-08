@@ -55,7 +55,7 @@ export class GroupService {
   }
 
   async updateGroup(
-    group: Omit<Prisma.GroupUpdateInput, 'id'> & { id: string }
+    group: Omit<Prisma.GroupUpdateInput, 'id'> & { id: string },
   ): Promise<Group | null> {
     return await this.prisma.group.update({
       data: group,

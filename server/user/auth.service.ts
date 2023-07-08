@@ -29,7 +29,7 @@ export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
     @inject('RedisClient') private redisClient: RedisClient,
-    @inject('EmailService') private emailService: EmailService
+    @inject('EmailService') private emailService: EmailService,
   ) {}
 
   async getUsers(): Promise<User[]> {
@@ -68,7 +68,7 @@ export class AuthService {
       await this.emailService.sendEmail(
         { address: email },
         'Password reset on JabRef',
-        resetPasswordUserNotFoundTemplate()
+        resetPasswordUserNotFoundTemplate(),
       )
       return true
     }
@@ -80,7 +80,7 @@ export class AuthService {
     await this.emailService.sendEmail(
       { address: email },
       'Password reset on JabRef',
-      resetPasswordTemplate(user.id, token)
+      resetPasswordTemplate(user.id, token),
     )
     return true
   }
@@ -132,7 +132,7 @@ export class AuthService {
   async updatePassword(
     token: string,
     id: string,
-    newPassword: string
+    newPassword: string,
   ): Promise<ChangePasswordPayload> {
     if (newPassword.length < 6) {
       return {

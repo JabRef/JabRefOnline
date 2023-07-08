@@ -138,7 +138,7 @@ const {
         cacheCurrentUser(cache, null)
       }
     },
-  }
+  },
 )
 onDone((result) => {
   if (result.data?.login?.__typename === 'UserReturned') {

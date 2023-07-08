@@ -24,7 +24,7 @@ describe('mutation', () => {
             password: '123',
           },
         },
-        context
+        context,
       )
       expect(result).toMatchInlineSnapshot(`
         {
