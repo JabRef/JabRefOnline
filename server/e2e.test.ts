@@ -9,7 +9,10 @@ describe('index page', () => {
 
 describe('download', () => {
   it('redirects to fosshub', async () => {
-    const response = await root().get('/download')
+    const response = (await root().get('/download')) as {
+      statusCode: number
+      headers: { location: string }
+    }
     expect(response.statusCode).toBe(302)
     expect(response.headers.location).toBe(
       'https://www.fosshub.com/JabRef.html',
