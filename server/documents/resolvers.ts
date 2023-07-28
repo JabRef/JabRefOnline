@@ -60,7 +60,10 @@ const specialFields: string[] = [
 
 function convertDocumentInput(
   type: DocumentType,
-  document: AddJournalArticleInput | AddProceedingsArticleInput | AddThesisInput
+  document:
+    | AddJournalArticleInput
+    | AddProceedingsArticleInput
+    | AddThesisInput,
 ): UserDocumentCreateInput {
   /* TODO: Save those fields as well
   const special = document.fields
@@ -166,13 +169,13 @@ function convertDocumentInput(
 export class Query {
   constructor(
     @inject('UserDocumentService')
-    private userDocumentService: UserDocumentService
+    private userDocumentService: UserDocumentService,
   ) {}
 
   async userDocument(
     _root: Record<string, never>,
     { id }: QueryUserDocumentArgs,
-    _context: Context
+    _context: Context,
   ): Promise<UserDocument | null> {
     return await this.userDocumentService.getDocumentById(id, true)
   }
@@ -182,13 +185,13 @@ export class Query {
 export class Mutation {
   constructor(
     @inject('UserDocumentService')
-    private userDocumentService: UserDocumentService
+    private userDocumentService: UserDocumentService,
   ) {}
 
   async addUserDocument(
     _root: Record<string, never>,
     { input }: MutationAddUserDocumentArgs,
-    _context: Context
+    _context: Context,
   ): Promise<UserDocument | null> {
     const document =
       input.journalArticle ?? input.proceedingsArticle ?? input.thesis
@@ -197,12 +200,12 @@ export class Mutation {
       throw new Error('No document given')
     }
     return await this.userDocumentService.addDocument(
-      convertDocumentInput(documentType, document)
+      convertDocumentInput(documentType, document),
     )
   }
 
   private getDocumentType(
-    input: AddUserDocumentInput | UpdateUserDocumentInput
+    input: AddUserDocumentInput | UpdateUserDocumentInput,
   ): DocumentType | null {
     if (input.journalArticle) {
       return 'JOURNAL_ARTICLE'
@@ -217,7 +220,7 @@ export class Mutation {
   async updateUserDocument(
     _root: Record<string, never>,
     { input }: MutationUpdateUserDocumentArgs,
-    _context: Context
+    _context: Context,
   ): Promise<UserDocument | null> {
     const document =
       input.journalArticle ?? input.proceedingsArticle ?? input.thesis
@@ -230,7 +233,7 @@ export class Mutation {
     convertedDocument.id = input.id
     return await this.userDocumentService.updateDocument(
       input.id,
-      convertedDocument
+      convertedDocument,
     )
   }
 }
@@ -309,7 +312,7 @@ export class ProceedingsArticleResolver extends DocumentResolver {
 export class ThesisResolver extends DocumentResolver {
   institution(document: UserDocument): Institution | null {
     const institutionName = document.other?.find(
-      (field) => field.field === 'institution'
+      (field) => field.field === 'institution',
     )?.value
 
     if (institutionName) {

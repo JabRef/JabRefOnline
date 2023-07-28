@@ -246,7 +246,7 @@ describe('roundtrip', () => {
             "errors": undefined,
           },
         }
-      `
+      `,
       )
 
       if (addResult.body.kind !== 'single') {
@@ -336,7 +336,7 @@ describe('roundtrip', () => {
             "errors": undefined,
           },
         }
-      `
+      `,
       )
     })
     it('update user document + query', async () => {
@@ -441,7 +441,7 @@ describe('roundtrip', () => {
             "errors": undefined,
           },
         }
-      `
+      `,
       )
     })
   })

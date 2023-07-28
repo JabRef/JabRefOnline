@@ -30,7 +30,7 @@ export enum Environment {
  */
 function enumFromStringValue<T>(
   enm: { [s: string]: T },
-  value: string
+  value: string,
 ): T | undefined {
   return (Object.values(enm) as unknown as string[]).includes(value)
     ? (value as unknown as T)
@@ -71,7 +71,7 @@ export interface Config {
   }
 }
 
-export function constructConfig(): Config {
+export function constructConfig() {
   return {
     redis: {
       port: Number(process.env.REDIS_PORT) || 6380,
@@ -86,5 +86,5 @@ export function constructConfig(): Config {
     public: {
       environment: getEnvironment(),
     },
-  }
+  } satisfies Config
 }

@@ -35,7 +35,7 @@ type InjectionSymbol<T> = { sym: symbol; value: T | undefined }
  * https://github.com/microsoft/TypeScript/issues/26242
  */
 function injectSymbol<S extends string>(
-  name: S
+  name: S,
 ): <T>() => Record<S, InjectionSymbol<T>> {
   return <T>() => {
     const res = {} as Record<S, InjectionSymbol<T>>
@@ -105,13 +105,12 @@ type Token = keyof typeof InjectionSymbols
  * Depends on https://github.com/Microsoft/TypeScript/issues/30102 and/or https://github.com/microsoft/TypeScript/issues/43132.
  */
 export function inject(
-  token: Token
+  token: Token,
 ): (
   target: any,
   propertyKey: string | symbol | undefined,
-  parameterIndex: number
+  parameterIndex: number,
 ) => void {
-  // @ts-expect-error: https://github.com/microsoft/tsyringe/issues/221
   return tsyringeInject(InjectionSymbols[token].sym)
 }
 
@@ -128,7 +127,7 @@ const injectionSymbolToConstructor = new Map<symbol, constructor<any>>()
  * @return An instance of the dependency.
  */
 export function resolve<T extends Token>(
-  token: T
+  token: T,
 ): ValueOfSymbol<(typeof InjectionSymbols)[T]> {
   const symb = InjectionSymbols[token].sym
   // If explicitly registered, use that
@@ -167,7 +166,7 @@ type ConstructableSymbols = {
  */
 export function fallback<T extends keyof ConstructableSymbols>(
   token: T,
-  target: TypeOfSymbol<ConstructableSymbols[T]>
+  target: TypeOfSymbol<ConstructableSymbols[T]>,
 ): void {
   injectionSymbolToConstructor.set(InjectionSymbols[token].sym, target)
 }
@@ -179,38 +178,38 @@ export function fallback<T extends keyof ConstructableSymbols>(
  */
 export function register<T extends Token>(
   token: T,
-  provider: ValueProvider<ValueOfToken<T>>
+  provider: ValueProvider<ValueOfToken<T>>,
 ): DependencyContainer
 export function register<T extends Token>(
   token: T,
-  provider: FactoryProvider<ValueOfToken<T>>
+  provider: FactoryProvider<ValueOfToken<T>>,
 ): DependencyContainer
 export function register<T extends Token>(
   token: T,
   provider: TokenProvider<ValueOfToken<T>>,
-  options?: RegistrationOptions
+  options?: RegistrationOptions,
 ): DependencyContainer
 export function register<T extends keyof ConstructableSymbols>(
   token: T,
   provider: ClassProvider<ValueOfToken<T>>,
-  options?: RegistrationOptions
+  options?: RegistrationOptions,
 ): DependencyContainer
 export function register<T extends keyof ConstructableSymbols>(
   token: T,
   provider: constructor<ValueOfToken<T>>,
-  options?: RegistrationOptions
+  options?: RegistrationOptions,
 ): DependencyContainer
 export function register<T extends Token>(
   token: T,
   providerOrConstructor:
     | Provider<ValueOfToken<T>>
     | constructor<ValueOfToken<T>>,
-  options: RegistrationOptions = { lifecycle: Lifecycle.Transient }
+  options: RegistrationOptions = { lifecycle: Lifecycle.Transient },
 ): DependencyContainer {
   return container.register(
     InjectionSymbols[token].sym,
     // @ts-expect-error: There is a problem with the overloads, don't know why
     providerOrConstructor,
-    options
+    options,
   )
 }

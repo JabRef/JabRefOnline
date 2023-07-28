@@ -115,10 +115,10 @@ export default defineComponent({
             cache,
             data?.signup?.__typename === 'UserReturned'
               ? data?.signup?.user
-              : null
+              : null,
           )
         },
-      })
+      }),
     )
     onDone(() => {
       void navigateTo({ path: '/dashboard' })

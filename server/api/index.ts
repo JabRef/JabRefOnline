@@ -22,7 +22,7 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
 
   // CHANGED: Extra logic to find kOutHeaders symbol in `this`
   const kOutHeaders = Object.getOwnPropertySymbols(this).find(
-    (sym) => sym.toString() === 'Symbol(kOutHeaders)'
+    (sym) => sym.toString() === 'Symbol(kOutHeaders)',
   )
 
   // @ts-expect-error: Is workaround anyway

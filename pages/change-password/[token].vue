@@ -81,7 +81,7 @@ export default defineComponent({
             newPassword: password.value,
           },
         },
-      })
+      }),
     )
     onDone(() => {
       void navigateTo({ name: 'user-login' })

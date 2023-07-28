@@ -5,7 +5,7 @@ import { AnyZodObject, TypeOf, ZodType } from 'zod'
 type MethodDecorator<T> = <S extends T>(
   target: any,
   propertyKey: string | symbol,
-  descriptor: TypedPropertyDescriptor<S>
+  descriptor: TypedPropertyDescriptor<S>,
 ) => TypedPropertyDescriptor<S> | void
 
 /**
@@ -17,7 +17,7 @@ type MethodDecorator<T> = <S extends T>(
  * @return {MethodDecorator} A {@link MethodDecorator}.
  */
 export function validation<T extends AnyZodObject>(
-  arg: T | (() => T)
+  arg: T | (() => T),
 ): MethodDecorator<(input: TypeOf<T>) => any> {
   return function (_target, _propertyKey, descriptor) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -49,7 +49,7 @@ type ZodResolver<T extends ZodType<any, any, any>> = ResolverFn<
  * @return {MethodDecorator} A {@link MethodDecorator}.
  */
 export function validateInput<T extends AnyZodObject>(
-  arg: T | (() => T)
+  arg: T | (() => T),
 ): MethodDecorator<ZodResolver<T>> {
   return function (_target, _propertyKey, descriptor) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -66,7 +66,7 @@ export function validateInput<T extends AnyZodObject>(
           root,
           { input: result.data },
           context,
-          info
+          info,
         )
       } else {
         return { problems: result.error.issues }

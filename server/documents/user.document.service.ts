@@ -66,7 +66,7 @@ export class UserDocumentService {
   getRevisionHash(
     document:
       | UserDocument
-      | (UserDocumentCreateInput & { revisionHash?: string })
+      | (UserDocumentCreateInput & { revisionHash?: string }),
   ): string {
     const { revisionNumber, revisionHash, ...documentWithoutRevision } =
       document
@@ -75,7 +75,7 @@ export class UserDocumentService {
 
   async getDocumentById(
     id: string,
-    includeOtherFields = false
+    includeOtherFields = false,
   ): Promise<UserDocument | null> {
     const document = await this.prisma.userDocument.findUnique({
       where: {
@@ -91,7 +91,7 @@ export class UserDocumentService {
     filterBy: DocumentFilters | null = null,
     first: number | null = null,
     after: string | null = null,
-    includeOtherFields = false
+    includeOtherFields = false,
   ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
     const cursor = after ? { id: after } : null
@@ -132,8 +132,8 @@ export class UserDocumentService {
           query.test(document.title ?? '') ||
           document.contributors.some((contributor) =>
             query.test(
-              contributor.entity.name ?? contributor.entity.family ?? ''
-            )
+              contributor.entity.name ?? contributor.entity.family ?? '',
+            ),
           )
         )
       })
@@ -154,7 +154,7 @@ export class UserDocumentService {
     user: User | string,
     first: number | null = null,
     after: UserChangesCursorInput | null = null,
-    includeOtherFields = false
+    includeOtherFields = false,
   ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
     const documents = await this.prisma.userDocument.findMany({
@@ -181,7 +181,7 @@ export class UserDocumentService {
   }
 
   async addDocument(
-    document: UserDocumentCreateInput
+    document: UserDocumentCreateInput,
   ): Promise<UserDocument | null> {
     const data = {
       ...document,
@@ -210,7 +210,7 @@ export class UserDocumentService {
 
   async updateDocument(
     id: string,
-    document: UserDocumentUpdateInput
+    document: UserDocumentUpdateInput,
   ): Promise<UserDocument | null> {
     await this.prisma.documentContributor.deleteMany({
       where: {

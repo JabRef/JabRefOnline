@@ -95,7 +95,7 @@ describe('get document by id', () => {
     prisma.userDocument.findUnique.mockResolvedValue(testDocument)
 
     const actualDocument = await userDocumentService.getDocumentById(
-      testDocument.id
+      testDocument.id,
     )
     expect(actualDocument).toEqual(testDocument)
     expect(prisma.userDocument.findUnique).toBeCalledWith({
