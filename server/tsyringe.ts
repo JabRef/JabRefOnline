@@ -16,6 +16,8 @@ import type * as DocumentResolvers from './documents/resolvers'
 import type { UserDocumentService } from './documents/user.document.service'
 import type * as GroupResolvers from './groups/resolvers'
 import type { GroupService } from './groups/service'
+import type { JournalService } from './journals/journal.service'
+import type * as JournalResolvers from './journals/resolvers'
 import type { AuthService } from './user/auth.service'
 import type PassportInitializer from './user/passport-initializer'
 import type * as UserResolvers from './user/resolvers'
@@ -51,6 +53,7 @@ export const InjectionSymbols = {
   ...injectSymbol('UserDocumentService')<typeof UserDocumentService>(),
   ...injectSymbol('AuthService')<typeof AuthService>(),
   ...injectSymbol('GroupService')<typeof GroupService>(),
+  ...injectSymbol('JournalService')<typeof JournalService>(),
   // Resolvers
   ...injectSymbol('DocumentQuery')<typeof DocumentResolvers.Query>(),
   ...injectSymbol('DocumentMutation')<typeof DocumentResolvers.Mutation>(),
@@ -69,6 +72,9 @@ export const InjectionSymbols = {
   ...injectSymbol('GroupQuery')<typeof GroupResolvers.Query>(),
   ...injectSymbol('GroupMutation')<typeof GroupResolvers.Mutation>(),
   ...injectSymbol('GroupResolver')<typeof GroupResolvers.GroupResolver>(),
+
+  ...injectSymbol('JournalQuery')<typeof JournalResolvers.Query>(),
+  ...injectSymbol('JournalResolver')<typeof JournalResolvers.JournalResolver>(),
 
   ...injectSymbol('UserQuery')<typeof UserResolvers.Query>(),
   ...injectSymbol('UserMutation')<typeof UserResolvers.Mutation>(),

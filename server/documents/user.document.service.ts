@@ -22,7 +22,7 @@ import { inject, injectable } from './../tsyringe'
 
 export type UserDocument = PlainUserDocument & {
   other?: UserDocumentOtherField[]
-  journalIssue?:
+  journalIssue:
     | (JournalIssue & {
         journal: Journal | null
       })

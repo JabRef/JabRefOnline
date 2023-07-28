@@ -21,7 +21,8 @@
             "scalars": {
               "Date": "Date",
               "DateTime": "Date",
-              "EmailAddress": "string"
+              "EmailAddress": "string",
+              "BigInt": "BigInt"
             }
           }
         },
@@ -42,7 +43,8 @@
             "scalarSchemas": {
               "Date": "z.date()",
               "DateTime": "z.date()",
-              "EmailAddress": "z.string().email()"
+              "EmailAddress": "z.string().email()",
+              "BigInt": "z.bigint()"
             },
             "importFrom": "~/apollo/graphql",
             "validationSchemaExportType": "const"

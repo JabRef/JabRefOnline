@@ -18,8 +18,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
-    moduleSideEffects: ['reflect-metadata'],
+    // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
+    moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
       // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],

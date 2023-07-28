@@ -8,6 +8,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
   await prisma.user.deleteMany({})
   await prisma.userDocument.deleteMany({})
   await prisma.userDocumentOtherField.deleteMany({})
+  await prisma.journalCitationInfoYearly.deleteMany({})
   await prisma.journal.deleteMany({})
   await prisma.journalIssue.deleteMany({})
   await prisma.group.deleteMany({})
@@ -90,6 +91,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
             create: {
               id: 'ckslj094u000309jvdpng93mk',
               name: 'Circulation',
+              isCustom: true,
             },
           },
           volume: '119',
@@ -99,7 +101,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       pageStart: '1433',
       pageEnd: '1441',
       publishedAt: '2009',
-      revisionHash: 'd1265c25d1d45905fc832b9185273aa8',
+      revisionHash: 'a574258637e9c610636f8c0941734a8a',
       lastModified: '2021-01-01T00:00:00.000Z',
       added: '2000-01-01T00:00:00.000Z',
     },
@@ -172,6 +174,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
             create: {
               id: 'ckslj1heh000709jv5ja9dcyn',
               name: 'British Journal of Nutrition',
+              isCustom: true,
             },
           },
           volume: '99',
@@ -181,7 +184,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       pageStart: '1',
       pageEnd: '11',
       publishedAt: '2008',
-      revisionHash: '9c32fd7b106729e7c68275f4e80c178c',
+      revisionHash: 'd8d6128eaadb987b3c7da7c3c2ece0e9',
       lastModified: '2021-05-28T12:00:00.000Z',
       added: '2000-01-01T00:00:00.000Z',
     },
@@ -258,6 +261,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
             create: {
               id: 'ckslj2ca3000b09jvdmyj6552',
               name: 'Nutrition & Metabolism',
+              isCustom: true,
             },
           },
           volume: '3',
@@ -265,7 +269,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
         },
       },
       publishedAt: '2006',
-      revisionHash: '837cd3388b8dcf732f3d1d9dde4d71a0',
+      revisionHash: '348b9cc86344780ad3b0cd3b9dcc20e6',
       lastModified: '2022-01-01T00:00:00.000Z',
       added: '2000-01-01T00:00:00.000Z',
     },
@@ -326,6 +330,50 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
             create: {
               id: 'ckslj3f10000f09jvc1xifgi9',
               name: 'Antioxidants & Redox Signaling',
+              isCustom: false,
+              issn: ['15230864', '15577716'],
+              scimagoId: 27514,
+              country: 'United States',
+              publisher: 'Mary Ann Liebert Inc.',
+              categories: [
+                'Biochemistry (Q1)',
+                'Cell Biology (Q1)',
+                'Clinical Biochemistry (Q1)',
+                'Medicine (miscellaneous) (Q1)',
+                'Molecular Biology (Q1)',
+                'Physiology (Q1)',
+              ],
+              areas: [
+                'Biochemistry, Genetics and Molecular Biology',
+                'Medicine',
+              ],
+              citationInfo: {
+                create: [
+                  {
+                    year: 2022,
+                    docsThisYear: 217,
+                    docsPrevious3Years: 488,
+                    citableDocsPrevious3Years: 487,
+                    citesOutgoing: 19202,
+                    citesOutgoingPerDoc: 130.63,
+                    citesIncomingByRecentlyPublished: 3692,
+                    citesIncomingPerDocByRecentlyPublished: 7.21,
+                    sjrIndex: 1.706,
+                  },
+                  {
+                    year: 2021,
+                    docsThisYear: 158,
+                    docsPrevious3Years: 530,
+                    citableDocsPrevious3Years: 530,
+                    citesOutgoing: 24155,
+                    citesOutgoingPerDoc: 152.88,
+                    citesIncomingByRecentlyPublished: 4724,
+                    citesIncomingPerDocByRecentlyPublished: 7.59,
+                    sjrIndex: 1.832,
+                  },
+                ],
+              },
+              hIndex: 217,
             },
           },
           volume: '15',
@@ -335,7 +383,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       pageStart: '2779',
       pageEnd: '2811',
       publishedAt: '2011',
-      revisionHash: 'a751c468e36521f98fb7fb4aac3042c8',
+      revisionHash: 'eaf18ca3259f277a05a8790df6bca28f',
       lastModified: '2020-12-01T00:00:00.000Z',
       added: '2000-01-01T00:00:00.000Z',
     },
