@@ -1,6 +1,10 @@
 import { Resolvers } from '#graphql/resolver'
 import { mergeResolvers } from '@graphql-tools/merge'
-import { DateTimeResolver, EmailAddressResolver } from 'graphql-scalars'
+import {
+  DateTimeResolver,
+  EmailAddressResolver,
+  BigIntResolver,
+} from 'graphql-scalars'
 import { resolvers as documentResolvers } from './documents/resolvers'
 import { resolvers as groupResolvers } from './groups/resolvers'
 import { resolvers as journalResolvers } from './journals/resolvers'
@@ -16,6 +20,7 @@ export function loadResolvers(): Resolvers {
       // Custom scalar types
       DateTime: DateTimeResolver,
       EmailAddress: EmailAddressResolver,
+      BigInt: BigIntResolver,
     },
   ])
 }

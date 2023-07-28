@@ -81,6 +81,13 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
   return this
 }
 
+// Fix for BigInt not being supported by JSON.stringify by default
+// @ts-expect-error: we add json stringify to BigInt
+// eslint-disable-next-line no-extend-native
+BigInt.prototype.toJSON = function () {
+  return this.toString()
+}
+
 export default defineLazyEventHandler(async () => {
   const server = new ApolloServer<Context>({
     schema: await loadSchemaWithResolvers(),
