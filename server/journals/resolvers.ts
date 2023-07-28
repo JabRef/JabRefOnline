@@ -7,7 +7,7 @@ import { JournalService } from './journal.service'
 export class JournalResolver {
   constructor(
     @inject('JournalService')
-    private journalService: JournalService
+    private journalService: JournalService,
   ) {}
 
   async citationInfo(journal: Journal) {
@@ -19,13 +19,13 @@ export class JournalResolver {
 export class Query {
   constructor(
     @inject('JournalService')
-    private journalService: JournalService
+    private journalService: JournalService,
   ) {}
 
   async journal(
     _root: Record<string, never>,
     { id, issn, name }: QueryJournalArgs,
-    _context: Context
+    _context: Context,
   ): Promise<Journal | null> {
     if (id) {
       return await this.journalService.getJournalById(id)
