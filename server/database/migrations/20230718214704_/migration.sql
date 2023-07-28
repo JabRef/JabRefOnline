@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Journal" ALTER COLUMN "scimagoId" SET DATA TYPE BIGINT;

@@ -116,7 +116,7 @@ model Journal {
   subtitle String?
   titleAddon String?
   issn String[]
-  scimagoId Int?
+  scimagoId BigInt? @unique
   country String?
   publisher String?
   areas String[]
