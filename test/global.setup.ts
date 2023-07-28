@@ -2,6 +2,7 @@
 import prisma from '@prisma/client'
 import 'dotenv/config'
 import 'reflect-metadata'
+import 'json-bigint-patch'
 import { beforeAll } from 'vitest'
 import { constructConfig } from '~/config'
 import { register } from '~/server/tsyringe'

@@ -5,6 +5,7 @@ import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
 import http from 'http'
 import 'reflect-metadata' // Needed for tsyringe
+import 'json-bigint-patch' // Needed for bigint support in JSON
 import { buildContext, Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
 
@@ -79,13 +80,6 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
   dest.emit('unpipe', this, unpipeInfo)
 
   return this
-}
-
-// Fix for BigInt not being supported by JSON.stringify by default
-// @ts-expect-error: we add json stringify to BigInt
-// eslint-disable-next-line no-extend-native
-BigInt.prototype.toJSON = function () {
-  return this.toString()
 }
 
 export default defineLazyEventHandler(async () => {
