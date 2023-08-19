@@ -102,6 +102,7 @@ jobs:
           az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output/server.zip
         shell: pwsh
       - name: Check HTTP status
+        shell: pwsh
         run: |
           Start-Sleep -Seconds 30
           curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.url }} || true
@@ -130,7 +131,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
 
     strategy:
       fail-fast: false
