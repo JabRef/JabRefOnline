@@ -127,7 +127,7 @@ jobs:
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
 
-    runs-on: ubuntu-lateset
+    runs-on: ubuntu-latest
 
     if: github.event_name == 'push'
 
