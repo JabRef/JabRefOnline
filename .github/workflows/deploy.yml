@@ -17,7 +17,7 @@ jobs:
   pr_preview:
     name: Build & Deploy to PR preview
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
 
@@ -69,6 +69,7 @@ jobs:
           echo "url=$url" >> $env:GITHUB_OUTPUT
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+        shell: pwsh   
 
       - name: Install Python
         uses: actions/setup-python@v4
@@ -85,20 +86,20 @@ jobs:
           az extension add --name rdbms-connect --version 1.0.3 --debug
           az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "GRANT CREATE ON DATABASE $name TO azure_pg_admin; create schema public;" --output table
           yarn prisma:migrate:reset --force
-
+        shell: pwsh
       - name: Create & Link Function App
         run: |
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env ${{ github.event.pull_request.number }}
+          python .github/scripts/deploy.py --env ${{ github.event.pull_request.number }}
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Function App
         run: |
-          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output\server.zip
-
+          Compress-Archive -Path .output/server/* -DestinationPath .output/server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output/server.zip
+        shell: pwsh
       - name: Check HTTP status
         run: |
           Start-Sleep -Seconds 30
@@ -126,7 +127,7 @@ jobs:
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     if: github.event_name == 'push'
 
@@ -188,7 +189,7 @@ jobs:
           # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
           az staticwebapp environment delete --name jabref-online --environment-name ${{ matrix.deployment_environment }} --yes || true
 
-          yarn swa deploy .output\public --env ${{ matrix.deployment_environment }}
+          yarn swa deploy .output/public --env ${{ matrix.deployment_environment }}
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
@@ -200,16 +201,16 @@ jobs:
       - name: Create & Link Function App
         run: |
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }}
+          python .github/scripts/deploy.py --env ${{ matrix.deployment_environment }}
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Function App
         run: |
-          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output\server.zip
-
+          Compress-Archive -Path .output/server/* -DestinationPath .output/server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output/server.zip
+        shell: pwsh
       - name: Check HTTP status
         run: |
           Start-Sleep -Seconds 30
