@@ -69,6 +69,7 @@
           <li class="py-1">
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
+              href=""
               @click="showLegalNotices = true"
             >
               Legal Notices
@@ -78,6 +79,7 @@
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
               @click="showPrivacyPolicy = true"
+              href=""
             >
               Privacy Policy
             </t-nuxtlink>
@@ -147,9 +149,9 @@
           <li class="py-1">
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
-              href="https://twitter.com/JabRef_org"
+              rel="me" href="https://foojay.social/@jabref">Mastodon</a>
             >
-              Twitter
+              Mastodon
             </t-nuxtlink>
           </li>
           <li class="py-1">
