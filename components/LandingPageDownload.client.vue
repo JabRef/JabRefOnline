@@ -30,7 +30,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://www.fosshub.com/JabRef.html"
               >mac OS X and Linux</t-nuxtlink
             >
             <br />
@@ -41,7 +41,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://www.fosshub.com/JabRef.html"
               >Windows and Linux</t-nuxtlink
             >
             <br />
@@ -52,7 +52,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://www.fosshub.com/JabRef.html"
             >
               mac OS X and Windows
             </t-nuxtlink>
