@@ -149,7 +149,7 @@
           <li class="py-1">
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
-              rel="me" href="https://foojay.social/@jabref">Mastodon</a>
+              rel="me" href="https://foojay.social/@jabref">
             >
               Mastodon
             </t-nuxtlink>
