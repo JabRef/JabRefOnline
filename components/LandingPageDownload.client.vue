@@ -17,7 +17,7 @@
           >
             <a
               class="text-2xl"
-              :href="https://www.fosshub.com/JabRef.html"
+              href="https://www.fosshub.com/JabRef.html"
               >Download JabRef</a
             >
           </n-button>
