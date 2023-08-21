@@ -77,7 +77,7 @@
                 <ClientOnly>
                   <a
                     class="text-2xl"
-                    :href="constructDownloadUrl()"
+                    href="https://www.fosshub.com/JabRef.html"
                     >Download JabRef</a
                   >
                 </ClientOnly>
