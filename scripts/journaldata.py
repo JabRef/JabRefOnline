@@ -33,6 +33,7 @@ from pathlib import Path
 
 from prisma import Prisma
 from prisma.types import JournalCitationInfoYearlyCreateWithoutRelationsInput
+from tqdm import tqdm
 
 # current_year should be the latest year of data available at https://www.scimagojr.com/journalrank.php
 current_year = 2022
@@ -137,8 +138,7 @@ def download_all_data():
 def combine_data():
     """Iterate over files and return the consolidated dataset"""
     journals: dict[int, JournalInfo] = {}
-    for year in range(start_year, current_year + 1):
-        print(f'Processing {year}')
+    for year in tqdm(range(start_year, current_year + 1), desc='Processing data'):
         filepath = get_data_filepath(year)
         with open(filepath, mode='r', encoding='utf-8') as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=';')
@@ -212,7 +212,7 @@ async def dump_into_database(journals: dict[int, JournalInfo]):
     # delete all existing yearly data (because its easier than updating)
     await db.journalcitationinfoyearly.delete_many()
 
-    for journal in journals.values():
+    for journal in tqdm(journals.values(), desc='Saving to database'):
         citation_info: list[JournalCitationInfoYearlyCreateWithoutRelationsInput] = [
             {
                 'year': year,
