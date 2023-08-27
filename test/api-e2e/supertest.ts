@@ -5,7 +5,7 @@ import supertestGraphql, {
   Variables,
 } from 'supertest-graphql'
 
-const url = process.env.TEST_URL || 'http://localhost:3000'
+const url = process.env.TEST_URL ?? 'http://localhost:3000'
 
 export function api(): SuperTestGraphQL<unknown, Variables> {
   return supertestGraphql(url).path('/api')

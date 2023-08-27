@@ -4,8 +4,8 @@ import type { RouterConfig } from '@nuxt/schema'
 // ex: <NuxtLink to="#top"> To Top </NuxtLink>
 // https://github.com/nuxt/framework/discussions/5561
 // https://router.vuejs.org/api/#routeroptions
-export default <RouterConfig>{
-  scrollBehavior: (to, from, savedPosition) => {
+export default {
+  scrollBehavior: (to) => {
     if (to.hash) {
       return {
         el: to.hash,
@@ -13,4 +13,4 @@ export default <RouterConfig>{
       }
     }
   },
-}
+} as RouterConfig

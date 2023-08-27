@@ -118,7 +118,7 @@ export default defineComponent({
     const groups = useResult(
       result,
       null,
-      (data) => data?.me?.groups,
+      (data) => data.me.groups,
     ) as unknown as any[]
 
     const uiStore = useUiStore()

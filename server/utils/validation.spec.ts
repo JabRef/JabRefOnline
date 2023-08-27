@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { z } from 'zod'
 import { validateInput, validation } from './validation'
 

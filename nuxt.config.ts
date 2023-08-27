@@ -238,8 +238,8 @@ export default defineNuxtConfig({
         ? {
             // Gitpod is served over https, so we need to use wss as well
             protocol: 'wss',
-            host: `3000-${process.env.GITPOD_WORKSPACE_ID || ''}.${
-              process.env.GITPOD_WORKSPACE_CLUSTER_HOST || ''
+            host: `3000-${process.env.GITPOD_WORKSPACE_ID ?? ''}.${
+              process.env.GITPOD_WORKSPACE_CLUSTER_HOST ?? ''
             }`,
             port: 443,
           }

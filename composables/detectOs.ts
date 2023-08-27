@@ -10,7 +10,7 @@ export function detectOs() {
     return 'mac'
   } else if (windowsPlatforms.includes(platform)) {
     return 'windows'
-  } else if (/Linux/.test(platform)) {
+  } else if (platform.includes('Linux')) {
     return 'linux'
   }
 }

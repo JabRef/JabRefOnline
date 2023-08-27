@@ -5,7 +5,7 @@ import { Context } from '~/server/context'
 import { loadSchemaWithResolvers } from '~/server/schema'
 import { resolve } from '~/server/tsyringe'
 
-export type ApolloClient = {
+export interface ApolloClient {
   executeOperation<
     TData = Record<string, unknown>,
     TVariables extends VariableValues = VariableValues,

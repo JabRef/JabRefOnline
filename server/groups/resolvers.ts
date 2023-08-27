@@ -92,6 +92,7 @@ export class Mutation {
       isRegEx = group.searchGroup.isRegEx
     } else if (group.texGroup) {
       type = GroupType.TexGroup
+      // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars --- TODO: handle paths
       paths = group.texGroup.paths
     }
 

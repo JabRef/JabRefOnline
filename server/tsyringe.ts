@@ -25,7 +25,10 @@ import { RedisClient } from './utils/services.factory'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
 
-type InjectionSymbol<T> = { sym: symbol; value: T | undefined }
+interface InjectionSymbol<T> {
+  sym: symbol
+  value: T | undefined
+}
 
 /**
  * Define a new injection token.
@@ -178,11 +181,7 @@ export function fallback<T extends keyof ConstructableSymbols>(
  */
 export function register<T extends Token>(
   token: T,
-  provider: ValueProvider<ValueOfToken<T>>,
-): DependencyContainer
-export function register<T extends Token>(
-  token: T,
-  provider: FactoryProvider<ValueOfToken<T>>,
+  provider: ValueProvider<ValueOfToken<T>> | FactoryProvider<ValueOfToken<T>>,
 ): DependencyContainer
 export function register<T extends Token>(
   token: T,
@@ -191,12 +190,7 @@ export function register<T extends Token>(
 ): DependencyContainer
 export function register<T extends keyof ConstructableSymbols>(
   token: T,
-  provider: ClassProvider<ValueOfToken<T>>,
-  options?: RegistrationOptions,
-): DependencyContainer
-export function register<T extends keyof ConstructableSymbols>(
-  token: T,
-  provider: constructor<ValueOfToken<T>>,
+  provider: ClassProvider<ValueOfToken<T>> | constructor<ValueOfToken<T>>,
   options?: RegistrationOptions,
 ): DependencyContainer
 export function register<T extends Token>(
