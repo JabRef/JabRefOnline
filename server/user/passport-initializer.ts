@@ -30,6 +30,7 @@ export default class PassportInitializer {
 
     // TODO: Use redis store also for development as soon as mock-redis is compatible with redis v4
     let store: session.Store
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison --- bug in nuxt?
     if (config.public.environment === Environment.Production) {
       store = new RedisStore({
         client: this.redisClient,
@@ -54,6 +55,7 @@ export default class PassportInitializer {
       name: 'session',
       cookie: {
         // Serve secure cookies (requires HTTPS, so only in production)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison --- bug in nuxt?
         secure: config.public.environment === Environment.Production,
         // Blocks the access cookie from javascript, preventing XSS attacks
         httpOnly: true,

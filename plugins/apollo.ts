@@ -18,6 +18,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // Print errors
   const errorLink = onError((error) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison --- bug in nuxt?
     if (config.public.environment !== Environment.Production) {
       logErrorMessages(error)
     }

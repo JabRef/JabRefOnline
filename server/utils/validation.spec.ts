@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { z } from 'zod'
 import { validateInput, validation } from './validation'
 
@@ -8,18 +9,18 @@ const schema = z.object({
 
 class Test {
   @validation(schema)
-  hello(_input: { name: string; age: number }) {
+  hello(input: { name: string; age: number }) {
     return 'test'
   }
 
   // @ts-expect-error: This should fail because the argument type does not match the schema.
   @validation(schema)
-  not_matching(_input: { nothing: string }) {
+  not_matching(input: { nothing: string }) {
     return 'test'
   }
 
   @validation(() => schema)
-  with_factory(_input: { name: string; age: number }) {
+  with_factory(input: { name: string; age: number }) {
     return 'test'
   }
 }
@@ -47,7 +48,7 @@ class TestResolver {
   @validateInput(schema)
   hello(
     _root: Record<string, never>,
-    { _input }: { _input: { name: string; age: number } },
+    { input }: { input: { name: string; age: number } },
     _context: Record<string, never>,
   ): string {
     return 'test'
@@ -55,21 +56,21 @@ class TestResolver {
 
   @validateInput(schema)
   without_root_and_context({
-    _input,
+    input,
   }: {
-    _input: { name: string; age: number }
+    input: { name: string; age: number }
   }): string {
     return 'test'
   }
 
   // @ts-expect-error: This should fail because the argument type does not match the schema.
   @validation(schema)
-  not_matching(_input: { nothing: string }) {
+  not_matching(input: { nothing: string }) {
     return 'test'
   }
 
   @validation(() => schema)
-  with_factory(_input: { name: string; age: number }) {
+  with_factory(input: { name: string; age: number }) {
     return 'test'
   }
 }
@@ -78,11 +79,11 @@ const testResolver = new TestResolver()
 describe('validated resolver', () => {
   it('returns function value if args are valid', () => {
     expect(
-      testResolver.hello({}, { _input: { name: 'test', age: 18 } }, {}),
+      testResolver.hello({}, { input: { name: 'test', age: 18 } }, {}),
     ).toBe('test')
   })
   it('returns issues if args are invalid', () => {
-    expect(testResolver.hello({}, { _input: { name: 'test', age: 17 } }, {}))
+    expect(testResolver.hello({}, { input: { name: 'test', age: 17 } }, {}))
       .toMatchInlineSnapshot(`
         {
           "problems": [
