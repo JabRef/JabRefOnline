@@ -3,6 +3,6 @@
 export default defineNuxtPlugin((nuxtApp) => {
   // Register a global custom directive called `v-focus` that auto-focuses the given element
   nuxtApp.vueApp.directive('focus', {
-    mounted: (element: HTMLElement) => element.focus(),
+    mounted: (element: HTMLElement) => { element.focus(); },
   })
 })

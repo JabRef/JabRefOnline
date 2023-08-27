@@ -61,6 +61,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
     state.pipes = []
     this.pause()
 
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < dests.length; i++)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       dests[i].emit('unpipe', this, { hasUnpiped: false })

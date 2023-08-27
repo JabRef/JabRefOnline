@@ -7,6 +7,7 @@ import { Environment } from '~/config'
 import { cache } from '../apollo/cache'
 
 export default defineNuxtPlugin((nuxtApp) => {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!nuxtApp) {
     // For some strange reason, nuxtApp is not defined for storybook, so don't do anything in this case
     return

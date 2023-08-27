@@ -21,9 +21,7 @@ export default defineComponent({
       default: 'input',
     },
     settings: {
-      type: Object as PropType<
-        Tagify.TagifyConstructorSettings<Tagify.TagData>
-      >,
+      type: Object as PropType<Tagify.TagifyConstructorSettings>,
       default: () => ({}),
     },
     value: {
@@ -57,10 +55,10 @@ export default defineComponent({
   },
   mounted() {
     // Install tagify
-    const tagifySettings: Tagify.TagifyConstructorSettings<Tagify.TagData> = {
+    const tagifySettings: Tagify.TagifyConstructorSettings = {
       delimiters: this.delimiters,
       whitelist: this.whitelist,
-      ...(this.settings ?? []),
+      ...this.settings,
     }
     if (this.tagClass) {
       if (tagifySettings.classNames) {
@@ -85,7 +83,7 @@ export default defineComponent({
       // Update value prop
       this.$emit(
         'input',
-        (event.target as HTMLInputElement | null)?.value || [],
+        (event.target as HTMLInputElement | null)?.value ?? [],
       )
     },
   },

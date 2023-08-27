@@ -218,7 +218,7 @@ const authors = computed({
           ? formatAuthor(useFragment(PersonFullDetails, author))
           : '',
     })),
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -229,7 +229,7 @@ const keywords = computed({
     document.value?.keywords.map((keyword) => ({
       value: keyword,
     })),
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -246,7 +246,7 @@ const externalLinks = computed(() => [
 
 const title = computed({
   get: () => document.value?.title,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -255,7 +255,7 @@ const published = computed({
     document.value && 'published' in document.value
       ? document.value.published
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -265,9 +265,9 @@ const journal = computed({
     'in' in document.value &&
     document.value.in &&
     'journal' in document.value.in
-      ? document.value.in?.journal?.name
+      ? document.value.in.journal?.name
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -277,9 +277,9 @@ const volume = computed({
     'in' in document.value &&
     document.value.in &&
     'volume' in document.value.in
-      ? document.value.in?.volume
+      ? document.value.in.volume
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -289,9 +289,9 @@ const issue = computed({
     'in' in document.value &&
     document.value.in &&
     'number' in document.value.in
-      ? document.value.in?.number
+      ? document.value.in.number
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -301,7 +301,7 @@ const pages = computed({
       ? (document.value.pageStart ?? '') +
         (document.value.pageEnd ? '-' + document.value.pageEnd : '')
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -310,7 +310,7 @@ const abstract = computed({
     document.value && 'abstract' in document.value
       ? document.value.abstract
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })

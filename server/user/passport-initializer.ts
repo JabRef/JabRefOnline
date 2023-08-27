@@ -17,12 +17,12 @@ export default class PassportInitializer {
 
   initialize(): void {
     passport.use(new EmailStrategy(this.accountService))
-    passport.serializeUser<string>((user, done) =>
-      this.serializeUser(user, done),
-    )
-    passport.deserializeUser<string>((id, done) =>
-      this.deserializeUser(id, done),
-    )
+    passport.serializeUser<string>((user, done) => {
+      this.serializeUser(user, done)
+    })
+    passport.deserializeUser<string>((id, done) => {
+      this.deserializeUser(id, done)
+    })
   }
 
   createHandler(): EventHandler {
@@ -96,12 +96,14 @@ export default class PassportInitializer {
     this.accountService
       .getUserById(id)
       .then((user) => {
-        if (user === undefined) {
+        if (user === null) {
           done("account doesn't exist", undefined)
         } else {
           done(null, user)
         }
       })
-      .catch((error) => done(error, null))
+      .catch((error) => {
+        done(error, null)
+      })
   }
 }
