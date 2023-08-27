@@ -53,6 +53,9 @@ export function validateInput<T extends AnyZodObject>(
 ): MethodDecorator<ZodResolver<T>> {
   return function (_target, _propertyKey, descriptor) {
     const originalMethod = descriptor.value
+    if (!originalMethod) {
+      throw new Error('validateInput can only be used on methods')
+    }
     // @ts-expect-error: should be fine
     descriptor.value = function (root, { input }, context, info) {
       const schema = typeof arg === 'function' ? arg() : arg
