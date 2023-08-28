@@ -18,8 +18,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
-    moduleSideEffects: ['reflect-metadata'],
+    // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
+    moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
       // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],
@@ -114,7 +114,7 @@ export default defineNuxtConfig({
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // Add support for naive-ui
-    '@huntersofbook/naive-ui-nuxt',
+    '@bg-dev/nuxt-naiveui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -168,7 +168,7 @@ export default defineNuxtConfig({
   // storybook: {},
 
   tailwindcss: {
-    // Expose config so that we can use it in the vscode extension
+    // Expose config so that we can use it to configure naive ui and in the vscode extension
     exposeConfig: true,
   },
 
@@ -201,20 +201,6 @@ export default defineNuxtConfig({
     markdown: {
       // Don't automatically print h2-h4 headings as links
       anchorLinks: false,
-    },
-  },
-
-  /**
-   * Naive UI configuration
-   */
-  naiveUI: {
-    themeOverrides: {
-      common: {
-        primaryColor: '#6072A7',
-        primaryColorHover: '#4F5F8F',
-        primaryColorPressed: '#3B476B',
-        primaryColorSuppl: '#4F5F8F',
-      },
     },
   },
 
@@ -252,8 +238,8 @@ export default defineNuxtConfig({
         ? {
             // Gitpod is served over https, so we need to use wss as well
             protocol: 'wss',
-            host: `3000-${process.env.GITPOD_WORKSPACE_ID || ''}.${
-              process.env.GITPOD_WORKSPACE_CLUSTER_HOST || ''
+            host: `3000-${process.env.GITPOD_WORKSPACE_ID ?? ''}.${
+              process.env.GITPOD_WORKSPACE_CLUSTER_HOST ?? ''
             }`,
             port: 443,
           }

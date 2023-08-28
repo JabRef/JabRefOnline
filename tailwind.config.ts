@@ -18,7 +18,7 @@ const flip = plugin(({ addUtilities }) => {
   })
 })
 
-export default <Config>{
+export default {
   content: [`components/**/*.{vue,js}`, `layouts/**/*.vue`, `pages/**/*.vue`],
   plugins: [forms, flip, typography],
   theme: {
@@ -59,4 +59,4 @@ export default <Config>{
       }),
     },
   },
-}
+} as Config

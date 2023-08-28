@@ -40,6 +40,7 @@ export function renderToCanvas(
 ): void {
   const element = storyFn()
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!element) {
     showError({
       title: `Expecting a Vue component from the story: "${name}" of "${title}".`,

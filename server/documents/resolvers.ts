@@ -26,6 +26,7 @@ import {
 } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const specialFields: string[] = [
   'author',
   'editor',
@@ -131,7 +132,8 @@ function convertDocumentInput(
             name: document.in.journal.name,
             subtitle: document.in.journal.subtitle,
             titleAddon: document.in.journal.titleAddon,
-            issn: document.in.journal.issn,
+            issn: document.in.journal.issn ?? [],
+            isCustom: true,
           },
         },
         title: document.in.title,
@@ -254,26 +256,22 @@ export class DocumentResolver {
   }
 
   authors(document: UserDocument): (Person | Organization)[] {
-    if (document.contributors) {
-      // TODO: Already store authors separately on save?
-      return document.contributors
-        .filter((contributor) => contributor.role === 'AUTHOR')
-        .sort((a, b) => a.position - b.position)
-        .map((contributor) => {
-          return contributor.entity.type === 'PERSON'
-            ? {
-                ...contributor.entity,
-                __typename: 'Person',
-              }
-            : {
-                id: contributor.entity.id,
-                name: contributor.entity.name ?? '',
-                __typename: 'Organization',
-              }
-        })
-    } else {
-      return []
-    }
+    // TODO: Already store authors separately on save?
+    return document.contributors
+      .filter((contributor) => contributor.role === 'AUTHOR')
+      .sort((a, b) => a.position - b.position)
+      .map((contributor) => {
+        return contributor.entity.type === 'PERSON'
+          ? {
+              ...contributor.entity,
+              __typename: 'Person',
+            }
+          : {
+              id: contributor.entity.id,
+              name: contributor.entity.name ?? '',
+              __typename: 'Organization',
+            }
+      })
   }
 
   keywords(document: UserDocument): string[] {

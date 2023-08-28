@@ -16,6 +16,8 @@ import type * as DocumentResolvers from './documents/resolvers'
 import type { UserDocumentService } from './documents/user.document.service'
 import type * as GroupResolvers from './groups/resolvers'
 import type { GroupService } from './groups/service'
+import type { JournalService } from './journals/journal.service'
+import type * as JournalResolvers from './journals/resolvers'
 import type { AuthService } from './user/auth.service'
 import type PassportInitializer from './user/passport-initializer'
 import type * as UserResolvers from './user/resolvers'
@@ -23,7 +25,10 @@ import { RedisClient } from './utils/services.factory'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
 
-type InjectionSymbol<T> = { sym: symbol; value: T | undefined }
+interface InjectionSymbol<T> {
+  sym: symbol
+  value: T | undefined
+}
 
 /**
  * Define a new injection token.
@@ -51,6 +56,7 @@ export const InjectionSymbols = {
   ...injectSymbol('UserDocumentService')<typeof UserDocumentService>(),
   ...injectSymbol('AuthService')<typeof AuthService>(),
   ...injectSymbol('GroupService')<typeof GroupService>(),
+  ...injectSymbol('JournalService')<typeof JournalService>(),
   // Resolvers
   ...injectSymbol('DocumentQuery')<typeof DocumentResolvers.Query>(),
   ...injectSymbol('DocumentMutation')<typeof DocumentResolvers.Mutation>(),
@@ -69,6 +75,9 @@ export const InjectionSymbols = {
   ...injectSymbol('GroupQuery')<typeof GroupResolvers.Query>(),
   ...injectSymbol('GroupMutation')<typeof GroupResolvers.Mutation>(),
   ...injectSymbol('GroupResolver')<typeof GroupResolvers.GroupResolver>(),
+
+  ...injectSymbol('JournalQuery')<typeof JournalResolvers.Query>(),
+  ...injectSymbol('JournalResolver')<typeof JournalResolvers.JournalResolver>(),
 
   ...injectSymbol('UserQuery')<typeof UserResolvers.Query>(),
   ...injectSymbol('UserMutation')<typeof UserResolvers.Mutation>(),
@@ -172,11 +181,7 @@ export function fallback<T extends keyof ConstructableSymbols>(
  */
 export function register<T extends Token>(
   token: T,
-  provider: ValueProvider<ValueOfToken<T>>,
-): DependencyContainer
-export function register<T extends Token>(
-  token: T,
-  provider: FactoryProvider<ValueOfToken<T>>,
+  provider: ValueProvider<ValueOfToken<T>> | FactoryProvider<ValueOfToken<T>>,
 ): DependencyContainer
 export function register<T extends Token>(
   token: T,
@@ -185,12 +190,7 @@ export function register<T extends Token>(
 ): DependencyContainer
 export function register<T extends keyof ConstructableSymbols>(
   token: T,
-  provider: ClassProvider<ValueOfToken<T>>,
-  options?: RegistrationOptions,
-): DependencyContainer
-export function register<T extends keyof ConstructableSymbols>(
-  token: T,
-  provider: constructor<ValueOfToken<T>>,
+  provider: ClassProvider<ValueOfToken<T>> | constructor<ValueOfToken<T>>,
   options?: RegistrationOptions,
 ): DependencyContainer
 export function register<T extends Token>(

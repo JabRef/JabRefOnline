@@ -110,11 +110,36 @@ model JournalIssue {
 
 model Journal {
   id String @id @default(cuid())
+  isCustom Boolean
   issues JournalIssue[]
   name String
   subtitle String?
   titleAddon String?
-  issn String?
+  issn String[]
+  scimagoId BigInt? @unique
+  country String?
+  publisher String?
+  areas String[]
+  categories String[]
+  citationInfo JournalCitationInfoYearly[]
+  hIndex Int?
+}
+
+model JournalCitationInfoYearly { 
+  journalId String
+  journal Journal @relation(fields: [journalId], references: [id])
+  year Int
+
+  docsThisYear Int 
+  docsPrevious3Years Int
+  citableDocsPrevious3Years Int
+  citesOutgoing Int
+  citesOutgoingPerDoc Float
+  citesIncomingByRecentlyPublished Int
+  citesIncomingPerDocByRecentlyPublished Float
+  sjrIndex Float
+
+  @@id([journalId, year])
 }
 
 model UserDocumentOtherField {

@@ -5,6 +5,7 @@ import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
 import http from 'http'
 import 'reflect-metadata' // Needed for tsyringe
+import 'json-bigint-patch' // Needed for bigint support in JSON
 import { buildContext, Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
 
@@ -60,6 +61,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
     state.pipes = []
     this.pause()
 
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < dests.length; i++)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       dests[i].emit('unpipe', this, { hasUnpiped: false })
