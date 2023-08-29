@@ -8,34 +8,41 @@ on:
     types: [opened, synchronize, reopened, closed, labeled]
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      preview_name:
+        description: 'Name of the deployment environment'
+        type: string
+        required: true
 
 permissions:
   pull-requests: write
   id-token: write
 
 jobs:
-  pr_preview:
-    name: Build & Deploy to PR preview
+  preview:
+    name: Build & Deploy to preview
 
     runs-on: windows-latest
 
-    if: github.event_name == 'pull_request_target' && github.event.action != 'closed'
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request_target' && github.event.action != 'closed')
 
     env:
-      DATABASE_URL: ${{ format(secrets.AZURE_PR_DATABASE_URL, github.event.pull_request.number) }}
+      PREVIEW_NAME: ${{ github.event.pull_request.number || github.event.inputs.preview_name }}
+      DATABASE_URL: ${{ format(secrets.AZURE_PR_DATABASE_URL, github.event.pull_request.number || github.event.inputs.preview_name) }}
       GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
       # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
       - name: Fail if unsecure
-        if: "!contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez'"
+        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez'"
         run: exit 1
 
       - name: Checkout
         uses: actions/checkout@v3.5.3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3.7.0
@@ -59,9 +66,9 @@ jobs:
         id: deploy_web
         run: |
           # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
-          az staticwebapp environment delete --name jabref-online --environment-name ${{ github.event.pull_request.number }} --yes || true
+          az staticwebapp environment delete --name jabref-online --environment-name ${PREVIEW_NAME} --yes || true
           # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
-          $output = yarn swa deploy .output\public --env ${{ github.event.pull_request.number }} --verbose=silly 2>&1 | Out-String
+          $output = yarn swa deploy .output\public --env ${PREVIEW_NAME} --verbose=silly 2>&1 | Out-String
           Write-Host $output
           $match = $output | Select-String -Pattern 'Project deployed to (?<url>.*) '
           if ($match -eq $null) { exit 1 }
@@ -77,7 +84,7 @@ jobs:
 
       - name: Create test database on Azure
         run: |
-          $name = "postgres_test_${{ github.event.pull_request.number }}"
+          $name = "postgres_test_${PREVIEW_NAME}"
           az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
           $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
           # For some reason the public schema is not created automatically, so we need to do it manually
@@ -89,7 +96,7 @@ jobs:
       - name: Create & Link Function App
         run: |
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env ${{ github.event.pull_request.number }}
+          python .github\scripts\deploy.py --env ${PREVIEW_NAME}
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
@@ -97,7 +104,7 @@ jobs:
       - name: Deploy Function App
         run: |
           Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ github.event.pull_request.number }} --src .output\server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${PREVIEW_NAME} --src .output\server.zip
 
       - name: Check HTTP status
         run: |
@@ -113,6 +120,7 @@ jobs:
         #   interval: 30
 
       - name: Report URL as PR comment
+        if: github.event_name == 'pull_request_target'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
