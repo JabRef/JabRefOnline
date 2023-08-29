@@ -66,9 +66,9 @@ jobs:
         id: deploy_web
         run: |
           # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
-          az staticwebapp environment delete --name jabref-online --environment-name ${PREVIEW_NAME} --yes || true
+          az staticwebapp environment delete --name jabref-online --environment-name $env:PREVIEW_NAME --yes || true
           # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
-          $output = yarn swa deploy .output\public --env ${PREVIEW_NAME} --verbose=silly 2>&1 | Out-String
+          $output = yarn swa deploy .output\public --env $env:PREVIEW_NAME --verbose=silly 2>&1 | Out-String
           Write-Host $output
           $match = $output | Select-String -Pattern 'Project deployed to (?<url>.*) '
           if ($match -eq $null) { exit 1 }
@@ -84,7 +84,7 @@ jobs:
 
       - name: Create test database on Azure
         run: |
-          $name = "postgres_test_${PREVIEW_NAME}"
+          $name = "postgres_test_$env:PREVIEW_NAME"
           az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
           $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
           # For some reason the public schema is not created automatically, so we need to do it manually
@@ -95,7 +95,7 @@ jobs:
       - name: Create & Link Function App
         run: |
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env ${PREVIEW_NAME}
+          python .github\scripts\deploy.py --env $env:PREVIEW_NAME
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
@@ -103,7 +103,7 @@ jobs:
       - name: Deploy Function App
         run: |
           Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${PREVIEW_NAME} --src .output\server.zip
+          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-$env:PREVIEW_NAME --src .output\server.zip
 
       - name: Check HTTP status
         run: |
