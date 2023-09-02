@@ -84,21 +84,21 @@ jobs:
       - name: Create test database on Azure
         run: |
           $name = "postgres_test_$env:PREVIEW_NAME"
-          az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
           $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
+          # az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
           # For some reason the public schema is not created automatically or without the default permissions, so we need to do it manually
           # TODO: Remove this workaround once https://github.com/Azure/azure-cli/issues/26772 is fixed
           # We also need to manually install an old version of rdbms due to https://github.com/Azure/azure-cli/issues/25067
-          az extension add --name rdbms-connect --version 1.0.3 --debug
-          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "ALTER DATABASE $name OWNER TO azure_pg_admin; create schema public;" --output table
-          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "grant usage on schema public to public; grant create on schema public to public;" --output table
-          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "SELECT schema_name FROM information_schema.schemata;" --output table
+          # az extension add --name rdbms-connect --version 1.0.3 --debug
+          # az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "ALTER DATABASE $name OWNER TO azure_pg_admin; create schema public;" --output table
+          # az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "grant usage on schema public to public; grant create on schema public to public;" --output table
+          # az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "SELECT schema_name FROM information_schema.schemata;" --output table
           # Login to the database using the Github user
-          $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$name?sslmode=require"
+          $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$($name)?sslmode=require"
           echo "::add-mask::$connection_string" 
           echo "DATABASE_URL=$connection_string" >> $env:GITHUB_ENV
           $Env:DATABASE_URL = $connection_string
-          # Finally, run the migrations
+          # Finally, run the migrations (this also creates the db)
           yarn prisma:migrate:reset --force
         env:
           DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
