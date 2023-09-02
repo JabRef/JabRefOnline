@@ -29,7 +29,6 @@ jobs:
 
     env:
       PREVIEW_NAME: ${{ github.event.pull_request.number || github.event.inputs.preview_name }}
-      DATABASE_URL: ${{ format(secrets.AZURE_PR_DATABASE_URL, github.event.pull_request.number || github.event.inputs.preview_name) }}
       GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
 
     steps:
@@ -94,7 +93,15 @@ jobs:
           az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "ALTER DATABASE $name OWNER TO azure_pg_admin; create schema public;" --output table
           az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "grant usage on schema public to public; grant create on schema public to public;" --output table
           az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "SELECT schema_name FROM information_schema.schemata;" --output table
+          # Login to the database using the Github user
+          $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$name?sslmode=require"
+          echo "::add-mask::$connection_string" 
+          echo "DATABASE_URL=$connection_string" >> $env:GITHUB_ENV
+          $Env:DATABASE_URL = $connection_string
+          # Finally, run the migrations
           yarn prisma:migrate:reset --force
+        env:
+          DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
 
       - name: Create & Link Function App
         run: |
