@@ -1,16 +1,8 @@
 diff --git a/lib/server/redis-db.js b/lib/server/redis-db.js
-index 35583cc92b5d0b26ac9e8373a2808b133c188552..07974d02e340b310a65c7d7d3b6ed1734ad438a1 100644
+index 35583cc92b5d0b26ac9e8373a2808b133c188552..2eea5dfa3b11ca76891dc11cd8e936533fa1d28b 100644
 --- a/lib/server/redis-db.js
 +++ b/lib/server/redis-db.js
-@@ -3,7 +3,6 @@
- const helpers = require('../helpers');
- 
- class RedisDb {
--
-   constructor() {
-     this.storage = {};
-   }
-@@ -28,7 +27,8 @@ class RedisDb {
+@@ -28,7 +28,8 @@ class RedisDb {
   *
   * The server contains a log of logic. It only feels natural to split it into multiple files
   */
