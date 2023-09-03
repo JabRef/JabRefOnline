@@ -4,8 +4,8 @@ import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
 import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
 import http from 'http'
-import 'reflect-metadata' // Needed for tsyringe
 import 'json-bigint-patch' // Needed for bigint support in JSON
+import 'reflect-metadata' // Needed for tsyringe
 import { buildContext, Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
 
