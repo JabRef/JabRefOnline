@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 import { theme } from '#tailwind-config'
+import { ThemeConfig } from '@bg-dev/nuxt-naiveui'
 
 const themeConfig: ThemeConfig = {
   shared: {
