@@ -4,140 +4,16 @@ on:
   push:
     branches:
       - main
-  pull_request_target:
-    types: [opened, synchronize, reopened, closed, labeled]
-    branches:
-      - main
-  workflow_dispatch:
-    inputs:
-      preview_name:
-        description: 'Name of the deployment environment'
-        type: string
-        required: true
 
 permissions:
   pull-requests: write
   id-token: write
 
 jobs:
-  preview:
-    name: Build & Deploy to preview
-
-    runs-on: windows-latest
-
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request_target' && github.event.action != 'closed')
-
-    env:
-      PREVIEW_NAME: ${{ github.event.pull_request.number || github.event.inputs.preview_name }}
-      DATABASE_URL: ${{ format(secrets.AZURE_PR_DATABASE_URL, github.event.pull_request.number || github.event.inputs.preview_name) }}
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-
-    steps:
-      # We could also add these checks to the above if condition, to skip the workflow if its unsecure to run.
-      # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
-      - name: Fail if unsecure
-        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez'"
-        run: exit 1
-
-      - name: Checkout
-        uses: actions/checkout@v3.5.3
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.ref }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3.7.0
-        with:
-          node-version: 18
-          cache: 'yarn'
-
-      - name: Build
-        run: |
-          yarn install
-          yarn build:azure
-
-      - name: Login to Azure
-        uses: Azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Deploy Web App
-        id: deploy_web
-        run: |
-          # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
-          az staticwebapp environment delete --name jabref-online --environment-name $env:PREVIEW_NAME --yes || true
-          # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
-          $output = yarn swa deploy .output\public --env $env:PREVIEW_NAME --verbose=silly 2>&1 | Out-String
-          Write-Host $output
-          $match = $output | Select-String -Pattern 'Project deployed to (?<url>.*) '
-          if ($match -eq $null) { exit 1 }
-          $url = $match.Matches[0].Groups['url'].Value
-          echo "url=$url" >> $env:GITHUB_OUTPUT
-        env:
-          SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
-
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Create test database on Azure
-        run: |
-          $name = "postgres_test_$env:PREVIEW_NAME"
-          az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
-          $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
-          # For some reason the public schema is not created automatically, so we need to do it manually
-          # We also need to manually install an old version of rdbms due to https://github.com/Azure/azure-cli/issues/25067
-          az extension add --name rdbms-connect --version 1.0.3 --debug
-          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "ALTER DATABASE $name OWNER TO azure_pg_admin; create schema public;" --output table
-          az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "SELECT schema_name FROM information_schema.schemata;" --output table
-          yarn prisma:migrate:reset --force
-
-      - name: Create & Link Function App
-        run: |
-          pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env $env:PREVIEW_NAME
-        env:
-          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
-
-      - name: Deploy Function App
-        run: |
-          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-$env:PREVIEW_NAME --src .output\server.zip
-
-      - name: Check HTTP status
-        run: |
-          Start-Sleep -Seconds 30
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.url }} || true
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.url }}/api || true
-        # The api returns 400 status code for some reason
-        # uses: gerdemann/http-status-code@1.0.0
-        # with:
-        #   url: ${{ steps.deploy_web.outputs.url }}/api
-        #   code: 200
-        #   timeout: 300 # initial warm up can take quite some time
-        #   interval: 30
-
-      - name: Report URL as PR comment
-        if: github.event_name == 'pull_request_target'
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          message: |
-            Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.url }}
-
-      - name: Run API tests
-        run: yarn test:api
-        env:
-          TEST_URL: ${{ steps.deploy_web.outputs.url }}
-
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
 
     runs-on: windows-latest
-
-    if: github.event_name == 'push'
 
     strategy:
       fail-fast: false
@@ -163,10 +39,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3.7.0
+        uses: actions/setup-node@v3.8.1
         with:
           node-version: 18
           cache: 'yarn'
@@ -235,30 +111,3 @@ jobs:
         run: yarn test:api
         env:
           TEST_URL: ${{ matrix.url }}
-
-  close_pr_preview:
-    name: Close PR preview
-
-    if: github.event_name == 'pull_request_target' && github.event.action == 'closed'
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Delete WebApp environment
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
-          action: 'close'
-
-      - name: Login to Azure
-        uses: Azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Delete Function App
-        run: az functionapp delete --name jabref-function-${{ github.event.pull_request.number }} --resource-group JabRefOnline
-
-      - name: Delete test database
-        run: az postgres flexible-server db delete --server-name jabrefdb --resource-group JabRefOnline --database-name postgres_test_${{ github.event.pull_request.number }} -y
