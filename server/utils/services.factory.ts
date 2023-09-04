@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */ // TODO: Remove once redis-mock is updated
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
 import {
   createClient,
@@ -57,10 +56,18 @@ export async function createRedisClient(config: Config): Promise<RedisClient> {
     // Log errors
     // The 'error' handler is important, since otherwise errors in the redis connection bring down the whole server/process
     // see https://github.com/redis/node-redis/issues/2032#issuecomment-1116883257
-    client.on('error', (err) => console.error('Redis client:', err))
-    client.on('connect', () => console.debug('Redis client: connected'))
-    client.on('reconnecting', () => console.debug('Redis client: reconnecting'))
-    client.on('ready', () => console.debug('Redis client: ready'))
+    client.on('error', (err) => {
+      console.error('Redis client:', err)
+    })
+    client.on('connect', () => {
+      console.debug('Redis client: connected')
+    })
+    client.on('reconnecting', () => {
+      console.debug('Redis client: reconnecting')
+    })
+    client.on('ready', () => {
+      console.debug('Redis client: ready')
+    })
     try {
       await client.connect()
     } catch (exception) {

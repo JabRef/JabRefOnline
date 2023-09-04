@@ -1,9 +1,9 @@
 import { Resolvers } from '#graphql/resolver'
 import { mergeResolvers } from '@graphql-tools/merge'
 import {
+  BigIntResolver,
   DateTimeResolver,
   EmailAddressResolver,
-  BigIntResolver,
 } from 'graphql-scalars'
 import { resolvers as documentResolvers } from './documents/resolvers'
 import { resolvers as groupResolvers } from './groups/resolvers'

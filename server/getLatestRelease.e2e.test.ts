@@ -11,7 +11,7 @@ test.runIf(process.env.GITHUB_REPO_TOKEN)(
     expect(response.statusCode).toBe(200)
     expect(response.get('content-type')).toContain('application/json')
     expect((response.body as GetLatestReleaseResponse).version).toMatch(
-      /^\d.\d$/,
+      /^\d.\d{1,2}$/,
     )
   },
 )

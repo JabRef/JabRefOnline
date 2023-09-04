@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
 import 'dotenv/config'
+import 'json-bigint-patch'
 import 'reflect-metadata'
 import 'json-bigint-patch'
 import { beforeAll } from 'vitest'

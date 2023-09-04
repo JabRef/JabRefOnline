@@ -95,7 +95,7 @@ export class Mutation {
           {
             path: ['email'],
             message:
-              (typeof info === 'string' ? info : info?.message) ||
+              (typeof info === 'string' ? info : info?.message) ??
               'Unknown error while logging in.',
           },
         ],
