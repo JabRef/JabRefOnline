@@ -78,5 +78,4 @@
 <script setup lang="ts">
 import { isLinux, isMac, isWindows } from '~/composables/detectOs'
 
-const downloadUrl = constructDownloadUrl()
 </script>
