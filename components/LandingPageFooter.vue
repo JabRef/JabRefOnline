@@ -78,8 +78,8 @@
           <li class="py-1">
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
-              @click="showPrivacyPolicy = true"
               href=""
+              @click="showPrivacyPolicy = true"
             >
               Privacy Policy
             </t-nuxtlink>
