@@ -114,7 +114,7 @@ export default defineComponent({
           cacheCurrentUser(
             cache,
             data?.signup?.__typename === 'UserReturned'
-              ? data?.signup?.user
+              ? data.signup.user
               : null,
           )
         },

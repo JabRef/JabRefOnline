@@ -38,18 +38,34 @@ updates:
         patterns:
           - 'storybook'
           - '@storybook/*'
+          - 'chromatic'
       nuxt:
         patterns:
           - 'nuxt'
           - 'nuxt-*'
           - '@nuxt/*'
           - '@nuxtjs/*'
+          - 'pinia'
           - '@pinia/nuxt'
+          - '@bg-dev/nuxt-naiveui'
+          - 'vee-validate'
+          - '@vee-validate/nuxt'
+          - '@vee-validate/zod'
+          - 'zod'
+          - 'ufo'
       vue:
         patterns:
           - 'vue'
           - '@vue/*'
           - 'vue-*'
+          - 'unplugin-vue-components'
+          - '@vueuse/core'
+          - '@he-tree/vue'
+          - '@tailwindcss/forms'
+      prisma:
+        patterns:
+          - 'prisma'
+          - '@prisma/*'
       types:
         patterns:
           - '@types/*'

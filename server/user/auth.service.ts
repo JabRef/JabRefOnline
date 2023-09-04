@@ -63,7 +63,7 @@ export class AuthService {
     if (!user) {
       return true
     }
-    const PREFIX = process.env.PREFIX || 'forgot-password'
+    const PREFIX = process.env.PREFIX ?? 'forgot-password'
     const key = PREFIX + user.id
     const token = generateToken()
     const hashedToken = await hash(token)
@@ -131,7 +131,7 @@ export class AuthService {
         ],
       }
     }
-    const PREFIX = process.env.PREFIX || 'forgot-password'
+    const PREFIX = process.env.PREFIX ?? 'forgot-password'
     const key = PREFIX + id
     const hashedToken = await this.redisClient.get(key)
     if (!hashedToken) {

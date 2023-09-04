@@ -25,7 +25,7 @@ export function buildContext({
     // @ts-expect-error: h3 doesn't provide correct types https://github.com/unjs/h3/issues/146
     ...passportBuildContext<User>({ req: event.req, res: event.res }),
     // The login method provided by graphql-passport doesn't work on azure, so we have to override it
-    login: async (user, options) => {
+    login: async (user) => {
       // @ts-expect-error: there are no correct types for this
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const session = event.req.session
@@ -42,7 +42,8 @@ export function buildContext({
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         session.save(function (err: any) {
           if (err) {
-            return reject(err)
+            reject(err)
+            return
           }
           // For some strange reason the session cookie is not set correctly on azure, so do this manually
           // @ts-expect-error: internal

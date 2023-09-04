@@ -151,7 +151,7 @@ onDone((result) => {
         : 'Unknown error'
   }
 })
-const error = computed(() => graphqlError.value || otherError.value)
+const error = computed(() => graphqlError.value ?? otherError.value)
 
 // TODO: Implement remember login
 const rememberLogin = ref(false)
