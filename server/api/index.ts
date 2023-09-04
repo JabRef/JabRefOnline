@@ -6,7 +6,6 @@ import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
 import http from 'http'
 import 'json-bigint-patch' // Needed for bigint support in JSON
 import 'reflect-metadata' // Needed for tsyringe
-import 'json-bigint-patch' // Needed for bigint support in JSON
 import { buildContext, Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
 
