@@ -143,13 +143,15 @@
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
               href="http://discourse.jabref.org/"
-              >Forum</t-nuxtlink
+              >
+              Forum</t-nuxtlink
             >
           </li>
           <li class="py-1">
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
-              rel="me" href="https://foojay.social/@jabref">
+              rel="me"
+              href="https://foojay.social/@jabref"
             >
               Mastodon
             </t-nuxtlink>
