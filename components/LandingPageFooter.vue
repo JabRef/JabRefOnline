@@ -143,7 +143,7 @@
             <t-nuxtlink
               class="no-underline text-sm text-gray-800 hover:text-primary-800"
               href="http://discourse.jabref.org/"
-              >
+            >
               Forum</t-nuxtlink
             >
           </li>
