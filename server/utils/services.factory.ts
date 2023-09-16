@@ -25,7 +25,9 @@ export async function createRedisClient(config: Config): Promise<RedisClient> {
     // Workaround for redis-mock being not compatible with redis@4
     // TODO: Remove this workaround once https://github.com/yeahoffline/redis-mock/issues/195 is fixed
     return {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       get: promisify(mockRedis.get).bind(mockRedis),
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       quit: promisify(mockRedis.quit).bind(mockRedis),
       /*
       delete: promisify(mockRedis.del).bind(mockRedis),

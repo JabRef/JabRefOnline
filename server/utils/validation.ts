@@ -62,7 +62,7 @@ export function validateInput<T extends AnyZodObject>(
       const result = schema.safeParse(input)
 
       if (result.success) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return originalMethod.call(
           this,
           root,
