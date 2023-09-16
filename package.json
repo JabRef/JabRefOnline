@@ -96,7 +96,7 @@
     "@nuxt/devtools": "^0.8.3",
     "@nuxtjs/eslint-config": "^12.0.0",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/tailwindcss": "6.8.0",
+    "@nuxtjs/tailwindcss": "^6.8.0",
     "@storybook/core-server": "^7.0.26",
     "@storybook/vue3": "^7.0.26",
     "@storybook/vue3-vite": "7.0.26",
@@ -169,10 +169,7 @@
     "vue-demi": "^0.14.5",
     "@wry/trie": "^0.4.3",
     "@vue/apollo-util": "patch:@vue/apollo-util@npm%3A4.0.0-beta.6#./.yarn/patches/@vue-apollo-util-npm-4.0.0-beta.6-7e26e14eb7.patch",
-    "@nuxt/content": "patch:@nuxt/content@npm%3A2.7.0#./.yarn/patches/@nuxt-content-npm-2.7.0-425d472cf3.patch",
-    "nitropack": "patch:nitropack@npm%3A2.5.2#./.yarn/patches/nitropack-npm-2.5.2-65c39b23d1.patch",
-    "redis-mock@^0.56.3": "patch:redis-mock@npm%3A0.56.3#./.yarn/patches/redis-mock-npm-0.56.3-967bd7c6ea.patch",
-    "@bg-dev/nuxt-naiveui@^1.2.1": "patch:@bg-dev/nuxt-naiveui@npm%3A1.2.1#./.yarn/patches/@bg-dev-nuxt-naiveui-npm-1.2.1-69980da2af.patch"
+    "redis-mock@^0.56.3": "patch:redis-mock@npm%3A0.56.3#./.yarn/patches/redis-mock-npm-0.56.3-967bd7c6ea.patch"
   },
   "resolutionsComments": {
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
@@ -183,5 +180,5 @@
     "schema": "server/database/schema.prisma",
     "seed": "node --experimental-specifier-resolution=node --loader ts-node/esm ./server/database/runSeed.ts"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.6.3"
 }
