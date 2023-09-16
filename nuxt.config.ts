@@ -56,8 +56,10 @@ export default defineNuxtConfig({
 
   // Workaround for https://github.com/nuxt/nuxt/issues/22933
   hooks: {
-    close: () => {
-      process.exit()
+    close: (nuxt) => {
+      if (!nuxt.options._prepare) {
+        process.exit()
+      }
     },
   },
 
