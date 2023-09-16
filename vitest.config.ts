@@ -2,6 +2,14 @@ import { defineVitestConfig } from 'nuxt-vitest/config'
 import GithubActionsReporter from 'vitest-github-actions-reporter'
 
 export default defineVitestConfig({
+  esbuild: {
+    tsconfigRaw: {
+      compilerOptions: {
+        // Enable decorators, workaround for https://github.com/unjs/nitro/issues/1380
+        experimentalDecorators: true,
+      },
+    },
+  },
   test: {
     // Provide global API
     // https://vitest.dev/config/#globals

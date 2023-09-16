@@ -235,9 +235,6 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    optimizeDeps: {
-      exclude: ['@nuxtjs/mdc'],
-    },
     // Workaround for https://github.com/browserify/node-util/pull/62
     define: {
       'process.env': {},
