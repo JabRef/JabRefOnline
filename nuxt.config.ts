@@ -54,6 +54,13 @@ export default defineNuxtConfig({
     runtimeCompiler: true,
   },
 
+  // Workaround for https://github.com/nuxt/nuxt/issues/22933
+  hooks: {
+    close: () => {
+      process.exit()
+    },
+  },
+
   /*
    ** Headers of the page
    ** See https://v3.nuxtjs.org/getting-started/seo-meta
