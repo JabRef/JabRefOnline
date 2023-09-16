@@ -153,7 +153,7 @@ export class Mutation {
   ): Promise<Group | null> {
     return await this.groupService.updateGroup({
       id: group.id,
-      name: group.name || undefined,
+      name: group.name ?? undefined,
       // TODO: Remaining properties
     })
   }

@@ -1,9 +1,8 @@
+import type { MutationLoginArgs, MutationSignupArgs } from '#graphql/resolver'
 import {
   ForgotPasswordPayload,
   MutationChangePasswordArgs,
   MutationForgotPasswordArgs,
-  MutationLoginArgs,
-  MutationSignupArgs,
   QueryUserArgs,
   Resolvers,
   UserChangesArgs,
@@ -13,7 +12,7 @@ import {
 } from '#graphql/resolver'
 import { User } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
-import { Context } from '../context'
+import type { Context } from '../context'
 import {
   UserDocument,
   UserDocumentService,

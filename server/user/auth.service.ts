@@ -5,7 +5,7 @@ import { v4 as generateToken } from 'uuid'
 import { hash, verifyHash } from '../utils/crypto'
 import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
 import { sendEmail } from '../utils/sendEmail'
-import { RedisClient } from '../utils/services.factory'
+import type { RedisClient } from '../utils/services.factory'
 import { inject, injectable } from './../tsyringe'
 
 export type { InfoArgument as AuthenticationMessage } from 'graphql-passport'

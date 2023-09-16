@@ -14,10 +14,18 @@ export default defineNuxtConfig({
   alias: {
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
-    global: 'global.ts',
+    global: './global.ts',
   },
 
   nitro: {
+    azure: {
+      config: {
+        globalHeaders: {
+          'X-Robots-Tag':
+            'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        },
+      },
+    },
     // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
@@ -44,6 +52,15 @@ export default defineNuxtConfig({
   vue: {
     // Add support for vue runtime compiler (needed to render stories in storybook)
     runtimeCompiler: true,
+  },
+
+  // Workaround for https://github.com/nuxt/nuxt/issues/22933
+  hooks: {
+    close: (nuxt) => {
+      if (!nuxt.options._prepare) {
+        process.exit()
+      }
+    },
   },
 
   /*
