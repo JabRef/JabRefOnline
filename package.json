@@ -168,13 +168,14 @@
     "@graphql-tools/schema": "^10.0.0",
     "vue-demi": "^0.14.5",
     "@wry/trie": "^0.4.3",
+    "unified": "^11.0.3",
     "@vue/apollo-util": "patch:@vue/apollo-util@npm%3A4.0.0-beta.6#./.yarn/patches/@vue-apollo-util-npm-4.0.0-beta.6-7e26e14eb7.patch",
     "redis-mock@^0.56.3": "patch:redis-mock@npm%3A0.56.3#./.yarn/patches/redis-mock-npm-0.56.3-967bd7c6ea.patch"
   },
   "resolutionsComments": {
     "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
     "tslib": "some libraries still pull-in v1 of tslib, which is incompatible with the other libraries that use tslib v2 features",
-    "uuid/node-fetch-native/destr/schema/vue-demi/trie": "nitro still has problems when multiple versions of packages are used"
+    "uuid/node-fetch-native/destr/schema/vue-demi/trie/unified": "nitro still has problems when multiple versions of packages are used"
   },
   "prisma": {
     "schema": "server/database/schema.prisma",
