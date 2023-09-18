@@ -118,7 +118,7 @@ jobs:
           {
               $source = $link.Target;
               $destination = $link.FullName;
-          
+
               Remove-Item $destination -Force
               Copy-Item -Path $source -Destination $destination -Force -Recurse
           }
