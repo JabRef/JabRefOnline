@@ -1,7 +1,5 @@
 import { H3ContextFunctionArgument } from '@as-integrations/h3'
 import { User } from '@prisma/client'
-import cookie from 'cookie'
-import signature from 'cookie-signature'
 import {
   AuthenticateReturn,
   buildContext as passportBuildContext,
@@ -47,16 +45,14 @@ export function buildContext({
             return
           }
           // For some strange reason the session cookie is not set correctly on azure, so do this manually
-          const signed =
-            's:' +
-            signature.sign(
-              event.req.sessionID,
-              useRuntimeConfig().session.primarySecret,
-            )
-          const data = cookie.serialize('session', signed, session.cookie.data)
-          setCookie(event, 'session', data)
-          // @ts-expect-error: internal
-
+          // const signed =
+          //   's:' +
+          //   signature.sign(
+          //     event.req.sessionID,
+          //     useRuntimeConfig().session.primarySecret,
+          //   )
+          // const data = cookie.serialize('session', signed, session.cookie.data)
+          // setCookie(event, 'session', data)
           // expressSession.setcookie(
           //   event.res,
           //   'session',
