@@ -1,19 +1,16 @@
 # type: ignore
 
+import logging
 import os
+from argparse import ArgumentParser
 
 from azure.identity import DefaultAzureCredential
-from azure.mgmt.web import WebSiteManagementClient
-from azure.mgmt.web.models import (
-    StaticSiteUserProvidedFunctionAppARMResource,
-    Site,
-    SiteConfig,
-)
-from azure.mgmt.storage import StorageManagementClient
 from azure.mgmt.applicationinsights import ApplicationInsightsManagementClient
 from azure.mgmt.redis import RedisManagementClient
-from argparse import ArgumentParser
-import logging
+from azure.mgmt.storage import StorageManagementClient
+from azure.mgmt.web import WebSiteManagementClient
+from azure.mgmt.web.models import (
+  Site, SiteConfig, StaticSiteUserProvidedFunctionAppARMResource)
 
 
 def main(environment_name: str, verbose: bool = False):
@@ -99,7 +96,7 @@ def main(environment_name: str, verbose: bool = False):
                 app_settings=[
                     {"name": "FUNCTIONS_EXTENSION_VERSION", "value": "~4"},
                     {"name": "FUNCTIONS_WORKER_RUNTIME", "value": "node"},
-                    {"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "~18"},
+                    {"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "~20"},
                     # Better deploy and cold-start performance
                     # https://docs.microsoft.com/en-us/azure/azure-functions/run-functions-from-deployment-package#integration-with-zip-deployment
                     {"name": "WEBSITE_RUN_FROM_PACKAGE", "value": "1"},
