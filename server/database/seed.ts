@@ -17,9 +17,16 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
     data: {
       id: 'ckn4oul7100004cv7y3t94n8j',
       email: 'alice@jabref.org',
-      password:
-        '19184d8c1c1e9b483d8347f8da0d53ad92170233100d32c3a0d748725948c28d09a060d7f02962b7b93320c72a2cdd94f21b16b08bf8bd1cba0c5f77afeffddbb24df527c4f16f1fca6eb5480159b56df3d818b4b3c74ead04227a78b3d810b8', // EBNPXY35TYkYXHs
       name: 'Alice',
+      key: {
+        create: [
+          {
+            id: 'email:alice@jabref.org',
+            hashed_password:
+              's2:v0m1wv8ia158m21f:6b60b32e60cf1ed5960afca58f2feb1779e409b3570d46919b21d93e342e532238631f8218c9d7854a69f210830c0d1c0bcd74d0ba2a7a2e5483b676f2b619cb', // EBNPXY35TYkYXHs
+          },
+        ],
+      },
     },
   })
 

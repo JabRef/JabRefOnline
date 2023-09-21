@@ -9,14 +9,16 @@ import { JournalService } from './journals/journal.service'
 import * as JournalResolvers from './journals/resolvers'
 import { instanceCachingFactory, register } from './tsyringe'
 import { AuthService } from './user/auth.service'
-import PassportInitializer from './user/passport-initializer'
 import * as UserResolvers from './user/resolvers'
 import { createRedisClient } from './utils/services.factory'
 
 const { PrismaClient } = prisma
 
-export async function configure(): Promise<void> {
+export async function configure() {
   const config = useRuntimeConfig() as Config
+  register('Config', {
+    useValue: config,
+  })
   // Tools
   register('PrismaClient', {
     useFactory: instanceCachingFactory(() => new PrismaClient()),
@@ -28,9 +30,6 @@ export async function configure(): Promise<void> {
 }
 
 export function registerClasses(): void {
-  // Tools
-  register('PassportInitializer', PassportInitializer)
-
   // Services
   register('UserDocumentService', UserDocumentService)
   register('AuthService', AuthService)

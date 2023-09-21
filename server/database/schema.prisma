@@ -14,10 +14,19 @@ model User {
   email String @unique
   emailIsVerified Boolean @default(false)
   name String?
-  password String
   createdAt DateTime @default(now())
   documents UserDocument[]
   groups Group[]
+  key Key[] // TODO: Rename to keys?
+}
+
+model Key {
+  id String  @id @unique // TODO: really unique here?
+  hashed_password String? // TODO: Rename to hashedPassword?
+  user_id String // TODO: Rename to userId?
+  user User @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
 }
 
 enum DocumentType {

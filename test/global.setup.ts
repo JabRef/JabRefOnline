@@ -26,6 +26,9 @@ beforeAll(async (context) => {
 
   if (isIntegrationTest) {
     const config = constructConfig()
+    register('Config', {
+      useValue: config,
+    })
     const redisClient = await createRedisClient(config)
     register('RedisClient', {
       useValue: redisClient,
@@ -37,9 +40,7 @@ beforeAll(async (context) => {
     })
 
     return async () => {
-      if ('disconnect' in redisClient) {
-        await redisClient.disconnect()
-      }
+      await redisClient.dispose()
       await prismaClient.$disconnect()
     }
   }
