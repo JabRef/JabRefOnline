@@ -13864,7 +13864,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ioredis@npm:^5.3.2":
+"ioredis@npm:5.3.2":
   version: 5.3.2
   resolution: "ioredis@npm:5.3.2"
   dependencies:
@@ -13878,6 +13878,23 @@ __metadata:
     redis-parser: ^3.0.0
     standard-as-callback: ^2.1.0
   checksum: 9a23559133e862a768778301efb68ae8c2af3c33562174b54a4c2d6574b976e85c75a4c34857991af733e35c48faf4c356e7daa8fb0a3543d85ff1768c8754bc
+  languageName: node
+  linkType: hard
+
+"ioredis@patch:ioredis@npm%3A5.3.2#./.yarn/patches/ioredis-npm-5.3.2-58471071b1.patch::locator=jabref-online%40workspace%3A.":
+  version: 5.3.2
+  resolution: "ioredis@patch:ioredis@npm%3A5.3.2#./.yarn/patches/ioredis-npm-5.3.2-58471071b1.patch::version=5.3.2&hash=52354b&locator=jabref-online%40workspace%3A."
+  dependencies:
+    "@ioredis/commands": ^1.1.1
+    cluster-key-slot: ^1.1.0
+    debug: ^4.3.4
+    denque: ^2.1.0
+    lodash.defaults: ^4.2.0
+    lodash.isarguments: ^3.1.0
+    redis-errors: ^1.2.0
+    redis-parser: ^3.0.0
+    standard-as-callback: ^2.1.0
+  checksum: ebb7cb143682b29ccf7b3118725ef58552c0db2ddbff245e4506dd3406b74c9ef770bbe79902e1a16a8b6b3ed3922ebac96bf4d7be5c678f275892a1c3538bdb
   languageName: node
   linkType: hard
 
