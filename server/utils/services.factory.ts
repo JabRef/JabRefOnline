@@ -64,7 +64,7 @@ export async function createRedisClient(config: Config): Promise<Storage> {
         base: '{unstorage}',
         // We don't queue commands if Redis is not available but instead fail
         // (otherwise this would mask errors)
-        enableOfflineQueue: false,
+        // enableOfflineQueue: false,
         ...createRedisConfig(),
       }),
     })
