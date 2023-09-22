@@ -1,10 +1,20 @@
 diff --git a/dist/runtime/entries/azure-functions.mjs b/dist/runtime/entries/azure-functions.mjs
-index 7437e5b196f983f4706d56c5820e664b4f1d4098..83c3675cc5120a46f0dd3800ee3a81a04c785df4 100644
+index 7437e5b196f983f4706d56c5820e664b4f1d4098..30251a23976e8a261778404b1e13561d3fa5c2e0 100644
 --- a/dist/runtime/entries/azure-functions.mjs
 +++ b/dist/runtime/entries/azure-functions.mjs
 @@ -18,4 +18,5 @@ export async function handle(context, req) {
      headers: normalizeLambdaOutgoingHeaders(headers, true),
      body: body ? body.toString() : statusText
    };
-+  context.log("Nitro response", context.res.cookies, context.res.headers, headers)
++  context.error("Nitro response", context.res.cookies, context.res.headers, headers)
+ }
+diff --git a/dist/runtime/entries/azure.mjs b/dist/runtime/entries/azure.mjs
+index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..e963ad977c9789c0b0fad8d8e893ce8c2f060966 100644
+--- a/dist/runtime/entries/azure.mjs
++++ b/dist/runtime/entries/azure.mjs
+@@ -25,4 +25,5 @@ export async function handle(context, req) {
+     headers: normalizeLambdaOutgoingHeaders(headers, true),
+     body: body ? body.toString() : statusText
+   };
++  context.error("Nitro response", context.res.cookies, context.res.headers, headers)
  }
