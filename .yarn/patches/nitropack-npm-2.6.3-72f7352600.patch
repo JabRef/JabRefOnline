@@ -1,0 +1,10 @@
+diff --git a/dist/runtime/entries/azure-functions.mjs b/dist/runtime/entries/azure-functions.mjs
+index 7437e5b196f983f4706d56c5820e664b4f1d4098..83c3675cc5120a46f0dd3800ee3a81a04c785df4 100644
+--- a/dist/runtime/entries/azure-functions.mjs
++++ b/dist/runtime/entries/azure-functions.mjs
+@@ -18,4 +18,5 @@ export async function handle(context, req) {
+     headers: normalizeLambdaOutgoingHeaders(headers, true),
+     body: body ? body.toString() : statusText
+   };
++  context.log("Nitro response", context.res.cookies, context.res.headers, headers)
+ }
