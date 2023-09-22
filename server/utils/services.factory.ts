@@ -17,13 +17,26 @@ export async function createRedisClient(config: Config): Promise<Storage> {
       switch (config.public.environment) {
         case Environment.Production:
           return {
-            // Only Azure needs a TLS connection to Redis
-            tls: { servername: config.redis.host },
-            password: config.redis.password,
+            cluster: [
+              {
+                port: config.redis.port,
+                host: config.redis.host,
+              },
+            ],
+            clusterOptions: {
+              redisOptions: {
+                // Azure needs a TLS connection to Redis
+                tls: { servername: config.redis.host },
+                password: config.redis.password,
+              },
+            },
           }
         case Environment.CI:
           // Redis on Github Actions does not need a password
-          return {}
+          return {
+            port: config.redis.port,
+            host: config.redis.host,
+          }
       }
     }
 
@@ -31,15 +44,10 @@ export async function createRedisClient(config: Config): Promise<Storage> {
     return createStorage({
       driver: redisDriver({
         base: '{unstorage}',
-        cluster: [
-          {
-            port: config.redis.port,
-            host: config.redis.host,
-          },
-        ],
-        clusterOptions: {
-          redisOptions: createRedisConfig(),
-        },
+        // We don't queue commands if Redis is not available but instead fail
+        // (otherwise this would mask errors)
+        enableOfflineQueue: false,
+        ...createRedisConfig(),
       }),
     })
   }
