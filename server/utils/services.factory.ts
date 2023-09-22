@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
 import { Config, Environment } from '~/config'
 
-import { Redis } from 'ioredis'
+import Redis from 'ioredis'
 import { createStorage, Storage } from 'unstorage'
 import memoryDriver from 'unstorage/drivers/memory'
 

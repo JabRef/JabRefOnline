@@ -1,13 +1,15 @@
 diff --git a/built/index.js b/built/index.js
-index 24a189578794dc3073278788fc443e6c8dc957d5..4444da2d0e13da70994f081e56b7ddc8c3cbdb45 100644
+index 24a189578794dc3073278788fc443e6c8dc957d5..9047749039e70b81b5f047fef44c2902c456e2f3 100644
 --- a/built/index.js
 +++ b/built/index.js
-@@ -1,7 +1,7 @@
- "use strict";
+@@ -2,8 +2,8 @@
  Object.defineProperty(exports, "__esModule", { value: true });
  exports.print = exports.ReplyError = exports.SentinelIterator = exports.SentinelConnector = exports.AbstractConnector = exports.Pipeline = exports.ScanStream = exports.Command = exports.Cluster = exports.Redis = exports.default = void 0;
--exports = module.exports = require("./Redis").default;
-+//exports = module.exports = require("./Redis").default;
- var Redis_1 = require("./Redis");
- Object.defineProperty(exports, "default", { enumerable: true, get: function () { return Redis_1.default; } });
+ exports = module.exports = require("./Redis").default;
+-var Redis_1 = require("./Redis");
+-Object.defineProperty(exports, "default", { enumerable: true, get: function () { return Redis_1.default; } });
++//var Redis_1 = require("./Redis");
++//Object.defineProperty(exports, "default", { enumerable: true, get: function () { return Redis_1.default; } });
  var Redis_2 = require("./Redis");
+ Object.defineProperty(exports, "Redis", { enumerable: true, get: function () { return Redis_2.default; } });
+ var cluster_1 = require("./cluster");
