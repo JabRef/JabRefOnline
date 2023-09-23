@@ -19,10 +19,10 @@ index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..db36cee92c7638fc99e02f4ac9ff1f7b
 +  context.log.error("Nitro response", context.res.cookies, context.res.headers, headers)
  }
 diff --git a/dist/runtime/utils.azure.mjs b/dist/runtime/utils.azure.mjs
-index d0e27bd1b36683f7834ed097c07702429da3c152..d21061e4852cbbada3b9b878c2f700bc03057092 100644
+index d0e27bd1b36683f7834ed097c07702429da3c152..1a81eb140d15c413407d5789709676e1bfa2b029 100644
 --- a/dist/runtime/utils.azure.mjs
 +++ b/dist/runtime/utils.azure.mjs
-@@ -1,13 +1,27 @@
+@@ -1,13 +1,57 @@
  import { parse } from "cookie-es";
  import { splitCookiesString } from "h3";
 -import { joinHeaders } from "./utils.mjs";
@@ -42,17 +42,47 @@ index d0e27bd1b36683f7834ed097c07702429da3c152..d21061e4852cbbada3b9b878c2f700bc
 +    console.log(parse(cookie), cookie);
 +    if (entries.length > 0) {
 +      const [entry, ...rest] = entries;
-+      return [
-+        {
-+          name: entry[0],
-+          value: entry[1],
-+          ...Object.fromEntries(
-+            rest.map(([key, value]) => [key.toLowerCase(), value])
-+          )
++      const options = Object.fromEntries(
++        rest.map(([k, v]) => [k.toLowerCase(), v])
++      );
++      const res = {
++        name: entry[0],
++        value: entry[1],
++        domain: options.domain,
++        path: options.path,
++        expires: parseNumberOrDate(options.expires),
++        // secure: options.secure,
++        // httponly: options.httponly,
++        samesite: options.samesite,
++        maxAge: parseNumber(options.maxAge)
++      };
++      for (const key in res) {
++        if (res[key] === void 0) {
++          delete res[key];
 +        }
-+      ];
++      }
++      return [res];
 +    }
 +    return [];
 +  });
    return cookies;
  }
++function parseNumberOrDate(expires) {
++  const expiresAsNumber = parseNumber(expires);
++  if (expiresAsNumber !== void 0) {
++    return expiresAsNumber;
++  }
++  const expiresAsDate = new Date(expires);
++  if (!Number.isNaN(expiresAsDate.getTime())) {
++    return expiresAsDate;
++  }
++}
++function parseNumber(maxAge) {
++  if (!maxAge) {
++    return void 0;
++  }
++  const maxAgeAsNumber = Number(maxAge);
++  if (!Number.isNaN(maxAgeAsNumber)) {
++    return maxAgeAsNumber;
++  }
++}
