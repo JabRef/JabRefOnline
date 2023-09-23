@@ -19,25 +19,40 @@ index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..db36cee92c7638fc99e02f4ac9ff1f7b
 +  context.log.error("Nitro response", context.res.cookies, context.res.headers, headers)
  }
 diff --git a/dist/runtime/utils.azure.mjs b/dist/runtime/utils.azure.mjs
-index d0e27bd1b36683f7834ed097c07702429da3c152..b078579627e739876113b19ab5fa294c0413e038 100644
+index d0e27bd1b36683f7834ed097c07702429da3c152..d21061e4852cbbada3b9b878c2f700bc03057092 100644
 --- a/dist/runtime/utils.azure.mjs
 +++ b/dist/runtime/utils.azure.mjs
-@@ -7,7 +7,17 @@ export function getAzureParsedCookiesFromHeaders(headers) {
+@@ -1,13 +1,27 @@
+ import { parse } from "cookie-es";
+ import { splitCookiesString } from "h3";
+-import { joinHeaders } from "./utils.mjs";
+ export function getAzureParsedCookiesFromHeaders(headers) {
+-  const c = String(headers["set-cookie"]);
+-  if (!c || c.length === 0) {
++  const raw = headers["set-cookie"];
++  if (!raw || typeof raw === "number" || raw.length === 0) {
      return [];
    }
-   const cookies = splitCookiesString(joinHeaders(c)).map(
+-  const cookies = splitCookiesString(joinHeaders(c)).map(
 -    (cookie) => parse(cookie)
-+    (cookie) => {
-+        const entries = Object.entries(parse(cookie))
-+        if (entries.length >= 1) {
-+          const [entry, ...rest] = Object.entries(cookie)
-+          return {
-+            name: entry[0],
-+            value: entry[1],
-+            ...Object.fromEntries(rest)
-+          }
+-  );
++  const rawCookies = Array.isArray(raw) ? raw : splitCookiesString(String(raw));
++  const cookies = rawCookies.flatMap((cookie) => {
++    const entries = Object.entries(parse(cookie));
++    console.log(parse(cookie), cookie);
++    if (entries.length > 0) {
++      const [entry, ...rest] = entries;
++      return [
++        {
++          name: entry[0],
++          value: entry[1],
++          ...Object.fromEntries(
++            rest.map(([key, value]) => [key.toLowerCase(), value])
++          )
 +        }
-+      }
-   );
++      ];
++    }
++    return [];
++  });
    return cookies;
  }
