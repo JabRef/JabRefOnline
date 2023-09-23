@@ -1,23 +1,50 @@
-diff --git a/dist/runtime/entries/azure-functions.mjs b/dist/runtime/entries/azure-functions.mjs
-index 7437e5b196f983f4706d56c5820e664b4f1d4098..30251a23976e8a261778404b1e13561d3fa5c2e0 100644
---- a/dist/runtime/entries/azure-functions.mjs
-+++ b/dist/runtime/entries/azure-functions.mjs
-@@ -18,4 +18,5 @@ export async function handle(context, req) {
-     headers: normalizeLambdaOutgoingHeaders(headers, true),
-     body: body ? body.toString() : statusText
-   };
-+  context.error("Nitro response", context.res.cookies, context.res.headers, headers)
- }
 diff --git a/dist/runtime/entries/azure.mjs b/dist/runtime/entries/azure.mjs
-index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..db36cee92c7638fc99e02f4ac9ff1f7b86eb2d99 100644
+index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..4a1262c583f746556898fe43c4e5d01c1497ba26 100644
 --- a/dist/runtime/entries/azure.mjs
 +++ b/dist/runtime/entries/azure.mjs
-@@ -25,4 +25,5 @@ export async function handle(context, req) {
-     headers: normalizeLambdaOutgoingHeaders(headers, true),
-     body: body ? body.toString() : statusText
-   };
-+  context.log.error("Nitro response", context.res.cookies, context.res.headers, headers)
- }
+@@ -3,6 +3,8 @@ import { parseURL } from "ufo";
+ import { nitroApp } from "../app.mjs";
+ import { getAzureParsedCookiesFromHeaders } from "../utils.azure.mjs";
+ import { normalizeLambdaOutgoingHeaders } from "../utils.lambda.mjs";
++import { createConsola } from "consola";
++
+ export async function handle(context, req) {
+   let url;
+   if (req.headers["x-ms-original-url"]) {
+@@ -11,6 +13,25 @@ export async function handle(context, req) {
+   } else {
+     url = "/api/" + (req.params.url || "");
+   }
++  _getLogFn = (level) => {
++    if (level < 1) {
++      return context.log.error;
++    }
++    if (level === 1) {
++      return context.log.warn;
++    }
++    return context.log;
++  }
++  const consola = createConsola({
++    reporters: [
++      {
++        log: (logObj) => {
++          _getLogFn(logObj.level)(logObj.args);
++        },
++      },
++    ],
++  });
++  consola.wrapConsole();
+   const { body, status, statusText, headers } = await nitroApp.localCall({
+     url,
+     headers: req.headers,
+@@ -18,6 +39,7 @@ export async function handle(context, req) {
+     // https://github.com/Azure/azure-functions-host/issues/293
+     body: req.rawBody
+   });
++  consola.restoreConsole();
+   context.res = {
+     status,
+     // cookies https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-node?tabs=typescript%2Cwindows%2Cazure-cli&pivots=nodejs-model-v4#http-response
 diff --git a/dist/runtime/utils.azure.mjs b/dist/runtime/utils.azure.mjs
 index d0e27bd1b36683f7834ed097c07702429da3c152..1a81eb140d15c413407d5789709676e1bfa2b029 100644
 --- a/dist/runtime/utils.azure.mjs
