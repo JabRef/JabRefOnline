@@ -13,6 +13,12 @@ describe('mutation', () => {
                   id
                 }
               }
+              ... on InputValidationProblem {
+                problems {
+                  path
+                  message
+                }
+              }
             }
           }
         `)
@@ -20,11 +26,11 @@ describe('mutation', () => {
           input: { email: 'alice@jabref.org', password: 'EBNPXY35TYkYXHs' },
         })
       expect(errors).toEqual(undefined)
-      // TODO: Check that there is even a session cookie
-      expect(response.get('set-cookie')).toBeDefined()
       expect(data).toStrictEqual({
         login: { user: { id: 'ckn4oul7100004cv7y3t94n8j' } },
       })
+      // TODO: Check that there is even a session cookie
+      expect(response.get('set-cookie')).toBeDefined()
     })
   })
 })

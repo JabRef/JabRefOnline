@@ -41,7 +41,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3.8.1
         with:
-          node-version: 18
+          node-version: 20
           cache: 'yarn'
 
       - name: Build
@@ -108,6 +108,21 @@ jobs:
 
       - name: Deploy Function App
         run: |
+          # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
+          # if multiple versions of the same package are used.
+          # However, these symlinks are not preserved by Compress-Archive, and even they were, Azure has problems with symlinks:
+          # https://github.com/Azure/webapps-deploy/issues/54
+          # Therefore, replace all symlinks by the actual files
+          $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
+          foreach ($link in $links)
+          {
+              $source = $link.Target;
+              $destination = $link.FullName;
+
+              Remove-Item $destination -Force
+              Copy-Item -Path $source -Destination $destination -Force -Recurse
+          }
+
           Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
           az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-$env:PREVIEW_NAME --src .output\server.zip
 
