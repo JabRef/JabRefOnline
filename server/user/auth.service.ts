@@ -53,6 +53,7 @@ export class AuthService {
           sameSite: 'strict',
         },
       },
+      // TODO: Enable (once figure out why login then no longer works)
       csrfProtection: false,
     })
   }
