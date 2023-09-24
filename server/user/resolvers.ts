@@ -50,12 +50,12 @@ export class Query {
     return await this.authService.getUserById(id)
   }
 
-  me(
+  async me(
     _root: Record<string, never>,
     _args: Record<string, never>,
     context: Context,
-  ): User | null {
-    return context.getUser()
+  ): Promise<User | null> {
+    return await context.getUser()
   }
 }
 
@@ -69,9 +69,13 @@ export class Mutation {
     { input: { email, password } }: MutationSignupArgs,
     context: Context,
   ): Promise<SignupPayload> {
-    const newUserPayload = await this.authService.createAccount(email, password)
-    if ('user' in newUserPayload) void context.login(await newUserPayload.user)
-    return newUserPayload
+    const userOrProblems = await this.authService.createAccount(email, password)
+    if ('problems' in userOrProblems) {
+      return userOrProblems
+    }
+    const session = await this.authService.createSession(userOrProblems)
+    context.setSession(session)
+    return { user: userOrProblems }
   }
 
   @validateInput(LoginInputSchema)
@@ -80,26 +84,15 @@ export class Mutation {
     { input: { email, password } }: MutationLoginArgs,
     context: Context,
   ): Promise<LoginPayload> {
-    const { user, info } = await context.authenticate('graphql-local', {
-      email,
-      password,
-    })
-    if (user) {
-      // Make login persistent by putting it in the session store
-      await context.login(user)
-      return { user }
-    } else {
-      return {
-        problems: [
-          {
-            path: ['email'],
-            message:
-              (typeof info === 'string' ? info : info?.message) ??
-              'Unknown error while logging in.',
-          },
-        ],
-      }
+    const userOrProblems = await this.authService.validateUser(email, password)
+    if ('problems' in userOrProblems) {
+      return userOrProblems
     }
+
+    // Make login persistent by putting it in the session store
+    const session = await this.authService.createSession(userOrProblems)
+    context.setSession(session)
+    return { user: userOrProblems }
   }
 
   logout(
@@ -107,7 +100,7 @@ export class Mutation {
     _args: Record<string, never>,
     context: Context,
   ): LogoutPayload {
-    context.logout()
+    context.setSession(null)
     return {
       result: true,
     }

@@ -107,10 +107,11 @@ export class Mutation {
       )
     }
 
+    const user = await context.getUser()
     return await this.groupService.addGroup({
       users: {
         connect: {
-          id: context.getUser()?.id,
+          id: user?.id,
         },
       },
       name: group.name,

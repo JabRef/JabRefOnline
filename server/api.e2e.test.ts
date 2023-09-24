@@ -34,10 +34,10 @@ describe('request without query', () => {
       .get('/api')
       .set('Apollo-Require-Preflight', 'True')
 
-    expect(response.statusCode).toBe(400)
     expect(response.text).toContain(
       'GraphQL operations must contain a non-empty `query`',
     )
+    expect(response.statusCode).toBe(400)
   })
 })
 

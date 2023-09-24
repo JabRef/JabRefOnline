@@ -12,6 +12,8 @@ import {
   inject as tsyringeInject,
 } from 'tsyringe'
 import { constructor } from 'tsyringe/dist/typings/types'
+import type { Storage } from 'unstorage'
+import type { Config } from '~/config'
 import type * as DocumentResolvers from './documents/resolvers'
 import type { UserDocumentService } from './documents/user.document.service'
 import type * as GroupResolvers from './groups/resolvers'
@@ -19,9 +21,7 @@ import type { GroupService } from './groups/service'
 import type { JournalService } from './journals/journal.service'
 import type * as JournalResolvers from './journals/resolvers'
 import type { AuthService } from './user/auth.service'
-import type PassportInitializer from './user/passport-initializer'
 import type * as UserResolvers from './user/resolvers'
-import { RedisClient } from './utils/services.factory'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
 
@@ -48,10 +48,10 @@ function injectSymbol<S extends string>(
 }
 
 export const InjectionSymbols = {
+  ...injectSymbol('Config')<Config>(),
   // Tools
   ...injectSymbol('PrismaClient')<typeof PrismaClient>(),
-  ...injectSymbol('RedisClient')<RedisClient>(),
-  ...injectSymbol('PassportInitializer')<typeof PassportInitializer>(),
+  ...injectSymbol('RedisClient')<Storage>(),
   // Services
   ...injectSymbol('UserDocumentService')<typeof UserDocumentService>(),
   ...injectSymbol('AuthService')<typeof AuthService>(),

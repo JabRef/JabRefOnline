@@ -20,13 +20,16 @@ globalThis.Reflect = Reflect
 registerClasses()
 
 // Setup services for integration tests
-beforeAll(async (context) => {
+beforeAll((context) => {
   const isIntegrationTest =
     context.filepath?.endsWith('integration.test.ts') ?? false
 
   if (isIntegrationTest) {
     const config = constructConfig()
-    const redisClient = await createRedisClient(config)
+    register('Config', {
+      useValue: config,
+    })
+    const redisClient = createRedisClient(config)
     register('RedisClient', {
       useValue: redisClient,
     })
@@ -37,9 +40,7 @@ beforeAll(async (context) => {
     })
 
     return async () => {
-      if ('disconnect' in redisClient) {
-        await redisClient.disconnect()
-      }
+      await redisClient.dispose()
       await prismaClient.$disconnect()
     }
   }
