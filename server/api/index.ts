@@ -8,6 +8,7 @@ import 'json-bigint-patch' // Needed for bigint support in JSON
 import 'reflect-metadata' // Needed for tsyringe
 import { buildContext, Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
+import { configure as configureTsyringe } from './../tsyringe.config'
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_outgoing.js
@@ -84,6 +85,8 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
 }
 
 export default defineLazyEventHandler(async () => {
+  configureTsyringe()
+
   const server = new ApolloServer<Context>({
     schema: await loadSchemaWithResolvers(),
     introspection: true,
