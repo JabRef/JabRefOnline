@@ -20,7 +20,7 @@ globalThis.Reflect = Reflect
 registerClasses()
 
 // Setup services for integration tests
-beforeAll(async (context) => {
+beforeAll((context) => {
   const isIntegrationTest =
     context.filepath?.endsWith('integration.test.ts') ?? false
 
@@ -29,7 +29,7 @@ beforeAll(async (context) => {
     register('Config', {
       useValue: config,
     })
-    const redisClient = await createRedisClient(config)
+    const redisClient = createRedisClient(config)
     register('RedisClient', {
       useValue: redisClient,
     })

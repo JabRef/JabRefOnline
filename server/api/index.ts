@@ -85,7 +85,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
 }
 
 export default defineLazyEventHandler(async () => {
-  await configureTsyringe()
+  configureTsyringe()
 
   const server = new ApolloServer<Context>({
     schema: await loadSchemaWithResolvers(),

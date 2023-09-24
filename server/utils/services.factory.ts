@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */ // TODO: Remove once redis-mock is updated
 import { Config, Environment } from '~/config'
 
-import Redis from 'ioredis'
 import { createStorage, Storage } from 'unstorage'
 import memoryDriver from 'unstorage/drivers/memory'
+import redisDriver from 'unstorage/drivers/redis'
 
-export async function createRedisClient(config: Config): Promise<Storage> {
+export function createRedisClient(config: Config): Storage {
   if (
     config.public.environment === Environment.LocalDevelopment ||
     config.public.environment === Environment.AzureBuild
@@ -43,6 +42,7 @@ export async function createRedisClient(config: Config): Promise<Storage> {
     }
 
     // Create redis instance to test connection
+    /*
     const redisClient = new Redis(createRedisConfig())
     redisClient.on('error', (error) => {
       console.error('Redis error', error)
@@ -57,14 +57,11 @@ export async function createRedisClient(config: Config): Promise<Storage> {
       console.warn('Redis closed')
     })
     await redisClient.set('test', 'test')
+    */
 
-    const { default: redisDriver } = await import('unstorage/drivers/redis')
     return createStorage({
       driver: redisDriver({
         base: '{unstorage}',
-        // We don't queue commands if Redis is not available but instead fail
-        // (otherwise this would mask errors)
-        // enableOfflineQueue: false,
         ...createRedisConfig(),
       }),
     })

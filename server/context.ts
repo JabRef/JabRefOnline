@@ -21,6 +21,7 @@ export function buildContext({
   const authHandler = resolve('AuthService').createAuthContext(event)
   return Promise.resolve({
     getUser: async () => {
+      // Validate internally caches the result, so we don't need to cache it here
       const session = await authHandler.validate()
       return session?.user ?? null
     },
