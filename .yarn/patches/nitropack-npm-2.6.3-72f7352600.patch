@@ -46,10 +46,10 @@ index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..ac3dad70537e585d63c713048c545238
      status,
      // cookies https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-node?tabs=typescript%2Cwindows%2Cazure-cli&pivots=nodejs-model-v4#http-response
 diff --git a/dist/runtime/utils.azure.mjs b/dist/runtime/utils.azure.mjs
-index d0e27bd1b36683f7834ed097c07702429da3c152..1a81eb140d15c413407d5789709676e1bfa2b029 100644
+index d0e27bd1b36683f7834ed097c07702429da3c152..0dd0309f7c73ccb709c7bee85360267f7198a4da 100644
 --- a/dist/runtime/utils.azure.mjs
 +++ b/dist/runtime/utils.azure.mjs
-@@ -1,13 +1,57 @@
+@@ -1,13 +1,56 @@
  import { parse } from "cookie-es";
  import { splitCookiesString } from "h3";
 -import { joinHeaders } from "./utils.mjs";
@@ -66,7 +66,6 @@ index d0e27bd1b36683f7834ed097c07702429da3c152..1a81eb140d15c413407d5789709676e1
 +  const rawCookies = Array.isArray(raw) ? raw : splitCookiesString(String(raw));
 +  const cookies = rawCookies.flatMap((cookie) => {
 +    const entries = Object.entries(parse(cookie));
-+    console.log(parse(cookie), cookie);
 +    if (entries.length > 0) {
 +      const [entry, ...rest] = entries;
 +      const options = Object.fromEntries(
