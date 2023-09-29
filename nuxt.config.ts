@@ -28,10 +28,6 @@ export default defineNuxtConfig({
     },
     // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
-    prerender: {
-      // Needed for storybook support (otherwise the file is not created during nuxi generate)
-      routes: ['/_storybook/external-iframe'],
-    },
     esbuild: {
       options: {
         tsconfigRaw: {
@@ -47,11 +43,6 @@ export default defineNuxtConfig({
   experimental: {
     // Full typed routing
     typedPages: true,
-  },
-
-  vue: {
-    // Add support for vue runtime compiler (needed to render stories in storybook)
-    runtimeCompiler: true,
   },
 
   // Workaround for https://github.com/nuxt/nuxt/issues/22933
@@ -143,6 +134,9 @@ export default defineNuxtConfig({
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
+    // Add support for storybook
+    // https://storybook.nuxtjs.org/
+    '@nuxtjs/storybook',
     // Add support for native vue stories
     // https://github.com/tobiasdiez/storybook-vue-addon
     'storybook-vue-addon/nuxt',
