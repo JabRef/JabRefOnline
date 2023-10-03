@@ -18,7 +18,7 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
       id: 'ckn4oul7100004cv7y3t94n8j',
       email: 'alice@jabref.org',
       name: 'Alice',
-      key: {
+      keys: {
         create: [
           {
             id: 'email:alice@jabref.org',

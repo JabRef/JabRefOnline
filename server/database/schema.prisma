@@ -17,7 +17,7 @@ model User {
   createdAt DateTime @default(now())
   documents UserDocument[]
   groups Group[]
-  key Key[] // TODO: Rename to keys
+  keys Key[]
 }
 
 model Key {

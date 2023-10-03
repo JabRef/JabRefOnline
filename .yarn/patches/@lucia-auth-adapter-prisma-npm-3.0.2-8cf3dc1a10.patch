@@ -1,0 +1,28 @@
+diff --git a/dist/prisma.js b/dist/prisma.js
+index 64924ab08a2fb22e6365a60c37adf684ea7ecbce..922babc0285618c8f737d6a3893dfe74e6ad962b 100644
+--- a/dist/prisma.js
++++ b/dist/prisma.js
+@@ -33,14 +33,15 @@ export const prismaAdapter = (client, modelNames) => {
+                     return;
+                 }
+                 try {
+-                    await client.$transaction([
+-                        User.create({
+-                            data: user
+-                        }),
+-                        Key.create({
+-                            data: key
+-                        })
+-                    ]);
++                    // CHANGED: Use prisma nested create to create key
++                    // Userid is taken care of by prisma automatically
++					const { user_id: _, ...keyData } = key;
++					await User.create({
++						data: {
++							keys: { create: [keyData] },
++							...user
++						}
++					});
+                 }
+                 catch (e) {
+                     const error = e;

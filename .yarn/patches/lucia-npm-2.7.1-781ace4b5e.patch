@@ -1,0 +1,35 @@
+diff --git a/dist/auth/index.js b/dist/auth/index.js
+index 8a70113bbb245dae9190f3392538e18afc750e52..377025c76a182e53113d9b8b12876bb5a405c0a7 100644
+--- a/dist/auth/index.js
++++ b/dist/auth/index.js
+@@ -158,11 +158,12 @@ export class Auth {
+         return user;
+     };
+     createUser = async (options) => {
+-        const userId = options.userId ?? generateRandomString(15);
++        // CHANGED: We want the db to generate the id
++        //const userId = options.userId ?? generateRandomString(15);
+         const userAttributes = options.attributes ?? {};
+         const databaseUser = {
+             ...userAttributes,
+-            id: userId
++            //id: userId
+         };
+         if (options.key === null) {
+             await this.adapter.setUser(databaseUser, null);
+@@ -171,12 +172,11 @@ export class Auth {
+         const keyId = createKeyId(options.key.providerId, options.key.providerUserId);
+         const password = options.key.password;
+         const hashedPassword = password === null ? null : await this.passwordHash.generate(password);
+-        await this.adapter.setUser(databaseUser, {
++        return this.transformDatabaseUser(await this.adapter.setUser(databaseUser, {
+             id: keyId,
+-            user_id: userId,
++            //user_id: userId,
+             hashed_password: hashedPassword
+-        });
+-        return this.transformDatabaseUser(databaseUser);
++        }));
+     };
+     updateUserAttributes = async (userId, attributes) => {
+         await this.adapter.updateUser(userId, attributes);
