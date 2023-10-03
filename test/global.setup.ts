@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
 import 'dotenv/config'
+import 'json-bigint-patch'
 import 'reflect-metadata'
 import { beforeAll } from 'vitest'
 import { constructConfig } from '~/config'
@@ -20,7 +21,7 @@ globalThis.Reflect = Reflect
 registerClasses()
 
 // Setup services for tests
-beforeAll(async (context) => {
+beforeAll((context) => {
   register('EmailService', { useValue: new EmailServiceMock() })
 
   const isIntegrationTest =
@@ -28,7 +29,10 @@ beforeAll(async (context) => {
 
   if (isIntegrationTest) {
     const config = constructConfig()
-    const redisClient = await createRedisClient(config)
+    register('Config', {
+      useValue: config,
+    })
+    const redisClient = createRedisClient(config)
     register('RedisClient', {
       useValue: redisClient,
     })
@@ -39,9 +43,7 @@ beforeAll(async (context) => {
     })
 
     return async () => {
-      if ('disconnect' in redisClient) {
-        await redisClient.disconnect()
-      }
+      await redisClient.dispose()
       await prismaClient.$disconnect()
     }
   }

@@ -78,6 +78,7 @@ const documents = computed(
     result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty),
 )
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const onScrollToBottom = () => {
   if (result.value?.me?.documents.pageInfo.hasNextPage) {
     void fetchMore({
@@ -85,7 +86,7 @@ const onScrollToBottom = () => {
         groupId: ui.selectedGroupId,
         query: ui.activeSearchQuery,
         first: FIRST,
-        after: result.value?.me?.documents.pageInfo.endCursor ?? undefined,
+        after: result.value.me.documents.pageInfo.endCursor ?? undefined,
       },
     })
   }

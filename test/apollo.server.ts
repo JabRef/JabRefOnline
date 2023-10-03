@@ -5,7 +5,7 @@ import { Context } from '~/server/context'
 import { loadSchemaWithResolvers } from '~/server/schema'
 import { resolve } from '~/server/tsyringe'
 
-export type ApolloClient = {
+export interface ApolloClient {
   executeOperation<
     TData = Record<string, unknown>,
     TVariables extends VariableValues = VariableValues,
@@ -30,16 +30,8 @@ export async function createAuthenticatedClient(): Promise<ApolloClient> {
     executeOperation: async (operation) => {
       return await server.executeOperation(operation, {
         contextValue: {
-          getUser: () => user,
-          isAuthenticated: () => true,
-          isUnauthenticated: () => false,
-          authenticate: (_strategyName) => {
-            throw new Error('Not implemented')
-          },
-          login: () => {
-            throw new Error('Not implemented')
-          },
-          logout: () => {
+          getUser: () => Promise.resolve(user),
+          setSession: () => {
             throw new Error('Not implemented')
           },
         },

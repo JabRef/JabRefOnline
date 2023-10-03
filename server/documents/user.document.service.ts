@@ -22,7 +22,7 @@ import { inject, injectable } from './../tsyringe'
 
 export type UserDocument = PlainUserDocument & {
   other?: UserDocumentOtherField[]
-  journalIssue?:
+  journalIssue:
     | (JournalIssue & {
         journal: Journal | null
       })
@@ -32,7 +32,7 @@ export type UserDocument = PlainUserDocument & {
   })[]
 }
 
-type UserDocumentsAndPageInfo = {
+interface UserDocumentsAndPageInfo {
   documents: UserDocument[]
   hasNextPage: boolean
 }
@@ -68,6 +68,7 @@ export class UserDocumentService {
       | UserDocument
       | (UserDocumentCreateInput & { revisionHash?: string }),
   ): string {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { revisionNumber, revisionHash, ...documentWithoutRevision } =
       document
     return unsecureHash(documentWithoutRevision)

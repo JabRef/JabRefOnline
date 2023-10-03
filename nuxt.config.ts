@@ -14,12 +14,20 @@ export default defineNuxtConfig({
   alias: {
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
-    global: 'global.ts',
+    global: './global.ts',
   },
 
   nitro: {
-    // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
-    moduleSideEffects: ['reflect-metadata'],
+    azure: {
+      config: {
+        globalHeaders: {
+          'X-Robots-Tag':
+            'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        },
+      },
+    },
+    // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
+    moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
       // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],
@@ -44,6 +52,19 @@ export default defineNuxtConfig({
   vue: {
     // Add support for vue runtime compiler (needed to render stories in storybook)
     runtimeCompiler: true,
+  },
+
+  // Workaround for https://github.com/nuxt/nuxt/issues/22933
+  hooks: {
+    close: (nuxt) => {
+      if (
+        !nuxt.options._prepare &&
+        !process.env.TEST &&
+        !process.env.VITE_TEST
+      ) {
+        process.exit()
+      }
+    },
   },
 
   /*
@@ -114,7 +135,7 @@ export default defineNuxtConfig({
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // Add support for naive-ui
-    '@huntersofbook/naive-ui-nuxt',
+    '@bg-dev/nuxt-naiveui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -168,7 +189,7 @@ export default defineNuxtConfig({
   // storybook: {},
 
   tailwindcss: {
-    // Expose config so that we can use it in the vscode extension
+    // Expose config so that we can use it to configure naive ui and in the vscode extension
     exposeConfig: true,
   },
 
@@ -201,20 +222,6 @@ export default defineNuxtConfig({
     markdown: {
       // Don't automatically print h2-h4 headings as links
       anchorLinks: false,
-    },
-  },
-
-  /**
-   * Naive UI configuration
-   */
-  naiveUI: {
-    themeOverrides: {
-      common: {
-        primaryColor: '#6072A7',
-        primaryColorHover: '#4F5F8F',
-        primaryColorPressed: '#3B476B',
-        primaryColorSuppl: '#4F5F8F',
-      },
     },
   },
 
@@ -252,8 +259,8 @@ export default defineNuxtConfig({
         ? {
             // Gitpod is served over https, so we need to use wss as well
             protocol: 'wss',
-            host: `3000-${process.env.GITPOD_WORKSPACE_ID || ''}.${
-              process.env.GITPOD_WORKSPACE_CLUSTER_HOST || ''
+            host: `3000-${process.env.GITPOD_WORKSPACE_ID ?? ''}.${
+              process.env.GITPOD_WORKSPACE_CLUSTER_HOST ?? ''
             }`,
             port: 443,
           }

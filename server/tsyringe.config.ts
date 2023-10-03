@@ -5,36 +5,38 @@ import * as DocumentResolvers from './documents/resolvers'
 import { UserDocumentService } from './documents/user.document.service'
 import * as GroupResolvers from './groups/resolvers'
 import { GroupService } from './groups/service'
+import { JournalService } from './journals/journal.service'
+import * as JournalResolvers from './journals/resolvers'
 import { instanceCachingFactory, register } from './tsyringe'
 import { AuthService } from './user/auth.service'
-import PassportInitializer from './user/passport-initializer'
 import * as UserResolvers from './user/resolvers'
 import { createEmailService } from './utils/email.service'
 import { createRedisClient } from './utils/services.factory'
 
 const { PrismaClient } = prisma
 
-export async function configure(): Promise<void> {
+export function configure() {
   const config = useRuntimeConfig() as Config
+  register('Config', {
+    useValue: config,
+  })
   // Tools
   register('PrismaClient', {
     useFactory: instanceCachingFactory(() => new PrismaClient()),
   })
   register('RedisClient', {
-    useValue: await createRedisClient(config),
+    useValue: createRedisClient(config),
   })
   register('EmailService', { useValue: createEmailService() })
   registerClasses()
 }
 
 export function registerClasses(): void {
-  // Tools
-  register('PassportInitializer', PassportInitializer)
-
   // Services
   register('UserDocumentService', UserDocumentService)
   register('AuthService', AuthService)
   register('GroupService', GroupService)
+  register('JournalService', JournalService)
   // Resolvers
   register('DocumentQuery', DocumentResolvers.Query)
   register('DocumentMutation', DocumentResolvers.Mutation)
@@ -50,6 +52,9 @@ export function registerClasses(): void {
   register('GroupQuery', GroupResolvers.Query)
   register('GroupMutation', GroupResolvers.Mutation)
   register('GroupResolver', GroupResolvers.GroupResolver)
+
+  register('JournalQuery', JournalResolvers.Query)
+  register('JournalResolver', JournalResolvers.JournalResolver)
 
   register('UserQuery', UserResolvers.Query)
   register('UserMutation', UserResolvers.Mutation)

@@ -92,6 +92,7 @@ export class Mutation {
       isRegEx = group.searchGroup.isRegEx
     } else if (group.texGroup) {
       type = GroupType.TexGroup
+      // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars --- TODO: handle paths
       paths = group.texGroup.paths
     }
 
@@ -106,10 +107,11 @@ export class Mutation {
       )
     }
 
+    const user = await context.getUser()
     return await this.groupService.addGroup({
       users: {
         connect: {
-          id: context.getUser()?.id,
+          id: user?.id,
         },
       },
       name: group.name,
@@ -152,7 +154,7 @@ export class Mutation {
   ): Promise<Group | null> {
     return await this.groupService.updateGroup({
       id: group.id,
-      name: group.name || undefined,
+      name: group.name ?? undefined,
       // TODO: Remaining properties
     })
   }

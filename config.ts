@@ -29,7 +29,7 @@ export enum Environment {
  * Taken from https://stackoverflow.com/a/41548441
  */
 function enumFromStringValue<T>(
-  enm: { [s: string]: T },
+  enm: Record<string, T>,
   value: string,
 ): T | undefined {
   return (Object.values(enm) as unknown as string[]).includes(value)
@@ -76,15 +76,15 @@ export function constructConfig() {
   return {
     redis: {
       port: Number(process.env.REDIS_PORT) || 6380,
-      host: process.env.REDIS_HOST || 'localhost',
-      password: process.env.REDIS_PASSWORD || 'jabref',
+      host: process.env.REDIS_HOST ?? 'localhost',
+      password: process.env.REDIS_PASSWORD ?? 'jabref',
     },
     emailClient: process.env.EMAIL_CLIENT,
     session: {
-      primarySecret: process.env.SESSION_SECRET_PRIMARY || 'session_secret',
-      secondarySecret: process.env.SESSION_SECRET_SECONDARY || 'session_secret',
+      primarySecret: process.env.SESSION_SECRET_PRIMARY ?? 'session_secret',
+      secondarySecret: process.env.SESSION_SECRET_SECONDARY ?? 'session_secret',
     },
-    githubRepoToken: process.env.GITHUB_REPO_TOKEN || 'UNDEFINED',
+    githubRepoToken: process.env.GITHUB_REPO_TOKEN ?? 'UNDEFINED',
     public: {
       environment: getEnvironment(),
     },

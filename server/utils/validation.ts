@@ -6,7 +6,7 @@ type MethodDecorator<T> = <S extends T>(
   target: any,
   propertyKey: string | symbol,
   descriptor: TypedPropertyDescriptor<S>,
-) => TypedPropertyDescriptor<S> | void
+) => TypedPropertyDescriptor<S>
 
 /**
  * Method decorator that validates the argument of the target function against the given schema.
@@ -52,8 +52,10 @@ export function validateInput<T extends AnyZodObject>(
   arg: T | (() => T),
 ): MethodDecorator<ZodResolver<T>> {
   return function (_target, _propertyKey, descriptor) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const originalMethod = descriptor.value!
+    const originalMethod = descriptor.value
+    if (!originalMethod) {
+      throw new Error('validateInput can only be used on methods')
+    }
     // @ts-expect-error: should be fine
     descriptor.value = function (root, { input }, context, info) {
       const schema = typeof arg === 'function' ? arg() : arg
