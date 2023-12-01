@@ -2175,7 +2175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@css-render/plugin-bem@npm:^0.15.10":
+"@css-render/plugin-bem@npm:^0.15.10, @css-render/plugin-bem@npm:^0.15.12":
   version: 0.15.12
   resolution: "@css-render/plugin-bem@npm:0.15.12"
   peerDependencies:
@@ -2184,7 +2184,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@css-render/vue3-ssr@npm:^0.15.10":
+"@css-render/vue3-ssr@npm:^0.15.10, @css-render/vue3-ssr@npm:^0.15.12":
   version: 0.15.12
   resolution: "@css-render/vue3-ssr@npm:0.15.12"
   peerDependencies:
@@ -6426,6 +6426,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/katex@npm:^0.16.2":
+  version: 0.16.7
+  resolution: "@types/katex@npm:0.16.7"
+  checksum: 4fd15d93553be97c02c064e16be18d7ccbabf66ec72a9dc7fd5bfa47f0c7581da2f942f693c7cb59499de4c843c2189796e49c9647d336cbd52b777b6722a95a
+  languageName: node
+  linkType: hard
+
 "@types/keyv@npm:^3.1.1":
   version: 3.1.4
   resolution: "@types/keyv@npm:3.1.4"
@@ -6444,6 +6451,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash-es@npm:^4.17.9":
+  version: 4.17.12
+  resolution: "@types/lodash-es@npm:4.17.12"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 990a99e2243bebe9505cb5ad19fbc172beb4a8e00f9075c99fc06c46c2801ffdb40bc2867271cf580d5f48994fc9fb076ec92cd60a20e621603bf22114e5b077
+  languageName: node
+  linkType: hard
+
 "@types/lodash@npm:*, @types/lodash@npm:^4.14.181, @types/lodash@npm:^4.14.92":
   version: 4.14.199
   resolution: "@types/lodash@npm:4.14.199"
@@ -6451,7 +6467,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.202":
+"@types/lodash@npm:^4.14.198, @types/lodash@npm:^4.14.202":
   version: 4.14.202
   resolution: "@types/lodash@npm:4.14.202"
   checksum: a91acf3564a568c6f199912f3eb2c76c99c5a0d7e219394294213b3f2d54f672619f0fde4da22b29dc5d4c31457cd799acc2e5cb6bd90f9af04a1578483b6ff7
@@ -8564,7 +8580,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-validator@npm:^4.0.7":
+"async-validator@npm:^4.0.7, async-validator@npm:^4.2.5":
   version: 4.2.5
   resolution: "async-validator@npm:4.2.5"
   checksum: 3e3d891a2e21497c8a646afeb7b1e6ed5f98de5f58ce3600732080f327cb581e65d8d8ff184273f1461dc84105d49f5cf31422a67ce50e787967c306838b6f40
@@ -10265,7 +10281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-render@npm:^0.15.10":
+"css-render@npm:^0.15.10, css-render@npm:^0.15.12":
   version: 0.15.12
   resolution: "css-render@npm:0.15.12"
   dependencies:
@@ -10438,6 +10454,15 @@ __metadata:
   peerDependencies:
     date-fns: ">=2.0.0"
   checksum: dbf17cb88de7c7b71a9f86b815ac62ebdbf725c030e78d2421309456b5001a85284a5b6763f4af0ba660183f12e876c165e725a0723f642edb7846407db03133
+  languageName: node
+  linkType: hard
+
+"date-fns-tz@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "date-fns-tz@npm:2.0.0"
+  peerDependencies:
+    date-fns: ">=2.0.0"
+  checksum: a6553603a9d26dd9669326c99a58a2335ac550bc060c74b86a5ad9e1de73c9d4e3e5236f0f552f990e616e4e8dcc2b6a637913a04d2e04396e6a9f8ae83c73da
   languageName: node
   linkType: hard
 
@@ -13776,6 +13801,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"highlight.js@npm:^11.8.0":
+  version: 11.9.0
+  resolution: "highlight.js@npm:11.9.0"
+  checksum: 4043d31c5de9d27d13387d9a9e5e1939557254b7b85f0fab85d9cae0e420e131a3456ebf6148552020a1d8a216d671d583f2433d6c4de6179b8a66487a8325cb
+  languageName: node
+  linkType: hard
+
 "hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
@@ -15034,7 +15066,7 @@ __metadata:
     lodash: ^4.17.21
     lucia: ^2.7.1
     mount-vue-component: ^0.10.2
-    naive-ui: ^2.34.4
+    naive-ui: ^2.35.0
     nodemailer: ^6.8.0
     nuxt: ^3.7.4
     nuxt-graphql-server: 3.0.0
@@ -17600,6 +17632,34 @@ __metadata:
   peerDependencies:
     vue: ^3.0.0
   checksum: 0e91d9208ec362f53bd23571db6a1b4a213bbbd225330e788b0e8610d06628de46df19c068c098b8d57ac3fbe53dbbc8ce25c89e4790c2d852130a23be504d52
+  languageName: node
+  linkType: hard
+
+"naive-ui@npm:^2.35.0":
+  version: 2.35.0
+  resolution: "naive-ui@npm:2.35.0"
+  dependencies:
+    "@css-render/plugin-bem": ^0.15.12
+    "@css-render/vue3-ssr": ^0.15.12
+    "@types/katex": ^0.16.2
+    "@types/lodash": ^4.14.198
+    "@types/lodash-es": ^4.17.9
+    async-validator: ^4.2.5
+    css-render: ^0.15.12
+    date-fns: ^2.30.0
+    date-fns-tz: ^2.0.0
+    evtd: ^0.2.4
+    highlight.js: ^11.8.0
+    lodash: ^4.17.21
+    lodash-es: ^4.17.21
+    seemly: ^0.3.6
+    treemate: ^0.3.11
+    vdirs: ^0.1.8
+    vooks: ^0.2.12
+    vueuc: ^0.4.51
+  peerDependencies:
+    vue: ^3.0.0
+  checksum: 53239b8cbe5092f719ac8975c76fd92cfc4b380975ad968843c8bbd0d5f0cd697573fde09480c058cb988d16acfb44757fd59af5049c9e7b388ed22ee49516d4
   languageName: node
   linkType: hard
 
