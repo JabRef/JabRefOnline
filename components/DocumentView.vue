@@ -33,8 +33,8 @@
           author.__typename === 'Organization'
             ? author.name
             : author.__typename === 'Person'
-            ? author.family
-            : ''
+              ? author.family
+              : ''
         }}</span
       >
     </div>

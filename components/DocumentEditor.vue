@@ -215,8 +215,8 @@ const authors = computed({
         author.__typename === 'Organization'
           ? author.name
           : author.__typename === 'Person'
-          ? formatAuthor(useFragment(PersonFullDetails, author))
-          : '',
+            ? formatAuthor(useFragment(PersonFullDetails, author))
+            : '',
     })),
   set: (_value) => {
     // TODO: implement
