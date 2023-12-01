@@ -122,7 +122,7 @@ jobs:
           cp -r .output/public/_nuxt storybook-static
 
       - name: Publish and test Storybook
-        uses: chromaui/action@v1
+        uses: chromaui/action@v10
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
