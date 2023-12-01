@@ -10,6 +10,7 @@ export default defineVitestConfig({
       },
     },
   },
+  // @ts-expect-error: https://github.com/danielroe/nuxt-vitest/issues/389
   test: {
     // Provide global API
     // https://vitest.dev/config/#globals

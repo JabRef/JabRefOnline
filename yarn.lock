@@ -4842,7 +4842,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:3.7.4, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.1, @nuxt/kit@npm:^3.5.3, @nuxt/kit@npm:^3.6.1, @nuxt/kit@npm:^3.6.5, @nuxt/kit@npm:^3.7.0, @nuxt/kit@npm:^3.7.1, @nuxt/kit@npm:^3.7.3, @nuxt/kit@npm:^3.7.4, @nuxt/kit@npm:latest":
+"@nuxt/kit@npm:3.7.4, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.1, @nuxt/kit@npm:^3.5.3, @nuxt/kit@npm:^3.6.1, @nuxt/kit@npm:^3.6.5, @nuxt/kit@npm:^3.7.1, @nuxt/kit@npm:^3.7.3, @nuxt/kit@npm:^3.7.4, @nuxt/kit@npm:latest":
   version: 3.7.4
   resolution: "@nuxt/kit@npm:3.7.4"
   dependencies:
@@ -12529,6 +12529,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fake-indexeddb@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "fake-indexeddb@npm:5.0.1"
+  checksum: b9bf94003e40923513863dde1f0f852fb00faa9d31db5203e4142e7937371e9061801b68cfdd37b321df1a314b2a30788b904be909685302d8f9c37a54580cb9
+  languageName: node
+  linkType: hard
+
 "fast-decode-uri-component@npm:^1.0.1":
   version: 1.0.1
   resolution: "fast-decode-uri-component@npm:1.0.1"
@@ -13099,7 +13106,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-port-please@npm:^3.0.2, get-port-please@npm:^3.1.1":
+"get-port-please@npm:^3.1.1":
   version: 3.1.1
   resolution: "get-port-please@npm:3.1.1"
   checksum: e2b0b3822e5a5a37994a0bd1c708eb220ca47fd4b29adbc6ba076fb378d4706c07eba4d382a8283f6534e870f9081a58f923a9f873f7d1f298f5fae386470211
@@ -15287,7 +15294,7 @@ __metadata:
     nuxt-graphql-server: 3.0.0
     nuxt-icon: ^0.5.0
     nuxt-seo-kit: ^1.3.13
-    nuxt-vitest: ^0.10.5
+    nuxt-vitest: ^0.11.5
     pinia: ^2.1.6
     postinstall-postinstall: ^2.1.0
     prettier: ^3.1.0
@@ -16010,6 +16017,16 @@ __metadata:
   version: 0.4.3
   resolution: "local-pkg@npm:0.4.3"
   checksum: 7825aca531dd6afa3a3712a0208697aa4a5cd009065f32e3fb732aafcc42ed11f277b5ac67229222e96f4def55197171cdf3d5522d0381b489d2e5547b407d55
+  languageName: node
+  linkType: hard
+
+"local-pkg@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "local-pkg@npm:0.5.0"
+  dependencies:
+    mlly: ^1.4.2
+    pkg-types: ^1.0.3
+  checksum: b0a6931e588ad4f7bf4ab49faacf49e07fc4d05030f895aa055d46727a15b99300d39491cf2c3e3f05284aec65565fb760debb74c32e64109f4a101f9300d81a
   languageName: node
   linkType: hard
 
@@ -18628,23 +18645,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-vitest@npm:^0.10.5":
-  version: 0.10.5
-  resolution: "nuxt-vitest@npm:0.10.5"
+"nuxt-vitest@npm:^0.11.5":
+  version: 0.11.5
+  resolution: "nuxt-vitest@npm:0.11.5"
   dependencies:
-    "@nuxt/kit": ^3.7.0
+    "@nuxt/kit": ^3.7.4
     "@vitest/ui": ^0.33.0
     defu: ^6.1.2
-    get-port-please: ^3.0.2
+    get-port-please: ^3.1.1
     perfect-debounce: ^1.0.0
     std-env: ^3.4.3
-    vitest-environment-nuxt: 0.10.5
+    vitest-environment-nuxt: 0.11.5
   peerDependencies:
     "@vitejs/plugin-vue": "*"
     "@vitejs/plugin-vue-jsx": "*"
     vite: "*"
     vitest: ^0.24.5 || ^0.26.0 || ^0.27.0 || ^0.28.0 || ^0.29.0 || ^0.30.0 || ^0.33.0
-  checksum: 2db71b516edfc4a9a6fbc2d2a86ee26b16054413f0f7edd4286732267ef4320be6afddb7ebf1e531898d0f01ecff9c01f0172c68eac780cc092b175adeca546b
+  checksum: 6a5d7327ed1a96cba097ed70c36ea959f6f034a02ef422aa25745e70f73eb3771d713fd02ad9acd835c2b0d84e89f5754941f92291378e15b02023e81c65b03e
   languageName: node
   linkType: hard
 
@@ -24569,23 +24586,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest-environment-nuxt@npm:0.10.5":
-  version: 0.10.5
-  resolution: "vitest-environment-nuxt@npm:0.10.5"
+"vitest-environment-nuxt@npm:0.11.5":
+  version: 0.11.5
+  resolution: "vitest-environment-nuxt@npm:0.11.5"
   dependencies:
-    "@nuxt/kit": ^3.7.0
+    "@nuxt/kit": ^3.7.4
     "@vue/test-utils": ^2.4.1
     defu: ^6.1.2
     estree-walker: ^3.0.3
+    fake-indexeddb: ^5.0.0
     h3: ^1.8.1
-    local-pkg: ^0.4.3
+    local-pkg: ^0.5.0
     magic-string: ^0.30.3
     ofetch: ^1.3.3
+    radix3: ^1.1.0
     ufo: ^1.3.0
     unenv: ^1.7.4
   peerDependencies:
-    "@testing-library/vue": 7.0.0
-    happy-dom: ^9.10.9 || ^10.0.0 || ^11.0.0
+    "@testing-library/vue": 8.0.1
+    happy-dom: ^9.10.9 || ^10.0.0 || ^11.0.0 || ^12.0.0
     jsdom: ^22.0.0
     vitest: ^0.24.5 || ^0.26.0 || ^0.27.0 || ^0.28.0 || ^0.29.0 || ^0.30.0 || ^0.33.0
     vue: ^3.2.45
@@ -24597,7 +24616,7 @@ __metadata:
       optional: true
     jsdom:
       optional: true
-  checksum: 89ad6a00e5c34bb6935a5b0ea281b98f8c61ab54847fade8c1050956d944f0bc6e4e5d571c8d0f0be4f6dd552b015e40fdee96bfcbf2c03008f4cbde99e39765
+  checksum: e3e698cde62096b60cfc38f2f5512b556506c00681c1d4cc968ab910ffc021f2e9d1b970445e1028dcdfcf0393f80a00f15e664f9c672cce0439d551ea4a36e0
   languageName: node
   linkType: hard
 
