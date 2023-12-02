@@ -1,4 +1,4 @@
-import { InternalApi } from 'nitropack'
+import type { InternalApi } from 'nitropack'
 import { root } from '~/test/api-e2e/supertest'
 
 type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']['default']

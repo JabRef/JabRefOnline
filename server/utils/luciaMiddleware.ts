@@ -1,4 +1,4 @@
-import { Middleware } from 'lucia'
+import type { Middleware } from 'lucia'
 
 import { H3Event, getCookie, getRequestURL, setCookie } from 'h3'
 

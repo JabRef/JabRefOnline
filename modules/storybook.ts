@@ -1,6 +1,6 @@
-import { Nuxt } from '@nuxt/schema'
+import type { Nuxt } from '@nuxt/schema'
 import { buildDevStandalone } from '@storybook/core-server'
-import { PackageJson } from '@storybook/types'
+import type { PackageJson } from '@storybook/types'
 import chalk from 'chalk'
 import { defineNuxtModule, logger } from 'nuxt/kit'
 import { withoutTrailingSlash } from 'ufo'

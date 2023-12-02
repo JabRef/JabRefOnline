@@ -1,7 +1,7 @@
 import type { PrismaClient, User } from '@prisma/client'
 
-import { ResolversTypes } from '#graphql/resolver'
-import { Auth, lucia as luciaConstructor, LuciaError } from 'lucia'
+import type { ResolversTypes } from '#graphql/resolver'
+import { LuciaError, lucia as luciaConstructor, type Auth } from 'lucia'
 import type { Storage } from 'unstorage'
 import { v4 as generateToken } from 'uuid'
 import { Environment, type Config } from '~/config'

@@ -186,7 +186,7 @@
   </footer>
 </template>
 <script setup lang="ts">
-import { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 
 const showLegalNotices = ref(false)
 const legalNotices = ref<ParsedContent | null>(null)
