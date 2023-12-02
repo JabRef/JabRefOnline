@@ -6,7 +6,7 @@ import { handleCors } from 'h3'
 import http from 'http'
 import 'json-bigint-patch' // Needed for bigint support in JSON
 import 'reflect-metadata' // Needed for tsyringe
-import { buildContext, Context } from '../context'
+import { buildContext, type Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
 import { configure as configureTsyringe } from './../tsyringe.config'
 

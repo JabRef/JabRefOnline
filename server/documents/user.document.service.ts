@@ -1,4 +1,4 @@
-import {
+import type {
   AddPersonInput,
   DocumentFilters,
   UserChangesCursorInput,
@@ -6,16 +6,16 @@ import {
 } from '#graphql/resolver'
 import {
   ContributorRole,
-  DocumentContributor,
-  Entity,
   EntityType,
-  Journal,
-  JournalIssue,
-  UserDocument as PlainUserDocument,
   Prisma,
   PrismaClient,
-  User,
-  UserDocumentOtherField,
+  type DocumentContributor,
+  type Entity,
+  type Journal,
+  type JournalIssue,
+  type UserDocument as PlainUserDocument,
+  type User,
+  type UserDocumentOtherField,
 } from '@prisma/client'
 import { unsecureHash } from '../utils/crypto'
 import { inject, injectable } from './../tsyringe'

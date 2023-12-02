@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ResolverFn } from '#graphql/resolver'
-import { AnyZodObject, TypeOf, ZodType } from 'zod'
+import type { ResolverFn } from '#graphql/resolver'
+import { ZodType, type AnyZodObject, type TypeOf } from 'zod'
 
 type MethodDecorator<T> = <S extends T>(
   target: any,
