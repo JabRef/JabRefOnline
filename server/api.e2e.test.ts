@@ -21,8 +21,8 @@ describe('invalid query', () => {
     expect(response.get('content-type')).toContain('application/json')
     expect(errors?.map((error) => error.message)).toMatchInlineSnapshot(`
       [
-        "Cannot query field \\"name\\" on type \\"User\\".",
-        "Variable \\"$id\\" of type \\"String\\" used in position expecting type \\"ID!\\".",
+        "Cannot query field "name" on type "User".",
+        "Variable "$id" of type "String" used in position expecting type "ID!".",
       ]
     `)
   })
