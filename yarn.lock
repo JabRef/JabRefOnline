@@ -4642,7 +4642,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxt/kit@npm:3.9.0, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.1, @nuxt/kit@npm:^3.6.1, @nuxt/kit@npm:^3.7.1, @nuxt/kit@npm:^3.7.3, @nuxt/kit@npm:^3.7.4, @nuxt/kit@npm:^3.8.2, @nuxt/kit@npm:^3.9.0":
+"@nuxt/kit@npm:3.9.0, @nuxt/kit@npm:^3.5.0, @nuxt/kit@npm:^3.5.1, @nuxt/kit@npm:^3.6.1, @nuxt/kit@npm:^3.7.1, @nuxt/kit@npm:^3.7.3, @nuxt/kit@npm:^3.8.2, @nuxt/kit@npm:^3.9.0":
   version: 3.9.0
   resolution: "@nuxt/kit@npm:3.9.0"
   dependencies:
@@ -4745,6 +4745,67 @@ __metadata:
   bin:
     nuxt-telemetry: bin/nuxt-telemetry.mjs
   checksum: 9acb3f23eff3b3884b3ddd6c0c24e408e59435df737b39361d874a67cace781d7741d3dca3ffcf58819bafb3060287209281acf0884643c3a297dee3c9269d50
+  languageName: node
+  linkType: hard
+
+"@nuxt/test-utils@npm:>=3.9.0, @nuxt/test-utils@npm:^3.9.0":
+  version: 3.9.0
+  resolution: "@nuxt/test-utils@npm:3.9.0"
+  dependencies:
+    "@nuxt/kit": ^3.8.2
+    "@nuxt/schema": ^3.8.2
+    c12: ^1.5.1
+    consola: ^3.2.3
+    defu: ^6.1.3
+    destr: ^2.0.2
+    estree-walker: ^3.0.3
+    execa: ^8.0.1
+    fake-indexeddb: ^5.0.1
+    get-port-please: ^3.1.1
+    local-pkg: ^0.5.0
+    magic-string: ^0.30.5
+    node-fetch-native: ^1.4.1
+    ofetch: ^1.3.3
+    pathe: ^1.1.1
+    perfect-debounce: ^1.0.0
+    radix3: ^1.1.0
+    scule: ^1.1.1
+    std-env: ^3.6.0
+    ufo: ^1.3.2
+    unenv: ^1.8.0
+    unplugin: ^1.5.1
+    vitest-environment-nuxt: ^1.0.0
+  peerDependencies:
+    "@jest/globals": ^29.5.0
+    "@testing-library/vue": ^7.0.0 || ^8.0.1
+    "@vitest/ui": ^0.34.6 || ^1.0.0
+    "@vue/test-utils": ^2.4.2
+    h3: "*"
+    happy-dom: ^9.10.9 || ^10.0.0 || ^11.0.0 || ^12.0.0
+    jsdom: ^22.0.0 || ^23.0.0
+    playwright-core: ^1.34.3
+    vite: "*"
+    vitest: ^0.34.6 || ^1.0.0
+    vue: ^3.3.4
+    vue-router: ^4.0.0
+  peerDependenciesMeta:
+    "@jest/globals":
+      optional: true
+    "@testing-library/vue":
+      optional: true
+    "@vitest/ui":
+      optional: true
+    "@vue/test-utils":
+      optional: true
+    happy-dom:
+      optional: true
+    jsdom:
+      optional: true
+    playwright-core:
+      optional: true
+    vitest:
+      optional: true
+  checksum: a1372ed7bd0a2ed8c1497937955e240ba72023283f77a8eb75b8eb2082ed2ff45fd7cd5103c182ae33f804ff96d98132bc89938829ce82620879ac8e9baab311
   languageName: node
   linkType: hard
 
@@ -7111,34 +7172,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/ui@npm:^0.33.0":
-  version: 0.33.0
-  resolution: "@vitest/ui@npm:0.33.0"
-  dependencies:
-    "@vitest/utils": 0.33.0
-    fast-glob: ^3.3.0
-    fflate: ^0.8.0
-    flatted: ^3.2.7
-    pathe: ^1.1.1
-    picocolors: ^1.0.0
-    sirv: ^2.0.3
-  peerDependencies:
-    vitest: ">=0.30.1 <1"
-  checksum: 46e9bd9529d9cb8a7c3b9d7e1a4d56ef74a43efd35d33283305e837d411e267ef72b78481546605a605f89962271f02f6c63638941fe542177d00e9d192b1255
-  languageName: node
-  linkType: hard
-
-"@vitest/utils@npm:0.33.0":
-  version: 0.33.0
-  resolution: "@vitest/utils@npm:0.33.0"
-  dependencies:
-    diff-sequences: ^29.4.3
-    loupe: ^2.3.6
-    pretty-format: ^29.5.0
-  checksum: 8c5b381f5599ca517bedd0e46805e91b1150564473d37b2b80ef45aa9c16cb59d296513dd34bc2171904beb28be73b89e5333056539d49a0ba9d513ae7672a0a
-  languageName: node
-  linkType: hard
-
 "@vitest/utils@npm:1.1.1":
   version: 1.1.1
   resolution: "@vitest/utils@npm:1.1.1"
@@ -7442,7 +7475,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/test-utils@npm:^2.4.1, @vue/test-utils@npm:^2.4.3":
+"@vue/test-utils@npm:^2.4.3":
   version: 2.4.3
   resolution: "@vue/test-utils@npm:2.4.3"
   dependencies:
@@ -10506,7 +10539,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff-sequences@npm:^29.4.3, diff-sequences@npm:^29.6.3":
+"diff-sequences@npm:^29.6.3":
   version: 29.6.3
   resolution: "diff-sequences@npm:29.6.3"
   checksum: f4914158e1f2276343d98ff5b31fc004e7304f5470bf0f1adb2ac6955d85a531a6458d33e87667f98f6ae52ebd3891bb47d420bb48a5bd8b7a27ee25b20e33aa
@@ -11827,10 +11860,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fake-indexeddb@npm:^5.0.0":
-  version: 5.0.1
-  resolution: "fake-indexeddb@npm:5.0.1"
-  checksum: b9bf94003e40923513863dde1f0f852fb00faa9d31db5203e4142e7937371e9061801b68cfdd37b321df1a314b2a30788b904be909685302d8f9c37a54580cb9
+"fake-indexeddb@npm:^5.0.1":
+  version: 5.0.2
+  resolution: "fake-indexeddb@npm:5.0.2"
+  checksum: df4dc15c2f2b1a04429461fdc4da02bf25e9b84e2bbfa2ffcf4bb87764f75eef772bb36b245547538796f372c5190eb06cdaa391c7c5f5662b19667f949106cb
   languageName: node
   linkType: hard
 
@@ -11967,13 +12000,6 @@ __metadata:
   version: 0.7.4
   resolution: "fflate@npm:0.7.4"
   checksum: b812ab26047432db70ff4c73eb45ad53bd0774575b4818b9c61c2921e89ec65d1259f06ec1618f2ac55e6a2f2e29b6dc09173d213b46580bc69efae5344bf8f1
-  languageName: node
-  linkType: hard
-
-"fflate@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "fflate@npm:0.8.0"
-  checksum: 6215f95ee01d620a41e459247a7de7e7117dd23e78ef017c26b64c26f2a880a90eedc77675918bbf816d18cc990f6505cd71be933c67cc48cc1e7ebbff1589ea
   languageName: node
   linkType: hard
 
@@ -14417,6 +14443,7 @@ __metadata:
     "@lucia-auth/adapter-prisma": ^3.0.2
     "@lucia-auth/adapter-session-unstorage": ^2.1.0
     "@nuxt/content": ^2.10.0
+    "@nuxt/test-utils": ^3.9.0
     "@nuxtjs/eslint-config": ^12.0.0
     "@nuxtjs/eslint-config-typescript": ^12.1.0
     "@nuxtjs/tailwindcss": ^6.10.3
@@ -14477,7 +14504,6 @@ __metadata:
     nuxt-graphql-server: 3.0.0
     nuxt-icon: ^0.6.8
     nuxt-seo-kit: ^1.3.13
-    nuxt-vitest: ^0.11.5
     pinia: ^2.1.7
     postinstall-postinstall: ^2.1.0
     prettier: ^3.1.1
@@ -14497,6 +14523,7 @@ __metadata:
     unstorage: ^1.10.1
     vee-validate: ^4.12.4
     vitest: ^1.1.1
+    vitest-environment-nuxt: ^1.0.0
     vitest-github-actions-reporter: ^0.11.1
     vitest-mock-extended: ^1.3.1
     vue-tsc: ^1.8.24
@@ -17319,26 +17346,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-vitest@npm:^0.11.5":
-  version: 0.11.5
-  resolution: "nuxt-vitest@npm:0.11.5"
-  dependencies:
-    "@nuxt/kit": ^3.7.4
-    "@vitest/ui": ^0.33.0
-    defu: ^6.1.2
-    get-port-please: ^3.1.1
-    perfect-debounce: ^1.0.0
-    std-env: ^3.4.3
-    vitest-environment-nuxt: 0.11.5
-  peerDependencies:
-    "@vitejs/plugin-vue": "*"
-    "@vitejs/plugin-vue-jsx": "*"
-    vite: "*"
-    vitest: ^0.24.5 || ^0.26.0 || ^0.27.0 || ^0.28.0 || ^0.29.0 || ^0.30.0 || ^0.33.0
-  checksum: 6a5d7327ed1a96cba097ed70c36ea959f6f034a02ef422aa25745e70f73eb3771d713fd02ad9acd835c2b0d84e89f5754941f92291378e15b02023e81c65b03e
-  languageName: node
-  linkType: hard
-
 "nuxt@npm:^3.9.0":
   version: 3.9.0
   resolution: "nuxt@npm:3.9.0"
@@ -18771,7 +18778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^29.5.0, pretty-format@npm:^29.7.0":
+"pretty-format@npm:^29.7.0":
   version: 29.7.0
   resolution: "pretty-format@npm:29.7.0"
   dependencies:
@@ -20810,7 +20817,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"std-env@npm:^3.3.2, std-env@npm:^3.3.3, std-env@npm:^3.4.3, std-env@npm:^3.5.0, std-env@npm:^3.7.0":
+"std-env@npm:^3.3.2, std-env@npm:^3.3.3, std-env@npm:^3.4.3, std-env@npm:^3.5.0, std-env@npm:^3.6.0, std-env@npm:^3.7.0":
   version: 3.7.0
   resolution: "std-env@npm:3.7.0"
   checksum: 4f489d13ff2ab838c9acd4ed6b786b51aa52ecacdfeaefe9275fcb220ff2ac80c6e95674723508fd29850a694569563a8caaaea738eb82ca16429b3a0b50e510
@@ -22932,37 +22939,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest-environment-nuxt@npm:0.11.5":
-  version: 0.11.5
-  resolution: "vitest-environment-nuxt@npm:0.11.5"
+"vitest-environment-nuxt@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "vitest-environment-nuxt@npm:1.0.0"
   dependencies:
-    "@nuxt/kit": ^3.7.4
-    "@vue/test-utils": ^2.4.1
-    defu: ^6.1.2
-    estree-walker: ^3.0.3
-    fake-indexeddb: ^5.0.0
-    h3: ^1.8.1
-    local-pkg: ^0.5.0
-    magic-string: ^0.30.3
-    ofetch: ^1.3.3
-    radix3: ^1.1.0
-    ufo: ^1.3.0
-    unenv: ^1.7.4
-  peerDependencies:
-    "@testing-library/vue": 8.0.1
-    happy-dom: ^9.10.9 || ^10.0.0 || ^11.0.0 || ^12.0.0
-    jsdom: ^22.0.0
-    vitest: ^0.24.5 || ^0.26.0 || ^0.27.0 || ^0.28.0 || ^0.29.0 || ^0.30.0 || ^0.33.0
-    vue: ^3.2.45
-    vue-router: ^4.0.0
-  peerDependenciesMeta:
-    "@testing-library/vue":
-      optional: true
-    happy-dom:
-      optional: true
-    jsdom:
-      optional: true
-  checksum: e3e698cde62096b60cfc38f2f5512b556506c00681c1d4cc968ab910ffc021f2e9d1b970445e1028dcdfcf0393f80a00f15e664f9c672cce0439d551ea4a36e0
+    "@nuxt/test-utils": ">=3.9.0"
+  checksum: 1252f4467671dc8e003ed36123842e6e5a08a2a468e527a474d8d338d352195c6cf7dc5311fc27a67644bd43a0714c14b1eca56f3b6574825b8732b5adf2a1e7
   languageName: node
   linkType: hard
 
