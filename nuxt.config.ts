@@ -153,9 +153,9 @@ export default defineNuxtConfig({
     'nuxt-icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
-    // Vitest integration
-    // https://github.com/danielroe/nuxt-vitest
-    'nuxt-vitest',
+    // Support for end-to-end testing and unit testing (and Vitest integration)
+    // https://nuxt.com/docs/getting-started/testing
+    '@nuxt/test-utils/module',
   ],
 
   /*
