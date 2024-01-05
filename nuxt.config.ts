@@ -235,15 +235,6 @@ export default defineNuxtConfig({
       'A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way.',
   },
 
-  /**
-   * Management of robots crawling
-   * https://github.com/harlan-zw/nuxt-simple-robots
-   */
-  robots: {
-    // Allow crawling of all pages
-    indexable: true,
-  },
-
   vite: {
     // Workaround for https://github.com/browserify/node-util/pull/62
     define: {
