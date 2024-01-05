@@ -1,4 +1,4 @@
-import { defineVitestConfig } from 'nuxt-vitest/config'
+import { defineVitestConfig } from '@nuxt/test-utils/config'
 import GithubActionsReporter from 'vitest-github-actions-reporter'
 
 export default defineVitestConfig({

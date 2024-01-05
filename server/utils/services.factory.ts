@@ -1,6 +1,6 @@
-import { Config, Environment } from '~/config'
+import { Environment, type Config } from '~/config'
 
-import { createStorage, Storage } from 'unstorage'
+import { createStorage, type Storage } from 'unstorage'
 import memoryDriver from 'unstorage/drivers/memory'
 import redisDriver from 'unstorage/drivers/redis'
 

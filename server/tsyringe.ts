@@ -1,17 +1,17 @@
 import type { PrismaClient } from '@prisma/client'
 import {
-  ClassProvider,
-  DependencyContainer,
-  FactoryProvider,
   Lifecycle,
-  Provider,
-  RegistrationOptions,
-  TokenProvider,
-  ValueProvider,
   container,
   inject as tsyringeInject,
+  type ClassProvider,
+  type DependencyContainer,
+  type FactoryProvider,
+  type Provider,
+  type RegistrationOptions,
+  type TokenProvider,
+  type ValueProvider,
 } from 'tsyringe'
-import { constructor } from 'tsyringe/dist/typings/types'
+import type { constructor } from 'tsyringe/dist/typings/types'
 import type { Storage } from 'unstorage'
 import type { Config } from '~/config'
 import type * as DocumentResolvers from './documents/resolvers'

@@ -17,7 +17,7 @@
 // The idea is that we use nuxt to render the stories
 import { start } from '@storybook/core-client'
 import type { RenderContext } from '@storybook/types'
-import { VueRenderer } from '@storybook/vue3'
+import type { VueRenderer } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
 import { applyDecorators } from '@storybook/vue3/preview'
 import { mount } from 'mount-vue-component'

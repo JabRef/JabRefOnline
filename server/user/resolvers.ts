@@ -1,8 +1,9 @@
-import type { MutationLoginArgs, MutationSignupArgs } from '#graphql/resolver'
-import {
+import type {
   ForgotPasswordPayload,
   MutationChangePasswordArgs,
   MutationForgotPasswordArgs,
+  MutationLoginArgs,
+  MutationSignupArgs,
   QueryUserArgs,
   Resolvers,
   UserChangesArgs,
@@ -10,24 +11,24 @@ import {
   UserChangesEdge,
   UserDocumentsArgs,
 } from '#graphql/resolver'
-import { User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
 import type { Context } from '../context'
 import {
-  UserDocument,
   UserDocumentService,
-  UserDocumentsResult,
+  type UserDocument,
+  type UserDocumentsResult,
 } from '../documents/user.document.service'
-import { GroupResolved } from '../groups/resolvers'
+import type { GroupResolved } from '../groups/resolvers'
 import { GroupService } from '../groups/service'
 import { validateInput } from '../utils/validation'
 import { inject, injectable, resolve } from './../tsyringe'
 import {
   AuthService,
-  ChangePasswordPayload,
-  LoginPayload,
-  LogoutPayload,
-  SignupPayload,
+  type ChangePasswordPayload,
+  type LoginPayload,
+  type LogoutPayload,
+  type SignupPayload,
 } from './auth.service'
 
 export type UserChangesEdgeUseDoc = Omit<UserChangesEdge, 'node'> & {

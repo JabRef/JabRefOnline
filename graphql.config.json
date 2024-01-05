@@ -50,6 +50,9 @@
             "validationSchemaExportType": "const"
           }
         }
+      },
+      "hooks": {
+        "afterOneFileWrite": ["node scripts/apollo-afterOneFileWrite.js"]
       }
     }
   }

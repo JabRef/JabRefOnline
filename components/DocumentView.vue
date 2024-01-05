@@ -33,8 +33,8 @@
           author.__typename === 'Organization'
             ? author.name
             : author.__typename === 'Person'
-            ? author.family
-            : ''
+              ? author.family
+              : ''
         }}</span
       >
     </div>
@@ -106,7 +106,7 @@
 
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import { FragmentType, gql, useFragment } from '~/apollo'
+import { gql, useFragment, type FragmentType } from '~/apollo'
 import { useUiStore } from '~/store'
 
 const DocumentForView = gql(/* GraphQL */ `

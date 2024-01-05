@@ -1,6 +1,6 @@
 import { schema } from '#graphql/schema'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import { TypeSource } from '@graphql-tools/utils'
+import type { TypeSource } from '@graphql-tools/utils'
 import { GraphQLSchema } from 'graphql'
 
 async function addResolvers(schema: TypeSource) {

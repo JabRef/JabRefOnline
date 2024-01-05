@@ -1,7 +1,7 @@
 import type { PrismaClient } from '@prisma/client'
 import { mockDeep, mockReset } from 'vitest-mock-extended'
 import { register, resolve } from '../tsyringe'
-import { UserDocument } from './user.document.service'
+import type { UserDocument } from './user.document.service'
 
 const prisma = mockDeep<PrismaClient>()
 register('PrismaClient', { useValue: prisma })
