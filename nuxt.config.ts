@@ -152,7 +152,7 @@ export default defineNuxtConfig({
     'nuxt-vitest',
     // Preset for configuring SEO
     // https://nuxtseo.com/nuxt-seo
-    '@nuxtseo/module',
+    '@nuxtjs/seo',
   ],
 
   /*
