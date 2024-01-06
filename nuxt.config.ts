@@ -1,12 +1,6 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  extends: [
-    // Preset for configuring SEO
-    // https://github.com/harlan-zw/nuxt-seo-kit
-    'nuxt-seo-kit',
-  ],
-
   /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
@@ -156,6 +150,9 @@ export default defineNuxtConfig({
     // Support for end-to-end testing and unit testing (and Vitest integration)
     // https://nuxt.com/docs/getting-started/testing
     '@nuxt/test-utils/module',
+    // Preset for configuring SEO
+    // https://nuxtseo.com/nuxt-seo
+    '@nuxtjs/seo',
   ],
 
   /*
@@ -227,24 +224,15 @@ export default defineNuxtConfig({
 
   /**
    * SEO configuration
-   * https://github.com/harlan-zw/nuxt-seo-kit
+   * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
   site: {
     // Hide information message during startup
     splash: false,
-    siteUrl: 'https://www.jabref.org/',
-    siteName: 'JabRef',
-    siteDescription:
+    url: 'https://www.jabref.org/',
+    name: 'JabRef - Free Reference Manager - Stay on top of your Literature',
+    description:
       'A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way.',
-  },
-
-  /**
-   * Management of robots crawling
-   * https://github.com/harlan-zw/nuxt-simple-robots
-   */
-  robots: {
-    // Allow crawling of all pages
-    indexable: true,
   },
 
   vite: {
