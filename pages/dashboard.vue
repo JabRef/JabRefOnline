@@ -73,9 +73,8 @@ const { result, fetchMore } = useQuery(
   }),
 )
 
-const documents = computed(
-  () =>
-    result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty),
+const documents = computed(() =>
+  result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty),
 )
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
