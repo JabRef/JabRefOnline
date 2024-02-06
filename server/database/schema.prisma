@@ -17,16 +17,7 @@ model User {
   createdAt DateTime @default(now())
   documents UserDocument[]
   groups Group[]
-  key Key[] // TODO: Rename to keys
-}
-
-model Key {
-  id String @id @unique
-  hashed_password String? // TODO: Rename to hashedPassword
-  user_id String // TODO: Rename to userId
-  user User @relation(references: [id], fields: [user_id], onDelete: Cascade)
-
-  @@index([user_id])
+  password String?
 }
 
 enum DocumentType {
@@ -134,12 +125,12 @@ model Journal {
   hIndex Int?
 }
 
-model JournalCitationInfoYearly { 
+model JournalCitationInfoYearly {
   journalId String
   journal Journal @relation(fields: [journalId], references: [id])
   year Int
 
-  docsThisYear Int 
+  docsThisYear Int
   docsPrevious3Years Int
   citableDocsPrevious3Years Int
   citesOutgoing Int

@@ -1,6 +1,7 @@
 import { z } from 'zod'
-import type { LoginInput, SignupInput } from './graphql'
+import type { ChangePasswordInput, LoginInput, SignupInput } from './graphql'
 import {
+  ChangePasswordInputSchema as InternalChangePasswordInputSchema,
   LoginInputSchema as InternalLoginInputSchema,
   SignupInputSchema as InternalSignupInputSchema,
 } from './validation.internal'
@@ -24,3 +25,9 @@ export const LoginInputSchema: z.ZodObject<Properties<LoginInput>> =
     email: z.string().email(),
     password: passwordSchema,
   })
+
+export const ChangePasswordInputSchema: z.ZodObject<
+  Properties<ChangePasswordInput>
+> = InternalChangePasswordInputSchema.extend({
+  newPassword: passwordSchema,
+})
