@@ -63,7 +63,6 @@ export default defineComponent({
   setup: () => {
     if (!process.client) return
     // @ts-expect-error: storybook typing is inconsistent
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const api = start(renderToCanvas, { applyDecorators })
     const framework = 'vue3'
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
