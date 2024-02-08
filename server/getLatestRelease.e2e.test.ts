@@ -1,10 +1,10 @@
-import { InternalApi } from 'nitropack'
+import type { InternalApi } from 'nitropack'
 import { root } from '~/test/api-e2e/supertest'
 
 type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']['default']
 
 test.runIf(process.env.GITHUB_REPO_TOKEN)(
-  'Returns a valid version',
+  'returns a valid version',
   async () => {
     const response = await root().get('/api/getLatestRelease')
 

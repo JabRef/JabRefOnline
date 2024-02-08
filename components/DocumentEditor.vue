@@ -112,7 +112,7 @@
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
 import { gql, useFragment } from '~/apollo'
-import { PersonFullDetailsFragment } from '~/apollo/graphql'
+import type { PersonFullDetailsFragment } from '~/apollo/graphql'
 import Tags from './tagify.vue'
 
 const PersonFullDetails = gql(/* GraphQL */ `
@@ -215,8 +215,8 @@ const authors = computed({
         author.__typename === 'Organization'
           ? author.name
           : author.__typename === 'Person'
-          ? formatAuthor(useFragment(PersonFullDetails, author))
-          : '',
+            ? formatAuthor(useFragment(PersonFullDetails, author))
+            : '',
     })),
   set: (_value) => {
     // TODO: implement

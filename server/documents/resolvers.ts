@@ -1,4 +1,4 @@
-import {
+import type {
   AddJournalArticleInput,
   AddProceedingsArticleInput,
   AddThesisInput,
@@ -16,13 +16,13 @@ import {
 } from '#graphql/resolver'
 import { DocumentType } from '@prisma/client'
 import { notEmpty } from '~/composables/util'
-import { Context } from '../context'
-import { ResolveType } from '../utils/extractResolveType'
+import type { Context } from '../context'
+import type { ResolveType } from '../utils/extractResolveType'
 import { inject, injectable, resolve } from './../tsyringe'
 import {
-  UserDocument,
-  UserDocumentCreateInput,
   UserDocumentService,
+  type UserDocument,
+  type UserDocumentCreateInput,
 } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
