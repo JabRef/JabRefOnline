@@ -70,7 +70,6 @@ export default defineComponent({
       }
     }
 
-    // @ts-expect-error: mismatch between Tagify constructor and Tagify types
     this.tagify = new Tagify(
       this.$el as HTMLTextAreaElement | HTMLInputElement,
       tagifySettings,
