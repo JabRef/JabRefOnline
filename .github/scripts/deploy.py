@@ -124,6 +124,11 @@ def main(environment_name: str, verbose: bool = False):
                     },
                     {"name": "SESSION_SECRET_PRIMARY", "value": SESSION_SECRET},
                     {"name": "GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
+                    # Disable indexing of non-production sites
+                    # https://nuxtseo.com/robots/guides/disable-indexing#preview-staging-testing-environments
+                    {"name": "NUXT_SITE_URL", "value":
+                        "production" if environment_name == "default" else "preview"
+                    },
                     # {
                     #     "name": "WEBSITE_CONTENTSHARE",
                     #     "value": "[concat(toLower(parameters('name')), 'b215')]",

@@ -1,5 +1,5 @@
-import { Journal, QueryJournalArgs, Resolvers } from '#graphql/resolver'
-import { Context } from '../context'
+import type { Journal, QueryJournalArgs, Resolvers } from '#graphql/resolver'
+import type { Context } from '../context'
 import { inject, injectable, resolve } from './../tsyringe'
 import { JournalService } from './journal.service'
 

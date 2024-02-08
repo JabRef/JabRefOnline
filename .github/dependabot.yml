@@ -4,11 +4,9 @@ updates:
   - package-ecosystem: npm
     directory: '/'
     open-pull-requests-limit: 20
+    labels: []
     schedule:
       interval: 'monthly'
-    labels:
-      - 'type: dependencies'
-      - 'status: safe to test'
     commit-message:
       prefix: 'chore'
     groups:
@@ -74,10 +72,8 @@ updates:
   - package-ecosystem: github-actions
     directory: '/'
     open-pull-requests-limit: 20
+    labels: []
     schedule:
       interval: 'monthly'
-    labels:
-      - 'type: dependencies'
-      - 'status: safe to test'
     commit-message:
       prefix: 'chore'

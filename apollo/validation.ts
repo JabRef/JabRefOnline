@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { LoginInput, SignupInput } from './graphql'
+import type { LoginInput, SignupInput } from './graphql'
 import {
   LoginInputSchema as InternalLoginInputSchema,
   SignupInputSchema as InternalSignupInputSchema,

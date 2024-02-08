@@ -1,7 +1,11 @@
-import { ApolloServer, GraphQLRequest, GraphQLResponse } from '@apollo/server'
-import { VariableValues } from '@apollo/server/dist/esm/externalTypes/graphql'
-import { DocumentNode, TypedQueryDocumentNode } from 'graphql'
-import { Context } from '~/server/context'
+import {
+  ApolloServer,
+  type GraphQLRequest,
+  type GraphQLResponse,
+} from '@apollo/server'
+import type { VariableValues } from '@apollo/server/dist/esm/externalTypes/graphql'
+import type { DocumentNode, TypedQueryDocumentNode } from 'graphql'
+import type { Context } from '~/server/context'
 import { loadSchemaWithResolvers } from '~/server/schema'
 import { resolve } from '~/server/tsyringe'
 

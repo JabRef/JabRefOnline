@@ -1,4 +1,4 @@
-import { Resolvers } from '#graphql/resolver'
+import type { Resolvers } from '#graphql/resolver'
 import { mergeResolvers } from '@graphql-tools/merge'
 import {
   BigIntResolver,

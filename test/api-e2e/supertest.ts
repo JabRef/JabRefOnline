@@ -2,7 +2,7 @@ import { gql } from 'graphql-tag'
 import supertestRequest from 'supertest'
 import supertestGraphql, {
   SuperTestGraphQL,
-  Variables,
+  type Variables,
 } from 'supertest-graphql'
 
 const url = process.env.TEST_URL ?? 'http://localhost:3000'
