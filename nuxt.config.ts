@@ -179,8 +179,6 @@ export default defineNuxtConfig({
     '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
     '/surveys/': { redirect: '/surveys/2015' },
     '/': { prerender: true },
-    // TODO: Workaround for https://github.com/unjs/nitro/issues/1402
-    '/download': { prerender: false },
   },
 
   /**
