@@ -1,6 +1,11 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
+  future: {
+    // @variantjs/vue, @apollo/server, and mount-vue-component are not yet compatible with bundler resolution
+    typescriptBundlerResolution: false
+  },
+
   /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
