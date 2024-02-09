@@ -10,6 +10,7 @@ import * as JournalResolvers from './journals/resolvers'
 import { instanceCachingFactory, register } from './tsyringe'
 import { AuthService } from './user/auth.service'
 import * as UserResolvers from './user/resolvers'
+import { createEmailService } from './utils/email.service'
 import { createRedisClient } from './utils/services.factory'
 
 const { PrismaClient } = prisma
@@ -26,6 +27,7 @@ export function configure() {
   register('RedisClient', {
     useValue: createRedisClient(config),
   })
+  register('EmailService', { useValue: createEmailService() })
   registerClasses()
 }
 
