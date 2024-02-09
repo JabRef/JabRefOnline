@@ -35,9 +35,10 @@ describe('mutation', () => {
     })
   }),
     describe('signup', () => {
-      it('sends confirmation email', async () => {
-        const email = getTemporaryEmail()
-        await api()
+      const email = getTemporaryEmail()
+      it(`sends an email to the address ${email}`, async () => {
+        console.log('Creating account with email', email)
+        const { data, errors } = await api()
           .mutate(gql`
             mutation SignupE2E($input: SignupInput!) {
               signup(input: $input) {
@@ -61,9 +62,27 @@ describe('mutation', () => {
               password: 'EBNPXY35TYkYXHs',
             },
           })
+        expect(errors).toEqual(undefined)
+        expect(data).toMatchInlineSnapshot(
+          {
+            signup: { user: { id: expect.any(String) } },
+          },
+          `
+            {
+              "signup": {
+                "user": {
+                  "id": Any<String>,
+                },
+              },
+            }
+          `,
+        )
+
         const receivedEmail = await getEmail(email)
-        expect(receivedEmail.subject).toContain('Confirm your email')
-      })
+        expect(receivedEmail.subject).toEqual(
+          'Welcome! Confirm your email and get started',
+        )
+      }, 15000)
     })
 })
 

@@ -10,7 +10,8 @@ import type { EmailService } from '../utils/email.service'
 import {
   resetPasswordTemplate,
   resetPasswordUserNotFoundTemplate,
-} from '../utils/resetPasswordTemplate'
+  welcomeTemplate,
+} from '../utils/emailTemplates'
 import { inject, injectable } from './../tsyringe'
 
 import { prisma as prismaAdapter } from '@lucia-auth/adapter-prisma'
@@ -147,6 +148,13 @@ export class AuthService {
           email: email.toLowerCase(),
         },
       })
+
+      await this.emailService.sendEmail(
+        { address: email },
+        'Welcome! Confirm your email and get started',
+        welcomeTemplate(user),
+      )
+
       return user
     } catch (error) {
       if (

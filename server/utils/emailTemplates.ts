@@ -1,3 +1,5 @@
+import type { User } from '@prisma/client'
+
 export function resetPasswordTemplate(id: string, token: string): string {
   return `
   <!doctype html>
@@ -88,6 +90,25 @@ export function resetPasswordUserNotFoundTemplate(): string {
       <p>Best regards,</p>
       <p>JabRef Team</p>
     </body>
-    </html>    
+    </html>
+    `
+}
+
+export function welcomeTemplate(user: User): string {
+  // TODO: Use an temporary id for the link
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Welcome to JabRef! Confirm your email and get started</title>
+    </head>
+    <body>
+      <h2>Welcome to JabRef!</h2>
+      <p>Dear ${user.name},</p>
+      <p>We're looking forward to pushing the boundaries of research with you! To get started, please confirm your email address by clicking the button below:</p>
+      <a href="https://www.jabref.org/user/confirm-email/${user.id}" style="background:black;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;">Confirm Email</a>
+    </body>
+    </html>
     `
 }
