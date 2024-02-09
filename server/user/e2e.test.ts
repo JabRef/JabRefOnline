@@ -1,5 +1,6 @@
 import { gql } from 'graphql-tag'
 import { api, login } from '~/test/api-e2e/supertest'
+import { getEmail, getTemporaryEmail } from '~/test/email'
 
 describe('mutation', () => {
   describe('login', () => {
@@ -32,7 +33,38 @@ describe('mutation', () => {
       // TODO: Check that there is even a session cookie
       expect(response.get('set-cookie')).toBeDefined()
     })
-  })
+  }),
+    describe('signup', () => {
+      it('sends confirmation email', async () => {
+        const email = getTemporaryEmail()
+        await api()
+          .mutate(gql`
+            mutation SignupE2E($input: SignupInput!) {
+              signup(input: $input) {
+                ... on UserReturned {
+                  user {
+                    id
+                  }
+                }
+                ... on InputValidationProblem {
+                  problems {
+                    path
+                    message
+                  }
+                }
+              }
+            }
+          `)
+          .variables({
+            input: {
+              email,
+              password: 'EBNPXY35TYkYXHs',
+            },
+          })
+        const receivedEmail = await getEmail(email)
+        expect(receivedEmail.subject).toContain('Confirm your email')
+      })
+    })
 })
 
 describe('query', () => {
@@ -52,18 +84,18 @@ describe('query', () => {
         me: { id: 'ckn4oul7100004cv7y3t94n8j' },
       })
     })
-  })
-  it('returns nothing when not logged in', async () => {
-    const { data, errors } = await api().query(gql`
-      query MeE2ENotLoggedIn {
-        me {
-          id
+    it('returns nothing when not logged in', async () => {
+      const { data, errors } = await api().query(gql`
+        query MeE2ENotLoggedIn {
+          me {
+            id
+          }
         }
-      }
-    `)
-    expect(errors).toEqual(undefined)
-    expect(data).toStrictEqual({
-      me: null,
+      `)
+      expect(errors).toEqual(undefined)
+      expect(data).toStrictEqual({
+        me: null,
+      })
     })
   })
 })
