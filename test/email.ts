@@ -12,7 +12,7 @@ export function getTemporaryEmail(): string {
   return 'jabref-test' + randomId + '@1secmail.com'
 }
 export async function getEmail(email: string): Promise<EmailMessage> {
-  const [login, domain, _] = email.split('@')
+  const [login, domain] = email.split('@')
   const response = await fetch(
     `https://www.1secmail.com/api/v1/?action=getMessages&login=${login}&domain=${domain}`,
   )
@@ -20,6 +20,7 @@ export async function getEmail(email: string): Promise<EmailMessage> {
   if (messages.length === 0) {
     // Try again in 1 second if there are no messages
     return new Promise((resolve) => {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       setTimeout(async () => {
         resolve(await getEmail(email))
       }, 1000)

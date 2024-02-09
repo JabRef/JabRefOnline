@@ -1,7 +1,7 @@
 import {
-  type EmailAddress,
   EmailClient,
   KnownEmailSendStatus,
+  type EmailAddress,
 } from '@azure/communication-email'
 import type { PipelinePolicy } from '@azure/core-rest-pipeline'
 import { injectable } from 'tsyringe'
