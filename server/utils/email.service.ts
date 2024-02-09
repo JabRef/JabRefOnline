@@ -13,7 +13,7 @@ const catch429Policy: PipelinePolicy = {
   async sendRequest(request, next) {
     const response = await next(request)
     if (response.status === 429) {
-      throw new Error(response.bodyAsText || 'Too many requests')
+      throw new Error(response.bodyAsText ?? 'Too many requests')
     }
     return response
   },
@@ -21,7 +21,7 @@ const catch429Policy: PipelinePolicy = {
 
 export interface EmailService {
   sendEmail(
-    to: EmailAddress[] | EmailAddress,
+    to: EmailAddress | EmailAddress[],
     subject: string,
     body: string,
   ): Promise<void>
@@ -30,7 +30,7 @@ export interface EmailService {
 @injectable()
 export class AzureEmailService implements EmailService {
   async sendEmail(
-    to: EmailAddress[] | EmailAddress,
+    to: EmailAddress | EmailAddress[],
     subject: string,
     body: string,
   ): Promise<void> {
@@ -58,6 +58,7 @@ export class AzureEmailService implements EmailService {
       },
     })
     const response = await poller.pollUntilDone()
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison --- type error?
     if (response.status === KnownEmailSendStatus.Failed) {
       throw new Error(response.error?.message)
     }
