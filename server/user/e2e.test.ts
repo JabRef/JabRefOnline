@@ -1,4 +1,5 @@
 import { gql } from 'graphql-tag'
+import { test } from 'vitest'
 import { api, login } from '~/test/api-e2e/supertest'
 import { getEmail, getTemporaryEmail } from '~/test/email'
 
@@ -36,38 +37,40 @@ describe('mutation', () => {
   }),
     describe('signup', () => {
       const email = getTemporaryEmail()
-      it(`sends an email to the address ${email}`, async () => {
-        console.log('Creating account with email', email)
-        const { data, errors } = await api()
-          .mutate(gql`
-            mutation SignupE2E($input: SignupInput!) {
-              signup(input: $input) {
-                ... on UserReturned {
-                  user {
-                    id
+      test.runIf(process.env.EMAIL_CLIENT)(
+        `sends an email to the address ${email}`,
+        async () => {
+          console.log('Creating account with email', email)
+          const { data, errors } = await api()
+            .mutate(gql`
+              mutation SignupE2E($input: SignupInput!) {
+                signup(input: $input) {
+                  ... on UserReturned {
+                    user {
+                      id
+                    }
                   }
-                }
-                ... on InputValidationProblem {
-                  problems {
-                    path
-                    message
+                  ... on InputValidationProblem {
+                    problems {
+                      path
+                      message
+                    }
                   }
                 }
               }
-            }
-          `)
-          .variables({
-            input: {
-              email,
-              password: 'EBNPXY35TYkYXHs',
+            `)
+            .variables({
+              input: {
+                email,
+                password: 'EBNPXY35TYkYXHs',
+              },
+            })
+          expect(errors).toEqual(undefined)
+          expect(data).toMatchInlineSnapshot(
+            {
+              signup: { user: { id: expect.any(String) } },
             },
-          })
-        expect(errors).toEqual(undefined)
-        expect(data).toMatchInlineSnapshot(
-          {
-            signup: { user: { id: expect.any(String) } },
-          },
-          `
+            `
             {
               "signup": {
                 "user": {
@@ -76,13 +79,15 @@ describe('mutation', () => {
               },
             }
           `,
-        )
+          )
 
-        const receivedEmail = await getEmail(email)
-        expect(receivedEmail.subject).toEqual(
-          'Welcome! Confirm your email and get started',
-        )
-      }, 15000)
+          const receivedEmail = await getEmail(email)
+          expect(receivedEmail.subject).toEqual(
+            'Welcome! Confirm your email and get started',
+          )
+        },
+        15000,
+      )
     })
 })
 
