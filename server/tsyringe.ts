@@ -22,7 +22,7 @@ import type { JournalService } from './journals/journal.service'
 import type * as JournalResolvers from './journals/resolvers'
 import type { AuthService } from './user/auth.service'
 import type * as UserResolvers from './user/resolvers'
-import { EmailService } from './utils/email.service'
+import type { EmailService } from './utils/email.service'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
 

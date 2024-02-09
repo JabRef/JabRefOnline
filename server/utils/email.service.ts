@@ -1,9 +1,9 @@
 import {
-  EmailAddress,
+  type EmailAddress,
   EmailClient,
   KnownEmailSendStatus,
 } from '@azure/communication-email'
-import { PipelinePolicy } from '@azure/core-rest-pipeline'
+import type { PipelinePolicy } from '@azure/core-rest-pipeline'
 import { injectable } from 'tsyringe'
 
 // Make sure that an exception is thrown when the tier limit is reached
