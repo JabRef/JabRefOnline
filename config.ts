@@ -82,7 +82,9 @@ export function constructConfig() {
     session: {
       primarySecret: process.env.SESSION_SECRET_PRIMARY ?? 'session_secret',
       secondarySecret: process.env.SESSION_SECRET_SECONDARY ?? 'session_secret',
-      seal: process.env.SESSION_SEAL ?? 'session_seal',
+      // seal has to be min 32 characters
+      seal:
+        process.env.SESSION_SEAL ?? 'session_seal_session_seal_session_seal',
     },
     githubRepoToken: process.env.GITHUB_REPO_TOKEN ?? 'UNDEFINED',
     public: {
