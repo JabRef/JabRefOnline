@@ -60,7 +60,7 @@ export class AuthService {
         ],
       }
     }
-    if (await verifyHash(user.password, password)) {
+    if (await verifyHash(password, user.password)) {
       return user
     } else {
       return {
