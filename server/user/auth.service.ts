@@ -7,8 +7,12 @@ import type { Storage } from 'unstorage'
 import { v4 as generateToken } from 'uuid'
 import { type Config } from '~/config'
 import { hash, verifyHash } from '../utils/crypto'
-import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
-import { sendEmail } from '../utils/sendEmail'
+import type { EmailService } from '../utils/email.service'
+import {
+  resetPasswordTemplate,
+  resetPasswordUserNotFoundTemplate,
+  welcomeTemplate,
+} from '../utils/emailTemplates'
 import { inject, injectable } from './../tsyringe'
 
 import { UnstorageSessionAdapter, UserAdapter } from './UnstorageSessionAdapter'
@@ -27,6 +31,7 @@ export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
     @inject('RedisClient') private redisClient: Storage,
+    @inject('EmailService') private emailService: EmailService,
     @inject('Config') private config: Config,
   ) {
     this.lucia = new Lucia(
@@ -69,15 +74,24 @@ export class AuthService {
   async resetPassword(email: string): Promise<boolean> {
     const user = await this.getUserByEmail(email)
     if (!user) {
+      await this.emailService.sendEmail(
+        { address: email },
+        'Password reset on JabRef',
+        resetPasswordUserNotFoundTemplate(),
+      )
       return true
     }
     const key = FORGOT_PASSWORD_PREFIX + user.id
     const token = generateToken()
     const hashedToken = await hash(token)
     await this.redisClient.setItem(key, hashedToken, {
-      ttl: 1000 * 60 * 60 * 24,
-    }) // Valid for 1 day
-    await sendEmail(email, resetPasswordTemplate(user.id, token))
+      ttl: 1000 * 60 * 60 * 24, // Valid for 1 day
+    })
+    await this.emailService.sendEmail(
+      { address: email },
+      'Password reset on JabRef',
+      resetPasswordTemplate(user.id, token),
+    )
     return true
   }
 
@@ -121,6 +135,13 @@ export class AuthService {
         password: hashedPassword,
       },
     })
+
+    await this.emailService.sendEmail(
+      { address: email },
+      'Welcome! Confirm your email and get started',
+      welcomeTemplate(user),
+    )
+
     return { user }
   }
 

@@ -1,6 +1,11 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
+  future: {
+    // @variantjs/vue, @apollo/server, and mount-vue-component are not yet compatible with bundler resolution
+    typescriptBundlerResolution: false,
+  },
+
   /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
@@ -174,8 +179,6 @@ export default defineNuxtConfig({
     '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
     '/surveys/': { redirect: '/surveys/2015' },
     '/': { prerender: true },
-    // TODO: Workaround for https://github.com/unjs/nitro/issues/1402
-    '/download': { prerender: false },
   },
 
   /**

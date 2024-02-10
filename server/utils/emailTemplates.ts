@@ -1,3 +1,5 @@
+import type { User } from '@prisma/client'
+
 export function resetPasswordTemplate(id: string, token: string): string {
   return `
   <!doctype html>
@@ -64,4 +66,49 @@ export function resetPasswordTemplate(id: string, token: string): string {
   </body>
 
   </html>`
+}
+
+export function resetPasswordUserNotFoundTemplate(): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Password Reset Request - Email Address Not Found</title>
+    </head>
+    <body>
+      <h2>Password Reset Request - Email Address Not Found</h2>
+      <p>Dear user,</p>
+      <p>We received your password reset request; however, we couldn't locate an account associated with the provided email address. Here are a few suggestions:</p>
+      <ol>
+        <li>Double-check the email: Please ensure that you entered the correct email address when requesting the password reset.</li>
+        <li>Create a new account: If you don't have an account with us yet, we invite you to <a href="https://www.jabref.org/user/register">create one</a> on our registration page.</li>
+        <li>Contact support: For further assistance or if you suspect an issue, please reach out to our support team, who will be happy to help.</li>
+      </ol>
+      <p>We apologize for any inconvenience caused. To protect user privacy, we can't disclose whether an email address is registered in our system.</p>
+      <p>If you didn't initiate the password reset request or have concerns, please contact us immediately. We'll investigate promptly and take necessary actions to ensure account security.</p>
+      <p>Best regards,</p>
+      <p>JabRef Team</p>
+    </body>
+    </html>
+    `
+}
+
+export function welcomeTemplate(user: User): string {
+  // TODO: Use an temporary id for the link
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Welcome to JabRef! Confirm your email and get started</title>
+    </head>
+    <body>
+      <h2>Welcome to JabRef!</h2>
+      <p>Dear ${user.name},</p>
+      <p>We're looking forward to pushing the boundaries of research with you! To get started, please confirm your email address by clicking the button below:</p>
+      <a href="https://www.jabref.org/user/confirm-email/${user.id}" style="background:black;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;">Confirm Email</a>
+    </body>
+    </html>
+    `
 }
