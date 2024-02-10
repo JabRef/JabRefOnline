@@ -23,15 +23,15 @@ registerClasses()
 // Setup services for tests
 beforeAll((context) => {
   register('EmailService', { useValue: new EmailServiceMock() })
+  const config = constructConfig()
+  register('Config', {
+    useValue: config,
+  })
 
   const isIntegrationTest =
     context.filepath?.endsWith('integration.test.ts') ?? false
 
   if (isIntegrationTest) {
-    const config = constructConfig()
-    register('Config', {
-      useValue: config,
-    })
     const redisClient = createRedisClient(config)
     register('RedisClient', {
       useValue: redisClient,

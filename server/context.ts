@@ -32,6 +32,7 @@ export async function buildContext({
   const config = resolve('Config')
   const authService = resolve('AuthService')
   const sessionHandler = await useSession<Session>(event, {
+    name: 'session',
     password: config.session.seal,
     cookie: {
       // Blocks sending a cookie in a cross-origin request, protects somewhat against CORS attacks
@@ -49,14 +50,14 @@ export async function buildContext({
       }
   > | null = null
   function getUserSessionPromise() {
-    if (!sessionHandler.id) {
+    if (!sessionHandler.data.id) {
       userSessionPromise = Promise.resolve({ user: null, session: null })
       return userSessionPromise
     }
     if (userSessionPromise) {
       return userSessionPromise
     }
-    const promise = authService.getSession(sessionHandler.id)
+    const promise = authService.getSession(sessionHandler.data.id)
     userSessionPromise = promise
     return promise
   }
@@ -64,7 +65,7 @@ export async function buildContext({
     getSession: async () => {
       return (await getUserSessionPromise()).session
     },
-    getSessionId: () => sessionHandler.id ?? null,
+    getSessionId: () => sessionHandler.data.id ?? null,
     getUser: async () => {
       return (await getUserSessionPromise()).user
     },
@@ -73,7 +74,16 @@ export async function buildContext({
         await sessionHandler.clear()
         return
       }
-      await sessionHandler.update(session)
+      // Remove an existing session cookie from the response
+      // not sure why this is necessary, seems to be a bug in h3
+      let cookies = getRequestHeader(event, 'set-cookie') ?? []
+      let cookiesArray = Array.isArray(cookies) ? cookies : [cookies]
+      let filteredCookies = cookiesArray.filter(
+        (cookie) => !cookie.startsWith('session='),
+      )
+      setHeader(event, 'set-cookie', filteredCookies)
+
+      await sessionHandler.update({ id: session.id })
     },
   }
 }

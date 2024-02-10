@@ -99,6 +99,9 @@ export class UnstorageSessionAdapter implements Adapter {
     if (!session) {
       return [null, null]
     }
+    // Might be stored as a string, so we need to convert it to a Date
+    session.expiresAt = new Date(session.expiresAt)
+
     const user = await this.userAdapter.getUserById(session.userId)
     if (!user) {
       return [session, null]
