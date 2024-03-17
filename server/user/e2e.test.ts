@@ -1,7 +1,26 @@
+import { parse } from 'cookie-es'
 import { gql } from 'graphql-tag'
-import { test } from 'vitest'
+import { defaults as sealDefaults, unseal } from 'iron-webcrypto'
+import crypto from 'uncrypto'
+import { expect, test } from 'vitest'
 import { api, login } from '~/test/api-e2e/supertest'
 import { getEmail, getTemporaryEmail } from '~/test/email'
+import { resolve } from '../tsyringe'
+
+async function unsealSessions(cookies: string[]) {
+  const config = resolve('Config')
+  return await Promise.all(
+    cookies.map(async (cookie) => {
+      const parsed = parse(cookie)
+      const session = parsed.session
+        ? await unseal(crypto, parsed.session, config.session.seal, {
+            ...sealDefaults,
+          })
+        : null
+      return { ...parsed, session }
+    }),
+  )
+}
 
 describe('mutation', () => {
   describe('login', () => {
@@ -31,8 +50,36 @@ describe('mutation', () => {
       expect(data).toStrictEqual({
         login: { user: { id: 'ckn4oul7100004cv7y3t94n8j' } },
       })
-      // TODO: Check that there is even a session cookie
-      expect(response.get('set-cookie')).toBeDefined()
+      const cookies = response.get('set-cookie')
+      expect(cookies).toBeDefined()
+      expect(await unsealSessions(cookies)).toMatchInlineSnapshot(
+        [
+          {
+            session: {
+              createdAt: expect.any(Number),
+              data: {
+                id: expect.any(String),
+              },
+              id: expect.any(String),
+            },
+          },
+        ],
+        `
+        [
+          {
+            "Path": "/",
+            "SameSite": "Strict",
+            "session": {
+              "createdAt": Any<Number>,
+              "data": {
+                "id": Any<String>,
+              },
+              "id": Any<String>,
+            },
+          },
+        ]
+      `,
+      )
     })
   })
   describe('signup', () => {
