@@ -29,7 +29,7 @@
           </div>
           <!--body-->
           <div class="relative p-6 flex-auto">
-            <slot></slot>
+            <slot />
           </div>
           <!--footer-->
           <slot name="footer">
@@ -45,7 +45,7 @@
     <div
       v-if="showModal"
       class="opacity-25 fixed inset-0 z-40 bg-black"
-    ></div>
+    />
   </div>
 </template>
 

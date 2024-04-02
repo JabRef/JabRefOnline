@@ -24,7 +24,13 @@ async function startStorybookServer(nuxt: Nuxt, nuxtUrl: string) {
 
 // TODO: Finish storybook as module
 export default defineNuxtModule({
-  hooks: {},
+  hooks: {
+    'prepare:types': async (options) => {
+      // Add .storybook to tsconfig include, needed for eslint
+      options.tsConfig.include = options.tsConfig.include || []
+      options.tsConfig.include.push('../.storybook')
+    },
+  },
   setup(_moduleOptions, nuxt) {
     /*
     addServerMiddleware({

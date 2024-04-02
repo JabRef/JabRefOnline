@@ -1,6 +1,6 @@
 import type { Middleware } from 'lucia'
 
-import { H3Event, getCookie, getRequestURL, setCookie } from 'h3'
+import { getCookie, getRequestURL, setCookie, type H3Event } from 'h3'
 
 export function h3(): Middleware<[H3Event]> {
   return ({ args, sessionCookieName }) => {

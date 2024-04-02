@@ -6,7 +6,8 @@ const filePath = process.argv[2]
 // Read the file
 fs.readFile(filePath, 'utf8', function (err, data) {
   if (err) {
-    return console.log(err)
+    console.log(err)
+    return
   }
 
   // Fix ts error
@@ -17,6 +18,9 @@ fs.readFile(filePath, 'utf8', function (err, data) {
 
   // Write the result back to the file
   fs.writeFile(filePath, result, 'utf8', function (err) {
-    if (err) return console.log(err)
+    if (err) {
+      console.log(err)
+      return
+    }
   })
 })

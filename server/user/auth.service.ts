@@ -16,7 +16,7 @@ import { inject, injectable } from './../tsyringe'
 
 import { prisma as prismaAdapter } from '@lucia-auth/adapter-prisma'
 import { unstorage as unstorageAdapter } from '@lucia-auth/adapter-session-unstorage'
-import { H3Event } from 'h3'
+import type { H3Event } from 'h3'
 import { h3 } from '../utils/luciaMiddleware'
 
 const EMAIL_PROVIDER = 'email'

@@ -1,7 +1,7 @@
 import { gql } from 'graphql-tag'
 import supertestRequest from 'supertest'
 import supertestGraphql, {
-  SuperTestGraphQL,
+  type SuperTestGraphQL,
   type Variables,
 } from 'supertest-graphql'
 
