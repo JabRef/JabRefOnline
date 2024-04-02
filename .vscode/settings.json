@@ -6,6 +6,7 @@
     "codegen",
     "composables",
     "datetime",
+    "defu",
     "esbuild",
     "issn",
     "jiti",
@@ -63,5 +64,7 @@
     "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yml"
   },
   "testing.automaticallyOpenPeekView": "never",
-  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs"
+  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs",
+  // Enable ESlint flat config support
+  "eslint.experimental.useFlatConfig": true
 }

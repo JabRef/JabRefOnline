@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/default
+// eslint-disable-next-lin import/default
 import prismaClient from '@prisma/client'
 import { seed } from './seed'
 

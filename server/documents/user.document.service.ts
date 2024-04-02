@@ -7,13 +7,13 @@ import type {
 import {
   ContributorRole,
   EntityType,
-  Prisma,
-  PrismaClient,
   type DocumentContributor,
   type Entity,
   type Journal,
   type JournalIssue,
   type UserDocument as PlainUserDocument,
+  type Prisma,
+  type PrismaClient,
   type User,
   type UserDocumentOtherField,
 } from '@prisma/client'

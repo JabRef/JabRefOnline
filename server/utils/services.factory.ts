@@ -13,6 +13,7 @@ export function createRedisClient(config: Config): Storage {
       driver: memoryDriver(),
     })
   } else {
+    // eslint-disable-next-line no-inner-declarations
     function createRedisConfig() {
       switch (config.public.environment) {
         case Environment.Production:

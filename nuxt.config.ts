@@ -158,6 +158,9 @@ export default defineNuxtConfig({
     // Preset for configuring SEO
     // https://nuxtseo.com/nuxt-seo
     '@nuxtjs/seo',
+    // Integration with eslint
+    // https://eslint.nuxt.com/packages/module
+    '@nuxt/eslint',
   ],
 
   /*

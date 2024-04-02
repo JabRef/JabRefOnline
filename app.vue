@@ -1,6 +1,6 @@
 <template>
   <NaiveConfig :theme-config="themeConfig">
-    <NuxtPage></NuxtPage>
+    <NuxtPage />
   </NaiveConfig>
 </template>
 

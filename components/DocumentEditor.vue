@@ -27,7 +27,7 @@
         v-model="title"
         variant="plain"
         class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
-      ></t-textarea>
+      />
     </div>
     <div class="-mt-3">
       <Tags
@@ -38,42 +38,42 @@
       />
     </div>
     <div>
-      <document-editor-input v-model="published"></document-editor-input>
+      <document-editor-input v-model="published" />
       <span class="text-gray-400">|</span>
-      <document-editor-input v-model="journal"></document-editor-input>
+      <document-editor-input v-model="journal" />
     </div>
     <div class="-mt-1">
       <span class="pl-3">
         Volume:
-        <document-editor-input v-model="volume"></document-editor-input>
+        <document-editor-input v-model="volume" />
       </span>
       <span class="text-gray-400 pr-3">|</span>
       <span>
         Issue:
-        <document-editor-input v-model="issue"></document-editor-input>
+        <document-editor-input v-model="issue" />
       </span>
       <span class="text-gray-400 pr-3">|</span>
       <span>
         pp.
-        <document-editor-input v-model="pages"></document-editor-input>
+        <document-editor-input v-model="pages" />
       </span>
     </div>
     <div>
       <document-editor-header
         heading="Abstract"
         class="mt-4 -mb-1"
-      ></document-editor-header>
+      />
       <t-textarea
         v-model="abstract"
         variant="plain"
         rows="5"
-      ></t-textarea>
+      />
     </div>
     <div>
       <document-editor-header
         heading="Keywords"
         class="mt-4"
-      ></document-editor-header>
+      />
       <Tags
         v-model="keywords"
         placeholder="Add keyword"
@@ -86,7 +86,7 @@
       <document-editor-header
         heading="Groups"
         class="mt-4"
-      ></document-editor-header>
+      />
       <Tags
         v-model="groups"
         placeholder="Add group"
@@ -99,12 +99,12 @@
       <document-editor-header
         heading="External"
         class="mt-4 mb-1"
-      ></document-editor-header>
+      />
       <t-table
         :data="externalLinks"
         variant="plain"
         class="text-sm"
-      ></t-table>
+      />
     </div>
   </div>
 </template>

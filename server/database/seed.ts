@@ -1,5 +1,5 @@
 import type { PrismaClient as PrismaClientT } from '@prisma/client'
-// eslint-disable-next-line import/default
+// eslint-disable-next-lin import/default
 import prisma from '@prisma/client'
 const { PrismaClient, GroupType, GroupHierarchyType } = prisma
 

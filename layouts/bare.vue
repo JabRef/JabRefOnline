@@ -4,7 +4,7 @@
   >
     <div class="w-full space-y-8 -mt-20">
       <div>
-        <slot name="header"></slot>
+        <slot name="header" />
       </div>
       <div
         class="shadow-xl sm:rounded-md sm:overflow-hidden container mx-auto flex sm:flex-nowrap flex-wrap max-w-4xl bg-white"
@@ -12,7 +12,7 @@
         <div
           class="w-5/12 overflow-hidden hidden md:flex px-5 pt-4 pb-14 items-center justify-start relative bg-primary-50"
         >
-          <slot name="side"></slot>
+          <slot name="side" />
           <div
             class="flex text-lg items-center md:justify-start justify-center absolute bottom-5"
           >

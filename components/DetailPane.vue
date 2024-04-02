@@ -28,7 +28,7 @@
           <document-editor
             v-if="selectedDocumentId"
             :document-id="selectedDocumentId"
-          ></document-editor>
+          />
         </slot>
       </div>
     </transition>

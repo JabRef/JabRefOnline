@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/default
+// eslint-disable-next-lin import/default
 import prisma from '@prisma/client'
 import 'dotenv/config'
 import 'json-bigint-patch'
