@@ -199,7 +199,7 @@ function formatAuthor(author: PersonFullDetailsFragment) {
   if (author.nonDroppingParticle) {
     result += author.nonDroppingParticle + ' '
   }
-  result += author.family
+  result += author.family ?? ''
   if (author.suffix) {
     result += ' ' + author.suffix
   }

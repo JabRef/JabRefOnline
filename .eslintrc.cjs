@@ -108,6 +108,11 @@ module.exports = {
         '@typescript-eslint/no-unsafe-assignment': 'warn',
         // TODO: Remove this once all errors are fixed
         '@typescript-eslint/no-redundant-type-constituents': 'warn',
+        // Allow numbers in templates without explicit casting
+        '@typescript-eslint/restrict-template-expressions': [
+          'error',
+          { allowNumber: true },
+        ],
       },
     },
     {

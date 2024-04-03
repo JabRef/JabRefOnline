@@ -7,9 +7,7 @@
 <script setup lang="ts">
 const route = useRoute('codeprojects-slug')
 let markdownPath = 'codeprojects/'
-if (route.params.slug == null || typeof route.params.slug === 'string') {
-  markdownPath += route.params.slug
-} else {
+if (route.params.slug != null) {
   markdownPath += route.params.slug
     .map((param) => param.toLowerCase())
     .join('/')
