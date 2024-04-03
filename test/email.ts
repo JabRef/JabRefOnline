@@ -9,14 +9,14 @@ interface EmailMessage {
 
 export function getTemporaryEmail(): string {
   const randomId = Math.floor(Math.random() * 10000)
-  return 'jabref-test' + randomId + '@1secmail.com'
+  return `jabref-test${randomId}@1secmail.com`
 }
 export async function getEmail(email: string): Promise<EmailMessage> {
   const [login, domain] = email.split('@')
   const response = await fetch(
     `https://www.1secmail.com/api/v1/?action=getMessages&login=${login}&domain=${domain}`,
   )
-  const messages = await response.json()
+  const messages = (await response.json()) as { id: string }[]
   if (messages.length === 0) {
     // Try again in 1 second if there are no messages
     return new Promise((resolve) => {

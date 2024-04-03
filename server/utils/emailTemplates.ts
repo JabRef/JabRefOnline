@@ -105,7 +105,7 @@ export function welcomeTemplate(user: User): string {
     </head>
     <body>
       <h2>Welcome to JabRef!</h2>
-      <p>Dear ${user.name},</p>
+      <p>Dear ${user.name ?? 'JabRef User'},</p>
       <p>We're looking forward to pushing the boundaries of research with you! To get started, please confirm your email address by clicking the button below:</p>
       <a href="https://www.jabref.org/user/confirm-email/${user.id}" style="background:black;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;">Confirm Email</a>
     </body>
