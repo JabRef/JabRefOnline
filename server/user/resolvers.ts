@@ -12,7 +12,11 @@ import type {
   UserDocumentsArgs,
 } from '#graphql/resolver'
 import type { User } from '@prisma/client'
-import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
+import {
+  ChangePasswordInputSchema,
+  LoginInputSchema,
+  SignupInputSchema,
+} from '~/apollo/validation'
 import type { Context } from '../context'
 import {
   UserDocumentService,
@@ -74,9 +78,9 @@ export class Mutation {
     if ('problems' in userOrProblems) {
       return userOrProblems
     }
-    const session = await this.authService.createSession(userOrProblems)
-    context.setSession(session)
-    return { user: userOrProblems }
+    const session = await this.authService.createSession(userOrProblems.user)
+    await context.setSession(session)
+    return { user: userOrProblems.user }
   }
 
   @validateInput(LoginInputSchema)
@@ -92,16 +96,23 @@ export class Mutation {
 
     // Make login persistent by putting it in the session store
     const session = await this.authService.createSession(userOrProblems)
-    context.setSession(session)
+    await context.setSession(session)
     return { user: userOrProblems }
   }
 
-  logout(
+  async logout(
     _root: Record<string, never>,
     _args: Record<string, never>,
     context: Context,
-  ): LogoutPayload {
-    context.setSession(null)
+  ): Promise<LogoutPayload> {
+    const sessionId = context.getSessionId()
+    if (!sessionId) {
+      return {
+        result: true,
+      }
+    }
+    await this.authService.invalidateSession(sessionId)
+    await context.setSession(null)
     return {
       result: true,
     }
@@ -117,6 +128,7 @@ export class Mutation {
     }
   }
 
+  @validateInput(ChangePasswordInputSchema)
   async changePassword(
     _root: Record<string, never>,
     { input: { token, id, newPassword } }: MutationChangePasswordArgs,

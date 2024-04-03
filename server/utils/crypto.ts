@@ -1,28 +1,18 @@
 import crypto from 'crypto'
+import { Argon2id } from 'oslo/password'
 
-const lengthSaltBytes = 16
-const lengthSaltString = lengthSaltBytes * 2 // lengthSaltBytes is in bytes, but salt is encoded in hex, so times 2
+// TODO: Use a proper pepper and store it in a secure location
+const argon2id = new Argon2id({ secret: Buffer.from('my-secret') })
 
 /**
  * Hash the given string.
- * We use salted hashing to prevent rainbow table attacks.
+ *
+ * Argon2Id internally already uses a salt to prevent rainbow table attacks, so we don't need to provide one.
  * @param token the token to hash
- * @returns the salted hash
+ * @returns the hash
  */
-export async function hash(token: string, salt?: string): Promise<string> {
-  if (salt && salt.length !== lengthSaltString) {
-    throw new Error(
-      `Invalid salt length: ${salt.length} but needs to be ${lengthSaltString}`,
-    )
-  }
-
-  const usedSalt = salt ?? crypto.randomBytes(lengthSaltString).toString('hex')
-  return new Promise((resolve, reject) => {
-    crypto.scrypt(token, usedSalt, 64, (err, derivedKey) => {
-      if (err) reject(err)
-      resolve(`${usedSalt}${derivedKey.toString('hex')}`)
-    })
-  })
+export async function hash(token: string): Promise<string> {
+  return await argon2id.hash(token)
 }
 
 export function unsecureHash(token: string | object): string {
@@ -34,12 +24,5 @@ export async function verifyHash(
   token: string,
   hashedToken: string,
 ): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    const salt = hashedToken.substring(0, 2 * lengthSaltString)
-    const hashedTokenWithoutSalt = hashedToken.substring(2 * lengthSaltString)
-    crypto.scrypt(token, salt, 64, (err, derivedKey) => {
-      if (err) reject(err)
-      resolve(derivedKey.toString('hex') === hashedTokenWithoutSalt)
-    })
-  })
+  return await argon2id.verify(hashedToken, token)
 }
