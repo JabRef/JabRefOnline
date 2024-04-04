@@ -190,7 +190,9 @@ export default defineNuxtConfig({
 
   tailwindcss: {
     // Expose config so that we can use it to configure naive ui and in the vscode extension
-    exposeConfig: true,
+    exposeConfig: {
+      write: true,
+    },
   },
 
   /**
