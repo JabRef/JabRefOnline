@@ -85,7 +85,6 @@ configure(() => {
         try {
           // Hide all output from storybook
           wrap.wrapAll()
-          // @ts-expect-error: just a type mismatch because we didn't yet upgraded nuxt
           const { address } = await startStorybookServer(nuxt, listener.url)
           /*
           // TODO: Try to expose the server on localhost:3000/_storybook
