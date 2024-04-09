@@ -1,17 +1,17 @@
 import type { PrismaClient } from '@prisma/client'
 import {
-  ClassProvider,
-  DependencyContainer,
-  FactoryProvider,
   Lifecycle,
-  Provider,
-  RegistrationOptions,
-  TokenProvider,
-  ValueProvider,
   container,
   inject as tsyringeInject,
+  type ClassProvider,
+  type DependencyContainer,
+  type FactoryProvider,
+  type Provider,
+  type RegistrationOptions,
+  type TokenProvider,
+  type ValueProvider,
 } from 'tsyringe'
-import { constructor } from 'tsyringe/dist/typings/types'
+import type { constructor } from 'tsyringe/dist/typings/types'
 import type { Storage } from 'unstorage'
 import type { Config } from '~/config'
 import type * as DocumentResolvers from './documents/resolvers'
@@ -22,6 +22,7 @@ import type { JournalService } from './journals/journal.service'
 import type * as JournalResolvers from './journals/resolvers'
 import type { AuthService } from './user/auth.service'
 import type * as UserResolvers from './user/resolvers'
+import type { EmailService } from './utils/email.service'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
 
@@ -52,6 +53,7 @@ export const InjectionSymbols = {
   // Tools
   ...injectSymbol('PrismaClient')<typeof PrismaClient>(),
   ...injectSymbol('RedisClient')<Storage>(),
+  ...injectSymbol('EmailService')<EmailService>(),
   // Services
   ...injectSymbol('UserDocumentService')<typeof UserDocumentService>(),
   ...injectSymbol('AuthService')<typeof AuthService>(),

@@ -1,6 +1,6 @@
-import { H3ContextFunctionArgument } from '@as-integrations/h3'
-import { User } from '@prisma/client'
-import { Session } from 'lucia'
+import type { H3ContextFunctionArgument } from '@as-integrations/h3'
+import type { User } from '@prisma/client'
+import type { Session } from 'lucia'
 import { resolve } from '~/server/tsyringe'
 
 export interface Context {

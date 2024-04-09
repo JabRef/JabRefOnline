@@ -1,13 +1,17 @@
 import type { PrismaClient, User } from '@prisma/client'
 
-import { ResolversTypes } from '#graphql/resolver'
-import { Auth, lucia as luciaConstructor, LuciaError } from 'lucia'
+import type { ResolversTypes } from '#graphql/resolver'
+import { LuciaError, lucia as luciaConstructor, type Auth } from 'lucia'
 import type { Storage } from 'unstorage'
 import { v4 as generateToken } from 'uuid'
 import { Environment, type Config } from '~/config'
 import { hash, verifyHash } from '../utils/crypto'
-import { resetPasswordTemplate } from '../utils/resetPasswordTemplate'
-import { sendEmail } from '../utils/sendEmail'
+import type { EmailService } from '../utils/email.service'
+import {
+  resetPasswordTemplate,
+  resetPasswordUserNotFoundTemplate,
+  welcomeTemplate,
+} from '../utils/emailTemplates'
 import { inject, injectable } from './../tsyringe'
 
 import { prisma as prismaAdapter } from '@lucia-auth/adapter-prisma'
@@ -30,6 +34,7 @@ export class AuthService {
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
     @inject('RedisClient') private redisClient: Storage,
+    @inject('EmailService') private emailService: EmailService,
     @inject('Config') private config: Config,
   ) {
     this.lucia = luciaConstructor({
@@ -93,15 +98,24 @@ export class AuthService {
   async resetPassword(email: string): Promise<boolean> {
     const user = await this.getUserByEmail(email)
     if (!user) {
+      await this.emailService.sendEmail(
+        { address: email },
+        'Password reset on JabRef',
+        resetPasswordUserNotFoundTemplate(),
+      )
       return true
     }
     const key = FORGOT_PASSWORD_PREFIX + user.id
     const token = generateToken()
     const hashedToken = await hash(token)
     await this.redisClient.setItem(key, hashedToken, {
-      EX: 1000 * 60 * 60 * 24,
-    }) // Valid for 1 day
-    await sendEmail(email, resetPasswordTemplate(user.id, token))
+      EX: 1000 * 60 * 60 * 24, // Valid for 1 day
+    })
+    await this.emailService.sendEmail(
+      { address: email },
+      'Password reset on JabRef',
+      resetPasswordTemplate(user.id, token),
+    )
     return true
   }
 
@@ -134,6 +148,13 @@ export class AuthService {
           email: email.toLowerCase(),
         },
       })
+
+      await this.emailService.sendEmail(
+        { address: email },
+        'Welcome! Confirm your email and get started',
+        welcomeTemplate(user),
+      )
+
       return user
     } catch (error) {
       if (

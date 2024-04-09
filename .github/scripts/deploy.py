@@ -6,11 +6,15 @@ from argparse import ArgumentParser
 
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.applicationinsights import ApplicationInsightsManagementClient
+from azure.mgmt.communication import CommunicationServiceManagementClient
 from azure.mgmt.redis import RedisManagementClient
 from azure.mgmt.storage import StorageManagementClient
 from azure.mgmt.web import WebSiteManagementClient
 from azure.mgmt.web.models import (
-  Site, SiteConfig, StaticSiteUserProvidedFunctionAppARMResource)
+    Site,
+    SiteConfig,
+    StaticSiteUserProvidedFunctionAppARMResource,
+)
 
 
 def main(environment_name: str, verbose: bool = False):
@@ -52,6 +56,9 @@ def main(environment_name: str, verbose: bool = False):
     redis_client = RedisManagementClient(
         credential=DefaultAzureCredential(), subscription_id=SUBSCRIPTION_ID
     )
+    email_client = CommunicationServiceManagementClient(
+        credential=DefaultAzureCredential(), subscription_id=SUBSCRIPTION_ID
+    )
 
     # Get info for static site (only for debug)
     # static_site = web_client.static_sites.get_static_site(
@@ -70,15 +77,17 @@ def main(environment_name: str, verbose: bool = False):
     storage_connection_string = f"DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName={STORAGE_ACCOUNT};AccountKey={storage_keys.keys[0].value}"
     logger.debug(f"Storage connection string: {storage_connection_string}")
 
-    appinsights = appinsights_client.components.get(
-        GROUP_NAME, APP_INSIGHTS_NAME
-    )
+    # Azure CLI equivalent:  az communication list-key
+    email_connection_string = email_client.communication_services.list_keys(
+        resource_group_name=GROUP_NAME, communication_service_name="JabRefCommunication"
+    ).primary_connection_string
+    logger.debug(f"Email connection string: {email_connection_string}")
+
+    appinsights = appinsights_client.components.get(GROUP_NAME, APP_INSIGHTS_NAME)
     logger.debug(
         f"Application insights instrumentation key: {appinsights.instrumentation_key}"
     )
-    redis = redis_client.redis.get(
-        resource_group_name=GROUP_NAME, name=REDIS_NAME
-    )
+    redis = redis_client.redis.get(resource_group_name=GROUP_NAME, name=REDIS_NAME)
     logger.debug(f"Redis client: {redis}")
     redis_keys = redis_client.redis.list_keys(
         resource_group_name=GROUP_NAME, name=REDIS_NAME
@@ -112,6 +121,7 @@ def main(environment_name: str, verbose: bool = False):
                         "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
                         "value": storage_connection_string,
                     },
+                    {"name": "EMAIL_CLIENT", "value": email_connection_string},
                     {"name": "DATABASE_URL", "value": DATABASE_URL},
                     {"name": "NODE_ENV", "value": "production"},
                     {
@@ -124,6 +134,11 @@ def main(environment_name: str, verbose: bool = False):
                     },
                     {"name": "SESSION_SECRET_PRIMARY", "value": SESSION_SECRET},
                     {"name": "GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
+                    # Disable indexing of non-production sites
+                    # https://nuxtseo.com/robots/guides/disable-indexing#preview-staging-testing-environments
+                    {"name": "NUXT_SITE_URL", "value":
+                        "production" if environment_name == "default" else "preview"
+                    },
                     # {
                     #     "name": "WEBSITE_CONTENTSHARE",
                     #     "value": "[concat(toLower(parameters('name')), 'b215')]",
@@ -153,10 +168,12 @@ def main(environment_name: str, verbose: bool = False):
     # print("Created function app slot:\n{}".format(function_app_slot))
 
     # Detach already attached function apps
-    linked_function_apps = web_client.static_sites.get_user_provided_function_apps_for_static_site_build(
-        resource_group_name=GROUP_NAME,
-        name=STATIC_SITE,
-        environment_name=environment_name,
+    linked_function_apps = (
+        web_client.static_sites.get_user_provided_function_apps_for_static_site_build(
+            resource_group_name=GROUP_NAME,
+            name=STATIC_SITE,
+            environment_name=environment_name,
+        )
     )
     for app in linked_function_apps:
         logger.info(f"Detaching function app {app.name}")
@@ -181,9 +198,7 @@ def main(environment_name: str, verbose: bool = False):
             function_app_region=function_app.location,
         ),
     )
-    logger.info(
-        f"Linked function app {function_app_name} to {environment_name}"
-    )
+    logger.info(f"Linked function app {function_app_name} to {environment_name}")
     logger.debug(f"{poller_link.result()}")
 
 

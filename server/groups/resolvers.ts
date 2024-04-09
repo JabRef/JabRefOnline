@@ -1,4 +1,4 @@
-import {
+import type {
   MutationCreateGroupArgs,
   MutationUpdateGroupArgs,
   QueryGroupArgs,
@@ -9,7 +9,7 @@ import type { Group, GroupType as GroupTypeT } from '@prisma/client'
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
 import { GraphQLError } from 'graphql'
-import { Context } from '~/server/context'
+import type { Context } from '~/server/context'
 import { inject, injectable, resolve } from './../tsyringe'
 import { GroupService } from './service'
 const { GroupType, GroupHierarchyType } = prisma

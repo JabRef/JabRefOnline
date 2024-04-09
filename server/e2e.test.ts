@@ -9,7 +9,7 @@ describe('index page', () => {
 
 describe('download', () => {
   it('redirects to fosshub', async () => {
-    const response = (await root().get('/download')) as {
+    const response = (await root().get('/download')) as unknown as {
       statusCode: number
       headers: { location: string }
     }
