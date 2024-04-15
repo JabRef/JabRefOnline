@@ -8,7 +8,7 @@
 const route = useRoute('codeprojects-slug')
 let markdownPath = 'codeprojects/'
 if (route.params.slug != null) {
-  markdownPath += route.params.slug
+  markdownPath += (route.params.slug as string[])
     .map((param) => param.toLowerCase())
     .join('/')
 }

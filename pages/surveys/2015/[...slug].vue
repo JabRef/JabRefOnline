@@ -14,7 +14,7 @@ const route = useRoute('surveys-2015-slug')
 let markdownPath = 'surveys/2015/'
 
 if (route.params.slug != null) {
-  markdownPath += route.params.slug
+  markdownPath += (route.params.slug as string[])
     .map((param) => param.toLowerCase())
     .join('/')
 }

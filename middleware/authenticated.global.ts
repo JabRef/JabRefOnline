@@ -34,5 +34,5 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
 
 async function redirectToLogin() {
   // TODO: Remember the intended url by appending something like ?redirect=context.route.fullPath
-  return navigateTo({ path: '/user/login' })
+  return await navigateTo({ path: '/user/login' })
 }
