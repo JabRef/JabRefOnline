@@ -32,7 +32,7 @@
     "docker:redis": "docker run -d --rm --name JabRefRedis -p 6380:6379 redis --requirepass jabref",
     "lint": "pnpm lint:eslint && pnpm lint:prettier",
     "lint:eslint": "eslint --ext .ts,.js,.vue,.graphql --ignore-path .gitignore --report-unused-disable-directives .",
-    "lint:prettier": "prettier --check --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
     "postinstall": "nuxi prepare && pnpm generate",
     "test": "vitest --poolOptions.threads.singleThread",
     "test:integration": "vitest integration.test.ts --poolOptions.threads.singleThread",
