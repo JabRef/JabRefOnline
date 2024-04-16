@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  mount-vue-component@0.10.2:
+    hash: kp7uettlb2x55t6hsmpjeazm5m
+    path: patches/mount-vue-component@0.10.2.patch
   nitropack@2.9.6:
     hash: 4gizknovjjp23lh4cgpcdz4hni
     path: patches/nitropack@2.9.6.patch
@@ -302,7 +305,7 @@ devDependencies:
     version: 2.12.6(graphql@16.8.1)
   mount-vue-component:
     specifier: ^0.10.2
-    version: 0.10.2
+    version: 0.10.2(patch_hash=kp7uettlb2x55t6hsmpjeazm5m)
   naive-ui:
     specifier: ^2.38.1
     version: 2.38.1(vue@3.4.22)
@@ -15704,9 +15707,10 @@ packages:
       pkg-types: 1.0.3
       ufo: 1.5.3
 
-  /mount-vue-component@0.10.2:
+  /mount-vue-component@0.10.2(patch_hash=kp7uettlb2x55t6hsmpjeazm5m):
     resolution: {integrity: sha512-oighx0My03ArLOoTV/kLTJnrBwKdQMvn8uRP+u02rGkgkLiX1LycaHzFGib7mUwkyjp3q3uzVgwHjLZqM6rxyA==}
     dev: true
+    patched: true
 
   /mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
