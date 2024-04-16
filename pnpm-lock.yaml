@@ -186,6 +186,9 @@ devDependencies:
   '@nuxt/content':
     specifier: ^2.12.1
     version: 2.12.1(ioredis@5.3.2)(nuxt@3.11.2)(vue@3.4.22)
+  '@nuxt/kit':
+    specifier: ^3.11.2
+    version: 3.11.2
   '@nuxt/test-utils':
     specifier: ^3.12.0
     version: 3.12.0(@vue/test-utils@2.4.5)(h3@1.11.1)(vite@5.2.8)(vitest@1.4.0)(vue-router@4.3.0)(vue@3.4.22)
@@ -356,7 +359,7 @@ devDependencies:
     version: 1.5.3
   unplugin-vue-components:
     specifier: ^0.26.0
-    version: 0.26.0(vue@3.4.22)
+    version: 0.26.0(@nuxt/kit@3.11.2)(vue@3.4.22)
   vite:
     specifier: ^5.2.8
     version: 5.2.8(@types/node@20.12.7)
@@ -20582,7 +20585,7 @@ packages:
       - rollup
     dev: true
 
-  /unplugin-vue-components@0.26.0(vue@3.4.22):
+  /unplugin-vue-components@0.26.0(@nuxt/kit@3.11.2)(vue@3.4.22):
     resolution: {integrity: sha512-s7IdPDlnOvPamjunVxw8kNgKNK8A5KM1YpK5j/p97jEKTjlPNrA0nZBiSfAKKlK1gWZuyWXlKL5dk3EDw874LQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -20596,6 +20599,7 @@ packages:
         optional: true
     dependencies:
       '@antfu/utils': 0.7.7
+      '@nuxt/kit': 3.11.2
       '@rollup/pluginutils': 5.1.0(rollup@4.14.0)
       chokidar: 3.6.0
       debug: 4.3.4
