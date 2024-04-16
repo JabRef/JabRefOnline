@@ -115,7 +115,7 @@ jobs:
         run: pnpm start &
 
       - name: Run tests
-        run: pnpm test --coverage
+        run: pnpm run test --coverage
         env:
           TEST_URL: http://localhost:3000
 
