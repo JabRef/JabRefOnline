@@ -163,10 +163,6 @@
     "vitest-mock-extended": "^1.3.1",
     "vue-tsc": "^2.0.7"
   },
-  "resolutionsComments": {
-    "@types/react": "Otherwise these types interfere with the types from vite: https://github.com/johnsoncodehk/volar/discussions/592#discussioncomment-1580518",
-    "nitropack": "Version 2.9.0 introduced a bug with deployment to Azure: https://github.com/unjs/nitro/issues/2342"
-  },
   "prisma": {
     "schema": "server/database/schema.prisma",
     "seed": "node --experimental-specifier-resolution=node --loader ts-node/esm ./server/database/runSeed.ts"
@@ -174,8 +170,14 @@
   "packageManager": "pnpm@8.15.6",
   "pnpm": {
     "patchedDependencies": {
-      "nitropack@2.9.6": "patches/nitropack@2.9.6.patch",
-      "mount-vue-component@0.10.2": "patches/mount-vue-component@0.10.2.patch"
+      "mount-vue-component@0.10.2": "patches/mount-vue-component@0.10.2.patch",
+      "nitropack@2.8.1": "patches/nitropack@2.8.1.patch"
+    },
+    "overrides": {
+      "nitropack": "2.8.1"
     }
+  },
+  "overridesComments": {
+    "nitropack": "Version 2.9.0 introduced a bug with deployment to Azure: https://github.com/unjs/nitro/issues/2342"
   }
 }
