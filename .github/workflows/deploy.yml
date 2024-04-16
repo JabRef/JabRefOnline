@@ -41,25 +41,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.2
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Reset Test database on Azure
         if: matrix.environment == 'Test'
-        run: yarn prisma:migrate:reset --force
+        run: pnpm prisma:migrate:reset --force
 
       - name: Update Production database on Azure
         if: matrix.environment == 'Staging'
-        run: yarn prisma:migrate:deploy
+        run: pnpm prisma:migrate:deploy
 
       - name: Build
-        run: yarn build:azure
+        run: pnpm build:azure
 
       - name: Login to Azure
         uses: Azure/login@v2
@@ -73,7 +76,7 @@ jobs:
           # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
           az staticwebapp environment delete --name jabref-online --environment-name ${{ matrix.deployment_environment }} --yes || true
 
-          yarn swa deploy .output\public --env ${{ matrix.deployment_environment }}
+          pnpm swa deploy .output\public --env ${{ matrix.deployment_environment }}
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
@@ -123,6 +126,6 @@ jobs:
         #   interval: 30
 
       - name: Run API tests
-        run: yarn test:api
+        run: pnpm test:api
         env:
           TEST_URL: ${{ matrix.url }}

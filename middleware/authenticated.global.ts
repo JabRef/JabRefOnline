@@ -4,7 +4,11 @@ import { gql } from '@apollo/client/core'
  * Plugin that adds checks if the user is logged in, and redirects her to the login page if not.
  */
 export default defineNuxtRouteMiddleware(async (to, _from) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
+  if (
+    to.matched.some(
+      (record: { meta: { requiresAuth: any } }) => record.meta.requiresAuth,
+    )
+  ) {
     const { $apolloClient } = useNuxtApp()
     try {
       // TODO: Only call this if we have a session cookie?
@@ -34,5 +38,5 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
 
 async function redirectToLogin() {
   // TODO: Remember the intended url by appending something like ?redirect=context.route.fullPath
-  return navigateTo({ path: '/user/login' })
+  return await navigateTo({ path: '/user/login' })
 }

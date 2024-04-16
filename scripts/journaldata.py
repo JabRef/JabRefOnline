@@ -13,7 +13,7 @@ Usage:
         recursive_type_depth = 5
     }
     ```
-    to the `schema.prisma` file, and run `yarn generate` to generate the Prisma client.
+    to the `schema.prisma` file, and run `pnpm generate` to generate the Prisma client.
 
 - Update the `current_year` variable to the latest year of data available.
 - Set the environment variable `DATABASE_URL` to the postgres database url (using a .env file is recommended).
