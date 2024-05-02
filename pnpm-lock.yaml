@@ -21,7 +21,7 @@ patchedDependencies:
 dependencies:
   '@apollo/client':
     specifier: ^3.9.10
-    version: 3.9.10(graphql@16.8.1)
+    version: 3.9.10(graphql@16.8.1)(react-dom@18.3.1)(react@18.3.1)
   '@apollo/server':
     specifier: ^4.10.2
     version: 4.10.2(graphql@16.8.1)
@@ -74,8 +74,8 @@ dependencies:
     specifier: ^10.9.0
     version: 10.9.0(vue@3.4.22)
   '@yaireo/tagify':
-    specifier: ^4.24.0
-    version: 4.24.0
+    specifier: ^4.26.0
+    version: 4.26.0(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1)
   autoprefixer:
     specifier: ^10.4.17
     version: 10.4.19(postcss@8.4.38)
@@ -436,7 +436,7 @@ packages:
       graphql: 16.8.1
     dev: false
 
-  /@apollo/client@3.9.10(graphql@16.8.1):
+  /@apollo/client@3.9.10(graphql@16.8.1)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-w8i/Lk1P0vvWZF0Xb00XPonn79/0rgRJ1vopBlVudVuy9QP29/NZXK0rI2xJIN6VrKuEqJZaVGJC+7k23I2sfA==}
     peerDependencies:
       graphql: ^15.0.0 || ^16.0.0
@@ -463,7 +463,9 @@ packages:
       hoist-non-react-statics: 3.3.2
       optimism: 0.18.0
       prop-types: 15.8.1
-      rehackt: 0.0.6
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      rehackt: 0.0.6(react@18.3.1)
       response-iterator: 0.2.6
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
@@ -9098,7 +9100,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      '@apollo/client': 3.9.10(graphql@16.8.1)
+      '@apollo/client': 3.9.10(graphql@16.8.1)(react-dom@18.3.1)(react@18.3.1)
       graphql: 16.8.1
       throttle-debounce: 5.0.0
       ts-essentials: 9.4.1(typescript@5.4.5)
@@ -9673,9 +9675,17 @@ packages:
   /@xtuc/long@4.2.2:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
 
-  /@yaireo/tagify@4.24.0:
-    resolution: {integrity: sha512-Q124iBwTsVgmCG1/LezRf13CGcmRqed3Jy5EZ0lE0QhnUzmwXZ0YBnYeO0Ic8DkFnZSzK2XJ7ESNwXBohs8uMw==}
+  /@yaireo/tagify@4.26.0(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-7AdaqWr+GJS9WTHkJISL+BGMMdq6WKcTiVewLRruOjyCcvQoCuXBEErQVLRdoas1jhtQ5TujWuykeCjFUikv6A==}
     engines: {node: '>=16.15.0', npm: '>=9.0.0'}
+    peerDependencies:
+      prop-types: '>15.5.7'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /@yarnpkg/esbuild-plugin-pnp@3.0.0-rc.15(esbuild@0.18.20):
@@ -18757,6 +18767,16 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
+  /react-dom@18.3.1(react@18.3.1):
+    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
+    peerDependencies:
+      react: ^18.3.1
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.3.1
+      scheduler: 0.23.2
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -18764,6 +18784,13 @@ packages:
   /react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
     dev: true
+
+  /react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
 
   /read-cache@1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
@@ -18945,7 +18972,7 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /rehackt@0.0.6:
+  /rehackt@0.0.6(react@18.3.1):
     resolution: {integrity: sha512-l3WEzkt4ntlEc/IB3/mF6SRgNHA6zfQR7BlGOgBTOmx7IJJXojDASav+NsgXHFjHn+6RmwqsGPFgZpabWpeOdw==}
     peerDependencies:
       '@types/react': '*'
@@ -18955,6 +18982,8 @@ packages:
         optional: true
       react:
         optional: true
+    dependencies:
+      react: 18.3.1
     dev: false
 
   /rehype-external-links@3.0.0:
@@ -19345,6 +19374,12 @@ packages:
       postcss-value-parser: 4.2.0
       yoga-wasm-web: 0.3.3
     dev: true
+
+  /scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
 
   /schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
