@@ -1,20 +1,19 @@
-import { root } from '~/test/api-e2e/supertest'
+import { fetch, setup } from '@nuxt/test-utils/e2e'
 
 describe('index page', () => {
+  setup({ endpoint: process.env.TEST_URL })
   it('is accessible', async () => {
-    const response = await root().get('/')
-    expect(response.statusCode).toBe(200)
+    const response = await fetch('/')
+    expect(response.status).toBe(200)
   })
 })
 
 describe('download', () => {
+  setup({ endpoint: process.env.TEST_URL })
   it('redirects to fosshub', async () => {
-    const response = (await root().get('/download')) as unknown as {
-      statusCode: number
-      headers: { location: string }
-    }
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toBe(
+    const response = await fetch('/download')
+    expect(response.status).toBe(302)
+    expect(response.headers.get('location')).toBe(
       'https://www.fosshub.com/JabRef.html',
     )
   })
