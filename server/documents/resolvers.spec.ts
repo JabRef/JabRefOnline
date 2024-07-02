@@ -2,7 +2,7 @@ import { mock, mockReset } from 'vitest-mock-extended'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 import { register, resolve } from '../tsyringe'
 import { DocumentResolver } from './resolvers'
-import { UserDocument, UserDocumentService } from './user.document.service'
+import type { UserDocument, UserDocumentService } from './user.document.service'
 
 const userDocumentService = mock<UserDocumentService>()
 register('UserDocumentService', { useValue: userDocumentService })
@@ -89,7 +89,7 @@ describe('mutation', () => {
             },
           },
         },
-        context
+        context,
       )
       expect(userDocumentService.addDocument).toHaveBeenCalledWith({
         added: undefined,

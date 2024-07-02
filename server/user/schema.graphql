@@ -1,5 +1,3 @@
-scalar EmailAddress
-
 extend type Query {
   """
   Get user by id.
@@ -43,7 +41,7 @@ extend type Mutation {
 union LoginPayload = UserReturned | InputValidationProblem
 
 union ChangePasswordPayload =
-    UserReturned
+  | UserReturned
   | TokenProblem
   | InputValidationProblem
 

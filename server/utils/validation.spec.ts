@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { z } from 'zod'
 import { validateInput, validation } from './validation'
 
@@ -48,7 +49,7 @@ class TestResolver {
   hello(
     _root: Record<string, never>,
     { input }: { input: { name: string; age: number } },
-    _context: Record<string, never>
+    _context: Record<string, never>,
   ): string {
     return 'test'
   }
@@ -78,7 +79,7 @@ const testResolver = new TestResolver()
 describe('validated resolver', () => {
   it('returns function value if args are valid', () => {
     expect(
-      testResolver.hello({}, { input: { name: 'test', age: 18 } }, {})
+      testResolver.hello({}, { input: { name: 'test', age: 18 } }, {}),
     ).toBe('test')
   })
   it('returns issues if args are invalid', () => {

@@ -112,7 +112,7 @@
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
 import { gql, useFragment } from '~/apollo'
-import { PersonFullDetailsFragment } from '~/apollo/graphql'
+import type { PersonFullDetailsFragment } from '~/apollo/graphql'
 import Tags from './tagify.vue'
 
 const PersonFullDetails = gql(/* GraphQL */ `
@@ -188,10 +188,10 @@ const { result } = useQuery(
   `),
   () => ({
     documentId: props.documentId,
-  })
+  }),
 )
 const document = computed(() =>
-  useFragment(DocumentDetails, result.value?.userDocument)
+  useFragment(DocumentDetails, result.value?.userDocument),
 )
 
 function formatAuthor(author: PersonFullDetailsFragment) {
@@ -199,7 +199,7 @@ function formatAuthor(author: PersonFullDetailsFragment) {
   if (author.nonDroppingParticle) {
     result += author.nonDroppingParticle + ' '
   }
-  result += author.family
+  result += author.family ?? ''
   if (author.suffix) {
     result += ' ' + author.suffix
   }
@@ -215,10 +215,10 @@ const authors = computed({
         author.__typename === 'Organization'
           ? author.name
           : author.__typename === 'Person'
-          ? formatAuthor(useFragment(PersonFullDetails, author))
-          : '',
+            ? formatAuthor(useFragment(PersonFullDetails, author))
+            : '',
     })),
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -229,7 +229,7 @@ const keywords = computed({
     document.value?.keywords.map((keyword) => ({
       value: keyword,
     })),
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -246,7 +246,7 @@ const externalLinks = computed(() => [
 
 const title = computed({
   get: () => document.value?.title,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -255,7 +255,7 @@ const published = computed({
     document.value && 'published' in document.value
       ? document.value.published
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -265,9 +265,9 @@ const journal = computed({
     'in' in document.value &&
     document.value.in &&
     'journal' in document.value.in
-      ? document.value.in?.journal?.name
+      ? document.value.in.journal?.name
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -277,9 +277,9 @@ const volume = computed({
     'in' in document.value &&
     document.value.in &&
     'volume' in document.value.in
-      ? document.value.in?.volume
+      ? document.value.in.volume
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -289,9 +289,9 @@ const issue = computed({
     'in' in document.value &&
     document.value.in &&
     'number' in document.value.in
-      ? document.value.in?.number
+      ? document.value.in.number
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -301,7 +301,7 @@ const pages = computed({
       ? (document.value.pageStart ?? '') +
         (document.value.pageEnd ? '-' + document.value.pageEnd : '')
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })
@@ -310,7 +310,7 @@ const abstract = computed({
     document.value && 'abstract' in document.value
       ? document.value.abstract
       : null,
-  set: (value) => {
+  set: (_value) => {
     // TODO: implement
   },
 })

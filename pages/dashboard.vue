@@ -4,7 +4,7 @@
     class="space-y-4 p-4 h-full"
   >
     <!-- TODO: Use virtual list as soon as it supports Vue3: https://github.com/tangbc/vue-virtual-scroll-list/issues/253
-  
+
     <virtual-list
       class="virtual-list"
       :page-mode="true"
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { WatchQueryFetchPolicy } from '@apollo/client/core'
+import type { WatchQueryFetchPolicy } from '@apollo/client/core'
 import { useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
@@ -70,13 +70,14 @@ const { result, fetchMore } = useQuery(
     fetchPolicy: ui.activeSearchQuery
       ? ('no-cache' as WatchQueryFetchPolicy)
       : ('cache-first' as WatchQueryFetchPolicy),
-  })
+  }),
 )
 
 const documents = computed(() =>
-  result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty)
+  result.value?.me?.documents.edges.map((edge) => edge.node).filter(notEmpty),
 )
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const onScrollToBottom = () => {
   if (result.value?.me?.documents.pageInfo.hasNextPage) {
     void fetchMore({
@@ -84,7 +85,7 @@ const onScrollToBottom = () => {
         groupId: ui.selectedGroupId,
         query: ui.activeSearchQuery,
         first: FIRST,
-        after: result.value?.me?.documents.pageInfo.endCursor ?? undefined,
+        after: result.value.me.documents.pageInfo.endCursor ?? undefined,
       },
     })
   }

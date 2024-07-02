@@ -2,11 +2,13 @@ import { ApolloServer } from '@apollo/server'
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
 import { startServerAndCreateH3Handler } from '@as-integrations/h3'
-import { defineCorsEventHandler } from '@nozomuikuta/h3-cors'
+import { handleCors } from 'h3'
 import http from 'http'
+import 'json-bigint-patch' // Needed for bigint support in JSON
 import 'reflect-metadata' // Needed for tsyringe
-import { buildContext, Context } from '../context'
+import { buildContext, type Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
+import { configure as configureTsyringe } from './../tsyringe.config'
 
 // Workaround for issue with Azure deploy: https://github.com/unjs/nitro/issues/351
 // Original code taken from https://github.com/nodejs/node/blob/main/lib/_http_outgoing.js
@@ -22,7 +24,7 @@ http.OutgoingMessage.prototype.setHeader = function setHeader(name, value) {
 
   // CHANGED: Extra logic to find kOutHeaders symbol in `this`
   const kOutHeaders = Object.getOwnPropertySymbols(this).find(
-    (sym) => sym.toString() === 'Symbol(kOutHeaders)'
+    (sym) => sym.toString() === 'Symbol(kOutHeaders)',
   )
 
   // @ts-expect-error: Is workaround anyway
@@ -60,6 +62,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
     state.pipes = []
     this.pause()
 
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < dests.length; i++)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       dests[i].emit('unpipe', this, { hasUnpiped: false })
@@ -82,6 +85,8 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
 }
 
 export default defineLazyEventHandler(async () => {
+  configureTsyringe()
+
   const server = new ApolloServer<Context>({
     schema: await loadSchemaWithResolvers(),
     introspection: true,
@@ -100,17 +105,18 @@ export default defineLazyEventHandler(async () => {
   const serverHandler = startServerAndCreateH3Handler(server, {
     context: buildContext,
   })
-  const corsHandler = defineCorsEventHandler({
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowHeaders: ['Content-Type'],
-    // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
-    origin: ['https://studio.apollographql.com'],
-    credentials: true,
+  const corsMiddleware = defineRequestMiddleware((event) => {
+    handleCors(event, {
+      methods: ['GET', 'POST', 'OPTIONS'],
+      allowHeaders: ['Content-Type'],
+      // Allow requests from Apollo Studio: https://www.apollographql.com/docs/studio/explorer/connecting-authenticating/
+      origin: ['https://studio.apollographql.com'],
+      credentials: true,
+    })
   })
 
-  return eventHandler(async (event) => {
-    await corsHandler(event)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return serverHandler(event)
+  return eventHandler({
+    onRequest: corsMiddleware,
+    handler: serverHandler,
   })
 })

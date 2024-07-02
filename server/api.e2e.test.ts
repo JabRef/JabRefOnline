@@ -13,7 +13,7 @@ describe('invalid query', () => {
               name
             }
           }
-        `
+        `,
       )
       .variables({ id: '' })
 
@@ -21,8 +21,8 @@ describe('invalid query', () => {
     expect(response.get('content-type')).toContain('application/json')
     expect(errors?.map((error) => error.message)).toMatchInlineSnapshot(`
       [
-        "Cannot query field \\"name\\" on type \\"User\\".",
-        "Variable \\"$id\\" of type \\"String\\" used in position expecting type \\"ID!\\".",
+        "Cannot query field "name" on type "User".",
+        "Variable "$id" of type "String" used in position expecting type "ID!".",
       ]
     `)
   })
@@ -34,10 +34,10 @@ describe('request without query', () => {
       .get('/api')
       .set('Apollo-Require-Preflight', 'True')
 
-    expect(response.statusCode).toBe(400)
     expect(response.text).toContain(
-      'GraphQL operations must contain a non-empty `query`'
+      'GraphQL operations must contain a non-empty `query`',
     )
+    expect(response.statusCode).toBe(400)
   })
 })
 
@@ -51,10 +51,10 @@ describe('preflight', () => {
     expect(response.body).toStrictEqual({})
     expect(response.statusCode).toBe(204)
     expect(response.get('access-control-allow-methods')).toBe(
-      'GET,POST,OPTIONS'
+      'GET,POST,OPTIONS',
     )
     expect(response.get('access-control-allow-origin')).toBe(
-      'https://studio.apollographql.com'
+      'https://studio.apollographql.com',
     )
     expect(response.get('access-control-allow-headers')).toBe('Content-Type')
   })
@@ -68,10 +68,10 @@ describe('preflight', () => {
     expect(response.body).toStrictEqual({})
     expect(response.statusCode).toBe(204)
     expect(response.get('access-control-allow-methods')).toBe(
-      'GET,POST,OPTIONS'
+      'GET,POST,OPTIONS',
     )
     expect(response.get('access-control-allow-origin')).toBe(
-      'https://studio.apollographql.com'
+      'https://studio.apollographql.com',
     )
     expect(response.get('access-control-allow-headers')).toBe('Content-Type')
   })

@@ -17,9 +17,9 @@
 // The idea is that we use nuxt to render the stories
 import { start } from '@storybook/core-client'
 import type { RenderContext } from '@storybook/types'
-import { VueRenderer } from '@storybook/vue3'
+import type { VueRenderer } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
-import { applyDecorators } from '@storybook/vue3/preview'
+import { applyDecorators } from '@storybook/vue3/dist/entry-preview.mjs'
 import { mount } from 'mount-vue-component'
 import * as JabRefLogoStories from '~/components/JabRefLogo.stories.vue'
 import * as NButtonStories from '~/components/n-button.stories.vue'
@@ -36,10 +36,11 @@ import * as TTextareaStories from '~/components/t-textarea.stories'
 
 export function renderToCanvas(
   { title, name, storyFn, showMain, showError }: RenderContext<VueRenderer>,
-  domElement: HTMLElement
+  domElement: HTMLElement,
 ): void {
   const element = storyFn()
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!element) {
     showError({
       title: `Expecting a Vue component from the story: "${name}" of "${title}".`,
@@ -62,7 +63,6 @@ export default defineComponent({
   setup: () => {
     if (!process.client) return
     // @ts-expect-error: storybook typing is inconsistent
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const api = start(renderToCanvas, { applyDecorators })
     const framework = 'vue3'
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -83,7 +83,7 @@ export default defineComponent({
         TTextareaStories,
       ],
       undefined,
-      false
+      false,
     )
   },
 })
@@ -140,9 +140,17 @@ export default defineComponent({
   left: 0;
   right: 0;
   padding: 20px;
-  font-family: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
-    'San Francisco', BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica,
-    Arial, sans-serif;
+  font-family:
+    'Nunito Sans',
+    -apple-system,
+    '.SFNSText-Regular',
+    'San Francisco',
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow: auto;
 }
@@ -334,7 +342,9 @@ export default defineComponent({
 
 .sb-argstableBlock-body {
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 1px, rgba(0, 0, 0, 0.065) 0 0 0 1px;
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0 1px 3px 1px,
+    rgba(0, 0, 0, 0.065) 0 0 0 1px;
 }
 .sb-argstableBlock-body tr {
   background: transparent;

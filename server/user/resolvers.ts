@@ -1,4 +1,4 @@
-import {
+import type {
   ForgotPasswordPayload,
   MutationChangePasswordArgs,
   MutationForgotPasswordArgs,
@@ -11,24 +11,24 @@ import {
   UserChangesEdge,
   UserDocumentsArgs,
 } from '#graphql/resolver'
-import { User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
-import { Context } from '../context'
+import type { Context } from '../context'
 import {
-  UserDocument,
   UserDocumentService,
-  UserDocumentsResult,
+  type UserDocument,
+  type UserDocumentsResult,
 } from '../documents/user.document.service'
-import { GroupResolved } from '../groups/resolvers'
+import type { GroupResolved } from '../groups/resolvers'
 import { GroupService } from '../groups/service'
 import { validateInput } from '../utils/validation'
 import { inject, injectable, resolve } from './../tsyringe'
 import {
   AuthService,
-  ChangePasswordPayload,
-  LoginPayload,
-  LogoutPayload,
-  SignupPayload,
+  type ChangePasswordPayload,
+  type LoginPayload,
+  type LogoutPayload,
+  type SignupPayload,
 } from './auth.service'
 
 export type UserChangesEdgeUseDoc = Omit<UserChangesEdge, 'node'> & {
@@ -46,17 +46,17 @@ export class Query {
   async user(
     _root: Record<string, never>,
     { id }: QueryUserArgs,
-    _context: Context
+    _context: Context,
   ): Promise<User | null> {
     return await this.authService.getUserById(id)
   }
 
-  me(
+  async me(
     _root: Record<string, never>,
     _args: Record<string, never>,
-    context: Context
-  ): User | null {
-    return context.getUser()
+    context: Context,
+  ): Promise<User | null> {
+    return await context.getUser()
   }
 }
 
@@ -68,47 +68,40 @@ export class Mutation {
   async signup(
     _root: Record<string, never>,
     { input: { email, password } }: MutationSignupArgs,
-    context: Context
+    context: Context,
   ): Promise<SignupPayload> {
-    const newUserPayload = await this.authService.createAccount(email, password)
-    if ('user' in newUserPayload) void context.login(await newUserPayload.user)
-    return newUserPayload
+    const userOrProblems = await this.authService.createAccount(email, password)
+    if ('problems' in userOrProblems) {
+      return userOrProblems
+    }
+    const session = await this.authService.createSession(userOrProblems)
+    context.setSession(session)
+    return { user: userOrProblems }
   }
 
   @validateInput(LoginInputSchema)
   async login(
     _root: Record<string, never>,
     { input: { email, password } }: MutationLoginArgs,
-    context: Context
+    context: Context,
   ): Promise<LoginPayload> {
-    const { user, info } = await context.authenticate('graphql-local', {
-      email,
-      password,
-    })
-    if (user) {
-      // Make login persistent by putting it in the session store
-      await context.login(user)
-      return { user }
-    } else {
-      return {
-        problems: [
-          {
-            path: ['email'],
-            message:
-              (typeof info === 'string' ? info : info?.message) ||
-              'Unknown error while logging in.',
-          },
-        ],
-      }
+    const userOrProblems = await this.authService.validateUser(email, password)
+    if ('problems' in userOrProblems) {
+      return userOrProblems
     }
+
+    // Make login persistent by putting it in the session store
+    const session = await this.authService.createSession(userOrProblems)
+    context.setSession(session)
+    return { user: userOrProblems }
   }
 
   logout(
     _root: Record<string, never>,
     _args: Record<string, never>,
-    context: Context
+    context: Context,
   ): LogoutPayload {
-    context.logout()
+    context.setSession(null)
     return {
       result: true,
     }
@@ -117,7 +110,7 @@ export class Mutation {
   async forgotPassword(
     _root: Record<string, never>,
     { input: { email } }: MutationForgotPasswordArgs,
-    _context: Context
+    _context: Context,
   ): Promise<ForgotPasswordPayload> {
     return {
       result: await this.authService.resetPassword(email),
@@ -127,7 +120,7 @@ export class Mutation {
   async changePassword(
     _root: Record<string, never>,
     { input: { token, id, newPassword } }: MutationChangePasswordArgs,
-    _context: Context
+    _context: Context,
   ): Promise<ChangePasswordPayload> {
     return await this.authService.updatePassword(token, id, newPassword)
   }
@@ -136,7 +129,7 @@ export class Mutation {
 @injectable()
 export class SignupPayloadResolver {
   __resolveType(
-    signup: SignupPayload
+    signup: SignupPayload,
   ): 'UserReturned' | 'InputValidationProblem' {
     if ('user' in signup) {
       return 'UserReturned'
@@ -148,7 +141,7 @@ export class SignupPayloadResolver {
 @injectable()
 export class ChangePasswordPayloadResolver {
   __resolveType(
-    changePassword: ChangePasswordPayload
+    changePassword: ChangePasswordPayload,
   ): 'UserReturned' | 'TokenProblem' | 'InputValidationProblem' {
     if ('user' in changePassword) return 'UserReturned'
     else if ('problems' in changePassword) return 'InputValidationProblem'
@@ -159,7 +152,7 @@ export class ChangePasswordPayloadResolver {
 @injectable()
 export class LoginPayloadResolver {
   __resolveType(
-    login: LoginPayload
+    login: LoginPayload,
   ): 'UserReturned' | 'InputValidationProblem' {
     if ('user' in login) {
       return 'UserReturned'
@@ -173,12 +166,12 @@ export class UserResolver {
   constructor(
     @inject('UserDocumentService')
     private userDocumentService: UserDocumentService,
-    @inject('GroupService') private groupService: GroupService
+    @inject('GroupService') private groupService: GroupService,
   ) {}
 
   async documents(
     user: User,
-    { filterBy, first, after }: UserDocumentsArgs
+    { filterBy, first, after }: UserDocumentsArgs,
   ): Promise<UserDocumentsResult> {
     const { documents, hasNextPage } =
       await this.userDocumentService.getDocumentsOf(
@@ -186,7 +179,7 @@ export class UserResolver {
         filterBy,
         first,
         after,
-        true
+        true,
       )
 
     return {
@@ -202,7 +195,7 @@ export class UserResolver {
     const groups = await this.groupService.getGroupsOf(user)
     const groupsById = new Map<string, GroupResolved>()
     groups.forEach((group) =>
-      groupsById.set(group.id, { ...group, parent: null, children: [] })
+      groupsById.set(group.id, { ...group, parent: null, children: [] }),
     )
     const roots: GroupResolved[] = []
 
@@ -220,14 +213,14 @@ export class UserResolver {
 
   async changes(
     user: User,
-    { first, after }: UserChangesArgs
+    { first, after }: UserChangesArgs,
   ): Promise<UserChangesResult> {
     const { documents, hasNextPage } =
       await this.userDocumentService.getChangedDocumentsOf(
         user,
         first,
         after,
-        true
+        true,
       )
 
     function constructCursor(documents: UserDocument[]) {

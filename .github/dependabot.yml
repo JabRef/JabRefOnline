@@ -4,22 +4,81 @@ updates:
   - package-ecosystem: npm
     directory: '/'
     open-pull-requests-limit: 20
+    labels: []
     schedule:
       interval: 'monthly'
-    labels:
-      - 'type: dependencies'
-      - 'status: safe to test'
     commit-message:
       prefix: 'chore'
+    groups:
+      graphql:
+        patterns:
+          - 'graphql'
+          - '@apollo/*'
+          - '@graphql-tools/*'
+          - '@as-integrations/h3'
+          - 'graphql-*'
+          - '@graphql-*'
+      vitest:
+        patterns:
+          - '@vitest*'
+          - 'vitest'
+          - 'vitest-*'
+      eslint:
+        patterns:
+          - '@typescript-eslint/*'
+          - 'eslint'
+          - 'eslint-*'
+      prettier:
+        patterns:
+          - 'prettier'
+          - 'prettier-*'
+      storybook:
+        patterns:
+          - 'storybook'
+          - '@storybook/*'
+          - 'chromatic'
+      nuxt:
+        patterns:
+          - 'nuxt'
+          - 'vite'
+          - 'nuxt-*'
+          - '@nuxt/*'
+          - '@nuxtjs/*'
+          - 'pinia'
+          - '@pinia/nuxt'
+          - '@bg-dev/nuxt-naiveui'
+          - 'vee-validate'
+          - '@vee-validate/nuxt'
+          - '@vee-validate/zod'
+          - 'zod'
+          - 'ufo'
+      vue:
+        patterns:
+          - 'vue'
+          - '@vue/*'
+          - 'vue-*'
+          - 'unplugin-vue-components'
+          - '@vueuse/core'
+          - '@he-tree/vue'
+          - '@tailwindcss/forms'
+          - '@yaireo/tagify'
+      prisma:
+        patterns:
+          - 'prisma'
+          - '@prisma/*'
+      types:
+        patterns:
+          - '@types/*'
+      azure:
+        patterns:
+          - '@azure/*'
 
   # Fetch and update latest `github-actions` pkgs
   - package-ecosystem: github-actions
     directory: '/'
     open-pull-requests-limit: 20
+    labels: []
     schedule:
       interval: 'monthly'
-    labels:
-      - 'type: dependencies'
-      - 'status: safe to test'
     commit-message:
       prefix: 'chore'

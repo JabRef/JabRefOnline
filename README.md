@@ -4,15 +4,15 @@ This repository contains the source of the [JabRef homepage](https://www.jabref.
 
 ## Servers
 
-- Production server: https://mango-pebble-0224c3803.1.azurestaticapps.net
+- Production server: [www.jabref.org](https://www.jabref.org/)
   This server runs the last released version with data provided by the production database.
-- Staging server: https://mango-pebble-0224c3803-staging.westeurope.1.azurestaticapps.net
+- Staging server: [staging.www.jabref.org](https://staging.www.jabref.org/)
   This server runs the latest version of the main branch with data provided by the production database.
   Usually, you do not want to target this server. Its main purpose is to test the main branch before a release.
-- Test server: https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net
+- Test server: [dev.www.jabref.org](https://dev.www.jabref.org/)
   This server runs the latest version of the main branch with test data that is usually reset on redeployment.
   The main use of this server is for developers to test the latest version against their application without the fear to delete user data.
-  In particular, you can [log in](https://mango-pebble-0224c3803-dev.westeurope.1.azurestaticapps.net/user/login) using `alice@jabref.org / EBNPXY35TYkYXHs`.
+  In particular, you can [log in](https://dev.www.jabref.org/user/login) using `alice@jabref.org / EBNPXY35TYkYXHs`.
 - PR previews:
   Every pull request is deployed to a (temporary) server, which uses the same test data as the "Test server".
 
@@ -25,12 +25,12 @@ The simplest way to start is by [opening this project in Gitpod](https://gitpod.
 - Checkout
 - Create a `.env` file in the root containing the connection URL for the database, e.g. `DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
 - Optional: Install and start [Redis](https://redis.io/).
-  Perhaps the most straightforward way to do this is via Docker: `yarn docker:redis`.
+  Perhaps the most straightforward way to do this is via Docker: `pnpm docker:redis`.
   If you do not use this command, make sure that Redis is available through the port `6380` or, alternatively, add the configuration `REDIS_PORT=<your port>` to the `.env` file.
-- Run `yarn install` to install all dependencies.
-- Run `yarn prisma:migrate:dev` to initialize the database. You may also want to use `yarn prisma:seed` to fill the database with some initial test data.
+- Run `pnpm install` to install all dependencies.
+- Run `pnpm prisma:migrate:dev` to initialize the database. You may also want to use `pnpm prisma:seed` to fill the database with some initial test data.
 
-Now you can start the server by using `yarn dev`.
+Now you can start the server by using `pnpm dev`.
 
 If you use Visual Studio Code, you might also want to activate automatic tasks which would then be run whenever you open the project and run the usual commands to get you running in no time.
 For this, open the command palette (Shift + Cmd + P) and choose "Tasks: Manage Automatic Tasks in Folder".
@@ -41,20 +41,20 @@ Now close and re-open the workspace.
 
 | Command            | Description                                                                                                                                                                                                              |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| yarn install       | Install project dependencies and generate code.                                                                                                                                                                          |
-| yarn dev           | Start Nuxt server in development mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
-| yarn test          | Execute all tests. Pass `-u` to update all snapshots.                                                                                                                                                                    |
-| yarn build         | Build the nuxt.js web application for production.                                                                                                                                                                        |
-| yarn start         | Start the production server built by `yarn build` (for testing purposes).                                                                                                                                                |
-| yarn prisma:studio | Explore data in the database using a visual editor.                                                                                                                                                                      |
-| yarn storybook     | Start [Storybook](#ui-workflow-storybook) in your browser.                                                                                                                                                               |
+| pnpm install       | Install project dependencies and generate code.                                                                                                                                                                          |
+| pnpm dev           | Start Nuxt server in development mode with hot reloading enabled. Listen on [http://localhost:3000](http://localhost:3000). The GraphQL API is then accessible at [http://localhost:3000/api](http://localhost:3000/api) |
+| pnpm test          | Execute all tests. Pass `-u` to update all snapshots.                                                                                                                                                                    |
+| pnpm build         | Build the nuxt.js web application for production.                                                                                                                                                                        |
+| pnpm start         | Start the production server built by `pnpm build` (for testing purposes).                                                                                                                                                |
+| pnpm prisma:studio | Explore data in the database using a visual editor.                                                                                                                                                                      |
+| pnpm storybook     | Start [Storybook](#ui-workflow-storybook) in your browser.                                                                                                                                                               |
 
 ### Workflow for editing the database schema
 
 1. Prototype your new feature by making the necessary changes to `schema.prisma`.
-2. Run `yarn prisma:push` to push the changes to the local database.
+2. Run `pnpm prisma:push` to push the changes to the local database.
 3. Iterate until feature is ready.
-4. Run `yarn prisma:migrate:dev` to generate new migration based on the schema changes.
+4. Run `pnpm prisma:migrate:dev` to generate new migration based on the schema changes.
 
 See [Prisma documentation](https://www.prisma.io/docs/guides/application-lifecycle/prototyping-schema-db-push) for more details.
 
@@ -72,7 +72,7 @@ components
 │   Button.stories.ts
 ```
 
-To start developing with Storybook, simply run `yarn storybook`, which opens Storybook in the browser.
+To start developing with Storybook, simply run `pnpm storybook`, which opens Storybook in the browser.
 
 An up-to-date version of all Storybook components can be found [online](https://www.chromatic.com/library?appId=61142988527d34003b1e783d&branch=main).
 

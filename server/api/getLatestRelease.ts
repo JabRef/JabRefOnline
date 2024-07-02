@@ -1,8 +1,7 @@
 const config = useRuntimeConfig()
 
 export default defineEventHandler(async () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const response = await fetch('https://api.github.com/graphql', {
+  const response = (await fetch('https://api.github.com/graphql', {
     headers: { Authorization: `Bearer ${config.githubRepoToken}` },
     body: JSON.stringify({
       query: `
@@ -22,13 +21,21 @@ export default defineEventHandler(async () => {
       `,
     }),
     method: 'POST',
-  }).then((res) => res.json())
+  }).then((res) => res.json())) as {
+    data?: {
+      repository?: {
+        releases?: {
+          nodes: {
+            tagName: string
+          }[]
+        }
+      }
+    }
+  }
   return {
-    version:
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      (response.data.repository.releases.nodes[0].tagName as string).replace(
-        'v',
-        ''
-      ), // something like 5.7
+    version: response.data?.repository?.releases?.nodes[0].tagName.replace(
+      'v',
+      '',
+    ), // something like 5.7
   }
 })

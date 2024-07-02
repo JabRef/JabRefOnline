@@ -1,4 +1,3 @@
-import { buildNuxt, loadNuxt, tryUseNuxt } from '@nuxt/kit'
 import type { StorybookConfig } from '@storybook/vue3-vite'
 import { mergeConfig } from 'vite'
 
@@ -35,7 +34,7 @@ const config: StorybookConfig = {
         plugins: nuxtViteConfig.plugins,
         define: nuxtViteConfig.define,
       },
-      config
+      config,
     )
   },
 }
@@ -43,6 +42,8 @@ const config: StorybookConfig = {
 // https://github.com/nuxt/nuxt/issues/14534
 // From: https://github.com/danielroe/nuxt-vitest/blob/main/packages/nuxt-vitest/src/config.ts
 async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
+  // Use dynamic import as a workaround for https://github.com/storybookjs/storybook/issues/23972
+  const { buildNuxt, loadNuxt, tryUseNuxt } = await import('@nuxt/kit')
   let nuxt = tryUseNuxt()
   let nuxtAlreadyRunnnig = true
   if (!nuxt) {

@@ -1,36 +1,42 @@
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
+import type { Config } from '~/config'
 import * as DocumentResolvers from './documents/resolvers'
 import { UserDocumentService } from './documents/user.document.service'
 import * as GroupResolvers from './groups/resolvers'
 import { GroupService } from './groups/service'
+import { JournalService } from './journals/journal.service'
+import * as JournalResolvers from './journals/resolvers'
 import { instanceCachingFactory, register } from './tsyringe'
 import { AuthService } from './user/auth.service'
-import PassportInitializer from './user/passport-initializer'
 import * as UserResolvers from './user/resolvers'
+import { createEmailService } from './utils/email.service'
 import { createRedisClient } from './utils/services.factory'
 
 const { PrismaClient } = prisma
 
-export async function configure(): Promise<void> {
+export function configure() {
+  const config = useRuntimeConfig() as Config
+  register('Config', {
+    useValue: config,
+  })
   // Tools
   register('PrismaClient', {
     useFactory: instanceCachingFactory(() => new PrismaClient()),
   })
   register('RedisClient', {
-    useValue: await createRedisClient(),
+    useValue: createRedisClient(config),
   })
+  register('EmailService', { useValue: createEmailService() })
   registerClasses()
 }
 
 export function registerClasses(): void {
-  // Tools
-  register('PassportInitializer', PassportInitializer)
-
   // Services
   register('UserDocumentService', UserDocumentService)
   register('AuthService', AuthService)
   register('GroupService', GroupService)
+  register('JournalService', JournalService)
   // Resolvers
   register('DocumentQuery', DocumentResolvers.Query)
   register('DocumentMutation', DocumentResolvers.Mutation)
@@ -38,7 +44,7 @@ export function registerClasses(): void {
   register('JournalArticleResolver', DocumentResolvers.JournalArticleResolver)
   register(
     'ProceedingsArticleResolver',
-    DocumentResolvers.ProceedingsArticleResolver
+    DocumentResolvers.ProceedingsArticleResolver,
   )
   register('ThesisResolver', DocumentResolvers.ThesisResolver)
   register('OtherResolver', DocumentResolvers.OtherResolver)
@@ -47,6 +53,9 @@ export function registerClasses(): void {
   register('GroupMutation', GroupResolvers.Mutation)
   register('GroupResolver', GroupResolvers.GroupResolver)
 
+  register('JournalQuery', JournalResolvers.Query)
+  register('JournalResolver', JournalResolvers.JournalResolver)
+
   register('UserQuery', UserResolvers.Query)
   register('UserMutation', UserResolvers.Mutation)
   register('UserResolver', UserResolvers.UserResolver)
@@ -54,6 +63,6 @@ export function registerClasses(): void {
   register('SignupPayloadResolver', UserResolvers.SignupPayloadResolver)
   register(
     'ChangePasswordPayloadResolver',
-    UserResolvers.ChangePasswordPayloadResolver
+    UserResolvers.ChangePasswordPayloadResolver,
   )
 }

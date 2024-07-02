@@ -1,4 +1,4 @@
-import {
+import type {
   AddJournalArticleInput,
   AddProceedingsArticleInput,
   AddThesisInput,
@@ -16,16 +16,17 @@ import {
 } from '#graphql/resolver'
 import { DocumentType } from '@prisma/client'
 import { notEmpty } from '~/composables/util'
-import { Context } from '../context'
-import { ResolveType } from '../utils/extractResolveType'
+import type { Context } from '../context'
+import type { ResolveType } from '../utils/extractResolveType'
 import { inject, injectable, resolve } from './../tsyringe'
 import {
-  UserDocument,
-  UserDocumentCreateInput,
   UserDocumentService,
+  type UserDocument,
+  type UserDocumentCreateInput,
 } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const specialFields: string[] = [
   'author',
   'editor',
@@ -60,7 +61,10 @@ const specialFields: string[] = [
 
 function convertDocumentInput(
   type: DocumentType,
-  document: AddJournalArticleInput | AddProceedingsArticleInput | AddThesisInput
+  document:
+    | AddJournalArticleInput
+    | AddProceedingsArticleInput
+    | AddThesisInput,
 ): UserDocumentCreateInput {
   /* TODO: Save those fields as well
   const special = document.fields
@@ -128,7 +132,8 @@ function convertDocumentInput(
             name: document.in.journal.name,
             subtitle: document.in.journal.subtitle,
             titleAddon: document.in.journal.titleAddon,
-            issn: document.in.journal.issn,
+            issn: document.in.journal.issn ?? [],
+            isCustom: true,
           },
         },
         title: document.in.title,
@@ -165,13 +170,13 @@ function convertDocumentInput(
 export class Query {
   constructor(
     @inject('UserDocumentService')
-    private userDocumentService: UserDocumentService
+    private userDocumentService: UserDocumentService,
   ) {}
 
   async userDocument(
     _root: Record<string, never>,
     { id }: QueryUserDocumentArgs,
-    _context: Context
+    _context: Context,
   ): Promise<UserDocument | null> {
     return await this.userDocumentService.getDocumentById(id, true)
   }
@@ -181,13 +186,13 @@ export class Query {
 export class Mutation {
   constructor(
     @inject('UserDocumentService')
-    private userDocumentService: UserDocumentService
+    private userDocumentService: UserDocumentService,
   ) {}
 
   async addUserDocument(
     _root: Record<string, never>,
     { input }: MutationAddUserDocumentArgs,
-    _context: Context
+    _context: Context,
   ): Promise<UserDocument | null> {
     const document =
       input.journalArticle ?? input.proceedingsArticle ?? input.thesis
@@ -196,12 +201,12 @@ export class Mutation {
       throw new Error('No document given')
     }
     return await this.userDocumentService.addDocument(
-      convertDocumentInput(documentType, document)
+      convertDocumentInput(documentType, document),
     )
   }
 
   private getDocumentType(
-    input: AddUserDocumentInput | UpdateUserDocumentInput
+    input: AddUserDocumentInput | UpdateUserDocumentInput,
   ): DocumentType | null {
     if (input.journalArticle) {
       return 'JOURNAL_ARTICLE'
@@ -216,7 +221,7 @@ export class Mutation {
   async updateUserDocument(
     _root: Record<string, never>,
     { input }: MutationUpdateUserDocumentArgs,
-    _context: Context
+    _context: Context,
   ): Promise<UserDocument | null> {
     const document =
       input.journalArticle ?? input.proceedingsArticle ?? input.thesis
@@ -229,7 +234,7 @@ export class Mutation {
     convertedDocument.id = input.id
     return await this.userDocumentService.updateDocument(
       input.id,
-      convertedDocument
+      convertedDocument,
     )
   }
 }
@@ -251,26 +256,22 @@ export class DocumentResolver {
   }
 
   authors(document: UserDocument): (Person | Organization)[] {
-    if (document.contributors) {
-      // TODO: Already store authors separately on save?
-      return document.contributors
-        .filter((contributor) => contributor.role === 'AUTHOR')
-        .sort((a, b) => a.position - b.position)
-        .map((contributor) => {
-          return contributor.entity.type === 'PERSON'
-            ? {
-                ...contributor.entity,
-                __typename: 'Person',
-              }
-            : {
-                id: contributor.entity.id,
-                name: contributor.entity.name ?? '',
-                __typename: 'Organization',
-              }
-        })
-    } else {
-      return []
-    }
+    // TODO: Already store authors separately on save?
+    return document.contributors
+      .filter((contributor) => contributor.role === 'AUTHOR')
+      .sort((a, b) => a.position - b.position)
+      .map((contributor) => {
+        return contributor.entity.type === 'PERSON'
+          ? {
+              ...contributor.entity,
+              __typename: 'Person',
+            }
+          : {
+              id: contributor.entity.id,
+              name: contributor.entity.name ?? '',
+              __typename: 'Organization',
+            }
+      })
   }
 
   keywords(document: UserDocument): string[] {
@@ -308,7 +309,7 @@ export class ProceedingsArticleResolver extends DocumentResolver {
 export class ThesisResolver extends DocumentResolver {
   institution(document: UserDocument): Institution | null {
     const institutionName = document.other?.find(
-      (field) => field.field === 'institution'
+      (field) => field.field === 'institution',
     )?.value
 
     if (institutionName) {

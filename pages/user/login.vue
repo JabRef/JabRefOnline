@@ -102,7 +102,7 @@ definePageMeta({ layout: false })
 // middleware: 'guest',
 
 const { handleSubmit, errors, values } = useForm({
-  validationSchema: toTypedSchema(LoginInputSchema()),
+  validationSchema: toTypedSchema(LoginInputSchema),
 })
 
 const otherError = ref('')
@@ -138,7 +138,7 @@ const {
         cacheCurrentUser(cache, null)
       }
     },
-  }
+  },
 )
 onDone((result) => {
   if (result.data?.login?.__typename === 'UserReturned') {
@@ -151,7 +151,7 @@ onDone((result) => {
         : 'Unknown error'
   }
 })
-const error = computed(() => graphqlError.value || otherError.value)
+const error = computed(() => graphqlError.value ?? otherError.value)
 
 // TODO: Implement remember login
 const rememberLogin = ref(false)

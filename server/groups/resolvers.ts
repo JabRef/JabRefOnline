@@ -1,4 +1,4 @@
-import {
+import type {
   MutationCreateGroupArgs,
   MutationUpdateGroupArgs,
   QueryGroupArgs,
@@ -9,7 +9,7 @@ import type { Group, GroupType as GroupTypeT } from '@prisma/client'
 // eslint-disable-next-line import/default
 import prisma from '@prisma/client'
 import { GraphQLError } from 'graphql'
-import { Context } from '~/server/context'
+import type { Context } from '~/server/context'
 import { inject, injectable, resolve } from './../tsyringe'
 import { GroupService } from './service'
 const { GroupType, GroupHierarchyType } = prisma
@@ -28,7 +28,7 @@ export class Query {
   async group(
     _root: Record<string, never>,
     { id }: QueryGroupArgs,
-    _context: Context
+    _context: Context,
   ): Promise<Group | null> {
     return await this.groupService.getGroupById(id)
   }
@@ -41,7 +41,7 @@ export class Mutation {
   async createGroup(
     _root: Record<string, never>,
     { input: group }: MutationCreateGroupArgs,
-    context: Context
+    context: Context,
   ): Promise<Group | null> {
     let type = null
     let field = null
@@ -92,6 +92,7 @@ export class Mutation {
       isRegEx = group.searchGroup.isRegEx
     } else if (group.texGroup) {
       type = GroupType.TexGroup
+      // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars --- TODO: handle paths
       paths = group.texGroup.paths
     }
 
@@ -102,14 +103,15 @@ export class Mutation {
           extensions: {
             code: ApolloServerErrorCode.BAD_USER_INPUT,
           },
-        }
+        },
       )
     }
 
+    const user = await context.getUser()
     return await this.groupService.addGroup({
       users: {
         connect: {
-          id: context.getUser()?.id,
+          id: user?.id,
         },
       },
       name: group.name,
@@ -148,11 +150,11 @@ export class Mutation {
   async updateGroup(
     _root: Record<never, string>,
     { input: group }: MutationUpdateGroupArgs,
-    _context: Context
+    _context: Context,
   ): Promise<Group | null> {
     return await this.groupService.updateGroup({
       id: group.id,
-      name: group.name || undefined,
+      name: group.name ?? undefined,
       // TODO: Remaining properties
     })
   }

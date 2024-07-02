@@ -18,19 +18,20 @@
 <script lang="ts" setup>
 definePageMeta({ layout: false })
 
-const route = useRoute()
+const route = useRoute('download-os')
 
 const { version: latestRelease } = await $fetch('/api/getLatestRelease')
 
 let downloadUrl = 'https://www.fosshub.com/JabRef.html'
-const os = route.params.os as string
-if (os) {
+
+const os = route.params.os as string | undefined
+if (os && ['win', 'mac', 'linux'].includes(os)) {
   downloadUrl +=
     {
       win: `?dwl=JabRef-${latestRelease}.msi`,
       mac: `?dwl=JabRef-${latestRelease}.pkg`,
       linux: `?dwl=jabref_${latestRelease}_amd64.deb`,
-    }[os] || ''
+    }[os] ?? ''
 }
 
 await navigateTo(downloadUrl, { external: true })

@@ -7,10 +7,12 @@
     "composables",
     "datetime",
     "esbuild",
+    "issn",
     "jiti",
     "journaltitle",
     "Nuxt",
     "nuxtjs",
+    "scimago",
     "transpiled",
     "tsyringe",
     "upsert"
@@ -21,13 +23,14 @@
   "[typescript]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+      "source.fixAll.eslint": "explicit"
     }
   },
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
   "[vue]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+      "source.fixAll.eslint": "explicit"
     }
   },
   "[json]": {
@@ -45,7 +48,7 @@
   "files.exclude": {
     "coverage": true
   },
-  "vitest.commandLine": "yarn test --",
+  "vitest.commandLine": "pnpm test --",
   "eslint.validate": ["javascript", "typescript", "graphql", "vue"],
   "search.exclude": {
     "**/node_modules": true,

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ResolverFn } from '#graphql/resolver'
-import { AnyZodObject, TypeOf, ZodType } from 'zod'
+import type { ResolverFn } from '#graphql/resolver'
+import { ZodType, type AnyZodObject, type TypeOf } from 'zod'
 
 type MethodDecorator<T> = <S extends T>(
   target: any,
   propertyKey: string | symbol,
-  descriptor: TypedPropertyDescriptor<S>
-) => TypedPropertyDescriptor<S> | void
+  descriptor: TypedPropertyDescriptor<S>,
+) => TypedPropertyDescriptor<S>
 
 /**
  * Method decorator that validates the argument of the target function against the given schema.
@@ -17,7 +17,7 @@ type MethodDecorator<T> = <S extends T>(
  * @return {MethodDecorator} A {@link MethodDecorator}.
  */
 export function validation<T extends AnyZodObject>(
-  arg: T | (() => T)
+  arg: T | (() => T),
 ): MethodDecorator<(input: TypeOf<T>) => any> {
   return function (_target, _propertyKey, descriptor) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -49,11 +49,13 @@ type ZodResolver<T extends ZodType<any, any, any>> = ResolverFn<
  * @return {MethodDecorator} A {@link MethodDecorator}.
  */
 export function validateInput<T extends AnyZodObject>(
-  arg: T | (() => T)
+  arg: T | (() => T),
 ): MethodDecorator<ZodResolver<T>> {
   return function (_target, _propertyKey, descriptor) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const originalMethod = descriptor.value!
+    const originalMethod = descriptor.value
+    if (!originalMethod) {
+      throw new Error('validateInput can only be used on methods')
+    }
     // @ts-expect-error: should be fine
     descriptor.value = function (root, { input }, context, info) {
       const schema = typeof arg === 'function' ? arg() : arg
@@ -66,7 +68,7 @@ export function validateInput<T extends AnyZodObject>(
           root,
           { input: result.data },
           context,
-          info
+          info,
         )
       } else {
         return { problems: result.error.issues }

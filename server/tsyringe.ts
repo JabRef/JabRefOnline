@@ -1,29 +1,35 @@
 import type { PrismaClient } from '@prisma/client'
 import {
-  ClassProvider,
-  DependencyContainer,
-  FactoryProvider,
   Lifecycle,
-  Provider,
-  RegistrationOptions,
-  TokenProvider,
-  ValueProvider,
   container,
   inject as tsyringeInject,
+  type ClassProvider,
+  type DependencyContainer,
+  type FactoryProvider,
+  type Provider,
+  type RegistrationOptions,
+  type TokenProvider,
+  type ValueProvider,
 } from 'tsyringe'
-import { constructor } from 'tsyringe/dist/typings/types'
+import type { constructor } from 'tsyringe/dist/typings/types'
+import type { Storage } from 'unstorage'
+import type { Config } from '~/config'
 import type * as DocumentResolvers from './documents/resolvers'
 import type { UserDocumentService } from './documents/user.document.service'
 import type * as GroupResolvers from './groups/resolvers'
 import type { GroupService } from './groups/service'
+import type { JournalService } from './journals/journal.service'
+import type * as JournalResolvers from './journals/resolvers'
 import type { AuthService } from './user/auth.service'
-import type PassportInitializer from './user/passport-initializer'
 import type * as UserResolvers from './user/resolvers'
-import { RedisClient } from './utils/services.factory'
+import type { EmailService } from './utils/email.service'
 
 export { injectable, instanceCachingFactory } from 'tsyringe'
 
-type InjectionSymbol<T> = { sym: symbol; value: T | undefined }
+interface InjectionSymbol<T> {
+  sym: symbol
+  value: T | undefined
+}
 
 /**
  * Define a new injection token.
@@ -33,7 +39,7 @@ type InjectionSymbol<T> = { sym: symbol; value: T | undefined }
  * https://github.com/microsoft/TypeScript/issues/26242
  */
 function injectSymbol<S extends string>(
-  name: S
+  name: S,
 ): <T>() => Record<S, InjectionSymbol<T>> {
   return <T>() => {
     const res = {} as Record<S, InjectionSymbol<T>>
@@ -43,14 +49,16 @@ function injectSymbol<S extends string>(
 }
 
 export const InjectionSymbols = {
+  ...injectSymbol('Config')<Config>(),
   // Tools
   ...injectSymbol('PrismaClient')<typeof PrismaClient>(),
-  ...injectSymbol('RedisClient')<RedisClient>(),
-  ...injectSymbol('PassportInitializer')<typeof PassportInitializer>(),
+  ...injectSymbol('RedisClient')<Storage>(),
+  ...injectSymbol('EmailService')<EmailService>(),
   // Services
   ...injectSymbol('UserDocumentService')<typeof UserDocumentService>(),
   ...injectSymbol('AuthService')<typeof AuthService>(),
   ...injectSymbol('GroupService')<typeof GroupService>(),
+  ...injectSymbol('JournalService')<typeof JournalService>(),
   // Resolvers
   ...injectSymbol('DocumentQuery')<typeof DocumentResolvers.Query>(),
   ...injectSymbol('DocumentMutation')<typeof DocumentResolvers.Mutation>(),
@@ -69,6 +77,9 @@ export const InjectionSymbols = {
   ...injectSymbol('GroupQuery')<typeof GroupResolvers.Query>(),
   ...injectSymbol('GroupMutation')<typeof GroupResolvers.Mutation>(),
   ...injectSymbol('GroupResolver')<typeof GroupResolvers.GroupResolver>(),
+
+  ...injectSymbol('JournalQuery')<typeof JournalResolvers.Query>(),
+  ...injectSymbol('JournalResolver')<typeof JournalResolvers.JournalResolver>(),
 
   ...injectSymbol('UserQuery')<typeof UserResolvers.Query>(),
   ...injectSymbol('UserMutation')<typeof UserResolvers.Mutation>(),
@@ -99,13 +110,12 @@ type Token = keyof typeof InjectionSymbols
  * Depends on https://github.com/Microsoft/TypeScript/issues/30102 and/or https://github.com/microsoft/TypeScript/issues/43132.
  */
 export function inject(
-  token: Token
+  token: Token,
 ): (
   target: any,
   propertyKey: string | symbol | undefined,
-  parameterIndex: number
+  parameterIndex: number,
 ) => void {
-  // @ts-expect-error: https://github.com/microsoft/tsyringe/issues/221
   return tsyringeInject(InjectionSymbols[token].sym)
 }
 
@@ -122,7 +132,7 @@ const injectionSymbolToConstructor = new Map<symbol, constructor<any>>()
  * @return An instance of the dependency.
  */
 export function resolve<T extends Token>(
-  token: T
+  token: T,
 ): ValueOfSymbol<(typeof InjectionSymbols)[T]> {
   const symb = InjectionSymbols[token].sym
   // If explicitly registered, use that
@@ -161,7 +171,7 @@ type ConstructableSymbols = {
  */
 export function fallback<T extends keyof ConstructableSymbols>(
   token: T,
-  target: TypeOfSymbol<ConstructableSymbols[T]>
+  target: TypeOfSymbol<ConstructableSymbols[T]>,
 ): void {
   injectionSymbolToConstructor.set(InjectionSymbols[token].sym, target)
 }
@@ -173,38 +183,29 @@ export function fallback<T extends keyof ConstructableSymbols>(
  */
 export function register<T extends Token>(
   token: T,
-  provider: ValueProvider<ValueOfToken<T>>
-): DependencyContainer
-export function register<T extends Token>(
-  token: T,
-  provider: FactoryProvider<ValueOfToken<T>>
+  provider: ValueProvider<ValueOfToken<T>> | FactoryProvider<ValueOfToken<T>>,
 ): DependencyContainer
 export function register<T extends Token>(
   token: T,
   provider: TokenProvider<ValueOfToken<T>>,
-  options?: RegistrationOptions
+  options?: RegistrationOptions,
 ): DependencyContainer
 export function register<T extends keyof ConstructableSymbols>(
   token: T,
-  provider: ClassProvider<ValueOfToken<T>>,
-  options?: RegistrationOptions
-): DependencyContainer
-export function register<T extends keyof ConstructableSymbols>(
-  token: T,
-  provider: constructor<ValueOfToken<T>>,
-  options?: RegistrationOptions
+  provider: ClassProvider<ValueOfToken<T>> | constructor<ValueOfToken<T>>,
+  options?: RegistrationOptions,
 ): DependencyContainer
 export function register<T extends Token>(
   token: T,
   providerOrConstructor:
     | Provider<ValueOfToken<T>>
     | constructor<ValueOfToken<T>>,
-  options: RegistrationOptions = { lifecycle: Lifecycle.Transient }
+  options: RegistrationOptions = { lifecycle: Lifecycle.Transient },
 ): DependencyContainer {
   return container.register(
     InjectionSymbols[token].sym,
     // @ts-expect-error: There is a problem with the overloads, don't know why
     providerOrConstructor,
-    options
+    options,
   )
 }

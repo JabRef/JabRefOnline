@@ -1,11 +1,10 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  extends: [
-    // Preset for configuring SEO
-    // https://github.com/harlan-zw/nuxt-seo-kit
-    'nuxt-seo-kit',
-  ],
+  future: {
+    // @variantjs/vue, @apollo/server, and mount-vue-component are not yet compatible with bundler resolution
+    typescriptBundlerResolution: false,
+  },
 
   /*
    ** Add alias for library imports
@@ -14,21 +13,57 @@ export default defineNuxtConfig({
   alias: {
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
-    global: 'global.ts',
+    global: './global.ts',
   },
 
   nitro: {
-    // Prevent 'reflect-metadata' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
-    moduleSideEffects: ['reflect-metadata'],
+    azure: {
+      config: {
+        globalHeaders: {
+          'X-Robots-Tag':
+            'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        },
+      },
+    },
+    // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
+    moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
       // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],
     },
+    esbuild: {
+      options: {
+        tsconfigRaw: {
+          compilerOptions: {
+            // Enable decorators, workaround for https://github.com/unjs/nitro/issues/1380
+            experimentalDecorators: true,
+          },
+        },
+      },
+    },
   },
 
   experimental: {
+    // Full typed routing
+    typedPages: true,
+  },
+
+  vue: {
     // Add support for vue runtime compiler (needed to render stories in storybook)
-    runtimeVueCompiler: true,
+    runtimeCompiler: true,
+  },
+
+  // Workaround for https://github.com/nuxt/nuxt/issues/22933
+  hooks: {
+    close: (nuxt) => {
+      if (
+        !nuxt.options._prepare &&
+        !process.env.TEST &&
+        !process.env.VITE_TEST
+      ) {
+        process.exit()
+      }
+    },
   },
 
   /*
@@ -99,11 +134,9 @@ export default defineNuxtConfig({
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // Add support for naive-ui
-    '@huntersofbook/naive-ui-nuxt',
+    '@bg-dev/nuxt-naiveui',
     // Use Pinia for state management
     '@pinia/nuxt',
-    // Add storybook support
-    './modules/storybook',
     // Add server-side graphql support
     'nuxt-graphql-server',
     // Add support for writing content in markdown
@@ -119,11 +152,17 @@ export default defineNuxtConfig({
     'nuxt-icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
+    // Support for end-to-end testing and unit testing (and Vitest integration)
+    // https://nuxt.com/docs/getting-started/testing
+    '@nuxt/test-utils/module',
+    // Preset for configuring SEO
+    // https://nuxtseo.com/nuxt-seo
+    '@nuxtjs/seo',
   ],
 
   /*
    ** Client and server-side configuration
-   ** See https://v3.nuxtjs.org/guide/features/runtime-config
+   ** See https://nuxt.com/docs/guide/going-further/runtime-config
    */
   runtimeConfig: constructConfig(),
 
@@ -150,8 +189,10 @@ export default defineNuxtConfig({
   // storybook: {},
 
   tailwindcss: {
-    // Expose config so that we can use it in the vscode extension
-    exposeConfig: true,
+    // Expose config so that we can use it to configure naive ui and in the vscode extension
+    exposeConfig: {
+      write: true,
+    },
   },
 
   /**
@@ -187,39 +228,16 @@ export default defineNuxtConfig({
   },
 
   /**
-   * Naive UI configuration
-   */
-  naiveUI: {
-    themeOverrides: {
-      common: {
-        primaryColor: '#6072A7',
-        primaryColorHover: '#4F5F8F',
-        primaryColorPressed: '#3B476B',
-        primaryColorSuppl: '#4F5F8F',
-      },
-    },
-  },
-
-  /**
    * SEO configuration
-   * https://github.com/harlan-zw/nuxt-seo-kit
+   * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
   site: {
     // Hide information message during startup
     splash: false,
-    siteUrl: 'https://www.jabref.org/',
-    siteName: 'JabRef',
-    siteDescription:
+    url: 'https://www.jabref.org/',
+    name: 'JabRef - Free Reference Manager - Stay on top of your Literature',
+    description:
       'A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way.',
-  },
-
-  /**
-   * Management of robots crawling
-   * https://github.com/harlan-zw/nuxt-simple-robots
-   */
-  robots: {
-    // Allow crawling of all pages
-    indexable: true,
   },
 
   vite: {
@@ -234,8 +252,8 @@ export default defineNuxtConfig({
         ? {
             // Gitpod is served over https, so we need to use wss as well
             protocol: 'wss',
-            host: `3000-${process.env.GITPOD_WORKSPACE_ID || ''}.${
-              process.env.GITPOD_WORKSPACE_CLUSTER_HOST || ''
+            host: `3000-${process.env.GITPOD_WORKSPACE_ID ?? ''}.${
+              process.env.GITPOD_WORKSPACE_CLUSTER_HOST ?? ''
             }`,
             port: 443,
           }

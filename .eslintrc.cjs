@@ -6,8 +6,6 @@ module.exports = {
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
-    // Enable typescript-specific recommended rules
-    'plugin:@typescript-eslint/recommended',
     'plugin:nuxt/recommended',
     // Turns off all rules that are unnecessary or might conflict with Prettier (needs to be last)
     'prettier',
@@ -81,19 +79,40 @@ module.exports = {
         parser: '@typescript-eslint/parser',
         // Correct root
         tsconfigRootDir: __dirname,
-        // Path to tsconfig to enable rules that require type information
-        project: './tsconfig.json',
+        // Enable rules that require type information
+        project: true,
         // Correctly handle vue files
         extraFileExtensions: ['.vue'],
       },
       extends: [
-        // Enable recommended rules for typescript that use typing information (may be CPU intensive)
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        // Enable typescript-specific stylistic rules
+        'plugin:@typescript-eslint/stylistic-type-checked',
+        // Enable strict rules for typescript that use typing information (may be CPU intensive)
+        'plugin:@typescript-eslint/strict-type-checked',
       ],
       rules: {
         // The graphql processor disables the vue processor, so some rules need to be disenabled
         // TODO: Remove this once https://github.com/eslint/eslint/issues/14745 is fixed and we can use multiple processors
         'vue/comment-directive': 'off',
+        // Allow any type (for now)
+        '@typescript-eslint/no-explicit-any': 'warn',
+        // TODO: Remove this once all errors are fixed
+        '@typescript-eslint/no-unsafe-call': 'warn',
+        // TODO: Remove this once all errors are fixed
+        '@typescript-eslint/no-unsafe-member-access': 'warn',
+        // TODO: Remove this once all errors are fixed
+        '@typescript-eslint/no-unsafe-argument': 'warn',
+        // TODO: Remove this once all errors are fixed
+        '@typescript-eslint/no-unsafe-return': 'warn',
+        // TODO: Remove this once all errors are fixed
+        '@typescript-eslint/no-unsafe-assignment': 'warn',
+        // TODO: Remove this once all errors are fixed
+        '@typescript-eslint/no-redundant-type-constituents': 'warn',
+        // Allow numbers in templates without explicit casting
+        '@typescript-eslint/restrict-template-expressions': [
+          'error',
+          { allowNumber: true },
+        ],
       },
     },
     {

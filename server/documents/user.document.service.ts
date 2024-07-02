@@ -1,4 +1,4 @@
-import {
+import type {
   AddPersonInput,
   DocumentFilters,
   UserChangesCursorInput,
@@ -6,23 +6,23 @@ import {
 } from '#graphql/resolver'
 import {
   ContributorRole,
-  DocumentContributor,
-  Entity,
   EntityType,
-  Journal,
-  JournalIssue,
-  UserDocument as PlainUserDocument,
   Prisma,
   PrismaClient,
-  User,
-  UserDocumentOtherField,
+  type DocumentContributor,
+  type Entity,
+  type Journal,
+  type JournalIssue,
+  type UserDocument as PlainUserDocument,
+  type User,
+  type UserDocumentOtherField,
 } from '@prisma/client'
 import { unsecureHash } from '../utils/crypto'
 import { inject, injectable } from './../tsyringe'
 
 export type UserDocument = PlainUserDocument & {
   other?: UserDocumentOtherField[]
-  journalIssue?:
+  journalIssue:
     | (JournalIssue & {
         journal: Journal | null
       })
@@ -32,7 +32,7 @@ export type UserDocument = PlainUserDocument & {
   })[]
 }
 
-type UserDocumentsAndPageInfo = {
+interface UserDocumentsAndPageInfo {
   documents: UserDocument[]
   hasNextPage: boolean
 }
@@ -66,8 +66,9 @@ export class UserDocumentService {
   getRevisionHash(
     document:
       | UserDocument
-      | (UserDocumentCreateInput & { revisionHash?: string })
+      | (UserDocumentCreateInput & { revisionHash?: string }),
   ): string {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { revisionNumber, revisionHash, ...documentWithoutRevision } =
       document
     return unsecureHash(documentWithoutRevision)
@@ -75,7 +76,7 @@ export class UserDocumentService {
 
   async getDocumentById(
     id: string,
-    includeOtherFields = false
+    includeOtherFields = false,
   ): Promise<UserDocument | null> {
     const document = await this.prisma.userDocument.findUnique({
       where: {
@@ -91,7 +92,7 @@ export class UserDocumentService {
     filterBy: DocumentFilters | null = null,
     first: number | null = null,
     after: string | null = null,
-    includeOtherFields = false
+    includeOtherFields = false,
   ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
     const cursor = after ? { id: after } : null
@@ -132,8 +133,8 @@ export class UserDocumentService {
           query.test(document.title ?? '') ||
           document.contributors.some((contributor) =>
             query.test(
-              contributor.entity.name ?? contributor.entity.family ?? ''
-            )
+              contributor.entity.name ?? contributor.entity.family ?? '',
+            ),
           )
         )
       })
@@ -154,7 +155,7 @@ export class UserDocumentService {
     user: User | string,
     first: number | null = null,
     after: UserChangesCursorInput | null = null,
-    includeOtherFields = false
+    includeOtherFields = false,
   ): Promise<UserDocumentsAndPageInfo> {
     const userId = typeof user === 'string' ? user : user.id
     const documents = await this.prisma.userDocument.findMany({
@@ -181,7 +182,7 @@ export class UserDocumentService {
   }
 
   async addDocument(
-    document: UserDocumentCreateInput
+    document: UserDocumentCreateInput,
   ): Promise<UserDocument | null> {
     const data = {
       ...document,
@@ -210,7 +211,7 @@ export class UserDocumentService {
 
   async updateDocument(
     id: string,
-    document: UserDocumentUpdateInput
+    document: UserDocumentUpdateInput,
   ): Promise<UserDocument | null> {
     await this.prisma.documentContributor.deleteMany({
       where: {

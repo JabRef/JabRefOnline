@@ -5,12 +5,10 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute('codeprojects-slug')
 let markdownPath = 'codeprojects/'
-if (typeof route.params.slug === 'string') {
-  markdownPath += route.params.slug
-} else {
-  markdownPath += route.params.slug
+if (route.params.slug != null) {
+  markdownPath += (route.params.slug as string[])
     .map((param) => param.toLowerCase())
     .join('/')
 }

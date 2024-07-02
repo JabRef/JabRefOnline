@@ -1,121 +1,3 @@
-type Journal {
-  id: ID!
-
-  """
-  The name of the journal.
-
-  Biblatex: journaltitle
-  """
-  name: String!
-
-  """
-  The subtitle of a journal.
-
-  Biblatex: journalsubtitle
-  """
-  subtitle: String
-
-  """
-  An annex to the name of the journal.
-  This may be useful in case a journal has been renamed or if the journal name isn't unique.
-
-  Biblatex: journaltitleaddon
-  """
-  titleAddon: String
-
-  """
-  The International Standard Serial Number of a journal.
-
-  Biblatex: issn
-  """
-  issn: String
-}
-
-input AddJournalInput {
-  name: String!
-  subtitle: String
-  titleAddon: String
-  issn: String
-}
-
-"""
-An issue of a journal.
-"""
-type JournalIssue implements Node {
-  id: ID!
-
-  """
-  The journal in which the article has been published.
-  """
-  journal: Journal
-
-  """
-  The title of a specific issue of a journal.
-
-  Biblatex: issuetitle
-  """
-  title: String
-
-  """
-  The subtitle of a specific issue of a journal.
-
-  Biblatex: issuesubtitle
-  """
-  subtitle: String
-
-  """
-  An annex to the title of the specific issue of a journal.
-  This may be useful when a special issue of a journal has a title that doesn't make it clear that it is a special issue and one wants to emphasize that.
-
-  Biblatex: issuetitleaddon
-  """
-  titleAddon: String
-
-  """
-  The number of the issue.
-
-  Normally this field will be an integer or an integer range, but it may also be a short designator that is not entirely numeric such as “S1”, “Suppl. 2”, “3es”.
-  Usually, the number is displayed close to the volume, e.g. 10.2 (volume: 10, number: 2).
-
-  Biblatex: number
-  """
-  number: String
-
-  """
-  This field is intended for journals whose individual issues are identified by a designation such as Lent, Michaelmas, Summer or Spring rather than the month or a number.
-  Usually the issue name is displayed in front of the year and not the volume.
-
-  Biblatex: issue
-  """
-  name: String
-
-  """
-  The name or number of a journal series.
-  Usually, after the journal has restarted publication with a new numbering.
-
-  Biblatex: series
-  """
-  series: String
-
-  """
-  The volume of the journal this issue is part of.
-
-  Biblatex: volume
-  """
-  volume: String
-}
-
-input AddJournalIssueInput {
-  journal: AddJournalInput!
-  title: String
-  subtitle: String
-  titleAddon: String
-  number: String
-  name: String
-  series: String
-  volume: String
-}
-
 """
 An article published in a journal disseminates the results of original research and scholarship.
 It is usually peer-reviewed and published under a separate title in a journal issue or periodical containing other works of the same form.
@@ -198,4 +80,11 @@ input AddJournalArticleInput {
   published: Date
   annotators: [AddEntityInput!]
   commentators: [AddEntityInput!]
+}
+
+extend type Query {
+  """
+  Retrieve a journal by its ID, ISSN or name
+  """
+  journal(id: ID, issn: String, name: String): Journal
 }

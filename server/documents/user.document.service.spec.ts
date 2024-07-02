@@ -1,7 +1,7 @@
 import type { PrismaClient } from '@prisma/client'
 import { mockDeep, mockReset } from 'vitest-mock-extended'
 import { register, resolve } from '../tsyringe'
-import { UserDocument } from './user.document.service'
+import type { UserDocument } from './user.document.service'
 
 const prisma = mockDeep<PrismaClient>()
 register('PrismaClient', { useValue: prisma })
@@ -53,9 +53,16 @@ const testDocument: UserDocument = {
     journal: {
       id: 'test_journal',
       name: 'Test Journal',
-      issn: null,
+      issn: [],
       subtitle: null,
       titleAddon: null,
+      isCustom: true,
+      scimagoId: null,
+      country: null,
+      publisher: null,
+      areas: [],
+      categories: [],
+      hIndex: null,
     },
   },
   pageStart: null,
@@ -88,7 +95,7 @@ describe('get document by id', () => {
     prisma.userDocument.findUnique.mockResolvedValue(testDocument)
 
     const actualDocument = await userDocumentService.getDocumentById(
-      testDocument.id
+      testDocument.id,
     )
     expect(actualDocument).toEqual(testDocument)
     expect(prisma.userDocument.findUnique).toBeCalledWith({

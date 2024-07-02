@@ -149,7 +149,7 @@
   </section>
 </template>
 <script setup lang="ts">
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 
 const // @ts-expect-error: https://github.com/nuxt/framework/issues/6910
   { data: maintainers }: { data: Ref<string[]> } = await useFetch<string>(
@@ -158,6 +158,6 @@ const // @ts-expect-error: https://github.com/nuxt/framework/issues/6910
       // @ts-expect-error: https://github.com/nuxt/framework/issues/6910
       transform: (data) =>
         data.split('\n').filter((member) => member.length > 0),
-    }
+    },
   )
 </script>

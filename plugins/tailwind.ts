@@ -8,7 +8,7 @@ import {
   TTag,
   TTextarea,
   variantJS,
-  VariantJSConfiguration,
+  type VariantJSConfiguration,
 } from '@variantjs/vue'
 import TTable from '~/components/TTable.vue'
 
