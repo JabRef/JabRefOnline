@@ -22,7 +22,17 @@ export function configure() {
   })
   // Tools
   register('PrismaClient', {
-    useFactory: instanceCachingFactory(() => new PrismaClient()),
+    useFactory: instanceCachingFactory(
+      () =>
+        new PrismaClient({
+          omit: {
+            user: {
+              // Normally, we don't want to expose the password hash
+              password: true,
+            },
+          },
+        }),
+    ),
   })
   register('RedisClient', {
     useValue: createRedisClient(config),
