@@ -92,7 +92,7 @@ export function constructConfig() {
     public: {
       environment: getEnvironment(),
       mdc: {
-        useNuxtImage: true,
+        useNuxtImage: false,
       },
     },
   } satisfies Config
