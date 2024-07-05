@@ -13,7 +13,7 @@
     "generate:watch": "concurrently \"pnpm:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:dev:create": "prisma migrate dev --create-only",
-    "prisma:migrate:diff": "prisma migrate diff --exit-code --from-migrations server/database/migrations --to-schema-datamodel server/database/schema.prisma --shadow-database-url",
+    "prisma:migrate:diff": "prisma migrate diff --exit-code --from-migrations server/database/migrations --to-schema-datamodel server --shadow-database-url",
     "prisma:migrate:reset": "prisma migrate reset",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:status": "prisma migrate status",
@@ -165,7 +165,7 @@
     "vue-tsc": "^2.0.19"
   },
   "prisma": {
-    "schema": "server/database/schema.prisma",
+    "schema": "server",
     "seed": "node --experimental-specifier-resolution=node --loader ts-node/esm ./server/database/runSeed.ts"
   },
   "packageManager": "pnpm@8.15.6",
