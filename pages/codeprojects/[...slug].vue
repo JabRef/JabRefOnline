@@ -7,10 +7,9 @@
 <script setup lang="ts">
 const route = useRoute('codeprojects-slug')
 let markdownPath = 'codeprojects/'
-if (route.params.slug == null || typeof route.params.slug === 'string') {
-  markdownPath += route.params.slug
-} else {
-  markdownPath += route.params.slug
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- typing issue?
+if (route.params.slug != null) {
+  markdownPath += (route.params.slug as string[])
     .map((param) => param.toLowerCase())
     .join('/')
 }

@@ -23,16 +23,15 @@ const route = useRoute('download-os')
 const { version: latestRelease } = await $fetch('/api/getLatestRelease')
 
 let downloadUrl = 'https://www.fosshub.com/JabRef.html'
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const os = route.params.os
-if (os) {
+
+const os = route.params.os as string | undefined
+if (os && ['win', 'mac', 'linux'].includes(os)) {
   downloadUrl +=
     {
       win: `?dwl=JabRef-${latestRelease}.msi`,
       mac: `?dwl=JabRef-${latestRelease}.pkg`,
       linux: `?dwl=jabref_${latestRelease}_amd64.deb`,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    }[os] || ''
+    }[os] ?? ''
 }
 
 await navigateTo(downloadUrl, { external: true })
