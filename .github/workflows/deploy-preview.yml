@@ -34,23 +34,26 @@ jobs:
         run: exit 1
 
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha || github.ref }}
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Build
         run: |
-          yarn install
-          yarn build:azure
+          pnpm install
+          pnpm build:azure
 
       - name: Login to Azure
-        uses: Azure/login@v1
+        uses: Azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -62,7 +65,7 @@ jobs:
           # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
           az staticwebapp environment delete --name jabref-online --environment-name $env:PREVIEW_NAME --yes || true
           # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
-          $output = yarn swa deploy .output\public --env $env:PREVIEW_NAME --verbose=silly 2>&1 | Out-String
+          $output = pnpm swa deploy .output\public --env $env:PREVIEW_NAME --verbose=silly 2>&1 | Out-String
           Write-Host $output
           $match = $output | Select-String -Pattern 'Project deployed to (?<url>.*) '
           if ($match -eq $null) { exit 1 }
@@ -90,11 +93,11 @@ jobs:
           # az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "SELECT schema_name FROM information_schema.schemata;" --output table
           # Login to the database using the Github user
           $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$($name)?sslmode=require"
-          echo "::add-mask::$connection_string" 
+          echo "::add-mask::$connection_string"
           echo "DATABASE_URL=$connection_string" >> $env:GITHUB_ENV
           $Env:DATABASE_URL = $connection_string
           # Finally, run the migrations (this also creates the db)
-          yarn prisma:migrate:reset --force
+          pnpm prisma:migrate:reset --force
         env:
           DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
 
@@ -147,6 +150,6 @@ jobs:
             Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.url }}
 
       - name: Run API tests
-        run: yarn test:api
+        run: pnpm test:api
         env:
           TEST_URL: ${{ steps.deploy_web.outputs.url }}

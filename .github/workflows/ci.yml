@@ -17,27 +17,30 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           fetch-depth: 0
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Run linter
-        run: yarn lint
+        run: pnpm lint
 
       - name: Check types
-        run: yarn typecheck
+        run: pnpm typecheck
 
       - name: Validate GraphQL operations
-        run: yarn validate
+        run: pnpm validate
 
   test:
     name: Build & Test
@@ -82,47 +85,50 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           fetch-depth: 0
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: ${{ matrix.node }}
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Init database
-        run: yarn prisma:push
+        run: pnpm prisma:push
 
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
-        run: yarn prisma:migrate:diff $DATABASE_URL
+        run: pnpm prisma:migrate:diff $DATABASE_URL
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Start server
-        run: yarn start &
+        run: pnpm start &
 
       - name: Run tests
-        run: yarn test --coverage
+        run: pnpm run test --coverage
         env:
           TEST_URL: http://localhost:3000
 
       - name: Build Storybook
         run: |
-          yarn nuxi generate
-          yarn storybook:build
+          pnpm nuxi generate
+          pnpm storybook:build
           cp .output/public/_storybook/external-iframe/index.html storybook-static/iframe.html
           mkdir -p storybook-static/_storybook/external-iframe
           cp -r .output/public/_nuxt storybook-static
 
       - name: Publish and test Storybook
-        uses: chromaui/action@v10
+        uses: chromaui/action@v11
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -131,6 +137,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3.1.4
+        uses: codecov/codecov-action@v4.5.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
