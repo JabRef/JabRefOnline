@@ -1,0 +1,75 @@
+{
+  extends: [
+    'config:best-practices',
+    ':semanticCommitTypeAll(chore)',
+    'schedule:monthly',
+  ],
+  // Pin all dependencies: https://docs.renovatebot.com/dependency-pinning/
+  rangeStrategy: 'pin',
+  packageRules: [
+    { matchPackagePatterns: ['*'], matchManagers: ['npm'] },
+    {
+      matchPackagePatterns: [
+        'graphql',
+        '@apollo/*',
+        '@graphql-tools/*',
+        '@as-integrations/h3',
+        'graphql-*',
+        '@graphql-*',
+      ],
+      groupName: 'graphql',
+    },
+    {
+      matchPackagePatterns: ['@typescript-eslint/*', 'eslint', 'eslint-*'],
+      groupName: 'eslint',
+    },
+    {
+      matchPackagePatterns: ['prettier', 'prettier-*'],
+      groupName: 'prettier',
+    },
+    {
+      matchPackagePatterns: [
+        'nuxt',
+        'vite',
+        'nuxt-*',
+        '@nuxt/*',
+        '@nuxtjs/*',
+        'pinia',
+        '@pinia/nuxt',
+        '@bg-dev/nuxt-naiveui',
+        'vee-validate',
+        '@vee-validate/nuxt',
+        '@vee-validate/zod',
+        'zod',
+        'ufo',
+      ],
+      groupName: 'nuxt',
+    },
+    {
+      matchPackagePatterns: [
+        'vue',
+        '@vue/*',
+        'vue-*',
+        'unplugin-vue-components',
+        '@vueuse/core',
+        '@he-tree/vue',
+        '@tailwindcss/forms',
+        '@yaireo/tagify',
+      ],
+      groupName: 'vue',
+    },
+    { matchPackagePatterns: ['prisma', '@prisma/*'], groupName: 'prisma' },
+    { matchPackagePatterns: ['@types/*'], groupName: 'types' },
+    { matchPackagePatterns: ['@azure/*'], groupName: 'azure' },
+    { matchPackagePatterns: ['lucia', '@lucia-auth/*'], groupName: 'lucia' },
+    {
+      matchPackagePatterns: ['@vitest*', 'vitest', 'vitest-*'],
+      groupName: 'vitest',
+    },
+    {
+      matchPackagePatterns: ['storybook', '@storybook/*', 'chromatic'],
+      groupName: 'storybook',
+    },
+  ],
+  'github-actions': { enabled: true },
+}
