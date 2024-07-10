@@ -1,18 +1,15 @@
 {
-  extends: ['config:best-practices'],
+  extends: [
+    'config:best-practices',
+    ':semanticCommitTypeAll(chore)',
+    'schedule:monthly',
+  ],
+  // Pin all dependencies: https://docs.renovatebot.com/dependency-pinning/
+  rangeStrategy: 'pin',
   packageRules: [
+    { matchPackagePatterns: ['*'], matchManagers: ['npm'] },
     {
-      packagePatterns: ['*'],
-      managers: ['npm'],
-      schedule: ['monthly'],
-      commitMessagePrefix: 'chore',
-      groupName: 'all dependencies',
-      labels: [],
-      // Pin all dependencies: https://docs.renovatebot.com/dependency-pinning/
-      rangeStrategy: 'pin',
-    },
-    {
-      packagePatterns: [
+      matchPackagePatterns: [
         'graphql',
         '@apollo/*',
         '@graphql-tools/*',
@@ -23,15 +20,15 @@
       groupName: 'graphql',
     },
     {
-      packagePatterns: ['@typescript-eslint/*', 'eslint', 'eslint-*'],
+      matchPackagePatterns: ['@typescript-eslint/*', 'eslint', 'eslint-*'],
       groupName: 'eslint',
     },
     {
-      packagePatterns: ['prettier', 'prettier-*'],
+      matchPackagePatterns: ['prettier', 'prettier-*'],
       groupName: 'prettier',
     },
     {
-      packagePatterns: [
+      matchPackagePatterns: [
         'nuxt',
         'vite',
         'nuxt-*',
@@ -49,7 +46,7 @@
       groupName: 'nuxt',
     },
     {
-      packagePatterns: [
+      matchPackagePatterns: [
         'vue',
         '@vue/*',
         'vue-*',
@@ -61,35 +58,18 @@
       ],
       groupName: 'vue',
     },
+    { matchPackagePatterns: ['prisma', '@prisma/*'], groupName: 'prisma' },
+    { matchPackagePatterns: ['@types/*'], groupName: 'types' },
+    { matchPackagePatterns: ['@azure/*'], groupName: 'azure' },
+    { matchPackagePatterns: ['lucia', '@lucia-auth/*'], groupName: 'lucia' },
     {
-      packagePatterns: ['prisma', '@prisma/*'],
-      groupName: 'prisma',
-    },
-    {
-      packagePatterns: ['@types/*'],
-      groupName: 'types',
-    },
-    {
-      packagePatterns: ['@azure/*'],
-      groupName: 'azure',
-    },
-    {
-      packagePatterns: ['lucia', '@lucia-auth/*'],
-      groupName: 'lucia',
-    },
-    {
-      packagePatterns: ['@vitest*', 'vitest', 'vitest-*'],
+      matchPackagePatterns: ['@vitest*', 'vitest', 'vitest-*'],
       groupName: 'vitest',
     },
     {
-      packagePatterns: ['storybook', '@storybook/*', 'chromatic'],
+      matchPackagePatterns: ['storybook', '@storybook/*', 'chromatic'],
       groupName: 'storybook',
     },
   ],
-  'github-actions': {
-    enabled: true,
-    schedule: ['monthly'],
-    commitMessagePrefix: 'chore',
-    labels: [],
-  },
+  'github-actions': { enabled: true },
 }
