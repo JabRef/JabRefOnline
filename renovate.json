@@ -1,3 +1,89 @@
 {
-  "extends": ["@nuxtjs"]
+  "extends": ["config:best-practices"],
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "managers": ["npm"],
+      "schedule": ["monthly"],
+      "commitMessagePrefix": "chore",
+      "groupName": "all dependencies",
+      "labels": []
+    },
+    {
+      "packagePatterns": [
+        "graphql",
+        "@apollo/*",
+        "@graphql-tools/*",
+        "@as-integrations/h3",
+        "graphql-*",
+        "@graphql-*"
+      ],
+      "groupName": "graphql"
+    },
+    {
+      "packagePatterns": ["@vitest*", "vitest", "vitest-*"],
+      "groupName": "vitest"
+    },
+    {
+      "packagePatterns": ["@typescript-eslint/*", "eslint", "eslint-*"],
+      "groupName": "eslint"
+    },
+    {
+      "packagePatterns": ["prettier", "prettier-*"],
+      "groupName": "prettier"
+    },
+    {
+      "packagePatterns": ["storybook", "@storybook/*", "chromatic"],
+      "groupName": "storybook"
+    },
+    {
+      "packagePatterns": [
+        "nuxt",
+        "vite",
+        "nuxt-*",
+        "@nuxt/*",
+        "@nuxtjs/*",
+        "pinia",
+        "@pinia/nuxt",
+        "@bg-dev/nuxt-naiveui",
+        "vee-validate",
+        "@vee-validate/nuxt",
+        "@vee-validate/zod",
+        "zod",
+        "ufo"
+      ],
+      "groupName": "nuxt"
+    },
+    {
+      "packagePatterns": [
+        "vue",
+        "@vue/*",
+        "vue-*",
+        "unplugin-vue-components",
+        "@vueuse/core",
+        "@he-tree/vue",
+        "@tailwindcss/forms",
+        "@yaireo/tagify"
+      ],
+      "groupName": "vue"
+    },
+    {
+      "packagePatterns": ["prisma", "@prisma/*"],
+      "groupName": "prisma"
+    },
+    {
+      "packagePatterns": ["@types/*"],
+      "groupName": "types"
+    },
+    {
+      "packagePatterns": ["@azure/*"],
+      "groupName": "azure"
+    }
+  ],
+  "github-actions": {
+    "enabled": true,
+    "schedule": ["monthly"],
+    "commitMessagePrefix": "chore",
+    "labels": []
+  }
 }
