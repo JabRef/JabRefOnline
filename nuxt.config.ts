@@ -265,4 +265,10 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  /**
+   * Provide compatibility information for Nitro presets, and Nuxt modules
+   * https://nuxt.com/docs/api/nuxt-config#compatibilitydate
+   */
+  compatibilityDate: '2024-07-13',
 })
