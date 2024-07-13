@@ -4,13 +4,13 @@
     {
       "label": "Ensure dependencies",
       "type": "shell",
-      "command": "yarn docker:redis",
+      "command": "pnpm docker:redis",
       "problemMatcher": []
     },
     {
       "label": "Generate code",
       "type": "shell",
-      "command": "yarn generate:watch",
+      "command": "pnpm generate:watch",
       "problemMatcher": [],
       // Mark as a background task to avoid the spinner animation on the terminal tab
       "isBackground": true
@@ -18,7 +18,7 @@
     {
       "label": "Run dev server",
       "type": "shell",
-      "command": "yarn dev",
+      "command": "pnpm dev",
       "problemMatcher": [],
       // Mark as a background task to avoid the spinner animation on the terminal tab
       "isBackground": true
@@ -26,7 +26,7 @@
     {
       "label": "Prisma Studio",
       "type": "shell",
-      "command": "yarn prisma:studio",
+      "command": "pnpm prisma:studio",
       "problemMatcher": [],
       // Mark as a background task to avoid the spinner animation on the terminal tab
       "isBackground": true
