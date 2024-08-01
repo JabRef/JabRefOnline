@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import { root } from '~/test/api-e2e/supertest'
 
 describe('index page', () => {
