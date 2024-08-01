@@ -28,14 +28,17 @@ definePageMeta({
 
     const os = to.params.os as string | undefined
     if (os && ['win', 'mac', 'linux'].includes(os)) {
-      const { data } = await useFetch('/api/getLatestRelease')
-      const latestRelease = data.value?.version
-      downloadUrl +=
-        {
-          win: `?dwl=JabRef-${latestRelease}.msi`,
-          mac: `?dwl=JabRef-${latestRelease}.pkg`,
-          linux: `?dwl=jabref_${latestRelease}_amd64.deb`,
-        }[os] ?? ''
+      const { version: latestRelease } = await useRequestFetch()(
+        '/api/getLatestRelease',
+      )
+      if (latestRelease) {
+        downloadUrl +=
+          {
+            win: `?dwl=JabRef-${latestRelease}.msi`,
+            mac: `?dwl=JabRef-${latestRelease}.pkg`,
+            linux: `?dwl=jabref_${latestRelease}_amd64.deb`,
+          }[os] ?? ''
+      }
     }
 
     return navigateTo(downloadUrl, { external: true })
