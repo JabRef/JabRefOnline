@@ -16,16 +16,15 @@
 </template>
 
 <script lang="ts" setup>
-let downloadUrl = 'https://www.fosshub.com/JabRef.html'
 definePageMeta({
   layout: false,
 
   middleware: async (to) => {
+    let downloadUrl = 'https://www.fosshub.com/JabRef.html'
     const os = to.params.os as string | undefined
     if (os && ['win', 'mac', 'linux'].includes(os)) {
-      const { version: latestRelease } = await useRequestFetch()(
-        '/api/getLatestRelease',
-      )
+      const { data } = await useFetch('/api/getLatestRelease')
+      const latestRelease = data.value?.version
       if (latestRelease) {
         downloadUrl +=
           {
@@ -36,7 +35,8 @@ definePageMeta({
       }
     }
 
-    return navigateTo(downloadUrl, { external: true })
+    return await navigateTo(downloadUrl, { external: true })
   },
 })
+const downloadUrl = 'https://www.fosshub.com/JabRef.html'
 </script>
