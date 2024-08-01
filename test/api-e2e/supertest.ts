@@ -1,23 +1,33 @@
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { fetch } from '@nuxt/test-utils/e2e'
 import { gql } from 'graphql-tag'
-import supertestRequest from 'supertest'
-import supertestGraphql, {
-  SuperTestGraphQL,
-  type Variables,
-} from 'supertest-graphql'
 
-const url = process.env.TEST_URL ?? 'http://localhost:3000'
+const url = (process.env.TEST_URL ?? 'http://localhost:3000') + '/api'
 
-export function api(): SuperTestGraphQL<unknown, Variables> {
-  return supertestGraphql(url).path('/api')
+export function api() {
+  const httpLink = new HttpLink({
+    uri: url,
+    fetch: (input, init) => {
+      if (typeof input === 'string') {
+        return fetch(input, init)
+      } else {
+        throw new TypeError('fetch input is not a string')
+      }
+    },
+  })
+  const apolloClient = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: httpLink,
+    // Send cookies along with every request (needed for authentication)
+    credentials: 'include',
+  })
+  return apolloClient
 }
-export function root() {
-  return supertestRequest(url)
-}
 
-export async function login(request: SuperTestGraphQL<unknown, Variables>) {
+export async function login(client: ApolloClient<any>) {
   // Supertest automatically saves the cookie in the "request"/agent
-  await request
-    .mutate(gql`
+  await client.mutate({
+    mutation: gql`
       mutation LoginForTests($input: LoginInput!) {
         login(input: $input) {
           ... on UserReturned {
@@ -27,8 +37,9 @@ export async function login(request: SuperTestGraphQL<unknown, Variables>) {
           }
         }
       }
-    `)
-    .variables({
+    `,
+    variables: {
       input: { email: 'alice@jabref.org', password: 'EBNPXY35TYkYXHs' },
-    })
+    },
+  })
 }
