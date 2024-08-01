@@ -1,5 +1,7 @@
 import { fetch } from '@nuxt/test-utils/e2e'
+import type { InternalApi } from 'nitropack'
 import { expect, test } from 'vitest'
+type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']['default']
 
 test.runIf(process.env.GITHUB_REPO_TOKEN)(
   'returns a valid version',
@@ -8,6 +10,9 @@ test.runIf(process.env.GITHUB_REPO_TOKEN)(
 
     expect(response.status).toBe(200)
     expect(response.headers.get('content-type')).toContain('application/json')
-    expect(response.text).toMatch(/^\d.\d{1,2}$/)
+    const { version } = JSON.parse(
+      await response.text(),
+    ) as GetLatestReleaseResponse
+    expect(version).toMatch(/^\d.\d{1,2}$/)
   },
 )
