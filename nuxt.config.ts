@@ -28,6 +28,8 @@ export default defineNuxtConfig({
     // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
+      // Prerender all pages reached from the index page
+      crawlLinks: true,
       // Needed for storybook support (otherwise the file is not created during nuxi generate)
       routes: ['/_storybook/external-iframe'],
     },
@@ -178,7 +180,6 @@ export default defineNuxtConfig({
     '/gsoc/**': { redirect: '/codeprojects/gsoc' },
     '/bluehat2022': { redirect: '/codeprojects/bluehat2022' },
     '/surveys/': { redirect: '/surveys/2015' },
-    '/': { prerender: true },
   },
 
   /**
