@@ -16,6 +16,11 @@ export default defineNuxtConfig({
     global: './global.ts',
   },
 
+  /**
+   * Pre-render routes at build time by default
+   */
+  ssr: true,
+
   nitro: {
     azure: {
       config: {
