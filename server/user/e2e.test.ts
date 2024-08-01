@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag'
-import { test } from 'vitest'
+import { describe, expect, it, test } from 'vitest'
 import { api, login } from '~/test/api-e2e/supertest'
 import { getEmail, getTemporaryEmail } from '~/test/email'
 

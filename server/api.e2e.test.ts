@@ -1,4 +1,5 @@
 import { gql as gqlNotVerified } from 'graphql-tag'
+import { describe, expect, it } from 'vitest'
 import { api, root } from '~/test/api-e2e/supertest'
 
 describe('invalid query', () => {
