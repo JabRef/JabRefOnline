@@ -147,7 +147,7 @@ jobs:
           message: |
             Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.url }}
 
-      - name: Run API tests
-        run: pnpm test:api
+      - name: Run E2E tests
+        run: pnpm test:e2e
         env:
           TEST_URL: ${{ steps.deploy_web.outputs.url }}

@@ -37,7 +37,7 @@
     "test": "vitest --poolOptions.threads.singleThread",
     "test:integration": "vitest integration.test.ts --poolOptions.threads.singleThread",
     "test:unit": "vitest spec.ts",
-    "test:api": "vitest e2e.test.ts",
+    "test:e2e": "vitest e2e.test.ts",
     "typecheck": "nuxi typecheck",
     "validate": "pnpm graphql:validate"
   },
