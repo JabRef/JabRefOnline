@@ -11,10 +11,11 @@ describe('download', () => {
   it('redirects to fosshub', async () => {
     const response = (await root().get('/download')) as unknown as {
       statusCode: number
-      headers: { location: string }
+      text: string
     }
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toBe(
+    // Client side redirect uses meta refresh
+    expect(response.statusCode).toBe(200)
+    expect(response.text).toContain(
       'https://www.fosshub.com/JabRef.html',
     )
   })
