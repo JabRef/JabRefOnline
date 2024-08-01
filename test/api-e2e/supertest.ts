@@ -2,7 +2,7 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { fetch } from '@nuxt/test-utils/e2e'
 import { gql } from 'graphql-tag'
 
-const url = (process.env.TEST_URL ?? 'http://localhost:3000') + '/api'
+const url = '/api'
 
 export function api() {
   const httpLink = new HttpLink({
