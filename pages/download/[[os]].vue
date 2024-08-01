@@ -21,11 +21,6 @@ definePageMeta({
   layout: false,
 
   middleware: async (to) => {
-    // Skip middleware on server
-    if (import.meta.server) {
-      return
-    }
-
     const os = to.params.os as string | undefined
     if (os && ['win', 'mac', 'linux'].includes(os)) {
       const { version: latestRelease } = await useRequestFetch()(
