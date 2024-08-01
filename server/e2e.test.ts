@@ -14,7 +14,7 @@ describe('download', async () => {
   it('redirects to fosshub', async () => {
     const response = await fetch('/download')
     // Client side redirect uses meta refresh
-    expect(response.statusCode).toBe(200)
+    expect(response.status).toBe(200)
     expect(response.text).toContain('https://www.fosshub.com/JabRef.html')
   })
 })
