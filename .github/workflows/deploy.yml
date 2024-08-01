@@ -125,7 +125,7 @@ jobs:
         #   timeout: 300 # initial warm up can take quite some time
         #   interval: 30
 
-      - name: Run API tests
-        run: pnpm test:api
+      - name: Run E2E tests
+        run: pnpm test:e2e
         env:
           TEST_URL: ${{ matrix.url }}
