@@ -11,10 +11,6 @@ export default defineVitestConfig({
     },
   },
   test: {
-    // Provide global API
-    // https://vitest.dev/config/#globals
-    globals: true,
-
     // Run before each test file
     // https://vitest.dev/config/#setupfiles
     setupFiles: ['test/global.setup.ts'],

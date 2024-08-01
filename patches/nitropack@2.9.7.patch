@@ -1,5 +1,5 @@
 diff --git a/dist/runtime/entries/azure.mjs b/dist/runtime/entries/azure.mjs
-index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..fca9788f9d40e7ac6cc8eeb8d503024ef68a4a1b 100644
+index fe72a0be7cd3984a638234280b409a7ca803b5d0..f57378bb6564af89b16ddbca66cbb11abe116115 100644
 --- a/dist/runtime/entries/azure.mjs
 +++ b/dist/runtime/entries/azure.mjs
 @@ -3,6 +3,7 @@ import { parseURL } from "ufo";
@@ -33,7 +33,7 @@ index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..fca9788f9d40e7ac6cc8eeb8d503024e
 +    ],
 +  });
 +  consola.wrapConsole();
-   const { body, status, statusText, headers } = await nitroApp.localCall({
+   const { body, status, headers } = await nitroApp.localCall({
      url,
      headers: req.headers,
 @@ -18,6 +38,7 @@ export async function handle(context, req) {
@@ -43,4 +43,4 @@ index 2ed72eb8e5f5f6b740d909bb12f62cf761599569..fca9788f9d40e7ac6cc8eeb8d503024e
 +  consola.restoreConsole();
    context.res = {
      status,
-     // cookies https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-node?tabs=typescript%2Cwindows%2Cazure-cli&pivots=nodejs-model-v4#http-response
+     cookies: getAzureParsedCookiesFromHeaders(headers),

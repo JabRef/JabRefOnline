@@ -1,4 +1,5 @@
 import { fetch, setup } from '@nuxt/test-utils/e2e'
+import { describe, expect, it } from 'vitest'
 
 describe('index page', async () => {
   await setup({ host: process.env.TEST_URL })
@@ -12,9 +13,8 @@ describe('download', async () => {
   await setup({ host: process.env.TEST_URL })
   it('redirects to fosshub', async () => {
     const response = await fetch('/download')
-    expect(response.status).toBe(302)
-    expect(response.headers.get('location')).toBe(
-      'https://www.fosshub.com/JabRef.html',
-    )
+    // Client side redirect uses meta refresh
+    expect(response.statusCode).toBe(200)
+    expect(response.text).toContain('https://www.fosshub.com/JabRef.html')
   })
 })
