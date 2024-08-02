@@ -65,6 +65,7 @@ export interface Config {
   session: {
     primarySecret: string
     secondarySecret: string
+    seal: string
   }
   githubRepoToken: string
   public: {
@@ -87,6 +88,9 @@ export function constructConfig() {
     session: {
       primarySecret: process.env.SESSION_SECRET_PRIMARY ?? 'session_secret',
       secondarySecret: process.env.SESSION_SECRET_SECONDARY ?? 'session_secret',
+      // seal has to be min 32 characters
+      seal:
+        process.env.SESSION_SEAL ?? 'session_seal_session_seal_session_seal',
     },
     githubRepoToken: process.env.GITHUB_REPO_TOKEN ?? 'UNDEFINED',
     public: {

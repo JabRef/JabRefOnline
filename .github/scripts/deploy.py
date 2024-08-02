@@ -37,6 +37,7 @@ def main(environment_name: str, verbose: bool = False):
     REDIS_NAME = "jabref"
     DATABASE_URL = os.environ.get("DATABASE_URL", "<Not specified>")
     SESSION_SECRET = os.environ.get("AZURE_SESSION_SECRET", "<Not specified>")
+    SESSION_SEAL = os.environ.get("AZURE_SESSION_SEAL", "<Not specified>")
     GITHUB_REPO_TOKEN = os.environ.get("GITHUB_REPO_TOKEN", "<Not specified>")
 
     function_app_name = "jabref-function-" + environment_name
@@ -133,6 +134,7 @@ def main(environment_name: str, verbose: bool = False):
                         "value": redis_keys.primary_key,
                     },
                     {"name": "SESSION_SECRET_PRIMARY", "value": SESSION_SECRET},
+                    {"name": "SESSION_SEAL", "value": SESSION_SEAL},
                     {"name": "GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
                     # Disable indexing of non-production sites
                     # https://nuxtseo.com/robots/guides/disable-indexing#preview-staging-testing-environments

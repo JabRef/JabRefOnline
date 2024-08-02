@@ -38,6 +38,12 @@ export async function createAuthenticatedClient(): Promise<ApolloClient> {
           setSession: () => {
             throw new Error('Not implemented')
           },
+          getSession: () => {
+            throw new Error('Not implemented')
+          },
+          getSessionId: () => {
+            throw new Error('Not implemented')
+          },
         },
       })
     },
