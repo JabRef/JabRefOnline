@@ -25,10 +25,12 @@ export class Api {
      * Each key in the object corresponds to a variable name, and that key's value corresponds to the variable value.
      */
     variables?: TVariables
+    cookies?: string[]
   }) {
     return await this.operation<TData, TVariables>({
       query: print(options.mutation),
       variables: options.variables,
+      cookies: options.cookies,
     })
   }
 
@@ -43,24 +45,32 @@ export class Api {
      * Each key in the object corresponds to a variable name, and that key's value corresponds to the variable value.
      */
     variables?: TVariables
+    cookies?: string[]
   }) {
     return await this.operation<TData, TVariables>({
       query: print(options.query),
       variables: options.variables,
+      cookies: options.cookies,
     })
   }
 
   private async operation<
     TData,
     TVariables extends OperationVariables,
-  >(options: { query: string; variables?: TVariables }) {
+  >(options: { query: string; variables?: TVariables; cookies?: string[] }) {
     const body = {
       query: options.query,
       variables: options.variables,
     }
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    }
+    if (options.cookies) {
+      headers.Cookie = options.cookies.join('; ')
+    }
     const response = await fetch(this.path, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify(body),
     })
 
@@ -80,9 +90,11 @@ export function api() {
   return new Api()
 }
 
+/**
+ * Logs in a user and returns the session cookies set by the server.
+ */
 export async function login(client: Api) {
-  // Automatically saves the cookie for the new request
-  await client.mutate({
+  const { rawResponse } = await client.mutate({
     mutation: gql`
       mutation LoginForTests($input: LoginInput!) {
         login(input: $input) {
@@ -98,4 +110,7 @@ export async function login(client: Api) {
       input: { email: 'alice@jabref.org', password: 'EBNPXY35TYkYXHs' },
     },
   })
+  return {
+    cookies: rawResponse.headers.getSetCookie(),
+  }
 }

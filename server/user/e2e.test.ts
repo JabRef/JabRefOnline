@@ -100,7 +100,7 @@ describe('query', () => {
   describe('me', () => {
     it('returns the user when logged in', async () => {
       const request = api()
-      await login(request)
+      const { cookies } = await login(request)
       const { data, errors } = await request.query({
         query: gql`
           query MeE2E {
@@ -109,6 +109,7 @@ describe('query', () => {
             }
           }
         `,
+        cookies,
       })
       expect(errors).toEqual(undefined)
       expect(data).toStrictEqual({
