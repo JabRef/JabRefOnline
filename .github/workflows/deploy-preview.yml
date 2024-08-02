@@ -30,11 +30,11 @@ jobs:
       # We could also add these checks to a job-wide if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
       - name: Fail if unsecure
-        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez' && github.actor != 'dependabot[bot]'"
+        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez' && github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'"
         run: exit 1
 
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           ref: ${{ github.event.pull_request.head.sha || github.ref }}
 
@@ -42,18 +42,19 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: 20
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Build
-        run: |
-          pnpm install
-          pnpm build:azure
+        run: pnpm build:azure
 
       - name: Login to Azure
-        uses: Azure/login@v2
+        uses: Azure/login@6c251865b4e6290e7b78be643ea2d005bc51f69a # v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -62,8 +63,6 @@ jobs:
       - name: Deploy Web App
         id: deploy_web
         run: |
-          # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
-          az staticwebapp environment delete --name jabref-online --environment-name $env:PREVIEW_NAME --yes || true
           # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
           $output = pnpm swa deploy .output\public --env $env:PREVIEW_NAME --verbose=silly 2>&1 | Out-String
           Write-Host $output
@@ -75,7 +74,7 @@ jobs:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5
         with:
           python-version: '3.10'
 
@@ -144,12 +143,12 @@ jobs:
 
       - name: Report URL as PR comment
         if: github.event_name == 'pull_request_target'
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@331f8f5b4215f0445d3c07b4967662a32a2d3e31 # v2
         with:
           message: |
             Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.url }}
 
-      - name: Run API tests
-        run: pnpm test:api
+      - name: Run E2E tests
+        run: pnpm test:e2e
         env:
           TEST_URL: ${{ steps.deploy_web.outputs.url }}
