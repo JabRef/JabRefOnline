@@ -3,8 +3,9 @@ import type { InternalApi } from 'nitropack'
 import { describe, expect, it } from 'vitest'
 type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']['default']
 
-describe.runIf(process.env.GITHUB_REPO_TOKEN)('getLatestRelease', async () => {
-  await setup({ host: process.env.TEST_URL })
+await setup({ host: process.env.TEST_URL })
+
+describe.runIf(process.env.GITHUB_REPO_TOKEN)('getLatestRelease', () => {
   it('returns a valid version', async () => {
     const response = await fetch('/api/getLatestRelease')
 

@@ -3,8 +3,9 @@ import { gql as gqlNotVerified } from 'graphql-tag'
 import { describe, expect, it } from 'vitest'
 import { api } from '~/test/api-e2e/graphqlClient'
 
-describe('invalid query', async () => {
-  await setup({ host: process.env.TEST_URL })
+await setup({ host: process.env.TEST_URL })
+
+describe('invalid query', () => {
   it('returns an error', async () => {
     const { errors, rawResponse } = await api().query({
       query: gqlNotVerified`
@@ -32,8 +33,7 @@ describe('invalid query', async () => {
   })
 })
 
-describe('request without query', async () => {
-  await setup({ host: process.env.TEST_URL })
+describe('request without query', () => {
   it('returns an error', async () => {
     const response = await fetch('/api', {
       headers: { 'Apollo-Require-Preflight': 'True' },
@@ -46,8 +46,7 @@ describe('request without query', async () => {
   })
 })
 
-describe('preflight', async () => {
-  await setup({ host: process.env.TEST_URL })
+describe('preflight', () => {
   it('works', async () => {
     const response = await fetch('/api', {
       headers: {

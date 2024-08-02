@@ -4,8 +4,9 @@ import { describe, expect, it, test } from 'vitest'
 import { api, login } from '~/test/api-e2e/graphqlClient'
 import { getEmail, getTemporaryEmail } from '~/test/email'
 
-describe('mutation', async () => {
-  await setup({ host: process.env.TEST_URL })
+await setup({ host: process.env.TEST_URL })
+
+describe('mutation', () => {
   describe('login', () => {
     it('sets the cookie', async () => {
       const { data, errors, rawResponse } = await api().mutate({
@@ -95,8 +96,7 @@ describe('mutation', async () => {
   })
 })
 
-describe('query', async () => {
-  await setup({ host: process.env.TEST_URL })
+describe('query', () => {
   describe('me', () => {
     it('returns the user when logged in', async () => {
       const request = api()
