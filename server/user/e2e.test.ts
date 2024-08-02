@@ -1,7 +1,7 @@
 import { setup } from '@nuxt/test-utils'
 import { gql } from 'graphql-tag'
 import { describe, expect, it, test } from 'vitest'
-import { api, login } from '~/test/api-e2e/supertest'
+import { api, login } from '~/test/api-e2e/graphqlClient'
 import { getEmail, getTemporaryEmail } from '~/test/email'
 
 describe('mutation', async () => {

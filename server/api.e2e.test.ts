@@ -1,7 +1,7 @@
 import { fetch, setup } from '@nuxt/test-utils'
 import { gql as gqlNotVerified } from 'graphql-tag'
 import { describe, expect, it } from 'vitest'
-import { api } from '~/test/api-e2e/supertest'
+import { api } from '~/test/api-e2e/graphqlClient'
 
 describe('invalid query', async () => {
   await setup({ host: process.env.TEST_URL })

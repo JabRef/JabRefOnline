@@ -81,7 +81,7 @@ export function api() {
 }
 
 export async function login(client: Api) {
-  // Supertest automatically saves the cookie in the "request"/agent
+  // Automatically saves the cookie for the new request
   await client.mutate({
     mutation: gql`
       mutation LoginForTests($input: LoginInput!) {
