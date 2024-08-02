@@ -6,7 +6,7 @@ import { api } from '~/test/api-e2e/supertest'
 describe('invalid query', async () => {
   await setup({ host: process.env.TEST_URL })
   it('returns an error', async () => {
-    const { errors } = await api().query({
+    const { errors, rawResponse } = await api().query({
       query: gqlNotVerified`
           query WrongQueryE2E($id: String) {
             user(id: $id) {
@@ -19,8 +19,10 @@ describe('invalid query', async () => {
       variables: { id: '' },
     })
 
-    // expect(response.statusCode).toBe(400)
-    // expect(response.get('content-type')).toContain('application/json')
+    expect(rawResponse.status).toBe(400)
+    expect(rawResponse.headers.get('content-type')).toContain(
+      'application/json',
+    )
     expect(errors?.map((error) => error.message)).toMatchInlineSnapshot(`
       [
         "Cannot query field "name" on type "User".",
@@ -30,7 +32,8 @@ describe('invalid query', async () => {
   })
 })
 
-describe('request without query', () => {
+describe('request without query', async () => {
+  await setup({ host: process.env.TEST_URL })
   it('returns an error', async () => {
     const response = await fetch('/api', {
       headers: { 'Apollo-Require-Preflight': 'True' },
@@ -43,7 +46,8 @@ describe('request without query', () => {
   })
 })
 
-describe('preflight', () => {
+describe('preflight', async () => {
+  await setup({ host: process.env.TEST_URL })
   it('works', async () => {
     const response = await fetch('/api', {
       headers: {

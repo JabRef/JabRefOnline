@@ -1,30 +1,92 @@
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import {
+  type DocumentNode,
+  type OperationVariables,
+  type TypedDocumentNode,
+} from '@apollo/client'
 import { fetch } from '@nuxt/test-utils/e2e'
+import { print, type GraphQLError } from 'graphql'
 import { gql } from 'graphql-tag'
 
-const url = '/api'
+/**
+ * Consider replacing by https://github.com/jasonkuhrt/graphql-request,
+ * which however at the moment doesn't allow to specify a custom fetch implementation.
+ */
+export class Api {
+  constructor(private path = '/api') {}
 
-export function api() {
-  const httpLink = new HttpLink({
-    uri: url,
-    fetch: (input, init) => {
-      if (typeof input === 'string') {
-        return fetch(input, init)
-      } else {
-        throw new TypeError('fetch input is not a string')
-      }
-    },
-  })
-  const apolloClient = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: httpLink,
-    // Send cookies along with every request (needed for authentication)
-    credentials: 'include',
-  })
-  return apolloClient
+  async mutate<TData, TVariables extends OperationVariables>(options: {
+    /**
+     * A GraphQL document containing the single mutation the client should execute.
+     */
+    mutation: DocumentNode | TypedDocumentNode<TData, TVariables>
+    /**
+     * An object containing all of the GraphQL variables your mutation requires to execute.
+     *
+     * Each key in the object corresponds to a variable name, and that key's value corresponds to the variable value.
+     */
+    variables?: TVariables
+  }) {
+    return await this.fetch<TData, TVariables>({
+      query: print(options.mutation),
+      variables: options.variables,
+    })
+  }
+
+  async query<TData, TVariables extends OperationVariables>(options: {
+    /**
+     * A GraphQL document containing the single query the client should execute.
+     */
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>
+    /**
+     * An object containing all of the GraphQL variables your query requires to execute.
+     *
+     * Each key in the object corresponds to a variable name, and that key's value corresponds to the variable value.
+     */
+    variables?: TVariables
+  }) {
+    return await this.fetch<TData, TVariables>({
+      query: print(options.query),
+      variables: options.variables,
+    })
+  }
+
+  private async fetch<TData, TVariables extends OperationVariables>(options: {
+    query: string
+    variables?: TVariables
+  }) {
+    const body = {
+      query: options.query,
+      variables: options.variables,
+    }
+    const response = await fetch(this.path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+
+    if (!response.ok) {
+      throw new Error(
+        `Request to GraphQL endpoint failed. (Status: ${String(response.status)})`,
+      )
+    }
+
+    const json = (await response.json()) as {
+      errors?: GraphQLError[]
+      data?: TData
+    }
+    return {
+      errors: json.errors,
+      data: json.data,
+      rawResponse: response,
+    }
+  }
 }
 
-export async function login(client: ApolloClient<any>) {
+export function api() {
+  return new Api()
+}
+
+export async function login(client: Api) {
   // Supertest automatically saves the cookie in the "request"/agent
   await client.mutate({
     mutation: gql`

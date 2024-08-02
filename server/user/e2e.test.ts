@@ -8,7 +8,7 @@ describe('mutation', async () => {
   await setup({ host: process.env.TEST_URL })
   describe('login', () => {
     it('sets the cookie', async () => {
-      const { data, errors } = await api().mutate({
+      const { data, errors, rawResponse } = await api().mutate({
         mutation: gql`
           mutation LoginE2E($input: LoginInput!) {
             login(input: $input) {
@@ -35,7 +35,7 @@ describe('mutation', async () => {
         login: { user: { id: 'ckn4oul7100004cv7y3t94n8j' } },
       })
       // TODO: Check that there is even a session cookie
-      // expect(response.get('set-cookie')).toBeDefined()
+      expect(rawResponse.headers.get('set-cookie')).toBeDefined()
     })
   })
   describe('signup', () => {
@@ -95,7 +95,8 @@ describe('mutation', async () => {
   })
 })
 
-describe('query', () => {
+describe('query', async () => {
+  await setup({ host: process.env.TEST_URL })
   describe('me', () => {
     it('returns the user when logged in', async () => {
       const request = api()
