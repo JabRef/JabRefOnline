@@ -1,18 +1,19 @@
+import { fetch, setup } from '@nuxt/test-utils/e2e'
 import type { InternalApi } from 'nitropack'
-import { expect, test } from 'vitest'
-import { root } from '~/test/api-e2e/supertest'
-
+import { describe, expect, it } from 'vitest'
 type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']['default']
 
-test.runIf(process.env.GITHUB_REPO_TOKEN)(
-  'returns a valid version',
-  async () => {
-    const response = await root().get('/api/getLatestRelease')
+await setup({ host: process.env.TEST_URL })
 
-    expect(response.statusCode).toBe(200)
-    expect(response.get('content-type')).toContain('application/json')
-    expect((response.body as GetLatestReleaseResponse).version).toMatch(
-      /^\d.\d{1,2}$/,
-    )
-  },
-)
+describe.runIf(process.env.GITHUB_REPO_TOKEN)('getLatestRelease', () => {
+  it('returns a valid version', async () => {
+    const response = await fetch('/api/getLatestRelease')
+
+    expect(response.status).toBe(200)
+    expect(response.headers.get('content-type')).toContain('application/json')
+    const { version } = JSON.parse(
+      await response.text(),
+    ) as GetLatestReleaseResponse
+    expect(version).toMatch(/^\d.\d{1,2}$/)
+  })
+})
