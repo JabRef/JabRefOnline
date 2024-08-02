@@ -39,7 +39,7 @@ describe('request without query', () => {
       headers: { 'Apollo-Require-Preflight': 'True' },
     })
 
-    expect(response.text).toContain(
+    expect(await response.text()).toContain(
       'GraphQL operations must contain a non-empty `query`',
     )
     expect(response.status).toBe(400)
@@ -49,13 +49,13 @@ describe('request without query', () => {
 describe('preflight', () => {
   it('works', async () => {
     const response = await fetch('/api', {
+      method: 'OPTIONS',
       headers: {
         Origin: 'https://studio.apollographql.com',
         'Access-Control-Request-Method': 'POST',
       },
     })
-
-    expect(response.body).toStrictEqual({})
+    expect(response.body).toBeNull()
     expect(response.status).toBe(204)
     expect(response.headers.get('access-control-allow-methods')).toBe(
       'GET,POST,OPTIONS',
@@ -70,13 +70,14 @@ describe('preflight', () => {
 
   it('works on route with slash', async () => {
     const response = await fetch('/api/', {
+      method: 'OPTIONS',
       headers: {
         Origin: 'https://studio.apollographql.com',
         'Access-Control-Request-Method': 'POST',
       },
     })
 
-    expect(response.body).toStrictEqual({})
+    expect(response.body).toBeNull()
     expect(response.status).toBe(204)
     expect(response.headers.get('access-control-allow-methods')).toBe(
       'GET,POST,OPTIONS',
