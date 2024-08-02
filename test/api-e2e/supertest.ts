@@ -26,7 +26,7 @@ export class Api {
      */
     variables?: TVariables
   }) {
-    return await this.fetch<TData, TVariables>({
+    return await this.operation<TData, TVariables>({
       query: print(options.mutation),
       variables: options.variables,
     })
@@ -44,16 +44,16 @@ export class Api {
      */
     variables?: TVariables
   }) {
-    return await this.fetch<TData, TVariables>({
+    return await this.operation<TData, TVariables>({
       query: print(options.query),
       variables: options.variables,
     })
   }
 
-  private async fetch<TData, TVariables extends OperationVariables>(options: {
-    query: string
-    variables?: TVariables
-  }) {
+  private async operation<
+    TData,
+    TVariables extends OperationVariables,
+  >(options: { query: string; variables?: TVariables }) {
     const body = {
       query: options.query,
       variables: options.variables,
@@ -63,12 +63,6 @@ export class Api {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     })
-
-    if (!response.ok) {
-      throw new Error(
-        `Request to GraphQL endpoint failed. (Status: ${String(response.status)})`,
-      )
-    }
 
     const json = (await response.json()) as {
       errors?: GraphQLError[]
