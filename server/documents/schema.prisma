@@ -1,34 +1,3 @@
-// After changing this file, run pnpm prisma:migrate:dev to push the changes to the database
-
-datasource db {
-  provider = "postgresql"
-  url = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-model User {
-  id String @id @default(cuid())
-  email String @unique
-  emailIsVerified Boolean @default(false)
-  name String?
-  createdAt DateTime @default(now())
-  documents UserDocument[]
-  groups Group[]
-  key Key[] // TODO: Rename to keys
-}
-
-model Key {
-  id String @id @unique
-  hashed_password String? // TODO: Rename to hashedPassword
-  user_id String // TODO: Rename to userId
-  user User @relation(references: [id], fields: [user_id], onDelete: Cascade)
-
-  @@index([user_id])
-}
-
 enum DocumentType {
   JOURNAL_ARTICLE
   PROCEEDINGS_ARTICLE
@@ -103,54 +72,6 @@ model UserDocument {
   @@unique([lastModified(sort: Asc), id(sort: Asc)], name: "checkpoint")
 }
 
-model JournalIssue {
-  id String @id @default(cuid())
-  articles UserDocument[]
-  journal Journal? @relation(fields: [journalId], references: [id])
-  journalId String?
-  title String?
-  subtitle String?
-  titleAddon String?
-  number String?
-  name String?
-  series String?
-  volume String?
-}
-
-model Journal {
-  id String @id @default(cuid())
-  isCustom Boolean
-  issues JournalIssue[]
-  name String
-  subtitle String?
-  titleAddon String?
-  issn String[]
-  scimagoId BigInt? @unique
-  country String?
-  publisher String?
-  areas String[]
-  categories String[]
-  citationInfo JournalCitationInfoYearly[]
-  hIndex Int?
-}
-
-model JournalCitationInfoYearly {
-  journalId String
-  journal Journal @relation(fields: [journalId], references: [id])
-  year Int
-
-  docsThisYear Int
-  docsPrevious3Years Int
-  citableDocsPrevious3Years Int
-  citesOutgoing Int
-  citesOutgoingPerDoc Float
-  citesIncomingByRecentlyPublished Int
-  citesIncomingPerDocByRecentlyPublished Float
-  sjrIndex Float
-
-  @@id([journalId, year])
-}
-
 model UserDocumentOtherField {
   document UserDocument @relation(fields: [documentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   documentId String
@@ -197,55 +118,4 @@ model DocumentContributor {
   role ContributorRole
 
   @@id([documentId, entityId])
-}
-
-enum GroupHierarchyType {
-  /// The group's content is independent of its hierarchical position.
-  INDEPENDENT
-
-  /// The group's content is the intersection of its own content with its supergroups' content.
-  INTERSECTION
-
-  /// The group's content is the union of its own content with its subgroups' content.
-  UNION
-}
-
-enum GroupType {
-  AutomaticKeywordGroup
-  AutomaticPersonsGroup
-  ExplicitGroup
-  LastNameGroup
-  WordKeywordGroup
-  RegexKeywordGroup
-  SearchGroup
-  TexGroup
-}
-
-model Group {
-  id String @id @default(cuid())
-  users User[]
-  name String
-  displayName String
-  parentId String?
-  parent Group? @relation("GroupTree", fields: [parentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  children Group[] @relation("GroupTree")
-
-  hierarchyType GroupHierarchyType
-  color String?
-  description String?
-  icon String?
-  isExpanded Boolean
-
-  // Prisma currently does not support union types / inheritance (https://github.com/prisma/prisma/issues/2505)
-  // Thus, we assemble all possible fields from all types of groups here
-  type GroupType
-  explicitDocuments UserDocument[]
-  field String?
-  keywordDelimiter String?
-  keywordHierarchicalDelimiter String?
-  authorLastName String?
-  searchExpression String?
-  caseSensitive Boolean?
-  onlySplitWordsAtDelimiter Boolean?
-  isRegEx Boolean?
 }
