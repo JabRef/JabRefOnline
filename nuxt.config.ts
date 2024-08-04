@@ -60,19 +60,6 @@ export default defineNuxtConfig({
     runtimeCompiler: true,
   },
 
-  // Workaround for https://github.com/nuxt/nuxt/issues/22933
-  hooks: {
-    close: (nuxt) => {
-      if (
-        !nuxt.options._prepare &&
-        !process.env.TEST &&
-        !process.env.VITE_TEST
-      ) {
-        process.exit()
-      }
-    },
-  },
-
   /*
    ** Headers of the page
    ** See https://v3.nuxtjs.org/getting-started/seo-meta
