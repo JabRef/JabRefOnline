@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/default
-import prisma from '@prisma/client'
 import 'dotenv/config'
 import 'json-bigint-patch'
 import 'reflect-metadata'
@@ -8,7 +6,10 @@ import { constructConfig } from '~/config'
 import { register } from '~/server/tsyringe'
 import { registerClasses } from '~/server/tsyringe.config'
 import { EmailServiceMock } from '~/server/utils/email.service'
-import { createRedisClient } from '~/server/utils/services.factory'
+import {
+  createPrismaClient,
+  createRedisClient,
+} from '~/server/utils/services.factory'
 import { GraphqlSerializer } from './snapshot.graphql'
 
 // Register custom graphql serializer
@@ -21,7 +22,7 @@ globalThis.Reflect = Reflect
 registerClasses()
 
 // Setup services for tests
-beforeAll((context) => {
+beforeAll(async (context) => {
   register('EmailService', { useValue: new EmailServiceMock() })
 
   const isIntegrationTest =
@@ -37,7 +38,7 @@ beforeAll((context) => {
       useValue: redisClient,
     })
 
-    const prismaClient = new prisma.PrismaClient()
+    const prismaClient = await createPrismaClient(config)
     register('PrismaClient', {
       useValue: prismaClient,
     })

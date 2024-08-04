@@ -1,8 +1,25 @@
 import { Environment, type Config } from '~/config'
-
+// eslint-disable-next-line import/default
+import prisma from '@prisma/client'
 import { createStorage, type Storage } from 'unstorage'
 import memoryDriver from 'unstorage/drivers/memory'
 import redisDriver from 'unstorage/drivers/redis'
+
+const { PrismaClient } = prisma
+
+export async function createPrismaClient(config: Config) {
+  if (config.public.environment === Environment.LocalDevelopment) {
+    // Use in memory database for local development
+    const { PGlite } = await import('@electric-sql/pglite')
+    const { PrismaPGlite } = await import('pglite-prisma-adapter')
+    const client = new PGlite('memory://')
+    // TOOD: Create database schema and seed data
+    const adapter = new PrismaPGlite(client)
+    return new PrismaClient({ adapter })
+  } else {
+    return new PrismaClient()
+  }
+}
 
 export function createRedisClient(config: Config): Storage {
   if (
