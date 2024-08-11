@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/vue3'
+import type { Meta, Story } from '@storybook-vue/nuxt'
 import { TTag } from '@variantjs/vue'
 
 export default {

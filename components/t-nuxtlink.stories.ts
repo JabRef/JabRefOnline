@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/vue3'
+import type { Meta, Story } from '@storybook-vue/nuxt'
 import { TButton } from '@variantjs/vue'
 
 export default {
