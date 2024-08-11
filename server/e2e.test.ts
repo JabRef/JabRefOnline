@@ -1,20 +1,21 @@
-import { root } from '~/test/api-e2e/supertest'
+import { fetch, setup } from '@nuxt/test-utils/e2e'
+import { describe, expect, it } from 'vitest'
+
+await setup({ host: process.env.TEST_URL })
 
 describe('index page', () => {
   it('is accessible', async () => {
-    const response = await root().get('/')
-    expect(response.statusCode).toBe(200)
+    const response = await fetch('/')
+    expect(response.status).toBe(200)
   })
 })
 
 describe('download', () => {
   it('redirects to fosshub', async () => {
-    const response = (await root().get('/download')) as unknown as {
-      statusCode: number
-      headers: { location: string }
-    }
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toBe(
+    const response = await fetch('/download')
+    // Client side redirect uses meta refresh
+    expect(response.status).toBe(200)
+    expect(await response.text()).toContain(
       'https://www.fosshub.com/JabRef.html',
     )
   })

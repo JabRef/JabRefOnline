@@ -8,8 +8,6 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
     const { $apolloClient } = useNuxtApp()
     try {
       // TODO: Only call this if we have a session cookie?
-      // @ts-expect-error: not sure why this is not typed
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       const response = await $apolloClient.query({
         query: gql(/* GraphQL */ `
           query CheckLoggedIn {
