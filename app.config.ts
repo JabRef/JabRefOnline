@@ -1,4 +1,4 @@
-import theme from '#tailwind-config/theme'
+import theme from '#tailwind-config/theme.mjs'
 
 export default defineAppConfig({
   naiveui: {
