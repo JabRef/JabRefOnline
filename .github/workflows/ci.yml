@@ -120,6 +120,7 @@ jobs:
           TEST_URL: http://localhost:3000
 
       - name: Build Storybook
+        if: always()
         run: |
           pnpm nuxi generate
           pnpm storybook:build
