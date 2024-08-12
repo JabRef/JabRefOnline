@@ -53,6 +53,11 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
+  vue: {
+    // Add support for vue runtime compiler (needed to render stories in storybook)
+    runtimeCompiler: true,
+  },
+
   /*
    ** Headers of the page
    ** See https://v3.nuxtjs.org/getting-started/seo-meta
