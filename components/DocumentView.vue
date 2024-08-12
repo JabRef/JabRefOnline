@@ -5,12 +5,12 @@
         class="font-semibold text-lg text-primary-800"
         @click="displayDocumentDetails"
       >
-        <Icon
+        <UIcon
           v-if="typeIcon"
           :name="typeIcon"
           class="mr-1"
           :title="typeDescription"
-        ></Icon>
+        />
         <span>{{ document.title }}</span>
       </button>
       <!-- TOOD: Add citation display
@@ -69,14 +69,14 @@
         variant="badge"
         class="border border-gray-400"
       >
-        <!-- TODO: Add icon of group <Icon name="dragon" class="mr-2" /> -->
+        <!-- TODO: Add icon of group <UIcon name="dragon" class="mr-2" /> -->
         {{ keyword }}
       </t-tag>
       <!-- TODO: Add overflow
-      <n-button variant="linkplain" class="text-sm my-auto">
+      <UButton variant="linkplain" class="text-sm my-auto">
         <span>View More (8+)</span>
-        <Icon name="ri:arrow-down-s-line" />
-      </n-button>
+        <UIcon name="ri:arrow-down-s-line" />
+      </UButton>
       -->
     </div>
     <div v-if="'abstract' in document && document.abstract">
@@ -86,20 +86,20 @@
       >
         {{ document.abstract }}
       </span>
-      <n-button
+      <UButton
         text
         class="text-sm my-auto"
         @click="viewFullAbstract = !viewFullAbstract"
       >
         <template v-if="viewFullAbstract">
           <span>View less</span>
-          <Icon name="ri:arrow-up-s-line" />
+          <UIcon name="ri:arrow-up-s-line" />
         </template>
         <template v-else>
           <span>View full abstract</span>
-          <Icon name="ri:arrow-down-s-line" />
+          <UIcon name="ri:arrow-down-s-line" />
         </template>
-      </n-button>
+      </UButton>
     </div>
   </div>
 </template>

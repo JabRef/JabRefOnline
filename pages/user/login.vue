@@ -23,7 +23,7 @@
         {{ error }}
       </n-alert>
       <n-form
-        size="large"
+        size="lg"
         @submit="onSubmit"
       >
         <div class="space-y-2">
@@ -65,11 +65,11 @@
           </div>
 
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
               type="primary"
               attr-type="submit"
-              >Sign in</n-button
+              >Sign in</UButton
             >
           </div>
 

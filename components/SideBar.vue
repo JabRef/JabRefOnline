@@ -20,7 +20,7 @@
         href="#"
         class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
       >
-        <Icon
+        <UIcon
           name="ri:list-check"
           class="mr-2 pb-0.5"
         />
@@ -31,7 +31,7 @@
         href="#"
         class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
       >
-        <Icon
+        <UIcon
           name="ri:arrow-left-right-fill"
           class="mr-2"
         />
@@ -54,11 +54,11 @@
             class="-ml-8 mr-4 w-4 text-gray-400 inline-block"
             @click="stat.open = !stat.open"
           >
-            <Icon
+            <UIcon
               v-if="!stat.open"
               name="ri:arrow-down-s-line"
             />
-            <Icon
+            <UIcon
               v-else
               name="ri:arrow-up-s-line"
             />
@@ -67,7 +67,7 @@
             class="hover:bg-gray-200 pl-1 pr-1"
             @click="onGroupClicked(node)"
           >
-            <Icon
+            <UIcon
               :name="node.icon"
               class="mr-2 pb-0.5"
             />

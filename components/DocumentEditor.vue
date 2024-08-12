@@ -9,7 +9,7 @@
         variant="plaincaps"
       >
         <template #arrow="{ className }">
-          <Icon
+          <UIcon
             name="ri:arrow-drop-down-line"
             :class="className"
           />

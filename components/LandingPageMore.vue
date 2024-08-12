@@ -16,7 +16,7 @@
             :href="item.href"
             class="text-primary-500 hover:text-primary-600"
           >
-            <Icon
+            <UIcon
               :name="item.icon"
               class="text-6xl"
             />

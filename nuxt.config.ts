@@ -125,10 +125,6 @@ export default defineNuxtConfig({
    ** Nuxt.js modules
    */
   modules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    // Add support for naive-ui
-    '@bg-dev/nuxt-naiveui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -142,8 +138,6 @@ export default defineNuxtConfig({
     // Devtools support
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
-    // Add support for different icons from iconify
-    'nuxt-icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
     // Support for end-to-end testing and unit testing (and Vitest integration)
@@ -152,6 +146,9 @@ export default defineNuxtConfig({
     // Preset for configuring SEO
     // https://nuxtseo.com/nuxt-seo
     '@nuxtjs/seo',
+    // Nuxt UI components library
+    // https://ui.nuxt.com
+    '@nuxt/ui',
   ],
 
   /*
@@ -181,11 +178,20 @@ export default defineNuxtConfig({
    */
   // storybook: {},
 
+  // Use the Nuxt UI Pro preset
+  // https://ui.nuxt.com/pro
+  extends: ['@nuxt/ui-pro'],
+
   tailwindcss: {
     // Expose config so that we can use it to configure naive ui and in the vscode extension
     exposeConfig: {
       write: true,
     },
+  },
+
+  colorMode: {
+    // Disable dark mode for now
+    preference: 'light',
   },
 
   /**
