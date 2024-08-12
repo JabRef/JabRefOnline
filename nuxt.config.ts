@@ -6,16 +6,6 @@ export default defineNuxtConfig({
     typescriptBundlerResolution: false,
   },
 
-  /*
-   ** Add alias for library imports
-   ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
-   */
-  alias: {
-    // Support `import 'global'` used by storybook
-    // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
-    global: './global.ts',
-  },
-
   /**
    * Pre-render routes at build time by default
    */
