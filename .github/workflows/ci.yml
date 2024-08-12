@@ -126,6 +126,7 @@ jobs:
           pnpm storybook:build
 
       - name: Publish and test Storybook
+        if: always()
         uses: chromaui/action@fdbe7756d4dbf493e2fbb822df73be7accd07e1c # v11
         with:
           projectToken: 'b3787adf2fa5'
