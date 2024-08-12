@@ -3,6 +3,8 @@
     'config:best-practices',
     ':semanticCommitTypeAll(chore)',
     'schedule:monthly',
+    // Update lock files: https://docs.renovatebot.com/presets-default/#maintainlockfilesmonthly
+    ':maintainLockFilesMonthly',
   ],
   // Pin all dependencies: https://docs.renovatebot.com/dependency-pinning/
   rangeStrategy: 'pin',
