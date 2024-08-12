@@ -30,21 +30,14 @@
       screenshot="https://www.jabref.org/assets/jabref-mainscreen.png"
       :offers="{ price: '0', priceCurrency: 'EUR' }"
     />
-    <n-layout :position="position">
-      <header>
-        <n-layout-header
-          :position="position"
-          class="z-50"
-        >
-          <slot name="header">
-            <NavBar />
-          </slot>
-        </n-layout-header>
+    <div class="overflow-hidden alig">
+      <header class="position-absolute z-50">
+        <NavBar />
       </header>
       <div class="md:mt-20 md:pb-10">
         <slot />
       </div>
-    </n-layout>
+    </div>
   </div>
 </template>
 <script setup lang="ts">

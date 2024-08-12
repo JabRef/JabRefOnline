@@ -10,17 +10,13 @@
           JabRef is free and works across all your devices.
         </h3>
         <div class="text-center">
-          <n-button
-            type="primary"
-            size="large"
-            style="height: 3.2em"
-          >
+          <UButton size="lg">
             <a
               class="text-2xl"
               :href="downloadUrl"
               >Download JabRef</a
             >
-          </n-button>
+          </UButton>
         </div>
 
         <div class="text-center pt-8 text-sm">

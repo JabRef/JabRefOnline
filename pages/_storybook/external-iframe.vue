@@ -22,7 +22,7 @@ import type { VueRenderer } from '@storybook/vue3'
 import { applyDecorators } from '@storybook/vue3/dist/entry-preview.mjs'
 import { mount } from 'mount-vue-component'
 import * as JabRefLogoStories from '~/components/JabRefLogo.stories.vue'
-import * as NButtonStories from '~/components/n-button.stories.vue'
+import * as UButtonStories from '~/components/UButton.stories.vue'
 import * as TAlertStories from '~/components/t-alert.stories'
 import * as TCheckboxStories from '~/components/t-checkbox.stories'
 import * as TDropdownStories from '~/components/t-dropdown.stories'
@@ -71,7 +71,7 @@ export default defineComponent({
       () => [
         JabRefLogoStories,
         TAlertStories,
-        NButtonStories,
+        UButtonStories,
         TCheckboxStories,
         TDropdownStories,
         TInputGroupStories,

@@ -68,20 +68,15 @@
           </div>
           <div class="row justify-content-center py-6 md:pb-16">
             <div class="col-auto">
-              <n-button
-                type="primary"
-                size="large"
-                class="mx-auto"
-                style="height: 3.2em"
-              >
-                <ClientOnly>
-                  <a
-                    class="text-2xl"
-                    :href="constructDownloadUrl()"
-                    >Download JabRef</a
-                  >
-                </ClientOnly>
-              </n-button>
+              <ClientOnly>
+                <UButton
+                  size="lg"
+                  class="text-2xl"
+                  :to="constructDownloadUrl()"
+                >
+                  Download JabRef
+                </UButton>
+              </ClientOnly>
             </div>
           </div>
         </div>

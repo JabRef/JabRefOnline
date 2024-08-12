@@ -16,13 +16,13 @@
         <div
           class="absolute top-10 -left-3.5 w-7 h-7 rounded-full bg-white border border-gray-300 md:shadow-sm flex items-center justify-center active:border-gray-300 transform text-gray-400 hover:scale-110 hover:border-gray-400 hover:text-gray-500"
         >
-          <n-button
+          <UButton
             quaternary
             circle
             @click="closePane"
           >
-            <Icon name="ri:close-fill" />
-          </n-button>
+            <UIcon name="ri:close-fill" />
+          </UButton>
         </div>
         <slot>
           <document-editor

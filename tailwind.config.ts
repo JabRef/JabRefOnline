@@ -1,7 +1,5 @@
 import type { Config } from 'tailwindcss'
 
-import forms from '@tailwindcss/forms'
-import typography from '@tailwindcss/typography'
 import colors from 'tailwindcss/colors'
 import plugin from 'tailwindcss/plugin'
 
@@ -19,36 +17,35 @@ const flip = plugin(({ addUtilities }) => {
 })
 
 export default {
-  content: [`components/**/*.{vue,js}`, `layouts/**/*.vue`, `pages/**/*.vue`],
-  plugins: [forms, flip, typography],
+  plugins: [flip],
   theme: {
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: colors.black,
-      white: colors.white,
-      gray: colors.neutral,
-      primary: {
-        // Generated with https://www.tailwindshades.com
-        DEFAULT: '#4F5F8F',
-        '50': '#D6DBE8',
-        '100': '#C9CFE1',
-        '200': '#AFB8D3',
-        '300': '#94A0C4',
-        '400': '#7A89B6',
-        '500': '#6072A7',
-        '600': '#4F5F8F',
-        '700': '#3B476B',
-        '800': '#272F47',
-        '900': '#131723',
-      },
-      secondary: colors.rose,
-      info: colors.black,
-      success: colors.green,
-      warning: colors.amber,
-      error: colors.red,
-    },
     extend: {
+      colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        black: colors.black,
+        white: colors.white,
+        gray: colors.neutral,
+        primary: {
+          // Generated with https://www.tailwindshades.com
+          DEFAULT: '#4F5F8F',
+          '50': '#D6DBE8',
+          '100': '#C9CFE1',
+          '200': '#AFB8D3',
+          '300': '#94A0C4',
+          '400': '#7A89B6',
+          '500': '#6072A7',
+          '600': '#4F5F8F',
+          '700': '#3B476B',
+          '800': '#272F47',
+          '900': '#131723',
+        },
+        secondary: colors.rose,
+        info: colors.black,
+        success: colors.green,
+        warning: colors.amber,
+        error: colors.red,
+      },
       typography: (theme: (path: string) => any) => ({
         DEFAULT: {
           css: {
@@ -59,4 +56,4 @@ export default {
       }),
     },
   },
-} as Config
+} as Partial<Config>

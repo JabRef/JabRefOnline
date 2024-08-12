@@ -9,7 +9,7 @@
     <div
       class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
     >
-      <Icon
+      <UIcon
         class="text-gray-500"
         :name="showHiddenPassword ? 'ri:eye-line' : 'ri:eye-off-line'"
         :title="showHiddenPassword ? 'Show Password' : 'Hide Password'"
