@@ -9,10 +9,10 @@
   // Pin all dependencies: https://docs.renovatebot.com/dependency-pinning/
   rangeStrategy: 'pin',
   packageRules: [
-    { matchPackagePatterns: ['*'], matchManagers: ['npm'] },
-    { matchPackagePatterns: ['@types/**'], groupName: 'types' },
+    { matchPackageNames: ['*'], matchManagers: ['npm'] },
+    { matchPackageNames: ['@types/**'], groupName: 'types' },
     {
-      matchPackagePatterns: [
+      matchPackageNames: [
         'graphql',
         '@apollo/**',
         '@graphql-tools/**',
@@ -23,15 +23,15 @@
       groupName: 'graphql',
     },
     {
-      matchPackagePatterns: ['@typescript-eslint/**', 'eslint', 'eslint-**'],
+      matchPackageNames: ['@typescript-eslint/**', 'eslint', 'eslint-**'],
       groupName: 'eslint',
     },
     {
-      matchPackagePatterns: ['prettier', 'prettier-*'],
+      matchPackageNames: ['prettier', 'prettier-*'],
       groupName: 'prettier',
     },
     {
-      matchPackagePatterns: [
+      matchPackageNames: [
         'nuxt',
         'vite',
         'nuxt-**',
@@ -50,7 +50,7 @@
       groupName: 'nuxt',
     },
     {
-      matchPackagePatterns: [
+      matchPackageNames: [
         'vue',
         '@vue/**',
         'vue-**',
@@ -64,15 +64,15 @@
       ],
       groupName: 'vue',
     },
-    { matchPackagePatterns: ['prisma', '@prisma/**'], groupName: 'prisma' },
-    { matchPackagePatterns: ['@azure/**'], groupName: 'azure' },
-    { matchPackagePatterns: ['lucia', '@lucia-auth/**'], groupName: 'lucia' },
+    { matchPackageNames: ['prisma', '@prisma/**'], groupName: 'prisma' },
+    { matchPackageNames: ['@azure/**'], groupName: 'azure' },
+    { matchPackageNames: ['lucia', '@lucia-auth/**'], groupName: 'lucia' },
     {
-      matchPackagePatterns: ['@vitest**', 'vitest', 'vitest-**'],
+      matchPackageNames: ['@vitest**', 'vitest', 'vitest-**'],
       groupName: 'vitest',
     },
     {
-      matchPackagePatterns: ['storybook', '@storybook/**', 'chromatic'],
+      matchPackageNames: ['storybook', '@storybook/**', 'chromatic'],
       groupName: 'storybook',
     },
   ],
