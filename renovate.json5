@@ -5,6 +5,8 @@
     'schedule:monthly',
     // Update lock files: https://docs.renovatebot.com/presets-default/#maintainlockfilesmonthly
     ':maintainLockFilesMonthly',
+    // Automerge all updates once they pass tests: https://docs.renovatebot.com/presets-default/#automergeall
+    ':automergeAll',
   ],
   // Pin all dependencies: https://docs.renovatebot.com/dependency-pinning/
   rangeStrategy: 'pin',
