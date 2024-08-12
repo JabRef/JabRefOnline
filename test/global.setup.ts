@@ -24,8 +24,9 @@ registerClasses()
 beforeAll((context) => {
   register('EmailService', { useValue: new EmailServiceMock() })
 
-  const isIntegrationTest =
-    context.filepath?.endsWith('integration.test.ts') ?? false
+  const isIntegrationTest = context.file.filepath.endsWith(
+    'integration.test.ts',
+  )
 
   if (isIntegrationTest) {
     const config = constructConfig()
