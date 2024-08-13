@@ -7,8 +7,8 @@ import plugin from 'tailwindcss/plugin'
 
 // Flip object horizontally or vertically
 // Adapted from https://github.com/tailwindlabs/tailwindcss/discussions/2146
-const flip = plugin(({ addUtilities }) => {
-  addUtilities({
+const flip = plugin((api) => {
+  api.addUtilities({
     '.flip-horizontal': {
       '--tw-scale-x': '-1',
     },
