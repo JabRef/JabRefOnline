@@ -8,6 +8,8 @@
     // Automerge all updates once they pass tests: https://docs.renovatebot.com/presets-default/#automergeall
     ':automergeAll',
   ],
+  // Always squash PRs: https://docs.renovatebot.com/configuration-options/#automergestrategy
+  automergeStrategy: 'squash',
   // Pin all dependencies: https://docs.renovatebot.com/dependency-pinning/
   rangeStrategy: 'pin',
   packageRules: [
@@ -76,6 +78,18 @@
     {
       matchPackageNames: ['storybook', '@storybook/**', 'chromatic'],
       groupName: 'storybook',
+    },
+    {
+      matchManagers: ['docker-compose', 'dockerfile'],
+      groupName: 'docker',
+    },
+    {
+      matchManagers: ['devcontainer'],
+      groupName: 'devcontainer',
+    },
+    {
+      matchManagers: ['github-actions'],
+      groupName: 'github-actions',
     },
   ],
   'github-actions': { enabled: true },
