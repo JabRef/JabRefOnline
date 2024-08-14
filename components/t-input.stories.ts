@@ -1,3 +1,4 @@
+// @ts-expect-error: not sure why nuxi typecheck fails for this
 import type { Meta, StoryFn } from '@nuxtjs/storybook'
 import { TInput } from '@variantjs/vue'
 

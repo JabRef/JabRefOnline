@@ -1,3 +1,4 @@
+// @ts-expect-error: not sure why nuxi typecheck fails for this
 import type { Meta, StoryFn } from '@nuxtjs/storybook'
 import { TCheckbox } from '@variantjs/vue'
 
@@ -9,6 +10,7 @@ export default {
   },
 } as Meta
 
+// @ts-expect-error: story missing arg types
 const Template: StoryFn = (args) => ({
   setup() {
     return { args }
