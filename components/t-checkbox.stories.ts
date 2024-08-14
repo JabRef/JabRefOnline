@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook-vue/nuxt'
+import type { Meta, StoryFn } from '@nuxtjs/storybook'
 import { TCheckbox } from '@variantjs/vue'
 
 export default {
@@ -9,7 +9,7 @@ export default {
   },
 } as Meta
 
-const Template: Story = (args) => ({
+const Template: StoryFn = (args) => ({
   setup() {
     return { args }
   },
