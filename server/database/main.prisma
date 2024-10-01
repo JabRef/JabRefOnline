@@ -1,0 +1,11 @@
+// After changing this file, run pnpm prisma:migrate:dev to push the changes to the database
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+}
