@@ -26,7 +26,7 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
       ) {
         return redirectToLogin()
       }
-    } catch (error) {
+    } catch {
       return redirectToLogin()
     }
   }
