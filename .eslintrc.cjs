@@ -9,6 +9,8 @@ module.exports = {
     'plugin:nuxt/recommended',
     // Turns off all rules that are unnecessary or might conflict with Prettier (needs to be last)
     'prettier',
+    // Disable rules covered by oxlint
+    'plugin:oxlint/recommended',
   ],
   plugins: ['unused-imports'],
   rules: {
