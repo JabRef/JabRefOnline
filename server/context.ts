@@ -4,6 +4,9 @@ import { defu } from 'defu'
 import type { H3Event, SessionConfig } from 'h3'
 
 export interface Context {
+  /**
+   * Returns the current (raw) session or initializes a new session if no session is present.
+   */
   getOrInitSession: () => Promise<{
     readonly id: string | undefined
     readonly data: UserSession
