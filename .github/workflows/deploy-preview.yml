@@ -106,7 +106,7 @@ jobs:
           python .github\scripts\deploy.py --env $env:PREVIEW_NAME
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
+          NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
 
       - name: Deploy Function App
         run: |

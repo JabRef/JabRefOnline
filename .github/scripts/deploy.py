@@ -36,7 +36,7 @@ def main(environment_name: str, verbose: bool = False):
     APP_INSIGHTS_NAME = "jabref-online"
     REDIS_NAME = "jabref"
     DATABASE_URL = os.environ.get("DATABASE_URL", "<Not specified>")
-    SESSION_SECRET = os.environ.get("AZURE_SESSION_SECRET", "<Not specified>")
+    SESSION_SECRET = os.environ.get("NUXT_SESSION_PASSWORD", "<Not specified>")
     GITHUB_REPO_TOKEN = os.environ.get("GITHUB_REPO_TOKEN", "<Not specified>")
 
     function_app_name = "jabref-function-" + environment_name
