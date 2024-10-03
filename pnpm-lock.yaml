@@ -249,8 +249,8 @@ importers:
         specifier: 4.13.2
         version: 4.13.2(magicast@0.3.4)(rollup@4.20.0)(vue@3.5.10(typescript@5.5.4))
       '@vitest/coverage-v8':
-        specifier: 2.0.5
-        version: 2.0.5(vitest@2.1.2(@types/node@20.16.10)(terser@5.31.6))
+        specifier: 2.1.2
+        version: 2.1.2(vitest@2.1.2(@types/node@20.16.10)(terser@5.31.6))
       '@vue/compiler-sfc':
         specifier: 3.5.10
         version: 3.5.10
@@ -3741,10 +3741,14 @@ packages:
       vite: ^5.0.0
       vue: ^3.2.25
 
-  '@vitest/coverage-v8@2.0.5':
-    resolution: {integrity: sha512-qeFcySCg5FLO2bHHSa0tAZAOnAUbp4L6/A5JDuj9+bt53JREl8hpLjLHEWF0e/gWc8INVpJaqA7+Ene2rclpZg==}
+  '@vitest/coverage-v8@2.1.2':
+    resolution: {integrity: sha512-b7kHrFrs2urS0cOk5N10lttI8UdJ/yP3nB4JYTREvR5o18cR99yPpK4gK8oQgI42BVv0ILWYUSYB7AXkAUDc0g==}
     peerDependencies:
-      vitest: 2.0.5
+      '@vitest/browser': 2.1.2
+      vitest: 2.1.2
+    peerDependenciesMeta:
+      '@vitest/browser':
+        optional: true
 
   '@vitest/expect@2.1.2':
     resolution: {integrity: sha512-FEgtlN8mIUSEAAnlvn7mP8vzaWhEaAEvhSXCqrsijM7K6QqjB11qoRZYEd4AKSCDz8p0/+yH5LzhZ47qt+EyPg==}
@@ -14831,7 +14835,7 @@ snapshots:
       vite: 5.4.0(@types/node@20.16.10)(terser@5.31.6)
       vue: 3.5.10(typescript@5.5.4)
 
-  '@vitest/coverage-v8@2.0.5(vitest@2.1.2(@types/node@20.16.10)(terser@5.31.6))':
+  '@vitest/coverage-v8@2.1.2(vitest@2.1.2(@types/node@20.16.10)(terser@5.31.6))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -16300,12 +16304,12 @@ snapshots:
   css-tree@2.2.1:
     dependencies:
       mdn-data: 2.0.28
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   css-tree@2.3.1:
     dependencies:
       mdn-data: 2.0.30
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   css-what@6.1.0: {}
 
@@ -18864,7 +18868,7 @@ snapshots:
     dependencies:
       '@babel/parser': 7.25.3
       '@babel/types': 7.25.2
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   make-dir@2.1.0:
     dependencies:
