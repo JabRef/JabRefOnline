@@ -32,6 +32,8 @@
     {
       matchPackageNames: ['@typescript-eslint{/,}**', 'eslint', 'eslint-**'],
       groupName: 'eslint',
+      // Disable eslint updates for now (maybe forever if we migrate to oxlint in time)
+      enabled: false
     },
     {
       matchPackageNames: ['prettier', 'prettier-*'],
