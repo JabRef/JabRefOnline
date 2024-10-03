@@ -56,7 +56,12 @@ export class Query {
     _args: Record<string, never>,
     context: Context,
   ): Promise<User | null> {
-    return await context.getUser()
+    const userId = (await context.getUser())?.id
+    if (userId) {
+      return this.authService.getUserById(userId)
+    } else {
+      return null
+    }
   }
 }
 
@@ -74,7 +79,7 @@ export class Mutation {
     if ('problems' in userOrProblems) {
       return userOrProblems
     }
-    const session = await this.authService.createSession(userOrProblems)
+    const session = await this.authService.initSession(userOrProblems)
     context.setSession(session)
     return { user: userOrProblems }
   }
@@ -91,8 +96,15 @@ export class Mutation {
     }
 
     // Make login persistent by putting it in the session store
-    const session = await this.authService.createSession(userOrProblems)
-    context.setSession(session)
+    const rawSession = await context.getOrInitSession()
+    if (!rawSession.id) {
+      throw new Error('Session ID not set')
+    }
+    const session = await this.authService.initSession(
+      rawSession.id,
+      userOrProblems,
+    )
+    await context.setSession(session)
     return { user: userOrProblems }
   }
 

@@ -132,7 +132,7 @@ def main(environment_name: str, verbose: bool = False):
                         "name": "REDIS_PASSWORD",
                         "value": redis_keys.primary_key,
                     },
-                    {"name": "SESSION_SECRET_PRIMARY", "value": SESSION_SECRET},
+                    {"name": "NUXT_SESSION_PASSWORD", "value": SESSION_SECRET},
                     {"name": "GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
                     # Disable indexing of non-production sites
                     # https://nuxtseo.com/robots/guides/disable-indexing#preview-staging-testing-environments
