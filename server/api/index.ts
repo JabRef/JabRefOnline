@@ -5,7 +5,6 @@ import { startServerAndCreateH3Handler } from '@as-integrations/h3'
 import { handleCors } from 'h3'
 import http from 'http'
 import 'json-bigint-patch' // Needed for bigint support in JSON
-import 'reflect-metadata' // Needed for tsyringe
 import { buildContext, type Context } from '../context'
 import { loadSchemaWithResolvers } from '../schema'
 

@@ -1,3 +1,4 @@
+import 'reflect-metadata' // Needed for tsyringe
 import { configure as configureTsyringe } from './../tsyringe.config'
 
 /**
