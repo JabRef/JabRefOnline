@@ -25,6 +25,7 @@ jobs:
     env:
       PREVIEW_NAME: ${{ github.event.pull_request.number || github.event.inputs.preview_name }}
       GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+      NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
 
     steps:
       # We could also add these checks to a job-wide if condition, to skip the workflow if its unsecure to run.
