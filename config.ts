@@ -63,8 +63,7 @@ export interface Config {
   }
   emailClient?: string
   session: {
-    primarySecret: string
-    secondarySecret: string
+    secret: string
   }
   githubRepoToken: string
   public: {
@@ -85,8 +84,7 @@ export function constructConfig() {
     },
     emailClient: process.env.EMAIL_CLIENT,
     session: {
-      primarySecret: process.env.SESSION_SECRET_PRIMARY ?? 'session_secret',
-      secondarySecret: process.env.SESSION_SECRET_SECONDARY ?? 'session_secret',
+      secret: process.env.NUXT_SESSION_PASSWORD ?? 'session_secret',
     },
     githubRepoToken: process.env.GITHUB_REPO_TOKEN ?? 'UNDEFINED',
     public: {
