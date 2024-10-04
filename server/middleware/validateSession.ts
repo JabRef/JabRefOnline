@@ -28,9 +28,9 @@ export default defineEventHandler(async (event) => {
   if (session.id && Object.keys(session.data).length !== 0) {
     try {
       // Check if session is valid
-      const info = await authHandler.refreshSession(session)
-      // TODO: This exposes the "server" info to the client, right?
-      await session.update((data) => defu({ server: info }, data))
+      await authHandler.refreshSession(session)
+      // TODO: This would exposes the "server" info to the client
+      // await session.update((data) => defu({ server: info }, data))
     } catch {
       // Clear session
       await session.clear()

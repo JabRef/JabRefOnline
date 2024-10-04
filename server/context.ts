@@ -29,7 +29,7 @@ export interface Context {
 }
 
 let sessionConfig: SessionConfig | null = null
-function _useSession(event: H3Event) {
+function _useSession(event: H3Event, config: Partial<SessionConfig> = {}) {
   if (!sessionConfig) {
     const runtimeConfig = useRuntimeConfig(event)
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- false positive
@@ -41,8 +41,8 @@ function _useSession(event: H3Event) {
       runtimeConfig.session,
     )
   }
-  // @ts-expect-error sessionConfig is not null here
-  return useSession<UserSession>(event, sessionConfig)
+  const finalConfig = defu(config, sessionConfig) as SessionConfig
+  return useSession<UserSession>(event, finalConfig)
 }
 
 export function buildContext({
@@ -59,7 +59,16 @@ export function buildContext({
       if (session === null) {
         await clearUserSession(event)
       } else {
-        await setUserSession(event, session, {
+        // TODO: Handle this properly (i.e. don't expose to client but still have it available on the server)
+        // @ts-expect-error -- hacky workaround
+        delete session.server
+
+        // This is all very hacky
+        // h3 currently doesn't deduplicate cookies. So just calling "setUserSession"
+        // creates actually 4 cookies...
+        // We clear the cookie in between, and then manually set the session data
+        // TODO: Remove this workaround once h3 v2 comes out
+        const rawSession = await _useSession(event, {
           // Session completely expires after half a year
           maxAge: 0.5 * 31556952 * 1000,
           cookie: {
@@ -67,6 +76,9 @@ export function buildContext({
             sameSite: 'strict',
           },
         })
+        // This actually clears all cookies! Probably not what we want
+        setResponseHeader(event, 'Set-Cookie', '')
+        await rawSession.update(() => session)
       }
     },
   })
