@@ -110,6 +110,7 @@
           </div>
         </div>
       </slot>
+      
     </div>
 
     <!-- User profile -->
@@ -183,6 +184,22 @@
       v-show="!isSmallDisplay"
       class="flex-1 mx-3 md:mx-6"
     ></div>
+
+    <n-button
+        v-show="!isSmallDisplay"
+        text
+        type="primary"
+        class="text-xl text-gray-400 hover:text-primary-500"
+        >
+        <a
+            href="https://github.com/JabRef"
+        >
+            <Icon
+            name="mdi:github"
+            class="text-5xl"
+            />
+        </a>
+    </n-button>
   </nav>
 </template>
 
