@@ -72,7 +72,38 @@
 
 <script setup lang="ts">
 import { constructDownloadUrl } from '~/composables/downloads'
+import type { MenuOption } from 'naive-ui'
 definePageMeta({ layout: false })
+
+const menuOptions: MenuOption[] = [
+    {
+        label: () =>
+            h(
+                'a',
+                {
+                    href: 'https://docs.jabref.org/',
+                    target: '_blank',
+                    rel: 'noopenner noreferrer'
+                },
+                'Docs'
+            ),
+        key: 'docs',
+        children: [
+            {
+                label: 'User Docs',
+                key: 'docs/user-docs',
+            },
+            {
+                label: 'Dev Docs',
+                key: 'docs/dev-docs',
+            },
+            {
+                label: 'Change Log',
+                key: 'docs/change-log'
+            }
+        ]
+    }
+]
 
 const links = [
     {

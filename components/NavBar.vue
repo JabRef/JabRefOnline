@@ -49,7 +49,10 @@
             </n-popover>
 
             <!-- Main menu -->
-            <div v-show="!isSmallDisplay" class="flex justify-evenly pr-20">
+            <div v-show="!isSmallDisplay">
+                <n-menu mode="horizontal" :options="menuOptions" responsive></n-menu>
+            </div>
+            <!-- <div v-show="!isSmallDisplay" class="flex justify-evenly pr-20">
                 <nav class="justify-evenly">
                     <t-nuxtlink active-class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
                         class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
@@ -77,7 +80,7 @@
                         </a>
                     </n-button>
                 </nav>
-            </div>
+            </div> -->
 
             <!-- User profile -->
             <nav v-if="showUserProfile" class="flex items-center pr-10 space-x-7">
@@ -130,15 +133,22 @@
 <script lang="ts" setup>
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { NPopover } from 'naive-ui'
+import { NPopover, NIcon } from 'naive-ui'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'
+import { h, ref } from 'vue'
+import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 
 const isHamburgerShown = ref(false)
 const hamburgerMenu = ref<typeof NPopover | null>(null)
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
+
+function renderIcon(icon: Component) {
+    return () => h(NIcon, null, { default: () => h(icon) })
+}
 
 defineProps({
     showLogo: {
@@ -152,8 +162,224 @@ defineProps({
     showUserProfile: {
         type: Boolean,
         default: false,
-    },
+    }
 })
+
+const menuOptions: MenuOption[] = [
+    {
+        label: () =>
+            h(
+                'a',
+                {
+                    href: 'https://docs.jabref.org/',
+                    target: '_blank',
+                    rel: 'noopenner noreferrer'
+                },
+                'Docs'
+            ),
+        key: 'docs',
+        children: [
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://docs.jabref.org/getting-started',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Getting Started'
+                    ),
+                key: 'docs/getting-started',
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://devdocs.jabref.org/',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Dev Docs'
+                    ),
+                key: 'docs/dev-docs',
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://github.com/JabRef/jabref/blob/main/CHANGELOG.md',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Change Log'
+                    ),
+                key: 'docs/change-log'
+            }
+        ]
+    },
+    {
+        label: () =>
+            h(
+                'a',
+                {
+                    href: 'https://contribute.jabref.org/',
+                    target: '_blank',
+                    rel: 'noopenner noreferrer'
+                },
+                'Contribute'
+            ),
+        key: 'contribute',
+    },
+    {
+        label: () =>
+            h(
+                'a',
+                {
+                    href: 'https://discourse.jabref.org/',
+                    target: '_blank',
+                    rel: 'noopenner noreferrer'
+                },
+                'Forum'
+            ),
+        key: 'forum',
+        children: [
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://discourse.jabref.org/c/news',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'News'
+                    ),
+                key: 'forum/news'
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://discourse.jabref.org/c/help',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Ask for Help'
+                    ),
+                key: 'forum/ask-for-help'
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://github.com/JabRef/jabref/issues',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Report an Issue'
+                    ),
+                key: 'forum/report-an-issue'
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://discourse.jabref.org/c/features',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Propose a Feature'
+                    ),
+                key: 'forum/propose-a-feature'
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://discourse.jabref.org/c/feedback',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Give Feedback'
+                    ),
+                key: 'forum/give-feedback'
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://discourse.jabref.org/c/beta-testing',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Beta Testing'
+                    ),
+                key: 'forum/beta-testing'
+            },
+            {
+                label: () =>
+                    h(
+                        'a',
+                        {
+                            href: 'https://discourse.jabref.org/c/corner',
+                            target: '_blank',
+                            rel: 'noopenner noreferrer'
+                        },
+                        'Speaker\'s Corner'
+                    ),
+                key: 'forum/speakers-corner'
+            }
+        ]
+    },
+    {
+        label: () =>
+            h(
+                'a',
+                {
+                    href: '/download',
+                    target: '_blank',
+                    rel: 'noopenner noreferrer'
+                },
+                'Download'
+            ),
+        key: 'download',
+    },
+    {
+        label: () =>
+            h(
+                'a',
+                {
+                    href: 'https://matrix.to/#/#JabRef_jabref:gitter.im',
+                    target: '_blank',
+                    rel: 'noopenner noreferrer'
+                },
+                'Gitter'
+            ),
+        key: 'gitter',
+    },
+    {
+        label: () =>
+            h(
+                'a',
+                {
+                    href: 'https://github.com/JabRef',
+                    target: '_blank',
+                    rel: 'noopenner noreferrer'
+                },
+                'GitHub'
+            ),
+        key: 'github'
+    }
+]
+
 
 const { resolveClient } = useApolloClient()
 
