@@ -118,6 +118,10 @@ const links = [
     href: '#support',
   },
   {
+    title: 'GitHub',
+    href: 'https://github.com/JabRef/jabref',
+  },
+  {
     title: 'News',
     href: 'https://blog.jabref.org/',
   },
