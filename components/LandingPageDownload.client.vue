@@ -12,141 +12,24 @@
         <div class="text-center">
           <span v-if="isWindows()">
             <n-flex justify="center">
-                <n-button
-                  type="primary"
-                  size="large"
-                  style="height: 3.2em"
-                >
-                  <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-                <a
-                  class="text-2xl"
-                  href="/download/win_msi"
-                >.msi</a
-                >
-                </n-button>
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-                <a
-                  class="text-2xl"
-                  href="/download/win_zip"
-                >.zip</a
-                >
-                </n-button>
+              <DownloadButton text=".msi" href="/download/win_msi" />
+              <DownloadButton text=".zip" href="/download/win_zip" />
             </n-flex>
           </span>
 
           <span v-if="isLinux()">
             <n-flex justify="center">
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-              <a
-                class="text-2xl"
-                href="/download/linux_deb"
-              >.deb</a
-              >
-              </n-button>
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-              <a
-                class="text-2xl"
-                href="/download/linux_rpm"
-              >.rpm</a
-              >
-              </n-button>
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-              <a
-                class="text-2xl"
-                href="/download/linux_tar_gz"
-              >.tar.gz</a
-              >
-              </n-button>
+              <DownloadButton text=".deb" href="/download/linux_deb" />
+              <DownloadButton text=".rpm" href="/download/linux_rpm" />
+              <DownloadButton text=".tar.gz" href="/download/linux_tar_gz" />
             </n-flex>
           </span>
           <span v-if="isMac()">
             <n-flex justify="center">
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-              <a
-                class="text-2xl"
-                href="/download/mac_arm64_dmg"
-              >arm64 .dmg</a
-              >
-              </n-button>
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-              <a
-                class="text-2xl"
-                href="/download/mac_arm64_pkg"
-              >arm64 .pkg</a
-              >
-              </n-button>
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-              <a
-                class="text-2xl"
-                href="/download/mac_x86_64_dmg"
-              >x86_64 .dmg</a
-              >
-              </n-button>
-              <n-button
-                type="primary"
-                size="large"
-                style="height: 3.2em"
-              >
-                <template #icon>
-                    <n-icon><Icon name="material-symbols:download"/></n-icon>
-                  </template>
-              <a
-                class="text-2xl"
-                href="/download/mac_x86_64_pkg"
-              >x86_64 .pkg</a
-              >
-              </n-button>
+              <DownloadButton text="arm64 .dmg" href="/download/mac_arm64_dmg" />
+              <DownloadButton text="arm64 .dmg" href="/download/mac_arm64_pkg" />
+              <DownloadButton text="x86_64 .dmg" href="/download/mac_x86_64_dmg" />
+              <DownloadButton text="x86_64 .pkg" href="/download/mac_x86_64_pkg" />
             </n-flex>
           </span>
         </div>
