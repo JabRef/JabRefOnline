@@ -73,6 +73,54 @@
               </n-button>
             </n-button-group>
           </span>
+          <span v-if="isMac()">
+            <n-button-group vertical>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/mac_arm64_dmg"
+              >Download for arm64 dmg</a
+              >
+              </n-button>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/mac_arm64_pkg"
+              >Download for arm64 pkg</a
+              >
+              </n-button>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/mac_x86_64_dmg"
+              >Download for x86_64 dmg</a
+              >
+              </n-button>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/mac_x86_64_pkg"
+              >Download for x86_64 pkg</a
+              >
+              </n-button>
+            </n-button-group>
+          </span>
         </div>
 
         <div class="text-center pt-8 text-sm">
