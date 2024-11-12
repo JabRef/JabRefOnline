@@ -90,16 +90,19 @@
             </n-flex>
           </span>
           <span v-if="isMac()">
-            <n-button-group vertical>
+            <n-flex justify="center">
               <n-button
                 type="default"
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
               <a
                 class="text-2xl"
                 href="/download/mac_arm64_dmg"
-              >Download for arm64 dmg</a
+              >arm64 dmg</a
               >
               </n-button>
               <n-button
@@ -107,10 +110,13 @@
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
               <a
                 class="text-2xl"
                 href="/download/mac_arm64_pkg"
-              >Download for arm64 pkg</a
+              >arm64 pkg</a
               >
               </n-button>
               <n-button
@@ -118,10 +124,13 @@
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
               <a
                 class="text-2xl"
                 href="/download/mac_x86_64_dmg"
-              >Download for x86_64 dmg</a
+              >x86_64 dmg</a
               >
               </n-button>
               <n-button
@@ -129,13 +138,16 @@
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
               <a
                 class="text-2xl"
                 href="/download/mac_x86_64_pkg"
-              >Download for x86_64 pkg</a
+              >x86_64 pkg</a
               >
               </n-button>
-            </n-button-group>
+            </n-flex>
           </span>
         </div>
 
