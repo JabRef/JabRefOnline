@@ -46,36 +46,45 @@
           <span v-if="isLinux()">
             <n-flex justify="center">
               <n-button
-                type="default"
+                type="primary"
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
               <a
                 class="text-2xl"
                 href="/download/linux_deb"
-              >Download .deb</a
+              >.deb</a
               >
               </n-button>
               <n-button
-                type="default"
+                type="primary"
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
               <a
                 class="text-2xl"
                 href="/download/linux_rpm"
-              >Download .rpm</a
+              >.rpm</a
               >
               </n-button>
               <n-button
-                type="default"
+                type="primary"
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
               <a
                 class="text-2xl"
                 href="/download/linux_tar_gz"
-              >Download .tar.gz</a
+              >.tar.gz</a
               >
               </n-button>
             </n-flex>
