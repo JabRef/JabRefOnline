@@ -102,7 +102,7 @@
               <a
                 class="text-2xl"
                 href="/download/mac_arm64_dmg"
-              >arm64 dmg</a
+              >arm64 .dmg</a
               >
               </n-button>
               <n-button
@@ -116,7 +116,7 @@
               <a
                 class="text-2xl"
                 href="/download/mac_arm64_pkg"
-              >arm64 pkg</a
+              >arm64 .pkg</a
               >
               </n-button>
               <n-button
@@ -130,7 +130,7 @@
               <a
                 class="text-2xl"
                 href="/download/mac_x86_64_dmg"
-              >x86_64 dmg</a
+              >x86_64 .dmg</a
               >
               </n-button>
               <n-button
@@ -144,7 +144,7 @@
               <a
                 class="text-2xl"
                 href="/download/mac_x86_64_pkg"
-              >x86_64 pkg</a
+              >x86_64 .pkg</a
               >
               </n-button>
             </n-flex>
