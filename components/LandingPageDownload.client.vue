@@ -43,7 +43,7 @@
             </n-flex>
           </span>
 
-          <span v-if="isLinux()">
+          <span v-if="isLinux">
             <n-flex justify="center">
               <n-button
                 type="primary"
@@ -92,7 +92,7 @@
           <span v-if="isMac()">
             <n-flex justify="center">
               <n-button
-                type="default"
+                type="primary"
                 size="large"
                 style="height: 3.2em"
               >
@@ -106,7 +106,7 @@
               >
               </n-button>
               <n-button
-                type="default"
+                type="primary"
                 size="large"
                 style="height: 3.2em"
               >
@@ -120,7 +120,7 @@
               >
               </n-button>
               <n-button
-                type="default"
+                type="primary"
                 size="large"
                 style="height: 3.2em"
               >
@@ -134,7 +134,7 @@
               >
               </n-button>
               <n-button
-                type="default"
+                type="primary"
                 size="large"
                 style="height: 3.2em"
               >
