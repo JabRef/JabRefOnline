@@ -36,6 +36,43 @@
               </n-button>
             </n-button-group>
           </span>
+          <span v-if="isLinux()">
+            <n-button-group vertical>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/linux_deb"
+              >Download .deb</a
+              >
+              </n-button>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/linux_rpm"
+              >Download .rpm</a
+              >
+              </n-button>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/linux_tar_gz"
+              >Download .tar.gz</a
+              >
+              </n-button>
+            </n-button-group>
+          </span>
         </div>
 
         <div class="text-center pt-8 text-sm">
