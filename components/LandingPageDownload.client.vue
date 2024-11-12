@@ -43,7 +43,7 @@
             </n-flex>
           </span>
 
-          <span v-if="isLinux">
+          <span v-if="isLinux()">
             <n-flex justify="center">
               <n-button
                 type="primary"
