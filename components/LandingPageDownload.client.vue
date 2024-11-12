@@ -18,7 +18,7 @@
                   style="height: 3.2em"
                 >
                   <template #icon>
-                    <n-icon></n-icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
                   </template>
                 <a
                   class="text-2xl"
@@ -31,6 +31,9 @@
                 size="large"
                 style="height: 3.2em"
               >
+                <template #icon>
+                    <n-icon><Icon name="material-symbols:download"/></n-icon>
+                  </template>
                 <a
                   class="text-2xl"
                   href="/download/win_zip"
