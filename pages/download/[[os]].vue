@@ -22,15 +22,21 @@ definePageMeta({
   middleware: async (to) => {
     let downloadUrl = 'https://www.fosshub.com/JabRef.html'
     const os = to.params.os as string | undefined
-    if (os && ['win', 'mac', 'linux'].includes(os)) {
+    if (os && ['win_msi', 'win_zip', 'mac_arm64_dmg', 'mac_arm64_pkg', 'mac_x86_64_dmg', 'mac_x86_64_pkg', 'linux_deb', 'linux_rpm', 'linux_tar_gz'].includes(os)) {
       const { data } = await useFetch('/api/getLatestRelease')
       const latestRelease = data.value?.version
       if (latestRelease) {
         downloadUrl +=
           {
-            win: `?dwl=JabRef-${latestRelease}.msi`,
-            mac: `?dwl=JabRef-${latestRelease}.pkg`,
-            linux: `?dwl=jabref_${latestRelease}_amd64.deb`,
+            win_msi: `?dwl=JabRef-${latestRelease}.msi`,
+            win_zip: `?dwl=JabRef-${latestRelease}-portable_windows.zip`,
+            mac_arm64_dmg: `?dwl=JabRef-${latestRelease}-arm64.dmg`,
+            mac_arm64_pkg: `?dwl=JabRef-${latestRelease}-arm64.pkg`,
+            mac_x86_64_dmg: `?dwl=JabRef-${latestRelease}.dmg`,
+            mac_x86_64_pkg: `?dwl=JabRef-${latestRelease}.pkg`,
+            linux_deb: `?dwl=jabref_${latestRelease}_amd64.deb`,
+            linux_rpm: `?dwl=jabref_${latestRelease}.x86_64.rpm`,
+            linux_tar_gz: `?dwl=JabRef-${latestRelease}-portable_linux.tar.gz`,
           }[os] ?? ''
       }
     }
