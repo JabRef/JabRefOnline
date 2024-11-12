@@ -44,7 +44,7 @@
           </span>
 
           <span v-if="isLinux()">
-            <n-button-group vertical>
+            <n-flex justify="center">
               <n-button
                 type="default"
                 size="large"
@@ -78,7 +78,7 @@
               >Download .tar.gz</a
               >
               </n-button>
-            </n-button-group>
+            </n-flex>
           </span>
           <span v-if="isMac()">
             <n-button-group vertical>
