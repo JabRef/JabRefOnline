@@ -10,7 +10,7 @@
           JabRef is free and works across all your devices.
         </h3>
         <div class="text-center">
-          <span class="text-center" v-if="isWindows()">
+          <span v-if="isWindows()">
             <n-flex justify="center">
                 <n-button
                   type="primary"
