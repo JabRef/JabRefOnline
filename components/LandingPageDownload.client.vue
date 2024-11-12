@@ -10,17 +10,32 @@
           JabRef is free and works across all your devices.
         </h3>
         <div class="text-center">
-          <n-button
-            type="primary"
-            size="large"
-            style="height: 3.2em"
-          >
-            <a
-              class="text-2xl"
-              :href="downloadUrl"
-              >Download JabRef</a
-            >
-          </n-button>
+          <span v-if="isWindows()">
+            <n-button-group vertical>
+              <n-button
+                  type="default"
+                  size="large"
+                  style="height: 3.2em"
+                >
+              <a
+                class="text-2xl"
+                href="/download/win_msi"
+              >Download .msi</a
+              >
+              </n-button>
+              <n-button
+                type="default"
+                size="large"
+                style="height: 3.2em"
+              >
+              <a
+                class="text-2xl"
+                href="/download/win_zip"
+              >Download .zip</a
+              >
+              </n-button>
+            </n-button-group>
+          </span>
         </div>
 
         <div class="text-center pt-8 text-sm">
