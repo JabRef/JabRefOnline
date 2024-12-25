@@ -261,8 +261,8 @@ importers:
         specifier: 5.3.0
         version: 5.3.0
       chromatic:
-        specifier: 11.16.3
-        version: 11.16.3
+        specifier: 11.20.2
+        version: 11.20.2
       concurrently:
         specifier: 9.0.1
         version: 9.0.1
@@ -339,8 +339,8 @@ importers:
         specifier: 7.6.20
         version: 7.6.20
       storybook-vue-addon:
-        specifier: 0.6.1
-        version: 0.6.1(@nuxt/kit@3.12.4(magicast@0.3.5)(rollup@4.24.3)(webpack-sources@3.2.3))(@nuxt/schema@3.13.2(rollup@4.24.3)(webpack-sources@3.2.3))(esbuild@0.18.20)(rollup@4.24.3)(typescript@5.5.4)(vite@5.4.0(@types/node@20.17.10)(terser@5.36.0))(vue-tsc@2.1.6(typescript@5.5.4))(vue@3.5.11(typescript@5.5.4))(webpack-sources@3.2.3)(webpack@5.96.0(esbuild@0.18.20))
+        specifier: 0.6.2
+        version: 0.6.2(@nuxt/kit@3.12.4(magicast@0.3.5)(rollup@4.24.3)(webpack-sources@3.2.3))(@nuxt/schema@3.13.2(rollup@4.24.3)(webpack-sources@3.2.3))(esbuild@0.18.20)(rollup@4.24.3)(typescript@5.5.4)(vite@5.4.0(@types/node@20.17.10)(terser@5.36.0))(vue-tsc@2.1.6(typescript@5.5.4))(vue@3.5.11(typescript@5.5.4))(webpack@5.96.0(esbuild@0.18.20))
       tailwindcss:
         specifier: 3.4.13
         version: 3.4.13(ts-node@10.9.2(@types/node@20.17.10)(typescript@5.5.4))
@@ -4614,8 +4614,8 @@ packages:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
 
-  chromatic@11.16.3:
-    resolution: {integrity: sha512-bckarRbZ3M1BvsmhLqEMschuQPk2FlSD9cvy8383JwoVvaIqLr0dv1tI/DPM4LMuXOjTjeBSZZINVH9r3RMiiA==}
+  chromatic@11.20.2:
+    resolution: {integrity: sha512-c+M3HVl5Y60c7ipGTZTyeWzWubRW70YsJ7PPDpO1D735ib8+Lu3yGF90j61pvgkXGngpkTPHZyBw83lcu2JMxA==}
     hasBin: true
     peerDependencies:
       '@chromatic-com/cypress': ^0.*.* || ^1.0.0
@@ -8940,15 +8940,15 @@ packages:
     resolution: {integrity: sha512-KXDYZ9dszj6bzvnEMRYvxgeTHU74QBFL54XKtP3nyMuJ81CFYtABZ3bAzL2EdFUaEwJOBOgENyFj3R7oTzDyyw==}
     engines: {node: '>=4', npm: '>=6'}
 
-  storybook-vue-addon@0.6.1:
-    resolution: {integrity: sha512-46CYmJSesQ6volWp86lgzE5JTMd63DUpqXNiANog4cBWGkgsE8kJxt8tPh1VLB68E5Ps4dcwi45ir3mVRq0n+w==}
+  storybook-vue-addon@0.6.2:
+    resolution: {integrity: sha512-ogBmiQDOdE4FV0zAx5dvETeRHq3/qLsT97GCvRSKKZ6utUUY5KGpDw7GvuWBmzcNQa0J2ioitI+G/YlfPP3sog==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@nuxt/kit': ^3
       '@nuxt/schema': ^3
       esbuild: '*'
       rollup: ^3 || ^4.0.0
-      vite: ^4.3.1 || ^5.0.0
+      vite: ^4.3.1 || ^5.0.0 || ^6.0.0
       vue: ^3.2.47
       webpack: ^4 || ^5
     peerDependenciesMeta:
@@ -9587,6 +9587,10 @@ packages:
     peerDependenciesMeta:
       webpack-sources:
         optional: true
+
+  unplugin@2.1.0:
+    resolution: {integrity: sha512-us4j03/499KhbGP8BU7Hrzrgseo+KdfJYWcbcajCOqsAyb8Gk0Yn2kiUIcZISYCb1JFaZfIuG3b42HmguVOKCQ==}
+    engines: {node: '>=18.12.0'}
 
   unstorage@1.12.0:
     resolution: {integrity: sha512-ARZYTXiC+e8z3lRM7/qY9oyaOkaozCeNd2xoz7sYK9fv7OLGhVsf+BZbmASqiK/HTZ7T6eAlnVq9JynZppyk3w==}
@@ -16131,7 +16135,7 @@ snapshots:
 
   chownr@2.0.0: {}
 
-  chromatic@11.16.3: {}
+  chromatic@11.20.2: {}
 
   chrome-launcher@1.1.2:
     dependencies:
@@ -21549,14 +21553,14 @@ snapshots:
 
   stoppable@1.1.0: {}
 
-  storybook-vue-addon@0.6.1(@nuxt/kit@3.12.4(magicast@0.3.5)(rollup@4.24.3)(webpack-sources@3.2.3))(@nuxt/schema@3.13.2(rollup@4.24.3)(webpack-sources@3.2.3))(esbuild@0.18.20)(rollup@4.24.3)(typescript@5.5.4)(vite@5.4.0(@types/node@20.17.10)(terser@5.36.0))(vue-tsc@2.1.6(typescript@5.5.4))(vue@3.5.11(typescript@5.5.4))(webpack-sources@3.2.3)(webpack@5.96.0(esbuild@0.18.20)):
+  storybook-vue-addon@0.6.2(@nuxt/kit@3.12.4(magicast@0.3.5)(rollup@4.24.3)(webpack-sources@3.2.3))(@nuxt/schema@3.13.2(rollup@4.24.3)(webpack-sources@3.2.3))(esbuild@0.18.20)(rollup@4.24.3)(typescript@5.5.4)(vite@5.4.0(@types/node@20.17.10)(terser@5.36.0))(vue-tsc@2.1.6(typescript@5.5.4))(vue@3.5.11(typescript@5.5.4))(webpack@5.96.0(esbuild@0.18.20)):
     dependencies:
       '@storybook/csf': 0.1.11
       '@storybook/mdx2-csf': 1.1.0
       consola: 3.2.3
       prettier: 3.3.3
       prettier-plugin-organize-imports: 4.1.0(prettier@3.3.3)(typescript@5.5.4)(vue-tsc@2.1.6(typescript@5.5.4))
-      unplugin: 1.15.0(webpack-sources@3.2.3)
+      unplugin: 2.1.0
       vue: 3.5.11(typescript@5.5.4)
     optionalDependencies:
       '@nuxt/kit': 3.12.4(magicast@0.3.5)(rollup@4.24.3)(webpack-sources@3.2.3)
@@ -21568,7 +21572,6 @@ snapshots:
     transitivePeerDependencies:
       - typescript
       - vue-tsc
-      - webpack-sources
 
   storybook@7.6.20:
     dependencies:
@@ -21836,7 +21839,7 @@ snapshots:
   terser@5.36.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.12.1
+      acorn: 8.14.0
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -22265,6 +22268,11 @@ snapshots:
       webpack-virtual-modules: 0.6.2
     optionalDependencies:
       webpack-sources: 3.2.3
+
+  unplugin@2.1.0:
+    dependencies:
+      acorn: 8.14.0
+      webpack-virtual-modules: 0.6.2
 
   unstorage@1.12.0(@azure/identity@4.5.0)(ioredis@5.4.1):
     dependencies:
