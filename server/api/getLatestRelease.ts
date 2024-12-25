@@ -14,6 +14,7 @@ export default defineEventHandler(async () => {
             ) {
               nodes {
                 tagName
+                isPrerelease
               }
             }
           }
@@ -27,15 +28,15 @@ export default defineEventHandler(async () => {
         releases?: {
           nodes: {
             tagName: string
+            isPrerelease: boolean
           }[]
         }
       }
     }
   }
   return {
-    version: response.data?.repository?.releases?.nodes[0].tagName.replace(
-      'v',
-      '',
-    ), // something like 5.7
+    version: response.data?.repository?.releases?.nodes
+      .find((release) => !release.isPrerelease)
+      ?.tagName.replace('v', ''), // something like 5.7
   }
 })
