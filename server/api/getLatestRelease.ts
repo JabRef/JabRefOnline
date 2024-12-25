@@ -9,7 +9,7 @@ export default defineEventHandler(async () => {
           # eslint-disable-next-line @graphql-eslint/fields-on-correct-type
           repository(owner: "JabRef", name: "jabref") {
             releases(
-              first: 1
+              first: 5
               orderBy: { field: CREATED_AT, direction: DESC }
             ) {
               nodes {
