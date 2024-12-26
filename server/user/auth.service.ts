@@ -27,7 +27,8 @@ const invalidCredentialsError = {
   ],
 }
 
-interface SessionStorage {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- unstorage doesn't seem to work interface
+type SessionStorage = {
   items: Record<string, ServerSessionData>
 }
 
