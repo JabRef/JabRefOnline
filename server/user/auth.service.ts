@@ -27,19 +27,28 @@ const invalidCredentialsError = {
   ],
 }
 
+type SessionStorage = {
+  items: {
+    [key: string]: ServerSessionData
+  }
+}
+
 @injectable()
 export class AuthService {
   /**
    * Storage for all sessions associated with a user. Base is the user ID, keys are session IDs.
    */
-  sessionStorage: Storage<ServerSessionData>
+  sessionStorage: Storage<SessionStorage>
 
   constructor(
     @inject('PrismaClient') private prisma: PrismaClient,
-    @inject('RedisClient') private redisClient: Storage,
+    @inject('RedisClient') private redisClient: Storage<string>,
     @inject('EmailService') private emailService: EmailService,
   ) {
-    this.sessionStorage = prefixStorage(redisClient, 'session')
+    this.sessionStorage = prefixStorage<SessionStorage>(
+      redisClient as any,
+      'session',
+    )
   }
 
   async getUsers(): Promise<User[]> {
@@ -138,7 +147,7 @@ export class AuthService {
       }
     }
     const key = FORGOT_PASSWORD_PREFIX + userId
-    const hashedToken = await this.redisClient.getItem<string>(key)
+    const hashedToken = await this.redisClient.getItem(key)
     if (!hashedToken) {
       return {
         message: 'Token Expired',
@@ -174,7 +183,13 @@ export class AuthService {
    *
    * @returns Server session data
    */
-  async refreshSession({ id, data }: { id?: string; data: UserSession }) {
+  async refreshSession({
+    id,
+    data,
+  }: {
+    id?: string
+    data: UserSession
+  }): Promise<ServerSessionData> {
     if (!id || !data.user?.id) {
       throw new Error('Invalid session')
     }
