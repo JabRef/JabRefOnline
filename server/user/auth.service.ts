@@ -27,10 +27,8 @@ const invalidCredentialsError = {
   ],
 }
 
-type SessionStorage = {
-  items: {
-    [key: string]: ServerSessionData
-  }
+interface SessionStorage {
+  items: Record<string, ServerSessionData>
 }
 
 @injectable()
