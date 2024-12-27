@@ -4,9 +4,9 @@ export function constructDownloadUrl(): string {
   if (os) {
     osSuffix =
       {
-        windows: 'win',
-        mac: 'mac',
-        linux: 'linux',
+        windows: 'win_msi',
+        mac: 'mac_arm64_dmg',
+        linux: 'linux_deb',
       }[os] || ''
   }
   return `/download/${osSuffix}`
