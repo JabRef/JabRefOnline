@@ -1,0 +1,13 @@
+diff --git a/dist/runtime/components/MDC.vue b/dist/runtime/components/MDC.vue
+index e13a6dc2c271fc24be61886b5445c971511ec0c6..a06d61d96088e2c58197b0dc865b4002d9bef415 100644
+--- a/dist/runtime/components/MDC.vue
++++ b/dist/runtime/components/MDC.vue
+@@ -21,7 +21,7 @@
+ import { hash } from 'ohash'
+ import { useAsyncData } from 'nuxt/app'
+ import { watch, computed, type PropType } from 'vue'
+-import type { MDCParseOptions } from '@nuxtjs/mdc'
++import type { MDCParseOptions } from '../../module'
+ import { parseMarkdown } from '../parser'
+ 
+ const props = defineProps({
