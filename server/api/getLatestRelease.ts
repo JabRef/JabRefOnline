@@ -32,7 +32,6 @@ export default defineEventHandler(async () => {
       }
     }
   }
-  console.log(response)
   return {
     version: response.data?.repository?.releases?.nodes[0].tagName.replace(
       'v',

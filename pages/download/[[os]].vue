@@ -21,8 +21,6 @@ definePageMeta({
         let downloadUrl = `https://github.com/JabRef/jabref/releases/download/`
         if (os && ['win_msi', 'win_zip', 'mac_arm64_dmg', 'mac_arm64_pkg', 'mac_x86_64_dmg', 'mac_x86_64_pkg', 'linux_deb', 'linux_rpm', 'linux_tar_gz'].includes(os)) {
             const { data } = await useFetch('/api/getLatestRelease')
-            console.log(211111111111111)
-            console.log(data)
             const latestRelease = data.value?.version
             downloadUrl += `v${latestRelease}`
             if (latestRelease) {
