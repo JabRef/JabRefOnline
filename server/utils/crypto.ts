@@ -1,28 +1,35 @@
 import crypto from 'crypto'
 
-const lengthSaltBytes = 16
-const lengthSaltString = lengthSaltBytes * 2 // lengthSaltBytes is in bytes, but salt is encoded in hex, so times 2
+import { Hash } from '@adonisjs/hash'
+// @ts-expect-error -- not sure why this is not working
+import { Argon } from '@adonisjs/hash/drivers/argon'
+
+// This is mostly taken from nuxt-auth-utils, but with a few changes to make it work it work with argon2 and to fix a few shortcomings
+let _hash: Hash | null = null
+function getHash() {
+  if (!_hash) {
+    _hash = new Hash(new Argon())
+  }
+  return _hash
+}
+export async function hashPassword(password: string) {
+  return await getHash().make(password)
+}
+export async function verifyPassword(
+  hashedPassword: string,
+  plainPassword: string,
+) {
+  return await getHash().verify(hashedPassword, plainPassword)
+}
 
 /**
  * Hash the given string.
- * We use salted hashing to prevent rainbow table attacks.
+ *
  * @param token the token to hash
- * @returns the salted hash
+ * @returns the hash
  */
-export async function hash(token: string, salt?: string): Promise<string> {
-  if (salt && salt.length !== lengthSaltString) {
-    throw new Error(
-      `Invalid salt length: ${salt.length} but needs to be ${lengthSaltString}`,
-    )
-  }
-
-  const usedSalt = salt ?? crypto.randomBytes(lengthSaltString).toString('hex')
-  return new Promise((resolve, reject) => {
-    crypto.scrypt(token, usedSalt, 64, (err, derivedKey) => {
-      if (err) reject(err)
-      resolve(`${usedSalt}${derivedKey.toString('hex')}`)
-    })
-  })
+export async function hash(token: string): Promise<string> {
+  return await hashPassword(token)
 }
 
 export function unsecureHash(token: string | object): string {
@@ -34,12 +41,5 @@ export async function verifyHash(
   token: string,
   hashedToken: string,
 ): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    const salt = hashedToken.substring(0, 2 * lengthSaltString)
-    const hashedTokenWithoutSalt = hashedToken.substring(2 * lengthSaltString)
-    crypto.scrypt(token, salt, 64, (err, derivedKey) => {
-      if (err) reject(err)
-      resolve(derivedKey.toString('hex') === hashedTokenWithoutSalt)
-    })
-  })
+  return await verifyPassword(hashedToken, token)
 }

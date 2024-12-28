@@ -9,6 +9,6 @@ pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicat
 az login
 export SUBSCRIPTION_ID=<...>
 export DATABASE_URL=<...>
-export AZURE_SESSION_SECRET=<...>
+export NUXT_SESSION_PASSWORD=<...>
 python3 .github/scripts/deploy.py --env dev -v
 ```

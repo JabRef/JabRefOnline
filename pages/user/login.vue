@@ -34,7 +34,8 @@
             :validation-status="errors.email ? 'error' : undefined"
           >
             <n-input
-              v-model:value="values.email"
+              v-model:value="email"
+              v-bind="emailAttrs"
               v-focus
             />
           </n-form-item>
@@ -45,7 +46,8 @@
             :validation-status="errors.password ? 'error' : undefined"
           >
             <n-input
-              v-model:value="values.password"
+              v-model:value="password"
+              v-bind="passwordAttrs"
               type="password"
               show-password-on="mousedown"
             />
@@ -101,17 +103,15 @@ definePageMeta({ layout: false })
 // TODO: Automatically go to home if already logged in
 // middleware: 'guest',
 
-const { handleSubmit, errors, values } = useForm({
+const { handleSubmit, errors, defineField } = useForm({
   validationSchema: toTypedSchema(LoginInputSchema),
 })
+const [email, emailAttrs] = defineField('email')
+const [password, passwordAttrs] = defineField('password')
 
 const otherError = ref('')
 
-const {
-  mutate: loginUser,
-  onDone,
-  error: graphqlError,
-} = useMutation(
+const { mutate: loginUser, error: graphqlError } = useMutation(
   gql(/* GraphQL */ `
     mutation Login($input: LoginInput!) {
       login(input: $input) {
@@ -140,23 +140,28 @@ const {
     },
   },
 )
-onDone((result) => {
-  if (result.data?.login?.__typename === 'UserReturned') {
-    void navigateTo({ name: 'dashboard' })
-  } else {
-    otherError.value =
-      result.data?.login?.__typename === 'InputValidationProblem' &&
-      result.data.login.problems[0]
-        ? result.data.login.problems[0].message
-        : 'Unknown error'
-  }
-})
 const error = computed(() => graphqlError.value ?? otherError.value)
 
 // TODO: Implement remember login
 const rememberLogin = ref(false)
 
 const onSubmit = handleSubmit(async (values) => {
-  await loginUser({ input: values })
+  // Reset errors
+  otherError.value = ''
+
+  const result = await loginUser({ input: values })
+  if (result?.data?.login?.__typename === 'UserReturned') {
+    // Update user info
+    const { fetch } = useUserSession()
+    await fetch()
+
+    await navigateTo({ name: 'dashboard' })
+  } else {
+    otherError.value =
+      result?.data?.login?.__typename === 'InputValidationProblem' &&
+      result.data.login.problems[0]
+        ? result.data.login.problems[0].message
+        : 'Unknown error'
+  }
 })
 </script>

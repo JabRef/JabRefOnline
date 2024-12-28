@@ -15,7 +15,7 @@ const Template: StoryFn = (args) => ({
   setup() {
     return { args }
   },
-  template: '<t-checkbox v-bind="args" />',
+  template: '<t-checkbox v-bind="args" checked />',
 })
 
 export const Default = Template.bind({})

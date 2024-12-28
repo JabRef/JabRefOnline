@@ -140,6 +140,9 @@ export default defineNuxtConfig({
     // Preset for configuring SEO
     // https://nuxtseo.com/nuxt-seo
     '@nuxtjs/seo',
+    // Add authentication support
+    // https://github.com/atinux/nuxt-auth-utils
+    'nuxt-auth-utils',
   ],
 
   /*
@@ -225,6 +228,10 @@ export default defineNuxtConfig({
     // Workaround for https://github.com/browserify/node-util/pull/62
     define: {
       'process.env': {},
+    },
+    optimizeDeps: {
+      // Workaround for https://github.com/nuxt/nuxt/issues/27544
+      exclude: ['vee-validate'],
     },
     server: {
       // Configure vite for HMR with Gitpod

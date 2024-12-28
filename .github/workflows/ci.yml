@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
@@ -25,7 +25,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: 20
           cache: 'pnpm'
@@ -54,7 +54,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:0cf02e45421b780449f0bab6b4af7e5ab2c37d3ca729e284fcec1a18f3fa9354
+        image: postgres@sha256:79c927b43c8bf2fc1e78b7f4badb394237ee0001032324ef015da562e57a5dcd
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -68,7 +68,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:79676a8f74e4aed85b6d6a2f4e4e3e55d8a229baa7168362e592bbfdc67b0c9b
+        image: redis@sha256:05f99264e2928ad472f2751b3a8d1f65c9c2cc1819be04548b2261c08e2e026b
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -82,10 +82,11 @@ jobs:
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
       GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+      NUXT_SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
 
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
@@ -93,7 +94,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: ${{ matrix.node }}
           cache: 'pnpm'
@@ -125,7 +126,7 @@ jobs:
 
       - name: Publish and test Storybook
         if: always()
-        uses: chromaui/action@fdbe7756d4dbf493e2fbb822df73be7accd07e1c # v11
+        uses: chromaui/action@64a9c0ca3bfb724389b0d536e544f56b7b5ff5b3 # v11
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -134,6 +135,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

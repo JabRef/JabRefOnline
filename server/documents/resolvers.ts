@@ -103,7 +103,7 @@ function convertDocumentInput(
     electronicId: 'electronicId' in document ? document.electronicId : null,
     originalLanguages:
       'translated' in document
-        ? document.translated?.originalLanguages ?? []
+        ? (document.translated?.originalLanguages ?? [])
         : [],
     translators:
       'translated' in document

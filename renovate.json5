@@ -2,11 +2,14 @@
   extends: [
     'config:best-practices',
     ':semanticCommitTypeAll(chore)',
-    'schedule:monthly',
     // Update lock files: https://docs.renovatebot.com/presets-default/#maintainlockfilesmonthly
     ':maintainLockFilesMonthly',
     // Automerge all updates once they pass tests: https://docs.renovatebot.com/presets-default/#automergeall
     ':automergeAll',
+  ],
+  schedule: [
+    // Monthly, but give a 3-day window (due to throttling not all PRs may be created on the same day): https://docs.renovatebot.com/configuration-options/#schedule
+    'on the 2nd through 5th day of the month',
   ],
   // Always squash PRs: https://docs.renovatebot.com/configuration-options/#automergestrategy
   automergeStrategy: 'squash',
@@ -14,12 +17,12 @@
   rangeStrategy: 'pin',
   packageRules: [
     { matchPackageNames: ['*'], matchManagers: ['npm'] },
-    { matchPackageNames: ['@types/**'], groupName: 'types' },
+    { matchPackageNames: ['@types{/,}**'], groupName: 'types' },
     {
       matchPackageNames: [
         'graphql',
-        '@apollo/**',
-        '@graphql-tools/**',
+        '@apollo{/,}**',
+        '@graphql-tools{/,}**',
         '@as-integrations/h3',
         'graphql-**',
         '@graphql-**',
@@ -27,8 +30,10 @@
       groupName: 'graphql',
     },
     {
-      matchPackageNames: ['@typescript-eslint/**', 'eslint', 'eslint-**'],
+      matchPackageNames: ['@typescript-eslint{/,}**', 'eslint', 'eslint-**'],
       groupName: 'eslint',
+      // Disable eslint updates for now (maybe forever if we migrate to oxlint in time)
+      enabled: false,
     },
     {
       matchPackageNames: ['prettier', 'prettier-*'],
@@ -39,8 +44,8 @@
         'nuxt',
         'vite',
         'nuxt-**',
-        '@nuxt/**',
-        '@nuxtjs/**',
+        '@nuxt{/,}**',
+        '@nuxtjs{/,}**',
         'pinia',
         '@pinia/nuxt',
         '@bg-dev/nuxt-naiveui',
@@ -50,34 +55,42 @@
         '@vee-validate/zod',
         'zod',
         'ufo',
+        'unstorage',
       ],
       groupName: 'nuxt',
     },
     {
       matchPackageNames: [
         'vue',
-        '@vue/**',
+        '@vue{/,}**',
         'vue-**',
         'unplugin-vue-components',
-        '@vueuse/core',
+        '@vueuse{/,}**',
         '@he-tree/vue',
-        '@tailwindcss/forms',
-        '@tailwindcss/typography',
+        '@tailwindcss{/,}**',
         'tailwindcss',
         '@yaireo/tagify',
       ],
       groupName: 'vue',
     },
-    { matchPackageNames: ['prisma', '@prisma/**'], groupName: 'prisma' },
-    { matchPackageNames: ['@azure/**'], groupName: 'azure' },
-    { matchPackageNames: ['lucia', '@lucia-auth/**'], groupName: 'lucia' },
+    { matchPackageNames: ['prisma', '@prisma{/,}**'], groupName: 'prisma' },
+    { matchPackageNames: ['@azure{/,}**'], groupName: 'azure' },
     {
-      matchPackageNames: ['@vitest**', 'vitest', 'vitest-**'],
+      matchPackageNames: ['@vitest{/,}**', 'vitest', 'vitest-**'],
       groupName: 'vitest',
     },
     {
-      matchPackageNames: ['storybook', '@storybook/**', 'chromatic'],
+      matchPackageNames: [
+        'storybook',
+        '@storybook{/,}**',
+        'storybook-**',
+        'chromatic',
+      ],
       groupName: 'storybook',
+    },
+    {
+      matchPackageNames: ['concurrently', 'cross-env', 'npm-run-all', 'pnpm'],
+      groupName: 'tools',
     },
     {
       matchManagers: ['docker-compose', 'dockerfile'],

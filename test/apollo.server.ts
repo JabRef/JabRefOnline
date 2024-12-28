@@ -34,6 +34,9 @@ export async function createAuthenticatedClient(): Promise<ApolloClient> {
     executeOperation: async (operation) => {
       return await server.executeOperation(operation, {
         contextValue: {
+          getOrInitSession: () => {
+            throw new Error('Not implemented')
+          },
           getUser: () => Promise.resolve(user),
           setSession: () => {
             throw new Error('Not implemented')
