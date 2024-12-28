@@ -2,7 +2,6 @@
 import { NButton } from 'naive-ui'
 </script>
 <template>
-  <!-- @vue-expect-error: wrong ts of vue-stories -->
   <Stories
     title="n-button"
     :component="NButton"
