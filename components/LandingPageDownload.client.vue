@@ -13,7 +13,7 @@
           <span v-if="isWindows()">
             <n-flex justify="center">
               <DownloadButton text=".msi" href="/download/win_msi" />
-              <DownloadButton text=".zip" href="/download/win_zip" />
+              <DownloadButton text="Windows Portable" href="/download/win_zip" />
             </n-flex>
           </span>
 
@@ -21,7 +21,7 @@
             <n-flex justify="center">
               <DownloadButton text=".deb" href="/download/linux_deb" />
               <DownloadButton text=".rpm" href="/download/linux_rpm" />
-              <DownloadButton text=".tar.gz" href="/download/linux_tar_gz" />
+              <DownloadButton text="Linux Portable" href="/download/linux_tar_gz" />
             </n-flex>
           </span>
           <span v-if="isMac()">
