@@ -97,7 +97,6 @@
 </template>
 
 <script setup lang="ts">
-import { constructDownloadUrl } from '~/composables/downloads'
 definePageMeta({ layout: false })
 
 const links = [
