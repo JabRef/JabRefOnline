@@ -41,7 +41,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
               >mac OS X and Linux</t-nuxtlink
             >
             <br />
@@ -52,7 +52,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
               >Windows and Linux</t-nuxtlink
             >
             <br />
@@ -63,7 +63,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
             >
               mac OS X and Windows
             </t-nuxtlink>
