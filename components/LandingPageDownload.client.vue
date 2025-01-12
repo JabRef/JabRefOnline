@@ -12,24 +12,51 @@
         <div class="text-center">
           <span v-if="isWindows()">
             <n-flex justify="center">
-              <DownloadButton text=".msi" href="/download/win_msi" />
-              <DownloadButton text="Windows Portable" href="/download/win_zip" />
+              <DownloadButton
+                text=".msi"
+                href="/download/win_msi"
+              />
+              <DownloadButton
+                text="Windows Portable"
+                href="/download/win_zip"
+              />
             </n-flex>
           </span>
 
           <span v-if="isLinux()">
             <n-flex justify="center">
-              <DownloadButton text=".deb" href="/download/linux_deb" />
-              <DownloadButton text=".rpm" href="/download/linux_rpm" />
-              <DownloadButton text="Linux Portable" href="/download/linux_tar_gz" />
+              <DownloadButton
+                text=".deb"
+                href="/download/linux_deb"
+              />
+              <DownloadButton
+                text=".rpm"
+                href="/download/linux_rpm"
+              />
+              <DownloadButton
+                text="Linux Portable"
+                href="/download/linux_tar_gz"
+              />
             </n-flex>
           </span>
           <span v-if="isMac()">
             <n-flex justify="center">
-              <DownloadButton text="arm64 .dmg" href="/download/mac_arm64_dmg" />
-              <DownloadButton text="arm64 .dmg" href="/download/mac_arm64_pkg" />
-              <DownloadButton text="x86_64 .dmg" href="/download/mac_x86_64_dmg" />
-              <DownloadButton text="x86_64 .pkg" href="/download/mac_x86_64_pkg" />
+              <DownloadButton
+                text="arm64 .dmg"
+                href="/download/mac_arm64_dmg"
+              />
+              <DownloadButton
+                text="arm64 .dmg"
+                href="/download/mac_arm64_pkg"
+              />
+              <DownloadButton
+                text="x86_64 .dmg"
+                href="/download/mac_x86_64_dmg"
+              />
+              <DownloadButton
+                text="x86_64 .pkg"
+                href="/download/mac_x86_64_pkg"
+              />
             </n-flex>
           </span>
         </div>
