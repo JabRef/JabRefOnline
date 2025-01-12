@@ -77,7 +77,7 @@
                 <ClientOnly>
                   <a
                     class="text-2xl"
-                    href='/#download'
+                    href="/#download"
                     >Download JabRef</a
                   >
                 </ClientOnly>
