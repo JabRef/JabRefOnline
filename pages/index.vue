@@ -77,7 +77,7 @@
                 <ClientOnly>
                   <a
                     class="text-2xl"
-                    :href="constructDownloadUrl()"
+                    href="/#download"
                     >Download JabRef</a
                   >
                 </ClientOnly>
@@ -97,7 +97,6 @@
 </template>
 
 <script setup lang="ts">
-import { constructDownloadUrl } from '~/composables/downloads'
 definePageMeta({ layout: false })
 
 const links = [

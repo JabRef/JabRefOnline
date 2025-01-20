@@ -10,17 +10,55 @@
           JabRef is free and works across all your devices.
         </h3>
         <div class="text-center">
-          <n-button
-            type="primary"
-            size="large"
-            style="height: 3.2em"
-          >
-            <a
-              class="text-2xl"
-              :href="downloadUrl"
-              >Download JabRef</a
-            >
-          </n-button>
+          <span v-if="isWindows()">
+            <n-flex justify="center">
+              <DownloadButton
+                text=".msi"
+                href="/download/win_msi"
+              />
+              <DownloadButton
+                text="Windows Portable"
+                href="/download/win_zip"
+              />
+            </n-flex>
+          </span>
+
+          <span v-if="isLinux()">
+            <n-flex justify="center">
+              <DownloadButton
+                text=".deb"
+                href="/download/linux_deb"
+              />
+              <DownloadButton
+                text=".rpm"
+                href="/download/linux_rpm"
+              />
+              <DownloadButton
+                text="Linux Portable"
+                href="/download/linux_tar_gz"
+              />
+            </n-flex>
+          </span>
+          <span v-if="isMac()">
+            <n-flex justify="center">
+              <DownloadButton
+                text="arm64 .dmg"
+                href="/download/mac_arm64_dmg"
+              />
+              <DownloadButton
+                text="arm64 .dmg"
+                href="/download/mac_arm64_pkg"
+              />
+              <DownloadButton
+                text="x86_64 .dmg"
+                href="/download/mac_x86_64_dmg"
+              />
+              <DownloadButton
+                text="x86_64 .pkg"
+                href="/download/mac_x86_64_pkg"
+              />
+            </n-flex>
+          </span>
         </div>
 
         <div class="text-center pt-8 text-sm">
@@ -30,7 +68,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
               >mac OS X and Linux</t-nuxtlink
             >
             <br />
@@ -41,7 +79,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
               >Windows and Linux</t-nuxtlink
             >
             <br />
@@ -52,7 +90,7 @@
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
             >
               mac OS X and Windows
             </t-nuxtlink>
@@ -77,6 +115,4 @@
 </template>
 <script setup lang="ts">
 import { isLinux, isMac, isWindows } from '~/composables/detectOs'
-
-const downloadUrl = constructDownloadUrl()
 </script>
