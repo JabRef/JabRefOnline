@@ -68,8 +68,8 @@ importers:
         specifier: 4.0.0-beta.6
         version: 4.0.0-beta.6(patch_hash=edbad00d9e143d8a1baa7afde4d48b9b4cde195c74e05f96ac38393dda99d793)
       '@vueuse/core':
-        specifier: 11.3.0
-        version: 11.3.0(vue@3.5.13(typescript@5.7.2))
+        specifier: 12.5.0
+        version: 12.5.0(typescript@5.7.2)
       '@yaireo/tagify':
         specifier: 4.33.2
         version: 4.33.2(prop-types@15.8.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -211,13 +211,13 @@ importers:
         version: 7.6.20(typescript@5.7.2)(vite@5.4.11(@types/node@22.13.1)(terser@5.37.0))(vue@3.5.13(typescript@5.7.2))
       '@tailwindcss/forms':
         specifier: 0.5.10
-        version: 0.5.10(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2)))
+        version: 0.5.10(tailwindcss@4.0.6)
       '@tailwindcss/line-clamp':
         specifier: 0.4.4
-        version: 0.4.4(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2)))
+        version: 0.4.4(tailwindcss@4.0.6)
       '@tailwindcss/typography':
         specifier: 0.5.16
-        version: 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2)))
+        version: 0.5.16(tailwindcss@4.0.6)
       '@types/bcryptjs':
         specifier: 2.4.6
         version: 2.4.6
@@ -345,14 +345,14 @@ importers:
         specifier: 0.6.2
         version: 0.6.2(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(@nuxt/schema@3.15.4)(esbuild@0.18.20)(rollup@4.32.1)(typescript@5.7.2)(vite@5.4.11(@types/node@22.13.1)(terser@5.37.0))(vue-tsc@2.2.0(typescript@5.7.2))(vue@3.5.13(typescript@5.7.2))(webpack@5.97.1(esbuild@0.18.20))
       tailwindcss:
-        specifier: 3.4.17
-        version: 3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2))
+        specifier: 4.0.6
+        version: 4.0.6
       ufo:
         specifier: 1.5.4
         version: 1.5.4
       unplugin-vue-components:
-        specifier: 0.28.0
-        version: 0.28.0(@babel/parser@7.26.7)(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(rollup@4.32.1)(vue@3.5.13(typescript@5.7.2))
+        specifier: 28.0.0
+        version: 28.0.0(@babel/parser@7.26.7)(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(rollup@4.32.1)(vue@3.5.13(typescript@5.7.2))
       vite:
         specifier: 5.4.11
         version: 5.4.11(@types/node@22.13.1)(terser@5.37.0)
@@ -9264,6 +9264,9 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
+  tailwindcss@4.0.6:
+    resolution: {integrity: sha512-mysewHYJKaXgNOW6pp5xon/emCsfAMnO8WMaGKZZ35fomnR/T5gYnRg2/yRTTrtXiEl1tiVkeRt0eMO6HxEZqw==}
+
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
@@ -9703,8 +9706,8 @@ packages:
     resolution: {integrity: sha512-Fhrj4mOAnQYy/bfcDbTNcTSJuBDo+Ayl/cud1sfh3RoNYQtOn0zBBUD081L1xm1SkGniB+3kcp/PN4PbQxzWxw==}
     engines: {node: '>=18.12.0'}
 
-  unplugin-vue-components@0.28.0:
-    resolution: {integrity: sha512-jiTGtJ3JsRFBjgvyilfrX7yUoGKScFgbdNw+6p6kEXU+Spf/rhxzgvdfuMcvhCcLmflB/dY3pGQshYBVGOUx7Q==}
+  unplugin-vue-components@28.0.0:
+    resolution: {integrity: sha512-vYe0wSyqTVhyNFIad1iiGyQGhG++tDOMgohqenMDOAooMJP9vvzCdXTqCVx20A0rCQXFNjgoRbSeDAioLPH36Q==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -14728,22 +14731,22 @@ snapshots:
       - encoding
       - supports-color
 
-  '@tailwindcss/forms@0.5.10(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2)))':
+  '@tailwindcss/forms@0.5.10(tailwindcss@4.0.6)':
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2))
+      tailwindcss: 4.0.6
 
-  '@tailwindcss/line-clamp@0.4.4(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2)))':
+  '@tailwindcss/line-clamp@0.4.4(tailwindcss@4.0.6)':
     dependencies:
-      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2))
+      tailwindcss: 4.0.6
 
-  '@tailwindcss/typography@0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2)))':
+  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.6)':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.2))
+      tailwindcss: 4.0.6
 
   '@trysound/sax@0.2.0': {}
 
@@ -22253,6 +22256,8 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
+  tailwindcss@4.0.6: {}
+
   tapable@2.2.1: {}
 
   tar-fs@2.1.2:
@@ -22723,7 +22728,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  unplugin-vue-components@0.28.0(@babel/parser@7.26.7)(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(rollup@4.32.1)(vue@3.5.13(typescript@5.7.2)):
+  unplugin-vue-components@28.0.0(@babel/parser@7.26.7)(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(rollup@4.32.1)(vue@3.5.13(typescript@5.7.2)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.4(rollup@4.32.1)
