@@ -54,7 +54,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:3267c505060a0052e5aa6e5175a7b41ab6b04da2f8c4540fc6e98a37210aa2d3
+        image: postgres@sha256:81f32a88ec561664634637dd446487efd5f9d90996304b96210078e90e5c8b21
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -68,7 +68,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:93a8d83b707d0d6a1b9186edecca2e37f83722ae0e398aee4eea0ff17c2fad0e
+        image: redis@sha256:6aafb7f25fc93c4ff74e99cff8e85899f03901bc96e61ba12cd3c39e95503c73
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -129,7 +129,7 @@ jobs:
           cp -r .output/public/_nuxt storybook-static
 
       - name: Publish and test Storybook
-        uses: chromaui/action@1fc59b137c52d2f7571c8cf0b40daad2794fd551 # v11
+        uses: chromaui/action@c93e0bc3a63aa176e14a75b61a31847cbfdd341c # v11
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -138,6 +138,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@13ce06bfc6bbe3ecf90edbbf1bc32fe5978ca1d3 # v5.3.1
+        uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574 # v5.4.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
