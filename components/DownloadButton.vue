@@ -5,7 +5,7 @@
     style="height: 3.2em"
   >
     <template #icon>
-      <n-icon>
+      <n-icon v-if="showIcon">
         <Icon name="material-symbols:download" />
       </n-icon>
     </template>
@@ -25,6 +25,10 @@ defineProps({
   href: {
     type: String,
     default: '',
+  },
+  showIcon: {
+    type: Boolean,
+    default: true,
   },
 })
 </script>
