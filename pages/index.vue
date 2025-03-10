@@ -117,6 +117,8 @@
 </template>
 
 <script setup lang="ts">
+import { isLinux, isMac, isWindows } from '~/composables/detectOs'
+
 definePageMeta({ layout: false })
 
 const links = [
