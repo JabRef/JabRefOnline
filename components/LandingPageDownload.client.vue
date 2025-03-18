@@ -13,12 +13,9 @@
           <span v-if="isWindows()">
             <n-flex justify="center">
               <DownloadButton
-                text=".msi"
+                text="Download for Windows"
                 href="/download/win_msi"
-              />
-              <DownloadButton
-                text="Windows Portable"
-                href="/download/win_zip"
+                :showIcon="false"
               />
             </n-flex>
           </span>
@@ -26,44 +23,35 @@
           <span v-if="isLinux()">
             <n-flex justify="center">
               <DownloadButton
-                text=".deb"
+                text=".deb (Ubuntu, Debian)"
                 href="/download/linux_deb"
               />
               <DownloadButton
-                text=".rpm"
+                text=".rpm (Fedora, RedHat)"
                 href="/download/linux_rpm"
-              />
-              <DownloadButton
-                text="Linux Portable"
-                href="/download/linux_tar_gz"
               />
             </n-flex>
           </span>
           <span v-if="isMac()">
             <n-flex justify="center">
               <DownloadButton
-                text="arm64 .dmg"
-                href="/download/mac_arm64_dmg"
-              />
-              <DownloadButton
-                text="arm64 .dmg"
+                text="Apple Silicon (Arm)"
                 href="/download/mac_arm64_pkg"
               />
               <DownloadButton
-                text="x86_64 .dmg"
-                href="/download/mac_x86_64_dmg"
-              />
-              <DownloadButton
-                text="x86_64 .pkg"
+                text="macOS Intel (x64)"
                 href="/download/mac_x86_64_pkg"
               />
             </n-flex>
           </span>
         </div>
-
         <div class="text-center pt-8 text-sm">
           <span v-if="isWindows()">
-            For Windows
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/win_zip"
+              >Windows Portable</t-nuxtlink
+            >
             <br />
             Also available for
             <t-nuxtlink
@@ -74,7 +62,23 @@
             <br />
           </span>
           <span v-if="isMac()">
-            For mac OS X
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/mac_arm64_dmg"
+              >Apple Silicon Portable (.dmg)</t-nuxtlink
+            >
+            or
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/mac_x86_64_dmg"
+              >macOS Intel Portable (.dmg)</t-nuxtlink
+            >
+            <br />
+            <div class="text-xs text-wrap max-w-sm mx-auto pt-2">
+              Unsure about your Mac type? Click the Apple icon, select "About
+              This Mac". If it shows "Chip", you have Apple Silicon. Otherwise,
+              it's Intel.
+            </div>
             <br />
             Also available for
             <t-nuxtlink
@@ -85,7 +89,11 @@
             <br />
           </span>
           <span v-if="isLinux()">
-            For Linux
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/linux_tar_gz"
+              >Linux Portable</t-nuxtlink
+            >
             <br />
             Also available for
             <t-nuxtlink
