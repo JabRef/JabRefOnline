@@ -90,7 +90,7 @@
                   <a
                     v-if="isMac()"
                     class="text-2xl"
-                    href="/download/mac_arm64_dmg"
+                    href="/download/mac_arm64_pkg"
                     >Download for macOS (Apple Silicon)</a
                   >
                 </ClientOnly>

@@ -35,19 +35,11 @@
           <span v-if="isMac()">
             <n-flex justify="center">
               <DownloadButton
-                text="Apple Silicon (Arm) .dmg"
-                href="/download/mac_arm64_dmg"
-              />
-              <DownloadButton
-                text="Apple Silicon (Arm) .pkg"
+                text="Apple Silicon (Arm)"
                 href="/download/mac_arm64_pkg"
               />
               <DownloadButton
-                text="macOS Intel (x64) .dmg"
-                href="/download/mac_x86_64_dmg"
-              />
-              <DownloadButton
-                text="macOS Intel (x64) .pkg"
+                text="macOS Intel (x64)"
                 href="/download/mac_x86_64_pkg"
               />
             </n-flex>
@@ -70,9 +62,23 @@
             <br />
           </span>
           <span v-if="isMac()">
-            Unsure about your Mac type? Click the Apple icon, select "About This
-            Mac". If it shows "Chip", you have Apple Silicon. Otherwise, it's
-            Intel.
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/mac_arm64_dmg"
+              >Apple Silicon Portable (.dmg)</t-nuxtlink
+            >
+            or
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/mac_x86_64_dmg"
+              >macOS Intel Portable (.dmg)</t-nuxtlink
+            >
+            <br />
+            <div class="text-xs text-wrap max-w-sm mx-auto pt-2">
+              Unsure about your Mac type? Click the Apple icon, select "About
+              This Mac". If it shows "Chip", you have Apple Silicon. Otherwise,
+              it's Intel.
+            </div>
             <br />
             Also available for
             <t-nuxtlink
