@@ -17,11 +17,13 @@ from azure.mgmt.web.models import (
 )
 
 
-def main(environment_name: str, verbose: bool = False):
+def main(environment_name: str, verbose: bool = False, secret: bool = False):
     logger = logging.getLogger("script")
     logger.addHandler(logging.StreamHandler(stream=os.sys.stdout))
     if verbose:
         logger.setLevel(level=logging.DEBUG)
+    elif secret:
+        logger.setLevel(level=5)
     else:
         logger.setLevel(level=logging.INFO)
 
@@ -75,24 +77,72 @@ def main(environment_name: str, verbose: bool = False):
         resource_group_name=GROUP_NAME, account_name=STORAGE_ACCOUNT
     )
     storage_connection_string = f"DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName={STORAGE_ACCOUNT};AccountKey={storage_keys.keys[0].value}"
-    logger.debug(f"Storage connection string: {storage_connection_string}")
+    logger.log(5, f"Storage connection string: {storage_connection_string}")
 
     # Azure CLI equivalent:  az communication list-key
     email_connection_string = email_client.communication_services.list_keys(
         resource_group_name=GROUP_NAME, communication_service_name="JabRefCommunication"
     ).primary_connection_string
-    logger.debug(f"Email connection string: {email_connection_string}")
+    logger.log(5, f"Email connection string: {email_connection_string}")
 
     appinsights = appinsights_client.components.get(GROUP_NAME, APP_INSIGHTS_NAME)
-    logger.debug(
-        f"Application insights instrumentation key: {appinsights.instrumentation_key}"
-    )
+    logger.log(5, f"Application insights instrumentation key: {appinsights.instrumentation_key}")
     redis = redis_client.redis.get(resource_group_name=GROUP_NAME, name=REDIS_NAME)
-    logger.debug(f"Redis client: {redis}")
+    logger.log(5, f"Redis client: {redis}")
     redis_keys = redis_client.redis.list_keys(
         resource_group_name=GROUP_NAME, name=REDIS_NAME
     )
-    logger.debug(f"Redis keys: {redis_keys}")
+    logger.log(5, f"Redis keys: {redis_keys}")
+
+    # We can even link to a certain slot in an function app
+    # however, we are currently limited to 2 slots per app, so this doesn't make much sense for PRs
+    # https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#service-limits
+    # but maybe for production + staging with swapping this might be handy in the future
+    # poller_function_app_slot = web_client.web_apps.begin_create_or_update_slot(
+    #     resource_group_name=GROUP_NAME,
+    #     name=function_app_name,
+    #     site_envelope=Site(
+    #         server_farm_id=function_app.server_farm_id,
+    #         location=function_app.location,
+    #     ),
+    #     slot="test",
+    # )
+    # function_app_slot = poller_function_app_slot.result()
+    # print("Created function app slot:\n{}".format(function_app_slot))
+
+    # Detach and delete already attached function apps
+    linked_function_apps = (
+        web_client.static_sites.get_user_provided_function_apps_for_static_site_build(
+            resource_group_name=GROUP_NAME,
+            name=STATIC_SITE,
+            environment_name=environment_name,
+        )
+    )
+    for app in linked_function_apps:
+        logger.info(f"Detaching and deleting function app {app.name}")
+        logger.debug(f"{app}")
+        try:
+            web_client.static_sites.detach_user_provided_function_app_from_static_site_build(
+                resource_group_name=GROUP_NAME,
+                name=STATIC_SITE,
+                environment_name=environment_name,
+                function_app_name=app.name,
+            )
+        except Exception as e:
+            logger.error(f"Failed to detach function app {app.name}: {e}")
+
+        # Delete function app if it exists
+        # This is actually not necessary (and perhaps desired), since we can just update the function app (see below)
+        # however, when doing this, we sometimes got function apps that were stuck in "deleting" state
+        # so deleting the function app is a workaround for that azure bug
+        try:
+            web_client.web_apps.delete(
+                resource_group_name=GROUP_NAME,
+                name=app.name,
+            )
+            logger.info(f"Deleted function app: {app.name}")
+        except Exception as e:
+            logger.error(f"Failed to delete function app {app.name}: {e}")
 
     poller_function_app = web_client.web_apps.begin_create_or_update(
         resource_group_name=GROUP_NAME,
@@ -151,43 +201,6 @@ def main(environment_name: str, verbose: bool = False):
     logger.info(f"Created function app: {function_app.name}")
     logger.debug(f"{function_app}")
 
-    # We can even link to a certain slot in an function app
-    # however, we are currently limited to 2 slots per app, so this doesn't make much sense for PRs
-    # https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#service-limits
-    # but maybe for production + staging with swapping this might be handy in the future
-    # poller_function_app_slot = web_client.web_apps.begin_create_or_update_slot(
-    #     resource_group_name=GROUP_NAME,
-    #     name=function_app_name,
-    #     site_envelope=Site(
-    #         server_farm_id=function_app.server_farm_id,
-    #         location=function_app.location,
-    #     ),
-    #     slot="test",
-    # )
-    # function_app_slot = poller_function_app_slot.result()
-    # print("Created function app slot:\n{}".format(function_app_slot))
-
-    # Detach already attached function apps
-    linked_function_apps = (
-        web_client.static_sites.get_user_provided_function_apps_for_static_site_build(
-            resource_group_name=GROUP_NAME,
-            name=STATIC_SITE,
-            environment_name=environment_name,
-        )
-    )
-    for app in linked_function_apps:
-        logger.info(f"Detaching function app {app.name}")
-        logger.debug(f"{app}")
-        try:
-            web_client.static_sites.detach_user_provided_function_app_from_static_site_build(
-                resource_group_name=GROUP_NAME,
-                name=STATIC_SITE,
-                environment_name=environment_name,
-                function_app_name=app.name,
-            )
-        except Exception as e:
-            logger.error(f"Failed to detach function app {app.name}: {e}")
-
     # Attach new function app
     poller_link = web_client.static_sites.begin_register_user_provided_function_app_with_static_site_build(
         resource_group_name=GROUP_NAME,
@@ -218,6 +231,14 @@ if __name__ == "__main__":
         "-v",
         "--verbose",
         help="increase output verbosity",
+        dest="verbose",
+        action="store_true",
+    )
+    # add secret flag
+    parser.add_argument(
+        "--secret",
+        help="also show sensitive information (e.g. connection strings)",
+        dest="secret",
         action="store_true",
     )
     args = parser.parse_args()
