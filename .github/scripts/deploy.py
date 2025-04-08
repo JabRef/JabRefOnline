@@ -17,11 +17,13 @@ from azure.mgmt.web.models import (
 )
 
 
-def main(environment_name: str, verbose: bool = False):
+def main(environment_name: str, verbose: bool = False, secret: bool = False):
     logger = logging.getLogger("script")
     logger.addHandler(logging.StreamHandler(stream=os.sys.stdout))
     if verbose:
         logger.setLevel(level=logging.DEBUG)
+    elif secret:
+        logger.setLevel(level=5)
     else:
         logger.setLevel(level=logging.INFO)
 
@@ -75,24 +77,22 @@ def main(environment_name: str, verbose: bool = False):
         resource_group_name=GROUP_NAME, account_name=STORAGE_ACCOUNT
     )
     storage_connection_string = f"DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName={STORAGE_ACCOUNT};AccountKey={storage_keys.keys[0].value}"
-    logger.debug(f"Storage connection string: {storage_connection_string}")
+    logger.log(5, f"Storage connection string: {storage_connection_string}")
 
     # Azure CLI equivalent:  az communication list-key
     email_connection_string = email_client.communication_services.list_keys(
         resource_group_name=GROUP_NAME, communication_service_name="JabRefCommunication"
     ).primary_connection_string
-    logger.debug(f"Email connection string: {email_connection_string}")
+    logger.log(5, f"Email connection string: {email_connection_string}")
 
     appinsights = appinsights_client.components.get(GROUP_NAME, APP_INSIGHTS_NAME)
-    logger.debug(
-        f"Application insights instrumentation key: {appinsights.instrumentation_key}"
-    )
+    logger.log(5, f"Application insights instrumentation key: {appinsights.instrumentation_key}")
     redis = redis_client.redis.get(resource_group_name=GROUP_NAME, name=REDIS_NAME)
-    logger.debug(f"Redis client: {redis}")
+    logger.log(5, f"Redis client: {redis}")
     redis_keys = redis_client.redis.list_keys(
         resource_group_name=GROUP_NAME, name=REDIS_NAME
     )
-    logger.debug(f"Redis keys: {redis_keys}")
+    logger.log(5, f"Redis keys: {redis_keys}")
 
     # We can even link to a certain slot in an function app
     # however, we are currently limited to 2 slots per app, so this doesn't make much sense for PRs
@@ -231,6 +231,14 @@ if __name__ == "__main__":
         "-v",
         "--verbose",
         help="increase output verbosity",
+        dest="verbose",
+        action="store_true",
+    )
+    # add secret flag
+    parser.add_argument(
+        "--secret",
+        help="also show sensitive information (e.g. connection strings)",
+        dest="secret",
         action="store_true",
     )
     args = parser.parse_args()
