@@ -21,7 +21,7 @@ export default defineComponent({
       default: 'input',
     },
     settings: {
-      type: Object as PropType<Tagify.TagifyConstructorSettings>,
+      type: Object as PropType<Tagify.TagifySettings>,
       default: () => ({}),
     },
     value: {
@@ -55,7 +55,7 @@ export default defineComponent({
   },
   mounted() {
     // Install tagify
-    const tagifySettings: Tagify.TagifyConstructorSettings = {
+    const tagifySettings: Tagify.TagifySettings = {
       delimiters: this.delimiters,
       whitelist: this.whitelist,
       ...this.settings,

@@ -1,14 +1,14 @@
 <template>
   <!-- Based on https://github.com/storybookjs/storybook/blob/next/code/lib/builder-vite/input/iframe.html -->
   <div>
-    <div id="storybook-root"></div>
-    <div id="storybook-docs"></div>
+    <div id="storybook-root" />
+    <div id="storybook-docs" />
     <div class="sb-errordisplay sb-wrapper">
       <div
         id="error-message"
         class="sb-heading"
-      ></div>
-      <pre class="sb-errordisplay_code"><code id="error-stack"></code></pre>
+      />
+      <pre class="sb-errordisplay_code"><code id="error-stack"/></pre>
     </div>
   </div>
 </template>
@@ -61,11 +61,11 @@ definePageMeta({ layout: false, alias: '/iframe.html' })
 
 export default defineComponent({
   setup: () => {
-    if (!process.client) return
+    if (!import.meta.client) return
     // @ts-expect-error: storybook typing is inconsistent
     const api = start(renderToCanvas, { applyDecorators })
     const framework = 'vue3'
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-deprecated
     api.configure(
       framework,
       () => [

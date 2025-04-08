@@ -20,6 +20,7 @@ declare module '#auth-utils' {
    * Private information about the current session, only accessible on the server
    * (exposed in an encrypted form to the client)
    */
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface SecureSessionData {}
 
   /**

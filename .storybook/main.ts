@@ -73,14 +73,14 @@ async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
     // TODO: Need better handling if Nuxt is already running
     // we don't really want to build nuxt again,
     // or at least shutdown the second build after vite:extendConfig is called
-    buildNuxt(nuxt).catch((err) => {
+    buildNuxt(nuxt).catch((err: Error) => {
       if (!err.toString().includes('_stop_')) {
         reject(err)
       }
     })
-  }).finally(() => {
+  }).finally(async () => {
     if (!nuxtAlreadyRunnnig) {
-      nuxt.close()
+      await nuxt.close()
     }
   })
 

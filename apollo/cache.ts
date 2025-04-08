@@ -1,4 +1,5 @@
-import { ApolloCache, InMemoryCache } from '@apollo/client/core'
+import type { ApolloCache } from '@apollo/client/core'
+import { InMemoryCache } from '@apollo/client/core'
 import { relayStylePagination } from '@apollo/client/utilities/policies/pagination'
 import introspection from '~/apollo/introspection'
 import { gql } from '.'
