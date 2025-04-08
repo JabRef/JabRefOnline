@@ -178,12 +178,15 @@ def main(environment_name: str, verbose: bool = False):
     for app in linked_function_apps:
         logger.info(f"Detaching function app {app.name}")
         logger.debug(f"{app}")
-        web_client.static_sites.detach_user_provided_function_app_from_static_site_build(
-            resource_group_name=GROUP_NAME,
-            name=STATIC_SITE,
-            environment_name=environment_name,
-            function_app_name=app.name,
-        )
+        try:
+            web_client.static_sites.detach_user_provided_function_app_from_static_site_build(
+                resource_group_name=GROUP_NAME,
+                name=STATIC_SITE,
+                environment_name=environment_name,
+                function_app_name=app.name,
+            )
+        except Exception as e:
+            logger.error(f"Failed to detach function app {app.name}: {e}")
 
     # Attach new function app
     poller_link = web_client.static_sites.begin_register_user_provided_function_app_with_static_site_build(
