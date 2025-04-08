@@ -106,7 +106,7 @@ jobs:
       - name: Create & Link Function App
         run: |
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env $env:PREVIEW_NAME
+          python .github\scripts\deploy.py --env $env:PREVIEW_NAME -v
         env:
           SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
