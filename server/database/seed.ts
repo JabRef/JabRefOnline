@@ -1,4 +1,4 @@
-import { PrismaClient } from '.'
+import { GroupHierarchyType, GroupType, PrismaClient } from '.'
 
 async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.entity.deleteMany({})
