@@ -1,9 +1,6 @@
-import type { PrismaClient as PrismaClientT } from '@prisma/client'
+import { PrismaClient } from '.'
 
-import prisma from '@prisma/client'
-const { PrismaClient, GroupType, GroupHierarchyType } = prisma
-
-async function seedInternal(prisma: PrismaClientT): Promise<void> {
+async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.entity.deleteMany({})
   await prisma.user.deleteMany({})
   await prisma.userDocument.deleteMany({})

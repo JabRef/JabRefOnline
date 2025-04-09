@@ -1,9 +1,8 @@
 import type { ServerSessionData, UserSession } from '#auth-utils'
-import type { PrismaClient, User } from '@prisma/client'
-
 import type { ResolversTypes } from '#graphql/resolver'
 import { prefixStorage, type Storage } from 'unstorage'
 import { v4 as generateToken } from 'uuid'
+import type { PrismaClient, User } from '../database'
 import { hash, verifyHash } from '../utils/crypto'
 import type { EmailService } from '../utils/email.service'
 import {

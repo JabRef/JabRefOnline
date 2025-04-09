@@ -1,5 +1,5 @@
-import prisma from '@prisma/client'
 import type { Config } from '~/config'
+import { PrismaClient } from './database'
 import * as DocumentResolvers from './documents/resolvers'
 import { UserDocumentService } from './documents/user.document.service'
 import * as GroupResolvers from './groups/resolvers'
@@ -11,8 +11,6 @@ import { AuthService } from './user/auth.service'
 import * as UserResolvers from './user/resolvers'
 import { createEmailService } from './utils/email.service'
 import { createRedisClient } from './utils/services.factory'
-
-const { PrismaClient } = prisma
 
 export function configure() {
   const config = useRuntimeConfig() as Config

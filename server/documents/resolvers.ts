@@ -14,9 +14,9 @@ import type {
   Resolvers,
   UpdateUserDocumentInput,
 } from '#graphql/resolver'
-import type { DocumentType } from '@prisma/client'
 import { notEmpty } from '~/composables/util'
 import type { Context } from '../context'
+import type { DocumentType } from '../database'
 import type { ResolveType } from '../utils/extractResolveType'
 import { inject, injectable, resolve } from './../tsyringe'
 import type {
