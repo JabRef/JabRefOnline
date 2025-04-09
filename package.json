@@ -167,6 +167,11 @@
       "@vue/apollo-util": "patches/@vue__apollo-util@4.0.0-beta.6.patch",
       "nitropack": "patches/nitropack@2.9.7.patch",
       "@nuxtjs/mdc": "patches/@nuxtjs__mdc.patch"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma"
+    ]
   }
 }
