@@ -115,9 +115,7 @@ export default defineComponent({
         }
       `),
     )
-    const groups = computed(
-      () => result.value?.me?.groups ?? null,
-    ) as unknown as any[]
+    const groups = computed(() => result.value?.me?.groups ?? null)
 
     const uiStore = useUiStore()
     function onGroupClicked(group: { id: string }) {

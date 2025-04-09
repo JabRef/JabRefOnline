@@ -78,9 +78,9 @@ async function startNuxtAndGetViteConfig(rootDir = process.cwd()) {
         reject(err)
       }
     })
-  }).finally(async () => {
+  }).finally(() => {
     if (!nuxtAlreadyRunnnig) {
-      await nuxt.close()
+      nuxt.close()
     }
   })
 

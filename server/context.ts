@@ -32,7 +32,6 @@ let sessionConfig: SessionConfig | null = null
 function _useSession(event: H3Event, config: Partial<SessionConfig> = {}) {
   if (!sessionConfig) {
     const runtimeConfig = useRuntimeConfig(event)
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- false positive
     const envSessionPassword = `${runtimeConfig.nitro?.envPrefix ?? 'NUXT_'}SESSION_PASSWORD`
 
     // @ts-expect-error hard to define with defu

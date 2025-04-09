@@ -49,7 +49,6 @@ export default defineComponent({
   watch: {
     value(newVal, _oldVal) {
       // Value modified externally, update tagify
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       this.tagify?.loadOriginalValues(newVal)
     },
   },

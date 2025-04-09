@@ -2,7 +2,6 @@ export function detectOs() {
   if (!import.meta.client) {
     return null
   }
-  // eslint-disable-next-line @typescript-eslint/no-deprecated
   const platform = window.navigator.platform
   const macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K']
   const windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE']

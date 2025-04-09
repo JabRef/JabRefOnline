@@ -40,7 +40,6 @@ export function renderToCanvas(
 ): void {
   const element = storyFn()
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!element) {
     showError({
       title: `Expecting a Vue component from the story: "${name}" of "${title}".`,
@@ -65,7 +64,7 @@ export default defineComponent({
     // @ts-expect-error: storybook typing is inconsistent
     const api = start(renderToCanvas, { applyDecorators })
     const framework = 'vue3'
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-deprecated
+
     api.configure(
       framework,
       () => [

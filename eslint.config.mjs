@@ -18,6 +18,13 @@ export default withNuxt({
     },
   },
 })
+  // Activate ts rules only for ts files, otherwise they also apply to graphql -- which the parser doesn't understand
+  .override('nuxt/vue/setup', {
+    files: ['**/*.{vue,ts}'],
+  })
+  .override('nuxt/typescript/setup', {
+    files: ['**/*.{vue,ts}'],
+  })
   .prepend(
     // Activate ts rules that require type information
     // https://github.com/vuejs/eslint-config-typescript
@@ -26,10 +33,15 @@ export default withNuxt({
     defineConfigWithVueTs(
       vueTsConfigs.stylisticTypeChecked,
       vueTsConfigs.strictTypeChecked,
-    ),
+    ).map((config) => ({
+      ...config,
+      // Activate ts rules only for ts files, otherwise they also apply to graphql -- which the parser doesn't understand
+      files: ['**/*.ts'],
+    })),
   )
   .append({
     // TS-specific rules
+    files: ['**/*.ts'],
     rules: {
       // Allow any type (for now)
       '@typescript-eslint/no-explicit-any': 'warn',
@@ -52,7 +64,7 @@ export default withNuxt({
       ],
     },
   })
-  .prepend([
+  .append([
     // Enable graphql-specific rules
     // https://the-guild.dev/graphql/eslint/docs
     {
@@ -115,6 +127,20 @@ export default withNuxt({
       'no-void': ['error', { allowAsStatement: true }],
       // Disallow the use of `console`
       'no-console': 'error',
+    },
+  })
+  .append({
+    files: ['**/*.vue'],
+    rules: {
+      // Conflicts with prettier
+      'vue/html-self-closing': [
+        'error',
+        {
+          html: {
+            void: 'any',
+          },
+        },
+      ],
     },
   })
   .append({
