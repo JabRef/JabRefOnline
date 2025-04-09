@@ -54,13 +54,16 @@ export class Api {
     })
   }
 
-  private async operation(options: {
+  private async operation<
+    TData,
+    TVariables extends OperationVariables,
+  >(options: {
     query: string
-    variables?: OperationVariables
+    variables?: TVariables
     cookies?: string[]
   }): Promise<{
     errors?: GraphQLError[]
-    data?: unknown
+    data?: TData
     rawResponse: Response
   }> {
     const body = {

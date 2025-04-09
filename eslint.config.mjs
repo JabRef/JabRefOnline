@@ -77,6 +77,7 @@ export default withNuxt({
         parser: graphqlPlugin.parser,
       },
       plugins: {
+        // @ts-expect-error: graphqlPlugin is not typed correctly
         '@graphql-eslint': graphqlPlugin,
       },
     },
