@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import fs from 'fs'
 
 // Get the file path from the command line arguments

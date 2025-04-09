@@ -1,7 +1,7 @@
 import type { Journal, QueryJournalArgs, Resolvers } from '#graphql/resolver'
 import type { Context } from '../context'
 import { inject, injectable, resolve } from './../tsyringe'
-import { JournalService } from './journal.service'
+import type { JournalService } from './journal.service'
 
 @injectable()
 export class JournalResolver {

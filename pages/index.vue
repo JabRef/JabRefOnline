@@ -107,11 +107,11 @@
         </div>
       </header>
 
-      <LandingPageFeatures></LandingPageFeatures>
-      <LandingPageDownload></LandingPageDownload>
-      <LandingPageGetInvolved></LandingPageGetInvolved>
-      <LandingPageMore></LandingPageMore>
-      <LandingPageFooter></LandingPageFooter>
+      <LandingPageFeatures />
+      <LandingPageDownload />
+      <LandingPageGetInvolved />
+      <LandingPageMore />
+      <LandingPageFooter />
     </NuxtLayout>
   </div>
 </template>

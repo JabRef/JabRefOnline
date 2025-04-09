@@ -10,7 +10,7 @@
           :name="typeIcon"
           class="mr-1"
           :title="typeDescription"
-        ></Icon>
+        />
         <span>{{ document.title }}</span>
       </button>
       <!-- TOOD: Add citation display

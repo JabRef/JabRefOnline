@@ -20,7 +20,7 @@
             <hr />
             <h2 class="text-4xl mt-5 font-semibold">{{ feature.title }}</h2>
             <div class="prose text-2xl font-light">
-              <ContentRenderer :value="feature"></ContentRenderer>
+              <ContentRenderer :value="feature" />
             </div>
           </div>
           <div

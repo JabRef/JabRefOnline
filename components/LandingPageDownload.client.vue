@@ -15,7 +15,7 @@
               <DownloadButton
                 text="Download for Windows"
                 href="/download/win_msi"
-                :showIcon="false"
+                :show-icon="false"
               />
             </n-flex>
           </span>

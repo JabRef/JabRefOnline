@@ -1,5 +1,5 @@
 export function detectOs() {
-  if (!process.client) {
+  if (!import.meta.client) {
     return null
   }
   const platform = window.navigator.platform

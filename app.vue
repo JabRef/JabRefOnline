@@ -1,6 +1,6 @@
 <template>
   <NaiveConfig>
-    <NuxtPage></NuxtPage>
+    <NuxtPage />
   </NaiveConfig>
 </template>
 

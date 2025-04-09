@@ -14,21 +14,21 @@ import type {
 import type { User } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
 import type { Context } from '../context'
-import {
+import type {
+  UserDocument,
   UserDocumentService,
-  type UserDocument,
-  type UserDocumentsResult,
+  UserDocumentsResult,
 } from '../documents/user.document.service'
 import type { GroupResolved } from '../groups/resolvers'
-import { GroupService } from '../groups/service'
+import type { GroupService } from '../groups/service'
 import { validateInput } from '../utils/validation'
 import { inject, injectable, resolve } from './../tsyringe'
-import {
+import type {
   AuthService,
-  type ChangePasswordPayload,
-  type LoginPayload,
-  type LogoutPayload,
-  type SignupPayload,
+  ChangePasswordPayload,
+  LoginPayload,
+  LogoutPayload,
+  SignupPayload,
 } from './auth.service'
 
 export type UserChangesEdgeUseDoc = Omit<UserChangesEdge, 'node'> & {

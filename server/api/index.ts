@@ -45,7 +45,7 @@ http.IncomingMessage.Readable.prototype.unpipe = function (dest) {
   // CHANGED: Add fallback if not existing
   // @ts-expect-error: is workaround anyway
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const state = (this._readableState as any) || { pipes: [] }
+  const state = (this._readableState as any) ?? { pipes: [] }
   const unpipeInfo = { hasUnpiped: false }
 
   // If we're not piping anywhere, then do nothing.
