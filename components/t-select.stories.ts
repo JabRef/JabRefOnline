@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
+// @ts-expect-error: not yet compatible with 'bundler' module resolution
 import { TSelect } from '@variantjs/vue'
 
 export default {

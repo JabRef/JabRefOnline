@@ -1,16 +1,16 @@
 <template>
   <main>
-    <ContentDoc :path="markdownPath" />
+    <ContentRenderer
+      v-if="page"
+      :value="page"
+      class="prose mx-auto"
+    />
   </main>
 </template>
 
 <script setup lang="ts">
-const route = useRoute('codeprojects-slug')
-let markdownPath = 'codeprojects/'
-
-if (route.params.slug != null) {
-  markdownPath += (route.params.slug as string[])
-    .map((param) => param.toLowerCase())
-    .join('/')
-}
+const route = useRoute()
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('pages').path(route.path.toLowerCase()).first()
+})
 </script>

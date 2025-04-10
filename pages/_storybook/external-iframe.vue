@@ -20,6 +20,7 @@ import type { RenderContext } from '@storybook/types'
 import type { VueRenderer } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
 import { applyDecorators } from '@storybook/vue3/dist/entry-preview.mjs'
+// @ts-expect-error: not yet compatible with 'bundler' module resolution
 import { mount } from 'mount-vue-component'
 import * as JabRefLogoStories from '~/components/JabRefLogo.stories.vue'
 import * as NButtonStories from '~/components/n-button.stories.vue'
