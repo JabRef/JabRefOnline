@@ -169,7 +169,7 @@
     >
       <ContentRenderer
         v-if="legalNotices"
-        :value="legalNotices"
+        :value="legalNotices.data"
         class="prose overflow-auto max-h-96"
       />
     </ModalDialog>
@@ -179,7 +179,7 @@
     >
       <ContentRenderer
         v-if="privacyPolicy"
-        :value="privacyPolicy"
+        :value="privacyPolicy.data"
         class="prose overflow-auto max-h-96"
       />
     </ModalDialog>
@@ -195,12 +195,16 @@ const privacyPolicy = ref<ParsedContent | null>(null)
 
 watch(showLegalNotices, async (shouldShowLegalNotices) => {
   if (shouldShowLegalNotices) {
-    legalNotices.value = await queryContent('/legalnotices').findOne()
+    legalNotices.value = await useAsyncData(async () => {
+      return await queryCollection('pages').path('/legalnotices').first()
+    })
   }
 })
 watch(showPrivacyPolicy, async (shouldShowPrivacyPolicy) => {
   if (shouldShowPrivacyPolicy) {
-    privacyPolicy.value = await queryContent('/privacypolicy').findOne()
+    privacyPolicy.value = await useAsyncData(async () => {
+      return await queryCollection('pages').path('/privacypolicy').first()
+    })
   }
 })
 </script>

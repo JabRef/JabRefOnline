@@ -220,7 +220,7 @@ export default defineNuxtConfig({
   },
 
   content: {
-    markdown: {
+    renderer: {
       // Don't automatically print h2-h4 headings as links
       anchorLinks: false,
     },
