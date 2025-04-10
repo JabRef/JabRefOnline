@@ -3,6 +3,7 @@ import {
   type GraphQLRequest,
   type GraphQLResponse,
 } from '@apollo/server'
+// @ts-expect-error: not yet compatible with 'bundler' module resolution
 import type { VariableValues } from '@apollo/server/dist/esm/externalTypes/graphql'
 import type { DocumentNode, TypedQueryDocumentNode } from 'graphql'
 import type { Context } from '~/server/context'
