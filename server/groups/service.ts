@@ -1,4 +1,4 @@
-import type { Group, Prisma, PrismaClient, User } from '@prisma/client'
+import type { Group, Prisma, PrismaClient, User } from '../database'
 import { inject, injectable } from './../tsyringe'
 
 @injectable()

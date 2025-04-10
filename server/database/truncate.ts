@@ -1,4 +1,4 @@
-import prismaClient from '@prisma/client'
+import { PrismaClient } from '.'
 import { seed } from './seed'
 
 /**
@@ -11,7 +11,7 @@ import { seed } from './seed'
  * It is necessary as long as https://github.com/prisma/prisma/issues/5596 is not implemented.
  */
 export async function truncate(): Promise<void> {
-  const prisma = new prismaClient.PrismaClient()
+  const prisma = new PrismaClient()
   const dbSchemaName = 'public'
 
   try {
