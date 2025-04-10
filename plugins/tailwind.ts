@@ -12,7 +12,7 @@ import {
   variantJS,
 } from '@variantjs/vue'
 // @ts-expect-error: not yet compatible with 'bundler' module resolution
-import type { type VariantJSConfiguration } from '@variantjs/vue'
+import type { VariantJSConfiguration } from '@variantjs/vue'
 import TTable from '~/components/TTable.vue'
 
 const settings: VariantJSConfiguration = {
