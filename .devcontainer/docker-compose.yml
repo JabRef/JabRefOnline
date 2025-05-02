@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     # Use offical typescript-node devcontainer image
-    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:1-20@sha256:29ec4d1ec8f7f75ce6d868bfc234b314025d4ca70fc3cd5d174b0e91fa878627
+    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:1-20@sha256:8da58ff44a1665e45e7020c8d1f3217de313c53b7486c5c3f5cf6dda10d1f009
 
     volumes:
       - ..:/workspace:cached
@@ -20,7 +20,7 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: postgres:latest@sha256:6e57135d237944dddf7588b249edcdf78745a7c318e5444ae0375855b64ec6cf
+    image: postgres:latest@sha256:304ab813518754228f9f792f79d6da36359b82d8ecf418096c636725f8c930ad
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
