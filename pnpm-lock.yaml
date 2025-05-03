@@ -86,8 +86,8 @@ importers:
         specifier: 1.24.1
         version: 1.24.1(graphql@16.10.0)
       ioredis:
-        specifier: 5.4.2
-        version: 5.4.2
+        specifier: 5.6.1
+        version: 5.6.1
       json-bigint-patch:
         specifier: 0.0.8
         version: 0.0.8
@@ -111,7 +111,7 @@ importers:
         version: 4.8.0
       unstorage:
         specifier: 1.14.1
-        version: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2)
+        version: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1)
       vee-validate:
         specifier: 4.15.0
         version: 4.15.0(vue@3.5.13(typescript@5.7.2))
@@ -187,7 +187,7 @@ importers:
         version: 3.15.1(@types/node@22.15.3)(@vue/test-utils@2.4.6)(magicast@0.3.5)(playwright-core@1.51.1)(rollup@4.32.1)(terser@5.37.0)(typescript@5.7.2)(vitest@3.0.5(@types/debug@4.1.12)(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
       '@nuxtjs/seo':
         specifier: 3.0.2
-        version: 3.0.2(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(h3@1.15.1)(magicast@0.3.5)(rollup@4.32.1)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
+        version: 3.0.2(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(h3@1.15.1)(magicast@0.3.5)(rollup@4.32.1)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
       '@storybook/core-client':
         specifier: 7.6.17
         version: 7.6.17
@@ -289,7 +289,7 @@ importers:
         version: 2.41.0(vue@3.5.13(typescript@5.7.2))
       nuxt:
         specifier: 3.15.0
-        version: 3.15.0(@azure/identity@4.6.0)(@parcel/watcher@2.5.1)(@types/node@22.15.3)(better-sqlite3@11.9.1)(db0@0.2.3(better-sqlite3@11.9.1))(eslint@9.0.0)(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.32.1)(terser@5.37.0)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.7.2))(yaml@2.7.0)
+        version: 3.15.0(@azure/identity@4.6.0)(@parcel/watcher@2.5.1)(@types/node@22.15.3)(better-sqlite3@11.9.1)(db0@0.2.3(better-sqlite3@11.9.1))(eslint@9.0.0)(ioredis@5.6.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.32.1)(terser@5.37.0)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.7.2))(yaml@2.7.0)
       nuxt-auth-utils:
         specifier: 0.4.4
         version: 0.4.4(argon2@0.43.0)(magicast@0.3.5)(rollup@4.32.1)
@@ -6577,8 +6577,8 @@ packages:
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
 
-  ioredis@5.4.2:
-    resolution: {integrity: sha512-0SZXGNGZ+WzISQ67QDyZ2x0+wVxjjUndtD8oSeik/4ajifeiRufed8fCb8QW8VMyi4MXcS+UO1k/0NGhvq1PAg==}
+  ioredis@5.6.1:
+    resolution: {integrity: sha512-UxC0Yv1Y4WRJiGQxQkP0hfdL0/5/6YvdfOOClRgJ0qppSarkhneSa6UvkMkms0AkdGimSH3Ikqm+6mkMmX7vGA==}
     engines: {node: '>=12.22.0'}
 
   ip-regex@4.3.0:
@@ -13977,13 +13977,13 @@ snapshots:
       - magicast
       - vue
 
-  '@nuxtjs/seo@3.0.2(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(h3@1.15.1)(magicast@0.3.5)(rollup@4.32.1)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))':
+  '@nuxtjs/seo@3.0.2(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(h3@1.15.1)(magicast@0.3.5)(rollup@4.32.1)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))':
     dependencies:
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
       '@nuxtjs/robots': 5.2.9(magicast@0.3.5)(vue@3.5.13(typescript@5.7.2))
       '@nuxtjs/sitemap': 7.2.10(h3@1.15.1)(magicast@0.3.5)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
       nuxt-link-checker: 4.3.0(magicast@0.3.5)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
-      nuxt-og-image: 5.1.1(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(magicast@0.3.5)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
+      nuxt-og-image: 5.1.1(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(magicast@0.3.5)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
       nuxt-schema-org: 5.0.4(magicast@0.3.5)(vue@3.5.13(typescript@5.7.2))
       nuxt-seo-utils: 7.0.7(magicast@0.3.5)(rollup@4.32.1)(vue@3.5.13(typescript@5.7.2))
       nuxt-site-config: 3.1.9(magicast@0.3.5)(vue@3.5.13(typescript@5.7.2))
@@ -18624,7 +18624,7 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  ioredis@5.4.2:
+  ioredis@5.6.1:
     dependencies:
       '@ioredis/commands': 1.2.0
       cluster-key-slot: 1.1.2
@@ -19872,7 +19872,7 @@ snapshots:
       h3: 1.14.0
       hookable: 5.5.3
       httpxy: 0.1.7
-      ioredis: 5.4.2
+      ioredis: 5.6.1
       jiti: 2.4.2
       klona: 2.0.6
       knitwork: 1.2.0
@@ -19902,7 +19902,7 @@ snapshots:
       unctx: 2.4.1
       unenv: 1.10.0
       unimport: 3.14.6(rollup@4.32.1)
-      unstorage: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2)
+      unstorage: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1)
       untyped: 1.5.2
       unwasm: 0.3.9
     transitivePeerDependencies:
@@ -20118,7 +20118,7 @@ snapshots:
       - vite
       - vue
 
-  nuxt-og-image@5.1.1(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(magicast@0.3.5)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2)):
+  nuxt-og-image@5.1.1(@unhead/vue@1.11.18(vue@3.5.13(typescript@5.7.2)))(magicast@0.3.5)(unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1))(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2)):
     dependencies:
       '@nuxt/devtools-kit': 2.3.2(magicast@0.3.5)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
@@ -20149,7 +20149,7 @@ snapshots:
       strip-literal: 3.0.0
       ufo: 1.5.4
       unplugin: 2.2.2
-      unstorage: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2)
+      unstorage: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1)
       unwasm: 0.3.9
       yoga-wasm-web: 0.3.3
     transitivePeerDependencies:
@@ -20214,7 +20214,7 @@ snapshots:
       - magicast
       - vue
 
-  nuxt@3.15.0(@azure/identity@4.6.0)(@parcel/watcher@2.5.1)(@types/node@22.15.3)(better-sqlite3@11.9.1)(db0@0.2.3(better-sqlite3@11.9.1))(eslint@9.0.0)(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.32.1)(terser@5.37.0)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.7.2))(yaml@2.7.0):
+  nuxt@3.15.0(@azure/identity@4.6.0)(@parcel/watcher@2.5.1)(@types/node@22.15.3)(better-sqlite3@11.9.1)(db0@0.2.3(better-sqlite3@11.9.1))(eslint@9.0.0)(ioredis@5.6.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.32.1)(terser@5.37.0)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.7.2))(yaml@2.7.0):
     dependencies:
       '@nuxt/devalue': 2.0.2
       '@nuxt/devtools': 1.7.0(rollup@4.32.1)(vite@6.2.5(@types/node@22.15.3)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.2))
@@ -20274,7 +20274,7 @@ snapshots:
       unimport: 3.14.6(rollup@4.32.1)
       unplugin: 2.1.2
       unplugin-vue-router: 0.10.9(rollup@4.32.1)(vue-router@4.5.0(vue@3.5.13(typescript@5.7.2)))(vue@3.5.13(typescript@5.7.2))
-      unstorage: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2)
+      unstorage: 1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1)
       untyped: 1.5.2
       vue: 3.5.13(typescript@5.7.2)
       vue-bundle-renderer: 2.1.1
@@ -22674,7 +22674,7 @@ snapshots:
       '@unrs/resolver-binding-win32-ia32-msvc': 1.4.1
       '@unrs/resolver-binding-win32-x64-msvc': 1.4.1
 
-  unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.4.2):
+  unstorage@1.14.1(@azure/identity@4.6.0)(db0@0.2.3(better-sqlite3@11.9.1))(ioredis@5.6.1):
     dependencies:
       anymatch: 3.1.3
       chokidar: 3.6.0
@@ -22689,7 +22689,7 @@ snapshots:
     optionalDependencies:
       '@azure/identity': 4.6.0
       db0: 0.2.3(better-sqlite3@11.9.1)
-      ioredis: 5.4.2
+      ioredis: 5.6.1
 
   untildify@4.0.0: {}
 
