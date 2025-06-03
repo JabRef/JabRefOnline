@@ -126,8 +126,8 @@ importers:
         version: 3.24.1
     devDependencies:
       '@adonisjs/hash':
-        specifier: 9.0.5
-        version: 9.0.5(argon2@0.43.0)
+        specifier: 9.1.1
+        version: 9.1.1(argon2@0.43.0)
       '@apollo/utils.keyvaluecache':
         specifier: 3.1.0
         version: 3.1.0
@@ -368,12 +368,12 @@ packages:
   '@actions/io@1.1.3':
     resolution: {integrity: sha512-wi9JjgKLYS7U/z8PPbco+PvTb/nRWjeoFlJ1Qer83k/3C5PHQi28hiVdeE2kHXmIL99mQFawx8qt/JPjZilJ8Q==}
 
-  '@adonisjs/hash@9.0.5':
-    resolution: {integrity: sha512-oY8PafBrdGsr5UY8cAzzxPCtehZDW7KsPcI47dZpjydOdL/PQrT4liX+cGujL6mSbi3JEgQLBgBs/+SlPFvCrg==}
+  '@adonisjs/hash@9.1.1':
+    resolution: {integrity: sha512-ZkRguwjAp4skKvKDdRAfdJ2oqQ0N7p9l3sioyXO1E8o0WcsyDgEpsTQtuVNoIdMiw4sn4gJlmL3nyF4BcK1ZDQ==}
     engines: {node: '>=20.6.0'}
     peerDependencies:
-      argon2: ^0.31.2 || ^0.41.0
-      bcrypt: ^5.1.1
+      argon2: ^0.31.2 || ^0.41.0 || ^0.43.0
+      bcrypt: ^5.1.1 || ^6.0.0
     peerDependenciesMeta:
       argon2:
         optional: true
@@ -2976,20 +2976,19 @@ packages:
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
-  '@poppinss/exception@1.2.0':
-    resolution: {integrity: sha512-WLneXKQYNClhaMXccO111VQmZahSrcSRDaHRbV6KL5R4pTvK87fMn/MXLUcvOjk0X5dTHDPKF61tM7j826wrjQ==}
-    engines: {node: '>=20.6.0'}
+  '@poppinss/exception@1.2.1':
+    resolution: {integrity: sha512-aQypoot0HPSJa6gDPEPTntc1GT6QINrSbgRlRhadGW2WaYqUK3tK4Bw9SBMZXhmxd3GeAlZjVcODHgiu+THY7A==}
+    engines: {node: '>=18'}
 
   '@poppinss/object-builder@1.1.0':
     resolution: {integrity: sha512-FOrOq52l7u8goR5yncX14+k+Ewi5djnrt1JwXeS/FvnwAPOiveFhiczCDuvXdssAwamtrV2hp5Rw9v+n2T7hQg==}
     engines: {node: '>=20.6.0'}
 
-  '@poppinss/string@1.2.0':
-    resolution: {integrity: sha512-1z78zjqhfjqsvWr+pQzCpRNcZpIM+5vNY5SFOvz28GrL/LRanwtmOku5tBX7jE8/ng3oXaOVrB59lnnXFtvkug==}
-    engines: {node: '>=20.6.0'}
+  '@poppinss/string@1.6.0':
+    resolution: {integrity: sha512-HfAf9VqTvo31BsruwgwEauQ316RNODdryk6QgYZo4qTV50s0h1H9HmIr+QjwwI3u4Sz7r4Q1dd1EVaLB7pWlaw==}
 
-  '@poppinss/utils@6.9.2':
-    resolution: {integrity: sha512-ypVszZxhwiehhklM5so2BI+nClQJwp7mBUSJh/R1GepeUH1vvD5GtxMz8Lp9dO9oAbKyDmq1jc4g/4E0dv8r2g==}
+  '@poppinss/utils@6.9.4':
+    resolution: {integrity: sha512-KJe9/ebFBqb4fFBdadgN4YgT4bHAKdWhLAFzjaeDqx5vOCtD3C+byN5DrORVNbwAjt+rb8beP8pXaWZWx+WmTA==}
     engines: {node: '>=18.16.0'}
 
   '@prisma/client@6.7.0':
@@ -4787,8 +4786,8 @@ packages:
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
 
-  case-anything@3.1.0:
-    resolution: {integrity: sha512-rRYnn5Elur8RuNHKoJ2b0tgn+pjYxL7BzWom+JZ7NKKn1lt/yGV/tUNwOovxYa9l9VL5hnXQdMc+mENbhJzosQ==}
+  case-anything@3.1.2:
+    resolution: {integrity: sha512-wljhAjDDIv/hM2FzgJnYQg90AWmZMNtESCjTeLH680qTzdo0nErlCxOmgzgX4ZsZAtIvqHyD87ES8QyriXB+BQ==}
     engines: {node: '>=18'}
 
   ccount@2.0.1:
@@ -9021,8 +9020,8 @@ packages:
   scule@1.3.0:
     resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
 
-  secure-json-parse@3.0.2:
-    resolution: {integrity: sha512-H6nS2o8bWfpFEV6U38sOSjS7bTbdgbCGU9wEM6W14P5H0QOsz94KCusifV44GpHDTu2nqZbuDNhTzu+mjDSw1w==}
+  secure-json-parse@4.0.0:
+    resolution: {integrity: sha512-dxtLJO6sc35jWidmLxo7ij+Eg48PM/kleBsxpC8QJE0qJICe+KawkDQmvCMZUr9u7WKVHgMW6vy3fQ7zMiFZMA==}
 
   seemly@0.3.9:
     resolution: {integrity: sha512-bMLcaEqhIViiPbaumjLN8t1y+JpD/N8SiyYOyp0i0W6RgdyLWboIsUWAbZojF//JyerxPZR5Tgda+x3Pdne75A==}
@@ -10683,10 +10682,10 @@ snapshots:
 
   '@actions/io@1.1.3': {}
 
-  '@adonisjs/hash@9.0.5(argon2@0.43.0)':
+  '@adonisjs/hash@9.1.1(argon2@0.43.0)':
     dependencies:
       '@phc/format': 1.0.0
-      '@poppinss/utils': 6.9.2
+      '@poppinss/utils': 6.9.4
     optionalDependencies:
       argon2: 0.43.0
 
@@ -14253,29 +14252,29 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@poppinss/exception@1.2.0': {}
+  '@poppinss/exception@1.2.1': {}
 
   '@poppinss/object-builder@1.1.0': {}
 
-  '@poppinss/string@1.2.0':
+  '@poppinss/string@1.6.0':
     dependencies:
       '@lukeed/ms': 2.0.2
       '@types/bytes': 3.1.5
       '@types/pluralize': 0.0.33
       bytes: 3.1.2
-      case-anything: 3.1.0
+      case-anything: 3.1.2
       pluralize: 8.0.0
       slugify: 1.6.6
       truncatise: 0.0.8
 
-  '@poppinss/utils@6.9.2':
+  '@poppinss/utils@6.9.4':
     dependencies:
-      '@poppinss/exception': 1.2.0
+      '@poppinss/exception': 1.2.1
       '@poppinss/object-builder': 1.1.0
-      '@poppinss/string': 1.2.0
+      '@poppinss/string': 1.6.0
       flattie: 1.1.1
       safe-stable-stringify: 2.5.0
-      secure-json-parse: 3.0.2
+      secure-json-parse: 4.0.0
 
   '@prisma/client@6.7.0(prisma@6.7.0(typescript@5.7.2))(typescript@5.7.2)':
     optionalDependencies:
@@ -16560,7 +16559,7 @@ snapshots:
       tslib: 2.8.1
       upper-case-first: 2.0.2
 
-  case-anything@3.1.0: {}
+  case-anything@3.1.2: {}
 
   ccount@2.0.1: {}
 
@@ -20162,7 +20161,7 @@ snapshots:
 
   nuxt-auth-utils@0.4.4(argon2@0.43.0)(magicast@0.3.5)(rollup@4.32.1):
     dependencies:
-      '@adonisjs/hash': 9.0.5(argon2@0.43.0)
+      '@adonisjs/hash': 9.1.1(argon2@0.43.0)
       '@nuxt/kit': 3.15.0(magicast@0.3.5)(rollup@4.32.1)
       defu: 6.1.4
       hookable: 5.5.3
@@ -21774,7 +21773,7 @@ snapshots:
 
   scule@1.3.0: {}
 
-  secure-json-parse@3.0.2: {}
+  secure-json-parse@4.0.0: {}
 
   seemly@0.3.9: {}
 
