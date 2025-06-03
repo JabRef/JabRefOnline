@@ -50,8 +50,8 @@ importers:
         specifier: 2.11.8
         version: 2.11.8
       '@prisma/client':
-        specifier: 6.7.0
-        version: 6.7.0(prisma@6.7.0(typescript@5.7.2))(typescript@5.7.2)
+        specifier: 6.9.0
+        version: 6.9.0(prisma@6.9.0(typescript@5.7.2))(typescript@5.7.2)
       '@variantjs/core':
         specifier: 0.0.90
         version: 0.0.90
@@ -102,7 +102,7 @@ importers:
         version: 0.2.2
       ts-loader:
         specifier: 9.5.2
-        version: 9.5.2(typescript@5.7.2)(webpack@5.97.1(esbuild@0.25.2))
+        version: 9.5.2(typescript@5.7.2)(webpack@5.97.1(esbuild@0.18.20))
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@types/node@22.15.29)(typescript@5.7.2)
@@ -312,14 +312,14 @@ importers:
         specifier: 4.1.0
         version: 4.1.0(prettier@3.4.2)(typescript@5.7.2)(vue-tsc@2.2.10(typescript@5.7.2))
       prisma:
-        specifier: 6.7.0
-        version: 6.7.0(typescript@5.7.2)
+        specifier: 6.9.0
+        version: 6.9.0(typescript@5.7.2)
       storybook:
         specifier: 7.6.20
         version: 7.6.20
       storybook-vue-addon:
         specifier: 0.6.2
-        version: 0.6.2(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(@nuxt/schema@3.16.2)(esbuild@0.25.2)(rollup@4.32.1)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.29)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.10(typescript@5.7.2))(vue@3.5.16(typescript@5.7.2))(webpack@5.97.1(esbuild@0.25.2))
+        version: 0.6.2(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(@nuxt/schema@3.16.2)(esbuild@0.18.20)(rollup@4.32.1)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.29)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.10(typescript@5.7.2))(vue@3.5.16(typescript@5.7.2))(webpack@5.97.1(esbuild@0.18.20))
       tailwindcss:
         specifier: 3.4.17
         version: 3.4.17(ts-node@10.9.2(@types/node@22.15.29)(typescript@5.7.2))
@@ -2991,8 +2991,8 @@ packages:
     resolution: {integrity: sha512-KJe9/ebFBqb4fFBdadgN4YgT4bHAKdWhLAFzjaeDqx5vOCtD3C+byN5DrORVNbwAjt+rb8beP8pXaWZWx+WmTA==}
     engines: {node: '>=18.16.0'}
 
-  '@prisma/client@6.7.0':
-    resolution: {integrity: sha512-+k61zZn1XHjbZul8q6TdQLpuI/cvyfil87zqK2zpreNIXyXtpUv3+H/oM69hcsFcZXaokHJIzPAt5Z8C8eK2QA==}
+  '@prisma/client@6.9.0':
+    resolution: {integrity: sha512-Gg7j1hwy3SgF1KHrh0PZsYvAaykeR0PaxusnLXydehS96voYCGt1U5zVR31NIouYc63hWzidcrir1a7AIyCsNQ==}
     engines: {node: '>=18.18'}
     peerDependencies:
       prisma: '*'
@@ -3003,23 +3003,23 @@ packages:
       typescript:
         optional: true
 
-  '@prisma/config@6.7.0':
-    resolution: {integrity: sha512-di8QDdvSz7DLUi3OOcCHSwxRNeW7jtGRUD2+Z3SdNE3A+pPiNT8WgUJoUyOwJmUr5t+JA2W15P78C/N+8RXrOA==}
+  '@prisma/config@6.9.0':
+    resolution: {integrity: sha512-Wcfk8/lN3WRJd5w4jmNQkUwhUw0eksaU/+BlAJwPQKW10k0h0LC9PD/6TQFmqKVbHQL0vG2z266r0S1MPzzhbA==}
 
-  '@prisma/debug@6.7.0':
-    resolution: {integrity: sha512-RabHn9emKoYFsv99RLxvfG2GHzWk2ZI1BuVzqYtmMSIcuGboHY5uFt3Q3boOREM9de6z5s3bQoyKeWnq8Fz22w==}
+  '@prisma/debug@6.9.0':
+    resolution: {integrity: sha512-bFeur/qi/Q+Mqk4JdQ3R38upSYPebv5aOyD1RKywVD+rAMLtRkmTFn28ZuTtVOnZHEdtxnNOCH+bPIeSGz1+Fg==}
 
-  '@prisma/engines-version@6.7.0-36.3cff47a7f5d65c3ea74883f1d736e41d68ce91ed':
-    resolution: {integrity: sha512-EvpOFEWf1KkJpDsBCrih0kg3HdHuaCnXmMn7XFPObpFTzagK1N0Q0FMnYPsEhvARfANP5Ok11QyoTIRA2hgJTA==}
+  '@prisma/engines-version@6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e':
+    resolution: {integrity: sha512-Qp9gMoBHgqhKlrvumZWujmuD7q4DV/gooEyPCLtbkc13EZdSz2RsGUJ5mHb3RJgAbk+dm6XenqG7obJEhXcJ6Q==}
 
-  '@prisma/engines@6.7.0':
-    resolution: {integrity: sha512-3wDMesnOxPrOsq++e5oKV9LmIiEazFTRFZrlULDQ8fxdub5w4NgRBoxtWbvXmj2nJVCnzuz6eFix3OhIqsZ1jw==}
+  '@prisma/engines@6.9.0':
+    resolution: {integrity: sha512-im0X0bwDLA0244CDf8fuvnLuCQcBBdAGgr+ByvGfQY9wWl6EA+kRGwVk8ZIpG65rnlOwtaWIr/ZcEU5pNVvq9g==}
 
-  '@prisma/fetch-engine@6.7.0':
-    resolution: {integrity: sha512-zLlAGnrkmioPKJR4Yf7NfW3hftcvqeNNEHleMZK9yX7RZSkhmxacAYyfGsCcqRt47jiZ7RKdgE0Wh2fWnm7WsQ==}
+  '@prisma/fetch-engine@6.9.0':
+    resolution: {integrity: sha512-PMKhJdl4fOdeE3J3NkcWZ+tf3W6rx3ht/rLU8w4SXFRcLhd5+3VcqY4Kslpdm8osca4ej3gTfB3+cSk5pGxgFg==}
 
-  '@prisma/get-platform@6.7.0':
-    resolution: {integrity: sha512-i9IH5lO4fQwnMLvQLYNdgVh9TK3PuWBfQd7QLk/YurnAIg+VeADcZDbmhAi4XBBDD+hDif9hrKyASu0hbjwabw==}
+  '@prisma/get-platform@6.9.0':
+    resolution: {integrity: sha512-/B4n+5V1LI/1JQcHp+sUpyRT1bBgZVPHbsC4lt4/19Xp4jvNIVcq5KYNtQDk5e/ukTSjo9PZVAxxy9ieFtlpTQ==}
 
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -8525,8 +8525,8 @@ packages:
     resolution: {integrity: sha512-4yf0QO/sllf/1zbZWYnvWw3NxCQwLXKzIj0G849LSufP15BXKM0rbD2Z3wVnkMfjdn/CB0Dpp444gYAACdsplg==}
     engines: {node: '>=18'}
 
-  prisma@6.7.0:
-    resolution: {integrity: sha512-vArg+4UqnQ13CVhc2WUosemwh6hr6cr6FY2uzDvCIFwH8pu8BXVv38PktoMLVjtX7sbYThxbnZF5YiR8sN2clw==}
+  prisma@6.9.0:
+    resolution: {integrity: sha512-resJAwMyZREC/I40LF6FZ6rZTnlrlrYrb63oW37Gq+U+9xHwbyMSPJjKtM7VZf3gTO86t/Oyz+YeSXr3CmAY1Q==}
     engines: {node: '>=18.18'}
     hasBin: true
     peerDependencies:
@@ -14276,38 +14276,35 @@ snapshots:
       safe-stable-stringify: 2.5.0
       secure-json-parse: 4.0.0
 
-  '@prisma/client@6.7.0(prisma@6.7.0(typescript@5.7.2))(typescript@5.7.2)':
+  '@prisma/client@6.9.0(prisma@6.9.0(typescript@5.7.2))(typescript@5.7.2)':
     optionalDependencies:
-      prisma: 6.7.0(typescript@5.7.2)
+      prisma: 6.9.0(typescript@5.7.2)
       typescript: 5.7.2
 
-  '@prisma/config@6.7.0':
+  '@prisma/config@6.9.0':
     dependencies:
-      esbuild: 0.25.2
-      esbuild-register: 3.6.0(esbuild@0.25.2)
-    transitivePeerDependencies:
-      - supports-color
+      jiti: 2.4.2
 
-  '@prisma/debug@6.7.0': {}
+  '@prisma/debug@6.9.0': {}
 
-  '@prisma/engines-version@6.7.0-36.3cff47a7f5d65c3ea74883f1d736e41d68ce91ed': {}
+  '@prisma/engines-version@6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e': {}
 
-  '@prisma/engines@6.7.0':
+  '@prisma/engines@6.9.0':
     dependencies:
-      '@prisma/debug': 6.7.0
-      '@prisma/engines-version': 6.7.0-36.3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
-      '@prisma/fetch-engine': 6.7.0
-      '@prisma/get-platform': 6.7.0
+      '@prisma/debug': 6.9.0
+      '@prisma/engines-version': 6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e
+      '@prisma/fetch-engine': 6.9.0
+      '@prisma/get-platform': 6.9.0
 
-  '@prisma/fetch-engine@6.7.0':
+  '@prisma/fetch-engine@6.9.0':
     dependencies:
-      '@prisma/debug': 6.7.0
-      '@prisma/engines-version': 6.7.0-36.3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
-      '@prisma/get-platform': 6.7.0
+      '@prisma/debug': 6.9.0
+      '@prisma/engines-version': 6.9.0-10.81e4af48011447c3cc503a190e86995b66d2a28e
+      '@prisma/get-platform': 6.9.0
 
-  '@prisma/get-platform@6.7.0':
+  '@prisma/get-platform@6.9.0':
     dependencies:
-      '@prisma/debug': 6.7.0
+      '@prisma/debug': 6.9.0
 
   '@protobufjs/aspromise@1.1.2': {}
 
@@ -17418,13 +17415,6 @@ snapshots:
     dependencies:
       debug: 4.4.0(supports-color@9.4.0)
       esbuild: 0.18.20
-    transitivePeerDependencies:
-      - supports-color
-
-  esbuild-register@3.6.0(esbuild@0.25.2):
-    dependencies:
-      debug: 4.4.0(supports-color@9.4.0)
-      esbuild: 0.25.2
     transitivePeerDependencies:
       - supports-color
 
@@ -21129,15 +21119,12 @@ snapshots:
     dependencies:
       parse-ms: 4.0.0
 
-  prisma@6.7.0(typescript@5.7.2):
+  prisma@6.9.0(typescript@5.7.2):
     dependencies:
-      '@prisma/config': 6.7.0
-      '@prisma/engines': 6.7.0
+      '@prisma/config': 6.9.0
+      '@prisma/engines': 6.9.0
     optionalDependencies:
-      fsevents: 2.3.3
       typescript: 5.7.2
-    transitivePeerDependencies:
-      - supports-color
 
   process-nextick-args@2.0.1: {}
 
@@ -22058,7 +22045,7 @@ snapshots:
 
   stoppable@1.1.0: {}
 
-  storybook-vue-addon@0.6.2(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(@nuxt/schema@3.16.2)(esbuild@0.25.2)(rollup@4.32.1)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.29)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.10(typescript@5.7.2))(vue@3.5.16(typescript@5.7.2))(webpack@5.97.1(esbuild@0.25.2)):
+  storybook-vue-addon@0.6.2(@nuxt/kit@3.15.0(magicast@0.3.5)(rollup@4.32.1))(@nuxt/schema@3.16.2)(esbuild@0.18.20)(rollup@4.32.1)(typescript@5.7.2)(vite@6.2.5(@types/node@22.15.29)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.10(typescript@5.7.2))(vue@3.5.16(typescript@5.7.2))(webpack@5.97.1(esbuild@0.18.20)):
     dependencies:
       '@storybook/csf': 0.1.13
       '@storybook/mdx2-csf': 1.1.0
@@ -22070,10 +22057,10 @@ snapshots:
     optionalDependencies:
       '@nuxt/kit': 3.15.0(magicast@0.3.5)(rollup@4.32.1)
       '@nuxt/schema': 3.16.2
-      esbuild: 0.25.2
+      esbuild: 0.18.20
       rollup: 4.32.1
       vite: 6.2.5(@types/node@22.15.29)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0)
-      webpack: 5.97.1(esbuild@0.25.2)
+      webpack: 5.97.1(esbuild@0.18.20)
     transitivePeerDependencies:
       - typescript
       - vue-tsc
@@ -22332,16 +22319,16 @@ snapshots:
       type-fest: 0.16.0
       unique-string: 2.0.0
 
-  terser-webpack-plugin@5.3.11(esbuild@0.25.2)(webpack@5.97.1(esbuild@0.25.2)):
+  terser-webpack-plugin@5.3.11(esbuild@0.18.20)(webpack@5.97.1(esbuild@0.18.20)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 4.3.0
       serialize-javascript: 6.0.2
       terser: 5.37.0
-      webpack: 5.97.1(esbuild@0.25.2)
+      webpack: 5.97.1(esbuild@0.18.20)
     optionalDependencies:
-      esbuild: 0.25.2
+      esbuild: 0.18.20
 
   terser@5.37.0:
     dependencies:
@@ -22462,7 +22449,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  ts-loader@9.5.2(typescript@5.7.2)(webpack@5.97.1(esbuild@0.25.2)):
+  ts-loader@9.5.2(typescript@5.7.2)(webpack@5.97.1(esbuild@0.18.20)):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.18.0
@@ -22470,7 +22457,7 @@ snapshots:
       semver: 7.7.0
       source-map: 0.7.4
       typescript: 5.7.2
-      webpack: 5.97.1(esbuild@0.25.2)
+      webpack: 5.97.1(esbuild@0.18.20)
 
   ts-log@2.2.7: {}
 
@@ -23300,7 +23287,7 @@ snapshots:
 
   webpack-virtual-modules@0.6.2: {}
 
-  webpack@5.97.1(esbuild@0.25.2):
+  webpack@5.97.1(esbuild@0.18.20):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.6
@@ -23322,7 +23309,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.11(esbuild@0.25.2)(webpack@5.97.1(esbuild@0.25.2))
+      terser-webpack-plugin: 5.3.11(esbuild@0.18.20)(webpack@5.97.1(esbuild@0.18.20))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
