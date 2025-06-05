@@ -1,9 +1,9 @@
-import prisma from '@prisma/client'
 import 'dotenv/config'
 import 'json-bigint-patch'
 import 'reflect-metadata'
 import { beforeAll, expect } from 'vitest'
 import { constructConfig } from '~/config'
+import { PrismaClient } from '~/server/database'
 import { register } from '~/server/tsyringe'
 import { registerClasses } from '~/server/tsyringe.config'
 import { EmailServiceMock } from '~/server/utils/email.service'
@@ -37,7 +37,7 @@ beforeAll((context) => {
       useValue: redisClient,
     })
 
-    const prismaClient = new prisma.PrismaClient()
+    const prismaClient = new PrismaClient()
     register('PrismaClient', {
       useValue: prismaClient,
     })
