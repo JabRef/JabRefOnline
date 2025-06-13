@@ -1,6 +1,6 @@
-import type { Journal, PrismaClient } from '@prisma/client'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { mockDeep, mockReset } from 'vitest-mock-extended'
+import type { Journal, PrismaClient } from '../database'
 import { register, resolve } from '../tsyringe'
 
 const prisma = mockDeep<PrismaClient>()
