@@ -3,6 +3,7 @@
     type="primary"
     size="large"
     style="height: 3.2em"
+    class="transition duration-200 hover:opacity-90 hover:shadow-lg hover:-translate-y-0.5"
   >
     <template #icon>
       <n-icon v-if="showIcon">
