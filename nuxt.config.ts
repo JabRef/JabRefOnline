@@ -122,8 +122,8 @@ export default defineNuxtConfig({
   modules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    // Add support for naive-ui
-    '@bg-dev/nuxt-naiveui',
+    // Add support for nuxt-ui
+    '@nuxt/ui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
