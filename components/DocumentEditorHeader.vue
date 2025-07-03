@@ -3,8 +3,9 @@
     {{ heading }}
   </p>
 </template>
-<script lang="ts">
-export default defineComponent({
-  props: { heading: { type: String, default: '' } },
-})
+
+<script setup lang="ts">
+defineProps<{
+  heading: string
+}>()
 </script>
