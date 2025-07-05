@@ -11,9 +11,9 @@ import type {
   UserChangesEdge,
   UserDocumentsArgs,
 } from '#graphql/resolver'
-import type { User } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
 import type { Context } from '../context'
+import type { User } from '../database'
 import type {
   UserDocument,
   UserDocumentService,
