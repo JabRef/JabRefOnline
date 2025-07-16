@@ -1,9 +1,5 @@
 <template>
   <div>
-    <SeoKit
-      site-name="JabRef - Free Reference Manager - Stay on top of your Literature"
-      site-description="A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way."
-    />
     <SchemaOrgOrganization
       name="JabRef e.V."
       logo="https://www.jabref.org/img/JabRef-icon-256.png"
