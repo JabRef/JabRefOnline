@@ -106,6 +106,7 @@
 
 <script lang="ts" setup>
 import type { PropType } from 'vue'
+// eslint-disable-next-line import/consistent-type-specifier-style
 import { gql, useFragment, type FragmentType } from '~/apollo'
 import { useUiStore } from '~/store'
 

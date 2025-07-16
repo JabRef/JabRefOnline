@@ -1,6 +1,5 @@
-import type { PrismaClient as PrismaClientT } from '@prisma/client'
+import prisma, { type PrismaClient as PrismaClientT } from '@prisma/client'
 
-import prisma from '@prisma/client'
 const { PrismaClient, GroupType, GroupHierarchyType } = prisma
 
 async function seedInternal(prisma: PrismaClientT): Promise<void> {
