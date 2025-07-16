@@ -106,4 +106,8 @@
     },
   ],
   'github-actions': { enabled: true },
+  postUpdateOptions: [
+    // Always dedupe the lock file after updating dependencies: https://docs.renovatebot.com/configuration-options/#postupdateoptions
+    'pnpmDedupe',
+  ],
 }
