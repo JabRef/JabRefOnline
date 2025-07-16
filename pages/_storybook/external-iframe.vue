@@ -191,9 +191,9 @@ export default defineComponent({
   padding: 10px;
   background: #000;
   color: #eee;
-  font-family: 'Operator Mono', 'Fira Code Retina', 'Fira Code',
-    'FiraCode-Retina', 'Andale Mono', 'Lucida Console', Consolas, Monaco,
-    monospace;
+  font-family:
+    'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina',
+    'Andale Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
 
 .sb-errordisplay pre {
