@@ -62,6 +62,18 @@ export default withNuxt({
         'error',
         { allowNumber: true },
       ],
+      // Use { type xyz } instead of type { xyz } for imports
+      // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/consistent-type-specifier-style.md
+      // Disabled due to https://github.com/import-js/eslint-plugin-import/issues/2675
+      'import/consistent-type-specifier-style': 'off',
+      // Don't allow duplicate imports
+      // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md
+      'import/no-duplicates': [
+        'error',
+        {
+          'prefer-inline': true,
+        },
+      ],
     },
   })
   .append([
