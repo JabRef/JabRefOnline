@@ -85,7 +85,7 @@
 </template>
 <script lang="ts">
 import { BaseTree } from '@he-tree/vue'
-import { useQuery, useResult } from '@vue/apollo-composable'
+import { useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
@@ -115,11 +115,7 @@ export default defineComponent({
         }
       `),
     )
-    const groups = useResult(
-      result,
-      null,
-      (data) => data.me.groups,
-    ) as unknown as any[]
+    const groups = computed(() => result.value?.me?.groups ?? null)
 
     const uiStore = useUiStore()
     function onGroupClicked(group: { id: string }) {

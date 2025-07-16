@@ -1,14 +1,11 @@
 <template>
   <div>
-    <ContentSlot
-      :use="$slots.default"
-      unwrap="p"
-    />
+    <slot mdc-unwrap="p" />
   </div>
 </template>
 <script setup lang="ts">
 // Workaround for https://github.com/vuejs/language-tools/issues/5082
 defineSlots<{
-  default: any
+  default: unknown
 }>()
 </script>

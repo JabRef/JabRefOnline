@@ -186,21 +186,24 @@
   </footer>
 </template>
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
-
 const showLegalNotices = ref(false)
-const legalNotices = ref<ParsedContent | null>(null)
 const showPrivacyPolicy = ref(false)
-const privacyPolicy = ref<ParsedContent | null>(null)
-
-watch(showLegalNotices, async (shouldShowLegalNotices) => {
-  if (shouldShowLegalNotices) {
-    legalNotices.value = await queryContent('/legalnotices').findOne()
-  }
-})
-watch(showPrivacyPolicy, async (shouldShowPrivacyPolicy) => {
-  if (shouldShowPrivacyPolicy) {
-    privacyPolicy.value = await queryContent('/privacypolicy').findOne()
-  }
-})
+const { data: legalNotices } = await useAsyncData(
+  async () => {
+    if (showLegalNotices.value) {
+      return await queryCollection('pages').path('/legalnotices').first()
+    }
+    return null
+  },
+  { watch: [showLegalNotices] },
+)
+const { data: privacyPolicy } = await useAsyncData(
+  async () => {
+    if (showPrivacyPolicy.value) {
+      return await queryCollection('pages').path('/privacypolicy').first()
+    }
+    return null
+  },
+  { watch: [showPrivacyPolicy] },
+)
 </script>

@@ -63,7 +63,7 @@ onMounted(() => {
   position = computed(() => (isSmallDisplay.value ? 'static' : 'absolute'))
 })
 // Only on client-side
-if (process.client) {
+if (import.meta.client) {
   // Make sure that the content is scrolled and not the unscrollable window
   // (vue-router for example uses window.scrollTo)
   // Taken from https://github.com/vuejs/vue-router/issues/1187#issuecomment-893964727

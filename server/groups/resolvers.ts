@@ -5,13 +5,15 @@ import type {
   Resolvers,
 } from '#graphql/resolver'
 import { ApolloServerErrorCode } from '@apollo/server/errors'
-import type { Group, GroupType as GroupTypeT } from '@prisma/client'
-// eslint-disable-next-line import/default
-import prisma from '@prisma/client'
+import prisma, {
+  type Group,
+  type GroupType as GroupTypeT,
+} from '@prisma/client'
+
 import { GraphQLError } from 'graphql'
 import type { Context } from '~/server/context'
 import { inject, injectable, resolve } from './../tsyringe'
-import { GroupService } from './service'
+import type { GroupService } from './service'
 const { GroupType, GroupHierarchyType } = prisma
 
 export type GroupResolved = Group & {
@@ -92,7 +94,7 @@ export class Mutation {
       isRegEx = group.searchGroup.isRegEx
     } else if (group.texGroup) {
       type = GroupType.TexGroup
-      // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars --- TODO: handle paths
+      // oxlint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars --- TODO: handle paths
       paths = group.texGroup.paths
     }
 

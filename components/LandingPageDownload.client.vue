@@ -10,49 +10,95 @@
           JabRef is free and works across all your devices.
         </h3>
         <div class="text-center">
-          <n-button
-            type="primary"
-            size="large"
-            style="height: 3.2em"
-          >
-            <a
-              class="text-2xl"
-              :href="downloadUrl"
-              >Download JabRef</a
-            >
-          </n-button>
-        </div>
+          <span v-if="isWindows()">
+            <n-flex justify="center">
+              <DownloadButton
+                text="Download for Windows"
+                href="/download/win_msi"
+                :show-icon="false"
+              />
+            </n-flex>
+          </span>
 
+          <span v-if="isLinux()">
+            <n-flex justify="center">
+              <DownloadButton
+                text=".deb (Ubuntu, Debian)"
+                href="/download/linux_deb"
+              />
+              <DownloadButton
+                text=".rpm (Fedora, RedHat)"
+                href="/download/linux_rpm"
+              />
+            </n-flex>
+          </span>
+          <span v-if="isMac()">
+            <n-flex justify="center">
+              <DownloadButton
+                text="Apple Silicon (Arm)"
+                href="/download/mac_arm64_pkg"
+              />
+              <DownloadButton
+                text="macOS Intel (x64)"
+                href="/download/mac_x86_64_pkg"
+              />
+            </n-flex>
+          </span>
+        </div>
         <div class="text-center pt-8 text-sm">
           <span v-if="isWindows()">
-            For Windows
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/win_zip"
+              >Windows Portable</t-nuxtlink
+            >
             <br />
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
               >mac OS X and Linux</t-nuxtlink
             >
             <br />
           </span>
           <span v-if="isMac()">
-            For mac OS X
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/mac_arm64_dmg"
+              >Apple Silicon Portable (.dmg)</t-nuxtlink
+            >
+            or
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/mac_x86_64_dmg"
+              >macOS Intel Portable (.dmg)</t-nuxtlink
+            >
+            <br />
+            <div class="text-xs text-wrap max-w-sm mx-auto pt-2">
+              Unsure about your Mac type? Click the Apple icon, select "About
+              This Mac". If it shows "Chip", you have Apple Silicon. Otherwise,
+              it's Intel.
+            </div>
             <br />
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
               >Windows and Linux</t-nuxtlink
             >
             <br />
           </span>
           <span v-if="isLinux()">
-            For Linux
+            <t-nuxtlink
+              class="text-primary-500"
+              href="/download/linux_tar_gz"
+              >Linux Portable</t-nuxtlink
+            >
             <br />
             Also available for
             <t-nuxtlink
               class="text-primary-500"
-              href="download"
+              href="https://github.com/JabRef/jabref/releases/latest"
             >
               mac OS X and Windows
             </t-nuxtlink>
@@ -77,6 +123,4 @@
 </template>
 <script setup lang="ts">
 import { isLinux, isMac, isWindows } from '~/composables/detectOs'
-
-const downloadUrl = constructDownloadUrl()
 </script>

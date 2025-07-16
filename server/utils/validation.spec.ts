@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, expect, it } from 'vitest'
 import { z } from 'zod'
 import { validateInput, validation } from './validation'
@@ -11,18 +10,18 @@ const schema = z.object({
 class Test {
   @validation(schema)
   hello(input: { name: string; age: number }) {
-    return 'test'
+    return input.name
   }
 
   // @ts-expect-error: This should fail because the argument type does not match the schema.
   @validation(schema)
   not_matching(input: { nothing: string }) {
-    return 'test'
+    return input.nothing
   }
 
   @validation(() => schema)
   with_factory(input: { name: string; age: number }) {
-    return 'test'
+    return input.name
   }
 }
 const test = new Test()
@@ -52,7 +51,7 @@ class TestResolver {
     { input }: { input: { name: string; age: number } },
     _context: Record<string, never>,
   ): string {
-    return 'test'
+    return input.name
   }
 
   @validateInput(schema)
@@ -61,18 +60,18 @@ class TestResolver {
   }: {
     input: { name: string; age: number }
   }): string {
-    return 'test'
+    return input.name
   }
 
   // @ts-expect-error: This should fail because the argument type does not match the schema.
   @validation(schema)
   not_matching(input: { nothing: string }) {
-    return 'test'
+    return input.nothing
   }
 
   @validation(() => schema)
   with_factory(input: { name: string; age: number }) {
-    return 'test'
+    return input.name
   }
 }
 const testResolver = new TestResolver()

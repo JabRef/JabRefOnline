@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ResolverFn } from '#graphql/resolver'
-import { ZodType, type AnyZodObject, type TypeOf } from 'zod'
+import type { AnyZodObject, TypeOf, ZodType } from 'zod'
 
 type MethodDecorator<T> = <S extends T>(
   target: any,
@@ -20,7 +20,6 @@ export function validation<T extends AnyZodObject>(
   arg: T | (() => T),
 ): MethodDecorator<(input: TypeOf<T>) => any> {
   return function (_target, _propertyKey, descriptor) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const originalMethod = descriptor.value!
     // @ts-expect-error: should be fine
     descriptor.value = function (input) {

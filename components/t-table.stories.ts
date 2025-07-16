@@ -1,5 +1,5 @@
 // @ts-expect-error: not sure why nuxi typecheck fails for this
-import type { Meta, StoryFn } from '@nuxtjs/storybook'
+import type { Meta, StoryFnFn } from '@nuxtjs/storybook'
 import TTable from '~/components/TTable.vue'
 
 export default {
@@ -15,7 +15,7 @@ export default {
 } as Meta
 
 // @ts-expect-error: story missing arg types
-const Template: StoryFn = (args) => ({
+const Template: StoryFnFn = (args) => ({
   setup() {
     return { args }
   },

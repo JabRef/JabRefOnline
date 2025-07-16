@@ -22,10 +22,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 20
           cache: 'pnpm'
@@ -54,7 +54,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:79c927b43c8bf2fc1e78b7f4badb394237ee0001032324ef015da562e57a5dcd
+        image: postgres@sha256:3962158596daaef3682838cc8eb0e719ad1ce520f88e34596ce8d5de1b6330a1
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -68,7 +68,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:05f99264e2928ad472f2751b3a8d1f65c9c2cc1819be04548b2261c08e2e026b
+        image: redis@sha256:b43d2dcbbdb1f9e1582e3a0f37e53bf79038522ccffb56a25858969d7a9b6c11
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -91,10 +91,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node }}
           cache: 'pnpm'
@@ -126,7 +126,7 @@ jobs:
 
       - name: Publish and test Storybook
         if: always()
-        uses: chromaui/action@64a9c0ca3bfb724389b0d536e544f56b7b5ff5b3 # v11
+        uses: chromaui/action@4d8ebd13658d795114f8051e25c28d66f14886c6 # v13
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -135,6 +135,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -44,7 +44,6 @@ describe('mutation', () => {
     test.runIf(process.env.EMAIL_CLIENT)(
       `sends an email to the address ${email}`,
       async () => {
-        console.log('Creating account with email', email)
         const { data, errors } = await api().mutate({
           mutation: gql`
             mutation SignupE2E($input: SignupInput!) {

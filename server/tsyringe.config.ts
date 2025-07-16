@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/default
 import prisma from '@prisma/client'
 import type { Config } from '~/config'
 import * as DocumentResolvers from './documents/resolvers'

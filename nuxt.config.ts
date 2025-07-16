@@ -1,11 +1,6 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  future: {
-    // @variantjs/vue, @apollo/server, and mount-vue-component are not yet compatible with bundler resolution
-    typescriptBundlerResolution: false,
-  },
-
   /**
    * Pre-render routes at build time by default
    */
@@ -138,6 +133,9 @@ export default defineNuxtConfig({
     // Add authentication support
     // https://github.com/atinux/nuxt-auth-utils
     'nuxt-auth-utils',
+    // Add eslint support
+    // https://eslint.nuxt.com
+    '@nuxt/eslint',
   ],
 
   /*
@@ -200,9 +198,10 @@ export default defineNuxtConfig({
   },
 
   content: {
-    markdown: {
+    renderer: {
       // Don't automatically print h2-h4 headings as links
-      anchorLinks: false,
+      // Currently leads to TS errors
+      //anchorLinks: false,
     },
   },
 
@@ -210,6 +209,7 @@ export default defineNuxtConfig({
    * SEO configuration
    * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
+  // @ts-expect-error: temporary issue
   site: {
     // Hide information message during startup
     splash: false,

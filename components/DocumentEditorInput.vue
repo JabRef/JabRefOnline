@@ -6,7 +6,7 @@
       variant="plain"
       class="absolute w-full left-0 py-1"
       @input="update"
-    ></t-input>
+    />
     <span
       class="inline-block px-3 py-1 text-base invisible border"
       aria-hidden="true"

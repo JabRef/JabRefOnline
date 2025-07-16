@@ -11,12 +11,12 @@ describe('index page', () => {
 })
 
 describe('download', () => {
-  it('redirects to fosshub', async () => {
+  it('downloads file from GitHub release', async () => {
     const response = await fetch('/download')
     // Client side redirect uses meta refresh
     expect(response.status).toBe(200)
     expect(await response.text()).toContain(
-      'https://www.fosshub.com/JabRef.html',
+      'https://github.com/JabRef/jabref/releases/download/',
     )
   })
 })
