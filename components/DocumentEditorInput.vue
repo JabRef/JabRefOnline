@@ -3,7 +3,7 @@
   <span class="inline-block relative">
     <UInput
       :model-value="value"
-      variant="none"
+      variant="plain"
       class="absolute w-full left-0 py-1"
       @update:model-value="update"
     />

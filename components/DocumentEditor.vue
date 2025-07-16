@@ -6,14 +6,9 @@
           { label: 'Journal Article', value: 'Article' },
           { label: 'PhD Thesis', value: 'PhDThesis' }
         ]"
-        variant="none"
-      >
-        <template #trailing>
-          <Icon
-            name="ri:arrow-drop-down-line"
-          />
-        </template>
-      </USelect>
+        variant="plaincaps"
+        trailing-icon="ri:arrow-drop-down-line"
+      />
     </div>
     <div class="z-10 grid -mt-2">
       <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
@@ -24,7 +19,7 @@
       </div>
       <UTextarea
         v-model="title"
-        variant="none"
+        variant="plain"
         class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
       />
     </div>
@@ -64,7 +59,7 @@
       />
       <UTextarea
         v-model="abstract"
-        variant="none"
+        variant="plain"
         rows="5"
       />
     </div>
@@ -101,6 +96,7 @@
       />
       <UTable
         :rows="externalLinks"
+        variant="plain"
         class="text-sm"
       />
     </div>
