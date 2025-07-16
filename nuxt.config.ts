@@ -138,7 +138,8 @@ export default defineNuxtConfig({
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
     // Add support for different icons from iconify
-    'nuxt-icon',
+    // TODO: Re-enable when compatible with Nuxt v4
+    // 'nuxt-icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
     // Support for end-to-end testing and unit testing (and Vitest integration)
@@ -226,7 +227,6 @@ export default defineNuxtConfig({
    * SEO configuration
    * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
-  // @ts-expect-error: temporary issue
   site: {
     // Hide information message during startup
     splash: false,
@@ -270,5 +270,5 @@ export default defineNuxtConfig({
    * Provide compatibility information for Nitro presets, and Nuxt modules
    * https://nuxt.com/docs/api/nuxt-config#compatibilitydate
    */
-  compatibilityDate: '2024-07-13',
+  compatibilityDate: '2024-12-24',
 })
