@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <t-input
+    <UInput
       ref="input"
       v-bind="$attrs"
       :type="showHiddenPassword ? 'password' : 'text'"
@@ -18,14 +18,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default defineComponent({
-  setup() {
-    const showHiddenPassword = ref(true)
 
-    return {
-      showHiddenPassword,
-    }
-  },
-})
+<script setup lang="ts">
+const showHiddenPassword = ref(true)
 </script>

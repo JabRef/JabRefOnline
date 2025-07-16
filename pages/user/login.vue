@@ -13,66 +13,65 @@
       <h2 class="text-center text-5xl font-extrabold text-gray-900">Sign in</h2>
       <p class="mt-6 mb-8 text-center text-sm text-gray-600">
         Don't have an account?
-        <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
+        <NuxtLink to="/user/register" class="text-primary-600 hover:text-primary-500">Sign up</NuxtLink>
       </p>
-      <n-alert
+      <UAlert
         v-if="error"
-        type="error"
+        color="red"
+        variant="soft"
         class="mb-4"
       >
         {{ error }}
-      </n-alert>
-      <n-form
-        size="large"
+      </UAlert>
+      <UForm
+        :state="{ email, password }"
         @submit="onSubmit"
       >
-        <div class="space-y-2">
-          <n-form-item
+        <div class="space-y-4">
+          <UFormGroup
             label="Email address"
-            label-style="font-weight: 600"
-            :feedback="errors.email"
-            :validation-status="errors.email ? 'error' : undefined"
+            :error="errors.email"
           >
-            <n-input
-              v-model:value="email"
+            <UInput
+              v-model="email"
               v-bind="emailAttrs"
-              v-focus
+              type="email"
+              placeholder="Enter your email"
             />
-          </n-form-item>
-          <n-form-item
-            label="Password"
-            label-style="font-weight: 600"
-            :feedback="errors.password"
-            :validation-status="errors.password ? 'error' : undefined"
+          </UFormGroup>
+          <UFormGroup
+            label="Password" 
+            :error="errors.password"
           >
-            <n-input
-              v-model:value="password"
+            <UInput
+              v-model="password"
               v-bind="passwordAttrs"
               type="password"
-              show-password-on="mousedown"
+              placeholder="Enter your password"
             />
-          </n-form-item>
+          </UFormGroup>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <n-checkbox v-model:checked="rememberLogin">
+              <UCheckbox v-model="rememberLogin">
                 Keep me logged in
-              </n-checkbox>
+              </UCheckbox>
             </div>
 
             <div class="text-sm">
-              <t-nuxtlink to="./forgot-password"
-                >Forgot your password?</t-nuxtlink
-              >
+              <NuxtLink to="./forgot-password" class="text-primary-600 hover:text-primary-500">
+                Forgot your password?
+              </NuxtLink>
             </div>
           </div>
 
           <div class="py-2 text-center">
-            <n-button
+            <UButton
+              type="submit"
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Sign in</n-button
+              size="lg"
             >
+              Sign in
+            </UButton>
           </div>
 
           <div>
@@ -87,7 +86,7 @@
             />
           </div>
         </div>
-      </n-form>
+      </UForm>
     </div>
   </NuxtLayout>
 </template>
