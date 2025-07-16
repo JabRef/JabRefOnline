@@ -5,9 +5,11 @@ import type {
   Resolvers,
 } from '#graphql/resolver'
 import { ApolloServerErrorCode } from '@apollo/server/errors'
-import type { Group, GroupType as GroupTypeT } from '@prisma/client'
+import prisma, {
+  type Group,
+  type GroupType as GroupTypeT,
+} from '@prisma/client'
 
-import prisma from '@prisma/client'
 import { GraphQLError } from 'graphql'
 import type { Context } from '~/server/context'
 import { inject, injectable, resolve } from './../tsyringe'
