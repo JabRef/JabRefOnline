@@ -239,11 +239,6 @@ export default defineNuxtConfig({
       'A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way.',
   },
 
-  // Workaround for https://github.com/prisma/prisma/issues/26565
-  build: {
-    transpile: ['@prisma/client'],
-  },
-
   vite: {
     // Workaround for https://github.com/browserify/node-util/pull/62
     define: {
