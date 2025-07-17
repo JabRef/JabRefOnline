@@ -138,7 +138,7 @@ export default defineNuxtConfig({
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
     // Add support for different icons from iconify
-    'nuxt-icon',
+    '@nuxt/icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
     // Support for end-to-end testing and unit testing (and Vitest integration)
