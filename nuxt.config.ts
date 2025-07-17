@@ -9,6 +9,10 @@ export default defineNuxtConfig({
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
     global: './global.ts',
+
+    // Workaround for https://github.com/prisma/prisma/issues/26565
+    '.prisma/client/index-browser': '@prisma/client',
+    '.prisma/client/default': '@prisma/client',
   },
 
   /**
@@ -233,6 +237,11 @@ export default defineNuxtConfig({
     name: 'JabRef - Free Reference Manager - Stay on top of your Literature',
     description:
       'A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way.',
+  },
+
+  // Workaround for https://github.com/prisma/prisma/issues/26565
+  build: {
+    transpile: ['@prisma/client'],
   },
 
   vite: {
