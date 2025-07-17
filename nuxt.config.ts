@@ -9,10 +9,6 @@ export default defineNuxtConfig({
     // Support `import 'global'` used by storybook
     // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
     global: './global.ts',
-
-    // Workaround for https://github.com/prisma/prisma/issues/26565
-    '.prisma/client/index-browser': '@prisma/client',
-    '.prisma/client/default': '@prisma/client',
   },
 
   /**
@@ -21,6 +17,11 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
+    alias: {
+      // Workaround for https://github.com/prisma/prisma/issues/26565
+      '.prisma/client/index-browser': '@prisma/client',
+      '.prisma/client/default': '@prisma/client',
+    },
     azure: {
       config: {
         globalHeaders: {
