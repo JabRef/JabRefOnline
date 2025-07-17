@@ -68,10 +68,6 @@ export interface Config {
   githubRepoToken: string
   public: {
     environment: Environment
-    // Only here to fix typescript error in @nuxtjs/mdc/dist/runtime/components/prose/ProseImg.vue
-    mdc: {
-      useNuxtImage: boolean
-    }
   }
 }
 
@@ -89,9 +85,6 @@ export function constructConfig() {
     githubRepoToken: process.env.GITHUB_REPO_TOKEN ?? 'UNDEFINED',
     public: {
       environment: getEnvironment(),
-      mdc: {
-        useNuxtImage: false,
-      },
     },
   } satisfies Config
 }
