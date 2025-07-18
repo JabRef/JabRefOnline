@@ -38,7 +38,7 @@ beforeAll((context) => {
       useValue: redisClient,
     })
 
-    const adapter = new PrismaPg({ connectionString: config.DATABASE_URL })
+    const adapter = new PrismaPg({ connectionString: config.databaseUrl })
     const prismaClient = new PrismaClient({ adapter })
     register('PrismaClient', {
       useValue: prismaClient,
