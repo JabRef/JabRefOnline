@@ -1,8 +1,8 @@
 diff --git a/build/index.js b/build/index.js
-index 3fcf846eebf718e0c179cc232fc255b77edeba3e..ecbe9a47b3cfea5a02e21bd71061217cb449b6d6 100644
+index 3fcf846eebf718e0c179cc232fc255b77edeba3e..28124f3a03a4f4d05b7146e9fec1efe9a6a3d873 100644
 --- a/build/index.js
 +++ b/build/index.js
-@@ -2276,12 +2276,7 @@ config.runtimeDataModel = JSON.parse(${JSON.stringify(a)})`}function Wwt(){retur
+@@ -2276,15 +2276,7 @@ config.runtimeDataModel = JSON.parse(${JSON.stringify(a)})`}function Wwt(){retur
    getRuntime: async () => await import(${JSON.stringify(l)}),
  
    getQuery${u}WasmModule: async () => {
@@ -12,11 +12,14 @@ index 3fcf846eebf718e0c179cc232fc255b77edeba3e..ecbe9a47b3cfea5a02e21bd71061217c
 -    const { readFile } = await dynamicRequireFn('node:fs/promises')
 -    ${Vwt(o)}
 -    const wasmModulePath = _require.resolve(${JSON.stringify(p)})
-+    const wasmModulePath = await import(${JSON.stringify(p)})
-     const wasmModuleBytes = await readFile(wasmModulePath)
- 
-     return new globalThis.WebAssembly.Module(wasmModuleBytes)
-@@ -2504,7 +2499,7 @@ ${u.length>0?`${u.join(`
+-    const wasmModuleBytes = await readFile(wasmModulePath)
+-
+-    return new globalThis.WebAssembly.Module(wasmModuleBytes)
++    return await import(${JSON.stringify(p + '?module')})
+   }
+ }`;if(g){let v=i==="edge-light"?`${p}?module`:p;return`config.${r}Wasm = {
+   getRuntime: async () => await import(${JSON.stringify(l)}),
+@@ -2504,7 +2496,7 @@ ${u.length>0?`${u.join(`
  `;let n=`import * as process from 'node:process'
  import * as path from 'node:path'
  `;return e==="esm"&&(n+=`import { fileURLToPath } from 'node:url'
