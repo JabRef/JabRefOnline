@@ -9,10 +9,10 @@ function getHash() {
   _hash ??= new Hash(new Argon({}))
   return _hash
 }
-export async function hashPassword(password: string) {
+async function hashPasswordInternal(password: string) {
   return await getHash().make(password)
 }
-export async function verifyPassword(
+async function verifyPasswordInternal(
   hashedPassword: string,
   plainPassword: string,
 ) {
@@ -26,7 +26,7 @@ export async function verifyPassword(
  * @returns the hash
  */
 export async function hash(token: string): Promise<string> {
-  return await hashPassword(token)
+  return await hashPasswordInternal(token)
 }
 
 export function unsecureHash(token: string | object): string {
@@ -38,5 +38,5 @@ export async function verifyHash(
   token: string,
   hashedToken: string,
 ): Promise<boolean> {
-  return await verifyPassword(hashedToken, token)
+  return await verifyPasswordInternal(hashedToken, token)
 }
