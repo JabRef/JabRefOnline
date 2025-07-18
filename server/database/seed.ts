@@ -1,3 +1,4 @@
+import { PrismaPg } from '@prisma/adapter-pg'
 import { GroupHierarchyType, GroupType, PrismaClient } from '.'
 
 async function seedInternal(prisma: PrismaClient): Promise<void> {
@@ -727,7 +728,8 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
 }
 
 export async function seed(): Promise<void> {
-  const prisma = new PrismaClient()
+  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+  const prisma = new PrismaClient({ adapter })
   try {
     await seedInternal(prisma)
   } finally {

@@ -1,3 +1,4 @@
+import { PrismaPg } from '@prisma/adapter-pg'
 import type { Config } from '~/config'
 import { PrismaClient } from './database'
 import * as DocumentResolvers from './documents/resolvers'
@@ -19,7 +20,10 @@ export function configure() {
   })
   // Tools
   register('PrismaClient', {
-    useFactory: instanceCachingFactory(() => new PrismaClient()),
+    useFactory: instanceCachingFactory(() => {
+      const adapter = new PrismaPg({ connectionString: config.databaseUrl })
+      return new PrismaClient({ adapter })
+    }),
   })
   register('RedisClient', {
     useValue: createRedisClient(config),
