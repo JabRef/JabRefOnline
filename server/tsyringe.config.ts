@@ -1,5 +1,6 @@
-import prisma from '@prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
 import type { Config } from '~/config'
+import { PrismaClient } from './database'
 import * as DocumentResolvers from './documents/resolvers'
 import { UserDocumentService } from './documents/user.document.service'
 import * as GroupResolvers from './groups/resolvers'
@@ -12,8 +13,6 @@ import * as UserResolvers from './user/resolvers'
 import { createEmailService } from './utils/email.service'
 import { createRedisClient } from './utils/services.factory'
 
-const { PrismaClient } = prisma
-
 export function configure() {
   const config = useRuntimeConfig() as Config
   register('Config', {
@@ -21,7 +20,10 @@ export function configure() {
   })
   // Tools
   register('PrismaClient', {
-    useFactory: instanceCachingFactory(() => new PrismaClient()),
+    useFactory: instanceCachingFactory(() => {
+      const adapter = new PrismaPg({ connectionString: config.databaseUrl })
+      return new PrismaClient({ adapter })
+    }),
   })
   register('RedisClient', {
     useValue: createRedisClient(config),

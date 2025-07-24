@@ -61,6 +61,7 @@ export interface Config {
     host: string
     password: string
   }
+  databaseUrl: string
   emailClient?: string
   session: {
     secret: string
@@ -82,6 +83,7 @@ export function constructConfig() {
       host: process.env.REDIS_HOST ?? 'localhost',
       password: process.env.REDIS_PASSWORD ?? 'jabref',
     },
+    databaseUrl: process.env.DATABASE_URL ?? 'postgresql://localhost/jabref',
     emailClient: process.env.EMAIL_CLIENT,
     session: {
       secret: process.env.NUXT_SESSION_PASSWORD ?? 'session_secret',

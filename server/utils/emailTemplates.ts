@@ -1,4 +1,4 @@
-import type { User } from '@prisma/client'
+import type { User } from '../database'
 
 export function resetPasswordTemplate(id: string, token: string): string {
   return `

@@ -1,4 +1,3 @@
-import type { PrismaClient } from '@prisma/client'
 import {
   Lifecycle,
   container,
@@ -14,6 +13,7 @@ import {
 import type { constructor } from 'tsyringe/dist/typings/types'
 import type { Storage } from 'unstorage'
 import type { Config } from '~/config'
+import type { PrismaClient } from './database'
 import type * as DocumentResolvers from './documents/resolvers'
 import type { UserDocumentService } from './documents/user.document.service'
 import type * as GroupResolvers from './groups/resolvers'
