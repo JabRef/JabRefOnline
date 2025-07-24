@@ -1,5 +1,5 @@
 diff --git a/build/index.js b/build/index.js
-index 3fcf846eebf718e0c179cc232fc255b77edeba3e..28124f3a03a4f4d05b7146e9fec1efe9a6a3d873 100644
+index 3fcf846eebf718e0c179cc232fc255b77edeba3e..4952c45eb3389800d585c5d78e74c35ee307bba4 100644
 --- a/build/index.js
 +++ b/build/index.js
 @@ -2276,15 +2276,7 @@ config.runtimeDataModel = JSON.parse(${JSON.stringify(a)})`}function Wwt(){retur
@@ -15,7 +15,7 @@ index 3fcf846eebf718e0c179cc232fc255b77edeba3e..28124f3a03a4f4d05b7146e9fec1efe9
 -    const wasmModuleBytes = await readFile(wasmModulePath)
 -
 -    return new globalThis.WebAssembly.Module(wasmModuleBytes)
-+    return await import(${JSON.stringify(p + '?module')})
++    return await import(${JSON.stringify(p + '?module')}).then(r => r.default || r);
    }
  }`;if(g){let v=i==="edge-light"?`${p}?module`:p;return`config.${r}Wasm = {
    getRuntime: async () => await import(${JSON.stringify(l)}),
