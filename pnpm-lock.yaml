@@ -124,7 +124,7 @@ importers:
     devDependencies:
       '@adonisjs/hash':
         specifier: 9.1.1
-        version: 9.1.1(argon2@0.43.0)
+        version: 9.1.1(argon2@0.43.1)
       '@apollo/utils.keyvaluecache':
         specifier: 4.0.0
         version: 4.0.0
@@ -249,8 +249,8 @@ importers:
         specifier: 2.4.6
         version: 2.4.6
       argon2:
-        specifier: 0.43.0
-        version: 0.43.0
+        specifier: 0.43.1
+        version: 0.43.1
       chalk:
         specifier: 5.4.1
         version: 5.4.1
@@ -292,7 +292,7 @@ importers:
         version: 3.15.0(@azure/identity@4.6.0)(@parcel/watcher@2.5.1)(@types/node@22.16.0)(better-sqlite3@11.9.1)(db0@0.2.3(better-sqlite3@11.9.1))(eslint@9.31.0(jiti@2.4.2))(ioredis@5.6.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.44.2)(terser@5.37.0)(typescript@5.7.2)(vite@7.0.2(@types/node@22.16.0)(jiti@2.4.2)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@3.0.1(typescript@5.7.2))(yaml@2.7.0)
       nuxt-auth-utils:
         specifier: 0.4.4
-        version: 0.4.4(argon2@0.43.0)(magicast@0.3.5)(rollup@4.44.2)
+        version: 0.4.4(argon2@0.43.1)(magicast@0.3.5)(rollup@4.44.2)
       nuxt-graphql-server:
         specifier: 3.1.4
         version: 3.1.4(@babel/core@7.26.7)(graphql@16.11.0)(magicast@0.3.5)(rollup@4.44.2)
@@ -4442,8 +4442,8 @@ packages:
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
 
-  argon2@0.43.0:
-    resolution: {integrity: sha512-u/HKLcbWShVDhkfwI4hWyiUf3qyX8QhTfaIv2cWE18uqhXCmR5hb6Ed7oqYi2KCQegeAnRhiFzbjzm7i5yl1GA==}
+  argon2@0.43.1:
+    resolution: {integrity: sha512-TfOzvDWUaQPurCT1hOwIeFNkgrAJDpbBGBGWDgzDsm11nNhImc13WhdGdCU6K7brkp8VpeY07oGtSex0Wmhg8w==}
     engines: {node: '>=16.17.0'}
 
   argparse@2.0.1:
@@ -7686,8 +7686,8 @@ packages:
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
 
-  node-addon-api@8.3.1:
-    resolution: {integrity: sha512-lytcDEdxKjGJPTLEfW4mYMigRezMlyJY8W4wxJK8zE533Jlb8L8dRuObJFWg2P+AuOIxoCgKF+2Oq4d4Zd0OUA==}
+  node-addon-api@8.5.0:
+    resolution: {integrity: sha512-/bRZty2mXUIFY/xU5HLvveNHlswNJej+RnxBjOMkidWfwZzgTbPG1E3K5TOxRLOR+5hX7bSofy8yf1hZevMS8A==}
     engines: {node: ^18 || ^20 || >= 21}
 
   node-dir@0.1.17:
@@ -10645,12 +10645,12 @@ snapshots:
 
   '@actions/io@1.1.3': {}
 
-  '@adonisjs/hash@9.1.1(argon2@0.43.0)':
+  '@adonisjs/hash@9.1.1(argon2@0.43.1)':
     dependencies:
       '@phc/format': 1.0.0
       '@poppinss/utils': 6.9.4
     optionalDependencies:
-      argon2: 0.43.0
+      argon2: 0.43.1
 
   '@alloc/quick-lru@5.2.0': {}
 
@@ -16102,10 +16102,10 @@ snapshots:
 
   arg@5.0.2: {}
 
-  argon2@0.43.0:
+  argon2@0.43.1:
     dependencies:
       '@phc/format': 1.0.0
-      node-addon-api: 8.3.1
+      node-addon-api: 8.5.0
       node-gyp-build: 4.8.4
 
   argparse@2.0.1: {}
@@ -19968,7 +19968,7 @@ snapshots:
 
   node-addon-api@7.1.1: {}
 
-  node-addon-api@8.3.1: {}
+  node-addon-api@8.5.0: {}
 
   node-dir@0.1.17:
     dependencies:
@@ -20049,9 +20049,9 @@ snapshots:
 
   nuxi@3.21.1: {}
 
-  nuxt-auth-utils@0.4.4(argon2@0.43.0)(magicast@0.3.5)(rollup@4.44.2):
+  nuxt-auth-utils@0.4.4(argon2@0.43.1)(magicast@0.3.5)(rollup@4.44.2):
     dependencies:
-      '@adonisjs/hash': 9.1.1(argon2@0.43.0)
+      '@adonisjs/hash': 9.1.1(argon2@0.43.1)
       '@nuxt/kit': 3.15.0(magicast@0.3.5)(rollup@4.44.2)
       defu: 6.1.4
       hookable: 5.5.3
