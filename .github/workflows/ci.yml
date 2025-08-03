@@ -54,7 +54,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:3962158596daaef3682838cc8eb0e719ad1ce520f88e34596ce8d5de1b6330a1
+        image: postgres@sha256:4d89c904835259bc58876520e56267ca07a4ebd6a027f7814bbbf91b50d685be
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -68,7 +68,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:b43d2dcbbdb1f9e1582e3a0f37e53bf79038522ccffb56a25858969d7a9b6c11
+        image: redis@sha256:f957ce918b51f3ac10414244bedd0043c47db44a819f98b9902af1bd9d0afcea
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -126,7 +126,7 @@ jobs:
 
       - name: Publish and test Storybook
         if: always()
-        uses: chromaui/action@4d8ebd13658d795114f8051e25c28d66f14886c6 # v13
+        uses: chromaui/action@58d9ffb36c90c97a02d061544ecc849cc4a242a9 # v13
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
