@@ -7,11 +7,6 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
-    alias: {
-      // Workaround for https://github.com/prisma/prisma/issues/26565
-      '.prisma/client/index-browser': '@prisma/client',
-      '.prisma/client/default': '@prisma/client',
-    },
     azure: {
       config: {
         globalHeaders: {
