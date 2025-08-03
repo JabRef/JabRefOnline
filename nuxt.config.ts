@@ -1,4 +1,7 @@
+import { createResolver } from '@nuxt/kit'
 import { constructConfig } from './config'
+
+const resolver = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   /**
@@ -9,8 +12,9 @@ export default defineNuxtConfig({
   nitro: {
     alias: {
       // Workaround for https://github.com/prisma/prisma/issues/26565
-      '.prisma/client/index-browser': '@prisma/client',
-      '.prisma/client/default': '@prisma/client',
+      '.prisma/client/index-browser': resolver.resolve(
+        './node_modules/.prisma/client/index-browser.js',
+      ),
     },
     azure: {
       config: {
