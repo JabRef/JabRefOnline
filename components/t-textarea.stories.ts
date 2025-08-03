@@ -1,4 +1,5 @@
-import type { Meta, StoryFn } from '@storybook/vue3'
+// @ts-expect-error: not sure why nuxi typecheck fails for this
+import type { Meta, StoryFnFn } from '@nuxtjs/storybook'
 // @ts-expect-error: not yet compatible with 'bundler' module resolution
 import { TTextarea } from '@variantjs/vue'
 
@@ -10,7 +11,8 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn = (args) => ({
+// @ts-expect-error: story missing arg types
+const Template: StoryFnFn = (args) => ({
   setup() {
     return { args }
   },
