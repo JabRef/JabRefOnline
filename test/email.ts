@@ -20,7 +20,6 @@ export async function getEmail(email: string): Promise<EmailMessage> {
   if (messages.length === 0) {
     // Try again in 1 second if there are no messages
     return new Promise((resolve) => {
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       setTimeout(async () => {
         resolve(await getEmail(email))
       }, 1000)

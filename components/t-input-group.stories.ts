@@ -1,4 +1,5 @@
-import type { Meta, Story } from '@storybook/vue3'
+import type { Meta, StoryFn } from '@storybook/vue3'
+// @ts-expect-error: not yet compatible with 'bundler' module resolution
 import { TInputGroup } from '@variantjs/vue'
 
 export default {
@@ -11,7 +12,7 @@ export default {
   },
 } as Meta
 
-const Template: Story = (args) => ({
+const Template: StoryFn = (args) => ({
   setup() {
     return { args }
   },

@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 interface Props {
   headers?: string[]
-  data?: any[]
+  data?: unknown[]
   variant?: string
 }
 

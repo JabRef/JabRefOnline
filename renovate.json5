@@ -6,6 +6,8 @@
     ':maintainLockFilesMonthly',
     // Automerge all updates once they pass tests: https://docs.renovatebot.com/presets-default/#automergeall
     ':automergeAll',
+    // Update _VERSION variables in GitHub Action files: https://docs.renovatebot.com/presets-customManagers/#custommanagersgithubactionsversions
+    'customManagers:githubActionsVersions',
   ],
   schedule: [
     // Monthly, but give a 3-day window (due to throttling not all PRs may be created on the same day): https://docs.renovatebot.com/configuration-options/#schedule
@@ -28,12 +30,6 @@
         '@graphql-**',
       ],
       groupName: 'graphql',
-    },
-    {
-      matchPackageNames: ['@typescript-eslint{/,}**', 'eslint', 'eslint-**'],
-      groupName: 'eslint',
-      // Disable eslint updates for now (maybe forever if we migrate to oxlint in time)
-      enabled: false,
     },
     {
       matchPackageNames: ['prettier', 'prettier-*'],
@@ -104,6 +100,14 @@
       matchManagers: ['github-actions'],
       groupName: 'github-actions',
     },
+    {
+      matchPackageNames: ['**eslint**'],
+      groupName: 'eslint',
+    },
   ],
   'github-actions': { enabled: true },
+  postUpdateOptions: [
+    // Always dedupe the lock file after updating dependencies: https://docs.renovatebot.com/configuration-options/#postupdateoptions
+    'pnpmDedupe',
+  ],
 }

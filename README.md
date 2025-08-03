@@ -49,6 +49,20 @@ Now close and re-open the workspace.
 | pnpm prisma:studio | Explore data in the database using a visual editor.                                                                                                                                                                      |
 | pnpm storybook     | Start [Storybook](#ui-workflow-storybook) in your browser.                                                                                                                                                               |
 
+### Running tests locally
+
+To run the tests locally, it's best to start the development server by running `pnpm dev`.
+Then, in a separate terminal, set the environment variable `TEST_URL` to the URL of the development server (e.g., `http://localhost:3000`)
+
+```bash
+# Linux
+export TEST_URL=http://localhost:3000
+# Windows
+$env:TEST_URL = "http://localhost:3000"
+```
+
+Then you can run the tests by executing `pnpm test`.
+
 ### Workflow for editing the database schema
 
 1. Prototype your new feature by making the necessary changes to `schema.prisma`.

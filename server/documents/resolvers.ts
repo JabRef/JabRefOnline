@@ -14,19 +14,19 @@ import type {
   Resolvers,
   UpdateUserDocumentInput,
 } from '#graphql/resolver'
-import { DocumentType } from '@prisma/client'
+import type { DocumentType } from '@prisma/client'
 import { notEmpty } from '~/composables/util'
 import type { Context } from '../context'
 import type { ResolveType } from '../utils/extractResolveType'
 import { inject, injectable, resolve } from './../tsyringe'
-import {
+import type {
+  UserDocument,
+  UserDocumentCreateInput,
   UserDocumentService,
-  type UserDocument,
-  type UserDocumentCreateInput,
 } from './user.document.service'
 
 // Fields that are stored as separate columns in the database
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line eslint/no-unused-vars
 const specialFields: string[] = [
   'author',
   'editor',

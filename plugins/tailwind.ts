@@ -1,3 +1,6 @@
+/* eslint-disable import/no-duplicates */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import {
   TAlert,
   TCheckbox,
@@ -8,8 +11,9 @@ import {
   TTag,
   TTextarea,
   variantJS,
-  type VariantJSConfiguration,
 } from '@variantjs/vue'
+// @ts-expect-error: not yet compatible with 'bundler' module resolution
+import type { VariantJSConfiguration } from '@variantjs/vue'
 import TTable from '~/components/TTable.vue'
 
 const settings: VariantJSConfiguration = {

@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { mock, mockReset } from 'vitest-mock-extended'
 import { createUnauthenticatedContext } from '~/test/context.helper'
 import { register, resolve } from '../tsyringe'
-import { AuthService } from './auth.service'
+import type { AuthService } from './auth.service'
 
 const authService = mock<AuthService>()
 register('AuthService', { useValue: authService })

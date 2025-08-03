@@ -17,15 +17,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 20
           cache: 'pnpm'
@@ -54,7 +54,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:4ec37d2a07a0067f176fdcc9d4bb633a5724d2cc4f892c7a2046d054bb6939e5
+        image: postgres@sha256:4d89c904835259bc58876520e56267ca07a4ebd6a027f7814bbbf91b50d685be
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -68,7 +68,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:6725a7dc7a44a6486b9d0a5172b10ccaf0c2ea600df87c0b93450d0e7769297f
+        image: redis@sha256:f957ce918b51f3ac10414244bedd0043c47db44a819f98b9902af1bd9d0afcea
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -86,15 +86,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node }}
           cache: 'pnpm'
@@ -129,7 +129,7 @@ jobs:
           cp -r .output/public/_nuxt storybook-static
 
       - name: Publish and test Storybook
-        uses: chromaui/action@30b6228aa809059d46219e0f556752e8672a7e26 # v11
+        uses: chromaui/action@58d9ffb36c90c97a02d061544ecc849cc4a242a9 # v13
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -138,6 +138,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

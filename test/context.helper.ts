@@ -1,5 +1,5 @@
 import { mock, type MockProxy } from 'vitest-mock-extended'
-import { type Context } from '~/server/context'
+import type { Context } from '~/server/context'
 
 export function createUnauthenticatedContext(): MockProxy<Context> {
   const context = mock<Context>()

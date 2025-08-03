@@ -1,6 +1,5 @@
-import type { PrismaClient as PrismaClientT } from '@prisma/client'
-// eslint-disable-next-line import/default
-import prisma from '@prisma/client'
+import prisma, { type PrismaClient as PrismaClientT } from '@prisma/client'
+
 const { PrismaClient, GroupType, GroupHierarchyType } = prisma
 
 async function seedInternal(prisma: PrismaClientT): Promise<void> {

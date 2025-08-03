@@ -21,7 +21,7 @@ export default defineComponent({
       default: 'input',
     },
     settings: {
-      type: Object as PropType<Tagify.TagifyConstructorSettings>,
+      type: Object as PropType<Tagify.TagifySettings>,
       default: () => ({}),
     },
     value: {
@@ -49,13 +49,12 @@ export default defineComponent({
   watch: {
     value(newVal, _oldVal) {
       // Value modified externally, update tagify
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       this.tagify?.loadOriginalValues(newVal)
     },
   },
   mounted() {
     // Install tagify
-    const tagifySettings: Tagify.TagifyConstructorSettings = {
+    const tagifySettings: Tagify.TagifySettings = {
       delimiters: this.delimiters,
       whitelist: this.whitelist,
       ...this.settings,

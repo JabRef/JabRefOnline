@@ -67,7 +67,7 @@
             <div
               class="backdrop-blur-sm bg-gray-400/20 w-full h-full"
               aria-hidden="true"
-            ></div>
+            />
           </div>
           <button
             class="text-right text-gray-700 text-xl relative z-60"
@@ -183,7 +183,7 @@
     <div
       v-show="!isSmallDisplay"
       class="flex-1 mx-3 md:mx-6"
-    ></div>
+    />
   </nav>
 </template>
 

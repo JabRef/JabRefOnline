@@ -76,28 +76,49 @@
               >
                 <ClientOnly>
                   <a
+                    v-if="isWindows()"
                     class="text-2xl"
-                    :href="constructDownloadUrl()"
-                    >Download JabRef</a
+                    href="/download/win_msi"
+                    >Download for Windows</a
+                  >
+                  <a
+                    v-if="isLinux()"
+                    class="text-2xl"
+                    href="/download/linux_deb"
+                    >Download for Linux (Ubuntu, Debian)</a
+                  >
+                  <a
+                    v-if="isMac()"
+                    class="text-2xl"
+                    href="/download/mac_arm64_pkg"
+                    >Download for macOS (Apple Silicon)</a
                   >
                 </ClientOnly>
               </n-button>
+              <div class="text-center pt-4 text-sm">
+                <a
+                  class="text-primary-500 text-sm"
+                  href="/#download"
+                  >Or see all download options</a
+                >
+              </div>
             </div>
           </div>
         </div>
       </header>
 
-      <LandingPageFeatures></LandingPageFeatures>
-      <LandingPageDownload></LandingPageDownload>
-      <LandingPageGetInvolved></LandingPageGetInvolved>
-      <LandingPageMore></LandingPageMore>
-      <LandingPageFooter></LandingPageFooter>
+      <LandingPageFeatures />
+      <LandingPageDownload />
+      <LandingPageGetInvolved />
+      <LandingPageMore />
+      <LandingPageFooter />
     </NuxtLayout>
   </div>
 </template>
 
 <script setup lang="ts">
-import { constructDownloadUrl } from '~/composables/downloads'
+import { isLinux, isMac, isWindows } from '~/composables/detectOs'
+
 definePageMeta({ layout: false })
 
 const links = [

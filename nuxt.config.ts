@@ -1,11 +1,6 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  future: {
-    // @variantjs/vue, @apollo/server, and mount-vue-component are not yet compatible with bundler resolution
-    typescriptBundlerResolution: false,
-  },
-
   /*
    ** Add alias for library imports
    ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
@@ -143,7 +138,7 @@ export default defineNuxtConfig({
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
     // Add support for different icons from iconify
-    'nuxt-icon',
+    '@nuxt/icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
     // Support for end-to-end testing and unit testing (and Vitest integration)
@@ -155,6 +150,9 @@ export default defineNuxtConfig({
     // Add authentication support
     // https://github.com/atinux/nuxt-auth-utils
     'nuxt-auth-utils',
+    // Add eslint support
+    // https://eslint.nuxt.com
+    '@nuxt/eslint',
   ],
 
   /*
@@ -217,9 +215,10 @@ export default defineNuxtConfig({
   },
 
   content: {
-    markdown: {
+    renderer: {
       // Don't automatically print h2-h4 headings as links
-      anchorLinks: false,
+      // Currently leads to TS errors
+      //anchorLinks: false,
     },
   },
 
@@ -227,6 +226,7 @@ export default defineNuxtConfig({
    * SEO configuration
    * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
+  // @ts-expect-error: temporary issue
   site: {
     // Hide information message during startup
     splash: false,

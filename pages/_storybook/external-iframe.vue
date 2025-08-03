@@ -1,14 +1,14 @@
 <template>
   <!-- Based on https://github.com/storybookjs/storybook/blob/next/code/lib/builder-vite/input/iframe.html -->
   <div>
-    <div id="storybook-root"></div>
-    <div id="storybook-docs"></div>
+    <div id="storybook-root" />
+    <div id="storybook-docs" />
     <div class="sb-errordisplay sb-wrapper">
       <div
         id="error-message"
         class="sb-heading"
-      ></div>
-      <pre class="sb-errordisplay_code"><code id="error-stack"></code></pre>
+      />
+      <pre class="sb-errordisplay_code"><code id="error-stack"/></pre>
     </div>
   </div>
 </template>
@@ -20,6 +20,7 @@ import type { RenderContext } from '@storybook/types'
 import type { VueRenderer } from '@storybook/vue3'
 // @ts-expect-error: This is not officially exported to use ugly workaround
 import { applyDecorators } from '@storybook/vue3/dist/entry-preview.mjs'
+// @ts-expect-error: not yet compatible with 'bundler' module resolution
 import { mount } from 'mount-vue-component'
 import * as JabRefLogoStories from '~/components/JabRefLogo.stories.vue'
 import * as NButtonStories from '~/components/n-button.stories.vue'
@@ -40,7 +41,6 @@ export function renderToCanvas(
 ): void {
   const element = storyFn()
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!element) {
     showError({
       title: `Expecting a Vue component from the story: "${name}" of "${title}".`,
@@ -61,11 +61,11 @@ definePageMeta({ layout: false, alias: '/iframe.html' })
 
 export default defineComponent({
   setup: () => {
-    if (!process.client) return
+    if (!import.meta.client) return
     // @ts-expect-error: storybook typing is inconsistent
     const api = start(renderToCanvas, { applyDecorators })
     const framework = 'vue3'
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+
     api.configure(
       framework,
       () => [
@@ -191,9 +191,9 @@ export default defineComponent({
   padding: 10px;
   background: #000;
   color: #eee;
-  font-family: 'Operator Mono', 'Fira Code Retina', 'Fira Code',
-    'FiraCode-Retina', 'Andale Mono', 'Lucida Console', Consolas, Monaco,
-    monospace;
+  font-family:
+    'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina',
+    'Andale Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
 
 .sb-errordisplay pre {
