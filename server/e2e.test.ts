@@ -14,9 +14,9 @@ describe('download', () => {
   it('downloads file from GitHub release', async () => {
     const response = await fetch('/download')
     // Client side redirect uses meta refresh
-    expect(response.status).toBe(200)
     expect(await response.text()).toContain(
-      'https://github.com/JabRef/jabref/releases/download/',
+      'url=https://github.com/JabRef/jabref/releases/download/',
     )
+    expect(response.status).toBe(200)
   })
 })
