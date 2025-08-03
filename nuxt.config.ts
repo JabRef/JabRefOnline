@@ -209,7 +209,6 @@ export default defineNuxtConfig({
    * SEO configuration
    * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
-  // @ts-expect-error: temporary issue
   site: {
     // Hide information message during startup
     splash: false,
@@ -253,5 +252,5 @@ export default defineNuxtConfig({
    * Provide compatibility information for Nitro presets, and Nuxt modules
    * https://nuxt.com/docs/api/nuxt-config#compatibilitydate
    */
-  compatibilityDate: '2024-07-13',
+  compatibilityDate: '2024-12-24',
 })
