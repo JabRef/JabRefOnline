@@ -121,14 +121,11 @@ jobs:
           TEST_URL: http://localhost:3000
 
       - name: Build Storybook
-        run: |
-          pnpm nuxi generate
-          pnpm storybook:build
-          cp .output/public/_storybook/external-iframe/index.html storybook-static/iframe.html
-          mkdir -p storybook-static/_storybook/external-iframe
-          cp -r .output/public/_nuxt storybook-static
+        if: always()
+        run: pnpm storybook:build
 
       - name: Publish and test Storybook
+        if: always()
         uses: chromaui/action@58d9ffb36c90c97a02d061544ecc849cc4a242a9 # v13
         with:
           projectToken: 'b3787adf2fa5'

@@ -1,16 +1,6 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  /*
-   ** Add alias for library imports
-   ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
-   */
-  alias: {
-    // Support `import 'global'` used by storybook
-    // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
-    global: './global.ts',
-  },
-
   /**
    * Pre-render routes at build time by default
    */
@@ -30,8 +20,6 @@ export default defineNuxtConfig({
     prerender: {
       // Prerender all pages reached from the index page
       crawlLinks: true,
-      // Needed for storybook support (otherwise the file is not created during nuxi generate)
-      routes: ['/_storybook/external-iframe'],
     },
     esbuild: {
       options: {
@@ -48,11 +36,6 @@ export default defineNuxtConfig({
   experimental: {
     // Full typed routing
     typedPages: true,
-  },
-
-  vue: {
-    // Add support for vue runtime compiler (needed to render stories in storybook)
-    runtimeCompiler: true,
   },
 
   /*
@@ -131,9 +114,9 @@ export default defineNuxtConfig({
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
-    // Add support for native vue stories
-    // https://github.com/tobiasdiez/storybook-vue-addon
-    'storybook-vue-addon/nuxt',
+    // Add support for storybook
+    // https://storybook.nuxtjs.org/
+    '@nuxtjs/storybook',
     // Devtools support
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
