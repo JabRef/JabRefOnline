@@ -48,14 +48,14 @@
         <div class="text-center pt-8 text-sm">
           <span v-if="isWindows()">
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-500 hover:underlin"
               href="/download/win_zip"
               >Windows Portable</t-nuxtlink
             >
             <br />
             Also available for
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-500 hover:underlin"
               href="https://github.com/JabRef/jabref/releases/latest"
               >mac OS X and Linux</t-nuxtlink
             >
@@ -63,13 +63,13 @@
           </span>
           <span v-if="isMac()">
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-500 hover:underline"
               href="/download/mac_arm64_dmg"
               >Apple Silicon Portable (.dmg)</t-nuxtlink
             >
             or
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-500 hover:underline"
               href="/download/mac_x86_64_dmg"
               >macOS Intel Portable (.dmg)</t-nuxtlink
             >
@@ -82,7 +82,7 @@
             <br />
             Also available for
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-500 hover:underline"
               href="https://github.com/JabRef/jabref/releases/latest"
               >Windows and Linux</t-nuxtlink
             >
@@ -90,14 +90,14 @@
           </span>
           <span v-if="isLinux()">
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-500 hover:underline"
               href="/download/linux_tar_gz"
               >Linux Portable</t-nuxtlink
             >
             <br />
             Also available for
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-500 hover:underline"
               href="https://github.com/JabRef/jabref/releases/latest"
             >
               mac OS X and Windows
@@ -105,14 +105,14 @@
             <br />
           </span>
           <a
-            class="text-primary-500"
+            class="text-primary-500 hover:underline"
             href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
           >
             Change Log
           </a>
           and
           <a
-            class="text-primary-500"
+            class="text-primary-500 hover:underline"
             href="https://builds.jabref.org/main/"
             >Development Builds</a
           >
