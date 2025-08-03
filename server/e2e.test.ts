@@ -13,10 +13,9 @@ describe('index page', () => {
 describe('download', () => {
   it('downloads file from GitHub release', async () => {
     const response = await fetch('/download', { redirect: 'manual' })
-    // Client side redirect uses meta refresh
     expect(await response.text()).toContain(
       'url=https://github.com/JabRef/jabref/releases/download/',
     )
-    expect(response.status).toBe(200)
+    expect(response.status).toBe(302) // Redirect
   })
 })
