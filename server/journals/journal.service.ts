@@ -1,5 +1,5 @@
-import type { PrismaClient } from '@prisma/client'
-import { inject, injectable } from './../tsyringe'
+import type { PrismaClient } from '../database'
+import { inject, injectable } from '../tsyringe'
 
 @injectable()
 export class JournalService {
