@@ -68,7 +68,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:f957ce918b51f3ac10414244bedd0043c47db44a819f98b9902af1bd9d0afcea
+        image: redis@sha256:68285a060161e1658538ca43a778f40cd5db7aa2be428b3e96f163a392c038ac
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
