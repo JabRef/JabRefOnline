@@ -103,6 +103,9 @@ export default defineNuxtConfig({
    ** Nuxt.js modules
    */
   modules: [
+    // Preset for configuring SEO
+    // https://nuxtseo.com/nuxt-seo
+    '@nuxtjs/seo',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // Add support for naive-ui
@@ -127,9 +130,6 @@ export default defineNuxtConfig({
     // Support for end-to-end testing and unit testing (and Vitest integration)
     // https://nuxt.com/docs/getting-started/testing
     '@nuxt/test-utils/module',
-    // Preset for configuring SEO
-    // https://nuxtseo.com/nuxt-seo
-    '@nuxtjs/seo',
     // Add authentication support
     // https://github.com/atinux/nuxt-auth-utils
     'nuxt-auth-utils',
@@ -209,7 +209,6 @@ export default defineNuxtConfig({
    * SEO configuration
    * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
-  // @ts-expect-error: temporary issue
   site: {
     // Hide information message during startup
     splash: false,
