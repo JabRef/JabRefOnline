@@ -16,7 +16,7 @@ export default defineNuxtConfig({
         './node_modules/.prisma/client/index-browser.js',
       ),
       '.prisma/client/default': resolver.resolve(
-        './node_modules/.prisma/client/default.js',
+        './node_modules/.prisma/client/index.js',
       ),
     },
     // Workaround for https://github.com/prisma/prisma/issues/26565
