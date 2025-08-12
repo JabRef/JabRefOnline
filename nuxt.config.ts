@@ -13,10 +13,10 @@ export default defineNuxtConfig({
     alias: {
       // Workaround for https://github.com/prisma/prisma/issues/26565
       '.prisma/client/index-browser': resolver.resolve(
-        './node_modules/.prisma/client/index-browser.js',
+        './node_modules/.pnpm/@prisma+client@6.13.0_prism_9ddcb10fcbc168becda139e3686af05a/node_modules/.prisma/client/index-browser.js',
       ),
       '.prisma/client/default': resolver.resolve(
-        './node_modules/.prisma/client/index.js',
+        './node_modules/.pnpm/@prisma+client@6.13.0_prism_9ddcb10fcbc168becda139e3686af05a/node_modules/.prisma/client/default.js',
       ),
     },
     // Workaround for https://github.com/prisma/prisma/issues/26565
