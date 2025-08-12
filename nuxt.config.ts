@@ -15,6 +15,14 @@ export default defineNuxtConfig({
       '.prisma/client/index-browser': resolver.resolve(
         './node_modules/.prisma/client/index-browser.js',
       ),
+      '.prisma/client/default': resolver.resolve(
+        './node_modules/.prisma/client/default.js',
+      ),
+    },
+    // Workaround for https://github.com/prisma/prisma/issues/26565
+    externals: {
+      trace: false,
+      inline: ['@prisma/client'],
     },
     azure: {
       config: {
@@ -228,6 +236,8 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    resolve: {},
+
     // Workaround for https://github.com/browserify/node-util/pull/62
     define: {
       'process.env': {},
