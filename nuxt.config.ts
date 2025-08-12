@@ -1,4 +1,7 @@
+import { createResolver } from '@nuxt/kit'
 import { constructConfig } from './config'
+
+const resolver = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   /**
@@ -7,6 +10,20 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
+    alias: {
+      // Workaround for https://github.com/prisma/prisma/issues/26565
+      '.prisma/client/index-browser': resolver.resolve(
+        './node_modules/.pnpm/@prisma+client@6.13.0_prism_9ddcb10fcbc168becda139e3686af05a/node_modules/@prisma/client/index-browser.js',
+      ),
+      '.prisma/client/default': resolver.resolve(
+        './node_modules/.pnpm/@prisma+client@6.13.0_prism_9ddcb10fcbc168becda139e3686af05a/node_modules/@prisma/client/default.js',
+      ),
+    },
+    // Workaround for https://github.com/prisma/prisma/issues/26565
+    externals: {
+      trace: false,
+      inline: ['@prisma/client'],
+    },
     azure: {
       config: {
         globalHeaders: {
@@ -209,7 +226,6 @@ export default defineNuxtConfig({
    * SEO configuration
    * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
-  // @ts-expect-error: temporary issue
   site: {
     // Hide information message during startup
     splash: false,
@@ -220,6 +236,8 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    resolve: {},
+
     // Workaround for https://github.com/browserify/node-util/pull/62
     define: {
       'process.env': {},
