@@ -77,27 +77,27 @@
                 <ClientOnly>
                   <a
                     v-if="isWindows()"
-                    class="text-2xl"
+                    class="text-2xl hover:underline"
                     href="/download/win_msi"
                     >Download for Windows</a
                   >
                   <a
                     v-if="isLinux()"
-                    class="text-2xl"
+                    class="text-2xl hover:underline"
                     href="/download/linux_deb"
                     >Download for Linux (Ubuntu, Debian)</a
                   >
                   <a
                     v-if="isMac()"
                     class="text-2xl"
-                    href="/download/mac_arm64_pkg"
+                    href="/download/mac_arm64_pkg hover:underline"
                     >Download for macOS (Apple Silicon)</a
                   >
                 </ClientOnly>
               </n-button>
               <div class="text-center pt-4 text-sm">
                 <a
-                  class="text-primary-500 text-sm"
+                  class="text-primary-500 text-sm hover:underline"
                   href="/#download"
                   >Or see all download options</a
                 >
