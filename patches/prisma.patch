@@ -1,5 +1,5 @@
 diff --git a/build/index.js b/build/index.js
-index 1fe094a3185252ef3b4d2201055a95f982833f72..88b366f73fb7cf77a8e5ec29fc3c4359c7f3c40f 100644
+index 1fe094a3185252ef3b4d2201055a95f982833f72..60e9fc888f34a8c1027decc4856c047414fd6f9c 100644
 --- a/build/index.js
 +++ b/build/index.js
 @@ -2489,7 +2489,7 @@ ${u.length>0?`${u.join(`
@@ -7,7 +7,7 @@ index 1fe094a3185252ef3b4d2201055a95f982833f72..88b366f73fb7cf77a8e5ec29fc3c4359
  import * as path from 'node:path'
  `;return e==="esm"&&(n+=`import { fileURLToPath } from 'node:url'
 -const __dirname = path.dirname(fileURLToPath(import.meta.url))
-+const __dirname = "DOESNOTEXIST"
++const __dirname = '/'
  `),n}var S0t=`/**
   * This file exports various common sort, input & filter types that are not directly linked to a particular model.
   *
