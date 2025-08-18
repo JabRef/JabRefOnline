@@ -31,9 +31,6 @@ export default defineNuxtConfig({
         },
       },
     },
-    experimental: {
-      wasm: true,
-    },
   },
 
   experimental: {
