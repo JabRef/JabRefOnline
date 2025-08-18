@@ -1,30 +1,13 @@
 diff --git a/build/index.js b/build/index.js
-index 3fcf846eebf718e0c179cc232fc255b77edeba3e..4952c45eb3389800d585c5d78e74c35ee307bba4 100644
+index 1fe094a3185252ef3b4d2201055a95f982833f72..88b366f73fb7cf77a8e5ec29fc3c4359c7f3c40f 100644
 --- a/build/index.js
 +++ b/build/index.js
-@@ -2276,15 +2276,7 @@ config.runtimeDataModel = JSON.parse(${JSON.stringify(a)})`}function Wwt(){retur
-   getRuntime: async () => await import(${JSON.stringify(l)}),
- 
-   getQuery${u}WasmModule: async () => {
--    ${Wwt()}
--  
--    // Note: we must use dynamic imports here to avoid bundling errors like \`Module parse failed: Unexpected character '' (1:0)\`.
--    const { readFile } = await dynamicRequireFn('node:fs/promises')
--    ${Vwt(o)}
--    const wasmModulePath = _require.resolve(${JSON.stringify(p)})
--    const wasmModuleBytes = await readFile(wasmModulePath)
--
--    return new globalThis.WebAssembly.Module(wasmModuleBytes)
-+    return await import(${JSON.stringify(p + '?module')}).then(r => r.default || r);
-   }
- }`;if(g){let v=i==="edge-light"?`${p}?module`:p;return`config.${r}Wasm = {
-   getRuntime: async () => await import(${JSON.stringify(l)}),
-@@ -2504,7 +2496,7 @@ ${u.length>0?`${u.join(`
+@@ -2489,7 +2489,7 @@ ${u.length>0?`${u.join(`
  `;let n=`import * as process from 'node:process'
  import * as path from 'node:path'
  `;return e==="esm"&&(n+=`import { fileURLToPath } from 'node:url'
 -const __dirname = path.dirname(fileURLToPath(import.meta.url))
 +const __dirname = "DOESNOTEXIST"
- `),n}var uEt=`/**
+ `),n}var S0t=`/**
   * This file exports various common sort, input & filter types that are not directly linked to a particular model.
   *
