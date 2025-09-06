@@ -1,0 +1,42 @@
+diff --git a/dist/presets/azure/runtime/azure-functions.mjs b/dist/presets/azure/runtime/azure-functions.mjs
+index 519277eab528bb8142d1bfc7dfed174f2134975b..d73b72c2e96cfe3d00f093c2719991005bf02e36 100644
+--- a/dist/presets/azure/runtime/azure-functions.mjs
++++ b/dist/presets/azure/runtime/azure-functions.mjs
+@@ -4,9 +4,29 @@ import {
+   getAzureParsedCookiesFromHeaders,
+   normalizeLambdaOutgoingHeaders
+ } from "nitropack/runtime/internal";
++import { createConsola } from "consola";
+ const nitroApp = useNitroApp();
+ export async function handle(context, req) {
+   const url = "/" + (req.params.url || "");
++  const _getLogFn = (level) => {
++    if (level < 1) {
++      return context.log.error;
++    }
++    if (level === 1) {
++      return context.log.warn;
++    }
++    return context.log;
++  }
++  const consola = createConsola({
++    reporters: [
++      {
++        log: (logObj) => {
++          _getLogFn(logObj.level)(logObj.args);
++        },
++      },
++    ],
++  });
++  consola.wrapConsole();
+   const { body, status, statusText, headers } = await nitroApp.localCall({
+     url,
+     headers: req.headers,
+@@ -14,6 +34,7 @@ export async function handle(context, req) {
+     // https://github.com/Azure/azure-functions-host/issues/293
+     body: req.rawBody
+   });
++  consola.restoreConsole();
+   context.res = {
+     status,
+     // cookies https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-node?tabs=typescript%2Cwindows%2Cazure-cli&pivots=nodejs-model-v4#http-response
