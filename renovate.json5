@@ -110,4 +110,15 @@
     // Always dedupe the lock file after updating dependencies: https://docs.renovatebot.com/configuration-options/#postupdateoptions
     'pnpmDedupe',
   ],
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^.github/scripts/deploy.py$/'],
+      matchStrings: [
+        '{"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "(?<currentValue>.*?)"},\\n',
+      ],
+      datasourceTemplate: 'node-version',
+      depNameTemplate: 'node',
+    },
+  ],
 }
