@@ -17,6 +17,37 @@ jobs:
     permissions:
       contents: read
 
+    services:
+      postgres:
+        image: postgres@sha256:29e0bb09c8e7e7fc265ea9f4367de9622e55bae6b0b97e7cce740c2d63c2ebc0
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: jabref
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis@sha256:cc2dfb8f5151da2684b4a09bd04b567f92d07591d91980eb3eca21df07e12760
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps port 6379 on service container to port 6380 on host
+          - 6380:6379
+
+    env:
+      NUXT_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
+      NUXT_SESSION_PASSWORD: somerandompasswordforcopilotNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
+
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -32,3 +63,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Init database
+        run: pnpm prisma:push
