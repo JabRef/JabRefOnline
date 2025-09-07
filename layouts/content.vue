@@ -80,7 +80,7 @@ if (import.meta.client) {
     value: (option: { top: number; left: number }) => {
       const els = document.querySelectorAll(contentElementSelector)
       const el = els[els.length - 1]
-      if (el.scrollHeight > el.clientHeight) {
+      if (el && el.scrollHeight > el.clientHeight) {
         // element can be scrolled
         el.scrollTo(option.left, el.scrollTop + option.top - offset)
       } else {
