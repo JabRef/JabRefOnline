@@ -68,6 +68,8 @@ jobs:
 
       - name: Build
         run: pnpm build:azure
+        env:
+          NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }} # Needed for prerending
 
       - name: Login to Azure
         uses: Azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0

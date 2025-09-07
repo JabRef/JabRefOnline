@@ -80,6 +80,7 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
+      SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
 
     steps:
       - name: Checkout
@@ -110,12 +111,14 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          NUXT_SESSION_PASSWORD: ${{ env.SESSION_PASSWORD }} # Needed for prerending
 
       - name: Start server
         run: pnpm start &
         env:
           NUXT_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-          NUXT_SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
+          NUXT_SESSION_PASSWORD: ${{ env.SESSION_PASSWORD }}
           NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Run tests

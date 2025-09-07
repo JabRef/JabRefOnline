@@ -82,7 +82,7 @@ export function constructConfig() {
     databaseUrl: 'postgresql://localhost/jabref',
     emailClient: undefined,
     session: {
-      password: 'session_password',
+      password: 'session_password', // It's too short by design, so that it's not used in production
     },
     githubRepoToken: undefined,
     public: {
