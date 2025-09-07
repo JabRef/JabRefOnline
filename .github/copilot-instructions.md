@@ -82,12 +82,12 @@ pnpm prisma:push                # Push schema changes to dev DB
 pnpm prisma:migrate:dev         # Create and apply new migration
 ```
 
-
 ## Workflows
 
 **Database Schema Development Workflow:**
 
 1. **Prototyping Phase:**
+
    ```bash
    # Make changes to server/database/schema.prisma
    pnpm prisma:push            # Push changes to database (no migration)
@@ -124,8 +124,8 @@ pnpm prisma:migrate:dev         # Create and apply new migration
 
 1. Make code changes to components or pages
 2. Verify that it works in the browser
-5. Run unit tests: `pnpm test:unit`
-6. Test E2E with dev server running: `pnpm test:e2e`
+3. Run unit tests: `pnpm test:unit`
+4. Test E2E with dev server running: `pnpm test:e2e`
 
 ### Scenario 3: Production Build Validation
 
@@ -158,7 +158,6 @@ pnpm prisma:migrate:dev         # Create and apply new migration
 /test/                # Test utilities and setup
 /.github/workflows/   # CI/CD pipeline configuration
 ```
-
 
 ## Pre-commit Checklist
 
