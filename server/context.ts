@@ -32,13 +32,8 @@ let sessionConfig: SessionConfig | null = null
 function _useSession(event: H3Event, config: Partial<SessionConfig> = {}) {
   if (!sessionConfig) {
     const runtimeConfig = useRuntimeConfig(event)
-    const envSessionPassword = `${runtimeConfig.nitro?.envPrefix ?? 'NUXT_'}SESSION_PASSWORD`
-
-    // @ts-expect-error hard to define with defu
-    sessionConfig = defu(
-      { password: process.env[envSessionPassword] },
-      runtimeConfig.session,
-    )
+    // @ts-expect-error some mismatch in cookie type definitions
+    sessionConfig = runtimeConfig.session
   }
   const finalConfig = defu(config, sessionConfig) as SessionConfig
   return useSession<UserSession>(event, finalConfig)

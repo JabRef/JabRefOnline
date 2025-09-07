@@ -1,8 +1,7 @@
-import prisma, { type PrismaClient as PrismaClientT } from '@prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { GroupHierarchyType, GroupType, PrismaClient } from '.'
 
-const { PrismaClient, GroupType, GroupHierarchyType } = prisma
-
-async function seedInternal(prisma: PrismaClientT): Promise<void> {
+async function seedInternal(prisma: PrismaClient): Promise<void> {
   await prisma.entity.deleteMany({})
   await prisma.user.deleteMany({})
   await prisma.userDocument.deleteMany({})
@@ -729,7 +728,10 @@ async function seedInternal(prisma: PrismaClientT): Promise<void> {
 }
 
 export async function seed(): Promise<void> {
-  const prisma = new PrismaClient()
+  const adapter = new PrismaPg({
+    connectionString: process.env.NUXT_DATABASE_URL,
+  })
+  const prisma = new PrismaClient({ adapter })
   try {
     await seedInternal(prisma)
   } finally {

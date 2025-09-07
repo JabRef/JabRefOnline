@@ -16,7 +16,7 @@ import {
   type PrismaClient,
   type User,
   type UserDocumentOtherField,
-} from '@prisma/client'
+} from '../database'
 import { unsecureHash } from '../utils/crypto'
 import { inject, injectable } from './../tsyringe'
 

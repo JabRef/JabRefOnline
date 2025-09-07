@@ -5,7 +5,7 @@ type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']['default']
 
 await setup({ host: process.env.TEST_URL })
 
-describe.runIf(process.env.GITHUB_REPO_TOKEN)('getLatestRelease', () => {
+describe.runIf(process.env.NUXT_GITHUB_REPO_TOKEN)('getLatestRelease', () => {
   it('returns a valid version', async () => {
     const response = await fetch('/api/getLatestRelease')
 

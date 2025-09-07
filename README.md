@@ -23,10 +23,10 @@ The simplest way to start is by [opening this project in Gitpod](https://gitpod.
 - Install [Node.js](https://nodejs.org/)
 - Install [PostgreSQL](https://www.postgresql.org/)
 - Checkout
-- Create a `.env` file in the root containing the connection URL for the database, e.g. `DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
+- Create a `.env` file in the root containing the connection URL for the database, e.g. `NUXT_DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
 - Optional: Install and start [Redis](https://redis.io/).
   Perhaps the most straightforward way to do this is via Docker: `pnpm docker:redis`.
-  If you do not use this command, make sure that Redis is available through the port `6380` or, alternatively, add the configuration `REDIS_PORT=<your port>` to the `.env` file.
+  If you do not use this command, make sure that Redis is available through the port `6380` or, alternatively, add the configuration `NUXT_REDIS_PORT=<your port>` to the `.env` file.
 - Run `pnpm install` to install all dependencies.
 - Run `pnpm prisma:migrate:dev` to initialize the database. You may also want to use `pnpm prisma:seed` to fill the database with some initial test data.
 

@@ -1,5 +1,4 @@
 import type { UserSession } from '#auth-utils'
-import { defu } from 'defu'
 import type { H3Event, SessionConfig } from 'h3'
 import { resolve } from '../tsyringe'
 
@@ -7,13 +6,8 @@ let sessionConfig: SessionConfig | null = null
 function _useSession(event: H3Event) {
   if (!sessionConfig) {
     const runtimeConfig = useRuntimeConfig(event)
-    const envSessionPassword = `${runtimeConfig.nitro?.envPrefix ?? 'NUXT_'}SESSION_PASSWORD`
-
-    // @ts-expect-error hard to define with defu
-    sessionConfig = defu(
-      { password: process.env[envSessionPassword] },
-      runtimeConfig.session,
-    )
+    // @ts-expect-error some mismatch in cookie type definitions
+    sessionConfig = runtimeConfig.session
   }
   // @ts-expect-error sessionConfig is not null here
   return useSession<UserSession>(event, sessionConfig)
