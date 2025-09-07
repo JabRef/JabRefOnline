@@ -4,31 +4,12 @@ JabRefOnline is a modern Nuxt.js web application serving as the homepage for Jab
 
 **Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.**
 
-## Environment Setup
-
-**Copilot Environment (Automated):**
-When running in the GitHub Copilot environment, PostgreSQL and Redis services are automatically provisioned with pre-configured environment variables:
-
-- **PostgreSQL**: `postgres:postgres@localhost:5432/jabref`
-- **Redis**: Available on port 6380 (mapped from container port 6379)  
-- **Environment variables**: Pre-configured automatically
-- **Database URL**: `postgresql://postgres:postgres@localhost:5432/jabref?schema=public`
-- **Redis URL**: `redis://localhost:6380`
-
-No manual installation or configuration required - services are ready to use immediately.
-
 ## Working Effectively
 
 ### Initial Setup
 
-**In Copilot Environment (Automated Setup):**
-PostgreSQL and Redis services are automatically provided with pre-configured environment variables. Simply run:
-
-```bash
-pnpm install                    # Takes ~14 seconds
-pnpm prisma:migrate:dev         # Takes ~3 seconds
-pnpm prisma:seed               # Takes ~2 seconds
-```
+PostgreSQL and Redis services are automatically provided with pre-configured environment variables in the Copilot environment. The database is already created and seeded.
+The dependencies are already installed.
 
 ### Build and Development Commands
 
@@ -40,7 +21,6 @@ pnpm prisma:seed               # Takes ~2 seconds
 
 ```bash
 # Development server (NEVER CANCEL - takes 30+ seconds to start)
-# Environment variables are automatically set in Copilot environment
 pnpm dev                        # Runs on http://localhost:3000 - TIMEOUT: 120+ seconds
 
 # Production build (NEVER CANCEL - takes 45-60 seconds)
@@ -102,16 +82,8 @@ pnpm prisma:push                # Push schema changes to dev DB
 pnpm prisma:migrate:dev         # Create and apply new migration
 ```
 
-### Debugging and Development
 
-**VS Code Debug Configurations (Pre-configured):**
-
-The repository includes pre-configured VS Code debug setups in `.vscode/launch.json`:
-
-- **Debug Current Test File**: Debug any test file currently open
-- **Client: Firefox/Chrome**: Debug frontend in browser with source maps
-- **Server: nuxt**: Debug the Nuxt.js server-side code
-- **Fullstack: nuxt**: Debug both client and server simultaneously
+## Workflows
 
 **Database Schema Development Workflow:**
 
@@ -151,9 +123,7 @@ The repository includes pre-configured VS Code debug setups in `.vscode/launch.j
 ### Scenario 2: Full Development Workflow
 
 1. Make code changes to components or pages
-2. Verify hot reload works in browser
-3. Run linting: `pnpm lint`
-4. Run type checking: `pnpm typecheck`
+2. Verify that it works in the browser
 5. Run unit tests: `pnpm test:unit`
 6. Test E2E with dev server running: `pnpm test:e2e`
 
@@ -166,20 +136,18 @@ The repository includes pre-configured VS Code debug setups in `.vscode/launch.j
 
 ## Technology Stack and Architecture
 
-- **Frontend:** Nuxt.js 3.15.0, Vue.js 3, TypeScript
+- **Frontend:** Nuxt.js 4, Vue.js 3, TypeScript
 - **Styling:** Tailwind CSS, Naive UI components
 - **Backend:** Nuxt server API, GraphQL with Apollo
 - **Database:** PostgreSQL with Prisma ORM
 - **Cache:** Redis for session storage
 - **Testing:** Vitest for unit/integration/E2E tests
 - **UI Development:** Storybook for component development
-- **Package Manager:** pnpm 10.15.1
-- **Node.js:** 22.19.0
 
 ## Important Directory Structure
 
 ```
-/server/               # Backend API, GraphQL resolvers, database models
+/server/              # Backend API, GraphQL resolvers, database models
 /pages/               # Nuxt.js route pages
 /components/          # Vue.js reusable components
 /layouts/             # Page layout templates
@@ -191,57 +159,15 @@ The repository includes pre-configured VS Code debug setups in `.vscode/launch.j
 /.github/workflows/   # CI/CD pipeline configuration
 ```
 
-## Common Issues and Solutions
-
-**Module Compatibility Warnings:**
-
-- Warnings about `nuxtseo` and `@bg-dev/nuxt-naiveui` are expected due to Nuxt version
-- These do not affect functionality
-
-**Database Connection Issues:**
-
-- Ensure PostgreSQL is running: `sudo systemctl status postgresql`
-- Verify database URL in `.env` matches your setup
-- Check user permissions for creating databases (required for Prisma shadow DB)
-
-**Redis Connection Issues:**
-
-- Ensure Redis is running: `sudo systemctl status redis-server`
-- In Copilot environment: Redis runs on port 6380 (mapped from container port 6379)
-
-**Build Failures:**
-
-- Always set environment variables before building
-- Ensure database is accessible during build (for prerendering)
-- Allow sufficient time - builds can take 45+ seconds
-
-**Test Failures:**
-
-- E2E tests require development server running first
-- Set `TEST_URL=http://localhost:3000` environment variable
-- Database must be seeded for tests to pass
-
-**Code Generation Issues:**
-
-- Prisma and GraphQL types are auto-generated during `postinstall`
-- If types are missing, run: `pnpm generate` (includes both Prisma and GraphQL generation)
-- Watch mode available: `pnpm generate:watch` for automatic regeneration during development
-
-**Hot Reload Not Working:**
-
-- Ensure development server is running with `pnpm dev`
-- Check browser console for connection errors
-- Restart development server if hot reload stops working
 
 ## Pre-commit Checklist
 
 Before committing changes, always run:
 
-1. `pnpm lint` - Fix any errors, warnings are acceptable
-2. `pnpm typecheck` - Must pass without errors
-3. `pnpm test:unit` - All unit tests must pass
-4. `pnpm build` - Must build successfully
-5. Test key user scenarios manually
+1. `pnpm test:unit` - All unit tests must pass
+2. `pnpm build` - Must build successfully
+3. `pnpm lint` - Fix any errors, warnings are acceptable
+4. `pnpm typecheck` - Must pass without errors
 
 The CI pipeline (.github/workflows/ci.yml) will fail if linting, type checking, building, or core tests fail.
 

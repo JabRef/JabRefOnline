@@ -63,3 +63,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Init database
+        run: pnpm prisma:push
