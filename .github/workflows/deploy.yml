@@ -34,9 +34,7 @@ jobs:
       url: ${{ matrix.url }}
 
     env:
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-      NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
-      NUXT_DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
+      DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
       # renovate: datasource=python-version depName=python
       PYTHON_VERSION: '3.13'
 
@@ -59,13 +57,19 @@ jobs:
       - name: Reset Test database on Azure
         if: matrix.environment == 'Test'
         run: pnpm prisma:migrate:reset --force
+        env:
+          NUXT_DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Update Production database on Azure
         if: matrix.environment == 'Staging'
         run: pnpm prisma:migrate:deploy
+        env:
+          NUXT_DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Build
         run: pnpm build:azure
+        env:
+          NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }} # Needed for prerending
 
       - name: Login to Azure
         uses: Azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
@@ -90,7 +94,10 @@ jobs:
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
           python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }} -v
         env:
-          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
+          AZURE_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Deploy Function App
         run: |
@@ -128,3 +135,6 @@ jobs:
         run: pnpm test:e2e
         env:
           TEST_URL: ${{ matrix.url }}
+          # The tests need these tokens to run, but their actual value should not matter
+          NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
+          NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'
