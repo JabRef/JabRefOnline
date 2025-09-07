@@ -31,8 +31,10 @@ jobs:
       # We could also add these checks to a job-wide if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
       - name: Fail if unsecure
-        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez' && github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'"
-        run: exit 1
+        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez' && github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]' && github.actor != 'copilot-swe-agent'"
+        run: |
+          echo "The workflow was triggered by ${{ github.actor }} and the PR is not labeled as 'safe to test'. For security reasons, we do not run this workflow in this case."
+          exit 1
 
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
