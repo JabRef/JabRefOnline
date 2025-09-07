@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import type { WatchQueryFetchPolicy } from '@apollo/client/core'
+import type { WatchQueryFetchPolicy } from '@apollo/client'
 import { useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'

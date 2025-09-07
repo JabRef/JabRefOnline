@@ -2,7 +2,7 @@ import type {
   DocumentNode,
   OperationVariables,
   TypedDocumentNode,
-} from '@apollo/client/core'
+} from '@apollo/client'
 import { fetch } from '@nuxt/test-utils/e2e'
 import { print, type GraphQLError } from 'graphql'
 import { gql } from 'graphql-tag'
