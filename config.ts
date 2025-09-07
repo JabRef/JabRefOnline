@@ -82,7 +82,8 @@ export function constructConfig() {
     databaseUrl: 'postgresql://localhost/jabref',
     emailClient: undefined,
     session: {
-      password: 'session_password', // It's too short by design, so that it's not used in production
+      password:
+        'somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL', // 32+ chars required for iron-webcrypto
     },
     githubRepoToken: undefined,
     public: {

@@ -32,14 +32,13 @@ describe('mutation', () => {
           "problems": [
             {
               "code": "too_small",
-              "exact": false,
               "inclusive": true,
               "message": "The password must be at least 8 characters long",
               "minimum": 8,
+              "origin": "string",
               "path": [
                 "password",
               ],
-              "type": "string",
             },
           ],
         }
