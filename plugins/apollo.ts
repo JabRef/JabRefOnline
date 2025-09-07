@@ -13,10 +13,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   }
 
   const config = useRuntimeConfig()
-  const httpLink = new HttpLink({ 
-    uri: '/api', 
+  const httpLink = new HttpLink({
+    uri: '/api',
     fetch,
-    credentials: 'include'
+    credentials: 'include',
   })
 
   // Print errors

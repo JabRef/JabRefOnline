@@ -74,7 +74,8 @@ const { result, fetchMore } = useQuery(
     }
   `),
   variables,
-  options,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options as any,
 )
 
 const documents = computed(() =>

@@ -93,8 +93,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useMutation } from '@vue/apollo-composable'
 import type { ApolloCache } from '@apollo/client/core'
+import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { LoginInputSchema } from '~/apollo/validation'
@@ -140,19 +140,18 @@ const onSubmit = handleSubmit(async (values) => {
   // Reset errors
   otherError.value = ''
 
-  const result = await loginUser(
-    { input: values },
-    {
-      update(cache: ApolloCache, { data: login }: { data: any }) {
-        if (login?.login?.__typename === 'UserReturned') {
-          const { user } = login.login
-          cacheCurrentUser(cache, user)
-        } else {
-          cacheCurrentUser(cache, null)
-        }
-      },
+  const result = await loginUser({ input: values }, {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    update(cache: ApolloCache, { data: login }: { data: any }) {
+      if (login?.login?.__typename === 'UserReturned') {
+        const { user } = login.login
+        cacheCurrentUser(cache, user)
+      } else {
+        cacheCurrentUser(cache, null)
+      }
     },
-  )
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any)
   if (result?.data?.login?.__typename === 'UserReturned') {
     // Update user info
     const { fetch } = useUserSession()

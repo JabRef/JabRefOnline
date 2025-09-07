@@ -168,11 +168,14 @@
               </button>
               <button
                 class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                @click="logout({}, {
-                  update(cache: ApolloCache, _data: any) {
-                    cacheCurrentUser(cache, null)
-                  },
-                })"
+                @click="
+                  logout({}, {
+                    update(cache: ApolloCache, _data: any) {
+                      cacheCurrentUser(cache, null)
+                    },
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  } as any)
+                "
               >
                 Logout
               </button>
@@ -191,10 +194,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { ApolloCache } from '@apollo/client/core'
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import type { NPopover } from 'naive-ui'
-import type { ApolloCache } from '@apollo/client/core'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'

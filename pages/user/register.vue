@@ -70,8 +70,8 @@
 </template>
 
 <script lang="ts">
-import { useMutation } from '@vue/apollo-composable'
 import type { ApolloCache } from '@apollo/client/core'
+import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 definePageMeta({ layout: false })
@@ -118,6 +118,7 @@ export default defineComponent({
           },
         },
         {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           update(cache: ApolloCache, { data }: { data: any }) {
             cacheCurrentUser(
               cache,
@@ -126,7 +127,8 @@ export default defineComponent({
                 : null,
             )
           },
-        },
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any,
       )
     }
 

@@ -88,7 +88,12 @@ export default defineComponent({
       })
     }
 
-    return { password, error, changePassword: handleChangePassword, repeatPassword }
+    return {
+      password,
+      error,
+      changePassword: handleChangePassword,
+      repeatPassword,
+    }
   },
 })
 </script>
