@@ -101,6 +101,8 @@ jobs:
 
       - name: Init database
         run: pnpm prisma:push
+        env:
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
