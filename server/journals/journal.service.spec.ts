@@ -30,7 +30,9 @@ describe('userDocumentService', () => {
   describe('getJournalById', () => {
     it('should return a journal with the given ISSN', async () => {
       prisma.journal.findFirst.mockResolvedValue(testJournal)
-      const journal = await journalService.getJournalByIssn(testJournal.issn[0])
+      const journal = await journalService.getJournalByIssn(
+        testJournal.issn[0]!,
+      )
       expect(journal).toBeDefined()
       expect(journal).toEqual(testJournal)
       expect(prisma.journal.findFirst).toBeCalledWith({
