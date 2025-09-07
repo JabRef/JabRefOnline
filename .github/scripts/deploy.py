@@ -1,4 +1,8 @@
 # type: ignore
+# Convention about env variable names:
+#  - All env variables that are used in this script should start with AZURE_
+#  - All env variables that are controlling the runtime behavior of the Nuxt app should start with NUXT_
+#    (so that they are automatically exposed to the Nuxt app according to https://nuxt.com/docs/4.x/guide/going-further/runtime-config#environment-variables)
 
 import logging
 import os
@@ -29,7 +33,7 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
 
     logger.info(f"Deploying to {environment_name}")
 
-    SUBSCRIPTION_ID = os.environ.get("SUBSCRIPTION_ID", None)
+    SUBSCRIPTION_ID = os.environ.get("AZURE_SUBSCRIPTION_ID", None)
     if SUBSCRIPTION_ID is None:
         raise Exception("No subscription ID found")
     GROUP_NAME = "JabRefOnline"
@@ -37,9 +41,9 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
     STORAGE_ACCOUNT = "jabreffunctionstorage"
     APP_INSIGHTS_NAME = "jabref-online"
     REDIS_NAME = "jabref"
-    DATABASE_URL = os.environ.get("NUXT_DATABASE_URL", "<Not specified>")
-    SESSION_SECRET = os.environ.get("NUXT_SESSION_PASSWORD", "<Not specified>")
-    GITHUB_REPO_TOKEN = os.environ.get("GITHUB_REPO_TOKEN", "<Not specified>")
+    DATABASE_URL = os.environ.get("AZURE_DATABASE_URL", "<Not specified>")
+    SESSION_SECRET = os.environ.get("AZURE_SESSION_PASSWORD", "<Not specified>")
+    GITHUB_REPO_TOKEN = os.environ.get("AZURE_GITHUB_REPO_TOKEN", "<Not specified>")
 
     function_app_name = "jabref-function-" + environment_name
 
@@ -171,19 +175,19 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
                         "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
                         "value": storage_connection_string,
                     },
-                    {"name": "EMAIL_CLIENT", "value": email_connection_string},
+                    {"name": "NUXT_EMAIL_CLIENT", "value": email_connection_string},
                     {"name": "NUXT_DATABASE_URL", "value": DATABASE_URL},
                     {"name": "NODE_ENV", "value": "production"},
                     {
-                        "name": "REDIS_HOST",
+                        "name": "NUXT_REDIS_HOST",
                         "value": redis.host_name,
                     },
                     {
-                        "name": "REDIS_PASSWORD",
+                        "name": "NUXT_REDIS_PASSWORD",
                         "value": redis_keys.primary_key,
                     },
-                    {"name": "NUXT_SESSION_PASSWORD", "value": SESSION_SECRET},
-                    {"name": "GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
+                    {"name": "NUXT_SESSION_SECRET", "value": SESSION_SECRET},
+                    {"name": "NUXT_GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
                     # Disable indexing of non-production sites
                     # https://nuxtseo.com/robots/guides/disable-indexing#preview-staging-testing-environments
                     {"name": "NUXT_SITE_URL", "value":

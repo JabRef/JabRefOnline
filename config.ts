@@ -57,15 +57,16 @@ function getEnvironment(): Environment {
 
 export interface Config {
   redis: {
-    port: number
+    port: string
     host: string
     password: string
   }
+  databaseUrl: string
   emailClient?: string
   session: {
     secret: string
   }
-  githubRepoToken: string
+  githubRepoToken?: string
   public: {
     environment: Environment
   }
@@ -74,16 +75,16 @@ export interface Config {
 export function constructConfig() {
   return {
     redis: {
-      port: Number(process.env.REDIS_PORT) || 6380,
-      host: process.env.REDIS_HOST ?? 'localhost',
-      password: process.env.REDIS_PASSWORD ?? 'jabref',
+      port: '6380',
+      host: 'localhost',
+      password: 'jabref',
     },
     databaseUrl: 'postgresql://localhost/jabref',
-    emailClient: process.env.EMAIL_CLIENT,
+    emailClient: undefined,
     session: {
-      secret: process.env.NUXT_SESSION_PASSWORD ?? 'session_secret',
+      secret: 'session_secret',
     },
-    githubRepoToken: process.env.GITHUB_REPO_TOKEN ?? 'UNDEFINED',
+    githubRepoToken: undefined,
     public: {
       environment: getEnvironment(),
     },

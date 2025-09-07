@@ -24,8 +24,6 @@ jobs:
 
     env:
       PREVIEW_NAME: ${{ github.event.pull_request.number || github.event.inputs.preview_name }}
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-      NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
       # renovate: datasource=python-version depName=python
       PYTHON_VERSION: '3.13'
 
@@ -82,6 +80,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Create test database on Azure
+        id: create_db
         run: |
           $name = "postgres_test_$env:PREVIEW_NAME"
           $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
@@ -96,9 +95,9 @@ jobs:
           # Login to the database using the Github user
           $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$($name)?sslmode=require"
           echo "::add-mask::$connection_string"
-          echo "NUXT_DATABASE_URL=$connection_string" >> $env:GITHUB_ENV
-          $Env:NUXT_DATABASE_URL = $connection_string
+          echo "db_url=$connection_string" >> $env:GITHUB_OUTPUT
           # Finally, run the migrations (this also creates the db)
+          $Env:NUXT_DATABASE_URL = $connection_string
           pnpm prisma:migrate:reset --force
         env:
           DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
@@ -108,7 +107,10 @@ jobs:
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
           python .github\scripts\deploy.py --env $env:PREVIEW_NAME -v
         env:
-          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
+          AZURE_DATABASE_URL: ${{ steps.create_db.outputs.db_url }}
 
       - name: Deploy Function App
         run: |
@@ -154,3 +156,6 @@ jobs:
         run: pnpm test:e2e
         env:
           TEST_URL: ${{ steps.deploy_web.outputs.url }}
+          # The tests need these tokens to run, but their actual value should not matter
+          NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
+          NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'

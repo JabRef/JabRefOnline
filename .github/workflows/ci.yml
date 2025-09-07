@@ -79,9 +79,7 @@ jobs:
           - 6380:6379
 
     env:
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-      NUXT_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
-      NUXT_SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
 
     steps:
       - name: Checkout
@@ -106,18 +104,24 @@ jobs:
 
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
-        run: pnpm prisma:migrate:diff $NUXT_DATABASE_URL
+        run: pnpm prisma:migrate:diff $DATABASE_URL
 
       - name: Build
         run: pnpm build
 
       - name: Start server
         run: pnpm start &
+        env:
+          NUXT_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          NUXT_SESSION_SECRET: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Run tests
         run: pnpm run test --coverage
         env:
           TEST_URL: http://localhost:3000
+          # The tests need these tokens to run, but their actual value should not matter
+          NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
 
       - name: Build Storybook
         if: always()

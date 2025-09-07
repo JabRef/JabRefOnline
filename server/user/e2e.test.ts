@@ -41,7 +41,7 @@ describe('mutation', () => {
   })
   describe('signup', () => {
     const email = getTemporaryEmail()
-    test.runIf(process.env.EMAIL_CLIENT)(
+    test.runIf(process.env.NUXT_EMAIL_CLIENT)(
       `sends an email to the address ${email}`,
       async () => {
         const { data, errors } = await api().mutate({
