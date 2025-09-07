@@ -79,8 +79,8 @@ jobs:
           - 6380:6379
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
       GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+      NUXT_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
       NUXT_SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
 
     steps:
@@ -106,7 +106,7 @@ jobs:
 
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
-        run: pnpm prisma:migrate:diff $DATABASE_URL
+        run: pnpm prisma:migrate:diff $NUXT_DATABASE_URL
 
       - name: Build
         run: pnpm build

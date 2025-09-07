@@ -96,8 +96,8 @@ jobs:
           # Login to the database using the Github user
           $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$($name)?sslmode=require"
           echo "::add-mask::$connection_string"
-          echo "DATABASE_URL=$connection_string" >> $env:GITHUB_ENV
-          $Env:DATABASE_URL = $connection_string
+          echo "NUXT_DATABASE_URL=$connection_string" >> $env:GITHUB_ENV
+          $Env:NUXT_DATABASE_URL = $connection_string
           # Finally, run the migrations (this also creates the db)
           pnpm prisma:migrate:reset --force
         env:
