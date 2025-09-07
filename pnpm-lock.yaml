@@ -8,6 +8,9 @@ patchedDependencies:
   '@azure/static-web-apps-cli':
     hash: 04179a06612e62789389771ae74e120b5748325086eb9d25be44e50be5416052
     path: patches/@azure__static-web-apps-cli.patch
+  '@prisma/client':
+    hash: 4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523
+    path: patches/@prisma__client.patch
   '@vue/apollo-util':
     hash: edbad00d9e143d8a1baa7afde4d48b9b4cde195c74e05f96ac38393dda99d793
     path: patches/@vue__apollo-util@4.0.0-beta.6.patch
@@ -57,7 +60,7 @@ importers:
         version: 6.15.0
       '@prisma/client':
         specifier: 6.15.0
-        version: 6.15.0(prisma@6.15.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)
+        version: 6.15.0(patch_hash=4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523)(prisma@6.15.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)
       '@variantjs/core':
         specifier: 0.0.90
         version: 0.0.90
@@ -13917,7 +13920,7 @@ snapshots:
     transitivePeerDependencies:
       - pg-native
 
-  '@prisma/client@6.15.0(prisma@6.15.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)':
+  '@prisma/client@6.15.0(patch_hash=4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523)(prisma@6.15.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)':
     optionalDependencies:
       prisma: 6.15.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2)
       typescript: 5.7.2
