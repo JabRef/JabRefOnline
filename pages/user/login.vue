@@ -34,7 +34,7 @@
             :validation-status="errors.email ? 'error' : undefined"
           >
             <n-input
-              v-model:value="email"
+              v-model:value="emailValue"
               v-bind="emailAttrs"
               v-focus
             />
@@ -46,7 +46,7 @@
             :validation-status="errors.password ? 'error' : undefined"
           >
             <n-input
-              v-model:value="password"
+              v-model:value="passwordValue"
               v-bind="passwordAttrs"
               type="password"
               show-password-on="mousedown"
@@ -108,6 +108,21 @@ const { handleSubmit, errors, defineField } = useForm({
 })
 const [email, emailAttrs] = defineField('email')
 const [password, passwordAttrs] = defineField('password')
+
+// Explicitly cast to string for naive-ui compatibility
+const emailValue = computed({
+  get: () => email.value as string,
+  set: (value) => {
+    email.value = value
+  },
+})
+
+const passwordValue = computed({
+  get: () => password.value as string,
+  set: (value) => {
+    password.value = value
+  },
+})
 
 const otherError = ref('')
 
