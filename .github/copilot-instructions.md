@@ -9,9 +9,13 @@ JabRefOnline is a modern Nuxt.js web application serving as the homepage for Jab
 **Copilot Environment (Automated):**
 When running in the GitHub Copilot environment, PostgreSQL and Redis services are automatically provisioned with pre-configured environment variables:
 
-- PostgreSQL: `postgres:postgres@localhost:5432/jabref`
-- Redis: Available on port 6380
-- Environment variables are pre-set
+- **PostgreSQL**: `postgres:postgres@localhost:5432/jabref`
+- **Redis**: Available on port 6380 (mapped from container port 6379)  
+- **Environment variables**: Pre-configured automatically
+- **Database URL**: `postgresql://postgres:postgres@localhost:5432/jabref?schema=public`
+- **Redis URL**: `redis://localhost:6380`
+
+No manual installation or configuration required - services are ready to use immediately.
 
 ## Working Effectively
 
@@ -98,6 +102,39 @@ pnpm prisma:push                # Push schema changes to dev DB
 pnpm prisma:migrate:dev         # Create and apply new migration
 ```
 
+### Debugging and Development
+
+**VS Code Debug Configurations (Pre-configured):**
+
+The repository includes pre-configured VS Code debug setups in `.vscode/launch.json`:
+
+- **Debug Current Test File**: Debug any test file currently open
+- **Client: Firefox/Chrome**: Debug frontend in browser with source maps
+- **Server: nuxt**: Debug the Nuxt.js server-side code
+- **Fullstack: nuxt**: Debug both client and server simultaneously
+
+**Database Schema Development Workflow:**
+
+1. **Prototyping Phase:**
+   ```bash
+   # Make changes to server/database/schema.prisma
+   pnpm prisma:push            # Push changes to database (no migration)
+   # Iterate and test changes
+   ```
+
+2. **Migration Creation:**
+   ```bash
+   pnpm prisma:migrate:dev     # Generate migration file from schema changes
+   pnpm prisma:seed            # Re-seed if needed
+   ```
+
+**GraphQL Development:**
+
+- Schema located at `server/schema.graphql`
+- Resolvers in `server/resolvers.ts`
+- Generated types automatically updated on file changes
+- GraphQL endpoint: `http://localhost:3000/api`
+
 ## Validation Scenarios
 
 **ALWAYS manually validate changes using these complete user scenarios:**
@@ -183,6 +220,18 @@ pnpm prisma:migrate:dev         # Create and apply new migration
 - E2E tests require development server running first
 - Set `TEST_URL=http://localhost:3000` environment variable
 - Database must be seeded for tests to pass
+
+**Code Generation Issues:**
+
+- Prisma and GraphQL types are auto-generated during `postinstall`
+- If types are missing, run: `pnpm generate` (includes both Prisma and GraphQL generation)
+- Watch mode available: `pnpm generate:watch` for automatic regeneration during development
+
+**Hot Reload Not Working:**
+
+- Ensure development server is running with `pnpm dev`
+- Check browser console for connection errors
+- Restart development server if hot reload stops working
 
 ## Pre-commit Checklist
 
