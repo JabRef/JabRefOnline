@@ -42,7 +42,7 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
     APP_INSIGHTS_NAME = "jabref-online"
     REDIS_NAME = "jabref"
     DATABASE_URL = os.environ.get("AZURE_DATABASE_URL", "<Not specified>")
-    SESSION_SECRET = os.environ.get("AZURE_SESSION_PASSWORD", "<Not specified>")
+    SESSION_PASSWORD = os.environ.get("AZURE_SESSION_PASSWORD", "<Not specified>")
     GITHUB_REPO_TOKEN = os.environ.get("AZURE_GITHUB_REPO_TOKEN", "<Not specified>")
 
     function_app_name = "jabref-function-" + environment_name
@@ -186,7 +186,7 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
                         "name": "NUXT_REDIS_PASSWORD",
                         "value": redis_keys.primary_key,
                     },
-                    {"name": "NUXT_SESSION_SECRET", "value": SESSION_SECRET},
+                    {"name": "NUXT_SESSION_PASSWORD", "value": SESSION_PASSWORD},
                     {"name": "NUXT_GITHUB_REPO_TOKEN", "value": GITHUB_REPO_TOKEN},
                     # Disable indexing of non-production sites
                     # https://nuxtseo.com/robots/guides/disable-indexing#preview-staging-testing-environments

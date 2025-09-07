@@ -64,7 +64,7 @@ export interface Config {
   databaseUrl: string
   emailClient?: string
   session: {
-    secret: string
+    password: string
   }
   githubRepoToken?: string
   public: {
@@ -82,7 +82,7 @@ export function constructConfig() {
     databaseUrl: 'postgresql://localhost/jabref',
     emailClient: undefined,
     session: {
-      secret: 'session_secret',
+      password: 'session_password',
     },
     githubRepoToken: undefined,
     public: {

@@ -115,7 +115,7 @@ jobs:
         run: pnpm start &
         env:
           NUXT_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-          NUXT_SESSION_SECRET: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
+          NUXT_SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
           NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Run tests
