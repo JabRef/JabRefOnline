@@ -1,6 +1,6 @@
-import type { PrismaClient } from '@prisma/client'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { mockDeep, mockReset } from 'vitest-mock-extended'
+import type { PrismaClient } from '../database'
 import { register, resolve } from '../tsyringe'
 import type { UserDocument } from './user.document.service'
 

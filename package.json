@@ -52,6 +52,7 @@
     "@nuxtjs/tailwindcss": "6.12.2",
     "@pinia/nuxt": "0.9.0",
     "@popperjs/core": "2.11.8",
+    "@prisma/adapter-pg": "6.15.0",
     "@prisma/client": "6.15.0",
     "@variantjs/core": "0.0.90",
     "@variantjs/vue": "0.0.22",
@@ -98,6 +99,7 @@
     "@graphql-typed-document-node/core": "3.2.0",
     "@nuxt/content": "3.6.3",
     "@nuxt/eslint": "1.5.2",
+    "@nuxt/icon": "1.15.0",
     "@nuxt/kit": "3.15.0",
     "@nuxt/test-utils": "3.15.1",
     "@nuxtjs/seo": "3.1.0",
@@ -132,7 +134,6 @@
     "nuxt": "3.15.0",
     "nuxt-auth-utils": "0.4.4",
     "nuxt-graphql-server": "3.1.4",
-    "@nuxt/icon": "1.15.0",
     "oxlint": "1.14.0",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.6.2",
@@ -161,8 +162,10 @@
     "patchedDependencies": {
       "mount-vue-component": "patches/mount-vue-component@0.10.2.patch",
       "@vue/apollo-util": "patches/@vue__apollo-util@4.0.0-beta.6.patch",
-      "nitropack": "patches/nitropack@2.9.7.patch",
-      "@azure/static-web-apps-cli": "patches/@azure__static-web-apps-cli.patch"
+      "nitropack": "patches/nitropack.patch",
+      "prisma": "patches/prisma.patch",
+      "@azure/static-web-apps-cli": "patches/@azure__static-web-apps-cli.patch",
+      "@prisma/client": "patches/@prisma__client.patch"
     },
     "onlyBuiltDependencies": [
       "@prisma/client",
