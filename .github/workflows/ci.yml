@@ -107,7 +107,7 @@ jobs:
 
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
-        run: pnpm prisma:migrate:diff $NUXT_DATABASE_URL
+        run: pnpm prisma:migrate:diff $DATABASE_URL
 
       - name: Build
         run: pnpm build
