@@ -55,6 +55,7 @@ export class Mutation {
     let caseSensitive = null
     let onlySplitWordsAtDelimiter = null
     let isRegEx = null
+    // oxlint-disable-next-line no-unused-vars
     let paths = null
 
     if (group.automaticKeywordGroup) {
