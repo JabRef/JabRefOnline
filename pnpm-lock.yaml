@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  '@azure/static-web-apps-cli':
+    hash: 04179a06612e62789389771ae74e120b5748325086eb9d25be44e50be5416052
+    path: patches/@azure__static-web-apps-cli.patch
   '@vue/apollo-util':
     hash: edbad00d9e143d8a1baa7afde4d48b9b4cde195c74e05f96ac38393dda99d793
     path: patches/@vue__apollo-util@4.0.0-beta.6.patch
@@ -133,7 +136,7 @@ importers:
         version: 1.22.0
       '@azure/static-web-apps-cli':
         specifier: 2.0.6
-        version: 2.0.6
+        version: 2.0.6(patch_hash=04179a06612e62789389771ae74e120b5748325086eb9d25be44e50be5416052)
       '@bg-dev/nuxt-naiveui':
         specifier: v2.0.0-rc.5
         version: 2.0.0-rc.5(magicast@0.3.5)(vue@3.5.21(typescript@5.7.2))
@@ -10913,7 +10916,7 @@ snapshots:
       jsonwebtoken: 9.0.2
       uuid: 8.3.2
 
-  '@azure/static-web-apps-cli@2.0.6':
+  '@azure/static-web-apps-cli@2.0.6(patch_hash=04179a06612e62789389771ae74e120b5748325086eb9d25be44e50be5416052)':
     dependencies:
       '@azure/arm-appservice': 15.0.0
       '@azure/arm-resources': 5.2.0
