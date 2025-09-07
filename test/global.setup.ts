@@ -30,6 +30,12 @@ beforeAll((context) => {
 
   if (isIntegrationTest) {
     const config = constructConfig()
+    // Override config from environment variables (only for db connections)
+    config.databaseUrl = process.env.NUXT_DATABASE_URL ?? config.databaseUrl
+    config.redis.port = process.env.NUXT_REDIS_PORT ?? config.redis.port
+    config.redis.host = process.env.NUXT_REDIS_HOST ?? config.redis.host
+    config.redis.password =
+      process.env.NUXT_REDIS_PASSWORD ?? config.redis.password
     register('Config', {
       useValue: config,
     })
