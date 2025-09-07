@@ -204,7 +204,9 @@ export class UserResolver {
     return {
       edges: documents.map((document) => ({ node: document })),
       pageInfo: {
-        endCursor: documents.length ? documents[documents.length - 1].id : null,
+        endCursor: documents.length
+          ? documents[documents.length - 1]?.id
+          : null,
         hasNextPage,
       },
     }
@@ -244,7 +246,7 @@ export class UserResolver {
 
     function constructCursor(documents: UserDocument[]) {
       if (documents.length === 0) return null
-      const lastDoc = documents[documents.length - 1]
+      const lastDoc = documents[documents.length - 1]!
       return {
         id: lastDoc.id,
         lastModified: lastDoc.lastModified,
