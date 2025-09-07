@@ -13,9 +13,6 @@ When running in the GitHub Copilot environment, PostgreSQL and Redis services ar
 - Redis: Available on port 6380
 - Environment variables are pre-set
 
-**Local Development Environment:**
-For local development, manual setup of PostgreSQL and Redis is required with different credentials and ports.
-
 ## Working Effectively
 
 ### Initial Setup
@@ -29,42 +26,6 @@ pnpm prisma:migrate:dev         # Takes ~3 seconds
 pnpm prisma:seed               # Takes ~2 seconds
 ```
 
-**For Local Development (Manual Setup):**
-Complete these steps in order for a fresh local development environment:
-
-1. **Install System Dependencies:**
-
-   ```bash
-   sudo apt update
-   sudo apt install -y postgresql postgresql-contrib redis-server
-   sudo systemctl start postgresql redis-server
-   ```
-
-2. **Configure PostgreSQL:**
-
-   ```bash
-   sudo -u postgres psql -c "CREATE USER jabref WITH PASSWORD 'jabref';"
-   sudo -u postgres psql -c "CREATE DATABASE jabref OWNER jabref;"
-   sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE jabref TO jabref;"
-   sudo -u postgres psql -c "ALTER USER jabref CREATEDB;"
-   ```
-
-3. **Create Environment Configuration:**
-   Create `.env` file in project root:
-
-   ```
-   NUXT_DATABASE_URL="postgresql://jabref:jabref@localhost:5432/jabref?schema=public"
-   NUXT_REDIS_PORT=6379
-   SESSION_PASSWORD=somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
-   ```
-
-4. **Install Dependencies and Setup Database:**
-   ```bash
-   pnpm install                    # Takes ~14 seconds
-   pnpm prisma:migrate:dev         # Takes ~3 seconds
-   pnpm prisma:seed               # Takes ~2 seconds
-   ```
-
 ### Build and Development Commands
 
 **CRITICAL - Build Timeouts:**
@@ -75,10 +36,7 @@ Complete these steps in order for a fresh local development environment:
 
 ```bash
 # Development server (NEVER CANCEL - takes 30+ seconds to start)
-# In Copilot environment, environment variables are already set
-# For local development, set these variables:
-export NUXT_DATABASE_URL="postgresql://jabref:jabref@localhost:5432/jabref?schema=public"
-export NUXT_SESSION_PASSWORD="somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL"
+# Environment variables are automatically set in Copilot environment
 pnpm dev                        # Runs on http://localhost:3000 - TIMEOUT: 120+ seconds
 
 # Production build (NEVER CANCEL - takes 45-60 seconds)
@@ -213,7 +171,6 @@ pnpm prisma:migrate:dev         # Create and apply new migration
 
 - Ensure Redis is running: `sudo systemctl status redis-server`
 - In Copilot environment: Redis runs on port 6380 (mapped from container port 6379)
-- In local development: Default port 6379 is configured
 
 **Build Failures:**
 
