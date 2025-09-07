@@ -36,6 +36,19 @@ definePageMeta({
 
 const ui = useUiStore()
 
+const variables = computed(() => ({
+  groupId: ui.selectedGroupId,
+  query: ui.activeSearchQuery,
+  first: ui.activeSearchQuery ? null : FIRST,
+  after: '',
+}))
+
+const options = computed(() => ({
+  fetchPolicy: ui.activeSearchQuery
+    ? ('no-cache' as WatchQueryFetchPolicy)
+    : ('cache-first' as WatchQueryFetchPolicy),
+}))
+
 const { result, fetchMore } = useQuery(
   gql(/* GraphQL */ `
     query Documents($groupId: ID, $query: String, $first: Int, $after: String) {
@@ -60,17 +73,8 @@ const { result, fetchMore } = useQuery(
       }
     }
   `),
-  () => ({
-    groupId: ui.selectedGroupId,
-    query: ui.activeSearchQuery,
-    first: ui.activeSearchQuery ? null : FIRST,
-    after: '',
-  }),
-  () => ({
-    fetchPolicy: ui.activeSearchQuery
-      ? ('no-cache' as WatchQueryFetchPolicy)
-      : ('cache-first' as WatchQueryFetchPolicy),
-  }),
+  variables,
+  options,
 )
 
 const documents = computed(() =>

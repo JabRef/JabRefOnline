@@ -73,20 +73,22 @@ export default defineComponent({
           }
         }
       `),
-      () => ({
-        variables: {
-          input: {
-            token,
-            id,
-            newPassword: password.value,
-          },
-        },
-      }),
     )
     onDone(() => {
       void navigateTo({ name: 'user-login' })
     })
-    return { password, error, changePassword, repeatPassword }
+
+    const handleChangePassword = async () => {
+      await changePassword({
+        input: {
+          token,
+          id,
+          newPassword: password.value,
+        },
+      })
+    }
+
+    return { password, error, changePassword: handleChangePassword, repeatPassword }
   },
 })
 </script>

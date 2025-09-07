@@ -64,15 +64,17 @@ export default defineComponent({
           }
         }
       `),
-      () => ({
-        variables: {
-          input: {
-            email: email.value,
-          },
-        },
-      }),
     )
-    return { email, error, called, forgotPassword }
+
+    const handleForgotPassword = async () => {
+      await forgotPassword({
+        input: {
+          email: email.value,
+        },
+      })
+    }
+
+    return { email, error, called, forgotPassword: handleForgotPassword }
   },
 })
 </script>

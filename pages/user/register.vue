@@ -71,6 +71,7 @@
 
 <script lang="ts">
 import { useMutation } from '@vue/apollo-composable'
+import type { ApolloCache } from '@apollo/client/core'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 definePageMeta({ layout: false })
@@ -103,32 +104,37 @@ export default defineComponent({
           }
         }
       `),
-      () => ({
-        variables: {
-          input: {
-            email: email.value,
-            password: password.value,
-          },
-        },
-        update(cache, { data }) {
-          cacheCurrentUser(
-            cache,
-            data?.signup?.__typename === 'UserReturned'
-              ? data.signup.user
-              : null,
-          )
-        },
-      }),
     )
     onDone(() => {
       void navigateTo({ path: '/dashboard' })
     })
 
+    const handleSignup = async () => {
+      await signup(
+        {
+          input: {
+            email: email.value,
+            password: password.value,
+          },
+        },
+        {
+          update(cache: ApolloCache, { data }: { data: any }) {
+            cacheCurrentUser(
+              cache,
+              data?.signup?.__typename === 'UserReturned'
+                ? data.signup.user
+                : null,
+            )
+          },
+        },
+      )
+    }
+
     return {
       error,
       email,
       password,
-      signup,
+      signup: handleSignup,
     }
   },
 })

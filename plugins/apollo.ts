@@ -13,7 +13,11 @@ export default defineNuxtPlugin((nuxtApp) => {
   }
 
   const config = useRuntimeConfig()
-  const httpLink = new HttpLink({ uri: '/api', fetch })
+  const httpLink = new HttpLink({ 
+    uri: '/api', 
+    fetch,
+    credentials: 'include'
+  })
 
   // Print errors
   const errorLink = onError((error) => {
@@ -26,10 +30,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   const apolloClient = new ApolloClient({
     cache,
     link: errorLink.concat(httpLink),
-    // Send cookies along with every request (needed for authentication)
-    credentials: 'include',
-    // Identification of client awareness: https://www.apollographql.com/docs/studio/metrics/client-awareness/
-    name: 'web',
   })
 
   // provideApolloClient(apolloClient)
