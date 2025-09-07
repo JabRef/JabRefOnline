@@ -1,9 +1,10 @@
-import prisma from '@prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
 import 'dotenv/config'
 import 'json-bigint-patch'
 import 'reflect-metadata'
 import { beforeAll, expect } from 'vitest'
 import { constructConfig } from '~/config'
+import { PrismaClient } from '~/server/database'
 import { register } from '~/server/tsyringe'
 import { registerClasses } from '~/server/tsyringe.config'
 import { EmailServiceMock } from '~/server/utils/email.service'
@@ -29,6 +30,12 @@ beforeAll((context) => {
 
   if (isIntegrationTest) {
     const config = constructConfig()
+    // Override config from environment variables (only for db connections)
+    config.databaseUrl = process.env.NUXT_DATABASE_URL ?? config.databaseUrl
+    config.redis.port = process.env.NUXT_REDIS_PORT ?? config.redis.port
+    config.redis.host = process.env.NUXT_REDIS_HOST ?? config.redis.host
+    config.redis.password =
+      process.env.NUXT_REDIS_PASSWORD ?? config.redis.password
     register('Config', {
       useValue: config,
     })
@@ -37,7 +44,8 @@ beforeAll((context) => {
       useValue: redisClient,
     })
 
-    const prismaClient = new prisma.PrismaClient()
+    const adapter = new PrismaPg({ connectionString: config.databaseUrl })
+    const prismaClient = new PrismaClient({ adapter })
     register('PrismaClient', {
       useValue: prismaClient,
     })

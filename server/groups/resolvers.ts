@@ -5,16 +5,11 @@ import type {
   Resolvers,
 } from '#graphql/resolver'
 import { ApolloServerErrorCode } from '@apollo/server/errors'
-import prisma, {
-  type Group,
-  type GroupType as GroupTypeT,
-} from '@prisma/client'
-
 import { GraphQLError } from 'graphql'
-import type { Context } from '~/server/context'
-import { inject, injectable, resolve } from './../tsyringe'
+import type { Context } from '../context'
+import { type Group, GroupHierarchyType, GroupType } from '../database'
+import { inject, injectable, resolve } from '../tsyringe'
 import type { GroupService } from './service'
-const { GroupType, GroupHierarchyType } = prisma
 
 export type GroupResolved = Group & {
   parent: GroupResolved | null
@@ -55,6 +50,7 @@ export class Mutation {
     let caseSensitive = null
     let onlySplitWordsAtDelimiter = null
     let isRegEx = null
+    // oxlint-disable-next-line no-unused-vars
     let paths = null
 
     if (group.automaticKeywordGroup) {
@@ -166,7 +162,7 @@ export class Mutation {
 export class GroupResolver {
   constructor(@inject('GroupService') private groupService: GroupService) {}
 
-  __resolveType(group: GroupMaybeResolved): GroupTypeT {
+  __resolveType(group: GroupMaybeResolved): GroupType {
     return group.type
   }
 
