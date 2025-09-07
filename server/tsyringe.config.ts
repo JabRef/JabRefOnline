@@ -21,8 +21,19 @@ export function configure() {
   // Tools
   register('PrismaClient', {
     useFactory: instanceCachingFactory(() => {
-      const adapter = new PrismaPg({ connectionString: config.databaseUrl })
-      return new PrismaClient({ adapter })
+      try {
+        const adapter = new PrismaPg({ connectionString: config.databaseUrl })
+        return new PrismaClient({ adapter })
+      } catch (error) {
+        // During prerender, Prisma might not be available due to network restrictions
+        // Return a mock client that throws meaningful errors
+        console.warn('PrismaClient initialization failed, creating mock client:', error.message)
+        return new Proxy({} as PrismaClient, {
+          get() {
+            throw new Error('Prisma client not available during prerender. Ensure database operations are not called during static generation.')
+          }
+        })
+      }
     }),
   })
   register('RedisClient', {
