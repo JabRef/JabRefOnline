@@ -160,4 +160,5 @@ jobs:
           TEST_URL: ${{ steps.deploy_web.outputs.url }}
           # The tests need these tokens to run, but their actual value should not matter
           NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
-          NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'
+          # Re-enable when email sending in the test environment is fixed
+          #NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'
