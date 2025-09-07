@@ -125,6 +125,7 @@ jobs:
         run: pnpm run test --coverage
         env:
           TEST_URL: http://localhost:3000
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }} # To seed the database
           # The tests need these tokens to run, but their actual value should not matter
           NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
 
