@@ -12,7 +12,9 @@ import { seed } from './seed'
  * It is necessary as long as https://github.com/prisma/prisma/issues/5596 is not implemented.
  */
 export async function truncate(): Promise<void> {
-  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+  const adapter = new PrismaPg({
+    connectionString: process.env.NUXT_DATABASE_URL,
+  })
   const prisma = new PrismaClient({ adapter })
   const dbSchemaName = 'public'
 

@@ -6,7 +6,7 @@
   "service": "app",
   "workspaceFolder": "/workspace",
   "remoteEnv": {
-    "DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/postgres"
+    "NUXT_DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/postgres"
   },
   // Configure tool-specific properties.
   "customizations": {
@@ -37,7 +37,10 @@
       "label": "Dev Server"
     }
   },
-  "forwardPorts": [3000, 24678],
+  "forwardPorts": [
+    3000,
+    24678
+  ],
   // Finalize container creation.
   "onCreateCommand": "pnpm install && pnpm prisma:migrate:dev && pnpm prisma:seed",
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.

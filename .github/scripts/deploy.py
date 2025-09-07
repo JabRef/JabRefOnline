@@ -37,7 +37,7 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
     STORAGE_ACCOUNT = "jabreffunctionstorage"
     APP_INSIGHTS_NAME = "jabref-online"
     REDIS_NAME = "jabref"
-    DATABASE_URL = os.environ.get("DATABASE_URL", "<Not specified>")
+    DATABASE_URL = os.environ.get("NUXT_DATABASE_URL", "<Not specified>")
     SESSION_SECRET = os.environ.get("NUXT_SESSION_PASSWORD", "<Not specified>")
     GITHUB_REPO_TOKEN = os.environ.get("GITHUB_REPO_TOKEN", "<Not specified>")
 
@@ -172,7 +172,7 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
                         "value": storage_connection_string,
                     },
                     {"name": "EMAIL_CLIENT", "value": email_connection_string},
-                    {"name": "DATABASE_URL", "value": DATABASE_URL},
+                    {"name": "NUXT_DATABASE_URL", "value": DATABASE_URL},
                     {"name": "NODE_ENV", "value": "production"},
                     {
                         "name": "REDIS_HOST",

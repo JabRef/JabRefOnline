@@ -8,7 +8,7 @@ source .venv/bin/activate
 pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
 az login
 export SUBSCRIPTION_ID=<...>
-export DATABASE_URL=<...>
+export NUXT_DATABASE_URL=<...>
 export NUXT_SESSION_PASSWORD=<...>
 python3 .github/scripts/deploy.py --env dev -v
 ```

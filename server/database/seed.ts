@@ -728,7 +728,9 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
 }
 
 export async function seed(): Promise<void> {
-  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+  const adapter = new PrismaPg({
+    connectionString: process.env.NUXT_DATABASE_URL,
+  })
   const prisma = new PrismaClient({ adapter })
   try {
     await seedInternal(prisma)
