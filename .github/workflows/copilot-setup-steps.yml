@@ -44,10 +44,6 @@ jobs:
           # Maps port 6379 on service container to port 6380 on host
           - 6380:6379
 
-    env:
-      NUXT_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
-      NUXT_SESSION_PASSWORD: somerandompasswordforcopilotNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
-
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -66,3 +62,5 @@ jobs:
 
       - name: Init database
         run: pnpm prisma:push
+        env:
+          NUXT_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
