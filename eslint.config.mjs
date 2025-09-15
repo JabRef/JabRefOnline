@@ -11,9 +11,6 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 export default withNuxt({
   languageOptions: {
     parserOptions: {
-      projectService: {
-        allowDefaultProject: ['.storybook/*.ts'],
-      },
       tsconfigRootDir: import.meta.dirname,
     },
   },

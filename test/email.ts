@@ -25,7 +25,7 @@ export async function getEmail(email: string): Promise<EmailMessage> {
       }, 1000)
     })
   }
-  const message = messages[0]
+  const message = messages[0]!
   const messageResponse = await fetch(
     `https://www.1secmail.com/api/v1/?action=readMessage&login=${login}&domain=${domain}&id=${message.id}`,
   )

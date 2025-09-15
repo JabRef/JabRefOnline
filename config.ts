@@ -57,41 +57,36 @@ function getEnvironment(): Environment {
 
 export interface Config {
   redis: {
-    port: number
+    port: string
     host: string
     password: string
   }
+  databaseUrl: string
   emailClient?: string
   session: {
-    secret: string
+    password: string
   }
-  githubRepoToken: string
+  githubRepoToken?: string
   public: {
     environment: Environment
-    // Only here to fix typescript error in @nuxtjs/mdc/dist/runtime/components/prose/ProseImg.vue
-    mdc: {
-      useNuxtImage: boolean
-    }
   }
 }
 
 export function constructConfig() {
   return {
     redis: {
-      port: Number(process.env.REDIS_PORT) || 6380,
-      host: process.env.REDIS_HOST ?? 'localhost',
-      password: process.env.REDIS_PASSWORD ?? 'jabref',
+      port: '6380',
+      host: 'localhost',
+      password: 'jabref',
     },
-    emailClient: process.env.EMAIL_CLIENT,
+    databaseUrl: 'postgresql://localhost/jabref',
+    emailClient: undefined,
     session: {
-      secret: process.env.NUXT_SESSION_PASSWORD ?? 'session_secret',
+      password: 'session_password', // It's too short by design, so that it's not used in production
     },
-    githubRepoToken: process.env.GITHUB_REPO_TOKEN ?? 'UNDEFINED',
+    githubRepoToken: undefined,
     public: {
       environment: getEnvironment(),
-      mdc: {
-        useNuxtImage: false,
-      },
     },
   } satisfies Config
 }

@@ -1,16 +1,6 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  /*
-   ** Add alias for library imports
-   ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
-   */
-  alias: {
-    // Support `import 'global'` used by storybook
-    // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
-    global: './global.ts',
-  },
-
   /**
    * Pre-render routes at build time by default
    */
@@ -30,8 +20,6 @@ export default defineNuxtConfig({
     prerender: {
       // Prerender all pages reached from the index page
       crawlLinks: true,
-      // Needed for storybook support (otherwise the file is not created during nuxi generate)
-      routes: ['/_storybook/external-iframe'],
     },
     esbuild: {
       options: {
@@ -48,11 +36,6 @@ export default defineNuxtConfig({
   experimental: {
     // Full typed routing
     typedPages: true,
-  },
-
-  vue: {
-    // Add support for vue runtime compiler (needed to render stories in storybook)
-    runtimeCompiler: true,
   },
 
   /*
@@ -120,8 +103,9 @@ export default defineNuxtConfig({
    ** Nuxt.js modules
    */
   modules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    // Preset for configuring SEO
+    // https://nuxtseo.com/nuxt-seo
+    '@nuxtjs/seo',
     // Add support for nuxt-ui
     '@nuxt/ui',
     // Use Pinia for state management
@@ -131,22 +115,19 @@ export default defineNuxtConfig({
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
-    // Add support for native vue stories
-    // https://github.com/tobiasdiez/storybook-vue-addon
-    'storybook-vue-addon/nuxt',
+    // Add support for storybook
+    // https://storybook.nuxtjs.org/
+    '@nuxtjs/storybook',
     // Devtools support
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
     // Add support for different icons from iconify
-    'nuxt-icon',
+    '@nuxt/icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
     // Support for end-to-end testing and unit testing (and Vitest integration)
     // https://nuxt.com/docs/getting-started/testing
     '@nuxt/test-utils/module',
-    // Preset for configuring SEO
-    // https://nuxtseo.com/nuxt-seo
-    '@nuxtjs/seo',
     // Add authentication support
     // https://github.com/atinux/nuxt-auth-utils
     'nuxt-auth-utils',
@@ -181,13 +162,6 @@ export default defineNuxtConfig({
    * TODO: See if we need this, maybe remove
    */
   // storybook: {},
-
-  tailwindcss: {
-    // Expose config so that we can use it to configure naive ui and in the vscode extension
-    exposeConfig: {
-      write: true,
-    },
-  },
 
   /**
    * GraphQL server config
@@ -226,7 +200,6 @@ export default defineNuxtConfig({
    * SEO configuration
    * https://nuxtseo.com/nuxt-seo/guides/configuring-modules
    */
-  // @ts-expect-error: temporary issue
   site: {
     // Hide information message during startup
     splash: false,
@@ -270,5 +243,5 @@ export default defineNuxtConfig({
    * Provide compatibility information for Nitro presets, and Nuxt modules
    * https://nuxt.com/docs/api/nuxt-config#compatibilitydate
    */
-  compatibilityDate: '2024-07-13',
+  compatibilityDate: '2024-12-24',
 })

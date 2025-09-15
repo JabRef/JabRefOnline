@@ -17,17 +17,17 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
-          node-version: 20
+          node-version: 22.19.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -50,11 +50,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [20]
 
     services:
       postgres:
-        image: postgres@sha256:3962158596daaef3682838cc8eb0e719ad1ce520f88e34596ce8d5de1b6330a1
+        image: postgres@sha256:29e0bb09c8e7e7fc265ea9f4367de9622e55bae6b0b97e7cce740c2d63c2ebc0
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -68,7 +67,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:b43d2dcbbdb1f9e1582e3a0f37e53bf79038522ccffb56a25858969d7a9b6c11
+        image: redis@sha256:cc2dfb8f5151da2684b4a09bd04b567f92d07591d91980eb3eca21df07e12760
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -81,22 +80,21 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-      NUXT_SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
+      SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 22.19.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -104,6 +102,8 @@ jobs:
 
       - name: Init database
         run: pnpm prisma:push
+        env:
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       # Check that no schema changes have been done without corresponding migration files have been added
       - name: Detect database schema drift
@@ -111,25 +111,31 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          NUXT_SESSION_PASSWORD: ${{ env.SESSION_PASSWORD }} # Needed for prerending
 
       - name: Start server
         run: pnpm start &
+        env:
+          NUXT_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          NUXT_SESSION_PASSWORD: ${{ env.SESSION_PASSWORD }}
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Run tests
         run: pnpm run test --coverage
         env:
           TEST_URL: http://localhost:3000
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }} # To seed the database
+          # The tests need these tokens to run, but their actual value should not matter
+          NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
 
       - name: Build Storybook
-        run: |
-          pnpm nuxi generate
-          pnpm storybook:build
-          cp .output/public/_storybook/external-iframe/index.html storybook-static/iframe.html
-          mkdir -p storybook-static/_storybook/external-iframe
-          cp -r .output/public/_nuxt storybook-static
+        if: always()
+        run: pnpm storybook:build
 
       - name: Publish and test Storybook
-        uses: chromaui/action@4d8ebd13658d795114f8051e25c28d66f14886c6 # v13
+        if: always()
+        uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce # v13.1.4
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -138,6 +144,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

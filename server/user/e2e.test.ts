@@ -41,7 +41,7 @@ describe('mutation', () => {
   })
   describe('signup', () => {
     const email = getTemporaryEmail()
-    test.runIf(process.env.EMAIL_CLIENT)(
+    test.runIf(process.env.NUXT_EMAIL_CLIENT)(
       `sends an email to the address ${email}`,
       async () => {
         const { data, errors } = await api().mutate({
@@ -156,8 +156,8 @@ describe('test-utils', () => {
     const { cookies } = await login(request)
     expect(cookies.length).toBe(1)
     expect(cookies[0]).toMatch('nuxt-session=')
-    expect(cookies[0].toLowerCase()).toContain('httponly')
-    expect(cookies[0].toLowerCase()).toContain('secure')
-    expect(cookies[0].toLowerCase()).toContain('samesite=strict')
+    expect(cookies[0]!.toLowerCase()).toContain('httponly')
+    expect(cookies[0]!.toLowerCase()).toContain('secure')
+    expect(cookies[0]!.toLowerCase()).toContain('samesite=strict')
   })
 })

@@ -229,7 +229,7 @@ const keywords = computed({
 })
 const keywordSuggestions = [{ value: 'Differential Geometry' }]
 
-const groups = [{ value: 'Chocolate Making' }, { value: 'Consumption' }]
+const groups = ref([{ value: 'Chocolate Making' }, { value: 'Consumption' }])
 const groupSuggestions = [{ value: 'Grinding' }]
 
 const externalLinks = computed(() => [
