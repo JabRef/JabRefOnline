@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
 export default {
-  title: 'UI/UDropdown',
-  component: 'UDropdown',
+  title: 'UI/UDropdownMenuMenu',
+  component: 'UDropdownMenuMenu',
   argTypes: {
     mode: {
       control: 'select',
@@ -19,12 +19,12 @@ const Template: StoryFn = (args) => ({
     return { args }
   },
   template: `
-    <UDropdown v-bind="args">
+    <UDropdownMenuMenu v-bind="args">
       <UButton>
         {{ args.triggerText || 'Dropdown' }}
         <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4 ml-2" />
       </UButton>
-    </UDropdown>
+    </UDropdownMenuMenu>
   `
 })
 
@@ -76,12 +76,12 @@ export const WithDividers = () => ({
     return { items }
   },
   template: `
-    <UDropdown :items="items">
+    <UDropdownMenu :items="items">
       <UButton>
         Menu
         <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4 ml-2" />
       </UButton>
-    </UDropdown>
+    </UDropdownMenu>
   `
 })
 
@@ -103,12 +103,12 @@ export const HoverMode = () => ({
     return { items }
   },
   template: `
-    <UDropdown :items="items" mode="hover">
+    <UDropdownMenu :items="items" mode="hover">
       <UButton>
         Resources
         <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4 ml-2" />
       </UButton>
-    </UDropdown>
+    </UDropdownMenu>
   `
 })
 
@@ -130,9 +130,9 @@ export const CustomTrigger = () => ({
     return { items }
   },
   template: `
-    <UDropdown :items="items">
+    <UDropdownMenu :items="items">
       <UButton variant="ghost" icon="heroicons:ellipsis-horizontal-20-solid" />
-    </UDropdown>
+    </UDropdownMenu>
   `
 })
 
@@ -158,12 +158,12 @@ export const WithShortcuts = () => ({
     return { items }
   },
   template: `
-    <UDropdown :items="items">
+    <UDropdownMenu :items="items">
       <UButton>
         File
         <Icon name="heroicons:chevron-down-20-solid" class="w-4 h-4 ml-2" />
       </UButton>
-    </UDropdown>
+    </UDropdownMenu>
   `
 })
 
@@ -181,12 +181,12 @@ export const States = () => ({
   },
   template: `
     <div class="space-x-4">
-      <UDropdown :items="items">
+      <UDropdownMenu :items="items">
         <UButton>Normal</UButton>
-      </UDropdown>
-      <UDropdown :items="items" disabled>
+      </UDropdownMenu>
+      <UDropdownMenu :items="items" disabled>
         <UButton disabled>Disabled</UButton>
-      </UDropdown>
+      </UDropdownMenu>
     </div>
   `
 })

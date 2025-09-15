@@ -123,7 +123,7 @@
       />
       <div>
         <!-- User profile dropdown -->
-        <UDropdown :items="userMenuItems">
+        <UDropdownMenu :items="userMenuItems">
           <button
             id="user-menu"
             class="w-12 h-12"
@@ -136,7 +136,7 @@
               alt=""
             />
           </button>
-        </UDropdown>
+        </UDropdownMenu>
       </div>
     </nav>
 

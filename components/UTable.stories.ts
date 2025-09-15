@@ -70,9 +70,9 @@ export const WithActions = () => ({
       :rows="rows"
     >
       <template #actions-data="{ row }">
-        <UDropdown :items="actions">
+        <UDropdownMenu :items="actions">
           <UButton variant="ghost" icon="heroicons:ellipsis-horizontal-20-solid" />
-        </UDropdown>
+        </UDropdownMenu>
       </template>
     </UTable>
   `
