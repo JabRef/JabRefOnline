@@ -20,7 +20,7 @@
       v-if="showSearchBar"
       class="relative text-gray-600"
     >
-      <t-input
+      <UInput
         v-model="searchQuery"
         type="search"
         placeholder="Search..."
@@ -38,7 +38,7 @@
     </div>
 
     <!-- Hamburger menu for small screens -->
-    <n-popover
+    <UPopover
       ref="hamburgerMenu"
       placement="top-end"
       :overlap="true"
@@ -89,7 +89,7 @@
         </button>
         <slot name="collapsed" />
       </div>
-    </n-popover>
+    </UPopover>
 
     <!-- Main menu -->
     <div v-show="!isSmallDisplay">
@@ -123,58 +123,20 @@
       />
       <div>
         <!-- User profile dropdown -->
-        <t-dropdown variant="left">
-          <template
-            #trigger="{
-              mousedownHandler,
-              focusHandler,
-              blurHandler,
-              keydownHandler,
-            }"
+        <UDropdownMenu :items="userMenuItems">
+          <button
+            id="user-menu"
+            class="w-12 h-12"
+            aria-label="User menu"
+            aria-haspopup="true"
           >
-            <button
-              id="user-menu"
-              class="w-12 h-12"
-              aria-label="User menu"
-              aria-haspopup="true"
-              @mousedown="mousedownHandler"
-              @focus="focusHandler"
-              @blur="blurHandler"
-              @keydown="keydownHandler"
-            >
-              <img
-                class="rounded-full"
-                src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
-                alt=""
-              />
-            </button>
-          </template>
-
-          <template #default="{ blurHandler }">
-            <div class="w-36">
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem"
-                @blur="blurHandler"
-              >
-                Your Profile
-              </button>
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem"
-                @blur="blurHandler"
-              >
-                Settings
-              </button>
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                @click="logout()"
-              >
-                Logout
-              </button>
-            </div>
-          </template>
-        </t-dropdown>
+            <img
+              class="rounded-full"
+              src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
+              alt=""
+            />
+          </button>
+        </UDropdownMenu>
       </div>
     </nav>
 
@@ -189,13 +151,12 @@
 <script lang="ts" setup>
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import type { NPopover } from 'naive-ui'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'
 
 const isHamburgerShown = ref(false)
-const hamburgerMenu = ref<typeof NPopover | null>(null)
+const hamburgerMenu = ref(null)
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
 
@@ -246,4 +207,28 @@ const searchQuery = ref(uiStore.activeSearchQuery ?? '')
 watch(searchQuery, (newQuery) => {
   uiStore.activeSearchQuery = newQuery
 })
+
+// User menu items for the dropdown
+const userMenuItems = [
+  [
+    {
+      label: 'Your Profile',
+      click: () => {
+        // Handle profile navigation
+      }
+    },
+    {
+      label: 'Settings', 
+      click: () => {
+        // Handle settings navigation
+      }
+    }
+  ],
+  [
+    {
+      label: 'Logout',
+      click: () => logout()
+    }
+  ]
+]
 </script>

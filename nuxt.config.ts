@@ -106,10 +106,8 @@ export default defineNuxtConfig({
     // Preset for configuring SEO
     // https://nuxtseo.com/nuxt-seo
     '@nuxtjs/seo',
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    // Add support for naive-ui
-    '@bg-dev/nuxt-naiveui',
+    // Add support for nuxt-ui
+    '@nuxt/ui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -164,13 +162,6 @@ export default defineNuxtConfig({
    * TODO: See if we need this, maybe remove
    */
   // storybook: {},
-
-  tailwindcss: {
-    // Expose config so that we can use it to configure naive ui and in the vscode extension
-    exposeConfig: {
-      write: true,
-    },
-  },
 
   /**
    * GraphQL server config

@@ -68,11 +68,10 @@
           </div>
           <div class="row justify-content-center py-6 md:pb-16">
             <div class="col-auto">
-              <n-button
-                type="primary"
-                size="large"
-                class="mx-auto"
-                style="height: 3.2em"
+              <UButton
+                variant="primary"
+                size="xl"
+                class="mx-auto h-16"
               >
                 <ClientOnly>
                   <a
@@ -94,7 +93,7 @@
                     >Download for macOS (Apple Silicon)</a
                   >
                 </ClientOnly>
-              </n-button>
+              </UButton>
               <div class="text-center pt-4 text-sm">
                 <a
                   class="text-primary-500 text-sm"

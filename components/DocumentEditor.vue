@@ -1,20 +1,14 @@
 <template>
   <div class="flex flex-col overflow-y-auto pr-3">
     <div>
-      <t-select
-        :options="{
-          Article: 'Journal Article',
-          PhDThesis: 'PhD Thesis',
-        }"
+      <USelect
+        :options="[
+          { label: 'Journal Article', value: 'Article' },
+          { label: 'PhD Thesis', value: 'PhDThesis' }
+        ]"
         variant="plaincaps"
-      >
-        <template #arrow="{ className }">
-          <Icon
-            name="ri:arrow-drop-down-line"
-            :class="className"
-          />
-        </template>
-      </t-select>
+        trailing-icon="ri:arrow-drop-down-line"
+      />
     </div>
     <div class="z-10 grid -mt-2">
       <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
@@ -23,7 +17,7 @@
       >
         {{ title + ' ' }}
       </div>
-      <t-textarea
+      <UTextarea
         v-model="title"
         variant="plain"
         class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
@@ -63,7 +57,7 @@
         heading="Abstract"
         class="mt-4 -mb-1"
       />
-      <t-textarea
+      <UTextarea
         v-model="abstract"
         variant="plain"
         rows="5"
@@ -100,8 +94,8 @@
         heading="External"
         class="mt-4 mb-1"
       />
-      <t-table
-        :data="externalLinks"
+      <UTable
+        :rows="externalLinks"
         variant="plain"
         class="text-sm"
       />
@@ -235,7 +229,7 @@ const keywords = computed({
 })
 const keywordSuggestions = [{ value: 'Differential Geometry' }]
 
-const groups = [{ value: 'Chocolate Making' }, { value: 'Consumption' }]
+const groups = ref([{ value: 'Chocolate Making' }, { value: 'Consumption' }])
 const groupSuggestions = [{ value: 'Grinding' }]
 
 const externalLinks = computed(() => [

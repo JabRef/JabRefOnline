@@ -45,12 +45,11 @@
             <PasswordInput v-model="password" />
           </t-input-group>
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Create your account</n-button
-            >
+              type="submit"
+              variant="primary"
+              >Create your account</UButton>
           </div>
           <div>
             <HorizontalRule content="or sign up with" />
