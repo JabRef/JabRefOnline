@@ -19,7 +19,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:29e0bb09c8e7e7fc265ea9f4367de9622e55bae6b0b97e7cce740c2d63c2ebc0
+        image: postgres@sha256:073e7c8b84e2197f94c8083634640ab37105effe1bc853ca4d5fbece3219b0e8
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -33,7 +33,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:cc2dfb8f5151da2684b4a09bd04b567f92d07591d91980eb3eca21df07e12760
+        image: redis@sha256:f0957bcaa75fd58a9a1847c1f07caf370579196259d69ac07f2e27b5b389b021
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -54,7 +54,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
-          node-version: 22.19.0
+          node-version: 22.20.0
           cache: 'pnpm'
 
       - name: Install dependencies
