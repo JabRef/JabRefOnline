@@ -47,11 +47,7 @@ const route = useRoute()
 const token = route.query.token as string
 const id = route.query.id as string
 
-const {
-  mutate: changePassword,
-  onDone,
-  error,
-} = useMutation(
+const { mutate: changePassword, onDone } = useMutation(
   gql(/* GraphQL */ `
     mutation ChangePassword($input: ChangePasswordInput!) {
       changePassword(input: $input) {

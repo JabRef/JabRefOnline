@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template v-once>
   <textarea
     v-if="type === 'textarea'"

@@ -51,11 +51,7 @@ import { gql } from '~/apollo'
 definePageMeta({ layout: false })
 
 const email = ref('')
-const {
-  mutate: forgotPassword,
-  called,
-  error,
-} = useMutation(
+const { mutate: forgotPassword, called } = useMutation(
   gql(/* GraphQL */ `
     mutation ForgotPassword($input: ForgotPasswordInput!) {
       forgotPassword(input: $input) {
