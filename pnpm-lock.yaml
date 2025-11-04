@@ -9,7 +9,7 @@ patchedDependencies:
     hash: 04179a06612e62789389771ae74e120b5748325086eb9d25be44e50be5416052
     path: patches/@azure__static-web-apps-cli.patch
   '@prisma/client':
-    hash: 4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523
+    hash: edd08fe791436ad7b71cdc1e8cc67fd88cf0da5a7768ac2c75b54f02bcc0c880
     path: patches/@prisma__client.patch
   '@vue/apollo-util':
     hash: edbad00d9e143d8a1baa7afde4d48b9b4cde195c74e05f96ac38393dda99d793
@@ -21,7 +21,7 @@ patchedDependencies:
     hash: c9de0aa16240d23ec5896f17298840aa2350ee6fbcac041d414bb3109bad6cd3
     path: patches/nitropack.patch
   prisma:
-    hash: 8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047
+    hash: f1d71a0c73f779cedd422a9a256404685fe68e56138eb2a5c51b558bdeff3a8e
     path: patches/prisma.patch
 
 importers:
@@ -60,7 +60,7 @@ importers:
         version: 6.18.0
       '@prisma/client':
         specifier: 6.18.0
-        version: 6.18.0(patch_hash=4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523)(prisma@6.18.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)
+        version: 6.18.0(patch_hash=edd08fe791436ad7b71cdc1e8cc67fd88cf0da5a7768ac2c75b54f02bcc0c880)(prisma@6.18.0(patch_hash=f1d71a0c73f779cedd422a9a256404685fe68e56138eb2a5c51b558bdeff3a8e)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)
       '@variantjs/core':
         specifier: 0.0.90
         version: 0.0.90
@@ -310,7 +310,7 @@ importers:
         version: 4.3.0(prettier@3.6.2)(typescript@5.7.2)(vue-tsc@3.1.0(typescript@5.7.2))
       prisma:
         specifier: 6.18.0
-        version: 6.18.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2)
+        version: 6.18.0(patch_hash=f1d71a0c73f779cedd422a9a256404685fe68e56138eb2a5c51b558bdeff3a8e)(magicast@0.3.5)(typescript@5.7.2)
       storybook:
         specifier: 9.1.16
         version: 9.1.16(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.0.2(@types/node@24.10.0)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.3)(yaml@2.8.1))
@@ -14073,9 +14073,9 @@ snapshots:
     transitivePeerDependencies:
       - pg-native
 
-  '@prisma/client@6.18.0(patch_hash=4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523)(prisma@6.18.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)':
+  '@prisma/client@6.18.0(patch_hash=edd08fe791436ad7b71cdc1e8cc67fd88cf0da5a7768ac2c75b54f02bcc0c880)(prisma@6.18.0(patch_hash=f1d71a0c73f779cedd422a9a256404685fe68e56138eb2a5c51b558bdeff3a8e)(magicast@0.3.5)(typescript@5.7.2))(typescript@5.7.2)':
     optionalDependencies:
-      prisma: 6.18.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2)
+      prisma: 6.18.0(patch_hash=f1d71a0c73f779cedd422a9a256404685fe68e56138eb2a5c51b558bdeff3a8e)(magicast@0.3.5)(typescript@5.7.2)
       typescript: 5.7.2
 
   '@prisma/config@6.18.0(magicast@0.3.5)':
@@ -20354,7 +20354,7 @@ snapshots:
     dependencies:
       parse-ms: 4.0.0
 
-  prisma@6.18.0(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(magicast@0.3.5)(typescript@5.7.2):
+  prisma@6.18.0(patch_hash=f1d71a0c73f779cedd422a9a256404685fe68e56138eb2a5c51b558bdeff3a8e)(magicast@0.3.5)(typescript@5.7.2):
     dependencies:
       '@prisma/config': 6.18.0(magicast@0.3.5)
       '@prisma/engines': 6.18.0
