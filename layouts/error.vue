@@ -9,12 +9,12 @@
     <section>
       <div class="text-center">
         <jabref-logo class="m-auto h-32" />
-        <h1 class="text-5xl font-light pt-3">Error {{ error?.statusCode }}</h1>
+        <h1 class="text-5xl font-light pt-3">Error {{ error.statusCode }}</h1>
         <h2 class="text-xl font-light text-gray-500 pt-3">
-          {{ error?.message }}
+          {{ error.message }}
         </h2>
         <nuxt-link
-          v-if="error?.statusCode === 404"
+          v-if="error.statusCode === 404"
           class="button"
           to="/"
         >
@@ -29,9 +29,9 @@
 definePageMeta({ layout: false })
 
 defineProps<{
-  error?: {
+  error: {
     statusCode: number
     message: string
-  } | null
+  }
 }>()
 </script>

@@ -13,21 +13,24 @@
 import Tagify from '@yaireo/tagify'
 import '@yaireo/tagify/dist/tagify.css'
 
-const props = withDefaults(defineProps<{
-  type?: string
-  settings?: Tagify.TagifySettings
-  value?: Tagify.TagData[]
-  delimiters?: string
-  whitelist?: Tagify.TagData[]
-  tagClass?: string
-}>(), {
-  type: 'input',
-  settings: () => ({}),
-  value: () => [],
-  delimiters: ',',
-  whitelist: () => [],
-  tagClass: '',
-})
+const props = withDefaults(
+  defineProps<{
+    type?: string
+    settings?: Tagify.TagifySettings
+    value?: Tagify.TagData[]
+    delimiters?: string
+    whitelist?: Tagify.TagData[]
+    tagClass?: string
+  }>(),
+  {
+    type: 'input',
+    settings: () => ({}),
+    value: () => [],
+    delimiters: ',',
+    whitelist: () => [],
+    tagClass: '',
+  },
+)
 
 const emit = defineEmits<{
   input: [value: string | Tagify.TagData[]]
@@ -35,12 +38,16 @@ const emit = defineEmits<{
 
 const tagify = ref<Tagify | null>(null)
 
-watch(() => props.value, (newVal) => {
-  // Value modified externally, update tagify
-  if (newVal) {
-    tagify.value?.loadOriginalValues(newVal as unknown as string | string[])
-  }
-})
+watch(
+  () => props.value,
+  (newVal) => {
+    // Value modified externally, update tagify
+    if (newVal) {
+      // @ts-expect-error: problem in tagify types
+      tagify.value?.loadOriginalValues(newVal)
+    }
+  },
+)
 
 onMounted(() => {
   // Install tagify
@@ -73,10 +80,7 @@ onUnmounted(() => {
 
 function onChange(event: { target: EventTarget | null }) {
   // Update value prop
-  emit(
-    'input',
-    (event.target as HTMLInputElement | null)?.value ?? [],
-  )
+  emit('input', (event.target as HTMLInputElement | null)?.value ?? [])
 }
 </script>
 

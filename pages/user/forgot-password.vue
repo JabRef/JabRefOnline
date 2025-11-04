@@ -62,7 +62,7 @@ const {
         result
       }
     }
-  `) as any,
+  `),
   () => ({
     variables: {
       input: {

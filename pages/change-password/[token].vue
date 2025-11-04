@@ -71,7 +71,7 @@ const {
         }
       }
     }
-  `) as any,
+  `),
   () => ({
     variables: {
       input: {

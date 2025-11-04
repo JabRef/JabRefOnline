@@ -100,7 +100,7 @@ const {
         }
       }
     }
-  `) as any,
+  `),
   () => ({
     variables: {
       input: {
@@ -111,9 +111,7 @@ const {
     update(cache, { data }) {
       cacheCurrentUser(
         cache,
-        data?.signup?.__typename === 'UserReturned'
-          ? data.signup.user
-          : null,
+        data?.signup?.__typename === 'UserReturned' ? data.signup.user : null,
       )
     },
   }),

@@ -108,7 +108,7 @@ const { result } = useQuery(
         }
       }
     }
-  `) as any,
+  `),
 )
 const groups = computed(() => result.value?.me?.groups ?? null)
 
