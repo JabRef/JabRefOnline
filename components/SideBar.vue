@@ -83,7 +83,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { BaseTree } from '@he-tree/vue'
 import { useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
@@ -91,44 +91,33 @@ import { useUiStore } from '~/store'
 
 import '@he-tree/vue/style/default.css'
 
-export default defineComponent({
-  components: {
-    BaseTree,
-  },
-  setup() {
-    const { result } = useQuery(
-      gql(/* GraphQL */ `
-        query Groups {
-          me {
+const { result } = useQuery(
+  gql(/* GraphQL */ `
+    query Groups {
+      me {
+        id
+        groups {
+          id
+          name
+          icon
+          children {
             id
-            groups {
-              id
-              name
-              icon
-              children {
-                id
-                name
-                icon
-              }
-            }
+            name
+            icon
           }
         }
-      `),
-    )
-    const groups = computed(() => result.value?.me?.groups ?? null)
-
-    const uiStore = useUiStore()
-    function onGroupClicked(group: { id: string }) {
-      uiStore.selectedGroupId = group.id
+      }
     }
+  `) as any,
+)
+const groups = computed(() => result.value?.me?.groups ?? null)
 
-    return {
-      groups,
-      onGroupClicked,
-      sideBarOpen: true,
-    }
-  },
-})
+const uiStore = useUiStore()
+function onGroupClicked(group: { id: string }) {
+  uiStore.selectedGroupId = group.id
+}
+
+const sideBarOpen = true
 </script>
 <style>
 .groupsTree .vtlist-inner {

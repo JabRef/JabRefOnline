@@ -15,18 +15,16 @@
   </span>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  props: {
-    value: {
-      type: String,
-      default: '',
-    },
-  },
-  methods: {
-    update(newValue: string) {
-      this.$emit('input', newValue)
-    },
-  },
-})
+<script setup lang="ts">
+defineProps<{
+  value?: string
+}>()
+
+const emit = defineEmits<{
+  input: [value: string]
+}>()
+
+function update(newValue: string) {
+  emit('input', newValue)
+}
 </script>

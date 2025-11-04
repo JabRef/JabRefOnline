@@ -44,35 +44,31 @@
     </div>
   </NuxtLayout>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
+
 definePageMeta({ layout: false })
-export default defineComponent({
-  name: 'ForgotPassword',
-  setup() {
-    const email = ref('')
-    const {
-      mutate: forgotPassword,
-      called,
-      error,
-    } = useMutation(
-      gql(/* GraphQL */ `
-        mutation ForgotPassword($input: ForgotPasswordInput!) {
-          forgotPassword(input: $input) {
-            result
-          }
-        }
-      `),
-      () => ({
-        variables: {
-          input: {
-            email: email.value,
-          },
-        },
-      }),
-    )
-    return { email, error, called, forgotPassword }
-  },
-})
+
+const email = ref('')
+const {
+  mutate: forgotPassword,
+  called,
+  error,
+} = useMutation(
+  gql(/* GraphQL */ `
+    mutation ForgotPassword($input: ForgotPasswordInput!) {
+      forgotPassword(input: $input) {
+        result
+      }
+    }
+  `) as any,
+  () => ({
+    variables: {
+      input: {
+        email: email.value,
+      },
+    },
+  }),
+)
 </script>

@@ -9,84 +9,75 @@
   />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Tagify from '@yaireo/tagify'
 import '@yaireo/tagify/dist/tagify.css'
-import type { PropType } from 'vue'
-export default defineComponent({
-  name: 'TagsInput',
-  props: {
-    type: {
-      type: String,
-      default: 'input',
-    },
-    settings: {
-      type: Object as PropType<Tagify.TagifySettings>,
-      default: () => ({}),
-    },
-    value: {
-      type: Array as PropType<Tagify.TagData[]>, // e.g. [{"value":"cat"}, {"value":"dog"}]'
-      default: () => [],
-    },
-    delimiters: {
-      type: String,
-      default: ',',
-    },
-    whitelist: {
-      type: Array as PropType<Tagify.TagData[]>,
-      default: () => [],
-    },
-    tagClass: {
-      type: String,
-      default: '',
-    },
-  },
-  data() {
-    return {
-      tagify: null as Tagify | null,
-    }
-  },
-  watch: {
-    value(newVal, _oldVal) {
-      // Value modified externally, update tagify
-      this.tagify?.loadOriginalValues(newVal)
-    },
-  },
-  mounted() {
-    // Install tagify
-    const tagifySettings: Tagify.TagifySettings = {
-      delimiters: this.delimiters,
-      whitelist: this.whitelist,
-      ...this.settings,
-    }
-    if (this.tagClass) {
-      if (tagifySettings.classNames) {
-        tagifySettings.classNames.tag = 'tagify__tag ' + this.tagClass
-      } else {
-        tagifySettings.classNames = {
-          tag: 'tagify__tag ' + this.tagClass,
-        }
+
+const props = withDefaults(defineProps<{
+  type?: string
+  settings?: Tagify.TagifySettings
+  value?: Tagify.TagData[]
+  delimiters?: string
+  whitelist?: Tagify.TagData[]
+  tagClass?: string
+}>(), {
+  type: 'input',
+  settings: () => ({}),
+  value: () => [],
+  delimiters: ',',
+  whitelist: () => [],
+  tagClass: '',
+})
+
+const emit = defineEmits<{
+  input: [value: string | Tagify.TagData[]]
+}>()
+
+const tagify = ref<Tagify | null>(null)
+
+watch(() => props.value, (newVal) => {
+  // Value modified externally, update tagify
+  if (newVal) {
+    tagify.value?.loadOriginalValues(newVal as unknown as string | string[])
+  }
+})
+
+onMounted(() => {
+  // Install tagify
+  const tagifySettings: Tagify.TagifySettings = {
+    delimiters: props.delimiters,
+    whitelist: props.whitelist,
+    ...props.settings,
+  }
+  if (props.tagClass) {
+    if (tagifySettings.classNames) {
+      tagifySettings.classNames.tag = 'tagify__tag ' + props.tagClass
+    } else {
+      tagifySettings.classNames = {
+        tag: 'tagify__tag ' + props.tagClass,
       }
     }
+  }
 
-    this.tagify = new Tagify(
-      this.$el as HTMLTextAreaElement | HTMLInputElement,
-      tagifySettings,
-    )
-  },
-  unmounted() {
-    this.tagify?.destroy()
-  },
-  methods: {
-    onChange(event: { target: EventTarget | null }) {
-      // Update value prop
-      this.$emit(
-        'input',
-        (event.target as HTMLInputElement | null)?.value ?? [],
-      )
-    },
-  },
+  // Get the actual DOM element (textarea or input) from the component root
+  const instance = getCurrentInstance()
+  const element = instance?.proxy?.$el as HTMLTextAreaElement | HTMLInputElement
+  if (element) {
+    tagify.value = new Tagify(element, tagifySettings)
+  }
 })
+
+onUnmounted(() => {
+  tagify.value?.destroy()
+})
+
+function onChange(event: { target: EventTarget | null }) {
+  // Update value prop
+  emit(
+    'input',
+    (event.target as HTMLInputElement | null)?.value ?? [],
+  )
+}
 </script>
 
 <style>
