@@ -20,7 +20,7 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: postgres:latest@sha256:1ffc019dae94eca6b09a49ca67d37398951346de3c3d0cfe23d8d4ca33da83fb
+    image: postgres:latest@sha256:b3ef52d269e0050ac3ba8266d8bc9650987412f60d66472fdf7e14f523ecc506
     restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
