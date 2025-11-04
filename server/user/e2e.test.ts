@@ -141,12 +141,17 @@ describe('nuxt-auth-endpoint', () => {
       headers: { cookie: cookies.join('; ') },
     })
     expect(html).toStrictEqual({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      id: expect.any(String),
       user: { id: 'ckn4oul7100004cv7y3t94n8j' },
     })
   })
-  it('returns nothing when not logged in', async () => {
+  it('returns only session id when not logged in', async () => {
     const html = await $fetch('api/_auth/session')
-    expect(html).toStrictEqual({})
+    expect(html).toStrictEqual({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      id: expect.any(String),
+    })
   })
 })
 

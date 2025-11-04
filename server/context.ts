@@ -25,14 +25,13 @@ export interface Context {
    * Writes the given session to the response (e.g. sets the session cookie).
    * If the session is null, the session information is removed from the response, which effectively logs the user out.
    */
-  setSession: (session: UserSession | null) => Promise<void>
+  setSession: (session: Omit<UserSession, 'id'> | null) => Promise<void>
 }
 
 let sessionConfig: SessionConfig | null = null
 function _useSession(event: H3Event, config: Partial<SessionConfig> = {}) {
   if (!sessionConfig) {
     const runtimeConfig = useRuntimeConfig(event)
-    // @ts-expect-error some mismatch in cookie type definitions
     sessionConfig = runtimeConfig.session
   }
   const finalConfig = defu(config, sessionConfig) as SessionConfig
@@ -54,7 +53,6 @@ export function buildContext({
         await clearUserSession(event)
       } else {
         // TODO: Handle this properly (i.e. don't expose to client but still have it available on the server)
-        // @ts-expect-error -- hacky workaround
         delete session.server
 
         // This is all very hacky

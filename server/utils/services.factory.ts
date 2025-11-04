@@ -1,6 +1,7 @@
 import { Environment, type Config } from '~/config'
 
 import { createStorage, type Storage } from 'unstorage'
+// @ts-expect-error: has no typing info
 import memoryDriver from 'unstorage/drivers/memory'
 import redisDriver from 'unstorage/drivers/redis'
 
