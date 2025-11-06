@@ -33,6 +33,9 @@ export default defineConfig({
         test: {
           name: 'unit',
           isolate: false,
+          sequence: {
+            groupOrder: 0,
+          },
           include: ['**/**spec.ts'],
         },
       },
@@ -42,14 +45,22 @@ export default defineConfig({
           name: 'integration',
           include: ['**/**integration.test.ts'],
           maxWorkers: 1,
+          sequence: {
+            groupOrder: 1,
+          },
         },
       },
       {
         extends: true,
         test: {
           name: 'e2e',
+          isolate: false,
           include: ['**/**e2e.test.ts'],
           maxWorkers: 1,
+          hookTimeout: 400000,
+          sequence: {
+            groupOrder: 2,
+          },
         },
       },
     ],
