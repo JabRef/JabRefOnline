@@ -5,15 +5,10 @@
     style="--bg: white; --p: 0 10px; --trans-x: -50%; --trans-y: -50%"
   />
 </template>
-<script lang="ts">
-export default defineComponent({
-  props: {
-    content: {
-      type: String,
-      default: '',
-    },
-  },
-})
+<script setup lang="ts">
+defineProps<{
+  content?: string
+}>()
 </script>
 <style>
 .hr-with-text::after {

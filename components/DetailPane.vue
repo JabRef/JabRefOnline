@@ -34,17 +34,12 @@
     </transition>
   </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { useUiStore } from './../store'
 
-export default defineComponent({
-  setup() {
-    const ui = useUiStore()
-    return {
-      selectedDocumentId: computed(() => ui.selectedDocumentId),
-      isDetailsOpen: computed(() => ui.isDetailsOpen),
-      closePane: () => (ui.isDetailsOpen = false),
-    }
-  },
-})
+const ui = useUiStore()
+
+const selectedDocumentId = computed(() => ui.selectedDocumentId)
+const isDetailsOpen = computed(() => ui.isDetailsOpen)
+const closePane = () => (ui.isDetailsOpen = false)
 </script>
