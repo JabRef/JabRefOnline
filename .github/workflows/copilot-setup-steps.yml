@@ -19,7 +19,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:b3ef52d269e0050ac3ba8266d8bc9650987412f60d66472fdf7e14f523ecc506
+        image: postgres@sha256:41fc5342eefba6cc2ccda736aaf034bbbb7c3df0fdb81516eba1ba33f360162c
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -33,7 +33,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:d318520052025d3cc5850ba3de966810916c7a7b327b412322399f38be39a39c
+        image: redis@sha256:5c7c0445ed86918cb9efb96d95a6bfc03ed2059fe2c5f02b4d74f477ffe47915
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
