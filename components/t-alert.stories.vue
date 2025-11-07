@@ -9,24 +9,23 @@ import { TAlert } from '@variantjs/vue'
     :component="TAlert"
   >
     <Story title="Default">
-      <t-alert
-        :show="true"
-        message="Hi there!"
-      />
+      <t-alert :show="true"> Hi there! </t-alert>
     </Story>
     <Story title="Error">
       <t-alert
         :show="true"
         variant="error"
-        message="oops!"
-      />
+      >
+        oops!
+      </t-alert>
     </Story>
     <Story title="Success">
       <t-alert
         :show="true"
         variant="success"
-        message="success!"
-      />
+      >
+        success!
+      </t-alert>
     </Story>
   </Stories>
 </template>
