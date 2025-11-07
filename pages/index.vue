@@ -49,7 +49,7 @@
               </h2>
             </div>
           </div>
-          <div class="mt-4 md:mt-20 max-w-screen-xl mx-auto">
+          <div class="mt-4 md:mt-20 max-w-(--breakpoint-xl) mx-auto">
             <img
               src="~/assets/jabref-mainscreen.png"
               class="shadow-[0_0_25px_#a7a7bd] rounded-xl"

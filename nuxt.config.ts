@@ -164,13 +164,7 @@ export default defineNuxtConfig({
    * TODO: See if we need this, maybe remove
    */
   // storybook: {},
-
-  tailwindcss: {
-    // Expose config so that we can use it to configure naive ui and in the vscode extension
-    exposeConfig: {
-      write: true,
-    },
-  },
+  css: ['~/assets/css/main.css'],
 
   /**
    * GraphQL server config

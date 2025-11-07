@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Generated with https://www.tailwindshades.com */
+	--color-primary-50: #d6dbe8;
+	--color-primary-100: #c9cfe1;
+	--color-primary-200: #afb8d3;
+	--color-primary-300: #94a0c4;
+	--color-primary-400: #7a89b6;
+	--color-primary-500: #6072a7;
+	--color-primary-600: #4f5f8f;
+	--color-primary-700: #3b476b;
+	--color-primary-800: #272f47;
+	--color-primary-900: #131723;
+	--color-primary: #4f5f8f;
+
+	--color-gray: var(--color-neutral);
+	--color-secondary: var(--color-rose);
+	--color-info: var(--color-black);
+	--color-success: var(--color-green);
+	--color-warning: var(--color-amber);
+	--color-error: var(--color-red);
+}
+
+@layer utilities {
+	.flip-horizontal {
+		--tw-scale-x: -1;
+	}
+
+	.flip-vertical {
+		--tw-scale-y: -1;
+	}
+}
+
+@layer components {
+	.prose {
+		--tw-prose-bullets: var(--color-black);
+	}
+}

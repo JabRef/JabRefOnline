@@ -19,7 +19,7 @@ import TTable from '~/components/TTable.vue'
 const settings: VariantJSConfiguration = {
   TInput: {
     fixedClasses:
-      'transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-3',
+      'transition duration-100 ease-in-out border rounded-sm shadow-xs focus:ring-2 focus:ring-primary-500 focus:outline-hidden focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-3',
     classes:
       'block w-full text-black sm:text-sm placeholder-gray-400 bg-white border-gray-300 focus:border-primary-500',
     variants: {
@@ -39,7 +39,7 @@ const settings: VariantJSConfiguration = {
   },
   TTextarea: {
     fixedClasses:
-      'block w-full px-3 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      'block w-full px-3 py-2 transition duration-100 ease-in-out border rounded-sm shadow-xs focus:ring-2 focus:ring-primary-500 focus:outline-hidden focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
     classes:
       'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-primary-500 ',
     variants: {
@@ -51,7 +51,7 @@ const settings: VariantJSConfiguration = {
   },
   TCheckbox: {
     fixedClasses:
-      'transition duration-100 ease-in-out rounded shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed',
+      'transition duration-100 ease-in-out rounded-sm shadow-xs focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-hidden focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed',
     classes: 'text-primary-500 border-gray-300 ',
     variants: {
       error: {
@@ -100,10 +100,10 @@ const settings: VariantJSConfiguration = {
   },
   TAlert: {
     fixedClasses: {
-      wrapper: 'relative flex items-center p-4 border-l-4  rounded shadow-sm',
+      wrapper: 'relative flex items-center p-4 border-l-4  rounded-sm shadow-xs',
       body: 'grow',
       close:
-        'absolute relative flex items-center justify-center ml-4 shrink-0 w-6 h-6 transition duration-100 ease-in-out rounded focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50',
+        'absolute relative flex items-center justify-center ml-4 shrink-0 w-6 h-6 transition duration-100 ease-in-out rounded-sm focus:ring-2 focus:ring-primary-500 focus:outline-hidden focus:ring-opacity-50',
       closeIcon: 'fill-current h-4 w-4',
     },
     classes: {
@@ -131,10 +131,10 @@ const settings: VariantJSConfiguration = {
   TDropdown: {
     fixedClasses: {
       trigger:
-        'flex items-center text-white block px-4 py-2 transition duration-100 ease-in-out border border-transparent rounded shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+        'flex items-center text-white block px-4 py-2 transition duration-100 ease-in-out border border-transparent rounded-sm shadow-xs focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-hidden focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
       wrapper: 'inline-flex flex-col',
       dropdownWrapper: 'relative z-10',
-      dropdown: 'absolute rounded shadow mt-1',
+      dropdown: 'absolute rounded-sm shadow-sm mt-1',
       enterActiveClass:
         'transition ease-out duration-100 transform opacity-0 scale-95',
       enterToClass: 'transform opacity-100 scale-100',
@@ -164,7 +164,7 @@ const settings: VariantJSConfiguration = {
   },
   TSelect: {
     fixedClasses:
-      'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-primary-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      'bg-none block w-full py-2 pl-2 pr-6 transition duration-100 ease-in-out border rounded-sm shadow-xs focus:ring-2 focus:ring-primary-500 focus:outline-hidden focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
     classes:
       'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-primary-500 sm:text-sm',
     variants: {
@@ -181,7 +181,7 @@ const settings: VariantJSConfiguration = {
   TTable: {
     classes: {
       table:
-        'min-w-full divide-y divide-gray-100 shadow-sm border-gray-200 border',
+        'min-w-full divide-y divide-gray-100 shadow-xs border-gray-200 border',
       thead: '',
       theadTr: '',
       theadTh: 'px-3 py-2 font-semibold text-left bg-gray-100 border-b',

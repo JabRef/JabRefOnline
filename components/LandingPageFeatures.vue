@@ -3,7 +3,7 @@
     <div
       v-for="(feature, index) in features"
       :key="feature.path"
-      class="container mx-auto px-4 pb-4 lg:pb-16 mt-4 max-w-screen-xl"
+      class="container mx-auto px-4 pb-4 lg:pb-16 mt-4 max-w-(--breakpoint-xl)"
     >
       <div class="flex flex-wrap">
         <div
@@ -27,7 +27,7 @@
           }"
         >
           <img
-            class="max-w-full h-auto shadow-[0_0_12px_#a7a7bd] rounded"
+            class="max-w-full h-auto shadow-[0_0_12px_#a7a7bd] rounded-sm"
             :src="useAsset(feature.img)"
             alt=""
           />
