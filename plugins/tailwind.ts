@@ -100,7 +100,8 @@ const settings: VariantJSConfiguration = {
   },
   TAlert: {
     fixedClasses: {
-      wrapper: 'relative flex items-center p-4 border-l-4  rounded-sm shadow-xs',
+      wrapper:
+        'relative flex items-center p-4 border-l-4  rounded-sm shadow-xs',
       body: 'grow',
       close:
         'absolute relative flex items-center justify-center ml-4 shrink-0 w-6 h-6 transition duration-100 ease-in-out rounded-sm focus:ring-2 focus:ring-primary-500 focus:outline-hidden focus:ring-opacity-50',
