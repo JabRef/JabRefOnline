@@ -42,21 +42,6 @@
       v-model:open="isHamburgerShown"
       :popper="{ placement: 'bottom-end' }"
     >
-      <template #panel>
-        <div class="px-6 py-5 text-base max-w-xs w-full rounded-lg">
-          <button
-            class="text-right text-gray-700 text-xl absolute top-3 right-5"
-            @click="isHamburgerShown = false"
-          >
-            <Icon
-              v-if="isHamburgerShown"
-              name="ri:close-fill"
-            />
-          </button>
-          <slot name="collapsed" />
-        </div>
-      </template>
-
       <div
         v-show="isSmallDisplay"
         class="flex mr-5 items-center relative"
@@ -79,6 +64,21 @@
           <Icon :name="isHamburgerShown ? 'ri:close-fill' : 'ri:menu-fill'" />
         </button>
       </div>
+
+      <template #content>
+        <div class="px-6 py-5 text-base max-w-xs w-full rounded-lg">
+          <button
+            class="text-right text-gray-700 text-xl absolute top-3 right-5"
+            @click="isHamburgerShown = false"
+          >
+            <Icon
+              v-if="isHamburgerShown"
+              name="ri:close-fill"
+            />
+          </button>
+          <slot name="collapsed" />
+        </div>
+      </template>
     </UPopover>
 
     <!-- Main menu -->

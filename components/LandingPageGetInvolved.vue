@@ -33,7 +33,8 @@
         <p class="text-justify">
           JabRef is developed and maintained by a multidisciplinary
           <UPopover>
-            <template #panel>
+            <UButton variant="link" class="p-0">core team</UButton>
+            <template #content>
               <div class="px-4 py-1">
                 <ul
                   v-for="member in maintainers"
@@ -46,7 +47,6 @@
                 </ul>
               </div>
             </template>
-            <UButton variant="link" class="p-0">core team</UButton>
           </UPopover>
           of PhD students, postdocs, and researchers in industry who work on
           JabRef in their free time. Without the support of numerous volunteers,

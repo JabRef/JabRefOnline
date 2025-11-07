@@ -10,10 +10,10 @@ import { UButton } from '#components'
       <UButton>Button</UButton>
     </Story>
     <Story title="Error">
-      <UButton color="red">error</UButton>
+      <UButton color="error">error</UButton>
     </Story>
     <Story title="Success">
-      <UButton color="green">success</UButton>
+      <UButton color="success">success</UButton>
     </Story>
     <Story title="Primary">
       <UButton color="primary">primary</UButton>

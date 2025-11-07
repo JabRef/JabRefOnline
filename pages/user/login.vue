@@ -17,10 +17,10 @@
       </p>
       <UAlert
         v-if="error"
-        color="red"
+        color="error"
         variant="solid"
         title="Error"
-        :description="error"
+        :description="String(error)"
         class="mb-4"
       />
       <form

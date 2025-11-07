@@ -42,5 +42,7 @@ const ui = useUiStore()
 
 const selectedDocumentId = computed(() => ui.selectedDocumentId)
 const isDetailsOpen = computed(() => ui.isDetailsOpen)
-const closePane = () => (ui.isDetailsOpen = false)
+const closePane = () => {
+  ui.isDetailsOpen = false
+}
 </script>
