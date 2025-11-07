@@ -1,27 +1,19 @@
-import theme from '#tailwind-config/theme.mjs'
-
 export default defineAppConfig({
   naiveui: {
     themeConfig: {
-      shared: {
-        common: {
-          fontFamily: theme.fontFamily.sans.join(', '),
-          lineHeight: theme.lineHeight.normal,
-        },
-      },
       light: {
         common: {
-          primaryColor: theme.colors.primary[500],
-          primaryColorHover: theme.colors.primary[600],
-          primaryColorPressed: theme.colors.primary[700],
-          primaryColorSuppl: theme.colors.primary[600],
+          primaryColor: '#6072A7',
+          primaryColorHover: '#4F5F8F',
+          primaryColorPressed: '#3B476B',
+          primaryColorSuppl: '#4F5F8F',
         },
       },
       dark: {
         common: {
-          primaryColor: theme.colors.primary[500],
-          primaryColorHover: theme.colors.primary[400],
-          primaryColorPressed: theme.colors.primary[600],
+          primaryColor: '#6072A7',
+          primaryColorHover: '#7A89B6',
+          primaryColorPressed: '#4F5F8F',
         },
       },
     },
