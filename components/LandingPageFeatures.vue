@@ -40,7 +40,7 @@
 <script lang="ts" setup>
 // Taken from https://github.com/nuxt/framework/issues/7121#issuecomment-1247934787
 function useAsset(path: string): string {
-  const assets = import.meta.glob('~/assets/**/*', {
+  const assets = import.meta.glob('~/assets/*', {
     eager: true,
     import: 'default',
   })
