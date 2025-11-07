@@ -16,13 +16,14 @@
         <div
           class="absolute top-10 -left-3.5 w-7 h-7 rounded-full bg-white border border-gray-300 md:shadow-xs flex items-center justify-center active:border-gray-300 transform text-gray-400 hover:scale-110 hover:border-gray-400 hover:text-gray-500"
         >
-          <n-button
-            quaternary
-            circle
+          <UButton
+            variant="ghost"
+            size="xs"
+            square
             @click="closePane"
           >
             <Icon name="ri:close-fill" />
-          </n-button>
+          </UButton>
         </div>
         <slot>
           <document-editor

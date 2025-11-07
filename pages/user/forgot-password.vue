@@ -32,11 +32,12 @@
             />
           </t-input-group>
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Submit</n-button
+              color="primary"
+              type="submit"
+              size="xl"
+              >Submit</UButton
             >
           </div>
         </div>

@@ -1,20 +1,18 @@
 <template>
-  <n-button
-    type="primary"
-    size="large"
-    style="height: 3.2em"
+  <UButton
+    color="primary"
+    size="xl"
+    class="h-[3.2em]"
   >
-    <template #icon>
-      <n-icon v-if="showIcon">
-        <Icon name="material-symbols:download" />
-      </n-icon>
+    <template v-if="showIcon" #leading>
+      <Icon name="material-symbols:download" />
     </template>
     <a
       class="text-2xl"
       :href
       >{{ text }}</a
     >
-  </n-button>
+  </UButton>
 </template>
 <script setup lang="ts">
 defineProps({

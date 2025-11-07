@@ -32,22 +32,22 @@
         </p>
         <p class="text-justify">
           JabRef is developed and maintained by a multidisciplinary
-          <n-popover trigger="hover">
-            <template #trigger>
-              <n-button text>core team</n-button>
+          <UPopover>
+            <template #panel>
+              <div class="px-4 py-1">
+                <ul
+                  v-for="member in maintainers"
+                  :key="member"
+                  class="list-disc"
+                >
+                  <li class="text-sm">
+                    {{ member }}
+                  </li>
+                </ul>
+              </div>
             </template>
-            <div class="px-4 py-1">
-              <ul
-                v-for="member in maintainers"
-                :key="member"
-                class="list-disc"
-              >
-                <li class="text-sm">
-                  {{ member }}
-                </li>
-              </ul>
-            </div>
-          </n-popover>
+            <UButton variant="link" class="p-0">core team</UButton>
+          </UPopover>
           of PhD students, postdocs, and researchers in industry who work on
           JabRef in their free time. Without the support of numerous volunteers,
           none of this would have been possible. We welcome anyone who would
@@ -61,9 +61,9 @@
         <div
           class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink grow wrap-break-word text-center py-6 md:px-6 max-w-prose"
         >
-          <n-button
-            text
-            type="primary"
+          <UButton
+            variant="link"
+            color="primary"
             class="text-xl mx-auto text-primary-500"
           >
             <a
@@ -75,7 +75,7 @@
               />
               <h4 class="text-2xl mb-3 font-semibold">Contribute</h4>
             </a>
-          </n-button>
+          </UButton>
           <h5 class="pb-2 text-xl">Help us build JabRef</h5>
           <p>
             You do not need to be a developer to improve the documentation,
@@ -91,9 +91,9 @@
         <div
           class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink grow wrap-break-word text-center py-6 md:px-6 max-w-prose"
         >
-          <n-button
-            text
-            type="primary"
+          <UButton
+            variant="link"
+            color="primary"
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref/wiki/Donations">
@@ -103,7 +103,7 @@
               />
               <h4 class="text-2xl mb-3 font-semibold">Donate</h4>
             </a>
-          </n-button>
+          </UButton>
           <h5 class="pb-2 text-xl">Support the development</h5>
           <p>
             Help us pay for project development and operating costs so that we
@@ -119,9 +119,9 @@
         <div
           class="lg:min-w-0 mx-auto flex flex-col flex-no-shrink grow wrap-break-word text-center py-6 md:px-6 max-w-prose"
         >
-          <n-button
-            text
-            type="primary"
+          <UButton
+            variant="link"
+            color="primary"
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref">
@@ -131,7 +131,7 @@
               />
               <h4 class="text-2xl mb-3 font-semibold">Develop</h4>
             </a>
-          </n-button>
+          </UButton>
           <h5 class="pb-2 text-xl">Make JabRef even better</h5>
           <p>
             JabRef is and always will be 100% free and open-source. Contribute

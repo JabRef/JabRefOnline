@@ -15,48 +15,44 @@
         Don't have an account?
         <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
       </p>
-      <n-alert
+      <UAlert
         v-if="error"
-        type="error"
+        color="red"
+        variant="solid"
+        title="Error"
+        :description="error"
         class="mb-4"
-      >
-        {{ error }}
-      </n-alert>
-      <n-form
-        size="large"
-        @submit="onSubmit"
+      />
+      <form
+        class="space-y-4"
+        @submit.prevent="onSubmit"
       >
         <div class="space-y-2">
-          <n-form-item
+          <UFormGroup
             label="Email address"
-            label-style="font-weight: 600"
-            :feedback="errors.email"
-            :validation-status="errors.email ? 'error' : undefined"
+            :error="errors.email"
           >
-            <n-input
-              v-model:value="email"
+            <UInput
+              v-model="email"
               v-bind="emailAttrs"
               v-focus
+              size="xl"
             />
-          </n-form-item>
-          <n-form-item
+          </UFormGroup>
+          <UFormGroup
             label="Password"
-            label-style="font-weight: 600"
-            :feedback="errors.password"
-            :validation-status="errors.password ? 'error' : undefined"
+            :error="errors.password"
           >
-            <n-input
-              v-model:value="password"
+            <UInput
+              v-model="password"
               v-bind="passwordAttrs"
               type="password"
-              show-password-on="mousedown"
+              size="xl"
             />
-          </n-form-item>
+          </UFormGroup>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <n-checkbox v-model:checked="rememberLogin">
-                Keep me logged in
-              </n-checkbox>
+              <UCheckbox v-model="rememberLogin" label="Keep me logged in" />
             </div>
 
             <div class="text-sm">
@@ -67,11 +63,12 @@
           </div>
 
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Sign in</n-button
+              color="primary"
+              type="submit"
+              size="xl"
+              >Sign in</UButton
             >
           </div>
 
@@ -87,7 +84,7 @@
             />
           </div>
         </div>
-      </n-form>
+      </form>
     </div>
   </NuxtLayout>
 </template>
