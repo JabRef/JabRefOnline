@@ -69,6 +69,7 @@
           <div class="row justify-content-center py-6 md:pb-16">
             <div class="col-auto">
               <UButton
+                variant="solid"
                 color="primary"
                 size="xl"
                 class="mx-auto h-[3.2em]"
