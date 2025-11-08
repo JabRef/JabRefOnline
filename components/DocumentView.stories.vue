@@ -7,7 +7,8 @@ const mockDocument = {
   id: '1',
   title: 'A Comprehensive Study on Reference Management',
   keywords: ['BibTeX', 'Reference Management', 'Open Source'],
-  abstract: 'This paper presents a comprehensive study on modern reference management systems, with a focus on open-source solutions. We explore the challenges faced by researchers in organizing their literature and propose innovative solutions to improve workflow efficiency.',
+  abstract:
+    'This paper presents a comprehensive study on modern reference management systems, with a focus on open-source solutions. We explore the challenges faced by researchers in organizing their literature and propose innovative solutions to improve workflow efficiency.',
   authors: [
     {
       __typename: 'Person',
@@ -34,7 +35,8 @@ const mockThesis = {
   id: '2',
   title: 'Advanced Algorithms for Bibliography Management',
   keywords: ['Algorithms', 'Bibliography'],
-  abstract: 'This thesis explores advanced algorithms for efficient bibliography management in large-scale research projects.',
+  abstract:
+    'This thesis explores advanced algorithms for efficient bibliography management in large-scale research projects.',
   authors: [
     {
       __typename: 'Person',

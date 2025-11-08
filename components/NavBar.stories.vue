@@ -38,7 +38,9 @@ import NavBar from './NavBar.vue'
           <div class="space-x-14">
             <span class="text-primary-600 text-lg font-semibold">Library</span>
             <span class="text-gray-400 text-lg font-semibold">Browse</span>
-            <span class="text-gray-400 text-lg font-semibold">Subscriptions</span>
+            <span class="text-gray-400 text-lg font-semibold"
+              >Subscriptions</span
+            >
           </div>
         </template>
       </NavBar>
