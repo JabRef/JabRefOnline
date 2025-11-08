@@ -33,7 +33,11 @@
         <p class="text-justify">
           JabRef is developed and maintained by a multidisciplinary
           <UPopover>
-            <UButton variant="link" class="p-0">core team</UButton>
+            <UButton
+              variant="link"
+              class="p-0"
+              >core team</UButton
+            >
             <template #content>
               <div class="px-4 py-1">
                 <ul

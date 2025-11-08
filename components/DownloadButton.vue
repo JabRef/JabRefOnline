@@ -4,7 +4,10 @@
     size="xl"
     class="h-[3.2em]"
   >
-    <template v-if="showIcon" #leading>
+    <template
+      v-if="showIcon"
+      #leading
+    >
       <Icon name="material-symbols:download" />
     </template>
     <a

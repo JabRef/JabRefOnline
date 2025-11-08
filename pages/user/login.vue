@@ -52,7 +52,10 @@
           </UFormGroup>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <UCheckbox v-model="rememberLogin" label="Keep me logged in" />
+              <UCheckbox
+                v-model="rememberLogin"
+                label="Keep me logged in"
+              />
             </div>
 
             <div class="text-sm">

@@ -31,7 +31,7 @@
         <div
           :class="[
             'z-50',
-            position === 'absolute' ? 'fixed top-0 left-0 right-0' : ''
+            position === 'absolute' ? 'fixed top-0 left-0 right-0' : '',
           ]"
         >
           <slot name="header">
