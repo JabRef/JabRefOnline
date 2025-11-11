@@ -9,7 +9,7 @@
     >
       <jabref-logo class="w-10 flex-none" />
       <span
-        class="ml-3 flex-1 text-gray-900 text-2xl font-semibold lg:inline-block hidden"
+        class="ml-3 flex-1 text-gray-900 text-2xl font-semibold xl:inline-block hidden"
       >
         JabRef</span
       >
@@ -110,6 +110,7 @@
           </div>
         </div>
       </slot>
+
     </div>
 
     <!-- User profile -->
@@ -197,7 +198,7 @@ import { useUiStore } from '~/store'
 const isHamburgerShown = ref(false)
 const hamburgerMenu = ref<typeof NPopover | null>(null)
 
-const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
+const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('lg')
 
 defineProps({
   showLogo: {
