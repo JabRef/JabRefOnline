@@ -27,9 +27,9 @@ const testJournal: Journal = {
 describe('userDocumentService', () => {
   beforeEach(() => {
     const mockClient = mockDeep<PrismaClient>()
-    prisma = createPrismaMock(Prisma, { 
+    prisma = createPrismaMock(Prisma, {
       mockClient,
-      datamodel: { enums: dmmf.enums, models: dmmf.models }
+      datamodel: { enums: dmmf.enums, models: dmmf.models },
     })
     register('PrismaClient', { useValue: prisma })
     journalService = resolve('JournalService')
@@ -39,7 +39,7 @@ describe('userDocumentService', () => {
     it('should return a journal with the given ISSN', async () => {
       // Seed the mock database with test data
       await prisma.journal.create({ data: testJournal })
-      
+
       const journal = await journalService.getJournalByIssn(
         testJournal.issn[0]!,
       )
