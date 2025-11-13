@@ -12,6 +12,11 @@ generator client {
   moduleFormat = "esm"
 }
 
+generator prismaMock {
+  provider = "node /home/runner/work/JabRefOnline/JabRefOnline/node_modules/prisma-mock/prisma-dmmf-generator.mjs"
+  output = "./generated/dmmf.ts"
+}
+
 model User {
   id String @id @default(cuid())
   email String @unique
