@@ -3,8 +3,8 @@
  * See: https://www.prisma.io/docs/orm/reference/prisma-config-reference
  */
 
-import path from 'node:path'
 import { config } from 'dotenv'
+import path from 'node:path'
 import { defineConfig } from 'prisma/config'
 
 // Load environment variables from .env file
