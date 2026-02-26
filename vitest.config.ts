@@ -13,8 +13,7 @@ export default defineConfig({
     // Workaround for https://github.com/nuxt/test-utils/issues/1408
     alias: {
       '~/': new URL(`./`, import.meta.url).pathname,
-      '#graphql/schema': new URL(`.nuxt/graphql-schema.mjs`, import.meta.url)
-        .pathname,
+      '#graphql/schema': new URL(`.nuxt/graphql-schema.mjs`, import.meta.url).pathname,
     },
   },
   test: {
