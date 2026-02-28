@@ -21,28 +21,20 @@ import NavBar from './NavBar.vue'
         :show-user-profile="true"
       />
     </Story>
-    <Story title="Minimal (Search Only)">
+    <Story title="Search Only">
       <NavBar
         :show-logo="false"
         :show-search-bar="true"
         :show-user-profile="false"
       />
     </Story>
-    <Story title="Full Navigation">
+    <Story title="Custom Navigation">
       <NavBar
         :show-logo="true"
         :show-search-bar="true"
         :show-user-profile="true"
       >
-        <template #default>
-          <div class="space-x-14">
-            <span class="text-primary-600 text-lg font-semibold">Library</span>
-            <span class="text-gray-400 text-lg font-semibold">Browse</span>
-            <span class="text-gray-400 text-lg font-semibold"
-              >Subscriptions</span
-            >
-          </div>
-        </template>
+        <template #default> Custom items </template>
       </NavBar>
     </Story>
   </Stories>

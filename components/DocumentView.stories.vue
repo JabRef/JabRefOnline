@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import DocumentView from './DocumentView.vue'
 
-// Mock fragment data for DocumentView
-const mockDocument = {
+const mockArticle = {
   __typename: 'JournalArticle',
   id: '1',
   title: 'A Comprehensive Study on Reference Management',
@@ -57,7 +56,7 @@ const mockThesis = {
     :component="DocumentView"
   >
     <Story title="Journal Article">
-      <DocumentView :source="mockDocument" />
+      <DocumentView :source="mockArticle" />
     </Story>
     <Story title="PhD Thesis">
       <DocumentView :source="mockThesis" />
@@ -65,7 +64,7 @@ const mockThesis = {
     <Story title="Without Abstract">
       <DocumentView
         :source="{
-          ...mockDocument,
+          ...mockArticle,
           abstract: null,
         }"
       />
