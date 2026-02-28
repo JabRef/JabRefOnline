@@ -2,7 +2,7 @@
  * Prisma configuration file
  * See: https://www.prisma.io/docs/orm/reference/prisma-config-reference
  */
-
+import 'dotenv/config';
 import path from 'node:path'
 import { defineConfig } from 'prisma/config'
 

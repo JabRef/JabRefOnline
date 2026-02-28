@@ -38,25 +38,30 @@ definePageMeta({
     ) {
       const { data } = await useFetch('/api/getLatestRelease')
       const latestRelease = data.value?.version
-      downloadUrl += `v${latestRelease}`
       if (latestRelease) {
+        const majorVersion = parseInt(latestRelease.split('.')[0] || '0')
+        downloadUrl += `v${latestRelease}`
         downloadUrl +=
           {
             win_msi: `/JabRef-${latestRelease}.msi`,
             win_zip: `/JabRef-${latestRelease}-portable_windows.zip`,
-            mac_arm64_dmg: `/JabRef-${latestRelease}-arm64.dmg`,
-            mac_arm64_pkg: `/JabRef-${latestRelease}-arm64.pkg`,
-            mac_x86_64_dmg: `/JabRef-${latestRelease}.dmg`,
-            mac_x86_64_pkg: `/JabRef-${latestRelease}.pkg`,
+            mac_arm64_dmg: majorVersion >= 6 ? `/JabRef-${latestRelease}_silicon.dmg` : `/JabRef-${latestRelease}-arm64.dmg`,
+            mac_arm64_pkg: majorVersion >= 6 ? `/JabRef-${latestRelease}_silicon.pkg` : `/JabRef-${latestRelease}-arm64.pkg`,
+            mac_x86_64_dmg: majorVersion >= 6 ?  `/JabRef-${latestRelease}_intel.dmg` : `/JabRef-${latestRelease}.dmg`,
+            mac_x86_64_pkg: majorVersion >= 6 ? `/JabRef-${latestRelease}_intel.pkg` : `/JabRef-${latestRelease}.pkg`,
             linux_deb: `/jabref_${latestRelease}_amd64.deb`,
             linux_rpm: `/jabref-${latestRelease}-1.x86_64.rpm`,
             linux_tar_gz: `/JabRef-${latestRelease}-portable_linux.tar.gz`,
           }[os] ?? ''
+      } else {
+        downloadUrl = 'https://github.com/JabRef/jabref/releases/latest'
       }
+    } else {
+      downloadUrl = 'https://github.com/JabRef/jabref/releases/latest'
     }
 
     return await navigateTo(downloadUrl, { external: true })
   },
 })
-const downloadUrl = `https://github.com/JabRef/jabref/releases/download/`
+const downloadUrl = `https://github.com/JabRef/jabref/releases/latest`
 </script>
