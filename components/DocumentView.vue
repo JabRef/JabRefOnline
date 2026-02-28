@@ -109,7 +109,7 @@ import type { PropType } from 'vue'
 import { gql, useFragment, type FragmentType } from '~/apollo'
 import { useUiStore } from '~/store'
 
-const DocumentForView = gql(/* GraphQL */ `
+export const DocumentForView = gql(/* GraphQL */ `
   fragment DocumentForView on Document {
     id
     title
