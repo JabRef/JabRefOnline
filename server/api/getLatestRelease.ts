@@ -36,6 +36,7 @@ export default defineEventHandler(async () => {
   }
   if (!response.data) {
     // TODO: Setup proper logging
+    // eslint-disable-next-line no-console
     console.debug(response)
     throw createError({
       statusCode: 500,
