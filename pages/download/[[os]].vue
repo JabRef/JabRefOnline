@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts" setup>
+const FALLBACK_DOWNLOAD_URL = `https://github.com/JabRef/jabref/releases/latest`
 definePageMeta({
   layout: false,
 
@@ -34,6 +35,9 @@ definePageMeta({
         'linux_deb',
         'linux_rpm',
         'linux_tar_gz',
+        'linux_arm64_deb',
+        'linux_arm64_rpm',
+        'linux_arm64_tar_gz',
       ].includes(os)
     ) {
       const { data } = await useFetch('/api/getLatestRelease')
@@ -52,16 +56,19 @@ definePageMeta({
             linux_deb: `/jabref_${latestRelease}_amd64.deb`,
             linux_rpm: `/jabref-${latestRelease}-1.x86_64.rpm`,
             linux_tar_gz: `/JabRef-${latestRelease}-portable_linux.tar.gz`,
+            linux_arm64_deb: `/jabref_${latestRelease}_arm64.deb`,
+            linux_arm64_rpm: `/jabref-${latestRelease}_arm64-1.aarch64.rpm`,
+            linux_arm64_tar_gz: `/JabRef-${latestRelease}-portable_linux_arm64.tar.gz`,
           }[os] ?? ''
       } else {
-        downloadUrl = 'https://github.com/JabRef/jabref/releases/latest'
+        downloadUrl = FALLBACK_DOWNLOAD_URL
       }
     } else {
-      downloadUrl = 'https://github.com/JabRef/jabref/releases/latest'
+      downloadUrl = FALLBACK_DOWNLOAD_URL
     }
 
     return await navigateTo(downloadUrl, { external: true })
   },
 })
-const downloadUrl = `https://github.com/JabRef/jabref/releases/latest`
+const downloadUrl = FALLBACK_DOWNLOAD_URL
 </script>
