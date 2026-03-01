@@ -49,10 +49,22 @@ definePageMeta({
           {
             win_msi: `/JabRef-${latestRelease}.msi`,
             win_zip: `/JabRef-${latestRelease}-portable_windows.zip`,
-            mac_arm64_dmg: majorVersion >= 6 ? `/JabRef-${latestRelease}_silicon.dmg` : `/JabRef-${latestRelease}-arm64.dmg`,
-            mac_arm64_pkg: majorVersion >= 6 ? `/JabRef-${latestRelease}_silicon.pkg` : `/JabRef-${latestRelease}-arm64.pkg`,
-            mac_x86_64_dmg: majorVersion >= 6 ?  `/JabRef-${latestRelease}_intel.dmg` : `/JabRef-${latestRelease}.dmg`,
-            mac_x86_64_pkg: majorVersion >= 6 ? `/JabRef-${latestRelease}_intel.pkg` : `/JabRef-${latestRelease}.pkg`,
+            mac_arm64_dmg:
+              majorVersion >= 6
+                ? `/JabRef-${latestRelease}_silicon.dmg`
+                : `/JabRef-${latestRelease}-arm64.dmg`,
+            mac_arm64_pkg:
+              majorVersion >= 6
+                ? `/JabRef-${latestRelease}_silicon.pkg`
+                : `/JabRef-${latestRelease}-arm64.pkg`,
+            mac_x86_64_dmg:
+              majorVersion >= 6
+                ? `/JabRef-${latestRelease}_intel.dmg`
+                : `/JabRef-${latestRelease}.dmg`,
+            mac_x86_64_pkg:
+              majorVersion >= 6
+                ? `/JabRef-${latestRelease}_intel.pkg`
+                : `/JabRef-${latestRelease}.pkg`,
             linux_deb: `/jabref_${latestRelease}_amd64.deb`,
             linux_rpm: `/jabref-${latestRelease}-1.x86_64.rpm`,
             linux_tar_gz: `/JabRef-${latestRelease}-portable_linux.tar.gz`,
