@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { FragmentType } from '~/apollo'
-import type { DocumentForView } from './DocumentView.vue'
 import DocumentView from './DocumentView.vue'
 
 const mockArticle = {
@@ -29,7 +27,8 @@ const mockArticle = {
       name: 'Journal of Software Engineering',
     },
   },
-} as FragmentType<typeof DocumentForView>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- hard to type this fragment
+} as any
 
 const mockThesis = {
   __typename: 'Thesis',
@@ -49,7 +48,8 @@ const mockThesis = {
     id: 'inst1',
     name: 'University of Technology',
   },
-} as FragmentType<typeof DocumentForView>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- hard to type this fragment
+} as any
 </script>
 
 <template>

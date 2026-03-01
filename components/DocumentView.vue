@@ -109,7 +109,7 @@ import type { PropType } from 'vue'
 import { gql, useFragment, type FragmentType } from '~/apollo'
 import { useUiStore } from '~/store'
 
-export const DocumentForView = gql(/* GraphQL */ `
+const DocumentForView = gql(/* GraphQL */ `
   fragment DocumentForView on Document {
     id
     title
@@ -148,10 +148,11 @@ export const DocumentForView = gql(/* GraphQL */ `
     }
   }
 `)
+type DocumentForViewFragment = FragmentType<typeof DocumentForView>
 
 const props = defineProps({
   source: {
-    type: Object as PropType<FragmentType<typeof DocumentForView>>,
+    type: Object as PropType<DocumentForViewFragment>,
     required: true,
   },
 })
