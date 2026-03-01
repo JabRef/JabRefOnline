@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { NButton } from 'naive-ui'
+import { UButton } from '#components'
 </script>
 <template>
   <Stories
-    title="n-button"
-    :component="NButton"
+    title="UButton"
+    :component="UButton"
   >
     <Story title="Standard">
-      <n-button>Button</n-button>
+      <UButton variant="solid">Button</UButton>
     </Story>
     <Story title="Error">
-      <n-button type="error">error</n-button>
+      <UButton variant="solid" color="error">error</UButton>
     </Story>
     <Story title="Success">
-      <n-button type="success">success</n-button>
+      <UButton variant="solid" color="success">success</UButton>
     </Story>
     <Story title="Primary">
-      <n-button type="primary">primary</n-button>
+      <UButton variant="solid" color="primary">primary</UButton>
     </Story>
-    <Story title="Tertiary">
-      <n-button type="tertiary">tertiary</n-button>
+    <Story title="Ghost">
+      <UButton variant="ghost">ghost</UButton>
     </Story>
     <Story title="Link">
-      <n-button text>Link</n-button>
+      <UButton variant="link">Link</UButton>
     </Story>
   </Stories>
 </template>

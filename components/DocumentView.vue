@@ -86,8 +86,9 @@
       >
         {{ document.abstract }}
       </span>
-      <n-button
-        text
+      <UButton
+        variant="link"
+        size="xs"
         class="text-sm my-auto"
         @click="viewFullAbstract = !viewFullAbstract"
       >
@@ -99,7 +100,7 @@
           <span>View full abstract</span>
           <Icon name="ri:arrow-down-s-line" />
         </template>
-      </n-button>
+      </UButton>
     </div>
   </div>
 </template>

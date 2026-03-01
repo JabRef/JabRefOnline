@@ -11,17 +11,17 @@
         </h3>
         <div class="text-center">
           <span v-if="isWindows()">
-            <n-flex justify="center">
+            <div class="flex justify-center gap-4">
               <DownloadButton
                 text="Download for Windows"
                 href="/download/win_msi"
                 :show-icon="false"
               />
-            </n-flex>
+            </div>
           </span>
 
           <span v-if="isLinux()">
-            <n-flex justify="center">
+            <div class="flex justify-center gap-4">
               <DownloadButton
                 text=".deb (Ubuntu, Debian)"
                 href="/download/linux_deb"
@@ -30,10 +30,10 @@
                 text=".rpm (Fedora, RedHat)"
                 href="/download/linux_rpm"
               />
-            </n-flex>
+            </div>
           </span>
           <span v-if="isMac()">
-            <n-flex justify="center">
+            <div class="flex justify-center gap-4">
               <DownloadButton
                 text="Apple Silicon (Arm)"
                 href="/download/mac_arm64_pkg"
@@ -42,7 +42,7 @@
                 text="macOS Intel (x64)"
                 href="/download/mac_x86_64_pkg"
               />
-            </n-flex>
+            </div>
           </span>
         </div>
         <div class="text-center pt-8 text-sm">
