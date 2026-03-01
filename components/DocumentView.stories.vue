@@ -27,8 +27,7 @@ const mockArticle = {
       name: 'Journal of Software Engineering',
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- hard to type this fragment
-} as any
+}
 
 const mockThesis = {
   __typename: 'Thesis',
@@ -48,8 +47,7 @@ const mockThesis = {
     id: 'inst1',
     name: 'University of Technology',
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- hard to type this fragment
-} as any
+}
 </script>
 
 <template>
@@ -58,12 +56,15 @@ const mockThesis = {
     :component="DocumentView"
   >
     <Story title="Journal Article">
+      <!-- @vue-expect-error: typing of the fragment is hard -->
       <DocumentView :source="mockArticle" />
     </Story>
     <Story title="PhD Thesis">
+      <!-- @vue-expect-error: typing of the fragment is hard -->
       <DocumentView :source="mockThesis" />
     </Story>
     <Story title="Without Abstract">
+      <!-- @vue-expect-error: typing of the fragment is hard -->
       <DocumentView
         :source="{
           ...mockArticle,
