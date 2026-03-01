@@ -1,11 +1,13 @@
+import createPrismaMock from 'prisma-mock/client'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { mockDeep, mockReset } from 'vitest-mock-extended'
-import type { Journal, PrismaClient } from '../database'
+import { mockDeep } from 'vitest-mock-extended'
+import { Prisma, type Journal, type PrismaClient } from '../database'
+import * as dmmf from '../database/generated/dmmf'
 import { register, resolve } from '../tsyringe'
+import type { JournalService } from './journal.service'
 
-const prisma = mockDeep<PrismaClient>()
-register('PrismaClient', { useValue: prisma })
-const journalService = resolve('JournalService')
+let prisma: PrismaClient
+let journalService: JournalService
 
 const testJournal: Journal = {
   id: 'test',
@@ -13,7 +15,7 @@ const testJournal: Journal = {
   issn: ['12345678'],
   subtitle: null,
   titleAddon: null,
-  isCustom: true,
+  isCustom: false,
   scimagoId: null,
   country: null,
   publisher: null,
@@ -24,36 +26,31 @@ const testJournal: Journal = {
 
 describe('userDocumentService', () => {
   beforeEach(() => {
-    mockReset(prisma)
+    const mockClient = mockDeep<PrismaClient>()
+    prisma = createPrismaMock(Prisma, {
+      mockClient,
+      datamodel: { enums: dmmf.enums, models: dmmf.models },
+    })
+    register('PrismaClient', { useValue: prisma })
+    journalService = resolve('JournalService')
   })
 
   describe('getJournalById', () => {
     it('should return a journal with the given ISSN', async () => {
-      prisma.journal.findFirst.mockResolvedValue(testJournal)
+      // Seed the mock database with test data
+      await prisma.journal.create({ data: testJournal })
+
       const journal = await journalService.getJournalByIssn(
         testJournal.issn[0]!,
       )
       expect(journal).toBeDefined()
       expect(journal).toEqual(testJournal)
-      expect(prisma.journal.findFirst).toBeCalledWith({
-        where: {
-          issn: { has: testJournal.issn[0] },
-          isCustom: false,
-        },
-      })
     })
 
     it('should return null if no journal with the given ISSN is found', async () => {
-      prisma.journal.findFirst.mockResolvedValue(null)
       const issn = '00000000'
       const journal = await journalService.getJournalByIssn(issn)
       expect(journal).toBeNull()
-      expect(prisma.journal.findFirst).toBeCalledWith({
-        where: {
-          issn: { has: issn },
-          isCustom: false,
-        },
-      })
     })
   })
 })
