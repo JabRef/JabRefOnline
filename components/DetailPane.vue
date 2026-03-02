@@ -11,10 +11,10 @@
       <div
         v-if="isDetailsOpen"
         id="details"
-        class="fixed top-20 bottom-0 right-0 flex flex-col flex-wrap bg-white border-l border-gray-300 z-40 w-1/3 md:shadow-sm p-4"
+        class="fixed top-20 bottom-0 right-0 flex flex-col flex-wrap bg-white border-l border-gray-300 z-40 w-1/3 md:shadow-xs p-4"
       >
         <div
-          class="absolute top-10 -left-3.5 w-7 h-7 rounded-full bg-white border border-gray-300 md:shadow-sm flex items-center justify-center active:border-gray-300 transform text-gray-400 hover:scale-110 hover:border-gray-400 hover:text-gray-500"
+          class="absolute top-10 -left-3.5 w-7 h-7 rounded-full bg-white border border-gray-300 md:shadow-xs flex items-center justify-center active:border-gray-300 transform text-gray-400 hover:scale-110 hover:border-gray-400 hover:text-gray-500"
         >
           <n-button
             quaternary
@@ -34,17 +34,12 @@
     </transition>
   </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { useUiStore } from './../store'
 
-export default defineComponent({
-  setup() {
-    const ui = useUiStore()
-    return {
-      selectedDocumentId: computed(() => ui.selectedDocumentId),
-      isDetailsOpen: computed(() => ui.isDetailsOpen),
-      closePane: () => (ui.isDetailsOpen = false),
-    }
-  },
-})
+const ui = useUiStore()
+
+const selectedDocumentId = computed(() => ui.selectedDocumentId)
+const isDetailsOpen = computed(() => ui.isDetailsOpen)
+const closePane = () => (ui.isDetailsOpen = false)
 </script>

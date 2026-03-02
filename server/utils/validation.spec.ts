@@ -89,14 +89,13 @@ describe('validated resolver', () => {
           "problems": [
             {
               "code": "too_small",
-              "exact": false,
               "inclusive": true,
-              "message": "Number must be greater than or equal to 18",
+              "message": "Too small: expected number to be >=18",
               "minimum": 18,
+              "origin": "number",
               "path": [
                 "age",
               ],
-              "type": "number",
             },
           ],
         }

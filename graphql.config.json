@@ -39,11 +39,11 @@
             "typescript-validation-schema"
           ],
           "config": {
-            "schema": "zod",
+            "schema": "zodv4",
             "scalarSchemas": {
               "Date": "z.date()",
               "DateTime": "z.date()",
-              "EmailAddress": "z.string().email()",
+              "EmailAddress": "z.email()",
               "BigInt": "z.bigint()"
             },
             "importFrom": "~/apollo/graphql",

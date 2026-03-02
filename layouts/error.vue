@@ -25,14 +25,13 @@
   </NuxtLayout>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 definePageMeta({ layout: false })
-export default defineComponent({
-  props: {
-    error: {
-      type: Object,
-      default: null,
-    },
-  },
-})
+
+defineProps<{
+  error: {
+    statusCode: number
+    message: string
+  }
+}>()
 </script>

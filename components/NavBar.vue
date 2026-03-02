@@ -65,7 +65,7 @@
             aria-modal="true"
           >
             <div
-              class="backdrop-blur-sm bg-gray-400/20 w-full h-full"
+              class="backdrop-blur-xs bg-gray-400/20 w-full h-full"
               aria-hidden="true"
             />
           </div>
@@ -153,21 +153,21 @@
           <template #default="{ blurHandler }">
             <div class="w-36">
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 role="menuitem"
                 @blur="blurHandler"
               >
                 Your Profile
               </button>
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 role="menuitem"
                 @blur="blurHandler"
               >
                 Settings
               </button>
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 @click="logout()"
               >
                 Logout

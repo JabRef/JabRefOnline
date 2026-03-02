@@ -3,7 +3,7 @@
     <div
       v-for="(feature, index) in features"
       :key="feature.path"
-      class="container mx-auto px-4 pb-4 lg:pb-16 mt-4 max-w-screen-xl"
+      class="container mx-auto px-4 pb-4 lg:pb-16 mt-4 max-w-(--breakpoint-xl)"
     >
       <div class="flex flex-wrap">
         <div
@@ -27,7 +27,7 @@
           }"
         >
           <img
-            class="max-w-full h-auto shadow-[0_0_12px_#a7a7bd] rounded"
+            class="max-w-full h-auto shadow-[0_0_12px_#a7a7bd] rounded-sm"
             :src="useAsset(feature.img)"
             alt=""
           />
@@ -40,7 +40,7 @@
 <script lang="ts" setup>
 // Taken from https://github.com/nuxt/framework/issues/7121#issuecomment-1247934787
 function useAsset(path: string): string {
-  const assets = import.meta.glob('~/assets/**/*', {
+  const assets = import.meta.glob('~/assets/*', {
     eager: true,
     import: 'default',
   })

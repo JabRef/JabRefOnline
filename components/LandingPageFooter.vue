@@ -1,7 +1,7 @@
 <template>
   <footer class="md:pb-4 md:pt-8">
     <div
-      class="container mx-auto pr-4 pl-8 md:pl-4 py-6 border-t border-gray-200 flex flex-col md:flex-row flex-wrap max-w-screen-lg"
+      class="container mx-auto pr-4 pl-8 md:pl-4 py-6 border-t border-gray-200 flex flex-col md:flex-row flex-wrap max-w-(--breakpoint-lg)"
     >
       <div class="w-4/12 md:w-1/5 md:mx-1/6">
         <JabrefLogo class="max-w-full max-h-44 h-auto md:p-3" />
