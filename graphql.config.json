@@ -12,10 +12,11 @@
     "codegen": {
       "overwrite": true,
       "generates": {
-        "apollo": {
-          "preset": "gql-tag-operations-preset",
+        "apollo/": {
+          "preset": "client",
           "presetConfig": {
-            "fragmentMasking": true
+            "fragmentMasking": true,
+            "gqlTagName": "gql"
           },
           "config": {
             "scalars": {

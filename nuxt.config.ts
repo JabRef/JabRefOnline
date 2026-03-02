@@ -221,6 +221,13 @@ export default defineNuxtConfig({
       // Workaround for https://github.com/nuxt/nuxt/issues/27544
       exclude: ['vee-validate'],
     },
+    resolve: {
+      alias: {
+        // Workaround for @graphql-typed-document-node/core having empty main field
+        '@graphql-typed-document-node/core':
+          '@graphql-typed-document-node/core/typings/index.d.ts',
+      },
+    },
     server: {
       // Configure vite for HMR with Gitpod
       // Taken from https://github.com/vitejs/vite/issues/1653#issuecomment-1079322770
