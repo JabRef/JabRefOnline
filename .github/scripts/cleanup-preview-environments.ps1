@@ -8,32 +8,6 @@ param(
     [switch]$Delete
 )
 
-function Coalesce {
-    param([Parameter(ValueFromRemainingArguments = $true)]$Values)
-    foreach ($value in $Values) {
-        if ($null -ne $value -and "$value" -ne "") { return $value }
-    }
-    return $null
-}
-
-function Get-EnvironmentTimestamp {
-    param([Parameter(Mandatory = $true)]$Environment)
-    $candidates = @(
-        $Environment.properties.lastUpdatedOn,
-        $Environment.properties.createdOn,
-        $Environment.properties.createdTime,
-        $Environment.properties.lastUpdatedTime,
-        $Environment.lastUpdatedOn,
-        $Environment.createdOn,
-        $Environment.createdTime
-    ) | Where-Object { $_ }
-
-    foreach ($candidate in $candidates) {
-        $parsed = [datetime]::MinValue
-        if ([datetime]::TryParse($candidate, [ref]$parsed)) { return $parsed.ToUniversalTime() }
-    }
-    return $null
-}
 
 if (-not (Get-Command az -ErrorAction SilentlyContinue)) {
     throw "Azure CLI (az) not found in PATH. Install it from https://aka.ms/installazurecliwindows"
