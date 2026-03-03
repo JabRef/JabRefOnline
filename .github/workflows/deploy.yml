@@ -58,13 +58,13 @@ jobs:
         if: matrix.environment == 'Test'
         run: pnpm prisma:migrate:reset --force
         env:
-          NUXT_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Update Production database on Azure
         if: matrix.environment == 'Staging'
         run: pnpm prisma:migrate:deploy
         env:
-          NUXT_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Build
         run: pnpm build:azure
@@ -95,7 +95,7 @@ jobs:
           python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }} -v
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
           AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
           AZURE_DATABASE_URL: ${{ env.DATABASE_URL }}
 
