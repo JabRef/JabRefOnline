@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
@@ -84,7 +84,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
@@ -135,7 +135,7 @@ jobs:
 
       - name: Publish and test Storybook
         if: always()
-        uses: chromaui/action@07791f8243f4cb2698bf4d00426baf4b2d1cb7e0 # v13.3.5
+        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
