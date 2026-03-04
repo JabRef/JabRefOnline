@@ -3,8 +3,6 @@ name: CD Azure (preview)
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, labeled]
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       preview_name:
