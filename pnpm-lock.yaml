@@ -11,9 +11,9 @@ patchedDependencies:
   '@azure/static-web-apps-cli':
     hash: 04179a06612e62789389771ae74e120b5748325086eb9d25be44e50be5416052
     path: patches/@azure__static-web-apps-cli.patch
-  '@prisma/client':
-    hash: 4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523
-    path: patches/@prisma__client.patch
+  '@prisma/client@7.4.2':
+    hash: f17082df8d229a3e11c42cab09430b085e08191b20b2db4a24ed069a60061142
+    path: patches/@prisma__client@7.4.2.patch
   '@vue/apollo-util':
     hash: edbad00d9e143d8a1baa7afde4d48b9b4cde195c74e05f96ac38393dda99d793
     path: patches/@vue__apollo-util@4.0.0-beta.6.patch
@@ -23,9 +23,9 @@ patchedDependencies:
   nitropack:
     hash: c9de0aa16240d23ec5896f17298840aa2350ee6fbcac041d414bb3109bad6cd3
     path: patches/nitropack.patch
-  prisma:
-    hash: 8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047
-    path: patches/prisma.patch
+  prisma@7.4.2:
+    hash: 22f9ed1367a51da7b629654ef417940954d4b9e53e7a618b5d23540e6392fabb
+    path: patches/prisma@7.4.2.patch
 
 importers:
 
@@ -63,7 +63,7 @@ importers:
         version: 7.4.2
       '@prisma/client':
         specifier: 7.4.2
-        version: 7.4.2(patch_hash=4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523)(prisma@7.4.2(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3))(typescript@5.9.3)
+        version: 7.4.2(patch_hash=f17082df8d229a3e11c42cab09430b085e08191b20b2db4a24ed069a60061142)(prisma@7.4.2(patch_hash=22f9ed1367a51da7b629654ef417940954d4b9e53e7a618b5d23540e6392fabb)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3))(typescript@5.9.3)
       '@variantjs/core':
         specifier: 0.0.90
         version: 0.0.90
@@ -316,7 +316,7 @@ importers:
         version: 4.3.0(prettier@3.8.1)(typescript@5.9.3)(vue-tsc@3.1.3(typescript@5.9.3))
       prisma:
         specifier: 7.4.2
-        version: 7.4.2(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3)
+        version: 7.4.2(patch_hash=22f9ed1367a51da7b629654ef417940954d4b9e53e7a618b5d23540e6392fabb)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3)
       storybook:
         specifier: 10.2.13
         version: 10.2.13(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -14173,11 +14173,11 @@ snapshots:
 
   '@prisma/client-runtime-utils@7.4.2': {}
 
-  '@prisma/client@7.4.2(patch_hash=4a4849104c9ac2b88435ebec250dd9bdcc4fa61ceae270b93a81b08dda46d523)(prisma@7.4.2(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3))(typescript@5.9.3)':
+  '@prisma/client@7.4.2(patch_hash=f17082df8d229a3e11c42cab09430b085e08191b20b2db4a24ed069a60061142)(prisma@7.4.2(patch_hash=22f9ed1367a51da7b629654ef417940954d4b9e53e7a618b5d23540e6392fabb)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3))(typescript@5.9.3)':
     dependencies:
       '@prisma/client-runtime-utils': 7.4.2
     optionalDependencies:
-      prisma: 7.4.2(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3)
+      prisma: 7.4.2(patch_hash=22f9ed1367a51da7b629654ef417940954d4b9e53e7a618b5d23540e6392fabb)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3)
       typescript: 5.9.3
 
   '@prisma/config@7.4.2(magicast@0.5.1)':
@@ -20435,7 +20435,7 @@ snapshots:
     dependencies:
       parse-ms: 4.0.0
 
-  prisma@7.4.2(patch_hash=8d742a89215bf270178785de496c4bc03b596cfab997ddffa855b0e1ecf25047)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3):
+  prisma@7.4.2(patch_hash=22f9ed1367a51da7b629654ef417940954d4b9e53e7a618b5d23540e6392fabb)(@types/react@19.0.8)(better-sqlite3@12.6.2)(magicast@0.5.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.9.3):
     dependencies:
       '@prisma/config': 7.4.2(magicast@0.5.1)
       '@prisma/dev': 0.20.0(typescript@5.9.3)

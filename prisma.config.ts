@@ -11,6 +11,7 @@ import { defineConfig } from 'prisma/config'
 config()
 
 const databaseUrl = process.env.NUXT_DATABASE_URL
+const shadowDatabaseUrl = process.env.NUXT_SHADOW_DATABASE_URL
 
 export default defineConfig({
   schema: path.join('server', 'database', 'schema.prisma'),
@@ -22,7 +23,7 @@ export default defineConfig({
     ? {
         datasource: {
           url: databaseUrl,
-          shadowDatabaseUrl: databaseUrl,
+          ...(shadowDatabaseUrl !== undefined ? { shadowDatabaseUrl } : {}),
         },
       }
     : {}),
