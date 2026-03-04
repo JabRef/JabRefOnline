@@ -102,7 +102,7 @@
     "@nuxt/eslint": "1.15.2",
     "@nuxt/icon": "2.1.0",
     "@nuxt/kit": "4.2.0",
-    "@nuxt/test-utils": "3.20.1",
+    "@nuxt/test-utils": "4.0.0",
     "@nuxtjs/seo": "3.2.2",
     "@nuxtjs/storybook": "npm:@nuxtjs/storybook@nightly",
     "@tailwindcss/forms": "0.5.10",
@@ -155,6 +155,9 @@
   },
   "packageManager": "pnpm@10.30.3",
   "pnpm": {
+    "overrides": {
+      "h3": "1.15.5"
+    },
     "patchedDependencies": {
       "mount-vue-component": "patches/mount-vue-component@0.10.2.patch",
       "@vue/apollo-util": "patches/@vue__apollo-util@4.0.0-beta.6.patch",
