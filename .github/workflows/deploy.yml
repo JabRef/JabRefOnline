@@ -56,7 +56,9 @@ jobs:
 
       - name: Reset Test database on Azure
         if: matrix.environment == 'Test'
-        run: pnpm prisma:migrate:reset --force
+        run: |
+          pnpm prisma:migrate:reset --force
+          pnpm prisma:seed
         env:
           NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
