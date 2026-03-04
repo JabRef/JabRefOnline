@@ -2,12 +2,10 @@
 
 datasource db {
   provider = "postgresql"
-  url = env("NUXT_DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client"
-  previewFeatures = ["queryCompiler", "driverAdapters"]
   output = "./generated"
   moduleFormat = "esm"
 }

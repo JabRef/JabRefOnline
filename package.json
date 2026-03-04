@@ -13,7 +13,7 @@
     "generate:watch": "concurrently \"pnpm:*:generate:watch\"",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:dev:create": "prisma migrate dev --create-only",
-    "prisma:migrate:diff": "prisma migrate diff --exit-code --from-migrations server/database/migrations --to-schema-datamodel server/database/schema.prisma --shadow-database-url",
+    "prisma:migrate:diff": "prisma migrate diff --exit-code --from-migrations server/database/migrations --to-schema server/database/schema.prisma",
     "prisma:migrate:reset": "prisma migrate reset",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:status": "prisma migrate status",
@@ -162,8 +162,8 @@
       "mount-vue-component": "patches/mount-vue-component@0.10.2.patch",
       "@vue/apollo-util": "patches/@vue__apollo-util@4.0.0-beta.6.patch",
       "nitropack": "patches/nitropack.patch",
-      "prisma": "patches/prisma.patch",
       "@azure/static-web-apps-cli": "patches/@azure__static-web-apps-cli.patch",
+      "prisma": "patches/prisma.patch",
       "@prisma/client": "patches/@prisma__client.patch"
     },
     "onlyBuiltDependencies": [
