@@ -5,10 +5,13 @@
 
 import { config } from 'dotenv'
 import path from 'node:path'
-import { defineConfig, env } from 'prisma/config'
+import { defineConfig } from 'prisma/config'
 
 // Load environment variables from .env file
 config()
+
+const databaseUrl = process.env.NUXT_DATABASE_URL
+const shadowDatabaseUrl = process.env.NUXT_SHADOW_DATABASE_URL
 
 export default defineConfig({
   schema: path.join('server', 'database', 'schema.prisma'),
@@ -16,8 +19,12 @@ export default defineConfig({
     path: path.join('server', 'database', 'migrations'),
     seed: 'jiti ./server/database/runSeed.ts',
   },
-  datasource: {
-    url: env('NUXT_DATABASE_URL'),
-    shadowDatabaseUrl: env('NUXT_SHADOW_DATABASE_URL'),
-  },
+  ...(databaseUrl !== undefined
+    ? {
+        datasource: {
+          url: databaseUrl,
+          ...(shadowDatabaseUrl !== undefined ? { shadowDatabaseUrl } : {}),
+        },
+      }
+    : {}),
 })
