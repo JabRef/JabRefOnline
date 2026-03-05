@@ -120,7 +120,7 @@ jobs:
       - name: Deploy Function App
         uses: Azure/functions-action@v1.5.4
         with:
-            app-name: jabref-function-$env:PREVIEW_NAME
+            app-name: jabref-function-${{ env.PREVIEW_NAME }}
             package: .output/server
 
       - name: Check HTTP status
