@@ -101,6 +101,7 @@ jobs:
           # Finally, run the migrations (this also creates the db)
           $Env:NUXT_DATABASE_URL = $connection_string
           pnpm prisma:migrate:reset --force
+          pnpm prisma:seed
         env:
           DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
 
