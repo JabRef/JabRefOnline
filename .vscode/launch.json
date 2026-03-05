@@ -44,10 +44,7 @@
       "type": "pwa-node",
       "request": "launch",
       "name": "Server: nuxt",
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ],
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
       "args": ["dev"],
       "osx": {
         "program": "${workspaceFolder}/node_modules/.bin/nuxt"

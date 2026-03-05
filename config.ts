@@ -28,10 +28,7 @@ export enum Environment {
 /**
  * Taken from https://stackoverflow.com/a/41548441
  */
-function enumFromStringValue<T>(
-  enm: Record<string, T>,
-  value: string,
-): T | undefined {
+function enumFromStringValue<T>(enm: Record<string, T>, value: string): T | undefined {
   return (Object.values(enm) as unknown as string[]).includes(value)
     ? (value as unknown as T)
     : undefined
@@ -49,10 +46,7 @@ function getEnvironment(): Environment {
 
   if (process.env.NODE_ENV === undefined) return Environment.LocalDevelopment
 
-  return (
-    enumFromStringValue(Environment, process.env.NODE_ENV) ??
-    Environment.LocalDevelopment
-  )
+  return enumFromStringValue(Environment, process.env.NODE_ENV) ?? Environment.LocalDevelopment
 }
 
 export interface Config {

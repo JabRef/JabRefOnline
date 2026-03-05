@@ -1,10 +1,7 @@
 // @ts-check
 import graphqlPlugin from '@graphql-eslint/eslint-plugin'
 import vitest from '@vitest/eslint-plugin'
-import {
-  defineConfigWithVueTs,
-  vueTsConfigs,
-} from '@vue/eslint-config-typescript'
+import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import oxlint from 'eslint-plugin-oxlint'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
@@ -27,14 +24,13 @@ export default withNuxt({
     // https://github.com/vuejs/eslint-config-typescript
     // https://typescript-eslint.io/getting-started/typed-linting
     // @ts-expect-error: @vue/eslint-config-typescript has problems with the type
-    defineConfigWithVueTs(
-      vueTsConfigs.stylisticTypeChecked,
-      vueTsConfigs.strictTypeChecked,
-    ).map((config) => ({
-      ...config,
-      // Activate ts rules only for ts files, otherwise they also apply to graphql -- which the parser doesn't understand
-      files: ['**/*.ts'],
-    })),
+    defineConfigWithVueTs(vueTsConfigs.stylisticTypeChecked, vueTsConfigs.strictTypeChecked).map(
+      (config) => ({
+        ...config,
+        // Activate ts rules only for ts files, otherwise they also apply to graphql -- which the parser doesn't understand
+        files: ['**/*.ts'],
+      }),
+    ),
   )
   .append({
     // TS-specific rules
@@ -55,10 +51,7 @@ export default withNuxt({
       // TODO: Remove this once all errors are fixed
       '@typescript-eslint/no-redundant-type-constituents': 'warn',
       // Allow numbers in templates without explicit casting
-      '@typescript-eslint/restrict-template-expressions': [
-        'error',
-        { allowNumber: true },
-      ],
+      '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
       // Use { type xyz } instead of type { xyz } for imports
       // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/consistent-type-specifier-style.md
       // Disabled due to https://github.com/import-js/eslint-plugin-import/issues/2675
