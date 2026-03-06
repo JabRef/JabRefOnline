@@ -122,7 +122,7 @@ jobs:
           # Create a clean, standard ZIP (no symlinks)
           # Workaround for https://github.com/Azure/functions-action/issues/332
           cd .output/server
-          zip -r ../publish.zip .
+          tar -h -a -c -f ../publish.zip .
 
       - name: Deploy Function App
         uses: Azure/functions-action@v1.5.4
