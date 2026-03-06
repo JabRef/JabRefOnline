@@ -101,25 +101,18 @@ jobs:
           AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
           AZURE_DATABASE_URL: ${{ env.DATABASE_URL }}
 
-      - name: Deploy Function App
+      - name: Create deployment zip
         run: |
-          # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
-          # if multiple versions of the same package are used.
-          # However, these symlinks are not preserved by Compress-Archive, and even they were, Azure has problems with symlinks:
-          # https://github.com/Azure/webapps-deploy/issues/54
-          # Therefore, replace all symlinks by the actual files
-          $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
-          foreach ($link in $links)
-          {
-              $source = $link.Target;
-              $destination = $link.FullName;
+          # Create a clean, standard ZIP (no symlinks)
+          # Workaround for https://github.com/Azure/functions-action/issues/332
+          cd .output/server
+          tar -h -a -c -f ../publish.zip .
 
-              Remove-Item $destination -Force
-              Copy-Item -Path $source -Destination $destination -Force -Recurse
-          }
-
-          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output\server.zip
+      - name: Deploy Function App
+        uses: Azure/functions-action@v1.5.4
+        with:
+          app-name: jabref-function-${{ matrix.deployment_environment }}
+          package: .output/publish.zip
 
       - name: Check HTTP status
         run: |
