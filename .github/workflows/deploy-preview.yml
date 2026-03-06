@@ -121,7 +121,7 @@ jobs:
         run: |
           # Create a clean, standard ZIP (no symlinks)
           # Workaround for https://github.com/Azure/functions-action/issues/332
-          cd output/server
+          cd .output/server
           zip -r ../publish.zip .
 
       - name: Deploy Function App
