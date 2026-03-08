@@ -7,6 +7,9 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
+    experimental: {
+      legacyExternals: true,
+    },
     azure: {
       config: {
         globalHeaders: {
