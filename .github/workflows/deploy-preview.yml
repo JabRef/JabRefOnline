@@ -119,13 +119,21 @@ jobs:
 
       - name: Cleanup deployment
         run: |
+          # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
+          # if multiple versions of the same package are used.
           # Replace symlinks with real copies so the deploy zip is self-contained
-          # Workaround for https://github.com/Azure/functions-action/issues/332
-          cd .output/server
-          Get-ChildItem -Recurse -Attributes ReparsePoint | ForEach-Object {
-            $target = $_.LinkTarget
-            Remove-Item $_.FullName
-            Copy-Item $target -Destination $_.FullName -Recurse
+          # However, Azure has problems with symlinks:
+          # - https://github.com/Azure/webapps-deploy/issues/54
+          # - https://github.com/Azure/functions-action/issues/332
+          # Therefore, replace all symlinks by the actual files
+          $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
+          foreach ($link in $links)
+          {
+              $source = $link.Target;
+              $destination = $link.FullName;
+
+              Remove-Item $destination -Force
+              Copy-Item -Path $source -Destination $destination -Force -Recurse
           }
 
       - name: Deploy Function App
