@@ -7,6 +7,13 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
+    preset: 'azure-swa',
+    imports: {
+      // These modules are imported explicitly and should not be globally auto-imported.
+      // Excluding them avoids circular self-reexports in generated Nitro imports.
+      exclude: [/server[/\\]utils[/\\](email\.service|validation)\.ts$/],
+    },
+    /*
     azure: {
       config: {
         globalHeaders: {
@@ -15,12 +22,14 @@ export default defineNuxtConfig({
         },
       },
     },
+    */
     // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
       // Prerender all pages reached from the index page
       crawlLinks: true,
     },
+    /*
     esbuild: {
       options: {
         tsconfigRaw: {
@@ -30,7 +39,7 @@ export default defineNuxtConfig({
           },
         },
       },
-    },
+    },*/
   },
 
   experimental: {

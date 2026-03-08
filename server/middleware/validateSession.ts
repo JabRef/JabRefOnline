@@ -1,5 +1,10 @@
 import type { UserSession } from '#auth-utils'
-import type { H3Event, SessionConfig } from 'h3'
+import {
+  defineEventHandler,
+  type H3Event,
+  type SessionConfig,
+  useSession,
+} from 'nitro/h3'
 import { resolve } from '../tsyringe'
 
 let sessionConfig: SessionConfig | null = null

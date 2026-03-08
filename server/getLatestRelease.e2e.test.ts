@@ -1,5 +1,5 @@
 import { fetch, setup } from '@nuxt/test-utils/e2e'
-import type { InternalApi } from 'nitropack'
+import type { InternalApi } from 'nitro'
 import { describe, expect, it } from 'vitest'
 type GetLatestReleaseResponse = InternalApi['/api/getLatestRelease']['default']
 
