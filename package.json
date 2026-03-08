@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build --fail-on-error",
-    "build:azure": "cross-env INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN=test NITRO_PRESET=azure pnpm build",
+    "build:azure": "cross-env INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN=test NITRO_PRESET=azure-swa pnpm build",
     "start": "nuxi preview",
     "start:azure": "cross-env NUXT_PUBLIC_ENVIRONMENT=development swa start .output/public --api-location .output/server",
     "generate": "pnpm prisma:generate && pnpm graphql:generate",
@@ -101,7 +101,7 @@
     "@nuxt/content": "3.8.0",
     "@nuxt/eslint": "1.15.2",
     "@nuxt/icon": "2.1.0",
-    "@nuxt/kit": "http://pkg.pr.new/nuxt@c6ed807",
+    "@nuxt/kit": "https://pkg.pr.new/@nuxt/kit@33005",
     "@nuxt/test-utils": "4.0.0",
     "@nuxtjs/seo": "3.2.2",
     "@nuxtjs/storybook": "npm:@nuxtjs/storybook@nightly",
@@ -132,7 +132,7 @@
     "jiti": "2.6.1",
     "mount-vue-component": "0.10.2",
     "naive-ui": "2.43.1",
-    "nuxt": "http://pkg.pr.new/nuxt@c6ed807",
+    "nuxt": "https://pkg.pr.new/nuxt@33005",
     "nuxt-auth-utils": "0.5.25",
     "nuxt-graphql-server": "3.1.6",
     "oxlint": "1.51.0",
@@ -155,13 +155,9 @@
   },
   "packageManager": "pnpm@10.30.3",
   "pnpm": {
-    "overrides": {
-      "h3": "1.15.5"
-    },
     "patchedDependencies": {
       "mount-vue-component": "patches/mount-vue-component@0.10.2.patch",
       "@vue/apollo-util": "patches/@vue__apollo-util@4.0.0-beta.6.patch",
-      "nitropack": "patches/nitropack.patch",
       "@azure/static-web-apps-cli": "patches/@azure__static-web-apps-cli.patch",
       "prisma": "patches/prisma.patch",
       "@prisma/client": "patches/@prisma__client.patch"
