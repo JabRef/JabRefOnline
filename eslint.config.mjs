@@ -86,7 +86,6 @@ export default withNuxt({
         parser: graphqlPlugin.parser,
       },
       plugins: {
-        // @ts-expect-error: graphqlPlugin is not typed correctly
         '@graphql-eslint': graphqlPlugin,
       },
     },
@@ -153,7 +152,6 @@ export default withNuxt({
       ],
     },
   })
-  // @ts-expect-error: eslint-vitest has problems with the type: https://github.com/vitest-dev/eslint-plugin-vitest/issues/814
   .append({
     // Test files
     // https://github.com/vitest-dev/eslint-plugin-vitest

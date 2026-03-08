@@ -1,10 +1,10 @@
 name: CD Azure (preview)
 
 on:
+  # Uncomment for testing:
+  # pull_request:
   pull_request_target:
     types: [opened, synchronize, reopened, labeled]
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       preview_name:
@@ -37,7 +37,7 @@ jobs:
           exit 1
 
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ github.event.pull_request.head.sha || github.ref }}
 
@@ -45,9 +45,9 @@ jobs:
         uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: 24.11.0
+          node-version: 24.14.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -79,7 +79,7 @@ jobs:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
       - name: Install Python
-        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
@@ -103,6 +103,7 @@ jobs:
           # Finally, run the migrations (this also creates the db)
           $Env:NUXT_DATABASE_URL = $connection_string
           pnpm prisma:migrate:reset --force
+          pnpm prisma:seed
         env:
           DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
 
@@ -116,12 +117,14 @@ jobs:
           AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
           AZURE_DATABASE_URL: ${{ steps.create_db.outputs.db_url }}
 
-      - name: Deploy Function App
+      - name: Cleanup deployment
         run: |
           # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
           # if multiple versions of the same package are used.
-          # However, these symlinks are not preserved by Compress-Archive, and even they were, Azure has problems with symlinks:
-          # https://github.com/Azure/webapps-deploy/issues/54
+          # Replace symlinks with real copies so the deploy zip is self-contained
+          # However, Azure has problems with symlinks:
+          # - https://github.com/Azure/webapps-deploy/issues/54
+          # - https://github.com/Azure/functions-action/issues/332
           # Therefore, replace all symlinks by the actual files
           $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
           foreach ($link in $links)
@@ -133,8 +136,11 @@ jobs:
               Copy-Item -Path $source -Destination $destination -Force -Recurse
           }
 
-          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-$env:PREVIEW_NAME --src .output\server.zip
+      - name: Deploy Function App
+        uses: Azure/functions-action@v1.5.4
+        with:
+          app-name: jabref-function-${{ env.PREVIEW_NAME }}
+          package: .output/server
 
       - name: Check HTTP status
         run: |

@@ -235,7 +235,13 @@ const keywords = computed({
 })
 const keywordSuggestions = [{ value: 'Differential Geometry' }]
 
-const groups = [{ value: 'Chocolate Making' }, { value: 'Consumption' }]
+const groups = computed({
+  get: () => [{ value: 'Chocolate Making' }, { value: 'Consumption' }],
+  set: (_value) => {
+    // TODO: Implement
+  },
+})
+
 const groupSuggestions = [{ value: 'Grinding' }]
 
 const externalLinks = computed(() => [
