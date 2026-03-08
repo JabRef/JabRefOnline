@@ -101,18 +101,22 @@ jobs:
           AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
           AZURE_DATABASE_URL: ${{ env.DATABASE_URL }}
 
-      - name: Create deployment zip
+      - name: Cleanup deployment
         run: |
-          # Create a clean, standard ZIP (no symlinks)
+          # Replace symlinks with real copies so the deploy zip is self-contained
           # Workaround for https://github.com/Azure/functions-action/issues/332
           cd .output/server
-          tar -h -a -c -f ../publish.zip .
+          Get-ChildItem -Recurse -Attributes ReparsePoint | ForEach-Object {
+            $target = $_.LinkTarget
+            Remove-Item $_.FullName
+            Copy-Item $target -Destination $_.FullName -Recurse
+          }
 
       - name: Deploy Function App
         uses: Azure/functions-action@v1.5.4
         with:
           app-name: jabref-function-${{ matrix.deployment_environment }}
-          package: .output/publish.zip
+          package: .output/server
 
       - name: Check HTTP status
         run: |
