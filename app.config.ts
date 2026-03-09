@@ -13,7 +13,7 @@ export default defineAppConfig({
       info: 'info',
       warning: 'warning',
       error: 'error',
-      neutral: 'gray',
+      neutral: 'neutral',
     },
   },
 })
