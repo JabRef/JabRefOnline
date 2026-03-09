@@ -39,7 +39,7 @@
     </div>
     <div>
       <document-editor-input v-model="published" />
-      <span class="text-gray-400">|</span>
+      <span class="text-dimmed">|</span>
       <document-editor-input v-model="journal" />
     </div>
     <div class="-mt-1">
@@ -47,12 +47,12 @@
         Volume:
         <document-editor-input v-model="volume" />
       </span>
-      <span class="text-gray-400 pr-3">|</span>
+      <span class="text-dimmed pr-3">|</span>
       <span>
         Issue:
         <document-editor-input v-model="issue" />
       </span>
-      <span class="text-gray-400 pr-3">|</span>
+      <span class="text-dimmed pr-3">|</span>
       <span>
         pp.
         <document-editor-input v-model="pages" />

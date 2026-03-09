@@ -10,10 +10,10 @@
       </div>
     </template>
     <div>
-      <h2 class="text-center text-5xl font-extrabold text-gray-900">
+      <h2 class="text-center text-5xl font-extrabold text-highlighted">
         Create account
       </h2>
-      <p class="mt-6 mb-8 text-center text-sm text-gray-600">
+      <p class="mt-6 mb-8 text-center text-sm text-toned">
         Already have an account?
         <t-nuxtlink to="/user/login">Sign in</t-nuxtlink>
       </p>

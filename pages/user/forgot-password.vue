@@ -7,7 +7,7 @@
       />
     </template>
     <div>
-      <h2 class="mb-7 text-center text-5xl font-extrabold text-gray-900">
+      <h2 class="mb-7 text-center text-5xl font-extrabold text-highlighted">
         Reset Password
       </h2>
       <p

@@ -9,7 +9,7 @@
     >
       <jabref-logo class="w-10 flex-none" />
       <span
-        class="ml-3 flex-1 text-gray-900 text-2xl font-semibold lg:inline-block hidden"
+        class="ml-3 flex-1 text-highlighted text-2xl font-semibold lg:inline-block hidden"
       >
         JabRef</span
       >
@@ -18,7 +18,7 @@
     <!-- Search bar -->
     <div
       v-if="showSearchBar"
-      class="relative text-gray-600"
+      class="relative text-toned"
     >
       <t-input
         v-model="searchQuery"
@@ -32,7 +32,7 @@
       >
         <Icon
           name="ri:search-line"
-          class="text-gray-400"
+          class="text-dimmed"
         />
       </button>
     </div>
@@ -58,7 +58,7 @@
           />
         </div>
         <button
-          class="text-right text-gray-700 text-xl relative z-60"
+          class="text-right text text-xl relative z-60"
           @click="isHamburgerShown = !isHamburgerShown"
         >
           <Icon :name="isHamburgerShown ? 'ri:close-fill' : 'ri:menu-fill'" />
@@ -68,7 +68,7 @@
       <template #content>
         <div class="px-6 py-5 text-base max-w-xs w-full rounded-lg">
           <button
-            class="text-right text-gray-700 text-xl absolute top-3 right-5"
+            class="text-right text text-xl absolute top-3 right-5"
             @click="isHamburgerShown = false"
           >
             <Icon
@@ -86,9 +86,9 @@
       <slot>
         <div class="space-x-14">
           <span class="text-primary-600 text-lg font-semibold">Library</span>
-          <span class="text-gray-400 text-lg font-semibold">Browse</span>
+          <span class="text-dimmed text-lg font-semibold">Browse</span>
           <div class="inline">
-            <span class="text-gray-400 text-lg font-semibold">
+            <span class="text-dimmed text-lg font-semibold">
               Subscriptions
             </span>
             <div class="inline-block align-top pl-0.5 -mt-1">
@@ -109,7 +109,7 @@
     >
       <Icon
         name="ri:notification-3-fill"
-        class="text-gray-400 hover:text-primary-500 text-lg"
+        class="text-dimmed hover:text-primary-500 text-lg"
       />
       <div>
         <!-- User profile dropdown -->
@@ -143,21 +143,21 @@
           <template #default="{ blurHandler }">
             <div class="w-36">
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                class="block w-full px-4 py-2 text-sm leading-5 text transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 role="menuitem"
                 @blur="blurHandler"
               >
                 Your Profile
               </button>
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                class="block w-full px-4 py-2 text-sm leading-5 text transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 role="menuitem"
                 @blur="blurHandler"
               >
                 Settings
               </button>
               <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                class="block w-full px-4 py-2 text-sm leading-5 text transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
                 @click="logout()"
               >
                 Logout

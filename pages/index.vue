@@ -10,8 +10,8 @@
             <t-nuxtlink
               v-for="link in links"
               :key="link.title"
-              active-class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
-              class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
+              active-class="text-dimmed hover:text-primary-600 text-lg font-semibold"
+              class="text-dimmed hover:text-primary-600 text-lg font-semibold"
               :to="link.href"
               >{{ link.title }}</t-nuxtlink
             >
@@ -44,7 +44,7 @@
               </h1>
             </div>
             <div class="xl:w-3/4 mx-auto">
-              <h2 class="mb-5 text-3xl text-gray-700">
+              <h2 class="mb-5 text-3xl text">
                 The efficient way to collect, organize & discover
               </h2>
             </div>

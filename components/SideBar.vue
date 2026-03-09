@@ -14,7 +14,7 @@
 
     <!-- Collections -->
     <div class="flex flex-col pl-12 pt-6 pr-4">
-      <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">Home</p>
+      <p class="uppercase text-xs text-toned mb-4 tracking-wider">Home</p>
 
       <a
         href="#"
@@ -38,7 +38,7 @@
         Recently modified
       </a>
 
-      <p class="uppercase text-xs text-gray-600 mb-2 mt-4 tracking-wider">
+      <p class="uppercase text-xs text-toned mb-2 mt-4 tracking-wider">
         Groups
       </p>
       <BaseTree
@@ -51,7 +51,7 @@
         <template #default="{ node, stat }">
           <span
             v-if="node.children && node.children.length > 0"
-            class="-ml-8 mr-4 w-4 text-gray-400 inline-block"
+            class="-ml-8 mr-4 w-4 text-dimmed inline-block"
             @click="stat.open = !stat.open"
           >
             <Icon
@@ -77,7 +77,7 @@
           </button>
         </template>
         <template #placeholder>
-          <span class="text-gray-400">No groups</span>
+          <span class="text-dimmed">No groups</span>
         </template>
       </BaseTree>
     </div>
