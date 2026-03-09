@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-gray-300 h-20"
+    class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-muted h-20"
   >
     <!-- Logo -->
     <div

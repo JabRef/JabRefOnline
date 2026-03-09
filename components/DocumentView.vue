@@ -67,7 +67,7 @@
         v-for="keyword in document.keywords"
         :key="keyword"
         variant="badge"
-        class="border border-gray-400"
+        class="border border-accented"
       >
         <!-- TODO: Add icon of group <Icon name="dragon" class="mr-2" /> -->
         {{ keyword }}
