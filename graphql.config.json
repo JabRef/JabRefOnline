@@ -12,7 +12,7 @@
     "codegen": {
       "overwrite": true,
       "generates": {
-        "apollo/": {
+        "apollo/generated/": {
           "preset": "client",
           "presetConfig": {
             "fragmentMasking": true,
@@ -28,10 +28,10 @@
             }
           }
         },
-        "apollo/introspection.ts": {
+        "apollo/generated/introspection.ts": {
           "plugins": ["fragment-matcher"]
         },
-        "apollo/validation.internal.ts": {
+        "apollo/generated/validation.internal.ts": {
           "plugins": [
             {
               "add": {
@@ -48,7 +48,7 @@
               "EmailAddress": "z.email()",
               "BigInt": "z.bigint()"
             },
-            "importFrom": "~/apollo/graphql",
+            "importFrom": "~/apollo/generated/graphql",
             "useTypeImports": true,
             "enumsAsTypes": true,
             "validationSchemaExportType": "const"

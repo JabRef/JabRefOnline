@@ -111,8 +111,8 @@
 
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
+import type { PersonFullDetailsFragment } from '~/apollo'
 import { gql, useFragment } from '~/apollo'
-import type { PersonFullDetailsFragment } from '~/apollo/graphql'
 import Tags from './tagify.vue'
 
 const PersonFullDetails = gql(/* GraphQL */ `
