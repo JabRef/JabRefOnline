@@ -24,9 +24,7 @@
         </div>
         <div class="py-2 text-center">
           <UButton
-            variant="solid"
             class="w-full"
-            color="primary"
             type="submit"
             size="xl"
             >Change Password</UButton

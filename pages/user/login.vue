@@ -18,7 +18,6 @@
       <UAlert
         v-if="error"
         color="error"
-        variant="solid"
         title="Error"
         :description="String(error)"
         class="mb-4"
@@ -67,9 +66,7 @@
 
           <div class="py-2 text-center">
             <UButton
-              variant="solid"
               class="w-full"
-              color="primary"
               type="submit"
               size="xl"
               >Sign in</UButton

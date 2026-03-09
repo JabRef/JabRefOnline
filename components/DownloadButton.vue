@@ -1,7 +1,5 @@
 <template>
   <UButton
-    variant="solid"
-    color="primary"
     size="xl"
     class="h-[3.2em]"
   >

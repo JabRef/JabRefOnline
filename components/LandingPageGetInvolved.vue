@@ -67,7 +67,6 @@
         >
           <UButton
             variant="link"
-            color="primary"
             class="text-xl mx-auto text-primary-500"
           >
             <a
@@ -97,7 +96,6 @@
         >
           <UButton
             variant="link"
-            color="primary"
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref/wiki/Donations">
@@ -125,7 +123,6 @@
         >
           <UButton
             variant="link"
-            color="primary"
             class="text-xl mx-auto text-primary-500"
           >
             <a href="https://github.com/JabRef/jabref">

@@ -7,28 +7,16 @@ import { UButton } from '#components'
     :component="UButton"
   >
     <Story title="Standard">
-      <UButton variant="solid">Button</UButton>
+      <UButton>Button</UButton>
     </Story>
     <Story title="Error">
-      <UButton
-        variant="solid"
-        color="error"
-        >error</UButton
-      >
+      <UButton color="error">error</UButton>
     </Story>
     <Story title="Success">
-      <UButton
-        variant="solid"
-        color="success"
-        >success</UButton
-      >
+      <UButton color="success">success</UButton>
     </Story>
     <Story title="Primary">
-      <UButton
-        variant="solid"
-        color="primary"
-        >primary</UButton
-      >
+      <UButton color="primary">primary</UButton>
     </Story>
     <Story title="Ghost">
       <UButton variant="ghost">ghost</UButton>
