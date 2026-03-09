@@ -12,12 +12,14 @@
     "codegen": {
       "overwrite": true,
       "generates": {
-        "apollo": {
-          "preset": "gql-tag-operations-preset",
+        "apollo/generated/": {
+          "preset": "client",
           "presetConfig": {
-            "fragmentMasking": true
+            "fragmentMasking": true,
+            "gqlTagName": "gql"
           },
           "config": {
+            "useTypeImports": true,
             "scalars": {
               "Date": "Date",
               "DateTime": "Date",
@@ -26,10 +28,10 @@
             }
           }
         },
-        "apollo/introspection.ts": {
+        "apollo/generated/introspection.ts": {
           "plugins": ["fragment-matcher"]
         },
-        "apollo/validation.internal.ts": {
+        "apollo/generated/validation.internal.ts": {
           "plugins": [
             {
               "add": {
@@ -46,7 +48,7 @@
               "EmailAddress": "z.email()",
               "BigInt": "z.bigint()"
             },
-            "importFrom": "~/apollo/graphql",
+            "importFrom": "~/apollo/generated/graphql",
             "useTypeImports": true,
             "enumsAsTypes": true,
             "validationSchemaExportType": "const"
