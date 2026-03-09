@@ -10,7 +10,7 @@
       class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
     >
       <Icon
-        class="text-gray-500"
+        class="text-muted"
         :name="showHiddenPassword ? 'ri:eye-line' : 'ri:eye-off-line'"
         :title="showHiddenPassword ? 'Show Password' : 'Hide Password'"
         @click="showHiddenPassword = !showHiddenPassword"

@@ -7,7 +7,7 @@
       />
     </template>
     <div>
-      <h2 class="mb-7 text-center text-5xl font-extrabold text-gray-900">
+      <h2 class="mb-7 text-center text-5xl font-extrabold text-highlighted">
         Reset Password
       </h2>
       <p
@@ -32,11 +32,11 @@
             />
           </t-input-group>
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Submit</n-button
+              type="submit"
+              size="xl"
+              >Submit</UButton
             >
           </div>
         </div>

@@ -67,7 +67,7 @@
         v-for="keyword in document.keywords"
         :key="keyword"
         variant="badge"
-        class="border border-gray-400"
+        class="border border-accented"
       >
         <!-- TODO: Add icon of group <Icon name="dragon" class="mr-2" /> -->
         {{ keyword }}
@@ -86,8 +86,10 @@
       >
         {{ document.abstract }}
       </span>
-      <n-button
-        text
+      <UButton
+        variant="link"
+        size="xs"
+        color="neutral"
         class="text-sm my-auto"
         @click="viewFullAbstract = !viewFullAbstract"
       >
@@ -99,7 +101,7 @@
           <span>View full abstract</span>
           <Icon name="ri:arrow-down-s-line" />
         </template>
-      </n-button>
+      </UButton>
     </div>
   </div>
 </template>
