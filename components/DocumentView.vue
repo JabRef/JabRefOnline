@@ -149,10 +149,11 @@ const DocumentForView = gql(/* GraphQL */ `
     }
   }
 `)
+type DocumentForViewFragment = FragmentType<typeof DocumentForView>
 
 const props = defineProps({
   source: {
-    type: Object as PropType<FragmentType<typeof DocumentForView>>,
+    type: Object as PropType<DocumentForViewFragment>,
     required: true,
   },
 })

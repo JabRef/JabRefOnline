@@ -111,8 +111,8 @@
 
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
+import type { PersonFullDetailsFragment } from '~/apollo'
 import { gql, useFragment } from '~/apollo'
-import type { PersonFullDetailsFragment } from '~/apollo/graphql'
 import Tags from './tagify.vue'
 
 const PersonFullDetails = gql(/* GraphQL */ `
@@ -235,7 +235,13 @@ const keywords = computed({
 })
 const keywordSuggestions = [{ value: 'Differential Geometry' }]
 
-const groups = [{ value: 'Chocolate Making' }, { value: 'Consumption' }]
+const groups = computed({
+  get: () => [{ value: 'Chocolate Making' }, { value: 'Consumption' }],
+  set: (_value) => {
+    // TODO: Implement
+  },
+})
+
 const groupSuggestions = [{ value: 'Grinding' }]
 
 const externalLinks = computed(() => [

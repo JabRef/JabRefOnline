@@ -175,7 +175,7 @@ export default defineNuxtConfig({
       mapperTypeSuffix: 'Model',
       contextType: './context#Context',
       mappers: {
-        User: '@prisma/client/index.d#User',
+        User: './database#User',
         Document: './documents/user.document.service#UserDocument',
         JournalArticle: './documents/user.document.service#UserDocument',
         ProceedingsArticle: './documents/user.document.service#UserDocument',
