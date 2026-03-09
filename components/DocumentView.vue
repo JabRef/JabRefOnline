@@ -89,6 +89,7 @@
       <UButton
         variant="link"
         size="xs"
+        color="neutral"
         class="text-sm my-auto"
         @click="viewFullAbstract = !viewFullAbstract"
       >
