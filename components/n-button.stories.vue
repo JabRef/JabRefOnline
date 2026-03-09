@@ -3,7 +3,7 @@ import { UButton } from '#components'
 </script>
 <template>
   <Stories
-    title="UButton"
+    title="n-button"
     :component="UButton"
   >
     <Story title="Standard">
