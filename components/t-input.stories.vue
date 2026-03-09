@@ -1,32 +1,31 @@
 <script setup lang="ts">
-// @ts-expect-error: not yet compatible with 'bundler' module resolution
-import { TInput } from '@variantjs/vue'
+import { UInput } from '#components'
 </script>
 
 <template>
   <Stories
     title="t-input"
-    :component="TInput"
+    :component="UInput"
   >
     <Story title="Default">
-      <t-input value="Input text" />
+      <UInput value="Input text" />
     </Story>
     <Story title="Error">
-      <t-input
+      <UInput
         value="Input text"
-        variant="error"
+        color="error"
       />
     </Story>
     <Story title="Success">
-      <t-input
+      <UInput
         value="Input text"
-        variant="success"
+        color="success"
       />
     </Story>
     <Story title="Plain">
-      <t-input
+      <UInput
         value="Input text"
-        variant="plain"
+        variant="none"
       />
     </Story>
   </Stories>

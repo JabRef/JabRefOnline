@@ -1,56 +1,50 @@
 <script setup lang="ts">
-// @ts-expect-error: not yet compatible with 'bundler' module resolution
-import { TInput, TInputGroup } from '@variantjs/vue'
+import { UFormField } from '#components'
 </script>
 
 <template>
   <Stories
     title="t-input-group"
-    :component="TInputGroup"
+    :component="UFormField"
   >
     <Story title="Default">
-      <t-input-group
+      <UFormField
         label="Label"
-        feedback="Feedback"
+        help="Feedback"
       >
-        <t-input value="Input text" />
-      </t-input-group>
+        <UInput value="Input text" />
+      </UFormField>
     </Story>
     <Story title="Error">
-      <t-input-group
-        variant="error"
+      <UFormField
         label="Label"
-        feedback="Feedback"
+        error="Feedback"
       >
-        <t-input
-          variant="error"
+        <UInput
+          color="error"
           value="Input text"
         />
-      </t-input-group>
+      </UFormField>
     </Story>
     <Story title="Success">
-      <t-input-group
-        variant="success"
+      <UFormField
         label="Label"
-        feedback="Feedback"
+        help="Feedback"
       >
-        <t-input
-          variant="success"
+        <UInput
+          color="success"
           value="Input text"
         />
-      </t-input-group>
+      </UFormField>
     </Story>
     <Story title="Important">
-      <t-input-group
-        variant="plain"
+      <UFormField
         label="Label"
-        feedback="Feedback"
+        required
+        help="Feedback"
       >
-        <t-input
-          variant="plain"
-          value="Input text"
-        />
-      </t-input-group>
+        <UInput value="Input text" />
+      </UFormField>
     </Story>
   </Stories>
 </template>

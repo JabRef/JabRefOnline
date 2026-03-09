@@ -1,20 +1,14 @@
 <template>
   <div class="flex flex-col overflow-y-auto pr-3">
     <div>
-      <t-select
-        :options="{
-          Article: 'Journal Article',
-          PhDThesis: 'PhD Thesis',
-        }"
-        variant="plaincaps"
-      >
-        <template #arrow="{ className }">
-          <Icon
-            name="ri:arrow-drop-down-line"
-            :class="className"
-          />
-        </template>
-      </t-select>
+      <USelect
+        :items="[
+          { label: 'Journal Article', value: 'Article' },
+          { label: 'PhD Thesis', value: 'PhDThesis' },
+        ]"
+        variant="none"
+        class="uppercase text-gray-600 tracking-wider text-xs"
+      />
     </div>
     <div class="z-10 grid -mt-2">
       <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
@@ -23,10 +17,11 @@
       >
         {{ title + ' ' }}
       </div>
-      <t-textarea
-        v-model="title"
-        variant="plain"
+      <UTextarea
+        :model-value="title ?? undefined"
+        variant="none"
         class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
+        @update:model-value="(v) => (title = v)"
       />
     </div>
     <div class="-mt-3">
@@ -63,10 +58,11 @@
         heading="Abstract"
         class="mt-4 -mb-1"
       />
-      <t-textarea
-        v-model="abstract"
-        variant="plain"
-        rows="5"
+      <UTextarea
+        :model-value="abstract ?? undefined"
+        variant="none"
+        :rows="5"
+        @update:model-value="(v) => (abstract = v)"
       />
     </div>
     <div>

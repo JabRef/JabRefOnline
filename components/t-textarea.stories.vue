@@ -1,15 +1,20 @@
 <script setup lang="ts">
-// @ts-expect-error: not yet compatible with 'bundler' module resolution
-import { TTextarea } from '@variantjs/vue'
+import { UTextarea } from '#components'
 </script>
 
 <template>
   <Stories
     title="t-textarea"
-    :component="TTextarea"
+    :component="UTextarea"
   >
     <Story title="Default">
-      <t-textarea value="Input text" />
+      <UTextarea value="Input text" />
+    </Story>
+    <Story title="Plain">
+      <UTextarea
+        value="Input text"
+        variant="none"
+      />
     </Story>
   </Stories>
 </template>

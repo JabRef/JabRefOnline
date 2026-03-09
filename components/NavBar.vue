@@ -20,11 +20,12 @@
       v-if="showSearchBar"
       class="relative text-toned"
     >
-      <t-input
+      <UInput
         v-model="searchQuery"
         type="search"
         placeholder="Search..."
         class="w-full xl:w-96 px-5 border-none shadow-none pl-10 font-semibold text-lg"
+        variant="none"
       />
       <button
         type="submit"
@@ -113,58 +114,26 @@
       />
       <div>
         <!-- User profile dropdown -->
-        <t-dropdown variant="left">
-          <template
-            #trigger="{
-              mousedownHandler,
-              focusHandler,
-              blurHandler,
-              keydownHandler,
-            }"
+        <UDropdownMenu
+          :content="{ align: 'end' }"
+          :items="[
+            [{ label: 'Your Profile' }, { label: 'Settings' }],
+            [{ label: 'Logout', onSelect: () => logout() }],
+          ]"
+        >
+          <button
+            id="user-menu"
+            class="w-12 h-12"
+            aria-label="User menu"
+            aria-haspopup="true"
           >
-            <button
-              id="user-menu"
-              class="w-12 h-12"
-              aria-label="User menu"
-              aria-haspopup="true"
-              @mousedown="mousedownHandler"
-              @focus="focusHandler"
-              @blur="blurHandler"
-              @keydown="keydownHandler"
-            >
-              <img
-                class="rounded-full"
-                src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
-                alt=""
-              />
-            </button>
-          </template>
-
-          <template #default="{ blurHandler }">
-            <div class="w-36">
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                role="menuitem"
-                @blur="blurHandler"
-              >
-                Your Profile
-              </button>
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                role="menuitem"
-                @blur="blurHandler"
-              >
-                Settings
-              </button>
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                @click="logout()"
-              >
-                Logout
-              </button>
-            </div>
-          </template>
-        </t-dropdown>
+            <img
+              class="rounded-full"
+              src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
+              alt=""
+            />
+          </button>
+        </UDropdownMenu>
       </div>
     </nav>
 
