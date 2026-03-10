@@ -26,21 +26,23 @@
       screenshot="https://www.jabref.org/assets/jabref-mainscreen.png"
       :offers="{ price: '0', priceCurrency: 'EUR' }"
     />
-    <n-layout :position="position">
+    <div :class="position === 'absolute' ? 'relative' : ''">
       <header>
-        <n-layout-header
-          :position="position"
-          class="z-50"
+        <div
+          :class="[
+            'z-50',
+            position === 'absolute' ? 'fixed top-0 left-0 right-0' : '',
+          ]"
         >
           <slot name="header">
             <NavBar />
           </slot>
-        </n-layout-header>
+        </div>
       </header>
-      <div class="md:mt-20 md:pb-10">
+      <div class="md:mt-20 md:pb-10 overflow-auto">
         <slot />
       </div>
-    </n-layout>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -64,7 +66,7 @@ if (import.meta.client) {
   // (vue-router for example uses window.scrollTo)
   // Taken from https://github.com/vuejs/vue-router/issues/1187#issuecomment-893964727
   const offset = 80
-  const contentElementSelector = '.n-layout-scroll-container'
+  const contentElementSelector = '.overflow-auto'
   Object.defineProperty(window, 'pageXOffset', {
     get() {
       return document.querySelector(contentElementSelector)?.scrollLeft ?? 0

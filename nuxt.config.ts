@@ -108,8 +108,8 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    // Add support for naive-ui
-    '@bg-dev/nuxt-naiveui',
+    // Add support for Nuxt UI
+    '@nuxt/ui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -175,7 +175,7 @@ export default defineNuxtConfig({
       mapperTypeSuffix: 'Model',
       contextType: './context#Context',
       mappers: {
-        User: '@prisma/client/index.d#User',
+        User: './database#User',
         Document: './documents/user.document.service#UserDocument',
         JournalArticle: './documents/user.document.service#UserDocument',
         ProceedingsArticle: './documents/user.document.service#UserDocument',

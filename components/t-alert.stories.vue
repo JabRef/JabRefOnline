@@ -1,31 +1,26 @@
 <script setup lang="ts">
-// @ts-expect-error: not yet compatible with 'bundler' module resolution
-import { TAlert } from '@variantjs/vue'
+import { UAlert } from '#components'
 </script>
 
 <template>
   <Stories
     title="t-alert"
-    :component="TAlert"
+    :component="UAlert"
   >
     <Story title="Default">
-      <t-alert :show="true"> Hi there! </t-alert>
+      <UAlert description="Hi there!" />
     </Story>
     <Story title="Error">
-      <t-alert
-        :show="true"
-        variant="error"
-      >
-        oops!
-      </t-alert>
+      <UAlert
+        color="error"
+        description="oops!"
+      />
     </Story>
     <Story title="Success">
-      <t-alert
-        :show="true"
-        variant="success"
-      >
-        success!
-      </t-alert>
+      <UAlert
+        color="success"
+        description="success!"
+      />
     </Story>
   </Stories>
 </template>
