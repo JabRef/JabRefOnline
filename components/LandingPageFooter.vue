@@ -146,27 +146,10 @@
           </li>
           <li class="py-1">
             <t-nuxtlink
-              class="no-underline text-sm text-gray-800 hover:text-primary-800"
+              class="no-underline text-sm text-highlighted hover:text-primary-800"
               href="https://matrix.to/#/#JabRef_jabref:gitter.im"
+              >Chat</t-nuxtlink
             >
-              Gitter
-            </t-nuxtlink>
-          </li>
-          <li class="py-1">
-            <t-nuxtlink
-              class="no-underline text-sm text-gray-800 hover:text-primary-800"
-              href="https://matrix.to/#/#JabRef_jabref:gitter.im"
-            >
-              Gitter
-            </t-nuxtlink>
-          </li>
-          <li class="py-1">
-            <t-nuxtlink
-              class="no-underline text-sm text-gray-800 hover:text-primary-800"
-              href="https://matrix.to/#/#JabRef_jabref:gitter.im"
-            >
-              Gitter
-            </t-nuxtlink>
           </li>
           <li class="py-1">
             <t-nuxtlink
