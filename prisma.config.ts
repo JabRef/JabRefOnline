@@ -16,7 +16,7 @@ const shadowDatabaseUrl = process.env.NUXT_SHADOW_DATABASE_URL
 export default defineConfig({
   schema: path.join('server'),
   migrations: {
-    path: path.join('server', 'database', 'migrations'),
+    path: path.join('server', 'migrations'),
     seed: 'jiti ./server/database/runSeed.ts',
   },
   ...(databaseUrl !== undefined
