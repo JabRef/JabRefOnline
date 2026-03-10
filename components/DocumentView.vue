@@ -63,15 +63,15 @@
       v-if="document.keywords.length > 0"
       class="flex flex-row space-x-2 text-sm"
     >
-      <t-tag
+      <UBadge
         v-for="keyword in document.keywords"
         :key="keyword"
-        variant="badge"
+        variant="outline"
         class="border border-accented"
       >
         <!-- TODO: Add icon of group <Icon name="dragon" class="mr-2" /> -->
         {{ keyword }}
-      </t-tag>
+      </UBadge>
       <!-- TODO: Add overflow
       <n-button variant="linkplain" class="text-sm my-auto">
         <span>View More (8+)</span>

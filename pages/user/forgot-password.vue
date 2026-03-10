@@ -22,15 +22,15 @@
         @submit.prevent="forgotPassword()"
       >
         <div class="space-y-5">
-          <t-input-group
+          <UFormField
             label="Email address"
-            variant="important"
+            required
           >
-            <t-input
+            <UInput
               v-model="email"
               v-focus
             />
-          </t-input-group>
+          </UFormField>
           <div class="py-2 text-center">
             <UButton
               class="w-full"

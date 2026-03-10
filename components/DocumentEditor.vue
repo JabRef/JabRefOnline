@@ -1,20 +1,14 @@
 <template>
   <div class="flex flex-col overflow-y-auto pr-3">
     <div>
-      <t-select
-        :options="{
-          Article: 'Journal Article',
-          PhDThesis: 'PhD Thesis',
-        }"
-        variant="plaincaps"
-      >
-        <template #arrow="{ className }">
-          <Icon
-            name="ri:arrow-drop-down-line"
-            :class="className"
-          />
-        </template>
-      </t-select>
+      <USelect
+        :items="[
+          { label: 'Journal Article', value: 'Article' },
+          { label: 'PhD Thesis', value: 'PhDThesis' },
+        ]"
+        variant="none"
+        class="uppercase text-gray-600 tracking-wider text-xs"
+      />
     </div>
     <div class="z-10 grid -mt-2">
       <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
@@ -23,9 +17,9 @@
       >
         {{ title + ' ' }}
       </div>
-      <t-textarea
+      <UTextarea
         v-model="title"
-        variant="plain"
+        variant="none"
         class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
       />
     </div>
@@ -63,10 +57,10 @@
         heading="Abstract"
         class="mt-4 -mb-1"
       />
-      <t-textarea
+      <UTextarea
         v-model="abstract"
-        variant="plain"
-        rows="5"
+        variant="none"
+        :rows="5"
       />
     </div>
     <div>
@@ -251,7 +245,7 @@ const externalLinks = computed(() => [
 ])
 
 const title = computed({
-  get: () => document.value?.title,
+  get: () => document.value?.title ?? undefined,
   set: (_value) => {
     // TODO: implement
   },
@@ -314,8 +308,8 @@ const pages = computed({
 const abstract = computed({
   get: () =>
     document.value && 'abstract' in document.value
-      ? document.value.abstract
-      : null,
+      ? (document.value.abstract ?? undefined)
+      : undefined,
   set: (_value) => {
     // TODO: implement
   },
