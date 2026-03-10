@@ -1,8 +1,8 @@
-import { ApolloCache, InMemoryCache } from '@apollo/client/core'
+import { type ApolloCache, InMemoryCache } from '@apollo/client/core'
 import { relayStylePagination } from '@apollo/client/utilities/policies/pagination'
-import introspection from '~/apollo/introspection'
 import { gql } from '.'
-import type { MeQuery } from './graphql'
+import type { MeQuery } from './generated/graphql'
+import introspection from './generated/introspection'
 
 export const cache = new InMemoryCache({
   typePolicies: {

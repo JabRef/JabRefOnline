@@ -1,7 +1,7 @@
-import { schema } from '#graphql/schema'
+import { typeDefs } from '#graphql/schema'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import type { TypeSource } from '@graphql-tools/utils'
-import { GraphQLSchema } from 'graphql'
+import type { GraphQLSchema } from 'graphql'
 
 async function addResolvers(schema: TypeSource) {
   const { loadResolvers } = await import('./resolvers')
@@ -22,5 +22,5 @@ async function addResolvers(schema: TypeSource) {
  * @returns the GraphQL schema
  */
 export async function loadSchemaWithResolvers(): Promise<GraphQLSchema> {
-  return await addResolvers(schema)
+  return await addResolvers(typeDefs)
 }

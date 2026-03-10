@@ -10,7 +10,7 @@
           :name="typeIcon"
           class="mr-1"
           :title="typeDescription"
-        ></Icon>
+        />
         <span>{{ document.title }}</span>
       </button>
       <!-- TOOD: Add citation display
@@ -63,15 +63,15 @@
       v-if="document.keywords.length > 0"
       class="flex flex-row space-x-2 text-sm"
     >
-      <t-tag
+      <UBadge
         v-for="keyword in document.keywords"
         :key="keyword"
-        variant="badge"
-        class="border border-gray-400"
+        variant="outline"
+        class="border border-accented"
       >
         <!-- TODO: Add icon of group <Icon name="dragon" class="mr-2" /> -->
         {{ keyword }}
-      </t-tag>
+      </UBadge>
       <!-- TODO: Add overflow
       <n-button variant="linkplain" class="text-sm my-auto">
         <span>View More (8+)</span>
@@ -86,8 +86,10 @@
       >
         {{ document.abstract }}
       </span>
-      <n-button
-        text
+      <UButton
+        variant="link"
+        size="xs"
+        color="neutral"
         class="text-sm my-auto"
         @click="viewFullAbstract = !viewFullAbstract"
       >
@@ -99,7 +101,7 @@
           <span>View full abstract</span>
           <Icon name="ri:arrow-down-s-line" />
         </template>
-      </n-button>
+      </UButton>
     </div>
   </div>
 </template>
@@ -148,10 +150,11 @@ const DocumentForView = gql(/* GraphQL */ `
     }
   }
 `)
+type DocumentForViewFragment = FragmentType<typeof DocumentForView>
 
 const props = defineProps({
   source: {
-    type: Object as PropType<FragmentType<typeof DocumentForView>>,
+    type: Object as PropType<DocumentForViewFragment>,
     required: true,
   },
 })

@@ -1,21 +1,6 @@
 import { constructConfig } from './config'
 
 export default defineNuxtConfig({
-  future: {
-    // @variantjs/vue, @apollo/server, and mount-vue-component are not yet compatible with bundler resolution
-    typescriptBundlerResolution: false,
-  },
-
-  /*
-   ** Add alias for library imports
-   ** https://v3.nuxtjs.org/guide/going-further/esm#aliasing-libraries
-   */
-  alias: {
-    // Support `import 'global'` used by storybook
-    // TODO: Remove this workaround once nuxt provides a proper polyfill for globals https://github.com/nuxt/framework/issues/1922
-    global: './global.ts',
-  },
-
   /**
    * Pre-render routes at build time by default
    */
@@ -35,8 +20,6 @@ export default defineNuxtConfig({
     prerender: {
       // Prerender all pages reached from the index page
       crawlLinks: true,
-      // Needed for storybook support (otherwise the file is not created during nuxi generate)
-      routes: ['/_storybook/external-iframe'],
     },
     esbuild: {
       options: {
@@ -53,24 +36,6 @@ export default defineNuxtConfig({
   experimental: {
     // Full typed routing
     typedPages: true,
-  },
-
-  vue: {
-    // Add support for vue runtime compiler (needed to render stories in storybook)
-    runtimeCompiler: true,
-  },
-
-  // Workaround for https://github.com/nuxt/nuxt/issues/22933
-  hooks: {
-    close: (nuxt) => {
-      if (
-        !nuxt.options._prepare &&
-        !process.env.TEST &&
-        !process.env.VITE_TEST
-      ) {
-        process.exit()
-      }
-    },
   },
 
   /*
@@ -138,10 +103,13 @@ export default defineNuxtConfig({
    ** Nuxt.js modules
    */
   modules: [
+    // Preset for configuring SEO
+    // https://nuxtseo.com/nuxt-seo
+    '@nuxtjs/seo',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    // Add support for naive-ui
-    '@bg-dev/nuxt-naiveui',
+    // Add support for Nuxt UI
+    '@nuxt/ui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -149,22 +117,25 @@ export default defineNuxtConfig({
     // Add support for writing content in markdown
     // https://content.nuxtjs.org/
     '@nuxt/content',
-    // Add support for native vue stories
-    // https://github.com/tobiasdiez/storybook-vue-addon
-    'storybook-vue-addon/nuxt',
+    // Add support for storybook
+    // https://storybook.nuxtjs.org/
+    '@nuxtjs/storybook',
     // Devtools support
     // https://github.com/nuxt/devtools
     '@nuxt/devtools',
     // Add support for different icons from iconify
-    'nuxt-icon',
+    '@nuxt/icon',
     // Add some auto-imports for vee-validate
     '@vee-validate/nuxt',
     // Support for end-to-end testing and unit testing (and Vitest integration)
     // https://nuxt.com/docs/getting-started/testing
     '@nuxt/test-utils/module',
-    // Preset for configuring SEO
-    // https://nuxtseo.com/nuxt-seo
-    '@nuxtjs/seo',
+    // Add authentication support
+    // https://github.com/atinux/nuxt-auth-utils
+    'nuxt-auth-utils',
+    // Add eslint support
+    // https://eslint.nuxt.com
+    '@nuxt/eslint',
   ],
 
   /*
@@ -193,13 +164,7 @@ export default defineNuxtConfig({
    * TODO: See if we need this, maybe remove
    */
   // storybook: {},
-
-  tailwindcss: {
-    // Expose config so that we can use it to configure naive ui and in the vscode extension
-    exposeConfig: {
-      write: true,
-    },
-  },
+  css: ['~/assets/css/main.css'],
 
   /**
    * GraphQL server config
@@ -210,7 +175,7 @@ export default defineNuxtConfig({
       mapperTypeSuffix: 'Model',
       contextType: './context#Context',
       mappers: {
-        User: '@prisma/client/index.d#User',
+        User: './database#User',
         Document: './documents/user.document.service#UserDocument',
         JournalArticle: './documents/user.document.service#UserDocument',
         ProceedingsArticle: './documents/user.document.service#UserDocument',
@@ -227,9 +192,10 @@ export default defineNuxtConfig({
   },
 
   content: {
-    markdown: {
+    renderer: {
       // Don't automatically print h2-h4 headings as links
-      anchorLinks: false,
+      // Currently leads to TS errors
+      //anchorLinks: false,
     },
   },
 
@@ -250,6 +216,10 @@ export default defineNuxtConfig({
     // Workaround for https://github.com/browserify/node-util/pull/62
     define: {
       'process.env': {},
+    },
+    optimizeDeps: {
+      // Workaround for https://github.com/nuxt/nuxt/issues/27544
+      exclude: ['vee-validate'],
     },
     server: {
       // Configure vite for HMR with Gitpod
@@ -276,5 +246,5 @@ export default defineNuxtConfig({
    * Provide compatibility information for Nitro presets, and Nuxt modules
    * https://nuxt.com/docs/api/nuxt-config#compatibilitydate
    */
-  compatibilityDate: '2024-07-13',
+  compatibilityDate: '2024-12-24',
 })

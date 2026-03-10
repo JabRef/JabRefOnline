@@ -1,0 +1,12 @@
+diff --git a/dist/cli/commands/start/start.js b/dist/cli/commands/start/start.js
+index 76971b3f2a4fd8a917564dfb313098efd5490755..d34a42f789f66b18c4e15392f7c639b89fcedcf4 100644
+--- a/dist/cli/commands/start/start.js
++++ b/dist/cli/commands/start/start.js
+@@ -148,7 +148,6 @@ export async function start(options) {
+                 if (isCoreToolsVersionCompatible(targetVersion, nodeMajorVersion) === false) {
+                     logger.error(`Found Azure Functions Core Tools v${targetVersion} which is incompatible with your current Node.js v${process.versions.node}.`);
+                     logger.error("See https://aka.ms/functions-node-versions for more information.");
+-                    process.exit(1);
+                 }
+                 // serve the api if and only if the user provides a folder via the --api-location flag
+                 if (isApiLocationExistsOnDisk) {

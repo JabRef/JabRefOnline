@@ -9,11 +9,12 @@ export default defineEventHandler(async () => {
           # eslint-disable-next-line @graphql-eslint/fields-on-correct-type
           repository(owner: "JabRef", name: "jabref") {
             releases(
-              first: 1
+              first: 10
               orderBy: { field: CREATED_AT, direction: DESC }
             ) {
               nodes {
                 tagName
+                isPrerelease
               }
             }
           }
@@ -27,15 +28,24 @@ export default defineEventHandler(async () => {
         releases?: {
           nodes: {
             tagName: string
+            isPrerelease: boolean
           }[]
         }
       }
     }
   }
+  if (!response.data) {
+    // TODO: Setup proper logging
+    // eslint-disable-next-line no-console
+    console.debug(response)
+    throw createError({
+      statusCode: 500,
+      message: 'Failed to fetch latest release from GitHub',
+    })
+  }
   return {
-    version: response.data?.repository?.releases?.nodes[0].tagName.replace(
-      'v',
-      '',
-    ), // something like 5.7
+    version: response.data?.repository?.releases?.nodes
+      .find((release) => !release.isPrerelease)
+      ?.tagName.replace('v', ''), // something like 5.7
   }
 })

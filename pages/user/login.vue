@@ -10,51 +10,53 @@
       </div>
     </template>
     <div>
-      <h2 class="text-center text-5xl font-extrabold text-gray-900">Sign in</h2>
-      <p class="mt-6 mb-8 text-center text-sm text-gray-600">
+      <h2 class="text-center text-5xl font-extrabold text-highlighted">
+        Sign in
+      </h2>
+      <p class="mt-6 mb-8 text-center text-sm text-toned">
         Don't have an account?
         <t-nuxtlink to="/user/register">Sign up</t-nuxtlink>
       </p>
-      <n-alert
+      <UAlert
         v-if="error"
-        type="error"
+        color="error"
+        title="Error"
+        :description="String(error)"
         class="mb-4"
-      >
-        {{ error }}
-      </n-alert>
-      <n-form
-        size="large"
-        @submit="onSubmit"
+      />
+      <form
+        class="space-y-4"
+        @submit.prevent="onSubmit"
       >
         <div class="space-y-2">
-          <n-form-item
+          <UFormGroup
             label="Email address"
-            label-style="font-weight: 600"
-            :feedback="errors.email"
-            :validation-status="errors.email ? 'error' : undefined"
+            :error="errors.email"
           >
-            <n-input
-              v-model:value="values.email"
+            <UInput
+              v-model="email"
+              v-bind="emailAttrs"
               v-focus
+              size="xl"
             />
-          </n-form-item>
-          <n-form-item
+          </UFormGroup>
+          <UFormGroup
             label="Password"
-            label-style="font-weight: 600"
-            :feedback="errors.password"
-            :validation-status="errors.password ? 'error' : undefined"
+            :error="errors.password"
           >
-            <n-input
-              v-model:value="values.password"
+            <UInput
+              v-model="password"
+              v-bind="passwordAttrs"
               type="password"
-              show-password-on="mousedown"
+              size="xl"
             />
-          </n-form-item>
+          </UFormGroup>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <n-checkbox v-model:checked="rememberLogin">
-                Keep me logged in
-              </n-checkbox>
+              <UCheckbox
+                v-model="rememberLogin"
+                label="Keep me logged in"
+              />
             </div>
 
             <div class="text-sm">
@@ -65,11 +67,11 @@
           </div>
 
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Sign in</n-button
+              type="submit"
+              size="xl"
+              >Sign in</UButton
             >
           </div>
 
@@ -85,7 +87,7 @@
             />
           </div>
         </div>
-      </n-form>
+      </form>
     </div>
   </NuxtLayout>
 </template>
@@ -101,17 +103,15 @@ definePageMeta({ layout: false })
 // TODO: Automatically go to home if already logged in
 // middleware: 'guest',
 
-const { handleSubmit, errors, values } = useForm({
+const { handleSubmit, errors, defineField } = useForm({
   validationSchema: toTypedSchema(LoginInputSchema),
 })
+const [email, emailAttrs] = defineField('email')
+const [password, passwordAttrs] = defineField('password')
 
 const otherError = ref('')
 
-const {
-  mutate: loginUser,
-  onDone,
-  error: graphqlError,
-} = useMutation(
+const { mutate: loginUser, error: graphqlError } = useMutation(
   gql(/* GraphQL */ `
     mutation Login($input: LoginInput!) {
       login(input: $input) {
@@ -140,23 +140,28 @@ const {
     },
   },
 )
-onDone((result) => {
-  if (result.data?.login?.__typename === 'UserReturned') {
-    void navigateTo({ name: 'dashboard' })
-  } else {
-    otherError.value =
-      result.data?.login?.__typename === 'InputValidationProblem' &&
-      result.data.login.problems[0]
-        ? result.data.login.problems[0].message
-        : 'Unknown error'
-  }
-})
 const error = computed(() => graphqlError.value ?? otherError.value)
 
 // TODO: Implement remember login
 const rememberLogin = ref(false)
 
 const onSubmit = handleSubmit(async (values) => {
-  await loginUser({ input: values })
+  // Reset errors
+  otherError.value = ''
+
+  const result = await loginUser({ input: values })
+  if (result?.data?.login?.__typename === 'UserReturned') {
+    // Update user info
+    const { fetch } = useUserSession()
+    await fetch()
+
+    await navigateTo({ name: 'dashboard' })
+  } else {
+    otherError.value =
+      result?.data?.login?.__typename === 'InputValidationProblem' &&
+      result.data.login.problems[0]
+        ? result.data.login.problems[0].message
+        : 'Unknown error'
+  }
 })
 </script>

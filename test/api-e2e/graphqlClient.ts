@@ -1,8 +1,8 @@
-import {
-  type DocumentNode,
-  type OperationVariables,
-  type TypedDocumentNode,
-} from '@apollo/client'
+import type {
+  DocumentNode,
+  OperationVariables,
+  TypedDocumentNode,
+} from '@apollo/client/core'
 import { fetch } from '@nuxt/test-utils/e2e'
 import { print, type GraphQLError } from 'graphql'
 import { gql } from 'graphql-tag'
@@ -57,7 +57,15 @@ export class Api {
   private async operation<
     TData,
     TVariables extends OperationVariables,
-  >(options: { query: string; variables?: TVariables; cookies?: string[] }) {
+  >(options: {
+    query: string
+    variables?: TVariables
+    cookies?: string[]
+  }): Promise<{
+    errors?: GraphQLError[]
+    data?: TData
+    rawResponse: Response
+  }> {
     const body = {
       query: options.query,
       variables: options.variables,

@@ -1,4 +1,4 @@
-import { setup } from '@nuxt/test-utils'
+import { $fetch, setup } from '@nuxt/test-utils'
 import { gql } from 'graphql-tag'
 import { describe, expect, it, test } from 'vitest'
 import { api, login } from '~/test/api-e2e/graphqlClient'
@@ -41,10 +41,9 @@ describe('mutation', () => {
   })
   describe('signup', () => {
     const email = getTemporaryEmail()
-    test.runIf(process.env.EMAIL_CLIENT)(
+    test.runIf(process.env.NUXT_EMAIL_CLIENT)(
       `sends an email to the address ${email}`,
       async () => {
-        console.log('Creating account with email', email)
         const { data, errors } = await api().mutate({
           mutation: gql`
             mutation SignupE2E($input: SignupInput!) {
@@ -131,5 +130,39 @@ describe('query', () => {
         me: null,
       })
     })
+  })
+})
+
+describe('nuxt-auth-endpoint', () => {
+  it('returns the session info when logged in', async () => {
+    const request = api()
+    const { cookies } = await login(request)
+    const html = await $fetch('api/_auth/session', {
+      headers: { cookie: cookies.join('; ') },
+    })
+    expect(html).toStrictEqual({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      id: expect.any(String),
+      user: { id: 'ckn4oul7100004cv7y3t94n8j' },
+    })
+  })
+  it('returns only session id when not logged in', async () => {
+    const html = await $fetch('api/_auth/session')
+    expect(html).toStrictEqual({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      id: expect.any(String),
+    })
+  })
+})
+
+describe('test-utils', () => {
+  it('login returns session cookie', async () => {
+    const request = api()
+    const { cookies } = await login(request)
+    expect(cookies.length).toBe(1)
+    expect(cookies[0]).toMatch('nuxt-session=')
+    expect(cookies[0]!.toLowerCase()).toContain('httponly')
+    expect(cookies[0]!.toLowerCase()).toContain('secure')
+    expect(cookies[0]!.toLowerCase()).toContain('samesite=strict')
   })
 })

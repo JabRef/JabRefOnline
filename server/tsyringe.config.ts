@@ -1,4 +1,4 @@
-import { type Config } from '~/config'
+import type { Config } from '~/config'
 import * as DocumentResolvers from './documents/resolvers'
 import { UserDocumentService } from './documents/user.document.service'
 import * as GroupResolvers from './groups/resolvers'

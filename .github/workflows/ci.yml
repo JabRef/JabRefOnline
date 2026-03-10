@@ -6,8 +6,6 @@ on:
       - main
 
   pull_request:
-    branches:
-      - main
 
 jobs:
   lint:
@@ -17,17 +15,17 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: 20
+          node-version: 24.14.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -50,11 +48,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [20]
 
     services:
       postgres:
-        image: postgres@sha256:d0f363f8366fbc3f52d172c6e76bc27151c3d643b870e1062b4e8bfe65baf609
+        image: postgres@sha256:69e8582b781cb44fa4557b98ed586fe68361e320d9b12f9707494335634f4f3d
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -68,7 +65,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:79676a8f74e4aed85b6d6a2f4e4e3e55d8a229baa7168362e592bbfdc67b0c9b
+        image: redis@sha256:1c054d54ecd1597bba52f4304bca5afbc5565ebe614c5b3d7dc5b7f8a0cd768d
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -81,21 +78,22 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+      SHADOW_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref_shadow
+      SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
 
     steps:
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 24.14.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -103,32 +101,46 @@ jobs:
 
       - name: Init database
         run: pnpm prisma:push
+        env:
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       # Check that no schema changes have been done without corresponding migration files have been added
+      - name: Create shadow database for schema drift detection
+        run: PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE jabref_shadow;"
+
       - name: Detect database schema drift
-        run: pnpm prisma:migrate:diff $DATABASE_URL
+        run: pnpm prisma:migrate:diff
+        env:
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
+          NUXT_SHADOW_DATABASE_URL: ${{ env.SHADOW_DATABASE_URL }}
 
       - name: Build
         run: pnpm build
+        env:
+          NUXT_SESSION_PASSWORD: ${{ env.SESSION_PASSWORD }} # Needed for prerending
 
       - name: Start server
         run: pnpm start &
+        env:
+          NUXT_GITHUB_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUXT_SESSION_PASSWORD: ${{ env.SESSION_PASSWORD }}
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Run tests
         run: pnpm run test --coverage
         env:
           TEST_URL: http://localhost:3000
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }} # To seed the database
+          # The tests need these tokens to run, but their actual value should not matter
+          NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
 
       - name: Build Storybook
-        run: |
-          pnpm nuxi generate
-          pnpm storybook:build
-          cp .output/public/_storybook/external-iframe/index.html storybook-static/iframe.html
-          mkdir -p storybook-static/_storybook/external-iframe
-          cp -r .output/public/_nuxt storybook-static
+        if: always()
+        run: pnpm storybook:build
 
       - name: Publish and test Storybook
-        uses: chromaui/action@fdbe7756d4dbf493e2fbb822df73be7accd07e1c # v11
+        if: always()
+        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -137,6 +149,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

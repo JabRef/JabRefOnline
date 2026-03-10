@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-gray-300 h-20"
+    class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-muted h-20"
   >
     <!-- Logo -->
     <div
@@ -9,7 +9,7 @@
     >
       <jabref-logo class="w-10 flex-none" />
       <span
-        class="ml-3 flex-1 text-gray-900 text-2xl font-semibold lg:inline-block hidden"
+        class="ml-3 flex-1 text-highlighted text-2xl font-semibold lg:inline-block hidden"
       >
         JabRef</span
       >
@@ -18,13 +18,14 @@
     <!-- Search bar -->
     <div
       v-if="showSearchBar"
-      class="relative text-gray-600"
+      class="relative text-toned"
     >
-      <t-input
+      <UInput
         v-model="searchQuery"
         type="search"
         placeholder="Search..."
         class="w-full xl:w-96 px-5 border-none shadow-none pl-10 font-semibold text-lg"
+        variant="none"
       />
       <button
         type="submit"
@@ -32,73 +33,63 @@
       >
         <Icon
           name="ri:search-line"
-          class="text-gray-400"
+          class="text-dimmed"
         />
       </button>
     </div>
 
     <!-- Hamburger menu for small screens -->
-    <n-popover
-      ref="hamburgerMenu"
-      placement="top-end"
-      :overlap="true"
-      trigger="click"
-      :duration="0"
-      :show-arrow="false"
-      style="
-        border-radius: 0.5rem;
-        padding: 0;
-        width: 20rem;
-        margin-right: -10px;
-      "
-      @update:show="isHamburgerShown = $event"
+    <UPopover
+      v-model:open="isHamburgerShown"
+      :popper="{ placement: 'bottom-end' }"
     >
-      <template #trigger>
+      <div
+        v-show="isSmallDisplay"
+        class="flex mr-5 items-center relative"
+      >
         <div
-          v-show="isSmallDisplay"
-          class="flex mr-5 items-center relative"
+          v-if="isHamburgerShown"
+          class="fixed z-50 inset-0 w-full h-full"
+          role="dialog"
+          aria-modal="true"
         >
           <div
-            v-if="isHamburgerShown"
-            class="fixed z-50 inset-0 w-full h-full"
-            role="dialog"
-            aria-modal="true"
-          >
-            <div
-              class="backdrop-blur-sm bg-gray-400/20 w-full h-full"
-              aria-hidden="true"
-            ></div>
-          </div>
+            class="backdrop-blur-xs bg-gray-400/20 w-full h-full"
+            aria-hidden="true"
+          />
+        </div>
+        <button
+          class="text-right text text-xl relative z-60"
+          @click="isHamburgerShown = !isHamburgerShown"
+        >
+          <Icon :name="isHamburgerShown ? 'ri:close-fill' : 'ri:menu-fill'" />
+        </button>
+      </div>
+
+      <template #content>
+        <div class="px-6 py-5 text-base max-w-xs w-full rounded-lg">
           <button
-            class="text-right text-gray-700 text-xl relative z-60"
-            @click="isHamburgerShown = !isHamburgerShown"
+            class="text-right text text-xl absolute top-3 right-5"
+            @click="isHamburgerShown = false"
           >
-            <Icon :name="isHamburgerShown ? 'ri:close-fill' : 'ri:menu-fill'" />
+            <Icon
+              v-if="isHamburgerShown"
+              name="ri:close-fill"
+            />
           </button>
+          <slot name="collapsed" />
         </div>
       </template>
-      <div class="px-6 py-5 text-base max-w-xs w-full">
-        <button
-          class="text-right text-gray-700 text-xl absolute top-3 right-5"
-          @click=";[hamburgerMenu?.setShow(false), (isHamburgerShown = false)]"
-        >
-          <Icon
-            v-if="isHamburgerShown"
-            name="ri:close-fill"
-          />
-        </button>
-        <slot name="collapsed" />
-      </div>
-    </n-popover>
+    </UPopover>
 
     <!-- Main menu -->
     <div v-show="!isSmallDisplay">
       <slot>
         <div class="space-x-14">
           <span class="text-primary-600 text-lg font-semibold">Library</span>
-          <span class="text-gray-400 text-lg font-semibold">Browse</span>
+          <span class="text-dimmed text-lg font-semibold">Browse</span>
           <div class="inline">
-            <span class="text-gray-400 text-lg font-semibold">
+            <span class="text-dimmed text-lg font-semibold">
               Subscriptions
             </span>
             <div class="inline-block align-top pl-0.5 -mt-1">
@@ -119,62 +110,30 @@
     >
       <Icon
         name="ri:notification-3-fill"
-        class="text-gray-400 hover:text-primary-500 text-lg"
+        class="text-dimmed hover:text-primary-500 text-lg"
       />
       <div>
         <!-- User profile dropdown -->
-        <t-dropdown variant="left">
-          <template
-            #trigger="{
-              mousedownHandler,
-              focusHandler,
-              blurHandler,
-              keydownHandler,
-            }"
+        <UDropdownMenu
+          :content="{ align: 'end' }"
+          :items="[
+            [{ label: 'Your Profile' }, { label: 'Settings' }],
+            [{ label: 'Logout', onSelect: () => logout() }],
+          ]"
+        >
+          <button
+            id="user-menu"
+            class="w-12 h-12"
+            aria-label="User menu"
+            aria-haspopup="true"
           >
-            <button
-              id="user-menu"
-              class="w-12 h-12"
-              aria-label="User menu"
-              aria-haspopup="true"
-              @mousedown="mousedownHandler"
-              @focus="focusHandler"
-              @blur="blurHandler"
-              @keydown="keydownHandler"
-            >
-              <img
-                class="rounded-full"
-                src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
-                alt=""
-              />
-            </button>
-          </template>
-
-          <template #default="{ blurHandler }">
-            <div class="w-36">
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem"
-                @blur="blurHandler"
-              >
-                Your Profile
-              </button>
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem"
-                @blur="blurHandler"
-              >
-                Settings
-              </button>
-              <button
-                class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                @click="logout()"
-              >
-                Logout
-              </button>
-            </div>
-          </template>
-        </t-dropdown>
+            <img
+              class="rounded-full"
+              src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
+              alt=""
+            />
+          </button>
+        </UDropdownMenu>
       </div>
     </nav>
 
@@ -182,20 +141,18 @@
     <div
       v-show="!isSmallDisplay"
       class="flex-1 mx-3 md:mx-6"
-    ></div>
+    />
   </nav>
 </template>
 
 <script lang="ts" setup>
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { NPopover } from 'naive-ui'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'
 
 const isHamburgerShown = ref(false)
-const hamburgerMenu = ref<typeof NPopover | null>(null)
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
 

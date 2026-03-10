@@ -1,10 +1,10 @@
 name: CD Azure (preview)
 
 on:
+  # Uncomment for testing:
+  # pull_request:
   pull_request_target:
     types: [opened, synchronize, reopened, labeled]
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       preview_name:
@@ -24,27 +24,30 @@ jobs:
 
     env:
       PREVIEW_NAME: ${{ github.event.pull_request.number || github.event.inputs.preview_name }}
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+      # renovate: datasource=python-version depName=python
+      PYTHON_VERSION: '3.14'
 
     steps:
       # We could also add these checks to a job-wide if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
       - name: Fail if unsecure
-        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez' && github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]'"
-        run: exit 1
+        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez' && github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]' && github.actor != 'copilot-swe-agent'"
+        run: |
+          echo "The workflow was triggered by ${{ github.actor }} and the PR is not labeled as 'safe to test'. For security reasons, we do not run this workflow in this case."
+          exit 1
 
       - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ github.event.pull_request.head.sha || github.ref }}
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: 20
+          node-version: 24.14.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -52,9 +55,11 @@ jobs:
 
       - name: Build
         run: pnpm build:azure
+        env:
+          NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }} # Needed for prerending
 
       - name: Login to Azure
-        uses: Azure/login@6c251865b4e6290e7b78be643ea2d005bc51f69a # v2
+        uses: Azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -74,11 +79,12 @@ jobs:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
       - name: Install Python
-        uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          python-version: '3.10'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Create test database on Azure
+        id: create_db
         run: |
           $name = "postgres_test_$env:PREVIEW_NAME"
           $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
@@ -93,27 +99,32 @@ jobs:
           # Login to the database using the Github user
           $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$($name)?sslmode=require"
           echo "::add-mask::$connection_string"
-          echo "DATABASE_URL=$connection_string" >> $env:GITHUB_ENV
-          $Env:DATABASE_URL = $connection_string
+          echo "db_url=$connection_string" >> $env:GITHUB_OUTPUT
           # Finally, run the migrations (this also creates the db)
+          $Env:NUXT_DATABASE_URL = $connection_string
           pnpm prisma:migrate:reset --force
+          pnpm prisma:seed
         env:
           DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
 
       - name: Create & Link Function App
         run: |
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env $env:PREVIEW_NAME
+          python .github\scripts\deploy.py --env $env:PREVIEW_NAME -v
         env:
-          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
+          AZURE_DATABASE_URL: ${{ steps.create_db.outputs.db_url }}
 
-      - name: Deploy Function App
+      - name: Cleanup deployment
         run: |
           # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
           # if multiple versions of the same package are used.
-          # However, these symlinks are not preserved by Compress-Archive, and even they were, Azure has problems with symlinks:
-          # https://github.com/Azure/webapps-deploy/issues/54
+          # Replace symlinks with real copies so the deploy zip is self-contained
+          # However, Azure has problems with symlinks:
+          # - https://github.com/Azure/webapps-deploy/issues/54
+          # - https://github.com/Azure/functions-action/issues/332
           # Therefore, replace all symlinks by the actual files
           $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
           foreach ($link in $links)
@@ -125,8 +136,11 @@ jobs:
               Copy-Item -Path $source -Destination $destination -Force -Recurse
           }
 
-          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-$env:PREVIEW_NAME --src .output\server.zip
+      - name: Deploy Function App
+        uses: Azure/functions-action@v1.5.4
+        with:
+          app-name: jabref-function-${{ env.PREVIEW_NAME }}
+          package: .output/server
 
       - name: Check HTTP status
         run: |
@@ -143,7 +157,7 @@ jobs:
 
       - name: Report URL as PR comment
         if: github.event_name == 'pull_request_target'
-        uses: marocchino/sticky-pull-request-comment@331f8f5b4215f0445d3c07b4967662a32a2d3e31 # v2
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
         with:
           message: |
             Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.url }}
@@ -152,3 +166,7 @@ jobs:
         run: pnpm test:e2e
         env:
           TEST_URL: ${{ steps.deploy_web.outputs.url }}
+          # The tests need these tokens to run, but their actual value should not matter
+          NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
+          # Re-enable when email sending in the test environment is fixed
+          #NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'

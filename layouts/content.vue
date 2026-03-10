@@ -1,9 +1,5 @@
 <template>
   <div>
-    <SeoKit
-      site-name="JabRef - Free Reference Manager - Stay on top of your Literature"
-      site-description="A free reference manager that helps you to discover, collect, organize and cite your scholarly literature and research in an efficient way."
-    />
     <SchemaOrgOrganization
       name="JabRef e.V."
       logo="https://www.jabref.org/img/JabRef-icon-256.png"
@@ -30,21 +26,23 @@
       screenshot="https://www.jabref.org/assets/jabref-mainscreen.png"
       :offers="{ price: '0', priceCurrency: 'EUR' }"
     />
-    <n-layout :position="position">
+    <div :class="position === 'absolute' ? 'relative' : ''">
       <header>
-        <n-layout-header
-          :position="position"
-          class="z-50"
+        <div
+          :class="[
+            'z-50',
+            position === 'absolute' ? 'fixed top-0 left-0 right-0' : '',
+          ]"
         >
           <slot name="header">
             <NavBar />
           </slot>
-        </n-layout-header>
+        </div>
       </header>
-      <div class="md:mt-20 md:pb-10">
+      <div class="md:mt-20 md:pb-10 overflow-auto">
         <slot />
       </div>
-    </n-layout>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -63,12 +61,12 @@ onMounted(() => {
   position = computed(() => (isSmallDisplay.value ? 'static' : 'absolute'))
 })
 // Only on client-side
-if (process.client) {
+if (import.meta.client) {
   // Make sure that the content is scrolled and not the unscrollable window
   // (vue-router for example uses window.scrollTo)
   // Taken from https://github.com/vuejs/vue-router/issues/1187#issuecomment-893964727
   const offset = 80
-  const contentElementSelector = '.n-layout-scroll-container'
+  const contentElementSelector = '.overflow-auto'
   Object.defineProperty(window, 'pageXOffset', {
     get() {
       return document.querySelector(contentElementSelector)?.scrollLeft ?? 0
@@ -84,7 +82,7 @@ if (process.client) {
     value: (option: { top: number; left: number }) => {
       const els = document.querySelectorAll(contentElementSelector)
       const el = els[els.length - 1]
-      if (el.scrollHeight > el.clientHeight) {
+      if (el && el.scrollHeight > el.clientHeight) {
         // element can be scrolled
         el.scrollTo(option.left, el.scrollTop + option.top - offset)
       } else {

@@ -6,17 +6,26 @@
     "codegen",
     "composables",
     "datetime",
+    "dedupe",
     "esbuild",
     "issn",
     "jiti",
     "journaltitle",
     "Nuxt",
     "nuxtjs",
+    "oxlint",
+    "pinia",
     "scimago",
     "transpiled",
     "tsyringe",
-    "upsert"
+    "unstorage",
+    "upsert",
+    "vite",
+    "vitest"
   ],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
   "[jsonc]": {
     "editor.formatOnSave": true
   },
@@ -63,5 +72,12 @@
     "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.yml"
   },
   "testing.automaticallyOpenPeekView": "never",
-  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs"
+  "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.classAttributes": ["class", "ui"],
+  "tailwindCSS.experimental.classRegex": [
+    ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }
