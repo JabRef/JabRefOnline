@@ -11,24 +11,24 @@ import type {
   UserChangesEdge,
   UserDocumentsArgs,
 } from '#graphql/resolver'
-import type { User } from '@prisma/client'
 import { LoginInputSchema, SignupInputSchema } from '~/apollo/validation'
 import type { Context } from '../context'
-import {
+import type { User } from '../database'
+import type {
+  UserDocument,
   UserDocumentService,
-  type UserDocument,
-  type UserDocumentsResult,
+  UserDocumentsResult,
 } from '../documents/user.document.service'
 import type { GroupResolved } from '../groups/resolvers'
-import { GroupService } from '../groups/service'
+import type { GroupService } from '../groups/service'
 import { validateInput } from '../utils/validation'
 import { inject, injectable, resolve } from './../tsyringe'
-import {
+import type {
   AuthService,
-  type ChangePasswordPayload,
-  type LoginPayload,
-  type LogoutPayload,
-  type SignupPayload,
+  ChangePasswordPayload,
+  LoginPayload,
+  LogoutPayload,
+  SignupPayload,
 } from './auth.service'
 
 export type UserChangesEdgeUseDoc = Omit<UserChangesEdge, 'node'> & {
@@ -56,7 +56,12 @@ export class Query {
     _args: Record<string, never>,
     context: Context,
   ): Promise<User | null> {
-    return await context.getUser()
+    const userId = (await context.getUser())?.id
+    if (userId) {
+      return this.authService.getUserById(userId)
+    } else {
+      return null
+    }
   }
 }
 
@@ -74,8 +79,15 @@ export class Mutation {
     if ('problems' in userOrProblems) {
       return userOrProblems
     }
-    const session = await this.authService.createSession(userOrProblems)
-    context.setSession(session)
+    const rawSession = await context.getOrInitSession()
+    if (!rawSession.id) {
+      throw new Error('Session ID not set')
+    }
+    const session = await this.authService.initSession(
+      rawSession.id,
+      userOrProblems,
+    )
+    await context.setSession(session)
     return { user: userOrProblems }
   }
 
@@ -91,17 +103,24 @@ export class Mutation {
     }
 
     // Make login persistent by putting it in the session store
-    const session = await this.authService.createSession(userOrProblems)
-    context.setSession(session)
+    const rawSession = await context.getOrInitSession()
+    if (!rawSession.id) {
+      throw new Error('Session ID not set')
+    }
+    const session = await this.authService.initSession(
+      rawSession.id,
+      userOrProblems,
+    )
+    await context.setSession(session)
     return { user: userOrProblems }
   }
 
-  logout(
+  async logout(
     _root: Record<string, never>,
     _args: Record<string, never>,
     context: Context,
-  ): LogoutPayload {
-    context.setSession(null)
+  ): Promise<LogoutPayload> {
+    await context.setSession(null)
     return {
       result: true,
     }
@@ -185,7 +204,9 @@ export class UserResolver {
     return {
       edges: documents.map((document) => ({ node: document })),
       pageInfo: {
-        endCursor: documents.length ? documents[documents.length - 1].id : null,
+        endCursor: documents.length
+          ? documents[documents.length - 1]?.id
+          : null,
         hasNextPage,
       },
     }
@@ -225,7 +246,7 @@ export class UserResolver {
 
     function constructCursor(documents: UserDocument[]) {
       if (documents.length === 0) return null
-      const lastDoc = documents[documents.length - 1]
+      const lastDoc = documents[documents.length - 1]!
       return {
         id: lastDoc.id,
         lastModified: lastDoc.lastModified,

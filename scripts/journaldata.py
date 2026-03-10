@@ -16,7 +16,7 @@ Usage:
     to the `schema.prisma` file, and run `pnpm generate` to generate the Prisma client.
 
 - Update the `current_year` variable to the latest year of data available.
-- Set the environment variable `DATABASE_URL` to the postgres database url (using a .env file is recommended).
+- Set the environment variable `NUXT_DATABASE_URL` to the postgres database url (using a .env file is recommended).
 - If you want to use the Azure database, add your IP address to the Azure exception list under `jabrefdb | Networking`.
 - Run this script with `download` argument to downloads data from the specified start year up to the current year.
 - Run this script with `db` (or `json`) argument to dump the consolidated dataset in the database (or `scimagojr_combined_data.json`, respectively).

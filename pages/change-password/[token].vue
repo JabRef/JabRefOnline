@@ -2,7 +2,7 @@
   <NuxtLayout name="bare">
     <template #header>
       <jabref-logo class="mx-auto h-20 w-auto" />
-      <h2 class="mt-8 text-center text-5xl font-extrabold text-gray-900">
+      <h2 class="mt-8 text-center text-5xl font-extrabold text-highlighted">
         Change Password
       </h2>
     </template>
@@ -23,11 +23,11 @@
           </t-input-group>
         </div>
         <div class="py-2 text-center">
-          <n-button
+          <UButton
             class="w-full"
-            type="primary"
-            attr-type="submit"
-            >Change Password</n-button
+            type="submit"
+            size="xl"
+            >Change Password</UButton
           >
         </div>
       </form>
@@ -35,58 +35,50 @@
   </NuxtLayout>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
-definePageMeta({ layout: false })
-export default defineComponent({
-  name: 'ChangePassword',
-  setup() {
-    const password = ref('')
-    const repeatPassword = ref('')
-    const route = useRoute()
-    const token = route.query.token as string
-    const id = route.query.id as string
 
-    const {
-      mutate: changePassword,
-      onDone,
-      error,
-    } = useMutation(
-      gql(/* GraphQL */ `
-        mutation ChangePassword($input: ChangePasswordInput!) {
-          changePassword(input: $input) {
-            ... on UserReturned {
-              user {
-                id
-              }
-            }
-            ... on InputValidationProblem {
-              problems {
-                path
-                message
-              }
-            }
-            ... on TokenProblem {
-              message
-            }
+definePageMeta({ layout: false })
+
+const password = ref('')
+const repeatPassword = ref('')
+const route = useRoute()
+const token = route.query.token as string
+const id = route.query.id as string
+
+const { mutate: changePassword, onDone } = useMutation(
+  gql(/* GraphQL */ `
+    mutation ChangePassword($input: ChangePasswordInput!) {
+      changePassword(input: $input) {
+        ... on UserReturned {
+          user {
+            id
           }
         }
-      `),
-      () => ({
-        variables: {
-          input: {
-            token,
-            id,
-            newPassword: password.value,
-          },
-        },
-      }),
-    )
-    onDone(() => {
-      void navigateTo({ name: 'user-login' })
-    })
-    return { password, error, changePassword, repeatPassword }
-  },
+        ... on InputValidationProblem {
+          problems {
+            path
+            message
+          }
+        }
+        ... on TokenProblem {
+          message
+        }
+      }
+    }
+  `),
+  () => ({
+    variables: {
+      input: {
+        token,
+        id,
+        newPassword: password.value,
+      },
+    },
+  }),
+)
+onDone(() => {
+  void navigateTo({ name: 'user-login' })
 })
 </script>

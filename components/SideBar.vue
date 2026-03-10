@@ -2,7 +2,7 @@
   <div
     v-if="sideBarOpen"
     id="sideBar"
-    class="flex flex-col flex-wrap bg-white border-r border-gray-300 w-64 fixed md:top-0 md:left-0 z-40 h-screen"
+    class="flex flex-col flex-wrap bg-white border-r border-muted w-64 fixed md:top-0 md:left-0 z-40 h-screen"
   >
     <!-- Logo -->
     <div
@@ -14,7 +14,7 @@
 
     <!-- Collections -->
     <div class="flex flex-col pl-12 pt-6 pr-4">
-      <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">Home</p>
+      <p class="uppercase text-xs text-toned mb-4 tracking-wider">Home</p>
 
       <a
         href="#"
@@ -38,7 +38,7 @@
         Recently modified
       </a>
 
-      <p class="uppercase text-xs text-gray-600 mb-2 mt-4 tracking-wider">
+      <p class="uppercase text-xs text-toned mb-2 mt-4 tracking-wider">
         Groups
       </p>
       <BaseTree
@@ -51,7 +51,7 @@
         <template #default="{ node, stat }">
           <span
             v-if="node.children && node.children.length > 0"
-            class="-ml-8 mr-4 w-4 text-gray-400 inline-block"
+            class="-ml-8 mr-4 w-4 text-dimmed inline-block"
             @click="stat.open = !stat.open"
           >
             <Icon
@@ -77,62 +77,47 @@
           </button>
         </template>
         <template #placeholder>
-          <span class="text-gray-400">No groups</span>
+          <span class="text-dimmed">No groups</span>
         </template>
       </BaseTree>
     </div>
   </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { BaseTree } from '@he-tree/vue'
-import { useQuery, useResult } from '@vue/apollo-composable'
+import { useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
 
 import '@he-tree/vue/style/default.css'
 
-export default defineComponent({
-  components: {
-    BaseTree,
-  },
-  setup() {
-    const { result } = useQuery(
-      gql(/* GraphQL */ `
-        query Groups {
-          me {
+const { result } = useQuery(
+  gql(/* GraphQL */ `
+    query Groups {
+      me {
+        id
+        groups {
+          id
+          name
+          icon
+          children {
             id
-            groups {
-              id
-              name
-              icon
-              children {
-                id
-                name
-                icon
-              }
-            }
+            name
+            icon
           }
         }
-      `),
-    )
-    const groups = useResult(
-      result,
-      null,
-      (data) => data.me.groups,
-    ) as unknown as any[]
-
-    const uiStore = useUiStore()
-    function onGroupClicked(group: { id: string }) {
-      uiStore.selectedGroupId = group.id
+      }
     }
+  `),
+)
+const groups = computed(() => result.value?.me?.groups ?? null)
 
-    return {
-      groups,
-      onGroupClicked,
-      sideBarOpen: true,
-    }
-  },
-})
+const uiStore = useUiStore()
+function onGroupClicked(group: { id: string }) {
+  uiStore.selectedGroupId = group.id
+}
+
+const sideBarOpen = true
 </script>
 <style>
 .groupsTree .vtlist-inner {

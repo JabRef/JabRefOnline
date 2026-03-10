@@ -16,23 +16,47 @@
 </template>
 
 <script lang="ts" setup>
-definePageMeta({ layout: false })
+definePageMeta({
+  layout: false,
 
-const route = useRoute('download-os')
+  middleware: async (to) => {
+    const os = to.params.os as string | undefined
+    let downloadUrl = `https://github.com/JabRef/jabref/releases/download/`
+    if (
+      os &&
+      [
+        'win_msi',
+        'win_zip',
+        'mac_arm64_dmg',
+        'mac_arm64_pkg',
+        'mac_x86_64_dmg',
+        'mac_x86_64_pkg',
+        'linux_deb',
+        'linux_rpm',
+        'linux_tar_gz',
+      ].includes(os)
+    ) {
+      const { data } = await useFetch('/api/getLatestRelease')
+      const latestRelease = data.value?.version
+      downloadUrl += `v${latestRelease}`
+      if (latestRelease) {
+        downloadUrl +=
+          {
+            win_msi: `/JabRef-${latestRelease}.msi`,
+            win_zip: `/JabRef-${latestRelease}-portable_windows.zip`,
+            mac_arm64_dmg: `/JabRef-${latestRelease}-arm64.dmg`,
+            mac_arm64_pkg: `/JabRef-${latestRelease}-arm64.pkg`,
+            mac_x86_64_dmg: `/JabRef-${latestRelease}.dmg`,
+            mac_x86_64_pkg: `/JabRef-${latestRelease}.pkg`,
+            linux_deb: `/jabref_${latestRelease}_amd64.deb`,
+            linux_rpm: `/jabref-${latestRelease}-1.x86_64.rpm`,
+            linux_tar_gz: `/JabRef-${latestRelease}-portable_linux.tar.gz`,
+          }[os] ?? ''
+      }
+    }
 
-const { version: latestRelease } = await $fetch('/api/getLatestRelease')
-
-let downloadUrl = 'https://www.fosshub.com/JabRef.html'
-
-const os = route.params.os as string | undefined
-if (os && ['win', 'mac', 'linux'].includes(os)) {
-  downloadUrl +=
-    {
-      win: `?dwl=JabRef-${latestRelease}.msi`,
-      mac: `?dwl=JabRef-${latestRelease}.pkg`,
-      linux: `?dwl=jabref_${latestRelease}_amd64.deb`,
-    }[os] ?? ''
-}
-
-await navigateTo(downloadUrl, { external: true })
+    return await navigateTo(downloadUrl, { external: true })
+  },
+})
+const downloadUrl = `https://github.com/JabRef/jabref/releases/download/`
 </script>

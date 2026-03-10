@@ -35,19 +35,20 @@ jobs:
 
     env:
       DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
-      GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+      # renovate: datasource=python-version depName=python
+      PYTHON_VERSION: '3.14'
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: 20
+          node-version: 24.14.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -55,17 +56,25 @@ jobs:
 
       - name: Reset Test database on Azure
         if: matrix.environment == 'Test'
-        run: pnpm prisma:migrate:reset --force
+        run: |
+          pnpm prisma:migrate:reset --force
+          pnpm prisma:seed
+        env:
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Update Production database on Azure
         if: matrix.environment == 'Staging'
         run: pnpm prisma:migrate:deploy
+        env:
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Build
         run: pnpm build:azure
+        env:
+          NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }} # Needed for prerending
 
       - name: Login to Azure
-        uses: Azure/login@v2
+        uses: Azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -73,32 +82,33 @@ jobs:
 
       - name: Deploy Web App
         run: |
-          # Delete old deployment (otherwise we get a spawn EBUSY error when running the workflow again)
-          az staticwebapp environment delete --name jabref-online --environment-name ${{ matrix.deployment_environment }} --yes || true
-
           pnpm swa deploy .output\public --env ${{ matrix.deployment_environment }}
         env:
           SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
 
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          python-version: '3.10'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Create & Link Function App
         run: |
           pip install azure-identity azure-mgmt-web azure-mgmt-storage azure-mgmt-applicationinsights azure-mgmt-redis azure-mgmt-communication
-          python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }}
+          python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }} -v
         env:
-          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_SESSION_SECRET: ${{ secrets.AZURE_SESSION_SECRET }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
+          AZURE_DATABASE_URL: ${{ env.DATABASE_URL }}
 
-      - name: Deploy Function App
+      - name: Cleanup deployment
         run: |
           # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
           # if multiple versions of the same package are used.
-          # However, these symlinks are not preserved by Compress-Archive, and even they were, Azure has problems with symlinks:
-          # https://github.com/Azure/webapps-deploy/issues/54
+          # Replace symlinks with real copies so the deploy zip is self-contained
+          # However, Azure has problems with symlinks:
+          # - https://github.com/Azure/webapps-deploy/issues/54
+          # - https://github.com/Azure/functions-action/issues/332
           # Therefore, replace all symlinks by the actual files
           $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
           foreach ($link in $links)
@@ -110,8 +120,11 @@ jobs:
               Copy-Item -Path $source -Destination $destination -Force -Recurse
           }
 
-          Compress-Archive -Path .output\server\* -DestinationPath .output\server.zip
-          az functionapp deployment source config-zip -g JabRefOnline -n jabref-function-${{ matrix.deployment_environment }} --src .output\server.zip
+      - name: Deploy Function App
+        uses: Azure/functions-action@v1.5.4
+        with:
+          app-name: jabref-function-${{ matrix.deployment_environment }}
+          package: .output/server
 
       - name: Check HTTP status
         run: |
@@ -125,7 +138,11 @@ jobs:
         #   timeout: 300 # initial warm up can take quite some time
         #   interval: 30
 
-      - name: Run API tests
-        run: pnpm test:api
+      - name: Run E2E tests
+        run: pnpm test:e2e
         env:
           TEST_URL: ${{ matrix.url }}
+          # The tests need these tokens to run, but their actual value should not matter
+          NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
+          # Re-enable when email sending in the test environment is fixed
+          # NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'

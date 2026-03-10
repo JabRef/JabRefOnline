@@ -3,6 +3,7 @@ import {
   type GraphQLRequest,
   type GraphQLResponse,
 } from '@apollo/server'
+// @ts-expect-error: not yet compatible with 'bundler' module resolution
 import type { VariableValues } from '@apollo/server/dist/esm/externalTypes/graphql'
 import type { DocumentNode, TypedQueryDocumentNode } from 'graphql'
 import type { Context } from '~/server/context'
@@ -34,6 +35,9 @@ export async function createAuthenticatedClient(): Promise<ApolloClient> {
     executeOperation: async (operation) => {
       return await server.executeOperation(operation, {
         contextValue: {
+          getOrInitSession: () => {
+            throw new Error('Not implemented')
+          },
           getUser: () => Promise.resolve(user),
           setSession: () => {
             throw new Error('Not implemented')

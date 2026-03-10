@@ -1,19 +1,14 @@
 <template>
   <hr
-    class="border-gray-300 text-gray-500 text-center text-base hr-with-text"
+    class="border-muted text-muted text-center text-base hr-with-text"
     :data-hr-content="content"
     style="--bg: white; --p: 0 10px; --trans-x: -50%; --trans-y: -50%"
   />
 </template>
-<script lang="ts">
-export default defineComponent({
-  props: {
-    content: {
-      type: String,
-      default: '',
-    },
-  },
-})
+<script setup lang="ts">
+defineProps<{
+  content?: string
+}>()
 </script>
 <style>
 .hr-with-text::after {

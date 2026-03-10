@@ -19,7 +19,7 @@ export function createRedisClient(config: Config): Storage {
           return {
             cluster: [
               {
-                port: config.redis.port,
+                port: Number(config.redis.port),
                 host: config.redis.host,
               },
             ],
@@ -35,7 +35,7 @@ export function createRedisClient(config: Config): Storage {
         default:
           // Redis on Github Actions does not need a password
           return {
-            port: config.redis.port,
+            port: Number(config.redis.port),
             host: config.redis.host,
           }
       }

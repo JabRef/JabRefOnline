@@ -11,28 +11,28 @@ tasks:
       pnpm docker:redis
       gp sync-done setup
     env:
-      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
       NUXT_TELEMETRY_DISABLED: 1
   - name: Dev Server
     command: |
       gp sync-await setup
       pnpm dev
     env:
-      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
       NUXT_TELEMETRY_DISABLED: 1
   - name: Generate
     command: |
       gp sync-await setup
       pnpm generate:watch
     env:
-      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
       NUXT_TELEMETRY_DISABLED: 1
   - name: Prisma Studio
     command: |
       gp sync-await setup
       pnpm prisma:studio
     env:
-      DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
+      NUXT_DATABASE_URL: postgresql://gitpod@localhost/jabrefonline
 
 vscode:
   # Add handy VS Code extensions: https://www.gitpod.io/docs/ides-and-editors/vscode-extensions

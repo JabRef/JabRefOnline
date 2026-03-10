@@ -23,10 +23,10 @@ The simplest way to start is by [opening this project in Gitpod](https://gitpod.
 - Install [Node.js](https://nodejs.org/)
 - Install [PostgreSQL](https://www.postgresql.org/)
 - Checkout
-- Create a `.env` file in the root containing the connection URL for the database, e.g. `DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
+- Create a `.env` file in the root containing the connection URL for the database, e.g. `NUXT_DATABASE_URL="postgresql://user:password@localhost:5432/jabref?schema=public"`.
 - Optional: Install and start [Redis](https://redis.io/).
   Perhaps the most straightforward way to do this is via Docker: `pnpm docker:redis`.
-  If you do not use this command, make sure that Redis is available through the port `6380` or, alternatively, add the configuration `REDIS_PORT=<your port>` to the `.env` file.
+  If you do not use this command, make sure that Redis is available through the port `6380` or, alternatively, add the configuration `NUXT_REDIS_PORT=<your port>` to the `.env` file.
 - Run `pnpm install` to install all dependencies.
 - Run `pnpm prisma:migrate:dev` to initialize the database. You may also want to use `pnpm prisma:seed` to fill the database with some initial test data.
 
@@ -48,6 +48,20 @@ Now close and re-open the workspace.
 | pnpm start         | Start the production server built by `pnpm build` (for testing purposes).                                                                                                                                                |
 | pnpm prisma:studio | Explore data in the database using a visual editor.                                                                                                                                                                      |
 | pnpm storybook     | Start [Storybook](#ui-workflow-storybook) in your browser.                                                                                                                                                               |
+
+### Running tests locally
+
+To run the tests locally, it's best to start the development server by running `pnpm dev`.
+Then, in a separate terminal, set the environment variable `TEST_URL` to the URL of the development server (e.g., `http://localhost:3000`)
+
+```bash
+# Linux
+export TEST_URL=http://localhost:3000
+# Windows
+$env:TEST_URL = "http://localhost:3000"
+```
+
+Then you can run the tests by executing `pnpm test`.
 
 ### Workflow for editing the database schema
 

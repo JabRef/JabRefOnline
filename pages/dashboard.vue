@@ -15,7 +15,7 @@
       v-for="document of documents"
       :key="document.id"
       :source="document"
-    ></DocumentView>
+    />
     <!--
         </virtual-list>
     -->

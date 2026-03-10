@@ -10,8 +10,8 @@
             <t-nuxtlink
               v-for="link in links"
               :key="link.title"
-              active-class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
-              class="text-gray-400 hover:text-primary-600 text-lg font-semibold"
+              active-class="text-dimmed hover:text-primary-600 text-lg font-semibold"
+              class="text-dimmed hover:text-primary-600 text-lg font-semibold"
               :to="link.href"
               >{{ link.title }}</t-nuxtlink
             >
@@ -44,12 +44,12 @@
               </h1>
             </div>
             <div class="xl:w-3/4 mx-auto">
-              <h2 class="mb-5 text-3xl text-gray-700">
+              <h2 class="mb-5 text-3xl text">
                 The efficient way to collect, organize & discover
               </h2>
             </div>
           </div>
-          <div class="mt-4 md:mt-20 max-w-screen-xl mx-auto">
+          <div class="mt-4 md:mt-20 max-w-(--breakpoint-xl) mx-auto">
             <img
               src="~/assets/jabref-mainscreen.png"
               class="shadow-[0_0_25px_#a7a7bd] rounded-xl"
@@ -68,35 +68,55 @@
           </div>
           <div class="row justify-content-center py-6 md:pb-16">
             <div class="col-auto">
-              <n-button
-                type="primary"
-                size="large"
-                class="mx-auto"
-                style="height: 3.2em"
+              <UButton
+                size="xl"
+                class="mx-auto h-[3.2em]"
               >
                 <ClientOnly>
                   <a
+                    v-if="isWindows()"
                     class="text-2xl"
-                    :href="constructDownloadUrl()"
-                    >Download JabRef</a
+                    href="/download/win_msi"
+                    >Download for Windows</a
+                  >
+                  <a
+                    v-if="isLinux()"
+                    class="text-2xl"
+                    href="/download/linux_deb"
+                    >Download for Linux (Ubuntu, Debian)</a
+                  >
+                  <a
+                    v-if="isMac()"
+                    class="text-2xl"
+                    href="/download/mac_arm64_pkg"
+                    >Download for macOS (Apple Silicon)</a
                   >
                 </ClientOnly>
-              </n-button>
+              </UButton>
+              <div class="text-center pt-4 text-sm">
+                <a
+                  class="text-primary-500 text-sm"
+                  href="/#download"
+                  >Or see all download options</a
+                >
+              </div>
             </div>
           </div>
         </div>
       </header>
 
-      <LandingPageFeatures></LandingPageFeatures>
-      <LandingPageDownload></LandingPageDownload>
-      <LandingPageGetInvolved></LandingPageGetInvolved>
-      <LandingPageMore></LandingPageMore>
-      <LandingPageFooter></LandingPageFooter>
+      <LandingPageFeatures />
+      <LandingPageDownload />
+      <LandingPageGetInvolved />
+      <LandingPageMore />
+      <LandingPageFooter />
     </NuxtLayout>
   </div>
 </template>
 
 <script setup lang="ts">
+import { isLinux, isMac, isWindows } from '~/composables/detectOs'
+
 definePageMeta({ layout: false })
 
 const links = [
