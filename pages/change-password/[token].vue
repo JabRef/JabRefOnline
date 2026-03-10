@@ -9,18 +9,18 @@
     <div>
       <form @submit.prevent="changePassword()">
         <div class="space-y-5">
-          <t-input-group
+          <UFormField
             label="New Password"
-            variant="important"
+            required
           >
             <PasswordInput v-model="password" />
-          </t-input-group>
-          <t-input-group
+          </UFormField>
+          <UFormField
             label="Confirm Password"
-            variant="important"
+            required
           >
             <PasswordInput v-model="repeatPassword" />
-          </t-input-group>
+          </UFormField>
         </div>
         <div class="py-2 text-center">
           <UButton
