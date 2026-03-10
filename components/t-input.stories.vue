@@ -14,12 +14,14 @@ import { UInput } from '#components'
       <UInput
         value="Input text"
         color="error"
+        highlight
       />
     </Story>
     <Story title="Success">
       <UInput
         value="Input text"
         color="success"
+        highlight
       />
     </Story>
     <Story title="Plain">
