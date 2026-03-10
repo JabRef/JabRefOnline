@@ -6,13 +6,16 @@ export default defineAppConfig({
    */
   ui: {
     // Colors are defined in assets\css\main.css
+    // Map to actual Tailwind color names so that Nuxt UI generates the full color palette.
+    // Custom color shades (like --color-success-*) are only generated for referenced utility
+    // classes, but standard Tailwind colors (green, red, etc.) are always available.
     colors: {
       primary: 'primary',
-      secondary: 'secondary',
-      success: 'success',
-      info: 'info',
-      warning: 'warning',
-      error: 'error',
+      secondary: 'rose',
+      success: 'green',
+      info: 'sky',
+      warning: 'amber',
+      error: 'red',
       neutral: 'neutral',
     },
   },
