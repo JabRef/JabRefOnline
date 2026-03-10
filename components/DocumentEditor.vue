@@ -1,20 +1,14 @@
 <template>
   <div class="flex flex-col overflow-y-auto pr-3">
     <div>
-      <t-select
-        :options="{
-          Article: 'Journal Article',
-          PhDThesis: 'PhD Thesis',
-        }"
-        variant="plaincaps"
-      >
-        <template #arrow="{ className }">
-          <Icon
-            name="ri:arrow-drop-down-line"
-            :class="className"
-          />
-        </template>
-      </t-select>
+      <USelect
+        :items="[
+          { label: 'Journal Article', value: 'Article' },
+          { label: 'PhD Thesis', value: 'PhDThesis' },
+        ]"
+        variant="none"
+        class="uppercase text-gray-600 tracking-wider text-xs"
+      />
     </div>
     <div class="z-10 grid -mt-2">
       <!-- Auto-grow textarea, taken from https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ -->
@@ -23,9 +17,9 @@
       >
         {{ title + ' ' }}
       </div>
-      <t-textarea
+      <UTextarea
         v-model="title"
-        variant="plain"
+        variant="none"
         class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
       />
     </div>
@@ -39,7 +33,7 @@
     </div>
     <div>
       <document-editor-input v-model="published" />
-      <span class="text-gray-400">|</span>
+      <span class="text-dimmed">|</span>
       <document-editor-input v-model="journal" />
     </div>
     <div class="-mt-1">
@@ -47,12 +41,12 @@
         Volume:
         <document-editor-input v-model="volume" />
       </span>
-      <span class="text-gray-400 pr-3">|</span>
+      <span class="text-dimmed pr-3">|</span>
       <span>
         Issue:
         <document-editor-input v-model="issue" />
       </span>
-      <span class="text-gray-400 pr-3">|</span>
+      <span class="text-dimmed pr-3">|</span>
       <span>
         pp.
         <document-editor-input v-model="pages" />
@@ -63,10 +57,10 @@
         heading="Abstract"
         class="mt-4 -mb-1"
       />
-      <t-textarea
+      <UTextarea
         v-model="abstract"
-        variant="plain"
-        rows="5"
+        variant="none"
+        :rows="5"
       />
     </div>
     <div>
@@ -111,8 +105,8 @@
 
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
+import type { PersonFullDetailsFragment } from '~/apollo'
 import { gql, useFragment } from '~/apollo'
-import type { PersonFullDetailsFragment } from '~/apollo/graphql'
 import Tags from './tagify.vue'
 
 const PersonFullDetails = gql(/* GraphQL */ `
@@ -251,7 +245,7 @@ const externalLinks = computed(() => [
 ])
 
 const title = computed({
-  get: () => document.value?.title,
+  get: () => document.value?.title ?? undefined,
   set: (_value) => {
     // TODO: implement
   },
@@ -314,8 +308,8 @@ const pages = computed({
 const abstract = computed({
   get: () =>
     document.value && 'abstract' in document.value
-      ? document.value.abstract
-      : null,
+      ? (document.value.abstract ?? undefined)
+      : undefined,
   set: (_value) => {
     // TODO: implement
   },
