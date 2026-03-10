@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UFormField } from '#components'
+import { UFormField, UInput } from '#components'
 </script>
 
 <template>
