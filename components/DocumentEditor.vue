@@ -18,10 +18,9 @@
         {{ title + ' ' }}
       </div>
       <UTextarea
-        :model-value="title ?? undefined"
+        v-model="title"
         variant="none"
         class="text-xl resize-none overflow-hidden row-span-1 col-span-1 col-start-1 row-start-1"
-        @update:model-value="(v) => (title = v)"
       />
     </div>
     <div class="-mt-3">
@@ -59,10 +58,9 @@
         class="mt-4 -mb-1"
       />
       <UTextarea
-        :model-value="abstract ?? undefined"
+        v-model="abstract"
         variant="none"
         :rows="5"
-        @update:model-value="(v) => (abstract = v)"
       />
     </div>
     <div>
@@ -247,7 +245,7 @@ const externalLinks = computed(() => [
 ])
 
 const title = computed({
-  get: () => document.value?.title,
+  get: () => document.value?.title ?? undefined,
   set: (_value) => {
     // TODO: implement
   },
@@ -310,8 +308,8 @@ const pages = computed({
 const abstract = computed({
   get: () =>
     document.value && 'abstract' in document.value
-      ? document.value.abstract
-      : null,
+      ? (document.value.abstract ?? undefined)
+      : undefined,
   set: (_value) => {
     // TODO: implement
   },
