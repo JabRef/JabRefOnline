@@ -14,7 +14,7 @@ describe('download', () => {
   it('downloads file from GitHub release', async () => {
     const response = await fetch('/download', { redirect: 'manual' })
     expect(await response.text()).toContain(
-      'url=https://github.com/JabRef/jabref/releases/latest',
+      'url=https://github.com/JabRef/jabref/releases/download/',
     )
     expect(response.status).toBe(302) // Redirect
   })
