@@ -143,8 +143,7 @@
               href="http://discourse.jabref.org/"
               >Forum</t-nuxtlink
             >
-          </li>
-          <li class="py-1">
+            /
             <t-nuxtlink
               class="no-underline text-sm text-highlighted hover:text-primary-800"
               href="https://matrix.to/#/#JabRef_jabref:gitter.im"
@@ -152,6 +151,12 @@
             >
           </li>
           <li class="py-1">
+            <t-nuxtlink
+              class="no-underline text-sm text-highlighted hover:text-primary-800"
+              href="https://foojay.social/@jabref"
+              >Mastodon
+            </t-nuxtlink>
+            /
             <t-nuxtlink
               class="no-underline text-sm text-highlighted hover:text-primary-800"
               href="https://twitter.com/JabRef_org"
