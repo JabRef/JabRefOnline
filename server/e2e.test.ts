@@ -19,7 +19,7 @@ describe('download', () => {
     expect(response.status).toBe(302) // Redirect
   })
   it('downloads file from GitHub release when os is specified', async () => {
-    const response = await fetch('/download?os=win_msi', { redirect: 'manual' })
+    const response = await fetch('/download/win_msi', { redirect: 'manual' })
     const text = await response.text()
     expect(text).toContain(
       'url=https://github.com/JabRef/jabref/releases/download',
