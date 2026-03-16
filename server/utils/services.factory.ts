@@ -1,8 +1,25 @@
-import { Environment, type Config } from '~/config'
-
+import { PrismaPg } from '@prisma/adapter-pg'
 import { createStorage, type Storage } from 'unstorage'
 import memoryDriver from 'unstorage/drivers/memory'
 import redisDriver from 'unstorage/drivers/redis'
+import { Environment, type Config } from '~/config'
+import { PrismaClient } from '~/server/database'
+
+export async function createPrismaClient(config: Config) {
+  let adapter
+  if (config.public.environment === Environment.LocalDevelopment) {
+    // Use in memory database for local development
+    const { PGlite } = await import('@electric-sql/pglite')
+    const { PrismaPGlite } = await import('pglite-prisma-adapter')
+    const client = new PGlite('./server/database/local')
+    // TOOD: Create database schema and seed data
+    // @ts-expect-error: type mismatch
+    adapter = new PrismaPGlite(client)
+  } else {
+    adapter = new PrismaPg({ connectionString: config.databaseUrl })
+  }
+  return new PrismaClient({ adapter })
+}
 
 export function createRedisClient(config: Config): Storage {
   if (

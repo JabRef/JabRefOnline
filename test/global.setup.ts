@@ -1,14 +1,15 @@
-import { PrismaPg } from '@prisma/adapter-pg'
 import 'dotenv/config'
 import 'json-bigint-patch'
 import 'reflect-metadata'
 import { beforeAll, expect } from 'vitest'
 import { constructConfig } from '~/config'
-import { PrismaClient } from '~/server/database'
 import { register } from '~/server/tsyringe'
 import { registerClasses } from '~/server/tsyringe.config'
 import { EmailServiceMock } from '~/server/utils/email.service'
-import { createRedisClient } from '~/server/utils/services.factory'
+import {
+  createPrismaClient,
+  createRedisClient,
+} from '~/server/utils/services.factory'
 import { GraphqlSerializer } from './snapshot.graphql'
 
 // Register custom graphql serializer
@@ -21,7 +22,7 @@ globalThis.Reflect = Reflect
 registerClasses()
 
 // Setup services for tests
-beforeAll((context) => {
+beforeAll(async (context) => {
   register('EmailService', { useValue: new EmailServiceMock() })
 
   const isIntegrationTest = context.file.filepath.endsWith(
@@ -44,8 +45,7 @@ beforeAll((context) => {
       useValue: redisClient,
     })
 
-    const adapter = new PrismaPg({ connectionString: config.databaseUrl })
-    const prismaClient = new PrismaClient({ adapter })
+    const prismaClient = await createPrismaClient(config)
     register('PrismaClient', {
       useValue: prismaClient,
     })
