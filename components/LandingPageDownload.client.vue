@@ -1,12 +1,14 @@
 <template>
   <section
     id="download"
-    class="bg-primary-50 bg-opacity-50"
+    class="bg-primary-50/70 dark:bg-primary-900/80"
   >
     <div class="container mx-auto px-4 pt-6 pb-4 md:py-16">
       <div class="flex flex-wrap flex-col content-center">
-        <h1 class="text-center mb-3 text-5xl">Try it now</h1>
-        <h3 class="text-center mb-12 text-3xl">
+        <h1 class="text-center mb-3 text-5xl text-primary-900 dark:text-primary-50">
+          Try it now
+        </h1>
+        <h3 class="text-center mb-12 text-3xl text-primary-800 dark:text-primary-100">
           JabRef is free and works across all your devices.
         </h3>
         <div class="text-center">
@@ -45,17 +47,17 @@
             </div>
           </span>
         </div>
-        <div class="text-center pt-8 text-sm">
+        <div class="text-center pt-8 text-sm text-primary-800 dark:text-primary-100">
           <span v-if="isWindows()">
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
               href="/download/win_zip"
               >Windows Portable</t-nuxtlink
             >
             <br />
             Also available for
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
               href="https://github.com/JabRef/jabref/releases/latest"
               >mac OS X and Linux</t-nuxtlink
             >
@@ -63,18 +65,18 @@
           </span>
           <span v-if="isMac()">
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
               href="/download/mac_arm64_dmg"
               >Apple Silicon Portable (.dmg)</t-nuxtlink
             >
             or
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
               href="/download/mac_x86_64_dmg"
               >macOS Intel Portable (.dmg)</t-nuxtlink
             >
             <br />
-            <div class="text-xs text-wrap max-w-sm mx-auto pt-2">
+            <div class="text-xs text-wrap max-w-sm mx-auto pt-2 text-primary-700 dark:text-primary-100">
               Unsure about your Mac type? Click the Apple icon, select "About
               This Mac". If it shows "Chip", you have Apple Silicon. Otherwise,
               it's Intel.
@@ -82,7 +84,7 @@
             <br />
             Also available for
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
               href="https://github.com/JabRef/jabref/releases/latest"
               >Windows and Linux</t-nuxtlink
             >
@@ -90,14 +92,14 @@
           </span>
           <span v-if="isLinux()">
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
               href="/download/linux_tar_gz"
               >Linux Portable</t-nuxtlink
             >
             <br />
             Also available for
             <t-nuxtlink
-              class="text-primary-500"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
               href="https://github.com/JabRef/jabref/releases/latest"
             >
               mac OS X and Windows
@@ -105,14 +107,14 @@
             <br />
           </span>
           <a
-            class="text-primary-500"
+            class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
             href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
           >
             Change Log
           </a>
           and
           <a
-            class="text-primary-500"
+            class="text-primary-600 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-200"
             href="https://builds.jabref.org/main/"
             >Development Builds</a
           >
