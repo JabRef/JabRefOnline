@@ -21,7 +21,7 @@
               @click="showModal = false"
             >
               <span
-                class="bg-transparent text-black opacity-80 h-6 w-6 text-2xl block outline-hidden focus:outline-hidden"
+                class="bg-transparent text-black h-6 w-6 text-2xl block outline-hidden focus:outline-hidden"
               >
                 ×
               </span>
