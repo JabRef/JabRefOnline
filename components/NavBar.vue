@@ -143,7 +143,7 @@
       class="flex-1 flex items-center justify-end mx-3 md:mx-6"
     >
       <a
-        v-if="showGitHubLink"
+        v-if="showGithubLink"
         href="https://github.com/JabRef/jabref"
         target="_blank"
         rel="noopener noreferrer"
@@ -188,13 +188,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  showGitHubLink: {
+  showGithubLink: {
     type: Boolean,
     default: false,
   },
 })
 
-const { stars } = props.showGitHubLink
+const { stars } = props.showGithubLink
   ? useGitHubStars('JabRef/jabref')
   : { stars: ref<string | null>(null) }
 

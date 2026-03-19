@@ -2,14 +2,21 @@ export function useGitHubStars(repo: string) {
   const stars = ref<string | null>(null)
 
   if (import.meta.client) {
-    fetch(`https://api.github.com/repos/${repo}`)
-      .then((res) => res.json())
-      .then((data: { stargazers_count?: number }) => {
-        if (data.stargazers_count !== undefined) {
-          stars.value = formatStarCount(data.stargazers_count)
+    fetch(`/api/githubStars?repo=${encodeURIComponent(repo)}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to fetch GitHub stars: ${res.statusText}`)
+        }
+        return res.json()
+      })
+      .then((data: { stars?: number }) => {
+        if (data.stars !== undefined) {
+          stars.value = formatStarCount(data.stars)
         }
       })
-      .catch(() => {})
+      .catch((error) => {
+        console.debug('Failed to fetch GitHub stars:', error)
+      })
   }
 
   return { stars }
