@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full flex flex-row flex-wrap items-center bg-white px-6 border-b border-muted h-20"
+    class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-muted h-20"
   >
     <!-- Logo -->
     <div
@@ -82,11 +82,8 @@
       </template>
     </UPopover>
 
-    <!-- Main menu (centered) -->
-    <div
-      v-show="!isSmallDisplay"
-      class="flex-1 flex justify-center"
-    >
+    <!-- Main menu -->
+    <div v-show="!isSmallDisplay">
       <slot>
         <div class="space-x-14">
           <span class="text-primary-600 text-lg font-semibold">Library</span>
@@ -106,15 +103,51 @@
       </slot>
     </div>
 
-    <!-- Right-side actions -->
-    <div class="flex items-center gap-4 ml-auto">
-      <!-- GitHub link -->
+    <!-- User profile -->
+    <nav
+      v-if="showUserProfile"
+      class="flex items-center pr-10 space-x-7"
+    >
+      <Icon
+        name="ri:notification-3-fill"
+        class="text-dimmed hover:text-primary-500 text-lg"
+      />
+      <div>
+        <!-- User profile dropdown -->
+        <UDropdownMenu
+          :content="{ align: 'end' }"
+          :items="[
+            [{ label: 'Your Profile' }, { label: 'Settings' }],
+            [{ label: 'Logout', onSelect: () => logout() }],
+          ]"
+        >
+          <button
+            id="user-menu"
+            class="w-12 h-12"
+            aria-label="User menu"
+            aria-haspopup="true"
+          >
+            <img
+              class="rounded-full"
+              src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
+              alt=""
+            />
+          </button>
+        </UDropdownMenu>
+      </div>
+    </nav>
+
+    <!-- Right spacer — also holds the GitHub link to keep menu centred -->
+    <div
+      v-show="!isSmallDisplay"
+      class="flex-1 flex items-center justify-end mx-3 md:mx-6"
+    >
       <a
         v-if="showGitHubLink"
         href="https://github.com/JabRef/jabref"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden md:flex items-center gap-1.5 text-dimmed hover:text-primary-600 transition-colors"
+        class="flex items-center gap-1.5 text-dimmed hover:text-primary-600 transition-colors"
         aria-label="JabRef on GitHub"
       >
         <Icon
@@ -127,40 +160,6 @@
           >{{ stars }}</span
         >
       </a>
-
-      <!-- User profile -->
-      <nav
-        v-if="showUserProfile"
-        class="flex items-center space-x-7"
-      >
-        <Icon
-          name="ri:notification-3-fill"
-          class="text-dimmed hover:text-primary-500 text-lg"
-        />
-        <div>
-          <!-- User profile dropdown -->
-          <UDropdownMenu
-            :content="{ align: 'end' }"
-            :items="[
-              [{ label: 'Your Profile' }, { label: 'Settings' }],
-              [{ label: 'Logout', onSelect: () => logout() }],
-            ]"
-          >
-            <button
-              id="user-menu"
-              class="w-12 h-12"
-              aria-label="User menu"
-              aria-haspopup="true"
-            >
-              <img
-                class="rounded-full"
-                src="https://a7sas.net/wp-content/uploads/2019/07/4060.jpeg"
-                alt=""
-              />
-            </button>
-          </UDropdownMenu>
-        </div>
-      </nav>
     </div>
   </nav>
 </template>
