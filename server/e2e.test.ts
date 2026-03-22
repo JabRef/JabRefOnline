@@ -11,11 +11,20 @@ describe('index page', () => {
 })
 
 describe('download', () => {
-  it('downloads file from GitHub release', async () => {
+  it('downloads latest from GitHub release', async () => {
     const response = await fetch('/download', { redirect: 'manual' })
     expect(await response.text()).toContain(
-      'url=https://github.com/JabRef/jabref/releases/download/',
+      'url=https://github.com/JabRef/jabref/releases/latest',
     )
+    expect(response.status).toBe(302) // Redirect
+  })
+  it('downloads file from GitHub release when os is specified', async () => {
+    const response = await fetch('/download/win_msi', { redirect: 'manual' })
+    const text = await response.text()
+    expect(text).toContain(
+      'url=https://github.com/JabRef/jabref/releases/download',
+    )
+    expect(text).toContain('.msi')
     expect(response.status).toBe(302) // Redirect
   })
 })
