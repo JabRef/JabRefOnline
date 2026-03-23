@@ -195,7 +195,7 @@ const props = defineProps({
 })
 
 const { stars } = props.showGithubLink
-  ? useGitHubStars('JabRef/jabref')
+  ? useGitHubStars()
   : { stars: ref<string | null>(null) }
 
 const { resolveClient } = useApolloClient()

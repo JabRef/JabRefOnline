@@ -1,31 +1,49 @@
-export default defineEventHandler(async (event) => {
-  const query = getQuery(event)
-  const repo = query.repo as string
+/** JabRef desktop app repo — fixed to avoid open proxy / rate-limit abuse */
+const JABREF_REPO = 'JabRef/jabref'
 
-  if (!repo) {
-    throw createError({
-      statusCode: 400,
-      message: 'Missing repo parameter',
-    })
-  }
+export default defineCachedEventHandler(
+  async (event) => {
+    event.node.res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=300, stale-while-revalidate=600',
+    )
 
-  try {
-    const response = await fetch(`https://api.github.com/repos/${repo}`)
+    const config = useRuntimeConfig()
+    const githubToken = config.githubRepoToken as string | undefined
 
-    if (!response.ok) {
-      throw new Error(`GitHub API responded with ${response.status}`)
+    const headers: Record<string, string> = {
+      Accept: 'application/vnd.github.v3+json',
+      'User-Agent': 'jabref-online',
+    }
+    if (githubToken) {
+      headers.Authorization = `Bearer ${githubToken}`
     }
 
-    const data = (await response.json()) as { stargazers_count?: number }
+    try {
+      const response = await fetch(
+        `https://api.github.com/repos/${JABREF_REPO}`,
+        { headers },
+      )
 
-    return {
-      stars: data.stargazers_count ?? 0,
+      if (!response.ok) {
+        throw new Error(`GitHub API responded with ${response.status}`)
+      }
+
+      const data = (await response.json()) as { stargazers_count?: number }
+
+      return {
+        stars: data.stargazers_count ?? 0,
+      }
+    } catch (error) {
+      console.debug('Failed to fetch GitHub stars for repo', JABREF_REPO, error)
+      throw createError({
+        statusCode: 500,
+        message: 'Failed to fetch GitHub stars',
+      })
     }
-  } catch (error) {
-    console.debug('Failed to fetch GitHub stars for repo', repo, error)
-    throw createError({
-      statusCode: 500,
-      message: 'Failed to fetch GitHub stars',
-    })
-  }
-})
+  },
+  {
+    name: 'github-stars-jabref',
+    maxAge: 300,
+  },
+)

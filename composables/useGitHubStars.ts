@@ -1,8 +1,8 @@
-export function useGitHubStars(repo: string) {
+export function useGitHubStars() {
   const stars = ref<string | null>(null)
 
   if (import.meta.client) {
-    fetch(`/api/githubStars?repo=${encodeURIComponent(repo)}`)
+    fetch('/api/githubStars')
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Failed to fetch GitHub stars: ${res.statusText}`)
