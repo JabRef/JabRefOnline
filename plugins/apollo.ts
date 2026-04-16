@@ -14,12 +14,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const config = useRuntimeConfig()
   const httpLink = new HttpLink({
-
     uri: '/api',
-
-    fetch, // Send cookies along with every request (needed for authentication)
-    credentials: 'include',
- ,
+    fetch,
     // Send cookies along with every request (needed for authentication)
     credentials: 'include',
   })
