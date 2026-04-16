@@ -61,12 +61,12 @@ const { result, fetchMore } = useQuery(
     }
   `),
   () => ({
-    groupId: ui.selectedGroupId,
-    query: ui.activeSearchQuery,
-    first: ui.activeSearchQuery ? null : FIRST,
-    after: '',
-  }),
-  () => ({
+    variables: {
+      groupId: ui.selectedGroupId,
+      query: ui.activeSearchQuery,
+      first: ui.activeSearchQuery ? null : FIRST,
+      after: '',
+    },
     fetchPolicy: ui.activeSearchQuery
       ? ('no-cache' as WatchQueryFetchPolicy)
       : ('cache-first' as WatchQueryFetchPolicy),

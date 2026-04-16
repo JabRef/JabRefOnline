@@ -1,7 +1,7 @@
 import { ApolloClient, HttpLink } from '@apollo/client'
+import { CombinedGraphQLErrors } from '@apollo/client/errors'
 import { ErrorLink } from '@apollo/client/link/error'
 import { DefaultApolloClient } from '@vue/apollo-composable'
-import { logErrorMessages } from '@vue/apollo-util'
 import fetch from 'cross-fetch'
 import { Environment } from '~/config'
 import { cache } from '../apollo/cache'
@@ -23,7 +23,15 @@ export default defineNuxtPlugin((nuxtApp) => {
   // Print errors
   const errorLink = new ErrorLink(({ error }) => {
     if (config.public.environment !== Environment.Production) {
-      logErrorMessages(error)
+      if (CombinedGraphQLErrors.is(error)) {
+        error.errors.forEach(({ message, locations, path }) => {
+          console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+          )
+        })
+      } else {
+        console.error('[Network error]:', error)
+      }
     }
   })
 
