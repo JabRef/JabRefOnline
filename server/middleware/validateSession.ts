@@ -6,10 +6,8 @@ let sessionConfig: SessionConfig | null = null
 function _useSession(event: H3Event) {
   if (!sessionConfig) {
     const runtimeConfig = useRuntimeConfig(event)
-    // @ts-expect-error some mismatch in cookie type definitions
     sessionConfig = runtimeConfig.session
   }
-  // @ts-expect-error sessionConfig is not null here
   return useSession<UserSession>(event, sessionConfig)
 }
 

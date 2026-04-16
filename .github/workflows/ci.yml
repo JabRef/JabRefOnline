@@ -6,8 +6,6 @@ on:
       - main
 
   pull_request:
-    branches:
-      - main
 
 jobs:
   lint:
@@ -17,17 +15,17 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: 22.19.0
+          node-version: 24.14.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -53,7 +51,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres@sha256:29e0bb09c8e7e7fc265ea9f4367de9622e55bae6b0b97e7cce740c2d63c2ebc0
+        image: postgres@sha256:69e8582b781cb44fa4557b98ed586fe68361e320d9b12f9707494335634f4f3d
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: jabref
@@ -67,7 +65,7 @@ jobs:
           - 5432:5432
 
       redis:
-        image: redis@sha256:cc2dfb8f5151da2684b4a09bd04b567f92d07591d91980eb3eca21df07e12760
+        image: redis@sha256:1c054d54ecd1597bba52f4304bca5afbc5565ebe614c5b3d7dc5b7f8a0cd768d
         # Set health checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
@@ -80,21 +78,22 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref?schema=public
+      SHADOW_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/jabref_shadow
       SESSION_PASSWORD: somerandompasswordNxFHaqCSPpBe6n5kRz2dru4hJ7K9bjgEtmsV8QAT3MDXcUfWGL
 
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
-          node-version: 22.19.0
+          node-version: 24.14.0
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -106,8 +105,14 @@ jobs:
           NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
       # Check that no schema changes have been done without corresponding migration files have been added
+      - name: Create shadow database for schema drift detection
+        run: PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE jabref_shadow;"
+
       - name: Detect database schema drift
-        run: pnpm prisma:migrate:diff $DATABASE_URL
+        run: pnpm prisma:migrate:diff
+        env:
+          NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
+          NUXT_SHADOW_DATABASE_URL: ${{ env.SHADOW_DATABASE_URL }}
 
       - name: Build
         run: pnpm build
@@ -117,7 +122,7 @@ jobs:
       - name: Start server
         run: pnpm start &
         env:
-          NUXT_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          NUXT_GITHUB_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NUXT_SESSION_PASSWORD: ${{ env.SESSION_PASSWORD }}
           NUXT_DATABASE_URL: ${{ env.DATABASE_URL }}
 
@@ -135,7 +140,7 @@ jobs:
 
       - name: Publish and test Storybook
         if: always()
-        uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce # v13.1.4
+        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
         with:
           projectToken: 'b3787adf2fa5'
           # Don't wait until Chroma verified the build (for this we have the Github check)
@@ -144,6 +149,6 @@ jobs:
           debug: true
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

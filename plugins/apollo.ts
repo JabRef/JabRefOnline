@@ -14,8 +14,12 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const config = useRuntimeConfig()
   const httpLink = new HttpLink({
+
     uri: '/api',
-    fetch,
+
+    fetch, // Send cookies along with every request (needed for authentication)
+    credentials: 'include',
+ ,
     // Send cookies along with every request (needed for authentication)
     credentials: 'include',
   })
@@ -40,8 +44,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     cache,
     link: errorLink.concat(httpLink),
 
+    // Identification of client awareness: https://www.apollographql.com/docs/react/api/link/apollo-link-client-awareness
     clientAwareness: {
-      // Identification of client awareness: https://www.apollographql.com/docs/studio/metrics/client-awareness/
       name: 'web',
     },
   })

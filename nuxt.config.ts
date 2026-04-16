@@ -108,8 +108,8 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    // Add support for naive-ui
-    '@bg-dev/nuxt-naiveui',
+    // Add support for Nuxt UI
+    '@nuxt/ui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -164,13 +164,7 @@ export default defineNuxtConfig({
    * TODO: See if we need this, maybe remove
    */
   // storybook: {},
-
-  tailwindcss: {
-    // Expose config so that we can use it to configure naive ui and in the vscode extension
-    exposeConfig: {
-      write: true,
-    },
-  },
+  css: ['~/assets/css/main.css'],
 
   /**
    * GraphQL server config
@@ -181,7 +175,7 @@ export default defineNuxtConfig({
       mapperTypeSuffix: 'Model',
       contextType: './context#Context',
       mappers: {
-        User: '@prisma/client/index.d#User',
+        User: './database#User',
         Document: './documents/user.document.service#UserDocument',
         JournalArticle: './documents/user.document.service#UserDocument',
         ProceedingsArticle: './documents/user.document.service#UserDocument',

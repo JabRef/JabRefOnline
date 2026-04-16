@@ -7,7 +7,7 @@
       />
     </template>
     <div>
-      <h2 class="mb-7 text-center text-5xl font-extrabold text-gray-900">
+      <h2 class="mb-7 text-center text-5xl font-extrabold text-highlighted">
         Reset Password
       </h2>
       <p
@@ -22,21 +22,21 @@
         @submit.prevent="forgotPassword()"
       >
         <div class="space-y-5">
-          <t-input-group
+          <UFormField
             label="Email address"
-            variant="important"
+            required
           >
-            <t-input
+            <UInput
               v-model="email"
               v-focus
             />
-          </t-input-group>
+          </UFormField>
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Submit</n-button
+              type="submit"
+              size="xl"
+              >Submit</UButton
             >
           </div>
         </div>
@@ -44,35 +44,27 @@
     </div>
   </NuxtLayout>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { useMutation } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
+
 definePageMeta({ layout: false })
-export default defineComponent({
-  name: 'ForgotPassword',
-  setup() {
-    const email = ref('')
-    const {
-      mutate: forgotPassword,
-      called,
-      error,
-    } = useMutation(
-      gql(/* GraphQL */ `
-        mutation ForgotPassword($input: ForgotPasswordInput!) {
-          forgotPassword(input: $input) {
-            result
-          }
-        }
-      `),
-      () => ({
-        variables: {
-          input: {
-            email: email.value,
-          },
-        },
-      }),
-    )
-    return { email, error, called, forgotPassword }
-  },
-})
+
+const email = ref('')
+const { mutate: forgotPassword, called } = useMutation(
+  gql(/* GraphQL */ `
+    mutation ForgotPassword($input: ForgotPasswordInput!) {
+      forgotPassword(input: $input) {
+        result
+      }
+    }
+  `),
+  () => ({
+    variables: {
+      input: {
+        email: email.value,
+      },
+    },
+  }),
+)
 </script>

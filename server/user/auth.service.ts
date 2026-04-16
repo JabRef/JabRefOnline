@@ -215,7 +215,7 @@ export class AuthService {
   async initSession(
     sessionId: string,
     user: User | string,
-  ): Promise<UserSession> {
+  ): Promise<Omit<UserSession, 'id'>> {
     const userId = typeof user === 'string' ? user : user.id
     const serverData = {
       lastActive: new Date(),
