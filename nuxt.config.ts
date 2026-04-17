@@ -45,6 +45,8 @@ export default defineNuxtConfig({
   experimental: {
     // Full typed routing
     typedPages: true,
+    // TODO: Workaround for https://github.com/nuxt/nuxt/issues/34142#issuecomment-3791192527
+    nitroAutoImports: true,
   },
 
   /*
