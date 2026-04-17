@@ -25,7 +25,7 @@ export async function truncate(): Promise<void> {
     await Promise.all(
       tables.map(({ tablename }: { tablename: string }) => {
         return prisma.$queryRawUnsafe(
-          `TRUNCATE TABLE "${dbSchemaName}"."${tablename as string}" CASCADE;`,
+          `TRUNCATE TABLE "${dbSchemaName}"."${tablename}" CASCADE;`,
         )
       }),
     )
@@ -36,9 +36,7 @@ export async function truncate(): Promise<void> {
     await Promise.all(
       sequences.map(({ relname }: { relname: string }) => {
         return prisma.$queryRawUnsafe(
-          `ALTER SEQUENCE "${dbSchemaName}"."${
-            relname as string
-          }" RESTART WITH 1;`,
+          `ALTER SEQUENCE "${dbSchemaName}"."${relname}" RESTART WITH 1;`,
         )
       }),
     )

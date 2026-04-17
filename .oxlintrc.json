@@ -9,9 +9,7 @@
     "vitest",
     "vue"
   ],
-  "jsPlugins": [
-    "@nuxt/eslint-plugin"
-  ],
+  "jsPlugins": ["@nuxt/eslint-plugin"],
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
@@ -19,15 +17,12 @@
     "style": "warn"
   },
   "options": {
-    "typeAware": true,
+    "typeAware": true
     // "typeCheck": true
   },
   "overrides": [
     {
-      "files": [
-        "**/*.ts",
-        "**/*.vue"
-      ],
+      "files": ["**/*.ts", "**/*.vue"],
       "rules": {
         // Don't allow duplicate imports
         // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md
@@ -58,12 +53,10 @@
             "allowNumber": true
           }
         ]
-      },
+      }
     },
     {
-      "files": [
-        "server/**/*.graphql"
-      ],
+      "files": ["server/**/*.graphql"],
       // Enable graphql-specific rules
       "rules": {
         "@graphql-eslint/description-style": "error",
@@ -81,61 +74,32 @@
             "DirectiveDefinition": "camelCase",
             "EnumValueDefinition": "UPPER_CASE",
             "FieldDefinition[parent.name.value=Query]": {
-              "forbiddenPrefixes": [
-                "query",
-                "get"
-              ],
-              "forbiddenSuffixes": [
-                "Query"
-              ]
+              "forbiddenPrefixes": ["query", "get"],
+              "forbiddenSuffixes": ["Query"]
             },
             "FieldDefinition[parent.name.value=Mutation]": {
-              "forbiddenPrefixes": [
-                "mutation"
-              ],
-              "forbiddenSuffixes": [
-                "Mutation"
-              ]
+              "forbiddenPrefixes": ["mutation"],
+              "forbiddenSuffixes": ["Mutation"]
             },
             "FieldDefinition[parent.name.value=Subscription]": {
-              "forbiddenPrefixes": [
-                "subscription"
-              ],
-              "forbiddenSuffixes": [
-                "Subscription"
-              ]
+              "forbiddenPrefixes": ["subscription"],
+              "forbiddenSuffixes": ["Subscription"]
             },
             "EnumTypeDefinition,EnumTypeExtension": {
-              "forbiddenPrefixes": [
-                "Enum"
-              ],
-              "forbiddenSuffixes": [
-                "Enum"
-              ]
+              "forbiddenPrefixes": ["Enum"],
+              "forbiddenSuffixes": ["Enum"]
             },
             "InterfaceTypeDefinition,InterfaceTypeExtension": {
-              "forbiddenPrefixes": [
-                "Interface"
-              ],
-              "forbiddenSuffixes": [
-                "Interface"
-              ]
+              "forbiddenPrefixes": ["Interface"],
+              "forbiddenSuffixes": ["Interface"]
             },
             "UnionTypeDefinition,UnionTypeExtension": {
-              "forbiddenPrefixes": [
-                "Union"
-              ],
-              "forbiddenSuffixes": [
-                "Union"
-              ]
+              "forbiddenPrefixes": ["Union"],
+              "forbiddenSuffixes": ["Union"]
             },
             "ObjectTypeDefinition,ObjectTypeExtension": {
-              "forbiddenPrefixes": [
-                "Type"
-              ],
-              "forbiddenSuffixes": [
-                "Type"
-              ]
+              "forbiddenPrefixes": ["Type"],
+              "forbiddenSuffixes": ["Type"]
             }
           }
         ],
@@ -175,14 +139,10 @@
           }
         ]
       },
-      "jsPlugins": [
-        "@graphql-eslint/eslint-plugin"
-      ]
+      "jsPlugins": ["@graphql-eslint/eslint-plugin"]
     },
     {
-      "files": [
-        "{pages,test}/**/*.graphql"
-      ],
+      "files": ["{pages,test}/**/*.graphql"],
       "rules": {
         "@graphql-eslint/executable-definitions": "error",
         "@graphql-eslint/fields-on-correct-type": "error",
@@ -198,26 +158,13 @@
             "VariableDefinition": "camelCase",
             "OperationDefinition": {
               "style": "PascalCase",
-              "forbiddenPrefixes": [
-                "Query",
-                "Mutation",
-                "Subscription",
-                "Get"
-              ],
-              "forbiddenSuffixes": [
-                "Query",
-                "Mutation",
-                "Subscription"
-              ]
+              "forbiddenPrefixes": ["Query", "Mutation", "Subscription", "Get"],
+              "forbiddenSuffixes": ["Query", "Mutation", "Subscription"]
             },
             "FragmentDefinition": {
               "style": "PascalCase",
-              "forbiddenPrefixes": [
-                "Fragment"
-              ],
-              "forbiddenSuffixes": [
-                "Fragment"
-              ]
+              "forbiddenPrefixes": ["Fragment"],
+              "forbiddenSuffixes": ["Fragment"]
             }
           }
         ],
@@ -250,17 +197,12 @@
         "@graphql-eslint/variables-are-input-types": "error",
         "@graphql-eslint/variables-in-allowed-position": "error"
       },
-      "jsPlugins": [
-        "@graphql-eslint/eslint-plugin"
-      ]
+      "jsPlugins": ["@graphql-eslint/eslint-plugin"]
     },
     {
       // Test files
       // https://github.com/vitest-dev/eslint-plugin-vitest
-      "files": [
-        "**/*.test.ts",
-        "**/*.spec.ts"
-      ],
+      "files": ["**/*.test.ts", "**/*.spec.ts"],
       "rules": {
         // Test title must be lowercase
         "vitest/prefer-lowercase-title": "error",
