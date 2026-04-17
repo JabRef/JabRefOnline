@@ -2,7 +2,7 @@ import { z } from 'zod'
 import {
   LoginInputSchema as InternalLoginInputSchema,
   SignupInputSchema as InternalSignupInputSchema,
-} from './validation.internal'
+} from './generated/validation.internal'
 
 const passwordSchema = z
   .string()

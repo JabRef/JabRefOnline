@@ -10,46 +10,44 @@
       </div>
     </template>
     <div>
-      <h2 class="text-center text-5xl font-extrabold text-gray-900">
+      <h2 class="text-center text-5xl font-extrabold text-highlighted">
         Create account
       </h2>
-      <p class="mt-6 mb-8 text-center text-sm text-gray-600">
+      <p class="mt-6 mb-8 text-center text-sm text-toned">
         Already have an account?
         <t-nuxtlink to="/user/login">Sign in</t-nuxtlink>
       </p>
-      <t-alert
+      <UAlert
         v-if="error"
-        variant="error"
+        color="error"
+        title="Error"
+        :description="String(error)"
         class="mt-8"
-        :dismissible="false"
-        show
-      >
-        {{ error }}
-      </t-alert>
+      />
       <form @submit.prevent="signup()">
         <div class="space-y-5">
-          <t-input-group
+          <UFormField
             label="Email address"
-            variant="important"
+            required
           >
-            <t-input
+            <UInput
               v-model="email"
               v-focus
             />
-          </t-input-group>
-          <t-input-group
+          </UFormField>
+          <UFormField
             label="Password"
-            variant="important"
-            feedback="Use 8 or more characters with a mix of letters, numbers and symbols"
+            required
+            help="Use 8 or more characters with a mix of letters, numbers and symbols"
           >
             <PasswordInput v-model="password" />
-          </t-input-group>
+          </UFormField>
           <div class="py-2 text-center">
-            <n-button
+            <UButton
               class="w-full"
-              type="primary"
-              attr-type="submit"
-              >Create your account</n-button
+              type="submit"
+              size="xl"
+              >Create your account</UButton
             >
           </div>
           <div>

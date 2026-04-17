@@ -1,15 +1,20 @@
 <script setup lang="ts">
-// @ts-expect-error: not yet compatible with 'bundler' module resolution
-import { TTag } from '@variantjs/vue'
+import { UBadge } from '#components'
 </script>
 
 <template>
   <Stories
     title="t-tag"
-    :component="TTag"
+    :component="UBadge"
   >
     <Story title="Default">
-      <t-tag variant="badge"> Hi there! </t-tag>
+      <UBadge>Hi there!</UBadge>
+    </Story>
+    <Story title="Soft">
+      <UBadge variant="soft">Hi there!</UBadge>
+    </Story>
+    <Story title="Outline">
+      <UBadge variant="outline">Hi there!</UBadge>
     </Story>
   </Stories>
 </template>

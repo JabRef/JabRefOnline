@@ -41,8 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
   variant: '',
 })
 
-let tableClass =
-  'min-w-full divide-y divide-gray-100 shadow-xs border-gray-200 border'
+let tableClass = 'min-w-full divide-y divide-gray-100 shadow-xs border'
 const headerClass = 'px-3 py-2 font-semibold text-left bg-gray-100 border-b'
 let tbodyClass = 'bg-white divide-y divide-gray-100'
 let tdClass = 'px-3 py-2 whitespace-no-wrap'

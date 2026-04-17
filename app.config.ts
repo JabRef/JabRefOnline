@@ -1,21 +1,19 @@
 export default defineAppConfig({
-  naiveui: {
-    themeConfig: {
-      light: {
-        common: {
-          primaryColor: '#6072A7',
-          primaryColorHover: '#4F5F8F',
-          primaryColorPressed: '#3B476B',
-          primaryColorSuppl: '#4F5F8F',
-        },
-      },
-      dark: {
-        common: {
-          primaryColor: '#6072A7',
-          primaryColorHover: '#7A89B6',
-          primaryColorPressed: '#4F5F8F',
-        },
-      },
+  /**
+   * Nuxt UI configuration
+   * https://ui.nuxt.com/docs/getting-started/theme/components#global-config
+   * https://ui.nuxt.com/docs/getting-started/theme/design-system#runtime-configuration
+   */
+  ui: {
+    // Colors are defined in assets\css\main.css
+    colors: {
+      primary: 'primary',
+      secondary: 'secondary',
+      success: 'success',
+      info: 'info',
+      warning: 'warning',
+      error: 'error',
+      neutral: 'neutral',
     },
   },
 })

@@ -8,6 +8,7 @@ on:
 permissions:
   contents: read
   id-token: write
+  pull-requests: read
 
 jobs:
   cleanup:
@@ -27,4 +28,5 @@ jobs:
         shell: pwsh
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: pwsh .github/scripts/cleanup-preview-environments.ps1 -Delete

@@ -1,32 +1,31 @@
 <script setup lang="ts">
-// @ts-expect-error: not yet compatible with 'bundler' module resolution
-import { TCheckbox } from '@variantjs/vue'
+import { UCheckbox } from '#components'
 </script>
 
 <template>
   <Stories
     title="t-checkbox"
-    :component="TCheckbox"
+    :component="UCheckbox"
   >
     <Story title="Default">
-      <t-checkbox :checked="true" />
+      <UCheckbox :default-value="true" />
     </Story>
     <Story title="Error">
-      <t-checkbox
-        :checked="true"
-        variant="error"
+      <UCheckbox
+        :default-value="true"
+        color="error"
       />
     </Story>
     <Story title="Success">
-      <t-checkbox
-        :checked="true"
-        variant="success"
+      <UCheckbox
+        :default-value="true"
+        color="success"
       />
     </Story>
-    <Story title="Plain">
-      <t-checkbox
-        :checked="true"
-        variant="plain"
+    <Story title="Primary">
+      <UCheckbox
+        :default-value="true"
+        color="primary"
       />
     </Story>
   </Stories>

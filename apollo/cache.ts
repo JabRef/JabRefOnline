@@ -1,8 +1,8 @@
-import { type ApolloCache, InMemoryCache } from '@apollo/client/core'
-import { relayStylePagination } from '@apollo/client/utilities/policies/pagination'
-import introspection from '~/apollo/introspection'
+import { type ApolloCache, InMemoryCache } from '@apollo/client'
+import { relayStylePagination } from '@apollo/client/utilities'
 import { gql } from '.'
-import type { MeQuery } from './graphql'
+import type { MeQuery } from './generated/graphql'
+import introspection from './generated/introspection'
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -17,7 +17,7 @@ export const cache = new InMemoryCache({
 })
 
 export function cacheCurrentUser(
-  cache: ApolloCache<any>,
+  cache: ApolloCache,
   user: MeQuery['me'] | null,
 ): void {
   cache.writeQuery({

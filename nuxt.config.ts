@@ -117,8 +117,8 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    // Add support for naive-ui
-    '@bg-dev/nuxt-naiveui',
+    // Add support for Nuxt UI
+    '@nuxt/ui',
     // Use Pinia for state management
     '@pinia/nuxt',
     // Add server-side graphql support
@@ -142,9 +142,6 @@ export default defineNuxtConfig({
     // Add authentication support
     // https://github.com/atinux/nuxt-auth-utils
     'nuxt-auth-utils',
-    // Add eslint support
-    // https://eslint.nuxt.com
-    '@nuxt/eslint',
   ],
 
   /*

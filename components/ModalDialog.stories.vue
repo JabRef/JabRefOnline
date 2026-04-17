@@ -32,9 +32,7 @@ const showCustomModal = ref(false)
           <p class="text-lg">
             Are you sure you want to proceed with this action?
           </p>
-          <p class="text-sm text-gray-500 mt-2">
-            This action cannot be undone.
-          </p>
+          <p class="text-sm text-muted mt-2">This action cannot be undone.</p>
         </ModalDialog>
       </div>
     </Story>

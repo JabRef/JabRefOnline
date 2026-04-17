@@ -1,0 +1,11 @@
+// After changing this file, run pnpm prisma:migrate:dev to push the changes to the database
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output = "./database/generated"
+  moduleFormat = "esm"
+}
