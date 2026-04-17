@@ -1,5 +1,216 @@
 {
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "error"
-  }
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "import",
+    "unicorn",
+    "typescript",
+    "oxc",
+    "vitest",
+    "vue"
+  ],
+  "jsPlugins": ["@nuxt/eslint-plugin"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "error",
+    "style": "warn"
+  },
+  "options": {
+    "typeAware": true
+    // "typeCheck": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.vue"],
+      "rules": {
+        // Don't allow duplicate imports
+        // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md
+        "import/no-duplicates": [
+          "error",
+          {
+            "prefer-inline": true
+          }
+        ],
+        // TODO: Remove this once all errors are fixed
+        "typescript/no-explicit-any": "warn",
+        // TODO: Remove this once all errors are fixed
+        "typescript/no-unsafe-call": "warn",
+        // TODO: Remove this once all errors are fixed
+        "typescript/no-unsafe-member-access": "warn",
+        // TODO: Remove this once all errors are fixed
+        "typescript/no-unsafe-argument": "warn",
+        // TODO: Remove this once all errors are fixed
+        "typescript/no-unsafe-return": "warn",
+        // TODO: Remove this once all errors are fixed
+        "typescript/no-unsafe-assignment": "warn",
+        // TODO: Remove this once all errors are fixed
+        "typescript/no-redundant-type-constituents": "warn",
+        // Allow numbers in templates without explicit casting
+        "typescript/restrict-template-expressions": [
+          "error",
+          {
+            "allowNumber": true
+          }
+        ]
+      }
+    },
+    {
+      "files": ["server/**/*.graphql"],
+      // Enable graphql-specific rules
+      "rules": {
+        "@graphql-eslint/description-style": "error",
+        "@graphql-eslint/known-argument-names": "error",
+        "@graphql-eslint/known-directives": "error",
+        "@graphql-eslint/known-type-names": "error",
+        "@graphql-eslint/lone-schema-definition": "error",
+        "@graphql-eslint/naming-convention": [
+          "error",
+          {
+            "types": "PascalCase",
+            "FieldDefinition": "camelCase",
+            "InputValueDefinition": "camelCase",
+            "Argument": "camelCase",
+            "DirectiveDefinition": "camelCase",
+            "EnumValueDefinition": "UPPER_CASE",
+            "FieldDefinition[parent.name.value=Query]": {
+              "forbiddenPrefixes": ["query", "get"],
+              "forbiddenSuffixes": ["Query"]
+            },
+            "FieldDefinition[parent.name.value=Mutation]": {
+              "forbiddenPrefixes": ["mutation"],
+              "forbiddenSuffixes": ["Mutation"]
+            },
+            "FieldDefinition[parent.name.value=Subscription]": {
+              "forbiddenPrefixes": ["subscription"],
+              "forbiddenSuffixes": ["Subscription"]
+            },
+            "EnumTypeDefinition,EnumTypeExtension": {
+              "forbiddenPrefixes": ["Enum"],
+              "forbiddenSuffixes": ["Enum"]
+            },
+            "InterfaceTypeDefinition,InterfaceTypeExtension": {
+              "forbiddenPrefixes": ["Interface"],
+              "forbiddenSuffixes": ["Interface"]
+            },
+            "UnionTypeDefinition,UnionTypeExtension": {
+              "forbiddenPrefixes": ["Union"],
+              "forbiddenSuffixes": ["Union"]
+            },
+            "ObjectTypeDefinition,ObjectTypeExtension": {
+              "forbiddenPrefixes": ["Type"],
+              "forbiddenSuffixes": ["Type"]
+            }
+          }
+        ],
+        "@graphql-eslint/no-hashtag-description": "error",
+        "@graphql-eslint/no-typename-prefix": "error",
+        "@graphql-eslint/no-unreachable-types": "error",
+        "@graphql-eslint/possible-type-extension": "error",
+        "@graphql-eslint/provided-required-arguments": "error",
+        "@graphql-eslint/require-deprecation-reason": "error",
+        // Enforces descriptions in your type definitions (reduce to warn since there are too many issues right now)
+        "@graphql-eslint/require-description": [
+          "warn",
+          {
+            "types": true,
+            "FieldDefinition": true,
+            "ObjectTypeDefinition": true,
+            "DirectiveDefinition": true
+          }
+        ],
+        // Having an id for a type makes sense (for caching), but the rule is too strict in some cases
+        "@graphql-eslint/strict-id-in-types": "warn",
+        "@graphql-eslint/unique-directive-names": "error",
+        "@graphql-eslint/unique-directive-names-per-location": "error",
+        "@graphql-eslint/unique-enum-value-names": "error",
+        "@graphql-eslint/unique-field-definition-names": "error",
+        "@graphql-eslint/unique-operation-types": "error",
+        "@graphql-eslint/unique-type-names": "error",
+        // Make sure that mutations returns not a scalar type (best practice: have special return type for each mutation)
+        "@graphql-eslint/no-scalar-result-type-on-mutation": "error",
+        // Requires mutation argument to be always called "input" and input type to be called Mutation name + "Input".
+        "@graphql-eslint/input-name": [
+          "error",
+          {
+            "checkInputType": true,
+            // Types name should be pascal case, but mutation names be camel case
+            "caseSensitiveInputType": false
+          }
+        ]
+      },
+      "jsPlugins": ["@graphql-eslint/eslint-plugin"]
+    },
+    {
+      "files": ["{pages,test}/**/*.graphql"],
+      "rules": {
+        "@graphql-eslint/executable-definitions": "error",
+        "@graphql-eslint/fields-on-correct-type": "error",
+        "@graphql-eslint/fragments-on-composite-type": "error",
+        "@graphql-eslint/known-argument-names": "error",
+        "@graphql-eslint/known-directives": "error",
+        "@graphql-eslint/known-fragment-names": "error",
+        "@graphql-eslint/known-type-names": "error",
+        "@graphql-eslint/lone-anonymous-operation": "error",
+        "@graphql-eslint/naming-convention": [
+          "error",
+          {
+            "VariableDefinition": "camelCase",
+            "OperationDefinition": {
+              "style": "PascalCase",
+              "forbiddenPrefixes": ["Query", "Mutation", "Subscription", "Get"],
+              "forbiddenSuffixes": ["Query", "Mutation", "Subscription"]
+            },
+            "FragmentDefinition": {
+              "style": "PascalCase",
+              "forbiddenPrefixes": ["Fragment"],
+              "forbiddenSuffixes": ["Fragment"]
+            }
+          }
+        ],
+        "@graphql-eslint/no-anonymous-operations": "error",
+        "@graphql-eslint/no-deprecated": "error",
+        "@graphql-eslint/no-duplicate-fields": "error",
+        "@graphql-eslint/no-fragment-cycles": "error",
+        "@graphql-eslint/no-undefined-variables": "error",
+        "@graphql-eslint/no-unused-fragments": "error",
+        "@graphql-eslint/no-unused-variables": "error",
+        "@graphql-eslint/one-field-subscriptions": "error",
+        "@graphql-eslint/overlapping-fields-can-be-merged": "error",
+        "@graphql-eslint/possible-fragment-spread": "error",
+        "@graphql-eslint/provided-required-arguments": "error",
+        "@graphql-eslint/require-selections": "error",
+        "@graphql-eslint/scalar-leafs": "error",
+        "@graphql-eslint/selection-set-depth": [
+          "error",
+          {
+            "maxDepth": 7
+          }
+        ],
+        "@graphql-eslint/unique-argument-names": "error",
+        "@graphql-eslint/unique-directive-names-per-location": "error",
+        "@graphql-eslint/unique-fragment-name": "error",
+        "@graphql-eslint/unique-input-field-names": "error",
+        "@graphql-eslint/unique-operation-name": "error",
+        "@graphql-eslint/unique-variable-names": "error",
+        "@graphql-eslint/value-literals-of-correct-type": "error",
+        "@graphql-eslint/variables-are-input-types": "error",
+        "@graphql-eslint/variables-in-allowed-position": "error"
+      },
+      "jsPlugins": ["@graphql-eslint/eslint-plugin"]
+    },
+    {
+      // Test files
+      // https://github.com/vitest-dev/eslint-plugin-vitest
+      "files": ["**/*.test.ts", "**/*.spec.ts"],
+      "rules": {
+        // Test title must be lowercase
+        "vitest/prefer-lowercase-title": "error",
+        // Disable typescript rule for unbound methods (false positives in spies/mocks)
+        // TODO: Should enable special rule for vitest once this is implemented
+        // https://github.com/veritem/eslint-plugin-vitest/issues/2
+        "typescript/unbound-method": "off"
+      }
+    }
+  ]
 }
