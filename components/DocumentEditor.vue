@@ -179,9 +179,11 @@ const { result } = useQuery(
       }
     }
   `),
-  () => ({
-    documentId: props.documentId,
-  }),
+  {
+    variables: () => ({
+      documentId: props.documentId,
+    }),
+  },
 )
 const document = computed(() =>
   useFragment(DocumentDetails, result.value?.userDocument),
