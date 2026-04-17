@@ -74,7 +74,7 @@ export function buildContext({
           },
         })
         // This actually clears all cookies! Probably not what we want
-        setResponseHeader(event, 'Set-Cookie', '')
+        event.res.headers.delete('set-cookie')
         await rawSession.update(() => session)
       }
     },
