@@ -16,10 +16,16 @@ describe('seed', () => {
     const userDocumentService = resolve('UserDocumentService')
     const actual = []
     const expected = []
-    for (const user of await userService.getUsers()) {
-      for (const doc of await userDocumentService
-        .getDocumentsOf(user)
-        .then((ret) => ret.documents)) {
+    const users = await userService.getUsers()
+    const userDocuments = await Promise.all(
+      users.map(async (user) => {
+        return userDocumentService
+          .getDocumentsOf(user)
+          .then((ret) => ret.documents)
+      }),
+    )
+    for (const documents of userDocuments) {
+      for (const doc of documents) {
         actual.push(doc.revisionHash)
         expected.push(userDocumentService.getRevisionHash(doc))
       }
