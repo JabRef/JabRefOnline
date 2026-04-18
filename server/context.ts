@@ -1,12 +1,7 @@
 import type { User, UserSession } from '#auth-utils'
 import type { H3ContextFunctionArgument } from '@as-integrations/h3'
 import { defu } from 'defu'
-import {
-  type H3Event,
-  type SessionConfig,
-  setResponseHeader,
-  useSession,
-} from 'nitro/h3'
+import { type H3Event, type SessionConfig, useSession } from 'nitro/h3'
 
 export interface Context {
   /**
