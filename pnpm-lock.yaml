@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  h3: 1.15.5
+  h3: 1.15.11
 
 patchedDependencies:
   '@azure/static-web-apps-cli':
@@ -36,7 +36,7 @@ importers:
         version: 5.4.0(graphql@16.13.0)
       '@as-integrations/h3':
         specifier: 2.0.3
-        version: 2.0.3(@apollo/server@5.4.0(graphql@16.13.0))(crossws@0.3.5)(graphql-ws@6.0.7(crossws@0.3.5)(graphql@16.13.0)(ws@8.19.0))(graphql@16.13.0)(h3@1.15.5)
+        version: 2.0.3(@apollo/server@5.4.0(graphql@16.13.0))(crossws@0.3.5)(graphql-ws@6.0.7(crossws@0.3.5)(graphql@16.13.0)(ws@8.19.0))(graphql@16.13.0)(h3@1.15.11)
       '@azure/communication-email':
         specifier: 1.1.0
         version: 1.1.0
@@ -485,7 +485,7 @@ packages:
       crossws: ^0.3.0
       graphql: ^16.0.0
       graphql-ws: ^5.0.0 || ^6.0.0
-      h3: 1.15.5
+      h3: 1.15.11
     peerDependenciesMeta:
       graphql-ws:
         optional: true
@@ -5332,8 +5332,8 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  cookie-es@1.2.2:
-    resolution: {integrity: sha512-+W7VmiVINB+ywl1HGXJXmrqkOhpKrIiVZV6tQuV54ZyQC7MMuBt81Vc336GMLoHBq5hV/F9eXgt5Mnx0Rha5Fg==}
+  cookie-es@1.2.3:
+    resolution: {integrity: sha512-lXVyvUvrNXblMqzIRrxHb57UUVmqsSWlxqt3XIjCkUP0wDAf6uicO6KMbEgYrMNtEvWgWHwe42CKxPu9MYAnWw==}
 
   cookie-es@2.0.0:
     resolution: {integrity: sha512-RAj4E421UYRgqokKUmotqAwuplYw15qtdXfY+hGzgCJ/MBjCVZcSoHK/kH9kocfjRjcDME7IiDWR/1WX1TM2Pg==}
@@ -5620,8 +5620,8 @@ packages:
     resolution: {integrity: sha512-N+MeXYoqr3pOgn8xfyRPREN7gHakLYjhsHhWGT3fWAiL4IkAt0iDw14QiiEm2bE30c5XX5q0FtAA3CK5f9/BUg==}
     engines: {node: '>=12'}
 
-  defu@6.1.4:
-    resolution: {integrity: sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==}
+  defu@6.1.7:
+    resolution: {integrity: sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==}
 
   delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
@@ -6520,8 +6520,8 @@ packages:
     resolution: {integrity: sha512-O1Ld7Dr+nqPnmGpdhzLmMTQ4vAsD+rHwMm1NLUmoUFFymBOMKxCCrtDxqdBRYXdeEPEi3SyoR4TizJLQrnKBNA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  h3@1.15.5:
-    resolution: {integrity: sha512-xEyq3rSl+dhGX2Lm0+eFQIAzlDN6Fs0EcC4f7BNUmzaRX/PTzeuM+Tr2lHB8FoXggsQIeXLj8EDVgs5ywxyxmg==}
+  h3@1.15.11:
+    resolution: {integrity: sha512-L3THSe2MPeBwgIZVSH5zLdBBU90TOxarvhK9d04IDY2AmVS8j2Jz2LIWtwsGOU3lu2I5jCN7FNvVfY2+XyF+mg==}
 
   h3@2.0.1-rc.11:
     resolution: {integrity: sha512-2myzjCqy32c1As9TjZW9fNZXtLqNedjFSrdFy2AjFBQQ3LzrnGoDdFDYfC0tV2e4vcyfJ2Sfo/F6NQhO2Ly/Mw==}
@@ -10680,13 +10680,13 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@as-integrations/h3@2.0.3(@apollo/server@5.4.0(graphql@16.13.0))(crossws@0.3.5)(graphql-ws@6.0.7(crossws@0.3.5)(graphql@16.13.0)(ws@8.19.0))(graphql@16.13.0)(h3@1.15.5)':
+  '@as-integrations/h3@2.0.3(@apollo/server@5.4.0(graphql@16.13.0))(crossws@0.3.5)(graphql-ws@6.0.7(crossws@0.3.5)(graphql@16.13.0)(ws@8.19.0))(graphql@16.13.0)(h3@1.15.11)':
     dependencies:
       '@apollo/server': 5.4.0(graphql@16.13.0)
       '@apollo/utils.withrequired': 3.0.0
       crossws: 0.3.5
       graphql: 16.13.0
-      h3: 1.15.5
+      h3: 1.15.11
     optionalDependencies:
       graphql-ws: 6.0.7(crossws@0.3.5)(graphql@16.13.0)(ws@8.19.0)
 
@@ -12946,7 +12946,7 @@ snapshots:
       consola: 3.4.2
       copy-paste: 2.2.0
       debug: 4.4.3
-      defu: 6.1.4
+      defu: 6.1.7
       exsolve: 1.0.8
       fuse.js: 7.1.0
       fzf: 0.5.2
@@ -12986,7 +12986,7 @@ snapshots:
       chokidar: 5.0.0
       consola: 3.4.2
       db0: 0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3)
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       git-url-parse: 16.1.0
       hookable: 5.5.3
@@ -13119,9 +13119,9 @@ snapshots:
       '@nuxt/devtools-kit': 3.2.2(magicast@0.5.2)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       fontless: 0.2.1(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(ioredis@5.10.1)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))
-      h3: 1.15.5
+      h3: 1.15.11
       magic-regexp: 0.10.0
       ofetch: 1.5.1
       pathe: 2.0.3
@@ -13179,7 +13179,7 @@ snapshots:
     dependencies:
       c12: 3.3.3(magicast@0.5.2)
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       errx: 0.1.0
       exsolve: 1.0.8
@@ -13205,7 +13205,7 @@ snapshots:
     dependencies:
       c12: 3.3.3(magicast@0.5.2)
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       errx: 0.1.0
       exsolve: 1.0.8
@@ -13233,13 +13233,13 @@ snapshots:
       '@unhead/vue': 2.1.10(vue@3.5.29(typescript@5.9.3))
       '@vue/shared': 3.5.29
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       devalue: 5.6.3
       errx: 0.1.0
       escape-string-regexp: 5.0.0
       exsolve: 1.0.8
-      h3: 1.15.5
+      h3: 1.15.11
       impound: 1.0.0
       klona: 2.0.6
       mocked-exports: 0.1.1
@@ -13292,7 +13292,7 @@ snapshots:
   '@nuxt/schema@3.21.1':
     dependencies:
       '@vue/shared': 3.5.29
-      defu: 6.1.4
+      defu: 6.1.7
       pathe: 2.0.3
       pkg-types: 2.3.0
       std-env: 3.10.0
@@ -13300,7 +13300,7 @@ snapshots:
   '@nuxt/schema@4.3.1':
     dependencies:
       '@vue/shared': 3.5.29
-      defu: 6.1.4
+      defu: 6.1.7
       pathe: 2.0.3
       pkg-types: 2.3.0
       std-env: 3.10.0
@@ -13321,13 +13321,13 @@ snapshots:
       '@nuxt/kit': 3.21.1(magicast@0.5.2)
       c12: 3.3.3(magicast@0.5.2)
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       estree-walker: 3.0.3
       exsolve: 1.0.8
       fake-indexeddb: 6.2.5
       get-port-please: 3.2.0
-      h3: 1.15.5
+      h3: 1.15.11
       h3-next: h3@2.0.1-rc.11(crossws@0.3.5)
       local-pkg: 1.1.2
       magic-string: 0.30.21
@@ -13395,7 +13395,7 @@ snapshots:
       '@vueuse/shared': 14.2.1(vue@3.5.29(typescript@5.9.3))
       colortranslator: 5.0.0
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       embla-carousel-auto-height: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-auto-scroll: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-autoplay: 8.6.0(embla-carousel@8.6.0)
@@ -13480,7 +13480,7 @@ snapshots:
       autoprefixer: 10.4.27(postcss@8.5.6)
       consola: 3.4.2
       cssnano: 7.1.2(postcss@8.5.6)
-      defu: 6.1.4
+      defu: 6.1.7
       esbuild: 0.27.3
       escape-string-regexp: 5.0.0
       exsolve: 1.0.8
@@ -13541,7 +13541,7 @@ snapshots:
       autoprefixer: 10.4.27(postcss@8.5.6)
       consola: 3.4.2
       cssnano: 7.1.2(postcss@8.5.6)
-      defu: 6.1.4
+      defu: 6.1.7
       esbuild: 0.27.3
       escape-string-regexp: 5.0.0
       exsolve: 1.0.8
@@ -13611,7 +13611,7 @@ snapshots:
       '@vue/compiler-core': 3.5.29
       consola: 3.4.2
       debug: 4.4.3
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       detab: 3.0.2
       github-slugger: 2.0.0
@@ -13654,8 +13654,8 @@ snapshots:
       '@nuxt/devtools-kit': 3.2.2(magicast@0.5.2)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
       consola: 3.4.2
-      defu: 6.1.4
-      h3: 1.15.5
+      defu: 6.1.7
+      h3: 1.15.11
       nuxt-site-config: 3.2.21(magicast@0.5.2)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       pathe: 2.0.3
       pkg-types: 2.3.0
@@ -13717,7 +13717,7 @@ snapshots:
       '@nuxt/devtools-kit': 3.2.2(magicast@0.5.2)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
       chalk: 5.6.2
-      defu: 6.1.4
+      defu: 6.1.7
       fast-xml-parser: 5.4.2
       nuxt-site-config: 3.2.21(magicast@0.5.2)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       ofetch: 1.5.1
@@ -13743,7 +13743,7 @@ snapshots:
       '@storybook-vue/nuxt': 9.1.0-29411911.f34c865(44928f23f73bb5c1744a4c7095158781)
       chalk: 5.6.2
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       get-port-please: 3.2.0
       storybook: 10.2.14(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       ufo: 1.6.3
@@ -15325,7 +15325,7 @@ snapshots:
 
   '@unhead/schema-org@2.0.19(@unhead/vue@2.0.19(vue@3.5.29(typescript@5.9.3)))':
     dependencies:
-      defu: 6.1.4
+      defu: 6.1.7
       ohash: 2.0.11
       ufo: 1.6.3
       unhead: 2.0.19
@@ -16307,7 +16307,7 @@ snapshots:
     dependencies:
       chokidar: 4.0.3
       confbox: 0.2.4
-      defu: 6.1.4
+      defu: 6.1.7
       dotenv: 16.6.1
       exsolve: 1.0.8
       giget: 2.0.0
@@ -16324,7 +16324,7 @@ snapshots:
     dependencies:
       chokidar: 5.0.0
       confbox: 0.2.4
-      defu: 6.1.4
+      defu: 6.1.7
       dotenv: 17.3.1
       exsolve: 1.0.8
       giget: 2.0.0
@@ -16642,7 +16642,7 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cookie-es@1.2.2: {}
+  cookie-es@1.2.3: {}
 
   cookie-es@2.0.0: {}
 
@@ -16901,7 +16901,7 @@ snapshots:
 
   define-lazy-prop@3.0.0: {}
 
-  defu@6.1.4: {}
+  defu@6.1.7: {}
 
   delayed-stream@1.0.0: {}
 
@@ -17574,7 +17574,7 @@ snapshots:
     dependencies:
       consola: 3.4.2
       css-tree: 3.1.0
-      defu: 6.1.4
+      defu: 6.1.7
       esbuild: 0.27.3
       fontaine: 0.8.0
       jiti: 2.6.1
@@ -17707,7 +17707,7 @@ snapshots:
     dependencies:
       citty: 0.1.6
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       node-fetch-native: 1.6.7
       nypm: 0.6.5
       pathe: 2.0.3
@@ -17888,11 +17888,11 @@ snapshots:
     dependencies:
       duplexer: 0.1.2
 
-  h3@1.15.5:
+  h3@1.15.11:
     dependencies:
-      cookie-es: 1.2.2
+      cookie-es: 1.2.3
       crossws: 0.3.5
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       iron-webcrypto: 1.2.1
       node-mock-http: 1.0.4
@@ -18686,9 +18686,9 @@ snapshots:
       clipboardy: 4.0.0
       consola: 3.4.2
       crossws: 0.3.5
-      defu: 6.1.4
+      defu: 6.1.7
       get-port-please: 3.2.0
-      h3: 1.15.5
+      h3: 1.15.11
       http-shutdown: 1.2.2
       jiti: 2.6.1
       mlly: 1.8.0
@@ -19386,7 +19386,7 @@ snapshots:
       croner: 9.1.0
       crossws: 0.3.5
       db0: 0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3)
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       dot-prop: 10.1.0
       esbuild: 0.27.3
@@ -19395,7 +19395,7 @@ snapshots:
       exsolve: 1.0.8
       globby: 16.1.1
       gzip-size: 7.0.0
-      h3: 1.15.5
+      h3: 1.15.11
       hookable: 5.5.3
       httpxy: 0.1.7
       ioredis: 5.10.1
@@ -19547,8 +19547,8 @@ snapshots:
     dependencies:
       '@adonisjs/hash': 9.1.1(argon2@0.44.0)
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
-      defu: 6.1.4
-      h3: 1.15.5
+      defu: 6.1.7
+      h3: 1.15.11
       hookable: 6.0.1
       jose: 6.2.0
       ofetch: 1.5.1
@@ -19583,7 +19583,7 @@ snapshots:
       '@graphql-tools/graphql-file-loader': 8.1.3(graphql@16.13.0)
       '@graphql-tools/load': 8.1.0(graphql@16.13.0)
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
-      defu: 6.1.4
+      defu: 6.1.7
       graphql: 16.13.0
       multimatch: 7.0.0
     transitivePeerDependencies:
@@ -19647,7 +19647,7 @@ snapshots:
       '@unocss/preset-wind3': 66.6.6
       chrome-launcher: 1.2.1
       consola: 3.4.2
-      defu: 6.1.4
+      defu: 6.1.7
       execa: 9.6.1
       image-size: 2.0.2
       magic-string: 0.30.21
@@ -19680,7 +19680,7 @@ snapshots:
     dependencies:
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
       '@unhead/schema-org': 2.0.19(@unhead/vue@2.0.19(vue@3.5.29(typescript@5.9.3)))
-      defu: 6.1.4
+      defu: 6.1.7
       nuxt-site-config: 3.2.21(magicast@0.5.2)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       pathe: 2.0.3
       pkg-types: 2.3.0
@@ -19701,7 +19701,7 @@ snapshots:
     dependencies:
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
       '@unhead/addons': 2.0.19(rollup@4.59.0)
-      defu: 6.1.4
+      defu: 6.1.7
       escape-string-regexp: 5.0.0
       fast-glob: 3.3.3
       image-size: 2.0.2
@@ -19732,7 +19732,7 @@ snapshots:
     dependencies:
       '@nuxt/devtools-kit': 3.2.2(magicast@0.5.2)(vite@7.3.1(@types/node@24.11.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
-      h3: 1.15.5
+      h3: 1.15.11
       nuxt-site-config-kit: 3.2.21(magicast@0.5.2)(vue@3.5.29(typescript@5.9.3))
       pathe: 2.0.3
       pkg-types: 2.3.0
@@ -19761,13 +19761,13 @@ snapshots:
       compatx: 0.2.0
       consola: 3.4.2
       cookie-es: 2.0.0
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
       devalue: 5.6.3
       errx: 0.1.0
       escape-string-regexp: 5.0.0
       exsolve: 1.0.8
-      h3: 1.15.5
+      h3: 1.15.11
       hookable: 5.5.3
       ignore: 7.0.5
       impound: 1.0.0
@@ -20816,12 +20816,12 @@ snapshots:
 
   rc9@2.1.2:
     dependencies:
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
 
   rc9@3.0.0:
     dependencies:
-      defu: 6.1.4
+      defu: 6.1.7
       destr: 2.0.5
 
   rc@1.2.8:
@@ -20974,7 +20974,7 @@ snapshots:
       '@vueuse/core': 14.2.1(vue@3.5.29(typescript@5.9.3))
       '@vueuse/shared': 14.2.1(vue@3.5.29(typescript@5.9.3))
       aria-hidden: 1.2.6
-      defu: 6.1.4
+      defu: 6.1.7
       ohash: 2.0.11
       vue: 3.5.29(typescript@5.9.3)
     transitivePeerDependencies:
@@ -21268,7 +21268,7 @@ snapshots:
 
   serve-placeholder@2.0.2:
     dependencies:
-      defu: 6.1.4
+      defu: 6.1.7
 
   serve-static@1.16.2:
     dependencies:
@@ -22105,7 +22105,7 @@ snapshots:
       anymatch: 3.1.3
       chokidar: 5.0.0
       destr: 2.0.5
-      h3: 1.15.5
+      h3: 1.15.11
       lru-cache: 11.2.6
       node-fetch-native: 1.6.7
       ofetch: 1.5.1
@@ -22125,7 +22125,7 @@ snapshots:
   untyped@2.0.0:
     dependencies:
       citty: 0.1.6
-      defu: 6.1.4
+      defu: 6.1.7
       jiti: 2.6.1
       knitwork: 1.3.0
       scule: 1.3.0
