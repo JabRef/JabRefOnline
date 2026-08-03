@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import type { WatchQueryFetchPolicy } from '@apollo/client/core'
+import type { WatchQueryFetchPolicy } from '@apollo/client'
 import { useQuery } from '@vue/apollo-composable'
 import { gql } from '~/apollo'
 import { useUiStore } from '~/store'
@@ -61,12 +61,12 @@ const { result, fetchMore } = useQuery(
     }
   `),
   () => ({
-    groupId: ui.selectedGroupId,
-    query: ui.activeSearchQuery,
-    first: ui.activeSearchQuery ? null : FIRST,
-    after: '',
-  }),
-  () => ({
+    variables: {
+      groupId: ui.selectedGroupId,
+      query: ui.activeSearchQuery,
+      first: ui.activeSearchQuery ? null : FIRST,
+      after: '',
+    },
     fetchPolicy: ui.activeSearchQuery
       ? ('no-cache' as WatchQueryFetchPolicy)
       : ('cache-first' as WatchQueryFetchPolicy),
