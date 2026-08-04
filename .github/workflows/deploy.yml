@@ -93,7 +93,7 @@ jobs:
 
       - name: Create & Link Function App
         run: |
-          pip install azure-identity==1.25.3 azure-mgmt-core==1.4.0 azure-mgmt-web==7.3.1 azure-mgmt-storage==25.1.0 azure-mgmt-applicationinsights==4.1.0 azure-mgmt-redis==14.5.0 azure-mgmt-communication==3.0.0
+          pip install azure-identity==1.25.3 azure-mgmt-core==1.6.0 azure-mgmt-web==7.3.1 azure-mgmt-storage==25.1.0 azure-mgmt-applicationinsights==4.1.0 azure-mgmt-redis==14.5.0 azure-mgmt-communication==3.0.0
           python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }} -v
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
