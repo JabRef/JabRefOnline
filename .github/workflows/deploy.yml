@@ -13,7 +13,7 @@ jobs:
   build_and_deploy:
     name: Build & Deploy to ${{ matrix.environment }}
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
@@ -22,21 +22,24 @@ jobs:
           - environment: Test
             url: https://dev.www.jabref.org
             deployment_environment: dev
+            site_url_setting: preview
           - environment: Staging
             url: https://staging.www.jabref.org
             deployment_environment: staging
+            site_url_setting: preview
           - environment: Production
             url: https://www.jabref.org
             deployment_environment: default
+            site_url_setting: production
 
     environment:
       name: ${{ matrix.environment }}
       url: ${{ matrix.url }}
 
     env:
-      DATABASE_URL: ${{ matrix.environment == 'Test' &&  secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
-      # renovate: datasource=python-version depName=python
-      PYTHON_VERSION: '3.14'
+      RESOURCE_GROUP: JabRefOnline
+      STATIC_SITE_NAME: jabref-online
+      DATABASE_URL: ${{ matrix.environment == 'Test' && secrets.AZURE_TEST_DATABASE_URL || secrets.AZURE_DATABASE_URL }}
 
     steps:
       - name: Checkout
@@ -73,6 +76,39 @@ jobs:
         env:
           NUXT_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }} # Needed for prerending
 
+      - name: Cleanup deployment
+        run: |
+          # Nuxt/nitro can create symlinks to replicate parts of node_modules.
+          # Replace symlinks with real copies so the deploy payload is self-contained.
+          python - <<'PY'
+          import shutil
+          from pathlib import Path
+
+          root = Path('.output/server')
+          for path in sorted(root.rglob('*')):
+              if path.is_symlink():
+                  target = path.resolve()
+                  path.unlink()
+                  if target.is_dir():
+                      shutil.copytree(target, path)
+                  else:
+                      path.parent.mkdir(parents=True, exist_ok=True)
+                      shutil.copy2(target, path)
+          PY
+
+      - name: Deploy with Azure Static Web Apps action
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9 # v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+          repo_token: ${{ github.token }}
+          action: 'upload'
+          deployment_environment: ${{ matrix.deployment_environment }}
+          app_location: '.output/public'
+          api_location: '.output/server'
+          skip_app_build: true
+          skip_api_build: true
+
       - name: Login to Azure
         uses: Azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
         with:
@@ -80,55 +116,26 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Deploy Web App
+      - name: Configure Static Web App environment settings
         run: |
-          pnpm swa deploy .output\public --env ${{ matrix.deployment_environment }}
-        env:
-          SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+          redis_host=$(az redis show --name jabref --resource-group "$RESOURCE_GROUP" --query hostName --output tsv)
+          redis_password=$(az redis list-keys --name jabref --resource-group "$RESOURCE_GROUP" --query primaryKey --output tsv)
+          email_connection_string=$(az communication list-key --name JabRefCommunication --resource-group "$RESOURCE_GROUP" --query primaryConnectionString --output tsv)
 
-      - name: Install Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Create & Link Function App
-        run: |
-          pip install azure-identity==1.25.3 azure-mgmt-core==1.6.0 azure-mgmt-web==7.3.1 azure-mgmt-storage==25.1.0 azure-mgmt-applicationinsights==4.1.0 azure-mgmt-redis==14.5.0 azure-mgmt-communication==3.0.0
-          python .github\scripts\deploy.py --env ${{ matrix.deployment_environment }} -v
-        env:
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
-          AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
-          AZURE_DATABASE_URL: ${{ env.DATABASE_URL }}
-
-      - name: Cleanup deployment
-        run: |
-          # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
-          # if multiple versions of the same package are used.
-          # Replace symlinks with real copies so the deploy zip is self-contained
-          # However, Azure has problems with symlinks:
-          # - https://github.com/Azure/webapps-deploy/issues/54
-          # - https://github.com/Azure/functions-action/issues/332
-          # Therefore, replace all symlinks by the actual files
-          $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
-          foreach ($link in $links)
-          {
-              $source = $link.Target;
-              $destination = $link.FullName;
-
-              Remove-Item $destination -Force
-              Copy-Item -Path $source -Destination $destination -Force -Recurse
-          }
-
-      - name: Deploy Function App
-        uses: Azure/functions-action@bc63708cc6539760eea18d8a7de4ce8ef5fdf593 # v1.5.6
-        with:
-          app-name: jabref-function-${{ matrix.deployment_environment }}
-          package: .output/server
+          az staticwebapp appsettings set --name "$STATIC_SITE_NAME" --resource-group "$RESOURCE_GROUP" --environment-name "${{ matrix.deployment_environment }}" --setting-names \
+            "NODE_ENV=production" \
+            "NUXT_DATABASE_URL=$DATABASE_URL" \
+            "NUXT_SESSION_PASSWORD=${{ secrets.AZURE_SESSION_SECRET }}" \
+            "NUXT_GITHUB_REPO_TOKEN=${{ secrets.GITHUBS_REPO_TOKEN }}" \
+            "NUXT_REDIS_HOST=$redis_host" \
+            "NUXT_REDIS_PORT=6380" \
+            "NUXT_REDIS_PASSWORD=$redis_password" \
+            "NUXT_EMAIL_CLIENT=$email_connection_string" \
+            "NUXT_SITE_URL=${{ matrix.site_url_setting }}"
 
       - name: Check HTTP status
         run: |
-          Start-Sleep -Seconds 30
+          sleep 30
           curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }} || true
           curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ matrix.url }}/api || true
         # The api returns 400 status code for some reason
