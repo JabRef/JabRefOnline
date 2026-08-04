@@ -123,10 +123,8 @@ if ($Delete) {
     }
 
     foreach ($item in $toDelete) {
-      # Delete Function App if there is one linked to the environment
-      if ($item.LinkedBackends) {
-        az functionapp delete --ids $item.LinkedBackends
-      }
+      # Delete Function App
+      az functionapp delete --ids $item.LinkedBackends
 
       # Delete test database
       az postgres flexible-server db delete --server-name jabrefdb --resource-group $ResourceGroup --database-name "postgres_test_$($item.Name)" --yes

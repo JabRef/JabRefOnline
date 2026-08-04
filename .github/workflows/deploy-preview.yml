@@ -1,6 +1,8 @@
 name: CD Azure (preview)
 
 on:
+  # Uncomment for testing:
+  # pull_request:
   pull_request_target:
     types: [opened, synchronize, reopened, labeled]
   workflow_dispatch:
@@ -18,12 +20,12 @@ jobs:
   preview:
     name: Build & Deploy to preview
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     env:
       PREVIEW_NAME: ${{ github.event.pull_request.number || github.event.inputs.preview_name }}
-      RESOURCE_GROUP: JabRefOnline
-      STATIC_SITE_NAME: jabref-online
+      # renovate: datasource=python-version depName=python
+      PYTHON_VERSION: '3.14'
 
     steps:
       # We could also add these checks to a job-wide if condition, to skip the workflow if its unsecure to run.
@@ -63,79 +65,92 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Deploy Web App
+        id: deploy_web
+        run: |
+          # Workaround for https://github.com/Azure/static-web-apps-cli/issues/557 and https://github.com/Azure/static-web-apps-cli/issues/565
+          $output = pnpm swa deploy .output\public --env $env:PREVIEW_NAME --verbose=silly 2>&1 | Out-String
+          Write-Host $output
+          $match = $output | Select-String -Pattern 'Project deployed to (?<url>.*) '
+          if ($match -eq $null) { exit 1 }
+          $url = $match.Matches[0].Groups['url'].Value
+          echo "url=$url" >> $env:GITHUB_OUTPUT
+        env:
+          SWA_CLI_DEPLOYMENT_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
+
+      - name: Install Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
       - name: Create test database on Azure
         id: create_db
         run: |
-          name="postgres_test_${PREVIEW_NAME}"
-          pwd=$(az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken)
-          connection_string="postgresql://Github:${pwd}@${DB_NAME}.postgres.database.azure.com:5432/${name}?sslmode=require"
+          $name = "postgres_test_$env:PREVIEW_NAME"
+          $pwd = az account get-access-token --resource-type oss-rdbms --output tsv --query accessToken
+          # az postgres flexible-server db create --server-name jabrefdb --resource-group JabRefOnline --database-name $name --charset utf8 --collation en_US.utf8
+          # For some reason the public schema is not created automatically or without the default permissions, so we need to do it manually
+          # TODO: Remove this workaround once https://github.com/Azure/azure-cli/issues/26772 is fixed
+          # We also need to manually install an old version of rdbms due to https://github.com/Azure/azure-cli/issues/25067
+          # az extension add --name rdbms-connect --version 1.0.3 --debug
+          # az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "ALTER DATABASE $name OWNER TO azure_pg_admin; create schema public;" --output table
+          # az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "grant usage on schema public to public; grant create on schema public to public;" --output table
+          # az postgres flexible-server execute --name jabrefdb -u "Github" -p "$pwd" --database-name $name -q "SELECT schema_name FROM information_schema.schemata;" --output table
+          # Login to the database using the Github user
+          $connection_string = "postgresql://Github:$pwd@$($env:DB_NAME).postgres.database.azure.com:5432/$($name)?sslmode=require"
           echo "::add-mask::$connection_string"
-          echo "db_url=$connection_string" >> "$GITHUB_OUTPUT"
-
-          NUXT_DATABASE_URL="$connection_string" pnpm prisma:migrate:reset --force
-          NUXT_DATABASE_URL="$connection_string" pnpm prisma:seed
+          echo "db_url=$connection_string" >> $env:GITHUB_OUTPUT
+          # Finally, run the migrations (this also creates the db)
+          $Env:NUXT_DATABASE_URL = $connection_string
+          pnpm prisma:migrate:reset --force
+          pnpm prisma:seed
         env:
           DB_NAME: ${{ secrets.AZURE_DATABASE_NAME }}
 
+      - name: Create & Link Function App
+        run: |
+          pip install azure-identity==1.25.3 azure-mgmt-core==1.6.0 azure-mgmt-web==7.3.1 azure-mgmt-storage==25.1.0 azure-mgmt-applicationinsights==4.1.0 azure-mgmt-redis==14.5.0 azure-mgmt-communication==3.0.0
+          python .github\scripts\deploy.py --env $env:PREVIEW_NAME -v
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_GITHUB_REPO_TOKEN: ${{ secrets.GITHUBS_REPO_TOKEN }}
+          AZURE_SESSION_PASSWORD: ${{ secrets.AZURE_SESSION_SECRET }}
+          AZURE_DATABASE_URL: ${{ steps.create_db.outputs.db_url }}
+
       - name: Cleanup deployment
         run: |
-          # Nuxt/nitro can create symlinks to replicate parts of node_modules.
-          # Replace symlinks with real copies so the deploy payload is self-contained.
-          python - <<'PY'
-          import shutil
-          from pathlib import Path
+          # Nuxt/nitro creates symlinks to replicate parts of the node_modules folder
+          # if multiple versions of the same package are used.
+          # Replace symlinks with real copies so the deploy zip is self-contained
+          # However, Azure has problems with symlinks:
+          # - https://github.com/Azure/webapps-deploy/issues/54
+          # - https://github.com/Azure/functions-action/issues/332
+          # Therefore, replace all symlinks by the actual files
+          $links = Get-ChildItem -Path .output\server -Attributes ReparsePoint -Recurse
+          foreach ($link in $links)
+          {
+              $source = $link.Target;
+              $destination = $link.FullName;
 
-          root = Path('.output/server')
-          for path in sorted(root.rglob('*')):
-              if path.is_symlink():
-                  target = path.resolve()
-                  path.unlink()
-                  if target.is_dir():
-                      shutil.copytree(target, path)
-                  else:
-                      path.parent.mkdir(parents=True, exist_ok=True)
-                      shutil.copy2(target, path)
-          PY
+              Remove-Item $destination -Force
+              Copy-Item -Path $source -Destination $destination -Force -Recurse
+          }
 
-      - name: Deploy with Azure Static Web Apps action
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9 # v1
+      - name: Deploy Function App
+        uses: Azure/functions-action@bc63708cc6539760eea18d8a7de4ce8ef5fdf593 # v1.5.6
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_PEBBLE_0224C3803 }}
-          repo_token: ${{ github.token }}
-          action: 'upload'
-          deployment_environment: ${{ env.PREVIEW_NAME }}
-          app_location: '.output/public'
-          api_location: '.output/server'
-          skip_app_build: true
-          skip_api_build: true
-
-      - name: Configure Static Web App environment settings
-        run: |
-          redis_host=$(az redis show --name jabref --resource-group "$RESOURCE_GROUP" --query hostName --output tsv)
-          redis_password=$(az redis list-keys --name jabref --resource-group "$RESOURCE_GROUP" --query primaryKey --output tsv)
-          email_connection_string=$(az communication list-key --name JabRefCommunication --resource-group "$RESOURCE_GROUP" --query primaryConnectionString --output tsv)
-
-          az staticwebapp appsettings set --name "$STATIC_SITE_NAME" --resource-group "$RESOURCE_GROUP" --environment-name "$PREVIEW_NAME" --setting-names \
-            "NODE_ENV=production" \
-            "NUXT_DATABASE_URL=${{ steps.create_db.outputs.db_url }}" \
-            "NUXT_SESSION_PASSWORD=${{ secrets.AZURE_SESSION_SECRET }}" \
-            "NUXT_GITHUB_REPO_TOKEN=${{ secrets.GITHUBS_REPO_TOKEN }}" \
-            "NUXT_REDIS_HOST=$redis_host" \
-            "NUXT_REDIS_PORT=6380" \
-            "NUXT_REDIS_PASSWORD=$redis_password" \
-            "NUXT_EMAIL_CLIENT=$email_connection_string" \
-            "NUXT_SITE_URL=preview"
+          app-name: jabref-function-${{ env.PREVIEW_NAME }}
+          package: .output/server
 
       - name: Check HTTP status
         run: |
-          sleep 30
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.builddeploy.outputs.static_web_app_url }} || true
-          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.builddeploy.outputs.static_web_app_url }}/api || true
+          Start-Sleep -Seconds 30
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.url }} || true
+          curl -s -w 'Establish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' ${{ steps.deploy_web.outputs.url }}/api || true
         # The api returns 400 status code for some reason
         # uses: gerdemann/http-status-code@1.0.0
         # with:
-        #   url: ${{ steps.builddeploy.outputs.static_web_app_url }}/api
+        #   url: ${{ steps.deploy_web.outputs.url }}/api
         #   code: 200
         #   timeout: 300 # initial warm up can take quite some time
         #   interval: 30
@@ -145,13 +160,13 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
         with:
           message: |
-            Deployed ${{ github.sha }} to ${{ steps.builddeploy.outputs.static_web_app_url }}
+            Deployed ${{ github.sha }} to ${{ steps.deploy_web.outputs.url }}
 
       - name: Run E2E tests
         run: pnpm test:e2e
         env:
-          TEST_URL: ${{ steps.builddeploy.outputs.static_web_app_url }}
+          TEST_URL: ${{ steps.deploy_web.outputs.url }}
           # The tests need these tokens to run, but their actual value should not matter
           NUXT_GITHUB_REPO_TOKEN: 'SIGNAL_TO_RUN_TEST'
           # Re-enable when email sending in the test environment is fixed
-          # NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'
+          #NUXT_EMAIL_CLIENT: 'SIGNAL_TO_RUN_TEST'
