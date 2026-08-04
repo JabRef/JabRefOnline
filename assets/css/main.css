@@ -70,6 +70,20 @@
   --color-error-900: var(--color-red-900);
 }
 
+@layer base {
+  :root {
+    --surface-base: #ffffff;
+    --surface-raised: #f0f2f8;
+    --surface-overlay: #e8ebf3;
+  }
+
+  .dark {
+    --surface-base: #12121e;
+    --surface-raised: #1a1a2e;
+    --surface-overlay: #222238;
+  }
+}
+
 @layer utilities {
   .flip-horizontal {
     --tw-scale-x: -1;
