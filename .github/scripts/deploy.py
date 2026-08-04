@@ -114,26 +114,17 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
     # function_app_slot = poller_function_app_slot.result()
     # print("Created function app slot:\n{}".format(function_app_slot))
 
-    # Detach and delete already attached function apps.
-    # If the desired function app is already linked to this environment, keep and reuse it.
-    linked_function_apps = list(
+    # Detach and delete already attached function apps
+    linked_function_apps = (
         web_client.static_sites.get_user_provided_function_apps_for_static_site_build(
             resource_group_name=GROUP_NAME,
             name=STATIC_SITE,
             environment_name=environment_name,
         )
     )
-    already_linked = False
     for app in linked_function_apps:
-        logger.debug(f"{app}")
-        if app.name == function_app_name:
-            already_linked = True
-            logger.info(
-                f"Function app {app.name} is already linked to {environment_name}; reusing existing link"
-            )
-            continue
-
         logger.info(f"Detaching and deleting function app {app.name}")
+        logger.debug(f"{app}")
         try:
             web_client.static_sites.detach_user_provided_function_app_from_static_site_build(
                 resource_group_name=GROUP_NAME,
@@ -213,12 +204,6 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
     function_app = poller_function_app.result()
     logger.info(f"Created function app: {function_app.name}")
     logger.debug(f"{function_app}")
-
-    if already_linked:
-        logger.info(
-            f"Function app {function_app_name} is already linked to {environment_name}; skipping link step"
-        )
-        return
 
     # Attach new function app
     poller_link = web_client.static_sites.begin_register_user_provided_function_app_with_static_site_build(
