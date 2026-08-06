@@ -28,7 +28,7 @@ export interface EmailService {
 }
 
 @injectable()
-export class AzureEmailService implements EmailService {
+class AzureEmailService implements EmailService {
   async sendEmail(
     to: EmailAddress | EmailAddress[],
     subject: string,

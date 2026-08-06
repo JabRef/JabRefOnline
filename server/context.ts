@@ -1,7 +1,7 @@
 import type { User, UserSession } from '#auth-utils'
 import type { H3ContextFunctionArgument } from '@as-integrations/h3'
 import { defu } from 'defu'
-import type { H3Event, SessionConfig } from 'h3'
+import { type H3Event, type SessionConfig, useSession } from 'nitro/h3'
 
 export interface Context {
   /**
@@ -69,7 +69,7 @@ export function buildContext({
           },
         })
         // This actually clears all cookies! Probably not what we want
-        setResponseHeader(event, 'Set-Cookie', '')
+        event.res.headers.delete('set-cookie')
         await rawSession.update(() => session)
       }
     },

@@ -39,7 +39,7 @@ export default defineEventHandler(async () => {
     // eslint-disable-next-line no-console
     console.debug(response)
     throw createError({
-      statusCode: 500,
+      status: 500,
       message: 'Failed to fetch latest release from GitHub',
     })
   }
