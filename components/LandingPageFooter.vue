@@ -67,20 +67,22 @@
             </t-nuxtlink>
           </li>
           <li class="py-1">
-            <t-nuxtlink
-              class="no-underline text-sm text-highlighted hover:text-primary-800"
+            <button
+              type="button"
+              class="cursor-pointer border-0 bg-transparent p-0 text-sm text-highlighted hover:text-primary-800"
               @click="showLegalNotices = true"
             >
               Legal Notices
-            </t-nuxtlink>
+            </button>
           </li>
           <li class="py-1">
-            <t-nuxtlink
-              class="no-underline text-sm text-highlighted hover:text-primary-800"
+            <button
+              type="button"
+              class="cursor-pointer border-0 bg-transparent p-0 text-sm text-highlighted hover:text-primary-800"
               @click="showPrivacyPolicy = true"
             >
               Privacy Policy
-            </t-nuxtlink>
+            </button>
           </li>
         </ul>
       </div>
