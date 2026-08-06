@@ -7,7 +7,7 @@
       v-if="showLogo"
       class="flex-1 flex flex-row items-center h-20 border-b mx-3 md:mx-6"
     >
-      <jabref-logo class="w-10 flex-none" />
+      <jabref-logo class="w-12 flex-none" />
       <span
         class="ml-3 flex-1 text-highlighted text-2xl font-semibold lg:inline-block hidden"
       >
@@ -137,11 +137,30 @@
       </div>
     </nav>
 
-    <!-- Empty stopper for proper alignment -->
+    <!-- Right spacer — also holds the GitHub link to keep menu centred -->
     <div
       v-show="!isSmallDisplay"
-      class="flex-1 mx-3 md:mx-6"
-    />
+      class="flex-1 flex items-center justify-end mx-3 md:mx-6"
+    >
+      <a
+        v-if="showGithubLink"
+        href="https://github.com/JabRef/jabref"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-1.5 text-dimmed hover:text-primary-600 transition-colors"
+        aria-label="JabRef on GitHub"
+      >
+        <Icon
+          name="ri:github-fill"
+          class="text-2xl"
+        />
+        <span
+          v-if="stars"
+          class="text-sm font-medium"
+          >{{ stars }}</span
+        >
+      </a>
+    </div>
   </nav>
 </template>
 
@@ -156,7 +175,7 @@ const isHamburgerShown = ref(false)
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
 
-defineProps({
+const props = defineProps({
   showLogo: {
     type: Boolean,
     default: false,
@@ -169,7 +188,15 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  showGithubLink: {
+    type: Boolean,
+    default: false,
+  },
 })
+
+const { stars } = props.showGithubLink
+  ? useGitHubStars()
+  : { stars: ref<string | null>(null) }
 
 const { resolveClient } = useApolloClient()
 
