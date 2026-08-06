@@ -7,7 +7,7 @@
       <div class="relative w-auto my-6 mx-auto max-w-3xl">
         <!--content-->
         <div
-          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-hidden focus:outline-hidden"
+          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white text-slate-900 outline-hidden focus:outline-hidden"
         >
           <!--header-->
           <div
@@ -17,11 +17,11 @@
               {{ header }}
             </h3>
             <button
-              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-hidden focus:outline-hidden"
+              class="p-1 ml-auto bg-transparent border-0 text-black opacity-80 hover:opacity-100 float-right text-3xl leading-none font-semibold outline-hidden focus:outline-hidden"
               @click="showModal = false"
             >
               <span
-                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-hidden focus:outline-hidden"
+                class="bg-transparent text-black h-6 w-6 text-2xl block outline-hidden focus:outline-hidden"
               >
                 ×
               </span>
