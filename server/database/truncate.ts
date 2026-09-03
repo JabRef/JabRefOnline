@@ -19,22 +19,27 @@ export async function truncate(): Promise<void> {
   const dbSchemaName = 'public'
 
   try {
-    for (const { tablename } of (await prisma.$queryRawUnsafe(
+    const tables = (await prisma.$queryRawUnsafe(
       `SELECT tablename::text FROM pg_tables WHERE schemaname='${dbSchemaName}';`,
-    )) as any) {
-      await prisma.$queryRawUnsafe(
-        `TRUNCATE TABLE "${dbSchemaName}"."${tablename as string}" CASCADE;`,
-      )
-    }
-    for (const { relname } of (await prisma.$queryRawUnsafe(
+    )) as any
+    await Promise.all(
+      tables.map(({ tablename }: { tablename: string }) => {
+        return prisma.$queryRawUnsafe(
+          `TRUNCATE TABLE "${dbSchemaName}"."${tablename}" CASCADE;`,
+        )
+      }),
+    )
+
+    const sequences = (await prisma.$queryRawUnsafe(
       `SELECT c.relname::text FROM pg_class AS c JOIN pg_namespace AS n ON c.relnamespace = n.oid WHERE c.relkind='S' AND n.nspname='${dbSchemaName}';`,
-    )) as any) {
-      await prisma.$queryRawUnsafe(
-        `ALTER SEQUENCE "${dbSchemaName}"."${
-          relname as string
-        }" RESTART WITH 1;`,
-      )
-    }
+    )) as any
+    await Promise.all(
+      sequences.map(({ relname }: { relname: string }) => {
+        return prisma.$queryRawUnsafe(
+          `ALTER SEQUENCE "${dbSchemaName}"."${relname}" RESTART WITH 1;`,
+        )
+      }),
+    )
   } finally {
     await prisma.$disconnect()
   }

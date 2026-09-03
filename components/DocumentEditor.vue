@@ -105,8 +105,7 @@
 
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
-import type { PersonFullDetailsFragment } from '~/apollo'
-import { gql, useFragment } from '~/apollo'
+import { gql, useFragment, type PersonFullDetailsFragment } from '~/apollo'
 import Tags from './tagify.vue'
 
 const PersonFullDetails = gql(/* GraphQL */ `
@@ -180,9 +179,11 @@ const { result } = useQuery(
       }
     }
   `),
-  () => ({
-    documentId: props.documentId,
-  }),
+  {
+    variables: () => ({
+      documentId: props.documentId,
+    }),
+  },
 )
 const document = computed(() =>
   useFragment(DocumentDetails, result.value?.userDocument),
