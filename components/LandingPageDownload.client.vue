@@ -4,7 +4,7 @@
     class="bg-primary-50 bg-opacity-50"
   >
     <div class="container mx-auto px-4 pt-6 pb-4 md:py-16">
-      <div class="flex flex-wrap flex-col content-center">
+      <div class="flex flex-wrap flex-col content-center text-primary-900">
         <h1 class="text-center mb-3 text-5xl">Try it now</h1>
         <h3 class="text-center mb-12 text-3xl">
           JabRef is free and works across all your devices.
