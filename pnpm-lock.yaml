@@ -200,6 +200,9 @@ importers:
       '@nuxtjs/storybook':
         specifier: npm:@nuxtjs/storybook@nightly
         version: 9.1.0-29411911.f34c865(ceb7513953d2df5aca64efb7ae96b990)
+      '@storybook/addon-themes':
+        specifier: 10.3.6
+        version: 10.3.6(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@tailwindcss/forms':
         specifier: 0.5.11
         version: 0.5.11(tailwindcss@4.2.4)
@@ -3408,6 +3411,11 @@ packages:
       storybook: ~10.0.2
       vite: ^5.2.0 || ^6.0.0 || ^7.0.0
       vue: ^3.4.0
+
+  '@storybook/addon-themes@10.3.6':
+    resolution: {integrity: sha512-/6lPU36+nDQzoDJqwy5BrAO0zFHOHDXn6hy/aq2aKF/RTS54+KrA0fdv0sxTssaBo5tjqZ4jKs60hB0iRWKkFA==}
+    peerDependencies:
+      storybook: ^10.3.6
 
   '@storybook/builder-vite@9.1.16':
     resolution: {integrity: sha512-CyvYA5w1BKeSVaRavKi+euWxLffshq0v9Rz/5E9MKCitbYtjwkDH6UMIYmcbTs906mEBuYqrbz3nygDP0ppodw==}
@@ -10022,6 +10030,9 @@ packages:
   vue-component-type-helpers@3.3.11:
     resolution: {integrity: sha512-LwcxzeliO9fkQcpJG0PoX8X5kmAhKmH9wkpDLxNabwzkQ9Zeib2YVHwFV4pcWmMLfXVfjr/dSV+DaJ3cIPgSNA==}
 
+  vue-component-type-helpers@3.3.14:
+    resolution: {integrity: sha512-Pq3+OnbCiPCHk0R7KSZrx+j/XXaUn2kSQ1epxq60w8CPbByLjC1EJgV51n4WY851sTXUVzsNMuitywdkdVyKjA==}
+
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
     engines: {node: '>=12'}
@@ -14181,6 +14192,11 @@ snapshots:
       - vue-tsc
       - yaml
 
+  '@storybook/addon-themes@10.3.6(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+    dependencies:
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      ts-dedent: 2.2.0
+
   '@storybook/builder-vite@9.1.16(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@7.3.1(@types/node@24.13.3)(jiti@2.7.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))':
     dependencies:
       '@storybook/csf-plugin': 9.1.16(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
@@ -14226,7 +14242,7 @@ snapshots:
       storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       type-fest: 2.19.0
       vue: 3.5.33(typescript@5.9.3)
-      vue-component-type-helpers: 3.3.11
+      vue-component-type-helpers: 3.3.14
 
   '@stylistic/eslint-plugin@5.9.0(eslint@10.0.2(jiti@2.7.0))':
     dependencies:
@@ -21913,6 +21929,8 @@ snapshots:
   vue-component-type-helpers@2.2.12: {}
 
   vue-component-type-helpers@3.3.11: {}
+
+  vue-component-type-helpers@3.3.14: {}
 
   vue-demi@0.14.10(vue@3.5.33(typescript@5.9.3)):
     dependencies:
