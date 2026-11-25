@@ -3,6 +3,12 @@ import { useGitHubStars } from '../composables/useGitHubStars'
 import NavBar from './NavBar.vue'
 
 useGitHubStars().value = 4912
+
+const links = [
+  { label: 'Features', to: '#features', active: false },
+  { label: 'Download', to: '#download', active: false },
+  { label: 'News', to: 'https://blog.jabref.org/' },
+]
 </script>
 
 <template>
@@ -36,6 +42,14 @@ useGitHubStars().value = 4912
         :show-logo="true"
         :show-search-bar="false"
         :show-github-link="true"
+      />
+    </Story>
+    <Story title="With Links">
+      <NavBar
+        :show-logo="true"
+        :show-search-bar="false"
+        :show-github-link="true"
+        :links="links"
       />
     </Story>
     <Story title="Custom Navigation">
