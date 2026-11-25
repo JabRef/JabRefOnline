@@ -262,10 +262,9 @@ export class DocumentResolver {
       .sort((a, b) => a.position - b.position)
       .map((contributor) => {
         return contributor.entity.type === 'PERSON'
-          ? {
-              ...contributor.entity,
-              __typename: 'Person',
-            }
+          ? Object.assign({}, contributor.entity, {
+              __typename: 'Person' as const,
+            })
           : {
               id: contributor.entity.id,
               name: contributor.entity.name ?? '',

@@ -1,16 +1,16 @@
 <template>
   <div
-    class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+    class="min-h-screen flex items-center justify-center bg-muted py-12 px-4 sm:px-6 lg:px-8"
   >
     <div class="w-full space-y-8 -mt-20">
       <div>
         <slot name="header" />
       </div>
       <div
-        class="shadow-xl sm:rounded-md sm:overflow-hidden container mx-auto flex sm:flex-nowrap flex-wrap max-w-4xl bg-white"
+        class="shadow-xl sm:rounded-md sm:overflow-hidden container mx-auto flex sm:flex-nowrap flex-wrap max-w-4xl bg-default"
       >
         <div
-          class="w-5/12 overflow-hidden hidden md:flex px-5 pt-4 pb-14 items-center justify-start relative bg-primary-50"
+          class="w-5/12 overflow-hidden hidden md:flex px-5 pt-4 pb-14 items-center justify-start relative bg-primary/20"
         >
           <slot name="side" />
           <div

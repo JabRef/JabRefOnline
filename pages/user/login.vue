@@ -149,7 +149,7 @@ const onSubmit = handleSubmit(async (values) => {
   // Reset errors
   otherError.value = ''
 
-  const result = await loginUser({ input: values })
+  const result = await loginUser({ variables: { input: values } })
   if (result?.data?.login?.__typename === 'UserReturned') {
     // Update user info
     const { fetch } = useUserSession()

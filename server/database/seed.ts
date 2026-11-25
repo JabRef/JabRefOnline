@@ -627,104 +627,112 @@ async function seedInternal(prisma: PrismaClient): Promise<void> {
   })
 
   // Assign documents to user
-  for (const document of [
-    'ckondtcaf000101mh7x9g4gia',
-    'ckondtpcn000301mhg9lvaqlu',
-    'ckondu6bh000501mh2o2tf00u',
-    'ckonduhjk000701mh12wia4nf',
-    'ckr9eqap6000301mk20hycjqb',
-    'ckr9eq4oc000101mk1ga9bxnt',
-  ]) {
-    await prisma.userDocument.update({
-      where: {
-        id: document,
-      },
-      data: {
-        users: {
-          connect: {
-            id: 'ckn4oul7100004cv7y3t94n8j',
+  await Promise.all(
+    [
+      'ckondtcaf000101mh7x9g4gia',
+      'ckondtpcn000301mhg9lvaqlu',
+      'ckondu6bh000501mh2o2tf00u',
+      'ckonduhjk000701mh12wia4nf',
+      'ckr9eqap6000301mk20hycjqb',
+      'ckr9eq4oc000101mk1ga9bxnt',
+    ].map((document) =>
+      prisma.userDocument.update({
+        where: {
+          id: document,
+        },
+        data: {
+          users: {
+            connect: {
+              id: 'ckn4oul7100004cv7y3t94n8j',
+            },
           },
         },
-      },
-    })
-  }
+      }),
+    ),
+  )
 
   // Assign documents to group
-  for (const document of [
-    'ckondtcaf000101mh7x9g4gia',
-    'ckr9eq4oc000101mk1ga9bxnt',
-    'ckr9eqap6000301mk20hycjqb',
-    'ckonduhjk000701mh12wia4nf',
-    'ckondu6bh000501mh2o2tf00u',
-    'ckondtpcn000301mhg9lvaqlu',
-  ]) {
-    await prisma.userDocument.update({
-      where: {
-        id: document,
-      },
-      data: {
-        explicitGroups: {
-          connect: {
-            // Health
-            id: 'ckn4iar8j000n01mc7feq709f',
+  await Promise.all(
+    [
+      'ckondtcaf000101mh7x9g4gia',
+      'ckr9eq4oc000101mk1ga9bxnt',
+      'ckr9eqap6000301mk20hycjqb',
+      'ckonduhjk000701mh12wia4nf',
+      'ckondu6bh000501mh2o2tf00u',
+      'ckondtpcn000301mhg9lvaqlu',
+    ].map((document) =>
+      prisma.userDocument.update({
+        where: {
+          id: document,
+        },
+        data: {
+          explicitGroups: {
+            connect: {
+              // Health
+              id: 'ckn4iar8j000n01mc7feq709f',
+            },
           },
         },
-      },
-    })
-  }
-  for (const document of [
-    'ckondtcaf000101mh7x9g4gia',
-    'ckr9eq4oc000101mk1ga9bxnt',
-    'ckr9eqap6000301mk20hycjqb',
-    'ckonduhjk000701mh12wia4nf',
-    'ckondu6bh000501mh2o2tf00u',
-  ]) {
-    await prisma.userDocument.update({
-      where: {
-        id: document,
-      },
-      data: {
-        explicitGroups: {
-          connect: {
-            // Positive Health Effects
-            id: 'ckn4iazmc000r01mc1a0d6l0s',
+      }),
+    ),
+  )
+  await Promise.all(
+    [
+      'ckondtcaf000101mh7x9g4gia',
+      'ckr9eq4oc000101mk1ga9bxnt',
+      'ckr9eqap6000301mk20hycjqb',
+      'ckonduhjk000701mh12wia4nf',
+      'ckondu6bh000501mh2o2tf00u',
+    ].map((document) =>
+      prisma.userDocument.update({
+        where: {
+          id: document,
+        },
+        data: {
+          explicitGroups: {
+            connect: {
+              // Positive Health Effects
+              id: 'ckn4iazmc000r01mc1a0d6l0s',
+            },
           },
         },
-      },
-    })
-  }
+      }),
+    ),
+  )
 
   // Assign groups to user
-  for (const group of [
-    'ckn4h9pl5000101le5bco3b8r',
-    'ckn4i99oe000101mc4igzgvix',
-    'ckn4i9dr1000301mc9oekh3nu',
-    'ckn4i9hg6000501mc21l9dmzb',
-    'ckn4i9qek000701mc82eqagmz',
-    'ckn4i9u9m000901mcc4mjgdkq',
-    'ckn4i9zhq000b01mcgqjxdvcv',
-    'ckn4ia3i2000d01mcdizx83np',
-    'ckn4ia876000f01mc0w5kgecg',
-    'ckn4iaf1t000h01mcaob9ewey',
-    'ckn4iajdx000j01mc8x219zb6',
-    'ckn4ian59000l01mc78zp3ryh',
-    'ckn4iar8j000n01mc7feq709f',
-    'ckn4iav33000p01mc3htz2ijx',
-    'ckn4iazmc000r01mc1a0d6l0s',
-  ]) {
-    await prisma.group.update({
-      where: {
-        id: group,
-      },
-      data: {
-        users: {
-          connect: {
-            id: 'ckn4oul7100004cv7y3t94n8j',
+  await Promise.all(
+    [
+      'ckn4h9pl5000101le5bco3b8r',
+      'ckn4i99oe000101mc4igzgvix',
+      'ckn4i9dr1000301mc9oekh3nu',
+      'ckn4i9hg6000501mc21l9dmzb',
+      'ckn4i9qek000701mc82eqagmz',
+      'ckn4i9u9m000901mcc4mjgdkq',
+      'ckn4i9zhq000b01mcgqjxdvcv',
+      'ckn4ia3i2000d01mcdizx83np',
+      'ckn4ia876000f01mc0w5kgecg',
+      'ckn4iaf1t000h01mcaob9ewey',
+      'ckn4iajdx000j01mc8x219zb6',
+      'ckn4ian59000l01mc78zp3ryh',
+      'ckn4iar8j000n01mc7feq709f',
+      'ckn4iav33000p01mc3htz2ijx',
+      'ckn4iazmc000r01mc1a0d6l0s',
+    ].map((group) =>
+      prisma.group.update({
+        where: {
+          id: group,
+        },
+        data: {
+          users: {
+            connect: {
+              id: 'ckn4oul7100004cv7y3t94n8j',
+            },
           },
         },
-      },
-    })
-  }
+      }),
+    ),
+  )
 }
 
 export async function seed(): Promise<void> {

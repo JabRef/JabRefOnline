@@ -80,7 +80,7 @@ def main(environment_name: str, verbose: bool = False, secret: bool = False):
     storage_keys = storage_client.storage_accounts.list_keys(
         resource_group_name=GROUP_NAME, account_name=STORAGE_ACCOUNT
     )
-    storage_connection_string = f"DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName={STORAGE_ACCOUNT};AccountKey={storage_keys.keys[0].value}"
+    storage_connection_string = f"DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName={STORAGE_ACCOUNT};AccountKey={storage_keys['keys'][0]['value']}"
     logger.log(5, f"Storage connection string: {storage_connection_string}")
 
     # Azure CLI equivalent:  az communication list-key

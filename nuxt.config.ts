@@ -133,9 +133,6 @@ export default defineNuxtConfig({
     // Add authentication support
     // https://github.com/atinux/nuxt-auth-utils
     'nuxt-auth-utils',
-    // Add eslint support
-    // https://eslint.nuxt.com
-    '@nuxt/eslint',
   ],
 
   /*

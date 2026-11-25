@@ -7,7 +7,7 @@
           { label: 'PhD Thesis', value: 'PhDThesis' },
         ]"
         variant="none"
-        class="uppercase text-gray-600 tracking-wider text-xs"
+        class="uppercase text-toned tracking-wider text-xs"
       />
     </div>
     <div class="z-10 grid -mt-2">
@@ -86,7 +86,7 @@
         placeholder="Add group"
         :delimiters="undefined"
         :whitelist="groupSuggestions"
-        tag-class="bg-primary-50 rounded-md"
+        tag-class="bg-primary/20 rounded-md"
       />
     </div>
     <div>
@@ -105,8 +105,7 @@
 
 <script lang="ts" setup>
 import { useQuery } from '@vue/apollo-composable'
-import type { PersonFullDetailsFragment } from '~/apollo'
-import { gql, useFragment } from '~/apollo'
+import { gql, useFragment, type PersonFullDetailsFragment } from '~/apollo'
 import Tags from './tagify.vue'
 
 const PersonFullDetails = gql(/* GraphQL */ `
@@ -180,9 +179,11 @@ const { result } = useQuery(
       }
     }
   `),
-  () => ({
-    documentId: props.documentId,
-  }),
+  {
+    variables: () => ({
+      documentId: props.documentId,
+    }),
+  },
 )
 const document = computed(() =>
   useFragment(DocumentDetails, result.value?.userDocument),
