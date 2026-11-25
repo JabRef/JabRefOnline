@@ -121,6 +121,7 @@ const {
 const isMenuOpen = ref(false)
 let isMenuClosedByLink = false
 const menuLinks = computed(() =>
+  // oxlint-disable-next-line oxc/no-map-spread -- the links are props, so copy them instead of mutating them
   links.map((link) => ({
     ...link,
     // Close the menu also when the link points to the current section, UHeader only closes it on route changes
