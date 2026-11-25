@@ -7,7 +7,7 @@
       v-if="showLogo"
       class="flex-1 flex flex-row items-center h-20 border-b mx-3 md:mx-6"
     >
-      <jabref-logo class="w-12 flex-none" />
+      <jabref-logo class="w-10 flex-none" />
       <span
         class="ml-3 flex-1 text-highlighted text-2xl font-semibold lg:inline-block hidden"
       >
@@ -46,6 +46,7 @@
       <div
         v-show="isSmallDisplay"
         class="flex mr-5 items-center relative"
+        :class="{ 'order-last': showGithubLink }"
       >
         <div
           v-if="isHamburgerShown"
@@ -137,29 +138,27 @@
       </div>
     </nav>
 
-    <!-- Right spacer — also holds the GitHub link to keep menu centred -->
+    <!-- Right side -->
     <div
-      v-show="!isSmallDisplay"
-      class="flex-1 flex items-center justify-end mx-3 md:mx-6"
+      v-show="!isSmallDisplay || showGithubLink"
+      class="md:flex-1 flex items-center justify-end mx-3 md:mx-6"
     >
-      <a
+      <UTooltip
         v-if="showGithubLink"
-        href="https://github.com/JabRef/jabref"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-1.5 text-dimmed hover:text-primary-600 transition-colors"
-        aria-label="JabRef on GitHub"
+        text="GitHub Stars"
       >
-        <Icon
-          name="ri:github-fill"
-          class="text-2xl"
+        <UButton
+          icon="i-ri-github-fill"
+          to="https://github.com/JabRef/jabref"
+          target="_blank"
+          variant="ghost"
+          color="neutral"
+          square
+          :label="stars === null ? '...' : formatNumber(stars)"
+          aria-label="JabRef on GitHub"
+          :ui="{ label: 'hidden sm:inline-flex' }"
         />
-        <span
-          v-if="stars"
-          class="text-sm font-medium"
-          >{{ stars }}</span
-        >
-      </a>
+      </UTooltip>
     </div>
   </nav>
 </template>
@@ -175,7 +174,7 @@ const isHamburgerShown = ref(false)
 
 const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
 
-const props = defineProps({
+defineProps({
   showLogo: {
     type: Boolean,
     default: false,
@@ -194,9 +193,17 @@ const props = defineProps({
   },
 })
 
-const { stars } = props.showGithubLink
-  ? useGitHubStars()
-  : { stars: ref<string | null>(null) }
+const stars = useGitHubStars()
+
+const numberFormatter = new Intl.NumberFormat('en-GB', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+})
+function formatNumber(value: number) {
+  return numberFormatter
+    .format(value)
+    .replace(/[kmb]$/i, (suffix) => suffix.toUpperCase())
+}
 
 const { resolveClient } = useApolloClient()
 

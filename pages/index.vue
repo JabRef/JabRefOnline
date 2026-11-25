@@ -30,20 +30,6 @@
                   >{{ link.title }}</t-nuxtlink
                 >
               </li>
-              <li>
-                <a
-                  href="https://github.com/JabRef/jabref"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="hover:text-primary-600 font-semibold inline-flex items-center gap-1.5"
-                >
-                  <Icon
-                    name="ri:github-fill"
-                    class="text-lg"
-                  />
-                  GitHub
-                </a>
-              </li>
             </ul>
           </template>
         </NavBar>
