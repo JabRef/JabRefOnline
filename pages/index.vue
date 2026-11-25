@@ -5,6 +5,7 @@
         <NavBar
           :show-search-bar="false"
           :show-logo="true"
+          :show-github-link="true"
         >
           <div class="space-x-14">
             <t-nuxtlink
