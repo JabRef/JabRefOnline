@@ -76,6 +76,9 @@ importers:
       '@yaireo/tagify':
         specifier: 4.37.1
         version: 4.37.1(prop-types@15.8.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      better-sqlite3:
+        specifier: 12.6.2
+        version: 12.6.2
       body-scroll-lock:
         specifier: 4.0.0-beta.0
         version: 4.0.0-beta.0
@@ -200,6 +203,9 @@ importers:
       '@nuxtjs/storybook':
         specifier: npm:@nuxtjs/storybook@nightly
         version: 9.1.0-29411911.f34c865(ceb7513953d2df5aca64efb7ae96b990)
+      '@storybook/addon-themes':
+        specifier: 10.3.6
+        version: 10.3.6(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@tailwindcss/forms':
         specifier: 0.5.11
         version: 0.5.11(tailwindcss@4.2.4)
@@ -3408,6 +3414,11 @@ packages:
       storybook: ~10.0.2
       vite: ^5.2.0 || ^6.0.0 || ^7.0.0
       vue: ^3.4.0
+
+  '@storybook/addon-themes@10.3.6':
+    resolution: {integrity: sha512-/6lPU36+nDQzoDJqwy5BrAO0zFHOHDXn6hy/aq2aKF/RTS54+KrA0fdv0sxTssaBo5tjqZ4jKs60hB0iRWKkFA==}
+    peerDependencies:
+      storybook: ^10.3.6
 
   '@storybook/builder-vite@9.1.16':
     resolution: {integrity: sha512-CyvYA5w1BKeSVaRavKi+euWxLffshq0v9Rz/5E9MKCitbYtjwkDH6UMIYmcbTs906mEBuYqrbz3nygDP0ppodw==}
@@ -14182,6 +14193,11 @@ snapshots:
       - vue-tsc
       - yaml
 
+  '@storybook/addon-themes@10.3.6(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+    dependencies:
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      ts-dedent: 2.2.0
+
   '@storybook/builder-vite@9.1.16(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@7.3.1(@types/node@24.13.3)(jiti@2.7.0)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.20.3)(yaml@2.8.2))':
     dependencies:
       '@storybook/csf-plugin': 9.1.16(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
@@ -15769,7 +15785,6 @@ snapshots:
     dependencies:
       bindings: 1.5.0
       prebuild-install: 7.1.3
-    optional: true
 
   bindings@1.5.0:
     dependencies:
