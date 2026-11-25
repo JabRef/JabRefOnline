@@ -16,7 +16,6 @@
   --color-primary-700: #3b476b;
   --color-primary-800: #272f47;
   --color-primary-900: #131723;
-  --color-primary: #4f5f8f;
 
   --color-secondary-50: var(--color-rose-50);
   --color-secondary-100: var(--color-rose-100);
@@ -68,6 +67,14 @@
   --color-error-700: var(--color-red-700);
   --color-error-800: var(--color-red-800);
   --color-error-900: var(--color-red-900);
+}
+
+:root {
+  --ui-primary: var(--ui-color-primary-600);
+}
+
+.dark {
+  --ui-primary: var(--ui-color-primary-300);
 }
 
 @layer utilities {

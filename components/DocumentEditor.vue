@@ -7,7 +7,7 @@
           { label: 'PhD Thesis', value: 'PhDThesis' },
         ]"
         variant="none"
-        class="uppercase text-gray-600 tracking-wider text-xs"
+        class="uppercase text-toned tracking-wider text-xs"
       />
     </div>
     <div class="z-10 grid -mt-2">
@@ -86,7 +86,7 @@
         placeholder="Add group"
         :delimiters="undefined"
         :whitelist="groupSuggestions"
-        tag-class="bg-primary-50 rounded-md"
+        tag-class="bg-primary/20 rounded-md"
       />
     </div>
     <div>

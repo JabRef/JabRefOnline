@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-muted h-20"
+    class="w-full flex flex-row flex-wrap items-center justify-between bg-default px-6 border-b border-muted h-20"
   >
     <!-- Logo -->
     <div
@@ -46,6 +46,7 @@
       <div
         v-show="isSmallDisplay"
         class="flex mr-5 items-center relative"
+        :class="{ 'order-last': showGithubLink }"
       >
         <div
           v-if="isHamburgerShown"
@@ -86,7 +87,7 @@
     <div v-show="!isSmallDisplay">
       <slot>
         <div class="space-x-14">
-          <span class="text-primary-600 text-lg font-semibold">Library</span>
+          <span class="text-primary text-lg font-semibold">Library</span>
           <span class="text-dimmed text-lg font-semibold">Browse</span>
           <div class="inline">
             <span class="text-dimmed text-lg font-semibold">
@@ -95,7 +96,7 @@
             <div class="inline-block align-top pl-0.5 -mt-1">
               <Icon
                 name="ri:checkbox-blank-circle-fill"
-                class="text-primary-600 text-xs"
+                class="text-primary text-xs"
               />
             </div>
           </div>
@@ -110,7 +111,7 @@
     >
       <Icon
         name="ri:notification-3-fill"
-        class="text-dimmed hover:text-primary-500 text-lg"
+        class="text-dimmed hover:text-primary text-lg"
       />
       <div>
         <!-- User profile dropdown -->
@@ -137,11 +138,28 @@
       </div>
     </nav>
 
-    <!-- Empty stopper for proper alignment -->
+    <!-- Right side -->
     <div
-      v-show="!isSmallDisplay"
-      class="flex-1 mx-3 md:mx-6"
-    />
+      v-show="!isSmallDisplay || showGithubLink"
+      class="md:flex-1 flex items-center justify-end mx-3 md:mx-6"
+    >
+      <UTooltip
+        v-if="showGithubLink"
+        text="GitHub Stars"
+      >
+        <UButton
+          icon="i-ri-github-fill"
+          to="https://github.com/JabRef/jabref"
+          target="_blank"
+          variant="ghost"
+          color="neutral"
+          square
+          :label="stars === null ? '...' : formatNumber(stars)"
+          aria-label="JabRef on GitHub"
+          :ui="{ label: 'hidden sm:inline-flex' }"
+        />
+      </UTooltip>
+    </div>
   </nav>
 </template>
 
@@ -169,7 +187,23 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  showGithubLink: {
+    type: Boolean,
+    default: false,
+  },
 })
+
+const stars = useGitHubStars()
+
+const numberFormatter = new Intl.NumberFormat('en-GB', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+})
+function formatNumber(value: number) {
+  return numberFormatter
+    .format(value)
+    .replace(/[kmb]$/i, (suffix) => suffix.toUpperCase())
+}
 
 const { resolveClient } = useApolloClient()
 

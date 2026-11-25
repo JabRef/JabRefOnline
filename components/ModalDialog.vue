@@ -7,21 +7,21 @@
       <div class="relative w-auto my-6 mx-auto max-w-3xl">
         <!--content-->
         <div
-          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-hidden focus:outline-hidden"
+          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-default outline-hidden focus:outline-hidden"
         >
           <!--header-->
           <div
-            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+            class="flex items-start justify-between p-5 border-b border-solid border-default rounded-t"
           >
             <h3 class="text-3xl font-semibold">
               {{ header }}
             </h3>
             <button
-              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-hidden focus:outline-hidden"
+              class="p-1 ml-auto bg-transparent border-0 text-muted hover:text-highlighted float-right text-3xl leading-none font-semibold outline-hidden focus:outline-hidden"
               @click="showModal = false"
             >
               <span
-                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-hidden focus:outline-hidden"
+                class="bg-transparent h-6 w-6 text-2xl block outline-hidden focus:outline-hidden"
               >
                 ×
               </span>
@@ -34,7 +34,7 @@
           <!--footer-->
           <slot name="footer">
             <div
-              class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+              class="flex items-center justify-end p-6 border-t border-solid border-default rounded-b"
             >
               <UButton @click="showModal = false"> Close </UButton>
             </div>

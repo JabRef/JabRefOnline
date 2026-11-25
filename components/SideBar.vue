@@ -2,7 +2,7 @@
   <div
     v-if="sideBarOpen"
     id="sideBar"
-    class="flex flex-col flex-wrap bg-white border-r border-muted w-64 fixed md:top-0 md:left-0 z-40 h-screen"
+    class="flex flex-col flex-wrap bg-default border-r border-muted w-64 fixed md:top-0 md:left-0 z-40 h-screen"
   >
     <!-- Logo -->
     <div
@@ -64,7 +64,7 @@
             />
           </span>
           <button
-            class="hover:bg-gray-200 pl-1 pr-1"
+            class="hover:bg-elevated pl-1 pr-1"
             @click="onGroupClicked(node)"
           >
             <Icon

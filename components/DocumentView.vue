@@ -2,7 +2,7 @@
   <div class="space-y-1">
     <div class="flex flex-row justify-between space-x-10">
       <button
-        class="font-semibold text-lg text-primary-800"
+        class="font-semibold text-lg text-highlighted"
         @click="displayDocumentDetails"
       >
         <Icon
