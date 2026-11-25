@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { z } from 'zod'
+import { ZodError, z } from 'zod'
 import { validateInput, validation } from './validation'
 
 const schema = z.object({
@@ -31,7 +31,7 @@ describe('validated function', () => {
     expect(test.hello({ name: 'test', age: 18 })).toBe('test')
   })
   it('throws if args are invalid', () => {
-    expect(() => test.hello({ name: 'test', age: 17 })).toThrow()
+    expect(() => test.hello({ name: 'test', age: 17 })).toThrow(ZodError)
   })
 })
 
@@ -40,7 +40,7 @@ describe('validated function with factory', () => {
     expect(test.with_factory({ name: 'test', age: 18 })).toBe('test')
   })
   it('throws if args are invalid', () => {
-    expect(() => test.with_factory({ name: 'test', age: 17 })).toThrow()
+    expect(() => test.with_factory({ name: 'test', age: 17 })).toThrow(ZodError)
   })
 })
 
@@ -108,6 +108,8 @@ describe('validated resolver with factory', () => {
     expect(testResolver.with_factory({ name: 'test', age: 18 })).toBe('test')
   })
   it('throws if args are invalid', () => {
-    expect(() => testResolver.with_factory({ name: 'test', age: 17 })).toThrow()
+    expect(() => testResolver.with_factory({ name: 'test', age: 17 })).toThrow(
+      ZodError,
+    )
   })
 })
