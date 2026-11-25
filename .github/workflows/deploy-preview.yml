@@ -30,16 +30,21 @@ jobs:
     steps:
       # We could also add these checks to a job-wide if condition, to skip the workflow if its unsecure to run.
       # However, Github views skipped workflows as "successful" and thus one could merge a PR without running this workflow first.
+      # Always run:
+      # - PRs created by trusted accounts
+      # - PRs labeled with 'safe to test' (only counts for the event that adds it, later pushes to the PR do not run with the label still attached; remove and re-add the label to test them)
       - name: Fail if unsecure
-        if: "github.event_name != 'workflow_dispatch' && !contains(github.event.pull_request.labels.*.name, 'status: safe to test') && github.actor != 'tobiasdiez' && github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]' && github.actor != 'copilot-swe-agent'"
+        if: "github.event_name != 'workflow_dispatch' && !(github.event.action == 'labeled' && github.event.label.name == 'status: safe to test') && github.event.pull_request.user.login != 'tobiasdiez' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.user.login != 'renovate[bot]' && github.event.pull_request.user.login != 'Copilot'"
         run: |
-          echo "The workflow was triggered by ${{ github.actor }} and the PR is not labeled as 'safe to test'. For security reasons, we do not run this workflow in this case."
+          echo "The PR was created by ${{ github.event.pull_request.user.login }}. For security reasons, we do not run this workflow in this case. To run it, (re-)add the label 'safe to test' after reviewing the latest changes."
           exit 1
 
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           ref: ${{ github.event.pull_request.head.sha || github.ref }}
+          # Fork PRs only get here after the "Fail if unsecure" check above passed
+          allow-unsafe-pr-checkout: true
 
       - name: Install pnpm
         uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
