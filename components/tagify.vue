@@ -58,12 +58,11 @@ onMounted(() => {
     ...props.settings,
   }
   if (props.tagClass) {
-    if (tagifySettings.classNames) {
-      tagifySettings.classNames.tag = 'tagify__tag ' + props.tagClass
-    } else {
-      tagifySettings.classNames = {
-        tag: 'tagify__tag ' + props.tagClass,
-      }
+    // Don't add the classes to `classNames.tag`: Tagify builds CSS selectors from it
+    const transformTag = tagifySettings.transformTag
+    tagifySettings.transformTag = (tagData) => {
+      tagData.class = props.tagClass
+      transformTag?.(tagData)
     }
   }
 
