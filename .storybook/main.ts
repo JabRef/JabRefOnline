@@ -7,7 +7,11 @@ const config: StorybookConfig = {
     // @ts-expect-error - need to update storybook types
     disableTelemetry: true,
   },
-  addons: ['storybook-vue-addon', '@chromatic-com/storybook'],
+  addons: [
+    'storybook-vue-addon',
+    '@chromatic-com/storybook',
+    '@storybook/addon-themes',
+  ],
   framework: {
     name: '@storybook-vue/nuxt',
     options: {},
