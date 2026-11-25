@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="w-full flex flex-row flex-wrap items-center justify-between bg-white px-6 border-b border-muted h-20"
+    class="w-full flex flex-row flex-wrap items-center justify-between bg-default px-6 border-b border-muted h-20"
   >
     <!-- Logo -->
     <div
@@ -86,7 +86,7 @@
     <div v-show="!isSmallDisplay">
       <slot>
         <div class="space-x-14">
-          <span class="text-primary-600 text-lg font-semibold">Library</span>
+          <span class="text-primary text-lg font-semibold">Library</span>
           <span class="text-dimmed text-lg font-semibold">Browse</span>
           <div class="inline">
             <span class="text-dimmed text-lg font-semibold">
@@ -95,7 +95,7 @@
             <div class="inline-block align-top pl-0.5 -mt-1">
               <Icon
                 name="ri:checkbox-blank-circle-fill"
-                class="text-primary-600 text-xs"
+                class="text-primary text-xs"
               />
             </div>
           </div>
@@ -110,7 +110,7 @@
     >
       <Icon
         name="ri:notification-3-fill"
-        class="text-dimmed hover:text-primary-500 text-lg"
+        class="text-dimmed hover:text-primary text-lg"
       />
       <div>
         <!-- User profile dropdown -->

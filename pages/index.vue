@@ -10,8 +10,8 @@
             <t-nuxtlink
               v-for="link in links"
               :key="link.title"
-              active-class="text-dimmed hover:text-primary-600 text-lg font-semibold"
-              class="text-dimmed hover:text-primary-600 text-lg font-semibold"
+              active-class="text-dimmed hover:text-primary text-lg font-semibold"
+              class="text-dimmed hover:text-primary text-lg font-semibold"
               :to="link.href"
               >{{ link.title }}</t-nuxtlink
             >
@@ -23,8 +23,8 @@
                 :key="link.title"
               >
                 <t-nuxtlink
-                  active-class="hover:text-primary-600 font-semibold"
-                  class="hover:text-primary-600 font-semibold"
+                  active-class="hover:text-primary font-semibold"
+                  class="hover:text-primary font-semibold"
                   :href="link.href"
                   >{{ link.title }}</t-nuxtlink
                 >
@@ -95,7 +95,7 @@
               </UButton>
               <div class="text-center pt-4 text-sm">
                 <a
-                  class="text-primary-500 text-sm"
+                  class="text-primary hover:text-primary/75 text-sm"
                   href="/#download"
                   >Or see all download options</a
                 >

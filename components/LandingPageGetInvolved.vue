@@ -67,7 +67,7 @@
         >
           <UButton
             variant="link"
-            class="text-xl mx-auto text-primary-500"
+            class="text-xl mx-auto text-primary"
           >
             <a
               href="https://docs.jabref.org/faq/faqcontributing#i-am-not-a-programmer"
@@ -86,7 +86,7 @@
           </p>
           <t-nuxtlink
             href="https://docs.jabref.org/contributing"
-            class="pt-4 text-primary-500 hover:text-primary-600"
+            class="pt-4 text-primary hover:text-primary/75"
           >
             Learn how to help
           </t-nuxtlink>
@@ -96,7 +96,7 @@
         >
           <UButton
             variant="link"
-            class="text-xl mx-auto text-primary-500"
+            class="text-xl mx-auto text-primary"
           >
             <a href="https://github.com/JabRef/jabref/wiki/Donations">
               <Icon
@@ -113,7 +113,7 @@
           </p>
           <t-nuxtlink
             href="https://github.com/JabRef/jabref/wiki/Donations"
-            class="pt-4 text-primary-500 hover:text-primary-600"
+            class="pt-4 text-primary hover:text-primary/75"
           >
             Donate
           </t-nuxtlink>
@@ -123,7 +123,7 @@
         >
           <UButton
             variant="link"
-            class="text-xl mx-auto text-primary-500"
+            class="text-xl mx-auto text-primary"
           >
             <a href="https://github.com/JabRef/jabref">
               <Icon
@@ -140,7 +140,7 @@
           </p>
           <t-nuxtlink
             href="https://github.com/JabRef/jabref"
-            class="pt-4 text-primary-500 hover:text-primary-600"
+            class="pt-4 text-primary hover:text-primary/75"
           >
             Develop via GitHub
           </t-nuxtlink>
