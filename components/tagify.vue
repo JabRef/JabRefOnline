@@ -89,7 +89,17 @@ function onChange(event: { target: EventTarget | null }) {
 .tagify {
   --tags-border-color: transparent;
   --tag-bg: transparent;
-  --tag-hover: #afb8d3; /* bg-primary-200 */
+  --tag-hover: color-mix(in oklab, var(--ui-primary) 30%, transparent);
+  --tag-text-color: var(--ui-text);
+  --tag-text-color--edit: var(--ui-text);
+  --tag-remove-btn-color: var(--ui-text-muted);
+  --placeholder-color: var(--ui-text-dimmed);
+  --placeholder-color-focus: var(--ui-text-dimmed);
+}
+.tagify__dropdown {
+  --tagify-dd-bg-color: var(--ui-bg);
+  --tagify-dd-text-color: var(--ui-text);
+  --tagify-dd-color-primary: var(--ui-primary);
 }
 .tagify__tag {
   margin-left: 0.25rem;

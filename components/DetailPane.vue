@@ -11,10 +11,10 @@
       <div
         v-if="isDetailsOpen"
         id="details"
-        class="fixed top-20 bottom-0 right-0 flex flex-col flex-wrap bg-white border-l border-accented z-40 w-1/3 md:shadow-xs p-4"
+        class="fixed top-20 bottom-0 right-0 flex flex-col flex-wrap bg-default border-l border-accented z-40 w-1/3 md:shadow-xs p-4"
       >
         <div
-          class="absolute top-10 -left-3.5 w-7 h-7 rounded-full bg-white border border-muted md:shadow-xs flex items-center justify-center active:border-accented transform text-dimmed hover:scale-110 hover:border-accented hover:text-muted"
+          class="absolute top-10 -left-3.5 w-7 h-7 rounded-full bg-default border border-muted md:shadow-xs flex items-center justify-center active:border-accented transform text-dimmed hover:scale-110 hover:border-accented hover:text-muted"
         >
           <UButton
             variant="ghost"
