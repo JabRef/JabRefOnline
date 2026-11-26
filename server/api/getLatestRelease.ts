@@ -56,7 +56,7 @@ export default defineCachedEventHandler(
       })
     }
     // A prerelease (alpha, beta, ...) that is newer than the latest stable release
-    const newest = repository.releases?.nodes[0]
+    const newest = repository?.releases?.nodes[0]
     const prerelease = newest?.isPrerelease
       ? { version: newest.tagName.replace('v', ''), url: newest.url }
       : undefined
