@@ -5,33 +5,9 @@
         <NavBar
           :show-search-bar="false"
           :show-logo="true"
-        >
-          <div class="space-x-14">
-            <t-nuxtlink
-              v-for="link in links"
-              :key="link.title"
-              active-class="text-dimmed hover:text-primary text-lg font-semibold"
-              class="text-dimmed hover:text-primary text-lg font-semibold"
-              :to="link.href"
-              >{{ link.title }}</t-nuxtlink
-            >
-          </div>
-          <template #collapsed>
-            <ul class="space-y-4">
-              <li
-                v-for="link in links"
-                :key="link.title"
-              >
-                <t-nuxtlink
-                  active-class="hover:text-primary font-semibold"
-                  class="hover:text-primary font-semibold"
-                  :href="link.href"
-                  >{{ link.title }}</t-nuxtlink
-                >
-              </li>
-            </ul>
-          </template>
-        </NavBar>
+          :show-github-link="true"
+          :links="links"
+        />
       </template>
 
       <!-- Masthead -->
@@ -115,30 +91,16 @@
 </template>
 
 <script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
 import { isLinux, isMac, isWindows } from '~/composables/detectOs'
 
 definePageMeta({ layout: false })
 
-const links = [
-  {
-    title: 'Features',
-    href: '#features',
-  },
-  {
-    title: 'Download',
-    href: '#download',
-  },
-  {
-    title: 'Get Involved',
-    href: '#getinvolved',
-  },
-  {
-    title: 'Support',
-    href: '#support',
-  },
-  {
-    title: 'News',
-    href: 'https://blog.jabref.org/',
-  },
+const links: NavigationMenuItem[] = [
+  { label: 'Features', to: '#features', active: false },
+  { label: 'Download', to: '#download', active: false },
+  { label: 'Get Involved', to: '#getinvolved', active: false },
+  { label: 'Support', to: '#support', active: false },
+  { label: 'News', to: 'https://blog.jabref.org/' },
 ]
 </script>

@@ -34,10 +34,6 @@
       groupName: 'graphql',
     },
     {
-      matchPackageNames: ['prettier', 'prettier-*'],
-      groupName: 'prettier',
-    },
-    {
       matchPackageNames: [
         'nuxt',
         'vite',
@@ -103,8 +99,14 @@
       groupName: 'github-actions',
     },
     {
-      matchPackageNames: ['**eslint**'],
-      groupName: 'eslint',
+      matchPackageNames: [
+        '**eslint**',
+        'oxlint',
+        'oxlint-*',
+        'prettier',
+        'prettier-*',
+      ],
+      groupName: 'linters',
     },
     {
       matchDepNames: [

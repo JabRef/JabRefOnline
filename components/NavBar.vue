@@ -1,119 +1,48 @@
 <template>
-  <nav
-    class="w-full flex flex-row flex-wrap items-center justify-between bg-default px-6 border-b border-muted h-20"
+  <UHeader
+    v-model:open="isMenuOpen"
+    :toggle="links.length > 0"
+    :menu="menu"
+    :ui="{ container: 'max-w-none', left: 'gap-6', root: 'static' }"
   >
-    <!-- Logo -->
-    <div
-      v-if="showLogo"
-      class="flex-1 flex flex-row items-center h-20 border-b mx-3 md:mx-6"
-    >
-      <jabref-logo class="w-10 flex-none" />
-      <span
-        class="ml-3 flex-1 text-highlighted text-2xl font-semibold lg:inline-block hidden"
+    <template #left>
+      <ULink
+        v-if="showLogo"
+        to="/"
+        aria-label="JabRef"
+        class="flex shrink-0 items-center gap-3"
       >
-        JabRef</span
-      >
-    </div>
+        <jabref-logo class="w-10" />
+        <span class="text-highlighted text-2xl font-semibold">JabRef</span>
+      </ULink>
 
-    <!-- Search bar -->
-    <div
-      v-if="showSearchBar"
-      class="relative text-toned"
-    >
       <UInput
+        v-if="showSearchBar"
         v-model="searchQuery"
         type="search"
         placeholder="Search..."
-        class="w-full xl:w-96 px-5 border-none shadow-none pl-10 font-semibold text-lg"
+        icon="i-ri-search-line"
         variant="none"
+        size="xl"
+        class="w-full xl:w-96"
+        :ui="{ base: 'font-semibold' }"
       />
-      <button
-        type="submit"
-        class="absolute left-0 top-0 bottom-0 ml-2"
-      >
+    </template>
+
+    <slot>
+      <UNavigationMenu
+        :items="links"
+        variant="link"
+        :ui="{ link: 'text-lg font-semibold' }"
+      />
+    </slot>
+
+    <template #right>
+      <template v-if="showUserProfile">
         <Icon
-          name="ri:search-line"
-          class="text-dimmed"
+          name="ri:notification-3-fill"
+          class="text-dimmed hover:text-primary text-lg"
         />
-      </button>
-    </div>
-
-    <!-- Hamburger menu for small screens -->
-    <UPopover
-      v-model:open="isHamburgerShown"
-      :popper="{ placement: 'bottom-end' }"
-    >
-      <div
-        v-show="isSmallDisplay"
-        class="flex mr-5 items-center relative"
-      >
-        <div
-          v-if="isHamburgerShown"
-          class="fixed z-50 inset-0 w-full h-full"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            class="backdrop-blur-xs bg-gray-400/20 w-full h-full"
-            aria-hidden="true"
-          />
-        </div>
-        <button
-          class="text-right text text-xl relative z-60"
-          @click="isHamburgerShown = !isHamburgerShown"
-        >
-          <Icon :name="isHamburgerShown ? 'ri:close-fill' : 'ri:menu-fill'" />
-        </button>
-      </div>
-
-      <template #content>
-        <div class="px-6 py-5 text-base max-w-xs w-full rounded-lg">
-          <button
-            class="text-right text text-xl absolute top-3 right-5"
-            @click="isHamburgerShown = false"
-          >
-            <Icon
-              v-if="isHamburgerShown"
-              name="ri:close-fill"
-            />
-          </button>
-          <slot name="collapsed" />
-        </div>
-      </template>
-    </UPopover>
-
-    <!-- Main menu -->
-    <div v-show="!isSmallDisplay">
-      <slot>
-        <div class="space-x-14">
-          <span class="text-primary text-lg font-semibold">Library</span>
-          <span class="text-dimmed text-lg font-semibold">Browse</span>
-          <div class="inline">
-            <span class="text-dimmed text-lg font-semibold">
-              Subscriptions
-            </span>
-            <div class="inline-block align-top pl-0.5 -mt-1">
-              <Icon
-                name="ri:checkbox-blank-circle-fill"
-                class="text-primary text-xs"
-              />
-            </div>
-          </div>
-        </div>
-      </slot>
-    </div>
-
-    <!-- User profile -->
-    <nav
-      v-if="showUserProfile"
-      class="flex items-center pr-10 space-x-7"
-    >
-      <Icon
-        name="ri:notification-3-fill"
-        class="text-dimmed hover:text-primary text-lg"
-      />
-      <div>
-        <!-- User profile dropdown -->
         <UDropdownMenu
           :content="{ align: 'end' }"
           :items="[
@@ -134,42 +63,102 @@
             />
           </button>
         </UDropdownMenu>
-      </div>
-    </nav>
+      </template>
 
-    <!-- Empty stopper for proper alignment -->
-    <div
-      v-show="!isSmallDisplay"
-      class="flex-1 mx-3 md:mx-6"
-    />
-  </nav>
+      <UTooltip text="Toggle theme">
+        <UColorModeButton aria-label="Toggle theme" />
+      </UTooltip>
+
+      <UTooltip
+        v-if="showGithubLink"
+        text="GitHub Stars"
+      >
+        <UButton
+          icon="i-ri-github-fill"
+          to="https://github.com/JabRef/jabref"
+          target="_blank"
+          variant="ghost"
+          color="neutral"
+          square
+          :label="stars === null ? '...' : formatNumber(stars)"
+          aria-label="JabRef on GitHub"
+          :ui="{ label: 'hidden sm:inline-flex' }"
+        />
+      </UTooltip>
+    </template>
+
+    <template #body>
+      <UNavigationMenu
+        :items="menuLinks"
+        orientation="vertical"
+        :ui="{ link: 'text-base font-semibold' }"
+        class="-mx-2.5"
+      />
+    </template>
+  </UHeader>
 </template>
 
 <script lang="ts" setup>
+import type { NavigationMenuItem } from '@nuxt/ui'
 import { useApolloClient, useMutation } from '@vue/apollo-composable'
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { gql } from '~/apollo'
 import { cacheCurrentUser } from '~/apollo/cache'
 import { useUiStore } from '~/store'
 
-const isHamburgerShown = ref(false)
+const {
+  showLogo = false,
+  showSearchBar = true,
+  showUserProfile = false,
+  showGithubLink = false,
+  links = [],
+} = defineProps<{
+  showLogo?: boolean
+  showSearchBar?: boolean
+  showUserProfile?: boolean
+  showGithubLink?: boolean
+  /**
+   * Navigation links, shown in the header on large screens and in the menu on small screens.
+   */
+  links?: NavigationMenuItem[]
+}>()
 
-const isSmallDisplay = useBreakpoints(breakpointsTailwind).smallerOrEqual('md')
+const isMenuOpen = ref(false)
+let isMenuClosedByLink = false
+const menuLinks = computed(() =>
+  // oxlint-disable-next-line oxc/no-map-spread -- the links are props, so copy them instead of mutating them
+  links.map((link) => ({
+    ...link,
+    // Close the menu also when the link points to the current section, UHeader only closes it on route changes
+    // (fix proposed in https://github.com/nuxt/ui/pull/7461)
+    onSelect: () => {
+      isMenuClosedByLink = true
+      isMenuOpen.value = false
+    },
+  })),
+)
+const menu = {
+  content: {
+    onCloseAutoFocus: (event: Event) => {
+      // The header is not sticky, so returning the focus to the menu toggle would scroll back to the top of the page
+      if (isMenuClosedByLink) {
+        event.preventDefault()
+        isMenuClosedByLink = false
+      }
+    },
+  },
+}
 
-defineProps({
-  showLogo: {
-    type: Boolean,
-    default: false,
-  },
-  showSearchBar: {
-    type: Boolean,
-    default: true,
-  },
-  showUserProfile: {
-    type: Boolean,
-    default: false,
-  },
+const stars = useGitHubStars()
+
+const numberFormatter = new Intl.NumberFormat('en-GB', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
 })
+function formatNumber(value: number) {
+  return numberFormatter
+    .format(value)
+    .replace(/[kmb]$/i, (suffix) => suffix.toUpperCase())
+}
 
 const { resolveClient } = useApolloClient()
 
