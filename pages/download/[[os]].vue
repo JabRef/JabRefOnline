@@ -21,6 +21,7 @@ definePageMeta({
   layout: false,
 
   middleware: async (to) => {
+    // @ts-expect-error: vue-router 5 types the params as the union of all routes
     const os = to.params.os as string | undefined
     let downloadUrl = FALLBACK_DOWNLOAD_URL
     if (

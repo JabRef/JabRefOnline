@@ -13,13 +13,30 @@ export default defineNuxtConfig({
           'X-Robots-Tag':
             'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
         },
+        routes: [
+          // Expose Nuxt Content API
+          {
+            route: '/__nuxt_content/*',
+            methods: ['POST'],
+            rewrite: '/api/server',
+          },
+        ],
       },
     },
     // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
     moduleSideEffects: ['reflect-metadata', 'json-bigint-patch'],
     prerender: {
-      // Prerender all pages reached from the index page
+      // Prerender all pages reached from the routes listed here
       crawlLinks: true,
+      routes: [
+        '/',
+        '/codeprojects/bluehat2022',
+        '/codeprojects/gsoc/gsoc2019',
+        '/codeprojects/gsoc/gsoc2021',
+        '/codeprojects/gsoc/gsoc2022',
+        '/surveys/2015',
+        '/surveys/2015/analysis',
+      ],
     },
     esbuild: {
       options: {
@@ -145,6 +162,14 @@ export default defineNuxtConfig({
    * Add redirects, mostly for backwards compatibility
    */
   routeRules: {
+    // Prerender everything at build time, except for what has to be rendered on request
+    '/**': { prerender: true },
+    '/api/**': { prerender: false },
+    // Depends on the logged-in user
+    '/dashboard': { prerender: false },
+    '/change-password/**': { prerender: false },
+    // Redirects to the latest release
+    '/download/**': { prerender: false },
     '/faq': { redirect: 'https://docs.jabref.org/faq' },
     '/paypal': { redirect: '/donations' },
     '/donations': {
@@ -197,6 +222,12 @@ export default defineNuxtConfig({
   },
 
   content: {
+    // The Azure Function App runs from a read-only package, so there is no place to write a SQLite file.
+    // Use an in-memory database instead.
+    database: {
+      type: 'sqlite',
+      filename: ':memory:',
+    },
     renderer: {
       // Don't automatically print h2-h4 headings as links
       // Currently leads to TS errors
