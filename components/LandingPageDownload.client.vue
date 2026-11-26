@@ -104,6 +104,15 @@
             </t-nuxtlink>
             <br />
           </span>
+          <span v-if="release?.prerelease">
+            Curious what's next? Try the
+            <t-nuxtlink
+              class="text-primary hover:text-primary/75"
+              :href="release.prerelease.url"
+              >JabRef {{ release.prerelease.version }} pre-release</t-nuxtlink
+            >
+            <br />
+          </span>
           <a
             class="text-primary hover:text-primary/75"
             href="https://github.com/JabRef/jabref/blob/main/CHANGELOG.md"
@@ -123,4 +132,6 @@
 </template>
 <script setup lang="ts">
 import { isLinux, isMac, isWindows } from '~/composables/detectOs'
+
+const { data: release } = useLazyFetch('/api/getLatestRelease')
 </script>

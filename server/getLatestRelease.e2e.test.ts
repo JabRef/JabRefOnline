@@ -11,9 +11,14 @@ describe.runIf(process.env.NUXT_GITHUB_REPO_TOKEN)('getLatestRelease', () => {
 
     expect(response.status).toBe(200)
     expect(response.headers.get('content-type')).toContain('application/json')
-    const { version } = JSON.parse(
+    const { version, prerelease } = JSON.parse(
       await response.text(),
     ) as GetLatestReleaseResponse
     expect(version).toMatch(/^\d.\d{1,2}$/)
+    expect(prerelease?.version ?? '').toMatch(/^(\d.\d{1,2}-.+)?$/)
+    expect(prerelease?.url).toBe(
+      prerelease &&
+        `https://github.com/JabRef/jabref/releases/tag/v${prerelease.version}`,
+    )
   })
 })
