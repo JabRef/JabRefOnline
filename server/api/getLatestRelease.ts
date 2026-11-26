@@ -1,5 +1,11 @@
 const config = useRuntimeConfig()
 
+interface Release {
+  tagName: string
+  isPrerelease: boolean
+  url: string
+}
+
 export default defineCachedEventHandler(
   async () => {
     const response = (await fetch('https://api.github.com/graphql', {
@@ -9,13 +15,18 @@ export default defineCachedEventHandler(
         query LatestRelease {
           # eslint-disable-next-line @graphql-eslint/fields-on-correct-type
           repository(owner: "JabRef", name: "jabref") {
+            # The latest stable release
+            latestRelease {
+              tagName
+            }
             releases(
-              first: 10
+              first: 1
               orderBy: { field: CREATED_AT, direction: DESC }
             ) {
               nodes {
                 tagName
                 isPrerelease
+                url
               }
             }
           }
@@ -26,18 +37,15 @@ export default defineCachedEventHandler(
     }).then((res) => res.json())) as {
       data?: {
         repository?: {
+          latestRelease?: Pick<Release, 'tagName'> | null
           releases?: {
-            nodes: {
-              tagName: string
-              isPrerelease: boolean
-            }[]
+            nodes: Release[]
           }
         }
       }
     }
-    const version = response.data?.repository?.releases?.nodes
-      .find((release) => !release.isPrerelease)
-      ?.tagName.replace('v', '') // something like 5.7
+    const repository = response.data?.repository
+    const version = repository?.latestRelease?.tagName.replace('v', '') // something like 5.7
     if (!version) {
       // TODO: Setup proper logging
       // eslint-disable-next-line no-console
@@ -47,7 +55,12 @@ export default defineCachedEventHandler(
         message: 'Failed to fetch latest release from GitHub',
       })
     }
-    return { version }
+    // A prerelease (alpha, beta, ...) that is newer than the latest stable release
+    const newest = repository?.releases?.nodes[0]
+    const prerelease = newest?.isPrerelease
+      ? { version: newest.tagName.replace('v', ''), url: newest.url }
+      : undefined
+    return { version, prerelease }
   },
   {
     name: 'latest-release',
