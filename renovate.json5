@@ -108,6 +108,17 @@
       ],
       groupName: 'linters',
     },
+    {
+      matchDepNames: [
+        'node',
+        '@types/node',
+        'mcr.microsoft.com/vscode/devcontainers/typescript-node',
+      ],
+      groupName: 'node',
+      // Node 24 is the latest version Azure Functions supports:
+      // https://learn.microsoft.com/en-us/azure/azure-functions/functions-versions
+      allowedVersions: '<25',
+    },
   ],
   'github-actions': { enabled: true },
   postUpdateOptions: [
@@ -119,10 +130,14 @@
       customType: 'regex',
       managerFilePatterns: ['/^.github/scripts/deploy.py$/'],
       matchStrings: [
-        '{"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "(?<currentValue>.*?)"},\\n',
+        '{"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "~(?<currentValue>\\d+)"},\\n',
       ],
       datasourceTemplate: 'node-version',
       depNameTemplate: 'node',
+      // Azure Functions only accepts the major version (e.g. `~24`),
+      // so only compare and update the major version (instead of pinning to e.g. `~24.11.0`)
+      extractVersionTemplate: '^(?<version>\\d+)\\.',
+      versioningTemplate: 'loose',
     },
   ],
 }
