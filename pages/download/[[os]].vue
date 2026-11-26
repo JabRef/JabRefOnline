@@ -20,7 +20,9 @@ const FALLBACK_DOWNLOAD_URL = `https://github.com/JabRef/jabref/releases/latest`
 definePageMeta({
   layout: false,
 
+  // @ts-expect-error: vue-router 5 types `to` as the union of all typed routes
   middleware: async (to) => {
+    // @ts-expect-error: vue-router 5 types the params as the union of all routes
     const os = to.params.os as string | undefined
     let downloadUrl = FALLBACK_DOWNLOAD_URL
     if (
