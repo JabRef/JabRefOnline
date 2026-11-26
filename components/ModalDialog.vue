@@ -36,7 +36,15 @@
             <div
               class="flex items-center justify-end p-6 border-t border-solid border-default rounded-b"
             >
-              <UButton @click="showModal = false"> Close </UButton>
+              <UButton
+                @click="
+                  () => {
+                    showModal = false
+                  }
+                "
+              >
+                Close
+              </UButton>
             </div>
           </slot>
         </div>
