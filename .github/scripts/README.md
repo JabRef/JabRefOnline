@@ -10,5 +10,5 @@ az login
 export AZURE_SUBSCRIPTION_ID=<...>
 export AZURE_DATABASE_URL=<...>
 export AZURE_SESSION_PASSWORD=<...>
-python3 .github/scripts/deploy.py --env dev -v
+python3 .github/scripts/deploy.py --env test -v
 ```
