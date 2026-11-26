@@ -65,6 +65,10 @@
         </UDropdownMenu>
       </template>
 
+      <UTooltip text="Toggle theme">
+        <UColorModeButton aria-label="Toggle theme" />
+      </UTooltip>
+
       <UTooltip
         v-if="showGithubLink"
         text="GitHub Stars"
