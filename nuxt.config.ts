@@ -188,6 +188,14 @@ export default defineNuxtConfig({
     },
   },
 
+  /**
+   * Web fonts
+   * https://fonts.nuxt.com/get-started/configuration
+   */
+  fonts: {
+    families: [{ name: 'Inter', weights: ['300 800'] }],
+  },
+
   content: {
     renderer: {
       // Don't automatically print h2-h4 headings as links
