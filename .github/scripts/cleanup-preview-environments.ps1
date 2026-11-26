@@ -79,7 +79,7 @@ foreach ($env in $environments) {
     Write-Host " - $($env.name)" -ForegroundColor Gray
 }
 $previewEnvs = $environments | Where-Object {
-  $_.name -notin @("default", "staging", "dev")
+  $_.name -notin @("default", "staging", "test")
 }
 $previewEnvs | Format-Table -AutoSize -Wrap
 
