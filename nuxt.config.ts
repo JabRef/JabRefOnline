@@ -193,9 +193,7 @@ export default defineNuxtConfig({
    * https://fonts.nuxt.com/get-started/configuration
    */
   fonts: {
-    families: [
-      { name: 'Inter', weights: ['300 800'] },
-    ],
+    families: [{ name: 'Inter', weights: ['300 800'] }],
   },
 
   content: {
