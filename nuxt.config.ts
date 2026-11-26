@@ -13,6 +13,14 @@ export default defineNuxtConfig({
           'X-Robots-Tag':
             'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
         },
+        routes: [
+          // Expose Nuxt Content API
+          {
+            route: '/__nuxt_content/*',
+            methods: ['POST'],
+            rewrite: '/api/server',
+          },
+        ],
       },
     },
     // Prevent 'reflect-metadata' and 'json-bigint-patch' from being treeshaked (since we don't explicitly use the import it would otherwise be removed)
