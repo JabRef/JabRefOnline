@@ -205,6 +205,14 @@ export default defineNuxtConfig({
     },
   },
 
+  /**
+   * Web fonts
+   * https://fonts.nuxt.com/get-started/configuration
+   */
+  fonts: {
+    families: [{ name: 'Inter', weights: ['300 800'] }],
+  },
+
   content: {
     // The Azure Function App runs from a read-only package, so there is no place to write a SQLite file.
     // Use an in-memory database instead.
