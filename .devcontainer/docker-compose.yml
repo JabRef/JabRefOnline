@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     # Use offical typescript-node devcontainer image
-    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:4-20@sha256:c510450276668c54c3810655663e58356dbd568c57c623574116968217a5d385
+    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:24@sha256:d757292f5050d7b10bae4e0df80da615db98a68b6fdc412558caf24087452fd6
 
     volumes:
       - ..:/workspace:cached
