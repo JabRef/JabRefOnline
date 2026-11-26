@@ -91,7 +91,11 @@
         size="xs"
         color="neutral"
         class="text-sm my-auto"
-        @click="viewFullAbstract = !viewFullAbstract"
+        @click="
+          () => {
+            viewFullAbstract = !viewFullAbstract
+          }
+        "
       >
         <template v-if="viewFullAbstract">
           <span>View less</span>
